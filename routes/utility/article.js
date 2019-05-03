@@ -18,6 +18,24 @@ var list = async function(){
 		
     return result;
 }
+//---------  getOneArticle() -------------
+var getOneArticle = async function(artiNum){
+    var result={};
+    
+    await sql('SELECT * FROM article WHERE "artiNum" = $1', [artiNum])
+        .then((data) => {
+            if(data.rows.length > 0){
+                result = data.rows[0];   
+            }else{
+                result = -1;
+            }    
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+
 
 //匯出
-module.exports = {list};
+module.exports = {list,getOneArticle};
