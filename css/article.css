@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
+html,
+body {
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    margin: 0;
+    padding: 0;
+    border: none;
+    word-wrap: break-word;
+    padding-top: 3em;
+    background: url("../imgs/banner.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    text-align: justify;
+}
+
+
+/* ----------------------- */
+
+
+/* font     */
+
+
+/* ----------------------- */
+
+div.content p.title {
+    font-weight: bolder 900;
+    font-size: 2em;
+}
+
+div.info {
+    font-size: 1em;
+    margin: 2pt;
+}
+
+h1 {
+    font-weight: bolder;
+    text-align: center !important;
+    font-size: 2em;
+    color: #eee;
+    text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555;
+    margin-top: 1em;
+}
+
+div.content {
+    padding: 1em 1em 1em 2em;
+    background-color: #eee;
+    opacity: 0.89;
+}
+
+div.container-fluid {
+    margin-top: 2em;
+}
+
+
+/* button */
+
+input.search {
+    width: 1em;
+}
+
+.container-fluid {
+    margin-bottom: 3em;
+}
+
+
+/* ------------------- */
+
+
+/* articlePost */
+
+
+/* ------------------- */
+
+div.tagDiv {
+    padding: 1em;
+    word-break: break-all;
+}
+
+a.tag {
+    text-align: left;
+    color: #fff !important;
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    line-height: 2.5em;
+    border: 2px solid #3b5998;
+    border-radius: 8px;
+    background-color: #3b5998;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+p.poster {
+    text-align: right;
+}
+
+a.floorTag {
+    text-align: right;
+    color: #fff !important;
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    line-height: 2.5em;
+    border: 2px solid #993a3a;
+    border-radius: 8px;
+    background-color: #993a3a;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+
+/* ------------------- */
+
+
+/* message */
+
+
+/* ------------------- */
+
+div.footer {
+    height: 25pt;
+    margin: 0.5em;
+    opacity: 0.75;
+    text-align: center;
+}
+
+div.footer a {
+    color: #fff !important;
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    line-height: 2.5em;
+    border: 2px solid #3b5998;
+    border-radius: 8px;
+    background-color: #3b5998;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+
+/* hr */
+
+hr.separate {
+    opacity: 0.75;
+    width: 80%;
+    background-color: #eee;
+    height: 1.5px;
+    border: none;
+    color: #d4d4d4;
+}
