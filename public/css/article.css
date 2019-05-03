@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
+html,
+body {
+    text-align: center;
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    margin: 0;
+    padding: 0;
+    border: none;
+    
+}
+
+body{
+    padding-top: 5em;
+    background: url("../imgs/banner.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height:auto;
+}
+
+div.background {
+
+    
+}
+
+
+/* ----------------------- */
+
+
+/* font     */
+
+
+/* ----------------------- */
+
+div.content p.title {
+    font-weight: bolder 900;
+    font-size: 1.4em;
+}
+
+div.content p {
+    text-align: left;
+}
+
+div.info {
+    font-size: 1em;
+    text-align: left !important;
+}
+
+h1 {
+    font-size: 3em;
+    color: #eee;
+    text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555;
+}
+
+div.content {
+    padding-top: 1em;
+    background-color: #eee;
+    opacity: 0.75;
+}
+
+div.container-fluid{
+    margin-top:2em;
+}
+
+/* button */
+
+input.search{
+    width:1em;
+    
+}
