@@ -3,7 +3,7 @@ $(document).ready(function() {
 
         var wn = $(window).scrollTop();
 
-        if (wn > 20) {
+        if (wn > 120) {
             $(".navbar").css("background", "#c8d6ca");
         } else {
             $(".navbar").css("background", "");
