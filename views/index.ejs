@@ -111,7 +111,29 @@
     <div class="article">
         <h2>熱門文章</h2>
         <center>
-            <hr />
+            <table>
+                <thead>
+                    <tr>
+                        <th width="15%">文章編號</th>
+                        <th width="15%">會員ID</th>
+                        <th width="15%">文章標題</th>
+                        <th width="15%">文章類別</th>
+                        <th width="15%">發文日期</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i=0; i<items.length; i++) {%>
+                    <tr>
+                        <td><a href="/"<%= items[i].artiNum %>"><%= items[i].artiNum %></a></td>
+                        <td><%= items[i].memID %></td>
+                        <td><%= items[i].artiHead %></td>
+                        <td><%= items[i].artiClass %></td>
+                        <td><%= items[i].artiCont %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+
         </center>
     </div>
 
