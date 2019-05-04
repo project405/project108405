@@ -48,6 +48,7 @@ $(function() {
     $('#gotop').click(function() {
         $('html,body').animate({ scrollTop: 0 }, 'slow'); /* 返回到最頂上 */
         return false;
+        2
     });
 
     /* 偵測卷軸滑動時，往下滑超過400px就讓GoTop按鈕出現 */
