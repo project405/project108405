@@ -55,28 +55,6 @@ hr {
     text-align: left !important;
 }
 
-.wrapperCardbig {
-    width: 100%;
-    height: 340pt;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center center;
-    border-radius: .2em;
-    border: 3px solid #fff;
-    text-align: left !important;
-}
-
-.wrapperCardSmall {
-    width: 100%;
-    height: 100pt;
-    overflow: hidden;
-    background-size: cover;
-    background-position: center center;
-    border-radius: .2em;
-    border: 3px solid #fff;
-    text-align: left !important;
-}
-
 p.poster {
     text-align: right;
     font-size: 1em;
@@ -107,17 +85,6 @@ a.floorTag {
     text-decoration: none;
     word-break: break-all;
 }
-
-
-/* -------------- */
-
-
-/* viemArticleList */
-
-
-/* -------------- */
-
-div.goArticleList {}
 
 
 /* -------------- */
