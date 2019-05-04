@@ -10,6 +10,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
     <link href="css/header.css" rel="stylesheet" type="text/css" />
     <link href="css/index.css" rel="stylesheet" type="text/css" />
@@ -30,8 +32,8 @@
     <div class="container-fluid recommend">
         <center>
             <h2>本周精選推薦</h2>
-
             <hr/>
+
         </center>
         <!-- Portfolio Section -->
         <section id="portfolio">
@@ -126,14 +128,96 @@
 
     <!-- 熱門文章區塊 -->
 
-    <section id=HotArticle>
-        <div class="HotArticle">
+    <section id=hotArticle>
+        <div class="container hotArticle">
             <center>
                 <h2>熱門文章</h2>
-
                 <hr/>
             </center>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-7">
+                    <div class="card  shadow" onclick="location.href='#'" ;>
+                        <div class="tagDiv text-break ">
 
+                            <a class="tag text-break " href="#"> 可愛</a>
+                            <a class="tag text-break " href="#"> 皮卡丘</a>
+                            <a class="tag text-break " href="#"> 有毛的</a>
+                            <a class="tag text-break " href="#"> 萌</a>
+
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">為什麼有辦法看的下去？
+                            </h3>
+                            <p class="card-text">為什麼有人有辦法看的下去皮卡丘真人電影 我真的搞不懂欸 我是說 牠那麼可愛又那麼毛茸茸的讓人想摸到抓狂 我光是看預告片就想摸牠到發瘋但摸不到 看完整部電影我會死在裡面
+                            </p>
+                            <p class="poster">
+                                <a class="floorTag text-break ">樓主</a> 匿名 於 2019-04-30 14:23發布
+                            </p>
+
+                        </div>
+
+                        <div class="wrapperCard card-img-top" style="background-image: url('imgs/testImgs/17.png');">
+                        </div>
+                    </div>
+                </div>
+                <!-- 精選右邊上面的格子 -->
+                <div class="col-12 col-md-6 col-lg-5 upGrid">
+                    <div class="card shadow" onclick="location.href='#'" ;>
+                        <div class="tagDiv text-break ">
+
+                            <a class="tag text-break " href="#"> 皮卡皮卡丘</a>
+
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">為什麼有辦法看的下去？
+                            </h3>
+                            <p class="card-text">為什麼有人有辦法看的下去皮卡丘真人電影....
+                            </p>
+                            <p class="poster">
+                                <a class="floorTag text-break ">樓主</a> 匿名 於 2019-04-30 14:23發布
+                            </p>
+                        </div>
+
+                        <div class="wrapperCardSmall card-img-top" style="background-image: url('imgs/testImgs/18.png');">
+                        </div>
+                    </div>
+                    <!-- 精選右邊上面的格子結束 -->
+
+                    <!-- 精選右邊下面的格子 -->
+                    <div class="card shadow" onclick="location.href='#'" ;>
+                        <div class="tagDiv text-break ">
+                            <a class="tag text-break " href="#"> 皮卡皮卡丘</a>
+                            <a class="tag text-break " href="#"> 皮卡皮卡丘</a>
+                            <a class="tag text-break " href="#"> 皮卡皮卡丘</a>
+
+                            <a class="tag text-break " href="#"> 皮卡皮卡丘</a>
+
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">為什麼有辦法看的下去？
+                            </h3>
+                            <p class="card-text">為什麼有人有辦法看的下去皮卡丘真人電影....
+                            </p>
+                            <p class="poster">
+                                <a class="floorTag text-break ">樓主</a> 匿名 於 2019-04-30 14:23發布
+                            </p>
+                        </div>
+
+                        <div class="wrapperCardSmall card-img-top" style="background-image: url('imgs/testImgs/19.jpeg');">
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- 精選右邊下面的格子結束 -->
+
+
+
+
+            </div>
+
+
+        </div>
         </div>
     </section>
     <!-- 熱門文章區塊結束 -->
@@ -142,22 +226,32 @@
 
 
     <!-- 文章列表區塊 -->
-    <section id=articleList>
+    <section id="articleList">
         <div class="container-fluid article">
             <center>
                 <h2>文章列表</h2>
-
                 <hr/>
+                <!-- Search -->
+                <form class="search" action="action_page.php">
+                    <input type="text" placeholder="輸入欲搜尋之關鍵字" name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+                <!-- Search End -->
+
             </center>
             <div class="row">
+
                 <!-- 控制格式用 -->
 
-                <div class="col-sm-1">
+                <div class="col-sm-2">
                 </div>
                 <!-- 控制格式用結束 -->
 
-                <div class="col-lg-10">
-                    <div class="card mb-3">
+                <div class="col-lg-8">
+
+
+
+                    <div class="card mb-3 shadow" onclick="location.href='#'" ;>
                         <div class="tagDiv col-lg-12 text-break ">
 
                             <a class="tag text-break " href="#"> 可愛</a>
@@ -178,7 +272,7 @@
                         </div>
                     </div>
 
-                    <div class="card mb-3">
+                    <div class="card mb-3 shadow">
                         <div class="tagDiv col-lg-12 text-break ">
 
                             <a class="tag text-break " href="#"> 我受不了了</a>
@@ -200,16 +294,16 @@
                     </div>
 
                     <!-- 控制格式用 -->
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                     </div>
                     <!-- 控制格式用結束 -->
 
 
                 </div>
 
-
-
             </div>
+
+
         </div>
     </section>
     <!-- 文章列表區塊結束 -->
@@ -220,7 +314,7 @@
 
 
     <div class="container-fluid footer">
-        <p>聯絡我們:10546004@ntub.edu.tw
+        <p>聯絡我們：10546004@ntub.edu.tw
         </p>
         <p>©2018 NTUB</p>
 

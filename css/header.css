@@ -158,7 +158,7 @@
 
 @media (max-width: 1199px) {
     .navbar {
-        background-color: #ffffff
+        background-color: #0D5146;
     }
 }
 
@@ -192,21 +192,4 @@
 
 #gotop :hover {
     background: #3b5998;
-}
-
-div.tagDiv {
-    padding: 1em;
-    word-break: break-all;
-}
-
-a.tag {
-    text-align: left;
-    color: #fff !important;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    line-height: 2.5em;
-    border: 2px solid #3b5998;
-    border-radius: 8px;
-    background-color: #3b5998;
-    text-decoration: none;
-    word-break: break-all;
 }

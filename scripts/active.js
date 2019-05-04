@@ -4,8 +4,8 @@ $(document).ready(function() {
 
         var wn = $(window).scrollTop();
 
-        if (wn > 20) {
-            $(".navbar").css("background", "#c8d6ca");
+        if (wn > 120) {
+            $(".navbar").css("background", "#0D5146");
         } else {
             $(".navbar").css("background", "");
         }
@@ -67,3 +67,7 @@ $("#goBottom").click(function() {
     var scrollHeight = $('html,body').prop("scrollHeight");
     $('html,body').animate({ scrollTop: scrollHeight }, 'slow');
 });
+
+
+
+//input
