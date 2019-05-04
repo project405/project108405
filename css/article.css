@@ -52,10 +52,6 @@ div.content {
     margin-bottom: 2em;
 }
 
-div.post {
-    margin-top: 4em;
-}
-
 
 /* button */
 
@@ -71,6 +67,16 @@ input.search {
 
 
 /* ------------------- */
+
+div.post {
+    margin-top: 13em;
+}
+
+@media (max-width: 1199px) {
+    div.post {
+        margin-top: 2em;
+    }
+}
 
 div.tagDiv {
     padding: 1em;
@@ -109,7 +115,7 @@ a.floorTag {
 /* ------------------- */
 
 
-/* message */
+/* footer */
 
 
 /* ------------------- */
@@ -144,16 +150,6 @@ hr.separate {
     color: #d4d4d4;
 }
 
-input.message {
-    width: 100%;
-    height: auto;
-}
-
-textarea.input {
-    width: 100%;
-    height: 200pt;
-}
-
 
 /* ------------------- */
 
@@ -168,7 +164,7 @@ textarea.input {
     position: fixed;
     z-index: 90;
     right: 30px;
-    bottom: 5px;
+    bottom: 31px;
     display: none;
     width: 50px;
     height: 50px;
@@ -184,4 +180,27 @@ textarea.input {
 
 #gotop :hover {
     background: #3b5998;
+}
+
+
+/* ------------------- */
+
+
+/* replying */
+
+
+/* ------------------- */
+
+div.replying {
+    margin-bottom: 50px;
+}
+
+input.message {
+    width: 100%;
+    height: auto;
+}
+
+textarea.input {
+    width: 100%;
+    height: 200pt;
 }
