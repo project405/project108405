@@ -7,7 +7,7 @@ body {
     padding: 0;
     border: none;
     word-wrap: break-word;
-    padding-top: 3em;
+    padding-top: 0.75em;
     background: url("../imgs/banner.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -46,13 +46,14 @@ h1 {
 }
 
 div.content {
-    padding: 1em 1em 1em 2em;
+    padding: 1em 1.5em 1em 1.5em;
     background-color: #eee;
     opacity: 0.89;
+    margin-bottom: 2em;
 }
 
-div.container-fluid {
-    margin-top: 2em;
+div.post {
+    margin-top: 4em;
 }
 
 
@@ -60,10 +61,6 @@ div.container-fluid {
 
 input.search {
     width: 1em;
-}
-
-.container-fluid {
-    margin-bottom: 3em;
 }
 
 
@@ -145,4 +142,46 @@ hr.separate {
     height: 1.5px;
     border: none;
     color: #d4d4d4;
+}
+
+input.message {
+    width: 100%;
+    height: auto;
+}
+
+textarea.input {
+    width: 100%;
+    height: 200pt;
+}
+
+
+/* ------------------- */
+
+
+/* goto */
+
+
+/* ------------------- */
+
+#gotop {
+    padding: 5px;
+    position: fixed;
+    z-index: 90;
+    right: 30px;
+    bottom: 5px;
+    display: none;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    background: #3b5998;
+    opacity: 0.75;
+    line-height: 50px;
+    border-radius: 50%;
+    transition: all 0.5s;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+#gotop :hover {
+    background: #3b5998;
 }
