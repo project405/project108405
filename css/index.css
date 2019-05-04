@@ -8,6 +8,7 @@ body {
     padding: 0;
     border: none;
     text-align: justify;
+    text-justify: inter-ideograph;
 }
 
 .banner {
@@ -39,6 +40,7 @@ hr {
     height: 5px;
     border: none;
     color: #d4d4d4;
+    border-radius: 50%;
 }
 
 @media (max-width: 450px) {
@@ -73,11 +75,11 @@ div.article {
     height: 200%;
 }
 
-#portfolio .container-fluid {
+#portfolio .container {
     max-width: 1920px;
 }
 
-#portfolio .container-fluid .portfolio-box {
+#portfolio .container .portfolio-box {
     position: relative;
     display: block;
 }
@@ -209,6 +211,19 @@ p.poster {
     font-size: 1em;
 }
 
+#articleList .card {
+    margin-bottom: 1em;
+}
+
+.card-text {
+    line-height: 1.75em;
+}
+
+#hotArticle>div>div>div.col-12.col-lg-7>div>div.card-body>h3 {
+    font-size: 0.75 !important;
+    letter-spacing: normal !important;
+}
+
 
 /* tag */
 
@@ -221,6 +236,19 @@ a.floorTag {
     background-color: #993a3a;
     text-decoration: none;
     word-break: break-all;
+}
+
+
+/* -------------- */
+
+
+/* goArticleList */
+
+
+/* -------------- */
+
+#hotArticle button {
+    margin-top: 0.75em;
 }
 
 
