@@ -49,18 +49,16 @@ div.article {
     height: 200%;
 }
 
-#portfolio .container-fluid {
+#portfolio .container {
     max-width: 1920px;
 }
 
-#portfolio .container-fluid .portfolio-box {
+#portfolio .container .portfolio-box {
     position: relative;
     display: block;
 }
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
