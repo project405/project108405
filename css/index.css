@@ -28,31 +28,6 @@ body {
 /* -------------- */
 
 
-/* hr */
-
-
-/* -------------- */
-
-hr {
-    margin: 20pt !important;
-    width: 20em;
-    background-color: #436327;
-    height: 5px;
-    border: none;
-    color: #d4d4d4;
-    border-radius: 50%;
-}
-
-@media (max-width: 450px) {
-    hr {
-        margin: 15pt !important;
-    }
-}
-
-
-/* -------------- */
-
-
 /* recommend */
 
 
@@ -182,6 +157,7 @@ div.hotArticle {
     border-radius: .2em;
     border: 3px solid #fff;
     text-align: left !important;
+    margin: 0;
 }
 
 .wrapperCardbig {
@@ -197,7 +173,7 @@ div.hotArticle {
 
 .wrapperCardSmall {
     width: 100%;
-    height: 100pt;
+    height: 115pt;
     overflow: hidden;
     background-size: cover;
     background-position: center center;
@@ -216,12 +192,17 @@ p.poster {
 }
 
 .card-text {
-    line-height: 1.75em;
+    line-height: 1.5em;
 }
 
-#hotArticle>div>div>div.col-12.col-lg-7>div>div.card-body>h3 {
-    font-size: 0.75 !important;
-    letter-spacing: normal !important;
+.card p {
+    padding: 0em;
+}
+
+#hotArticle h3 {
+    font-size: 1.3em;
+    text-align: left;
+    font-weight: bolder;
 }
 
 
@@ -269,6 +250,7 @@ div.footer {
     opacity: 0.89;
     margin-top: 1em;
     color: #fff;
+    font-size: 0.75em;
 }
 
 
@@ -281,7 +263,6 @@ div.footer {
 /* -------------- */
 
 div.tagDiv {
-    padding: 1em;
     word-break: break-all;
 }
 
@@ -295,6 +276,7 @@ a.tag {
     background-color: #3b5998;
     text-decoration: none;
     word-break: break-all;
+    font-size: 0.75em;
 }
 
 

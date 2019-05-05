@@ -55,3 +55,205 @@ div.content {
 div.container-fluid {
     margin-top: 2em;
 }
+
+
+/* article */
+
+div.article {
+    margin-top: 8em;
+}
+
+@media (max-width: 1199px) {
+    div.article {
+        margin-top: 4em;
+    }
+}
+
+
+/* -------------- */
+
+
+/* card */
+
+
+/* -------------- */
+
+.wrapperCard {
+    width: 100%;
+    height: 150pt;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    border-radius: .2em;
+    border: 3px solid #fff;
+    text-align: left !important;
+}
+
+p.poster {
+    text-align: right;
+    font-size: 1em;
+}
+
+#articleList .card {
+    margin-bottom: 1em;
+}
+
+.card-text {
+    line-height: 1.75em;
+}
+
+h3.card-title {
+    font-size: 1.3em !important;
+    text-align: left;
+    font-weight: bolder;
+}
+
+
+/* tag */
+
+a.floorTag {
+    text-align: right;
+    color: #fff !important;
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    border: 2px solid #993a3a;
+    border-radius: 8px;
+    background-color: #993a3a;
+    text-decoration: none;
+    word-break: break-all;
+    font-size: 0.75em;
+}
+
+
+/* -------------- */
+
+
+/* footer */
+
+
+/* -------------- */
+
+div.footer {
+    width: 100%;
+    height: 8em;
+    padding: 2em 1em 1em 1em;
+    text-align: center;
+    background-color: #0D5146;
+    opacity: 0.89;
+    margin-top: 1em;
+    color: #fff;
+}
+
+
+/* -------------- */
+
+
+/* tag */
+
+
+/* -------------- */
+
+div.tagDiv {
+    padding: 0em;
+    word-break: break-all;
+}
+
+a.tag {
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    text-align: left;
+    color: #fff !important;
+    line-height: 2.5em;
+    border: 2px solid #3b5998;
+    border-radius: 8px;
+    background-color: #3b5998;
+    text-decoration: none;
+    word-break: break-all;
+    font-size: 0.75em;
+}
+
+
+/* ------------------- */
+
+
+/* shadowBox */
+
+
+/* ------------------- */
+
+.shadow {
+    -moz-box-shadow: 2px 2px 2px rgba(20%, 20%, 40%, 0.6), 2px 2px 3px rgba(20%, 20%, 40%, 0.4), 3px 3px 6px rgba(20%, 20%, 40%, 0.4);
+    -webkit-box-shadow: 2px 2px 2px rgba(20%, 20%, 40%, 0.6), 2px 2px 3px rgba(20%, 20%, 40%, 0.4), 3px 3px 6px rgba(20%, 20%, 40%, 0.4);
+    box-shadow: 2px 2px 2px rgba(20%, 20%, 40%, 0.6), 2px 2px 3px rgba(20%, 20%, 40%, 0.4), 3px 3px 6px rgba(20%, 20%, 40%, 0.4);
+}
+
+
+/* ------------------- */
+
+
+/* search */
+
+
+/* ------------------- */
+
+div.search {
+    width: 100%;
+    margin: 0.75em 0 0.75em 0;
+}
+
+
+/*  button */
+
+.buttons button {
+    margin: 0.1em;
+    height: 2em;
+    font-size: 1em;
+    opacity: 0.89;
+}
+
+@media (max-width: 450px) {
+    .buttons button {
+        font-size: 0.85em;
+    }
+}
+
+
+/* Style the search field */
+
+form.search input[type=text] {
+    padding: 10px 0 10px 20px;
+    font-size: 15px;
+    border: 1px solid grey;
+    border-radius: 8px;
+    float: center;
+    width: 100%;
+    background: #f1f1f1;
+}
+
+
+/* Style the submit button */
+
+form.search button {
+    float: center !important;
+    width: 30pt;
+    padding: 5px;
+    background: #2196F3;
+    color: white;
+    font-size: 15px;
+    border: 1px solid grey;
+    border-left: none;
+    /* Prevent double borders */
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+form.search button:hover {
+    background: #0b7dda;
+}
+
+
+/* Clear floats */
+
+form.search::after {
+    content: "";
+    clear: both;
+    display: table;
+}

@@ -193,3 +193,34 @@
 #gotop :hover {
     background: #3b5998;
 }
+
+
+/* -------------- */
+
+
+/* hr */
+
+
+/* -------------- */
+
+hr.highlight {
+    margin: 1em 0 2em 0 !important;
+    width: 20em;
+    background-color: #436327;
+    height: 5px;
+    border: none;
+    color: #d4d4d4;
+    border-radius: 50%;
+}
+
+@media (max-width: 450px) {
+    hr {
+        width: 13em;
+    }
+    p {
+        font-size: 1em !important;
+    }
+    p.poster {
+        font-size: 0.75em !important;
+    }
+}
