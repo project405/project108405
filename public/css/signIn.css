@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
+html,
+body {
+    height: 100%;
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+div.member {
+    margin-top: 8em;
+}
+
+@media (max-width: 1199px) {
+    div.member {
+        margin-top: 3em;
+    }
+}
+
+div.thirdParty,
+div.signIn,
+div.signUp {
+    margin: 1em;
+    opacity: 0.89;
+    padding: 2em 1em 3em 1em;
+    border: 3px solid #3d3c3c;
+}
+
+button.btn {
+    font-size: 1em;
+}
+
+input {
+    border: 2px solid black;
+}
+
+
+/* SIGNUP */
+
+div.signUp {
+    text-align: left;
+    margin-top: 6em;
+    line-height: 2em;
+    padding: 2em 1.5em 2em 1.5em;
+}
+
+@media (max-width: 1199px) {
+    div.member {
+        margin-top: 3em;
+    }
+}
+
+#signUp h5 {
+    margin: 0.5em 0 0.5em 0;
+}
+
+input.address {
+    width: 20em;
+}
+
+input.gender {
+    width: 1.5em;
+    height: 1.5em;
+}

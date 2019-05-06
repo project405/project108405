@@ -5,10 +5,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <!-- jQuery Script -->
+
+    <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/navbar.js"></script>
+    <script src="/javacripts/active.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -19,44 +20,45 @@
 
 
     <link href="/css/header.css" rel="stylesheet" type="text/css" />
-    <link href="/css/member.css" rel="stylesheet" type="text/css" />
+    <link href="/css/signIn.css" rel="stylesheet" type="text/css" />
 
     <title>文藝富心</title>
 </head>
 
 <body>
-    <script src="javascripts/header.js"></script>
+    <script src="/javascripts/header.js"></script>
 
-    <div class="contain-fluid  row">
-
+    <div class="row d-flex justify-content-center member ">
         <div class="col-lg-5 thirdParty">
             <h3>第三方登入或註冊</h3>
-
+            <hr>
             <button type="button" class="btn btn-danger">Gmail登入或註冊</button>
             <br> <br>
 
 
             <button type="button" class="btn btn-primary">Facebook登入或註冊</button>
         </div>
-        <div class="col-lg-5">
+    </div>
 
+
+    <div class="row d-flex justify-content-center ">
+        <div class="col-lg-5 signIn">
             <form>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                        placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                        else.</small>
+                <div class="form-group ">
+                    <h5> 帳號
+                    </h5>
+                    <input type="text">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <h5> 密碼
+                    </h5>
+                    <input type="password">
                 </div>
-                <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <button type="submit" class="btn btn-primary">登入</button>
+                <button type="button" class="btn btn-danger" onclick="location.href='/signUp'">註冊</button>
+
+
             </form>
         </div>
     </div>
