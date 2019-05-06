@@ -12,9 +12,9 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    text-align: justify;
+    text-justify: inter-ideograph;
 }
-
-div.background {}
 
 
 /* ----------------------- */
