@@ -1,70 +1,16 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
 html,
 body {
-    text-align: center;
+    height: 100%;
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     border: none;
-    padding-top: 5em;
-    background: url("../imgs/banner.jpg");
+    text-align: justify;
+    /* background: url("../imgs/testImgs/background.jpg"); */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-}
-
-div.background {
-
-    
-}
-
-
-/* ----------------------- */
-
-
-/* font     */
-
-
-/* ----------------------- */
-
-div.content p.title {
-    font-weight: bolder 900;
-    font-size: 1.4em;
-}
-
-div.content p {
-    text-align: left;
-}
-
-div.info {
-    font-size: 1em;
-    text-align: left !important;
-}
-
-div.datetime{
-    
-}
-
-h1 {
-    font-size: 3em;
-    color: #eee;
-    text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555;
-}
-
-div.content {
-    padding-top: 1em;
-    background-color: #eee;
-    opacity: 0.75;
-}
-
-<<<<<<< HEAD:public/css/collection.css
-div.container-fluid{
-    margin-top:2em;
-}
-=======
-div.container-fluid {
-    margin-top: 2em;
 }
 
 
@@ -72,6 +18,7 @@ div.container-fluid {
 
 div.article {
     margin-top: 8em;
+    opacity: 0.94;
 }
 
 @media (max-width: 1199px) {
@@ -132,26 +79,6 @@ a.floorTag {
     text-decoration: none;
     word-break: break-all;
     font-size: 0.75em;
-}
-
-
-/* -------------- */
-
-
-/* footer */
-
-
-/* -------------- */
-
-div.footer {
-    width: 100%;
-    height: 8em;
-    padding: 2em 1em 1em 1em;
-    text-align: center;
-    background-color: #0D5146;
-    opacity: 0.89;
-    margin-top: 1em;
-    color: #fff;
 }
 
 
@@ -229,14 +156,16 @@ div.search {
 
 /* Style the search field */
 
-form.search input[type=text] {
-    padding: 10px 0 10px 20px;
+input.search {
     font-size: 15px;
     border: 1px solid grey;
-    border-radius: 8px;
+    border-radius: 4px;
     float: center;
-    width: 100%;
-    background: #f1f1f1;
+    height: 2em;
+}
+
+::placeholder {
+    padding: 0.7em;
 }
 
 
@@ -268,4 +197,12 @@ form.search::after {
     clear: both;
     display: table;
 }
->>>>>>> f7a404bb9b6619f71a0e564cfa6729014cedb92e:css/collection.css
+
+
+/* h2 */
+
+h2 {
+    font-size: 2em;
+    color: #eee;
+    text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555;
+}

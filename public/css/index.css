@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
 html,
 body {
     height: 100%;
-    text-align: center;
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     border: none;
+    text-align: justify;
+    text-justify: inter-ideograph;
 }
 
 .banner {
@@ -27,38 +27,10 @@ body {
 /* -------------- */
 
 
-/* hr */
-
-
-/* -------------- */
-
-hr {
-    margin: 20pt !important;
-    width: 20em;
-    background-color: #436327;
-    height: 5px;
-    border: none;
-    color: #d4d4d4;
-}
-
-@media (max-width: 450px) {
-    hr {
-        margin: 15pt !important;
-    }
-}
-
-
-/* -------------- */
-
-
 /* recommend */
 
 
 /* -------------- */
-
-div.recommend {
-    margin-bottom: 3em;
-}
 
 
 /* -------------- */
@@ -69,22 +41,24 @@ div.recommend {
 
 /* -------------- */
 
+div.recommend {
+    margin-bottom: 3em;
+}
+
 div.article {
     height: 200%;
 }
 
-#portfolio .container-fluid {
+#portfolio .container {
     max-width: 1920px;
 }
 
-#portfolio .container-fluid .portfolio-box {
+#portfolio .container .portfolio-box {
     position: relative;
     display: block;
 }
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -133,10 +107,6 @@ div.article {
     background-position: top center;
     border-radius: .2em;
     border: 3px solid #fff;
-    -webkit-transition: border linear .2s, box-shadow linear .2s;
-    -moz-transition: border linear .2s, box-shadow linear .2s;
-    -o-transition: border linear .2s, box-shadow linear .2s;
-    transition: border linear .2s, box-shadow linear .2s;
 }
 
 .portfolio-box {
@@ -150,4 +120,208 @@ div.article {
     /* Scale the image so it covers whole area, thus will likely crop */
     object-position: center;
     /* Center the image within the element */
+}
+
+
+/* -------------- */
+
+
+/* hotArticle */
+
+
+/* -------------- */
+
+div.hotArticle {
+    margin-bottom: 3em;
+    width: 100%;
+}
+
+
+/* -------------- */
+
+
+/* card */
+
+
+/* -------------- */
+
+.wrapperCard {
+    width: 100%;
+    height: 150pt;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    border-radius: .2em;
+    border: 3px solid #fff;
+    text-align: left !important;
+    margin: 0;
+}
+
+.wrapperCardbig {
+    width: 100%;
+    height: 340pt;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    border-radius: .2em;
+    border: 3px solid #fff;
+    text-align: left !important;
+}
+
+.wrapperCardSmall {
+    width: 100%;
+    height: 115pt;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    border-radius: .2em;
+    border: 3px solid #fff;
+    text-align: left !important;
+}
+
+p.poster {
+    text-align: right;
+    font-size: 1em;
+}
+
+#articleList .card {
+    margin-bottom: 1em;
+}
+
+.card-text {
+    line-height: 1.5em;
+}
+
+.card p {
+    padding: 0em;
+}
+
+#hotArticle h3 {
+    font-size: 1.3em;
+    text-align: left;
+    font-weight: bolder;
+}
+
+
+/* tag */
+
+a.floorTag {
+    text-align: right;
+    color: #fff !important;
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    border: 2px solid #993a3a;
+    border-radius: 8px;
+    background-color: #993a3a;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+
+/* -------------- */
+
+
+/* goArticleList */
+
+
+/* -------------- */
+
+#hotArticle button {
+    margin-top: 0.75em;
+}
+
+
+/* -------------- */
+
+
+/* tag */
+
+
+/* -------------- */
+
+div.tagDiv {
+    word-break: break-all;
+}
+
+a.tag {
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    text-align: left;
+    color: #fff !important;
+    line-height: 2.5em;
+    border: 2px solid #3b5998;
+    border-radius: 8px;
+    background-color: #3b5998;
+    text-decoration: none;
+    word-break: break-all;
+    font-size: 0.75em;
+}
+
+
+/* ------------------- */
+
+
+/* shadowBox */
+
+
+/* ------------------- */
+
+.shadow {
+    -moz-box-shadow: 2px 2px 2px rgba(20%, 20%, 40%, 0.6), 2px 2px 3px rgba(20%, 20%, 40%, 0.4), 3px 3px 6px rgba(20%, 20%, 40%, 0.4);
+    -webkit-box-shadow: 2px 2px 2px rgba(20%, 20%, 40%, 0.6), 2px 2px 3px rgba(20%, 20%, 40%, 0.4), 3px 3px 6px rgba(20%, 20%, 40%, 0.4);
+    box-shadow: 2px 2px 2px rgba(20%, 20%, 40%, 0.6), 2px 2px 3px rgba(20%, 20%, 40%, 0.4), 3px 3px 6px rgba(20%, 20%, 40%, 0.4);
+}
+
+
+/* ------------------- */
+
+
+/* search */
+
+
+/* ------------------- */
+
+form.search {
+    margin: 1em;
+}
+
+
+/* Style the search field */
+
+form.search input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-radius: 8px;
+    float: center;
+    width: 65%;
+    background: #f1f1f1;
+}
+
+
+/* Style the submit button */
+
+form.search button {
+    float: center !important;
+    width: 2.5em;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    border: 1px solid grey;
+    border-left: none;
+    /* Prevent double borders */
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+form.search button:hover {
+    background: #0b7dda;
+}
+
+
+/* Clear floats */
+
+form.search::after {
+    content: "";
+    clear: both;
+    display: table;
 }
