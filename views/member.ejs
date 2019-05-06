@@ -46,36 +46,61 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="/css/header.css" rel="stylesheet" type="text/css" />
-    <link href="/css/member.css" rel="stylesheet" type="text/css" />
-
+    
     <!-- jQuery Script -->
     <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/navbar.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link href="/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="/css/member.css" rel="stylesheet" type="text/css" />
 
     <title>文藝富心</title>
 </head>
 
 <body>
+    <script src="javascripts/header.js"></script>
 
-    <script src="/javascripts/header.js"></script>
+    <div class="contain-fluid  row">
 
-    <div class="background">
-        <h1>文藝富心</h2>
-            <div class="login">
-                <button type="button" class="btn btn-danger">Gmail登入</button>
+        <div class="col-lg-5 thirdParty">
+            <h3>第三方登入或註冊</h3>
 
-                <button type="button" class="btn btn-primary">Facebook登入</button>
+            <button type="button" class="btn btn-danger">Gmail登入或註冊</button>
+            <br> <br>
 
-            </div>
+
+            <button type="button" class="btn btn-primary">Facebook登入或註冊</button>
+        </div>
+        <div class="col-lg-5">
+
+            <form>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
     </div>
-
-
-
-
-
 
 
 </body>
