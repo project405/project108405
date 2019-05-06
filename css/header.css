@@ -157,6 +157,7 @@
 
 .navbar {
     opacity: 0.89;
+    background-color: #0D5146;
 }
 
 @media (max-width: 1199px) {
