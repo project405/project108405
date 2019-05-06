@@ -10,14 +10,27 @@ body {
     text-align: center;
 }
 
+div.member {
+    margin-top: 10em;
+}
+
 div.thirdParty {
-    margin-top: 5em;
-    padding: 1em;
-    background-color: rgba(214, 66, 66, 0.787);
+    margin: 1em;
+    padding: 3em 1em 1em 1em;
     opacity: 0.89;
+    border: 5px solid #4C3C1B;
 }
 
 button.btn {
     font-size: 1em;
-    margib
+}
+
+div.signUp {
+    margin: 1em;
+    padding: 3em 1em 1em 1em;
+    border: 5px solid #4C3C1B;
+}
+
+input.form-control {
+    width: 20em;
 }
