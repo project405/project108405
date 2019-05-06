@@ -12,11 +12,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-}
-
-div.background {
-
-    
+    text-align: justify;
+    text-justify: inter-ideograph;
 }
 
 
@@ -58,11 +55,6 @@ div.content {
     opacity: 0.75;
 }
 
-<<<<<<< HEAD:public/css/collection.css
-div.container-fluid{
-    margin-top:2em;
-}
-=======
 div.container-fluid {
     margin-top: 2em;
 }
@@ -268,4 +260,3 @@ form.search::after {
     clear: both;
     display: table;
 }
->>>>>>> f7a404bb9b6619f71a0e564cfa6729014cedb92e:css/collection.css
