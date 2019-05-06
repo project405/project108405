@@ -7,7 +7,7 @@ header = '    <div class="header">\
     <div class="collapse navbar-collapse" id="navbarNav">\
         <ul class="navbar-nav ml-auto">\
             <li class="nav-item">\
-                <a class="nav-link " href="index.html">首頁 <span class="sr-only">(current)</span></a>\
+                <a class="nav-link " href="/">首頁 <span class="sr-only">(current)</span></a>\
             </li>\
             <li class="nav-item ">\
                 <a class="nav-link" href="#">\
@@ -15,13 +15,13 @@ header = '    <div class="header">\
                 </a>\
             </li>\
             <li class="nav-item ">\
-                <a class="nav-link" href="articleList.html">文章列表</a>\
+                <a class="nav-link" href="/articleList">文章列表</a>\
             </li>\
             <li class="nav-item ">\
-                <a class="nav-link" href="collection.html">我的收藏</a>\
+                <a class="nav-link" href="/collection">我的收藏</a>\
             </li>\
             <li class="nav-item">\
-                <a class="nav-link" href="signIn.html">會員</a>\
+                <a class="nav-link" href="/signIn">會員</a>\
             </li>\
         </ul>\
     </div>\
