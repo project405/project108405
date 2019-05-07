@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var collectionRouter = require('./routes/collection');
 var memberRouter = require('./routes/member');
 var articleListRouter = require('./routes/articleList');
+var articleRouter = require('./routes/article');
 var signInRouter = require('./routes/signIn');
 var signUpRouter = require('./routes/signUp');
 
@@ -27,7 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/article', articleRouter);
 //-------  My use  --------------- 
 app.use('/collection',collectionRouter);
 app.use('/member',memberRouter);

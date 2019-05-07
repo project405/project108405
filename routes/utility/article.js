@@ -37,5 +37,6 @@ var getOneArticle = async function(artiNum){
 }
 
 
+
 //匯出
 module.exports = {list,getOneArticle};
