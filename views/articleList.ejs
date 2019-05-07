@@ -60,14 +60,14 @@
                 <div class="col-12 mb-3 col-lg-10 ">
 
                     <div class="card shadow list " onclick="location.href='article.html' " style="cursor:pointer;">
-
+                        <% for(var i=0; i<items.length; i++) {%>
                         <div class="card-body ">
-                            <h3 class="card-title ">為什麼有辦法看的下去？
+                            <h3 class="card-title "><%= items[i].artiHead %>
                             </h3>
-                            <p class="card-text ">為什麼有人有辦法看的下去皮卡丘真人電影 ...
+                            <p class="card-text "><%= items[i].artiCont %>
                             </p>
                             <p class="poster ">
-                                <a class="floorTag text-break ">樓主</a> 匿名 於 2019-04-30 14:23發佈
+                                <a class="floorTag text-break ">樓主</a> 匿名 於 <%= items[i].artiDateTime %>發佈
                             </p>
                             <div class="tagDiv col-lg-12 text-break ">
                                 <a class="tag text-break " href="# "> 可愛</a>
@@ -82,12 +82,13 @@
 
                             </div>
                         </div>
+                        <% } %> 
 
-                        <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/15.jpg'); ">
-                        </div>
+                        <!-- <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/15.jpg'); ">
+                        </div> -->
                     </div>
 
-                    <div class="card mb-3 shadow" onclick="location.href='article.html'" style="cursor:pointer;">
+                    <!-- <div class="card mb-3 shadow" onclick="location.href='article.html'" style="cursor:pointer;">
 
                         <div class="card-body ">
                             <h3 class="card-title ">為什麼有辦法看的下去？
@@ -110,7 +111,7 @@
                         </div>
                         <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/16.jpg'); ">
                         </div>
-                    </div>
+                    </div> -->
 
 
                 </div>
