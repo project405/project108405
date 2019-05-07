@@ -11,8 +11,10 @@
     <script src="/javascripts/navbar.js"></script>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
@@ -58,37 +60,32 @@
                 </div>
 
                 <div class="col-12 mb-3 col-lg-10 ">
-
-                    <div class="card shadow list " onclick="location.href='article.html' " style="cursor:pointer;">
-
+                    <% for(var i=0; i<items.length; i++) {%>
+                    <div class="card shadow list " onclick="location.href='/article/<%= items[i].artiNum %>' "
+                        style="cursor:pointer;">
                         <div class="card-body ">
-                            <h3 class="card-title ">為什麼有辦法看的下去？
+                            <h3 class="card-title "><%= items[i].artiHead %>
                             </h3>
-                            <p class="card-text ">為什麼有人有辦法看的下去皮卡丘真人電影 ...
+                            <p class="card-text "><%= items[i].artiCont %>
                             </p>
                             <p class="poster ">
-                                <a class="floorTag text-break ">樓主</a> 匿名 於 2019-04-30 14:23發佈
+                                <a class="floorTag text-break ">樓主</a> 匿名 於 <%= items[i].artiDateTime %>發佈
                             </p>
                             <div class="tagDiv col-lg-12 text-break ">
                                 <a class="tag text-break " href="# "> 可愛</a>
                                 <a class="tag text-break " href="# "> 皮卡丘</a>
                                 <a class="tag text-break " href="# "> 皮卡丘</a>
-
                                 <a class="tag text-break " href="# "> 皮卡丘</a>
                                 <a class="tag text-break " href="# "> 皮卡丘</a>
-
                                 <a class="tag text-break " href="# "> 有毛的</a>
                                 <a class="tag text-break " href="# "> 萌</a>
-
                             </div>
                         </div>
-
-                        <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/15.jpg'); ">
-                        </div>
+                        <!-- <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/15.jpg'); ">
+                        </div> -->
                     </div>
-
-                    <div class="card mb-3 shadow" onclick="location.href='article.html'" style="cursor:pointer;">
-
+                    <% } %>
+                    <!-- <div class="card mb-3 shadow" onclick="location.href='article.html'" style="cursor:pointer;">
                         <div class="card-body ">
                             <h3 class="card-title ">為什麼有辦法看的下去？
                             </h3>
@@ -97,20 +94,16 @@
                             <p class="poster ">
                                 <a class="floorTag text-break ">樓主</a> 匿名 於 2019-04-30 14:23發佈
                             </p>
-
                             <div class="tagDiv col-lg-12 ">
-
                                 <a class="tag " href="# "> 我受不了了</a>
                                 <a class="tag " href="# "> 皮卡丘</a>
                                 <a class="tag " href="# "> 帶回家</a>
                                 <a class="tag " href="# "> 萌萌</a>
-
                             </div>
-
                         </div>
                         <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/16.jpg'); ">
                         </div>
-                    </div>
+                    </div> -->
 
 
                 </div>
