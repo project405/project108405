@@ -7,7 +7,6 @@ var moment = require('moment');
 router.get('/', function (req, res, next) {
     article.list().then(data => {
         for (let i = 0; i < data.length; i++) {
-            console.log(data);
             data[i].artiDateTime = moment(data[i].artiDateTime).format("YYYY-MM-DD HH:mm:ss");
         }
         if (data == null) {
