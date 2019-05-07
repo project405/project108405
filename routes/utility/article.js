@@ -32,11 +32,23 @@ var getOneArticle = async function(artiNum){
         }, (error) => {
             result = null;
         });
+    
+		
+    return result;
+}
+//---------  getArticleMessage() -------------
+var getArticleMessage = async function(artiNum){
+    var result=[];
+	
+    await sql('SELECT * FROM "articleMessage" WHERE "artiNum" = $1', [artiNum])
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
 		
     return result;
 }
 
-
-
 //匯出
-module.exports = {list,getOneArticle};
+module.exports = {list,getOneArticle,getArticleMessage};
