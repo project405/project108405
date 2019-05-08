@@ -63,13 +63,18 @@
                     </div>
                 </div>
 
-                <div class="form-group has-feedback" :class="{ 'has-error': errors.has('user[password]') }">
-                    <label for="user_password" class="sr-only">密碼</label>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon"><i class="fa fa-fw fa-lock" aria-hidden="true"></i></span>
-                        <input id="user_password" class="form-control" name="user[password]" maxlength="128" placeholder="密碼 (8 個字元以上)" type="password" autocomplete="new-password" v-validate="'required|max:128'">
+                <div class="signup-modal--input">
+                    <div><span style="transition: opacity 0.5s ease 0s;"><button type="button" class="btn btn-info btn-block facebook--signup-btn metro">以 Facebook 註冊 / 登入</button></span><button type="button" class="btn btn-info btn-block google--signup-btn"
+                            style="">以 Google  註冊 / 登入</button>
+                        <div class="text-center space-top-15 space-bottom-15"><strong>或者</strong></div>
                     </div>
-                    <span v-show="errors.has('user[password]')" class="form-control-feedback" aria-hidden="true"><i class="fa fa-warning" aria-hidden="true"></i></span>
+                    <div class="signup-modal--form" style="display: block;"><input type="text" class="form-control email" placeholder="E-mail帳號" value="">
+                        <p style="text-align: center; color: red;">此欄位必填</p><input type="password" class="form-control pwd" placeholder="輸入密碼">
+                        <p style="text-align: center; color: red;"></p>
+                        <div class="sc-hqyNC eyLeQp">
+                            <div class="sc-dNLxif iOSrJl"><i class="fa fa-exclamation-circle"></i> 用原SOSreader帳號即可登入</div><a class="btn-link" href="/forgot">忘記密碼？</a></div>
+                        <div class="sc-jbKcbu jYVToR"><button id="loginSubmit" type="button" class="btn btn-primary btn-block btn-md btn btn-default">登入</button></div>
+                    </div>
                 </div>
 
 

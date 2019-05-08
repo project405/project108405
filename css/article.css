@@ -108,22 +108,9 @@ a.floorTag {
 
 /* ------------------- */
 
-div.footer {
-    height: 25pt;
-    opacity: 0.75;
-    text-align: center;
-    top: 20%;
-}
-
-div.footer a {
-    color: #fff !important;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    line-height: 2.5em;
-    border: 2px solid #3b5998;
-    border-radius: 8px;
-    background-color: #3b5998;
-    text-decoration: none;
-    word-break: break-all;
+.footer-item {
+    margin: 0.25em;
+    opacity: 0.85;
 }
 
 

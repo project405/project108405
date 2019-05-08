@@ -329,3 +329,10 @@ form.search::after {
 button.btn {
     float: right;
 }
+
+
+/* footer */
+
+div.footer {
+    margin-top: 5em;
+}
