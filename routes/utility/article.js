@@ -49,6 +49,59 @@ var getArticleMessage = async function(artiNum){
 		
     return result;
 }
-
+// ==================  四大 Class  (start)=========================
+//---------  getClassMovie() -------------
+var getClassMovie = async function(){
+    var result=[];
+	
+    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['movie'])
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+//---------  getClassMusic() -------------
+var getClassMusic = async function(){
+    var result=[];
+	
+    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['music'])
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+//---------  getClassBook() -------------
+var getClassBook = async function(){
+    var result=[];
+	
+    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['book'])
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+//---------  getClassExhibition() -------------
+var getClassExhibition = async function(){
+    var result=[];
+	
+    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['exhibition'])
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+// ==================  四大 Class  (end)=========================
 //匯出
-module.exports = {list,getOneArticle,getArticleMessage};
+module.exports = {list,getOneArticle,getArticleMessage,getClassMovie,getClassMusic,getClassBook,getClassExhibition};
