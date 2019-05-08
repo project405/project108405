@@ -39,7 +39,7 @@ app.use('/member',memberRouter);
 app.use('/articleList',articleListRouter);
 app.use('/signIn',signInRouter);
 app.use('/signUp',signUpRouter);
-// -------------- My use fore Class ----------------
+// -------------- My use Four Class ----------------
 app.use('/articleList/articleMovie',articleMovieRouter);
 app.use('/articleList/articleMusic',articleMusicRouter);
 app.use('/articleList/articleBook',articleBookRouter);

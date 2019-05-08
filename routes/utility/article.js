@@ -49,7 +49,7 @@ var getArticleMessage = async function(artiNum){
 		
     return result;
 }
-// ==================  四大 Class  (start)=========================
+// ==================  Four Class  (start)=========================
 //---------  getClassMovie() -------------
 var getClassMovie = async function(){
     var result=[];
@@ -102,6 +102,6 @@ var getClassExhibition = async function(){
 		
     return result;
 }
-// ==================  四大 Class  (end)=========================
+// ==================  Four Class  (end)=========================
 //匯出
 module.exports = {list,getOneArticle,getArticleMessage,getClassMovie,getClassMusic,getClassBook,getClassExhibition};
