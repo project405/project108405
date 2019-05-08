@@ -7,13 +7,20 @@ body {
     margin: 0;
     padding: 0;
     border: none;
-    padding-top: 5em;
+    padding-top: 4em;
     background: url("../imgs/banner.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     text-align: justify;
     text-justify: inter-ideograph;
+}
+
+@media (max-width: 1199px) {
+    html,
+    body {
+        padding-top: 2em;
+    }
 }
 
 
@@ -52,15 +59,16 @@ div.content {
     opacity: 0.75;
 }
 
-div.container-fluid {
+
+/* div.container-fluid {
     margin-top: 2em;
-}
+} */
 
 
 /* article */
 
 div.article {
-    margin-top: 8em;
+    margin-top: 2em;
 }
 
 @media (max-width: 1199px) {
@@ -257,3 +265,8 @@ form.search::after {
     clear: both;
     display: table;
 }
+
+
+/* ChangePage */
+
+ul.pagination {}

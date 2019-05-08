@@ -28,22 +28,25 @@
                     <div class="form">
                         <h5> 帳號
                         </h5>
-                        <input type="text">
-                        <h5> 密碼
+                        <input type="text" placeholder="4 ">
+                        <h5> 密碼 <i class="fab fa-accessible-icon"></i>
+
+
                         </h5>
                         <input type="password">
                         <h5> 確認密碼
                         </h5>
                         <input type="password">
-                        <h5> 住址
+                        <h5> 暱稱
                         </h5>
-                        <input class="address" type="text">
+                        <input type="text">
+                        <a>(不得超過15個字)</a>
 
+                        <h5>生日： <input type="date">
+                        </h5>
                         <h5>性別：
                             <input class="gender" name="gender" type="radio" value="M" />男性
                             <input class="gender" name="gender" type="radio" value="F" />女性
-                        </h5>
-                        <h5>生日： <input type="date">
                         </h5>
 
 
@@ -52,6 +55,22 @@
                 <button type="submit" class="btn btn-danger">註冊</button>
                 </div>
 
+                <div class="form-group">
+                    <label for="user_email" class="sr-only">電子郵件信箱</label>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i></span>
+                        <input id="user_email" class="form-control" name="user[email]" placeholder="Email" type="email" autocomplete="email" v-validate="'required|email'">
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback" :class="{ 'has-error': errors.has('user[password]') }">
+                    <label for="user_password" class="sr-only">密碼</label>
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon"><i class="fa fa-fw fa-lock" aria-hidden="true"></i></span>
+                        <input id="user_password" class="form-control" name="user[password]" maxlength="128" placeholder="密碼 (8 個字元以上)" type="password" autocomplete="new-password" v-validate="'required|max:128'">
+                    </div>
+                    <span v-show="errors.has('user[password]')" class="form-control-feedback" aria-hidden="true"><i class="fa fa-warning" aria-hidden="true"></i></span>
+                </div>
 
 
             </div>

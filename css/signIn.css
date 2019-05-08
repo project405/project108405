@@ -9,6 +9,12 @@ body {
     border: none;
     text-align: center;
     overflow-x: hidden;
+    /* background: url("../imgs/testImgs/background.jpg"); */
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: auto;
 }
 
 div.member {
@@ -19,6 +25,12 @@ div.member {
     div.member {
         margin-top: 3em;
     }
+    div.signUp {
+        margin-top: 3em;
+    }
+    div.notify {
+        margin-top: 3em;
+    }
 }
 
 div.thirdParty,
@@ -27,7 +39,7 @@ div.signUp {
     margin: 1em;
     opacity: 0.89;
     padding: 2em 1em 3em 1em;
-    border: 3px solid #3d3c3c;
+    border: 2px solid black;
 }
 
 button.btn {
@@ -35,7 +47,7 @@ button.btn {
 }
 
 input {
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 
@@ -48,14 +60,14 @@ div.signUp {
     padding: 2em 1.5em 2em 1.5em;
 }
 
-@media (max-width: 1199px) {
-    div.member {
-        margin-top: 3em;
-    }
-}
+@media (max-width: 1199px) {}
 
 #signUp h5 {
     margin: 0.5em 0 0.5em 0;
+}
+
+#signUp button {
+    float: right;
 }
 
 input.address {
@@ -65,4 +77,15 @@ input.address {
 input.gender {
     width: 1.5em;
     height: 1.5em;
+}
+
+
+/* notify */
+
+#notify div.notify {
+    background-color: #f0f0f0;
+    text-align: left;
+    margin-top: 6em;
+    line-height: 2em;
+    padding: 2em 1.5em 2em 1.5em;
 }

@@ -325,3 +325,7 @@ form.search::after {
     clear: both;
     display: table;
 }
+
+button.btn {
+    float: right;
+}
