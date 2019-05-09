@@ -120,14 +120,13 @@
                     <div class="card  shadow" onclick="location.href='article.html' " style="cursor:pointer;">
 
                         <div class="card-body">
-                            <h3 class="card-title">為什麼有辦法看的下去？
+                            <h3 class="card-title"><%= items[0][0].artiHead %>
                             </h3>
-                            <p class="card-text">為什麼有人有辦法看的下去皮卡丘真人電影 我真的搞不懂欸 我是說 牠那麼可愛又那麼毛茸茸的讓人想摸到抓狂 我光是看預告片就想摸牠到發瘋但摸不到
-                                看完整部電影我會死在裡面
+                            <p class="card-text"><%= items[0][0].artiCont %>
                             </p>
 
                             <p class="poster">
-                                匿名 於 2019-04-30 14:23發佈
+                                匿名 於 <%= items[0][0].artiDateTime %>發佈
                             </p>
 
                             <div class="tagDiv text-break ">
@@ -151,12 +150,12 @@
                     <div class="card shadow" onclick="location.href='article.html' " style="cursor:pointer;">
 
                         <div class="card-body">
-                            <h3 class="card-title">為什麼有辦法看的下去？
+                            <h3 class="card-title"><%= items[1][0].artiHead %>
                             </h3>
-                            <p class="card-text">為什麼有人有辦法看的下去皮卡丘真人電影....
+                            <p class="card-text"><%= items[1][0].artiCont %>
                             </p>
                             <p class="poster">
-                                匿名 於 2019-04-30 14:23發佈
+                                匿名 於 <%= items[1][0].artiDateTime %> 發佈
                             </p>
                             <div class="tagDiv text-break ">
 
@@ -175,12 +174,12 @@
                     <div class="card shadow" onclick="location.href='article.html' " style="cursor:pointer;">
 
                         <div class="card-body">
-                            <h3 class="card-title">為什麼有辦法看的下去？
+                            <h3 class="card-title"><%= items[2][0].artiHead %>
                             </h3>
-                            <p class="card-text">為什麼有人有辦法看的下去皮卡丘真人電影....
+                            <p class="card-text"><%= items[2][0].artiCont %>
                             </p>
                             <p class="poster">
-                                匿名 於 2019-04-30 14:23發佈
+                                匿名 於 <%= items[2][0].artiDateTime %> 發佈
                             </p>
                             <div class="tagDiv text-break ">
                                 <a class="tag text-break " href="#"> 皮卡皮卡丘</a>

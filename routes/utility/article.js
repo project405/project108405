@@ -4,7 +4,7 @@
 const sql = require('./asyncDB');
 
 //------------------------------------------
-//執行資料庫動作的函式-傳回所有產品資料
+// get article list
 //------------------------------------------
 var list = async function(){
     var result=[];
@@ -49,6 +49,87 @@ var getArticleMessage = async function(artiNum){
 		
     return result;
 }
-
+// ==================  Four Class  (start)=========================
+//---------  getClassMovie() -------------
+var getClassMovie = async function(){
+    var result=[];
+	
+    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['movie'])
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+//---------  getClassMusic() -------------
+var getClassMusic = async function(){
+    var result=[];
+	
+    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['music'])
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+//---------  getClassBook() -------------
+var getClassBook = async function(){
+    var result=[];
+	
+    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['book'])
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+//---------  getClassExhibition() -------------
+var getClassExhibition = async function(){
+    var result=[];
+	
+    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['exhibition'])
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+// ==================  Four Class  (end)=========================
+// ==================  get hot article (start)=========================
+//---------  getArticleNum() -------------
+var getArticleNum = async function(){
+    var result = [];
+    await sql('select "articleLike"."artiNum" from "articleLike"')
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+//---------  getHotArticle() -------------
+var getHotArticle = async function(artiNum){
+    var result = [];
+    await sql('select * from "article" where "artiNum" = $1 ',[artiNum])
+        .then((data) => {            
+            result = data.rows;  
+        }, (error) => {
+            result = null;
+        });
+		
+    return result;
+}
+// ==================  get hot article (end)=========================
 //匯出
-module.exports = {list,getOneArticle,getArticleMessage};
+module.exports = {list,getOneArticle,getArticleMessage,
+    getClassMovie,getClassMusic,getClassBook,getClassExhibition,
+    getArticleNum,getHotArticle};
