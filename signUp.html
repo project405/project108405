@@ -22,63 +22,49 @@
     <script src="scripts/header.js"></script>
 
     <section id="signUp">
-        <div class=" row d-flex justify-content-center">
-            <div class="col-md-3 signUp">
-                <form>
-                    <div class="form">
-                        <h5> 帳號
-                        </h5>
-                        <input type="text" placeholder="4 ">
-                        <h5> 密碼 <i class="fab fa-accessible-icon"></i>
-
-
-                        </h5>
-                        <input type="password">
-                        <h5> 確認密碼
-                        </h5>
-                        <input type="password">
-                        <h5> 暱稱
-                        </h5>
-                        <input type="text">
-                        <a>(不得超過15個字)</a>
-
-                        <h5>生日： <input type="date">
-                        </h5>
-                        <h5>性別：
-                            <input class="gender" name="gender" type="radio" value="M" />男性
-                            <input class="gender" name="gender" type="radio" value="F" />女性
-                        </h5>
-
-
-                </form>
-
-                <button type="submit" class="btn btn-danger">註冊</button>
-                </div>
-
-                <div class="form-group">
-                    <label for="user_email" class="sr-only">電子郵件信箱</label>
-                    <div class="input-group input-group-lg">
-                        <span class="input-group-addon"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i></span>
-                        <input id="user_email" class="form-control" name="user[email]" placeholder="Email" type="email" autocomplete="email" v-validate="'required|email'">
+        <div class="container row ">
+            <div class="col-md-4 d-flex justify-content-center signUp">
+                <div class="form">
+                    <div class="input-icon-wrap">
+                        <span class="input-icon"><span class="fa fa-user"></span></span>
+                        <input type="text" class="input-with-icon" id="ID" placeholder="帳號">
                     </div>
-                </div>
-
-                <div class="signup-modal--input">
-                    <div><span style="transition: opacity 0.5s ease 0s;"><button type="button" class="btn btn-info btn-block facebook--signup-btn metro">以 Facebook 註冊 / 登入</button></span><button type="button" class="btn btn-info btn-block google--signup-btn"
-                            style="">以 Google  註冊 / 登入</button>
-                        <div class="text-center space-top-15 space-bottom-15"><strong>或者</strong></div>
+                    <div class="input-icon-wrap">
+                        <span class="input-icon"><span class="fas fa-lock"></span></span>
+                        <input type="password" class="input-with-icon" id="password" placeholder="密碼">
                     </div>
-                    <div class="signup-modal--form" style="display: block;"><input type="text" class="form-control email" placeholder="E-mail帳號" value="">
-                        <p style="text-align: center; color: red;">此欄位必填</p><input type="password" class="form-control pwd" placeholder="輸入密碼">
-                        <p style="text-align: center; color: red;"></p>
-                        <div class="sc-hqyNC eyLeQp">
-                            <div class="sc-dNLxif iOSrJl"><i class="fa fa-exclamation-circle"></i> 用原SOSreader帳號即可登入</div><a class="btn-link" href="/forgot">忘記密碼？</a></div>
-                        <div class="sc-jbKcbu jYVToR"><button id="loginSubmit" type="button" class="btn btn-primary btn-block btn-md btn btn-default">登入</button></div>
+                    <div class="input-icon-wrap">
+                        <span class="input-icon"><span class="fas fa-lock"></span></span>
+                        <input type="password" class="input-with-icon" id="check-password" placeholder="確認密碼">
                     </div>
+                    <div class="input-icon-wrap">
+                        <span class="input-icon"><span class="fas fa-envelope-open-text"></span></span>
+                        <input type="email" class="input-with-icon" id="email" placeholder="email">
+                    </div>
+
+                    <div class="input-icon-wrap">
+                        <span class="input-icon"><span class="fas fa-birthday-cake"></span></span>
+                        <input type="date" class="input-with-icon" id="birthday" placeholder="生日">
+                    </div>
+                    <div class="input-icon-wrap">
+                        <span class="input-icon align-middle"><span class="fas fa-venus-double"></span></span>
+                        <div>
+                            <div>
+                                <input id="radio-1" class="radio-custom" name="radio-group" type="radio" checked>
+                                <label for="radio-1" class="radio-custom-label">男生</label>
+                            </div>
+                            <div>
+                                <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
+                                <label for="radio-2" class="radio-custom-label">女生</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-danger">註冊</button>
+
                 </div>
-
-
             </div>
+        </div>
         </div>
     </section>
     <!-- Optional JavaScript -->
