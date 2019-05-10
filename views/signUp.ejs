@@ -29,42 +29,70 @@
     <script src="/javascripts/header.js"></script>
 
     <section id="signUp">
-        <div class=" row d-flex justify-content-center">
-            <div class="col-md-3 signUp">
-                <form>
-                    <div class="form">
-                        <h5> 帳號
-                        </h5>
-                        <input type="text">
-                        <h5> 密碼
-                        </h5>
-                        <input type="password">
-                        <h5> 確認密碼
-                        </h5>
-                        <input type="password">
-                        <h5> 住址
-                        </h5>
-                        <input class="address" type="text">
+        <div class="container row ">
+            <div class="col-md-4 d-flex justify-content-center signUp">
+                <div class="form">
+                    <div class="input-icon-wrap">
+                        <span class="input-icon"><span class="fa fa-user"></span></span>
+                        <input type="text" class="input-with-icon" id="ID" placeholder="帳號">
+                    </div>
+                    <div class="input-icon-wrap">
+                        <span class="input-icon"><span class="fas fa-lock"></span></span>
+                        <input type="password" class="input-with-icon" id="password" placeholder="密碼">
+                    </div>
+                    <div class="input-icon-wrap">
+                        <span class="input-icon"><span class="fas fa-lock"></span></span>
+                        <input type="password" class="input-with-icon" id="check-password" placeholder="確認密碼">
+                    </div>
+                    <div class="input-icon-wrap">
+                        <span class="input-icon"><span class="fas fa-envelope-open-text"></span></span>
+                        <input type="email" class="input-with-icon" id="email" placeholder="email">
+                    </div>
 
-                        <h5>性別：
-                            <input class="gender" name="gender" type="radio" value="M" />男性
-                            <input class="gender" name="gender" type="radio" value="F" />女性
-                        </h5>
-                        <h5>生日： <input type="date">
-                        </h5>
+                    <div class="input-icon-wrap">
+                        <span class="input-icon"><span class="fas fa-birthday-cake"></span></span>
+                        <input type="date" class="input-with-icon" id="birthday" placeholder="生日">
+                    </div>
+                    <div class="input-icon-wrap">
+                        <span class="input-icon align-middle"><span class="fas fa-venus-mars"></span></span>
+                        <div>
+                            <div>
+                                <input id="radio-1" class="radio-custom" name="radio-group" type="radio" checked>
+                                <label for="radio-1" class="radio-custom-label">男生</label>
+                            </div>
+                            <div>
+                                <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
+                                <label for="radio-2" class="radio-custom-label">女生</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-danger">註冊</button>
+
+                    </form>
+
+                    <button type="submit" class="btn btn-danger">註冊</button>
+                </div>
 
 
-                </form>
 
-                <button type="submit" class="btn btn-danger">註冊</button>
             </div>
-
-
-
         </div>
         </div>
     </section>
- 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+        crossorigin="anonymous "></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+        crossorigin="anonymous "></script>
+    <script src="/javascripts/active.js "></script>
 </body>
 
 </html>
