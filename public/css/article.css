@@ -2,7 +2,6 @@ html,
 body {
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
-    margin: 0;
     padding: 0;
     border: none;
     word-wrap: break-word;
@@ -11,7 +10,6 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    width: 100%;
     height: auto;
     text-align: justify;
 }
@@ -25,14 +23,14 @@ body {
 
 /* ----------------------- */
 
-div.content p.title {
-    font-weight: bolder 900;
-    font-size: 2em;
+@media (max-width: 450px) {
+    h5.title {
+        font-size: 3em;
+    }
 }
 
 div.info {
     font-size: 1em;
-    margin: 2pt;
 }
 
 h1 {
@@ -94,7 +92,6 @@ a.floorTag {
     text-align: right;
     color: #fff !important;
     padding: 0.2em 0.4em 0.2em 0.4em;
-    line-height: 2.5em;
     border: 2px solid #993a3a;
     border-radius: 8px;
     background-color: #993a3a;
@@ -111,22 +108,9 @@ a.floorTag {
 
 /* ------------------- */
 
-div.footer {
-    height: 25pt;
-    margin: 0.5em;
-    opacity: 0.75;
-    text-align: center;
-}
-
-div.footer a {
-    color: #fff !important;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    line-height: 2.5em;
-    border: 2px solid #3b5998;
-    border-radius: 8px;
-    background-color: #3b5998;
-    text-decoration: none;
-    word-break: break-all;
+.footer-item {
+    margin: 0.25em;
+    opacity: 0.85;
 }
 
 
@@ -160,7 +144,7 @@ input.message {
 }
 
 textarea.input {
-    width: 100%;
+    width: 95%;
     height: 200pt;
 }
 

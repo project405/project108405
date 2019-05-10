@@ -325,3 +325,14 @@ form.search::after {
     clear: both;
     display: table;
 }
+
+button.btn {
+    float: right;
+}
+
+
+/* footer */
+
+div.footer {
+    margin-top: 5em;
+}
