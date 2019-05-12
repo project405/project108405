@@ -3,7 +3,7 @@
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
 
-////--------- getMemID() -------------
+////--------- checkMemID() -------------
 var checkMemID = async function (memID) {
     var result = []  //判斷資料庫是否已存在ID
     await sql('SELECT "memID" FROM "member" where "memID" = $1', [memID])
