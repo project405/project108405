@@ -62,7 +62,7 @@ router.get('/', function (req, res, next) {
                 res.render('index', { items: mydata });
                 // console.log("RenData", mydata);
                 mydata = []; //初始化
-            }, 2000)
+            }, 3000)
         } else {
             res.render('notFound');  //導向找不到頁面
         }

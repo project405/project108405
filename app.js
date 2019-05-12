@@ -14,6 +14,7 @@ var articleListRouter = require('./routes/articleList');
 var articleRouter = require('./routes/article');
 var signInRouter = require('./routes/signIn');
 var signUpRouter = require('./routes/signUp');
+var signUpAddRouter = require('./routes/signUp_add');
 // ---------------  My four Class -------------------
 var articleMovieRouter = require('./routes/articleMovie');
 var articleMusicRouter = require('./routes/articleMusic');
@@ -41,6 +42,7 @@ app.use('/member',memberRouter);
 app.use('/articleList',articleListRouter);
 app.use('/signIn',signInRouter);
 app.use('/signUp',signUpRouter);
+app.use('/signUp/add',signUpAddRouter);
 // -------------- My use Four Class ----------------
 app.use('/articleList/articleMovie',articleMovieRouter);
 app.use('/articleList/articleMusic',articleMusicRouter);

@@ -5,11 +5,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/navbar.js"></script>
-    <script src="/javacripts/active.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -32,52 +30,55 @@
         <div class="container row ">
             <div class="col-md-4 d-flex justify-content-center signUp">
                 <div class="form">
-                    <div class="input-icon-wrap">
-                        <span class="input-icon"><span class="fa fa-user"></span></span>
-                        <input type="text" class="input-with-icon" id="ID" placeholder="帳號">
-                    </div>
-                    <div class="input-icon-wrap">
-                        <span class="input-icon"><span class="fas fa-lock"></span></span>
-                        <input type="password" class="input-with-icon" id="password" placeholder="密碼">
-                    </div>
-                    <div class="input-icon-wrap">
-                        <span class="input-icon"><span class="fas fa-lock"></span></span>
-                        <input type="password" class="input-with-icon" id="check-password" placeholder="確認密碼">
-                    </div>
-                    <div class="input-icon-wrap">
-                        <span class="input-icon"><span class="fas fa-envelope-open-text"></span></span>
-                        <input type="email" class="input-with-icon" id="email" placeholder="email">
-                    </div>
-
-                    <div class="input-icon-wrap">
-                        <span class="input-icon"><span class="fas fa-birthday-cake"></span></span>
-                        <input type="date" class="input-with-icon" id="birthday" placeholder="生日">
-                    </div>
-                    <div class="input-icon-wrap">
-                        <span class="input-icon align-middle"><span class="fas fa-venus-mars"></span></span>
-                        <div>
-                            <div>
-                                <input id="radio-1" class="radio-custom" name="radio-group" type="radio" checked>
-                                <label for="radio-1" class="radio-custom-label">男生</label>
-                            </div>
-                            <div>
-                                <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
-                                <label for="radio-2" class="radio-custom-label">女生</label>
-                            </div>
-
+                    <form action="/signUp/add" method="POST">
+                        <div class="input-icon-wrap">
+                            <span class="input-icon"><span class="fa fa-user"></span></span>
+                            <input type="text" class="input-with-icon" id="ID" name="memID" placeholder="帳號">
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-danger">註冊</button>
+                        <div class="input-icon-wrap">
+                            <span class="input-icon"><span class="fas fa-lock"></span></span>
+                            <input type="password" class="input-with-icon" id="password" name="memPass"
+                                placeholder="密碼">
+                        </div>
+                        <div class="input-icon-wrap">
+                            <span class="input-icon"><span class="fas fa-lock"></span></span>
+                            <input type="password" class="input-with-icon" id="check-password" name="memCheckPass"
+                                placeholder="確認密碼">
+                        </div>
+                        <div class="input-icon-wrap">
+                            <span class="input-icon"><span class="fas fa-envelope-open-text"></span></span>
+                            <input type="email" class="input-with-icon" id="email" name="memMail" placeholder="email">
+                        </div>
+
+                        <div class="input-icon-wrap">
+                            <span class="input-icon"><span class="fas fa-birthday-cake"></span></span>
+                            <input type="date" class="input-with-icon" id="birthday" name="memBirth" placeholder="生日">
+                        </div>
+                        <div class="input-icon-wrap">
+                            <span class="input-icon align-middle"><span class="fas fa-venus-mars"></span></span>
+                            <div>
+                                <div>
+                                    <input id="radio-1" class="radio-custom" name="memGender" type="radio" checked
+                                        value="m">
+                                    <label for="radio-1" class="radio-custom-label">男生</label>
+                                </div>
+                                <div>
+                                    <input id="radio-2" class="radio-custom" name="memGender" type="radio" value="f">
+                                    <label for="radio-2" class="radio-custom-label">女生</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-danger">註冊</button>
 
                     </form>
 
+
                     <button type="submit" class="btn btn-danger">註冊</button>
                 </div>
-
-
-
             </div>
         </div>
+
         </div>
     </section>
     <!-- Optional JavaScript -->
