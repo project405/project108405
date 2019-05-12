@@ -28,9 +28,9 @@ router.post('/', function (req, res, next) {
             var newData = {
                 memID: memID,
                 memGender: memGender,
-                memPass: memPass
+                memPass: memPass,
                 // memMail:memMail,
-                // memBirth:memBirth,
+                memBirth:memBirth
             }
             console.log(newData);
             signUp.createMember(newData).then(d => {
@@ -41,7 +41,7 @@ router.post('/', function (req, res, next) {
                 }
             })
         }
-    }, 3000)
+    }, 2000)
 
 
 });

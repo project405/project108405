@@ -12,7 +12,6 @@ var checkMemID = async function (memID) {
         }, (error) => {
             result = undefined;
         });
-    console.log("3");
     return result;
 }
 //---------  createMember() -------------
@@ -20,7 +19,8 @@ var createMember = async function (newData) {
     var result;
     // 'INSERT INTO member (member, memPass, memBirth, memMail, memGender) VALUES ($1, $2, $3, $4, $5)', [newData.member, newData.memPass, newData.memBirth, newData.memMail,memGender])
     console.log(newData);
-    await sql('INSERT INTO "member" ("memID") VALUES ($1)', [newData.memID])
+    await sql('INSERT INTO "member" ("memID", "memPass", "memBirth", "memGender") VALUES ($1,$2,$3,$4)',
+     [newData.memID, newData.memPass, newData.memBirth, newData.memGender])
         .then((data) => {
             result = 0;
         }, (error) => {
