@@ -8,7 +8,7 @@ const {Client} = require('pg');
 //-----------------------
 // 自己的資料庫連結位址
 //-----------------------
-var pgConn = 'postgres://jzfxeqihevhngh:0d5a3860ecff77a9555d530bc1cb73aa93ee265772c781ac548f4c94224c96a4@ec2-184-73-210-189.compute-1.amazonaws.com:5432/da4coflhfi48ts';
+var pgConn = 'postgres://mfsgscxlglwcvv:3698dad2bbab146cd61a31d6af03094cc19aec2a1b4315f9208f972ca255ff4d@ec2-23-21-186-85.compute-1.amazonaws.com:5432/d96t764r1va6lf';
 
 
 //產生可同步執行sql的函式

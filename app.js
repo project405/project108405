@@ -7,12 +7,14 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 // --------------  My routes--------------- 
-var collectionRouter = require('./routes/collection');
+var collection_recommend_Router = require('./routes/collectionRecommend');
+var collection_article_Router = require('./routes/collectionArticle');
 var memberRouter = require('./routes/member');
 var articleListRouter = require('./routes/articleList');
 var articleRouter = require('./routes/article');
 var signInRouter = require('./routes/signIn');
 var signUpRouter = require('./routes/signUp');
+var signUpAddRouter = require('./routes/signUp_add');
 // ---------------  My four Class -------------------
 var articleMovieRouter = require('./routes/articleMovie');
 var articleMusicRouter = require('./routes/articleMusic');
@@ -34,11 +36,13 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/article', articleRouter);
 // ---------------  My use  ----------------
-app.use('/collection',collectionRouter);
+app.use('/collection/recommend',collection_recommend_Router);
+app.use('/collection/article',collection_article_Router);
 app.use('/member',memberRouter);
 app.use('/articleList',articleListRouter);
 app.use('/signIn',signInRouter);
 app.use('/signUp',signUpRouter);
+app.use('/signUp/add',signUpAddRouter);
 // -------------- My use Four Class ----------------
 app.use('/articleList/articleMovie',articleMovieRouter);
 app.use('/articleList/articleMusic',articleMusicRouter);

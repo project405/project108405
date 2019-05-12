@@ -12,6 +12,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
     <link href="/css/header.css" rel="stylesheet" type="text/css" />
     <link href="/css/article.css" rel="stylesheet" type="text/css" />
 
@@ -21,10 +25,8 @@
 <body>
 
     <script src="/javascripts/header.js"></script>
-    <div class="background">
-        <h1>文章列表</h1>
 
-        <!-- <div class="input-group     ">
+    <!-- <div class="input-group     ">
             <input type="text" class="form-control search mx-auto" placeholder="搜尋tag、文章或作者"
                 aria-label="Recipient's username" aria-describedby="button-addon2">
 
@@ -34,149 +36,164 @@
         </div> -->
 
 
-        <!-- 使用者發文 -->
+    <!-- 使用者發文 -->
 
-        <div class="container-fluid post">
-            <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-lg-10 content shadow">
+    <div class="container-fluid post">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-lg-10 content shadow">
+                <div class=" postArticle ">
+                    <h3><%= items[0].artiHead %></h3>
+                    <hr />
+                    <div class="tagDiv col-lg-12 text-break ">
 
-                    <div class=" postArticle ">
-                        <p class="title"><%= items[0].artiHead %>
+                        <a class="tag text-break " href="#"> 好玩</a>
+                        <a class="tag text-break " href="#"> 好吃</a>
+                        <a class="tag text-break " href="#"> 沖繩</a>
+                        <a class="tag text-break " href="#"> 自駕遊</a>
 
-                        </p>
-                        <hr />
-                        <div class="tagDiv col-lg-12 text-break ">
-
-                            <a class="tag text-break " href="#"> 好玩</a>
-                            <a class="tag text-break " href="#"> 好吃</a>
-                            <a class="tag text-break " href="#"> 沖繩</a>
-                            <a class="tag text-break " href="#"> 自駕遊</a>
-
-                            <a class="tag text-break " href="#"> 有趣</a>
-                            <a class="tag text-break " href="#"> 這個禮拜超開心</a>
-
-                        </div>
-                        <p class="content"> <%= items[0].artiCont %>
-                        </p>
-                        <p class="poster">
-                            <a class="floorTag text-break ">樓主</a> 匿名 於<%= items[0].artiDateTime %> 發布
-                        </p>
-                    </div>
-                    
-                    <!-- info -->
-                    <div class="info d-flex justify-content-between">
-                        <div class="like">
-                            <a>20個愛心</a>&nbsp;&nbsp;&nbsp;
-                            <a>5個留言</a>&nbsp;&nbsp;&nbsp;
-                            <a>收藏</a>&nbsp;&nbsp;&nbsp;
-                        </div>
-                        <div>
-                        </div>
-
-                        <div class="like">
-                            檢舉
-                        </div>
-                    </div>
-                    <!-- info結束 -->
-                </div>
-            </div>
-            <!-- 使用者發文結束' -->
-        </div>
-        <center>
-            <h1>文章留言</h1>
-
-            <hr class="separate">
-        </center>
-
-
-
-        <!-- 文章留言 -->
-        <% for(var i=1; i<items.length; i++) {%>
-                <% for(var j=0; j<items[1].length; j++) {%>
-        <div class="container-fluid ">
-
-
-            <div class="row">
-                <div class="col-sm-1"></div>
-                <div class="col-lg-10 content">
-                    <!-- 文章留言 -->
-                    <div class=" message ">
-                        <div class="tagDiv col-lg-12 text-break ">
-
-                            <a class="tag text-break " href="#"> 哈哈哈哈ㄏ</a>
-
-                        </div>
-
-                        <p class="content"><%= items[i][j].artiMessCont %>
-                        </p>
-                        <p class="poster">
-                            <a class="floorTag text-break ">1樓</a> 匿名 於 <%= items[i][j].artiMessDateTime %>留言
-                        </p>
+                        <a class="tag text-break " href="#"> 有趣</a>
+                        <a class="tag text-break " href="#"> 這個禮拜超開心</a>
 
                     </div>
-
-                    <!-- info -->
-                    <div class="info d-flex justify-content-between">
-                        <div class="like">
-                            <a>20個愛心</a>&nbsp;&nbsp;&nbsp;
-                        </div>
-                        <div>
-                        </div>
-
-                        <div class="like">
-                            檢舉
-                        </div>
-                    </div>
-                    <!-- info結束 -->
-                </div>
-            </div>
-        </div>
-            <% } %>
-        <% } %>
-        <!-- 文章留言結束 -->
-        <!-- replying -->
-
-        <div class="container-fluid replying">
-
-
-            <div class="row " id="reply">
-                <div class="col-sm-1"></div>
-                <div class="col-lg-10 content">
-                    <div class="input">
-                        <textarea class="input" col="40" id="text" placeholder="輸入您要回覆的內容"></textarea>
-                    </div>
-                    <form>
-                        <div class="form-group">
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                    </form>
-                    <a href="#" class="btn btn-secondary btn-lg active float-md-right" role="button"
-                        aria-pressed="true">發佈留言</a>
+                    <p class="content"> <%= items[0].artiCont %>
+                    </p>
+                    <p class="poster">
+                        <a class="floorTag text-break ">樓主</a> 匿名 於 <%= items[0].artiDateTime %> 發布
+                    </p>
 
                 </div>
 
-                <div class="col-sm-1"></div>
+                <!-- info -->
+                <div class="info d-flex justify-content-between">
+                    <div class="like">
+                        <a>20個愛心</a>&nbsp;&nbsp;&nbsp;
+                        <a>5個留言</a>&nbsp;&nbsp;&nbsp;
+                        <a>收藏</a>&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div>
+                    </div>
 
+                    <div class="like">
+                        檢舉
+                    </div>
+                </div>
+                <!-- info結束 -->
             </div>
         </div>
-        <!-- replying end -->
+        <!-- 使用者發文結束' -->
+    </div>
+    <center>
+        <h1>文章留言</h1>
 
-        <a href="https://www.blogger.com/blogger.g?blogID=2031514508322140995#" id="gotop">
-            <i class="fa fa-angle-up"></i>
-        </a>
+        <hr class="separate">
+    </center>
 
-        <div class="footer fixed-bottom">
-            <a class="footer-item" href="#" id="goBottom"> 去留言</a>
-            <a class="footer-item" href="#"> 愛心</a>
-            <a class="footer-item" href="#"> 收藏</a>
+
+
+    <!-- 文章留言 -->
+    <% for(var i=1; i<items.length; i++) {%>
+    <% for(var j=0; j<items[1].length; j++) {%>
+    <div class="container-fluid ">
+
+
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-lg-10 content">
+                <!-- 文章留言 -->
+                <div class=" message ">
+                    <div class="tagDiv col-lg-12 text-break ">
+
+                        <a class="tag text-break " href="#"> 哈哈哈哈ㄏ</a>
+
+                    </div>
+
+                    <p class="content"><%= items[i][j].artiMessCont %>
+                    </p>
+                    <p class="poster">
+                        <a class="floorTag text-break ">1樓</a> 匿名 於 <%= items[i][j].artiMessDateTime %>留言
+                    </p>
+
+                </div>
+
+                <!-- info -->
+                <div class="info d-flex justify-content-between">
+                    <div class="like">
+                        <a>20個愛心</a>&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div>
+                    </div>
+
+                    <div class="like">
+                        檢舉
+                    </div>
+                </div>
+                <!-- info結束 -->
+            </div>
+        </div>
+    </div>
+    <% } %>
+    <% } %>
+    <!-- 文章留言結束 -->
+
+    <!-- replying -->
+
+    <div class="container-fluid replying">
+
+
+        <div class="row " id="reply">
+            <div class="col-sm-1"></div>
+            <div class="col-lg-10 content">
+                <div class="input">
+                    <textarea class="input" col="40" id="text" placeholder="輸入您要回覆的內容"></textarea>
+                </div>
+                <form>
+                    <div class="form-group">
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    </div>
+                </form>
+                <button type="submit" class="btn btn-dark">發佈留言</button>
+
+            </div>
+
+            <div class="col-sm-1"></div>
+
+        </div>
+    </div>
+    <!-- replying end -->
+
+    <a href="https://www.blogger.com/blogger.g?blogID=2031514508322140995#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
+
+    <div class="row d-flex justify-content-center">
+        <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
+
+            <button type="button" class="btn btn-secondary  footer-item" id="goBottom">去留言</button>
+            <button type="button" class="btn btn-secondary  footer-item">愛心</button>
+            <button type="button" class="btn btn-secondary  footer-item">收藏</button>
+
         </div>
 
-    </div>
-    </div>
-    </div>
 
 
+
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+            crossorigin="anonymous "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+            crossorigin="anonymous "></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+            crossorigin="anonymous "></script>
+        <script src="/javascripts/active.js "></script>
 </body>
 
 </html>

@@ -135,6 +135,7 @@ a.tag {
 div.search {
     width: 100%;
     margin: 0.75em 0 0.75em 0;
+    float: right;
 }
 
 
@@ -160,7 +161,6 @@ input.search {
     font-size: 15px;
     border: 1px solid grey;
     border-radius: 4px;
-    float: center;
     height: 2em;
 }
 
@@ -172,7 +172,6 @@ input.search {
 /* Style the submit button */
 
 form.search button {
-    float: center !important;
     width: 30pt;
     padding: 5px;
     background: #2196F3;
@@ -203,6 +202,6 @@ form.search::after {
 
 h2 {
     font-size: 2em;
-    color: #eee;
-    text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555;
+    /* color: #eee; */
+    /* text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555; */
 }

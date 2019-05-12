@@ -29,7 +29,7 @@ router.get('/:artiNum', async function (req, res, next) {
                 if (data == null) {
                     res.render('error');  //導向錯誤頁面
                 } else {
-                    // console.log(mydata[1][0].artiMessNum);
+                    // console.log(mydata[1][0]);
                     res.render('article', { items: mydata });  // mydata[]丟給items 
                 }
             })

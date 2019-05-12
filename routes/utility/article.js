@@ -6,7 +6,7 @@ const sql = require('./asyncDB');
 //------------------------------------------
 // get article list
 //------------------------------------------
-var list = async function(){
+var getArticleList = async function(){
     var result=[];
 	
     await sql('SELECT * FROM article')
@@ -130,6 +130,6 @@ var getHotArticle = async function(artiNum){
 }
 // ==================  get hot article (end)=========================
 //匯出
-module.exports = {list,getOneArticle,getArticleMessage,
+module.exports = {getArticleList,getOneArticle,getArticleMessage,
     getClassMovie,getClassMusic,getClassBook,getClassExhibition,
     getArticleNum,getHotArticle};

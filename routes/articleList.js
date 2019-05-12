@@ -5,8 +5,9 @@ const article = require('./utility/article');
 var moment = require('moment');
 //接收GET請求
 router.get('/', function (req, res, next) {
-    article.list().then(data => {
+    article.getArticleList().then(data => {
         for (let i = 0; i < data.length; i++) {
+            // console.log(data);
             data[i].artiDateTime = moment(data[i].artiDateTime).format("YYYY-MM-DD HH:mm:ss");
         }
         if (data == null) {
