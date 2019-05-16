@@ -25,7 +25,7 @@
 
     <section id="signIn">
 
-        <div class="container-fluid row flex justify-content-center ">
+        <div class="container-fluid row flex justify-content-center signIn">
             <div class="container-fluid">
                 <center>
                     <h2>登入</h2>
@@ -33,7 +33,7 @@
 
                 </center>
             </div>
-            <form class="signUp  col-12-5" action="">
+            <form class="signIn col-12-5" action="">
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fa fa-user"></span></span>
                     <input type="text" class="input-with-icon" id="ID" placeholder="帳號">
@@ -42,17 +42,18 @@
                     <span class="input-icon"><span class="fas fa-lock"></span></span>
                     <input type="password" class="input-with-icon" id="password" placeholder="密碼">
                 </div>
+                <button type="submit" class="btn btn-secondary login">登入</button>
+                <button type="button" class="btn btn-light right">忘記密碼</button>
 
-                <button type="submit" class="btn btn-secondary">登入</button>
-                <button type="submit" class="btn btn-secondary">註冊</button>
-                <a href="">忘記密碼</a>
+                <button type="button" class="btn btn-light right" onclick="location.href='signUp.html'">註冊</button>
+
 
             </form>
 
             <div class="container-fluid row flex justify-content-center ">
-                <div class="col-12-8">
+                <div class="col-12-5 third">
                     <center>
-                        <h3>第三方登入或註冊</h3>
+                        <h4>第三方登入或註冊</h4>
                         <hr class="highlight">
                         <button type="button" class="btn btn-danger third">Gmail登入或註冊</button>
                         <button type="button" class="btn btn-primary third">Facebook登入或註冊</button>

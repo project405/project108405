@@ -16,13 +16,14 @@
         height: auto;
     }
     
-    .container-fluid {
-        margin: 3em 0em 0em 0em;
+    .container-fluid.signIn,
+    .container-fluid.signUp {
+        margin: 5em 0em 0em 0em;
         padding: 0;
     }
     
     h2 {
-        font-size: 2.5em;
+        font-size: 1.75em;
         color: #eee;
         text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555;
     }
@@ -30,31 +31,45 @@
     /* SIGNIN */
     /* --------------------- */
     
-    #signIn a {
-        color: black;
-        float: right;
-        margin: 0.4em;
+    #signIn form.signIn {
+        margin-bottom: 3em;
+        padding: 0;
     }
     
-    #signIn form button {
-        margin: 0.3em;
+    #signIn form button.right {
+        margin: 0.1em 0.75em 0 0.1em;
         float: right;
     }
     
-    #signIn button.third {
+    #signIn form.signIn {
+        line-height: 2em;
+        padding: 1em 0.75em 2em 0.75em;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        margin-bottom: 2em;
+    }
+    
+    @media (max-width: 350px) {
+        #signIn form.signIn {
+            border: none;
+        }
+    }
+    
+    #signIn button.third,
+    #signIn button.login {
         margin: 0.75em;
         float: center !important;
+        width: 85%;
     }
     /* --------------------- */
     /* SIGNUP */
     /* --------------------- */
     
     #signUp form.signUp {
-        text-align: left;
         line-height: 2em;
-        padding: 1em 0.75em 2em 0.75em;
         border: 1px solid #ddd;
         border-radius: 12px;
+        padding: 0.75em;
     }
     
     @media (max-width: 350px) {
@@ -64,11 +79,17 @@
         .button {
             margin: 1em;
         }
+        .container-fluid.signIn,
+        .container-fluid.signUp {
+            margin: 2.5em 0em 0em 0em;
+            padding: 0;
+        }
     }
     
     #signUp button {
-        float: right;
-        margin-top: 1em;
+        margin: 0.75em;
+        width: 90%;
+        float: center;
     }
     /* notify */
     
