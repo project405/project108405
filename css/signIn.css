@@ -4,7 +4,7 @@
         height: 100%;
         max-width: 100%;
         font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
-        margin: 0 auto;
+        margin: 0;
         padding: 0;
         border: none;
         text-align: center;
@@ -14,6 +14,12 @@
         background-size: cover;
         width: 100%;
         height: auto;
+        overflow-y: auto;
+    }
+    
+    .container-fluid {
+        margin: 0;
+        padding: 0;
     }
     
     div.member {
@@ -44,23 +50,28 @@
     button.btn {
         font-size: 1em;
     }
+    /* --------------------- */
     /* SIGNUP */
+    /* --------------------- */
     
-    div.signUp {
+    #signUp form.signUp {
         text-align: left;
-        margin-top: 6em;
+        margin: 5em 0em 0em 0em;
         line-height: 2em;
-        padding: 2em 1.5em 2em 1.5em;
+        padding: 1em 0.75em 2em 0.75em;
+        border: 1px solid #ddd;
+        border-radius: 12px;
     }
     
-    @media (max-width: 1199px) {}
-    
-    #signUp h5 {
-        margin: 0.5em 0 0.5em 0;
+    @media (max-width: 350px) {
+        #signUp form.signUp {
+            border: none;
+        }
     }
     
     #signUp button {
         float: right;
+        margin-top: 1em;
     }
     /* notify */
     
@@ -72,6 +83,10 @@
         padding: 2em 1.5em 2em 1.5em;
     }
     /* form */
+    
+    .input {
+        width: 2rem;
+    }
     
     .input-icon-wrap {
         border: 1px solid #ddd;
