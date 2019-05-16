@@ -21,40 +21,49 @@
 <body>
     <script src="scripts/header.js"></script>
 
-    <div class="row d-flex justify-content-center member ">
-        <div class="col-lg-5 thirdParty">
-            <h3>第三方登入或註冊</h3>
-            <hr>
-            <button type="button" class="btn btn-danger">Gmail登入或註冊</button>
-            <br> <br>
 
 
-            <button type="button" class="btn btn-primary">Facebook登入或註冊</button> </div>
-    </div>
+    <section id="signIn">
 
+        <div class="container-fluid row flex justify-content-center ">
+            <div class="container-fluid">
+                <center>
+                    <h2>登入</h2>
+                    <hr class="highlight">
 
-    <div class="row d-flex justify-content-center ">
-        <div class="col-lg-5 signIn">
-            <form>
-                <div class="form-group ">
-                    <h5> 帳號
-                    </h5>
-                    <input type="text">
+                </center>
+            </div>
+            <form class="signUp  col-12-5" action="">
+                <div class="input-icon-wrap">
+                    <span class="input-icon"><span class="fa fa-user"></span></span>
+                    <input type="text" class="input-with-icon" id="ID" placeholder="帳號">
                 </div>
-                <div class="form-group">
-                    <h5> 密碼
-                    </h5>
-                    <input type="password">
+                <div class="input-icon-wrap">
+                    <span class="input-icon"><span class="fas fa-lock"></span></span>
+                    <input type="password" class="input-with-icon" id="password" placeholder="密碼">
                 </div>
 
-                <button type="submit" class="btn btn-primary">登入</button>
-                <button type="button" class="btn btn-danger" onclick="location.href='signUp.html'">註冊</button>
-
+                <button type="submit" class="btn btn-secondary">登入</button>
+                <button type="submit" class="btn btn-secondary">註冊</button>
+                <a href="">忘記密碼</a>
 
             </form>
-        </div>
-    </div>
 
+            <div class="container-fluid row flex justify-content-center ">
+                <div class="col-12-8">
+                    <center>
+                        <h3>第三方登入或註冊</h3>
+                        <hr class="highlight">
+                        <button type="button" class="btn btn-danger third">Gmail登入或註冊</button>
+                        <button type="button" class="btn btn-primary third">Facebook登入或註冊</button>
+                    </center>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

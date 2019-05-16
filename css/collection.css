@@ -47,8 +47,8 @@ div.info {
     padding: 1em;
 }
 
-h1 {
-    font-size: 3em;
+h2 {
+    font-size: 1em !important;
     color: #eee;
     text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555;
 }
