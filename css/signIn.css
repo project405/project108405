@@ -102,15 +102,11 @@
     }
     /* form */
     
-    .input {
-        width: 2rem;
-    }
-    
     .input-icon-wrap {
         border: 1px solid #ddd;
         display: flex;
         flex-direction: row;
-        margin: 1em 0.5em;
+        margin: 0.5em 0.25em;
     }
     
     .input-icon {

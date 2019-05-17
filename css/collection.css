@@ -194,6 +194,22 @@ a.tag {
 }
 
 
+/*  button */
+
+button.footer {
+    margin: 0.1em;
+    height: 2em;
+    font-size: 1em;
+    opacity: 0.89;
+}
+
+@media (max-width: 450px) {
+    button.footer {
+        font-size: 0.85em;
+    }
+}
+
+
 /* ------------------- */
 
 
@@ -208,62 +224,46 @@ div.search {
 }
 
 
-/*  button */
-
-.buttons button {
-    margin: 0.1em;
-    height: 2em;
-    font-size: 1em;
-    opacity: 0.89;
-}
-
-@media (max-width: 450px) {
-    .buttons button {
-        font-size: 0.85em;
-    }
-}
-
-
 /* Style the search field */
 
-form.search input[type=text] {
-    padding: 10px 0 10px 20px;
-    font-size: 15px;
-    border: 1px solid grey;
+.form-inline input {
+    -webkit-box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 0.75rem 1.25rem;
+    height: auto;
+    letter-spacing: 0.15rem;
+    border: #f0f0f0 solid 0.75px;
     border-radius: 8px;
-    float: center;
-    width: 100%;
-    background: #f1f1f1;
 }
 
+button.search {
+    -webkit-box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 0.75rem 1.25rem;
+    font-size: 80%;
+    letter-spacing: .15rem;
+    border: 0;
+    border-radius: 8px;
+    font-size: 1em;
+    margin: 0.1em;
+}
 
-/* Style the submit button */
+button.search {
+    background-color: #64a19d;
+}
 
-form.search button {
-    float: center !important;
-    width: 30pt;
-    padding: 5px;
-    background: #2196F3;
+button.search:hover {
+    background-color: #4f837f;
+}
+
+button.search:focus {
+    background-color: #4f837f;
     color: white;
-    font-size: 15px;
-    border: 1px solid grey;
-    border-left: none;
-    /* Prevent double borders */
-    cursor: pointer;
-    border-radius: 8px;
+    width: 3em;
 }
 
-form.search button:hover {
-    background: #0b7dda;
-}
-
-
-/* Clear floats */
-
-form.search::after {
-    content: "";
-    clear: both;
-    display: table;
+button.search:active {
+    background-color: #467370 !important;
 }
 
 
