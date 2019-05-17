@@ -98,16 +98,6 @@ CREATE TABLE "public"."articleMessageLike" (
 ALTER TABLE "public"."articleMessageLike" ADD CONSTRAINT "articleMessageLike_pkey" PRIMARY KEY ("artiMessLikeNum");
 
 
--- ------------------------------
---    Create recommendClass table 
--- ------------------------------
-DROP TABLE IF EXISTS "public"."recommendClass";
-CREATE TABLE "public"."recommendClass" (
-  "recomClassNum" serial , 
-  "recomClassName" char(1)
-	
-);
-	ALTER TABLE "public"."recommendClass" ADD CONSTRAINT "recommendClass_pkey" PRIMARY KEY ("recomClassNum");
 
 -- ------------------------------
 --    Create recommend table 
@@ -118,10 +108,9 @@ CREATE TABLE "public"."recommend" (
   "recomDateTime" TIMESTAMP , 
 	"recomHead" varchar(100) COLLATE "pg_catalog"."default" ,
 	"recomCont" text , 
-	"recomClassNum" int,
-	"subNum" int4 ,
-	
-	FOREIGN KEY("recomClassNum") REFERENCES "recommendClass"("recomClassNum")ON DELETE RESTRICT  ON UPDATE RESTRICT
+	"recomClass" varchar(10),
+	"subNum" int4 
+
 	
 );
 	ALTER TABLE "public"."recommend" ADD CONSTRAINT "recommend_pkey" PRIMARY KEY ("recomNum");
