@@ -29,7 +29,6 @@ DROP TABLE IF EXISTS "public"."recommendMessageLike" ;
 DROP TABLE IF EXISTS "public"."recommendMessage" ;
 DROP TABLE IF EXISTS "public"."recommendLike" ;
 DROP TABLE IF EXISTS "public"."recommend" ;
-DROP TABLE IF EXISTS "public"."recommendClass" ;
 
 -- -------------------------------
 --           delete movie
