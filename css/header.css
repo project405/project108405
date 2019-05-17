@@ -166,15 +166,12 @@
     }
 }
 
-body>div.header>nav>a.title.justify-content-center {
+a.navTitle {
     font-size: 1.15em !important;
-    color: #fff;
-    color: white;
+    color: white !important;
     text-shadow: black 0.1em 0.1em 0.2em;
     text-align: center;
 }
-
-a.navTitle {}
 
 
 /* ------------------- */

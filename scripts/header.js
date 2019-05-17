@@ -13,7 +13,7 @@ header = '    <div class="header">\
                 <a class="nav-link " href="index.html">首頁 <span class="sr-only">(current)</span></a>\
             </li>\
             <li class="nav-item ">\
-                <a class="nav-link" href="#">\
+                <a class="nav-link" href="notify.html">\
                 <i class="fas fa-mail-bulk"></i>\
                 </a>\
             </li>\
