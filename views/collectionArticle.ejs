@@ -59,15 +59,16 @@
 
 
                 <div class="col-12 mb-3 col-lg-10 ">
+                    <% for(var i = 0 ; i<collData.length ; i++ ) {%>
                     <div class="card shadow list " onclick="location.href='#' ">
 
                         <div class="card-body ">
-                            <h3 class="card-title ">為什麼有辦法看的下去？
+                            <h3 class="card-title "><%= collData[i].artiHead %>
                             </h3>
-                            <p class="card-text ">為什麼有人有辦法看的下去皮卡丘真人電影 ...
+                            <p class="card-text "><%= collData[i].artiCont %>
                             </p>
                             <p class="poster ">
-                                <a class="floorTag text-break ">樓主</a> 匿名 於 2019-04-30 14:23發佈
+                                <a class="floorTag text-break ">樓主</a> 匿名 於 <%= collData[i].artiDateTime %> 發佈
                             </p>
                             <div class="tagDiv col-lg-12 text-break ">
                                 <a class="tag text-break " href="# "> 可愛</a>
@@ -83,40 +84,17 @@
                             </div>
                         </div>
 
-                        <div class="wrapperCard card-img-top " style="background-image: url( '/imgs/testImgs/15.jpg'); ">
+                        <div class="wrapperCard card-img-top "
+                            style="background-image: url( '/imgs/testImgs/15.jpg'); ">
                         </div>
                     </div>
-
-                    <div class="card mb-3 shadow ">
-
-                        <div class="card-body ">
-                            <h3 class="card-title ">為什麼有辦法看的下去？
-                            </h3>
-                            <p class="card-text ">為什麼有人有辦法看的下去皮卡丘真人電影 我真的搞不懂欸 我是說 牠那麼可愛又那麼毛茸茸的讓人想摸到抓狂 我光是看預告片就想摸牠到發瘋但摸不到
-                                看完整部電影我會死在裡面
-                            </p>
-                            <p class="poster ">
-                                <a class="floorTag text-break ">樓主</a> 匿名 於 2019-04-30 14:23發佈
-                            </p>
-
-                            <div class="tagDiv col-lg-12 ">
-
-                                <a class="tag " href="# "> 我受不了了</a>
-                                <a class="tag " href="# "> 皮卡丘</a>
-                                <a class="tag " href="# "> 帶回家</a>
-                                <a class="tag " href="# "> 萌萌</a>
-
-                            </div>
-
-                        </div>
-                        <div class="wrapperCard card-img-top " style="background-image: url( '/imgs/testImgs/16.jpg'); ">
-                        </div>
-                    </div>
-
-
+                    <% } %>
                 </div>
 
+
             </div>
+
+        </div>
 
 
         </div>
