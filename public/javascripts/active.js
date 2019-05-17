@@ -70,4 +70,4 @@ $("#goBottom").click(function() {
 
 
 
-//input
+//textarea insert image
