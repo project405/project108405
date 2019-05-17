@@ -46,7 +46,6 @@ div.content {
     background-color: #eee;
     opacity: 0.95;
     margin-bottom: 2em;
-    border-radius: 8px;
 }
 
 
@@ -69,7 +68,7 @@ div.post {
 }
 
 div.tagDiv {
-    padding: 1em;
+    padding: 1em 0 1em 0;
     word-break: break-all;
 }
 
@@ -83,10 +82,12 @@ a.tag {
     background-color: #3b5998;
     text-decoration: none;
     word-break: break-all;
+    font-size: 0.88em !important;
 }
 
 p.poster {
     text-align: right;
+    font-size: 1em !important;
 }
 
 a.floorTag {
@@ -98,6 +99,7 @@ a.floorTag {
     background-color: #993a3a;
     text-decoration: none;
     word-break: break-all;
+    font-size: 0.88em !important;
 }
 
 

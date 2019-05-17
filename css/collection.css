@@ -128,7 +128,7 @@ a.floorTag {
     background-color: #993a3a;
     text-decoration: none;
     word-break: break-all;
-    font-size: 0.75em;
+    font-size: 0.88em;
 }
 
 
@@ -219,7 +219,6 @@ button.footer {
 /* ------------------- */
 
 div.search {
-    width: 100%;
     margin: 0.75em 0 0.75em 0;
 }
 
@@ -231,9 +230,9 @@ div.search {
     box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
     padding: 0.75rem 1.25rem;
     height: auto;
-    letter-spacing: 0.15rem;
     border: #f0f0f0 solid 0.75px;
     border-radius: 8px;
+    min-width: 71%;
 }
 
 button.search {
@@ -259,7 +258,6 @@ button.search:hover {
 button.search:focus {
     background-color: #4f837f;
     color: white;
-    width: 3em;
 }
 
 button.search:active {
