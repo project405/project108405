@@ -19,7 +19,7 @@ router.post('/', function (req, res, next) {
         } else {
             req.session.memID = d.memID;
             req.session.memPass = d.memPass;
-            res.render('signIn', { name: d.memID });   //導向使用者
+            res.render('user_show', { name: d.memID });   //導向使用者
         }
     })
 });
