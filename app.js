@@ -47,6 +47,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// ---------------  express-session  ----------------
 app.use(session({secret: 'mysecret', cookie: { maxAge: 60000 }}));
 app.use('/', indexRouter);
 app.use('/article', articleRouter);
