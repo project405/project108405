@@ -48,9 +48,9 @@ var getCollArticle = async function (memID) {
     }
     return result;
 }
-// ==================  Four Class  (start)=========================
-//---------  getClassMovie() -------------
-var getClassMovie = async function (memID) {
+// ==================  Four Recom Class  (start)=========================
+//---------  getRecomMovie() -------------
+var getRecomMovie = async function (memID) {
     var getdata = [];
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "recomNum" != 0 ', [memID])
@@ -73,8 +73,8 @@ var getClassMovie = async function (memID) {
     }
     return result;
 }
-//---------  getClassMusic() -------------
-var getClassMusic = async function (memID) {
+//---------  getRecomMusic() -------------
+var getRecomMusic = async function (memID) {
     var getdata = [];
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "recomNum" != 0 ', [memID])
@@ -97,8 +97,8 @@ var getClassMusic = async function (memID) {
     }
     return result;
 }
-//---------  getClassBook() -------------
-var getClassBook = async function (memID) {
+//---------  getRecomBook() -------------
+var getRecomBook = async function (memID) {
     var getdata = [];
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "recomNum" != 0 ', [memID])
@@ -121,8 +121,8 @@ var getClassBook = async function (memID) {
     }
     return result;
 }
-//---------  getClassExhibition() -------------
-var getClassExhibition = async function (memID) {
+//---------  getRecomExhibition() -------------
+var getRecomExhibition = async function (memID) {
     var getdata = [];
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "recomNum" != 0 ', [memID])
@@ -146,4 +146,4 @@ var getClassExhibition = async function (memID) {
     return result;
 }
 module.exports = { getCollRecommend, getCollArticle,
-     getClassMovie, getClassMusic, getClassBook, getClassExhibition };
+    getRecomMovie, getRecomMusic, getRecomBook, getRecomExhibition };
