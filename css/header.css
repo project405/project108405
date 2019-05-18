@@ -156,7 +156,7 @@
 }
 
 .navbar {
-    /* opacity: 0.95; */
+    opacity: 0.89;
     background-color: #0D5146;
     /* background-color: #2D4F41;
     /* background-color: #9f9289; */
@@ -173,6 +173,7 @@ a.navTitle {
     color: white !important;
     text-shadow: black 0.1em 0.1em 0.2em;
     text-align: center;
+    text-decoration: none;
 }
 
 

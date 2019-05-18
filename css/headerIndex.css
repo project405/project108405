@@ -173,6 +173,7 @@ a.navTitle {
     color: white !important;
     text-shadow: black 0.1em 0.1em 0.2em;
     text-align: center;
+    text-decoration: none;
 }
 
 

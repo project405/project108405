@@ -34,7 +34,7 @@ $(function() {
     $('#gotop').click(function() {
         $('html,body').animate({ scrollTop: 0 }, 'slow'); /* 返回到最頂上 */
         return false;
-        2
+
     });
 
     /* 偵測卷軸滑動時，往下滑超過400px就讓GoTop按鈕出現 */
@@ -53,6 +53,33 @@ $("#goBottom").click(function() {
     var scrollHeight = $('html,body').prop("scrollHeight");
     $('html,body').animate({ scrollTop: scrollHeight }, 'slow');
 });
+
+
+
+//goDown
+
+$(function() {
+    /* 按下GoTop按鈕時的事件 */
+    $('#goDown').click(function() {
+        $('html,body').animate({ scrollTop: 900 }, 'slow');
+        return false;
+
+    });
+
+    /* 偵測卷軸滑動時，往下滑超過400px就讓GoTop按鈕出現 */
+    $(window).scroll(function() {
+        if ($(this).scrollTop() <= 500) {
+            $('#goDown').fadeIn();
+        } else {
+            $('#goDown').fadeOut();
+        }
+    });
+});
+
+
+
+
+
 
 
 
