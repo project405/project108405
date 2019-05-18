@@ -1,17 +1,3 @@
-// navbar
-$(document).ready(function() {
-    $(window).on("scroll", function() {
-
-        var wn = $(window).scrollTop();
-
-        if (wn > 120) {
-            $(".navbar").css("background", "#0D5146");
-        } else {
-            $(".navbar").css("background", "");
-        }
-    });
-});
-
 // 隨著留言增加height增加
 
 jQuery.fn.extend({

@@ -12,11 +12,11 @@ body {
 
 .banner {
     margin-bottom: 25pt;
-    opacity: 0.5;
+    /* opacity: 0.9; */
     height: 100%;
     padding-top: 10rem;
     padding-bottom: calc(10rem - 72px);
-    background: url("../imgs/banner.jpg");
+    background: url("../imgs/banner.png");
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: scroll;

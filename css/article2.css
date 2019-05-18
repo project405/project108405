@@ -5,10 +5,10 @@ body {
     border: none;
     word-wrap: break-word;
     padding-top: 3em;
-    /* background: url("../imgs/banner.jpg");
+    background: url("../imgs/article-bac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover; */
+    background-size: cover;
     text-align: justify;
 }
 
@@ -51,6 +51,7 @@ div.content {
     background-color: #eee;
     opacity: 0.95;
     margin-bottom: 2em;
+    border-radius: 12px;
 }
 
 
@@ -70,7 +71,7 @@ div.content {
 
 div.tagDiv {
     padding: 1em 0 1em 0;
-    word-break: break-all;
+    margin: 0em;
 }
 
 a.floorTag {
@@ -83,12 +84,6 @@ a.floorTag {
     text-decoration: none;
     word-break: break-all;
     font-size: 13px !important;
-}
-
-div.tagDiv {
-    padding: 0em;
-    word-break: break-all;
-    margin: 0em;
 }
 
 button.tag {
@@ -118,8 +113,33 @@ button.report {
     float: right !important;
 }
 
-div.floor {
-    margin-bottom: 0.5em;
+
+/* icon */
+
+.fa-gratipay,
+.fa-comment-dots,
+.fa-bookmark {
+    font-size: 23px;
+}
+
+div.info {
+    margin-left: -0.9em;
+}
+
+div.tagDiv {
+    padding: 0em;
+    margin: 0em;
+}
+
+button.tag {
+    font-size: 0.75em;
+    border-radius: 8px;
+    padding: 0.3em;
+}
+
+div.info a {
+    margin: 0.3em;
+    font-size: 1.25em;
 }
 
 
@@ -141,7 +161,7 @@ div.floor {
 
 hr.separate {
     opacity: 0.75;
-    width: 80%;
+    width: 70%;
     background-color: #eee;
     height: 1.5px;
     border: none;
@@ -188,33 +208,4 @@ textarea.input {
     box-shadow: 4px 4px 3px rgba(20%, 20%, 40%, 0.5);
     box-shadow: 2px 2px 1px rgba(20%, 20%, 40%, 0.5) inset;
     box-shadow: 2px 2px 2px rgba(20%, 20%, 40%, 0.6), 4px 4px 6px rgba(20%, 20%, 40%, 0.4), 6px 6px 12px rgba(20%, 20%, 40%, 0.4);
-}
-
-
-/* icon */
-
-.fa-gratipay,
-.fa-comment-dots,
-.fa-bookmark {
-    font-size: 23px;
-}
-
-div.info {
-    margin-left: -0.9em;
-}
-
-div.tagDiv {
-    padding: 0em;
-    margin: 0em;
-}
-
-button.tag {
-    font-size: 0.75em;
-    border-radius: 8px;
-    padding: 0.3em;
-}
-
-div.info a {
-    margin: 0.3em;
-    font-size: 1.25em;
 }
