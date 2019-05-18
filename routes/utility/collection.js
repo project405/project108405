@@ -145,5 +145,106 @@ var getRecomExhibition = async function (memID) {
     }
     return result;
 }
+// ==================  Four Recom Class  (end)=========================
+// ==================  Four Arti Class  (start)=========================
+//---------  getArtiMovie() -------------
+var getArtiMovie = async function (memID) {
+    var getdata = [];
+    var result = [];
+    await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
+        .then((data) => {
+            getdata = data.rows;
+        }, (error) => {
+            getdata = null;
+        });
+    for (let i = 0; i < getdata.length; i++) {
+        await sql('SELECT * FROM "article" where "artiNum" = $1 and "artiClass" = $2', [getdata[i].artiNum, 'movie'])
+            .then((data) => {
+                if (data.rows[0] != undefined) {
+                    // console.log(data.rows[0]);
+                    data.rows[0].artiDateTime = moment(data.rows[0].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+                    result.push(data.rows[0]);
+                }
+            }, (error) => {
+                result = null;
+            });
+    }
+    return result;
+}
+//---------  getArtiMusic() -------------
+var getArtiMusic = async function (memID) {
+    var getdata = [];
+    var result = [];
+    await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
+        .then((data) => {
+            getdata = data.rows;
+        }, (error) => {
+            getdata = null;
+        });
+    for (let i = 0; i < getdata.length; i++) {
+        await sql('SELECT * FROM "article" where "artiNum" = $1 and "artiClass" = $2', [getdata[i].artiNum, 'music'])
+            .then((data) => {
+                if (data.rows[0] != undefined) {
+                    // console.log(data.rows[0]);
+                    data.rows[0].artiDateTime = moment(data.rows[0].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+                    result.push(data.rows[0]);
+                }
+            }, (error) => {
+                result = null;
+            });
+    }
+    return result;
+}
+//---------  getArtiBook() -------------
+var getArtiBook = async function (memID) {
+    var getdata = [];
+    var result = [];
+    await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
+        .then((data) => {
+            getdata = data.rows;
+        }, (error) => {
+            getdata = null;
+        });
+    for (let i = 0; i < getdata.length; i++) {
+        await sql('SELECT * FROM "article" where "artiNum" = $1 and "artiClass" = $2', [getdata[i].artiNum, 'book'])
+            .then((data) => {
+                if (data.rows[0] != undefined) {
+                    // console.log(data.rows[0]);
+                    data.rows[0].artiDateTime = moment(data.rows[0].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+                    result.push(data.rows[0]);
+                }
+            }, (error) => {
+                result = null;
+            });
+    }
+    return result;
+}
+//---------  getArtiExhibition() -------------
+var getArtiExhibition = async function (memID) {
+    var getdata = [];
+    var result = [];
+    await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
+        .then((data) => {
+            getdata = data.rows;
+        }, (error) => {
+            getdata = null;
+        });
+    for (let i = 0; i < getdata.length; i++) {
+        await sql('SELECT * FROM "article" where "artiNum" = $1 and "artiClass" = $2', [getdata[i].artiNum, 'exhibition'])
+            .then((data) => {
+                if (data.rows[0] != undefined) {
+                    // console.log(data.rows[0]);
+                    data.rows[0].artiDateTime = moment(data.rows[0].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+                    result.push(data.rows[0]);
+                }
+            }, (error) => {
+                result = null;
+            });
+    }
+    return result;
+}
+
+// ==================  Four Arti Class  (end)=========================
 module.exports = { getCollRecommend, getCollArticle,
-    getRecomMovie, getRecomMusic, getRecomBook, getRecomExhibition };
+    getRecomMovie, getRecomMusic, getRecomBook, getRecomExhibition,
+    getArtiMovie, getArtiMusic, getArtiBook, getArtiExhibition };

@@ -6,6 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!--  js   -->
+    <script src="/javascripts/jquery.min.js"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -22,7 +25,7 @@
 
     <script src="/javascripts/header.js"></script>
     <center>
-        <h1>文章收藏</h1>
+        <h1>推薦收藏</h1>
         <hr class="highlight">
 
     </center>
@@ -33,11 +36,11 @@
 
 
             <ul class="pagination pagination-lg justify-content-center">
-                <li class="page-item ">
-                    <a class="page-link" href="/collection/recommend">推薦收藏</a>
-                </li>
                 <li class="page-item disabled">
-                    <a class="page-link" href="/collection/article" tabindex=" -1 ">文章收藏</a>
+                    <a class="page-link " href="/collection/recommend" tabindex="-1">推薦收藏</a>
+                </li>
+                <li class="page-item ">
+                    <a class="page-link" href="/collection/article">文章收藏</a>
                 </li>
             </ul>
 
@@ -59,16 +62,16 @@
 
 
                 <div class="col-12 mb-3 col-lg-10 ">
-                    <% for(var i = 0 ; i<collData.length ; i++ ) {%>
+                    <% for(var i=0; i<items.length; i++) {%>
                     <div class="card shadow list " onclick="location.href='#' ">
 
                         <div class="card-body ">
-                            <h3 class="card-title "><%= collData[i].artiHead %>
+                            <h3 class="card-title "><%= items[i].artiHead %>
                             </h3>
-                            <p class="card-text "><%= collData[i].artiCont %>
+                            <p class="card-text "><%= items[i].artiCont %>
                             </p>
                             <p class="poster ">
-                                <a class="floorTag text-break ">樓主</a> 匿名 於 <%= collData[i].artiDateTime %> 發佈
+                                <a class="floorTag text-break ">樓主</a> 匿名 於 <%= items[i].artiDateTime %> 發佈
                             </p>
                             <div class="tagDiv col-lg-12 text-break ">
                                 <a class="tag text-break " href="# "> 可愛</a>
@@ -104,11 +107,16 @@
 
 
     <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/article'">所有分類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/article/movie'">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/article/music'">音樂類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/article/book'">書籍類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/article/exhibition'">展覽類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/collection/article'">所有分類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/collection/article/movie'">電影類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/collection/article/music'">音樂類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/collection/article/book'">書籍類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/collection/article/exhibition'">展覽類</button>
 
     </div>
 
