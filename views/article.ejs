@@ -51,7 +51,7 @@
 
                     </div>
                     <p class="poster">
-                        <a class="floorTag text-break ">樓主</a> 匿名 於 <%= items[0].artiDateTime %> 發布
+                        <a class="floorTag text-break ">樓主</a> <%= items[0].memID %>  於 <%= items[0].artiDateTime %> 發布
                     </p>
 
                 </div>
@@ -99,7 +99,7 @@
 
                     <p class="content"> <%= items[i][j].artiMessCont %></p>
                     <p class="poster">
-                        <a class="floorTag text-break ">1樓</a> 匿名 於<%= items[i][j].artiMessDateTime %>留言
+                        <a class="floorTag text-break ">1樓</a> <%= items[i][j].memID %> 於<%= items[i][j].artiMessDateTime %>留言
                     </p>
 
                 </div>

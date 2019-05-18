@@ -25,6 +25,11 @@ var articleMovieRouter = require('./routes/articleMovie');
 var articleMusicRouter = require('./routes/articleMusic');
 var articleBookRouter = require('./routes/articleBook');
 var articleExhibitionRouter = require('./routes/articleExhibition');
+// ---------------  My four RecommendClass -------------------
+var colleRecomMovieRouter = require('./routes/colleRecomMovie');
+var colleRecomMusicRouter = require('./routes/colleRecomMusic');
+var colleRecomBookRouter = require('./routes/colleRecomBook');
+var colleRecomExhibitionRouter = require('./routes/colleRecomExhibition');
 var app = express();
 
 // view engine setup
@@ -54,7 +59,11 @@ app.use('/articleList/articleMovie',articleMovieRouter);
 app.use('/articleList/articleMusic',articleMusicRouter);
 app.use('/articleList/articleBook',articleBookRouter);
 app.use('/articleList/articleExhibition',articleExhibitionRouter);
-
+// -------------- My use Four RecommendClass ----------------
+app.use('/collection/recommend/movie',colleRecomMovieRouter);
+app.use('/collection/recommend/music',colleRecomMusicRouter);
+app.use('/collection/recommend/book',colleRecomBookRouter);
+app.use('/collection/recommend/exhibition',colleRecomExhibitionRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
