@@ -129,7 +129,7 @@
                             </p>
 
                             <p class="poster">
-                                匿名 於 <%= items[0][0].artiDateTime %>發佈
+                                <%= items[0][0].memID %> 於 <%= items[0][0].artiDateTime %>發佈
                             </p>
 
                             <div class="tagDiv">
@@ -156,7 +156,7 @@
                             <p class="card-text"><%= items[1][0].artiCont %>
                             </p>
                             <p class="poster">
-                                匿名 於 <%= items[1][0].artiDateTime %> 發佈
+                                <%= items[1][0].memID %> 於 <%= items[1][0].artiDateTime %> 發佈
                             </p>
                             <div class="tagDiv">
                                 <button type="button" class="btn btn-info tag">有毛的</button>
@@ -182,7 +182,7 @@
                             <p class="card-text"><%= items[2][0].artiCont %>
                             </p>
                             <p class="poster">
-                                匿名 於 <%= items[2][0].artiDateTime %> 發佈
+                                <%= items[2][0].memID %> 於 <%= items[2][0].artiDateTime %> 發佈
                             </p>
                             <div class="tagDiv">
                                 <button type="button" class="btn btn-info tag">有毛的</button>
@@ -207,7 +207,8 @@
             </div>
 
             <div class="col-12 goArticleList">
-                <button type="button" class="btn goArticle" onclick="location.href='/articleList'"><h3>前往文章列表  <i class="fas fa-arrow-right"></i></h3> 
+                <button type="button" class="btn goArticle" onclick="location.href='/articleList'">
+                    <h3>前往文章列表 <i class="fas fa-arrow-right"></i></h3>
                 </button>
 
             </div>
