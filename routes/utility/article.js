@@ -3,22 +3,26 @@
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
 var moment = require('moment');
-
+//=========================================
 //---------  getArticleList() -------------
+//=========================================
 var getArticleList = async function () {
     var articleList = [];
     var likeCount = [];
-    var messageCount = [] ;
+    var messageCount = [];
     var result = [];
     // -----------  取得文章清單 --------------
     await sql('SELECT * FROM "article"')
         .then((data) => {
             // console.log("data=", data.rows);
+            for (let i = 0; i < data.rows.length; i++) {
+                data.rows[i].artiDateTime = moment(data.rows[i].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+            }
             articleList = data.rows;
         }, (error) => {
             articleList = null;
         });
-    // -----------  取得文章清單每篇的愛心 --------------
+    // -----------  取得文章清單每篇的愛心數量 --------------
     for (let i = 0; i < articleList.length; i++) {
         await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [articleList[i].artiNum])
             .then((data) => {
@@ -30,6 +34,7 @@ var getArticleList = async function () {
                 likeCount = null;
             });
     }
+    // -----------  取得文章清單每篇的留言數量 --------------
     for (let i = 0; i < articleList.length; i++) {
         await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum"=$1', [articleList[i].artiNum])
             .then((data) => {
@@ -43,56 +48,88 @@ var getArticleList = async function () {
     }
 
     result[0] = articleList;  //存入文章清單
-    result[1] = likeCount;  //存入文章清單每篇的愛心
+    result[1] = likeCount;  //存入文章清單每篇的愛心數量
     result[2] = messageCount;
     // console.log(result);
     return result;
 }
-//---------  getArticleLike() -------------
-var getArticleLike = async function (artiNum) {
+//=========================================
+//---------  getOneArticle() -------------
+//=========================================
+var getOneArticle = async function (artiNum) {
+    var oneArticle = [];  //存放文章內容
+    var oneArtiLikeCount = []; //存放文章愛心總數
+    var oneArtiMessage = []; //存放文章留言內容
+    var oneArtiMessCount = []; //存放文章留言總數
+    var oneArtiMessLikeCount = []; //存放留言愛心數量
     var result = [];
 
-    await sql('SELECT * FROM "articleLike" WHERE "artiNum"=$1', [artiNum])
-        .then((data) => {
-            result = data.rows;
-        }, (error) => {
-            result = null;
-        });
-
-    return result;
-}
-//---------  getOneArticle() -------------
-var getOneArticle = async function (artiNum) {
-    var result = {};
-
-    await sql('SELECT * FROM article WHERE "artiNum" = $1', [artiNum])
+    // -----------  取得單一文章 --------------
+    await sql('SELECT * FROM "article" WHERE "artiNum" = $1', [artiNum])
         .then((data) => {
             if (data.rows.length > 0) {
-                result = data.rows[0];
+                // console.log(data.rows);
+                data.rows[0].artiDateTime = moment(data.rows[0].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+                oneArticle = data.rows;
             } else {
-                result = -1;
+                oneArticle = -1;
             }
         }, (error) => {
-            result = null;
+            oneArticle = null;
         });
-
-
-    return result;
-}
-//---------  getArticleMessage() -------------
-var getArticleMessage = async function (artiNum) {
-    var result = [];
-
+    // -----------  取得單一文章愛心數量 --------------
+    await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [artiNum])
+        .then((data) => {
+            if (data.rows.length > 0) {
+                // console.log(data.rows);
+                oneArtiLikeCount = data.rows;
+            } else {
+                oneArtiLikeCount = -1;
+            }
+        }, (error) => {
+            oneArtiLikeCount = null;
+        });
+    // -----------  取得單一文章所有留言 --------------
     await sql('SELECT * FROM "articleMessage" WHERE "artiNum" = $1', [artiNum])
         .then((data) => {
-            result = data.rows;
+            // console.log(data.rows);
+            for (let i = 0; i < data.rows.length; i++) {
+                data.rows[i].artiMessDateTime = moment(data.rows[i].artiMessDateTime).format("YYYY-MM-DD hh:mm:ss");
+            }
+            oneArtiMessage = data.rows;
         }, (error) => {
-            result = null;
+            oneArtiMessage = null;
         });
+    // -----------  取得單一文章留言數量 --------------
+    await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum" = $1', [artiNum])
+        .then((data) => {
+            // console.log(data.rows);
+            oneArtiMessCount = data.rows;
+        }, (error) => {
+            oneArtiMessCount = null;
+        });
+    // -----------  取得每篇文章留言的愛心數量 --------------
+    for (let i = 0; i < oneArtiMessage.length; i++) {
+        await sql('SELECT count("artiMessNum") FROM "articleMessageLike" WHERE "artiMessNum" = $1', [oneArtiMessage[i].artiMessNum])
+            .then((data) => {
+                // console.log(data.rows[0]);
+                oneArtiMessLikeCount.push(data.rows[0]);
+            }, (error) => {
+                oneArtiMessLikeCount = null;
+            });
+    }
 
+    result[0] = oneArticle;
+    result[1] = oneArtiMessage;
+    result[2] = oneArtiLikeCount;
+    result[3] = oneArtiMessCount;
+    result[4] = oneArtiMessLikeCount;
+    // console.log(result);
     return result;
 }
-// ==================  Four Class  (start)=========================
+//=========================================
+//----- get_four_class_article (start)-----
+//=========================================
 //---------  getClassMovie() -------------
 var getClassMovie = async function () {
     var result = [];
@@ -145,8 +182,11 @@ var getClassExhibition = async function () {
 
     return result;
 }
-// ==================  Four Class  (end)=========================
-//---------  getArticleNum() -------------
+// ========= get_four_class_article (start) ========
+
+//=========================================
+//---------  getHotArticle() -------------
+//=========================================
 var getHotArticle = async function () {
     var result = [];
     var mydata = [];
@@ -198,7 +238,7 @@ var getHotArticle = async function () {
 
 //匯出
 module.exports = {
-    getArticleList, getArticleLike, getOneArticle, getArticleMessage,
+    getArticleList, getOneArticle,
     getClassMovie, getClassMusic, getClassBook, getClassExhibition,
     getHotArticle
 };
