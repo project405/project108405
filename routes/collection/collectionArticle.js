@@ -6,7 +6,7 @@ var router = express.Router();
 const collection = require('../utility/collection');
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  if (req.session.memID == null | req.session.memID == undefined) {
+  if (req.session.memID == null || req.session.memID == undefined) {
     res.render('signIn');
   } else {
     collection.getCollArticle(req.session.memID).then(data => {
