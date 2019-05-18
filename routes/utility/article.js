@@ -6,9 +6,53 @@ var moment = require('moment');
 
 //---------  getArticleList() -------------
 var getArticleList = async function () {
+    var articleList = [];
+    var likeCount = [];
+    var messageCount = [] ;
+    var result = [];
+    // -----------  取得文章清單 --------------
+    await sql('SELECT * FROM "article"')
+        .then((data) => {
+            // console.log("data=", data.rows);
+            articleList = data.rows;
+        }, (error) => {
+            articleList = null;
+        });
+    // -----------  取得文章清單每篇的愛心 --------------
+    for (let i = 0; i < articleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [articleList[i].artiNum])
+            .then((data) => {
+                if (data.rows != '' && data.rows != undefined) {
+                    // console.log(articleList[i].artiNum , ":" , data.rows[0].count);
+                    likeCount[articleList[i].artiNum] = data.rows[0].count
+                }
+            }, (error) => {
+                likeCount = null;
+            });
+    }
+    for (let i = 0; i < articleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum"=$1', [articleList[i].artiNum])
+            .then((data) => {
+                if (data.rows != '' && data.rows != undefined) {
+                    // console.log(articleList[i].artiNum , ":" , data.rows[0].count);
+                    messageCount[articleList[i].artiNum] = data.rows[0].count
+                }
+            }, (error) => {
+                messageCount = null;
+            });
+    }
+
+    result[0] = articleList;  //存入文章清單
+    result[1] = likeCount;  //存入文章清單每篇的愛心
+    result[2] = messageCount;
+    // console.log(result);
+    return result;
+}
+//---------  getArticleLike() -------------
+var getArticleLike = async function (artiNum) {
     var result = [];
 
-    await sql('SELECT * FROM article')
+    await sql('SELECT * FROM "articleLike" WHERE "artiNum"=$1', [artiNum])
         .then((data) => {
             result = data.rows;
         }, (error) => {
@@ -154,7 +198,7 @@ var getHotArticle = async function () {
 
 //匯出
 module.exports = {
-    getArticleList, getOneArticle, getArticleMessage,
+    getArticleList, getArticleLike, getOneArticle, getArticleMessage,
     getClassMovie, getClassMusic, getClassBook, getClassExhibition,
     getHotArticle
 };
