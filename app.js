@@ -10,26 +10,26 @@ var usersRouter = require('./routes/users');
 var session = require('express-session');
 
 // --------------  My routes--------------- 
-var collection_recommend_Router = require('./routes/collectionRecommend');
-var collection_article_Router = require('./routes/collectionArticle');
+var collection_recommend_Router = require('./routes/collection/collectionRecommend');
+var collection_article_Router = require('./routes/collection/collectionArticle');
 var memberRouter = require('./routes/member');
-var articleListRouter = require('./routes/articleList');
-var articleRouter = require('./routes/article');
+var articleListRouter = require('./routes/article/articleList');
+var articleRouter = require('./routes/article/article');
 var signInRouter = require('./routes/signIn');
 var signUpRouter = require('./routes/signUp');
 var signUpAddRouter = require('./routes/signUp_add');
 var userLoginRouter = require('./routes/userLogin');
 
 // ---------------  My four Class -------------------
-var articleMovieRouter = require('./routes/articleMovie');
-var articleMusicRouter = require('./routes/articleMusic');
-var articleBookRouter = require('./routes/articleBook');
-var articleExhibitionRouter = require('./routes/articleExhibition');
+var articleMovieRouter = require('./routes/article/articleMovie');
+var articleMusicRouter = require('./routes/article/articleMusic');
+var articleBookRouter = require('./routes/article/articleBook');
+var articleExhibitionRouter = require('./routes/article/articleExhibition');
 // ---------------  My four RecommendClass -------------------
-var colleRecomMovieRouter = require('./routes/colleRecomMovie');
-var colleRecomMusicRouter = require('./routes/colleRecomMusic');
-var colleRecomBookRouter = require('./routes/colleRecomBook');
-var colleRecomExhibitionRouter = require('./routes/colleRecomExhibition');
+var colleRecomMovieRouter = require('./routes/collection/colleRecomMovie');
+var colleRecomMusicRouter = require('./routes/collection/colleRecomMusic');
+var colleRecomBookRouter = require('./routes/collection/colleRecomBook');
+var colleRecomExhibitionRouter = require('./routes/collection/colleRecomExhibition');
 var app = express();
 
 // view engine setup

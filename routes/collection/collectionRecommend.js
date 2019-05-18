@@ -3,7 +3,7 @@
 var express = require('express');
 var router = express.Router();
 
-const collection = require('./utility/collection');
+const collection = require('../utility/collection');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
