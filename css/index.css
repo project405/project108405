@@ -227,18 +227,6 @@ p.poster {
 
 /* -------------- */
 
-button.tag {
-    font-size: 0.75em;
-    border-radius: 8px;
-    padding: 0.45em !important;
-    float: left;
-    margin: 0.1em;
-}
-
-div.tagDiv {
-    word-break: break-all;
-}
-
 div.tagDiv {
     padding: 0em;
     margin: 0em;

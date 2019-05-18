@@ -86,12 +86,6 @@ a.floorTag {
     font-size: 13px !important;
 }
 
-button.tag {
-    font-size: 0.75em;
-    border-radius: 8px;
-    padding: 0.3em;
-}
-
 div.floor {
     margin-bottom: 0.5em;
 }
