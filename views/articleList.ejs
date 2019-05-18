@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-    <link href="/css/header.css" rel="stylesheet" type="text/css" />
-    <link href="/css/articleList.css" rel="stylesheet" type="text/css" />
+    <link href="css/header.css" rel="stylesheet" type="text/css" />
+    <link href="css/articleList.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo2.ico" type="image/x-icon" />
 
     <title>文藝富心</title>
 </head>
@@ -35,12 +35,11 @@
     <section id="articleList">
         <div class="container-fluid article">
             <center>
-                <h2>文章列表</h2>
+                <h3>文章列表</h3>
                 <hr class="highlight">
             </center>
 
             <div class="row d-flex justify-content-center">
-
                 <div class="search col-12 d-flex justify-content-center">
                     <!-- Search -->
                     <form class="form-inline d-flex">
@@ -52,37 +51,49 @@
 
                     <!-- Search End -->
                 </div>
-                <!-- list -->
+
                 <div class="col-12 mb-3 col-lg-10 ">
-                    <% for(var i=0; i<items.length; i++) {%>
-                    <div class="card shadow list " onclick="location.href='/article/<%= items[i].artiNum %>' "
-                        style="cursor:pointer;">
+                    <!-- list -->
+                    <% for(var i=0; i<items[0].length; i++) {%>
+                    <div class="card shadow list " onclick="location.href='/article/<%= items[0][i].artiNum %>' "
+                        style="cursor:pointer; ">
                         <div class="card-body ">
-                            <h3 class="card-title "><%= items[i].artiHead %>
-                            </h3>
-                            <p class="card-text "><%= items[i].artiCont %>
-                            </p>
-                            <p class="poster ">
-                                <a class="floorTag text-break ">樓主</a> <%= items[i].memID %> 於 <%= items[i].artiDateTime %>發佈
-                            </p>
-                            <div class="tagDiv col-lg-12 text-break ">
-                                <a class="tag text-break " href="# "> 可愛</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-                                <a class="tag text-break " href="# "> 有毛的</a>
-                                <a class="tag text-break " href="# "> 萌</a>
+                            <div class="poster">
+                                <div class="name">
+                                    <p><%= items[0][i].memID %> 於 <%= items[0][i].artiDateTime %>發表</p>
+                                </div>
+                                <hr>
                             </div>
+                            <h3 class="card-title "><%= items[0][i].artiHead %>
+                            </h3>
+                            <p class="card-text "><%= items[0][i].artiCont %>
+                            </p>
+
+                            <div class="tagDiv col-lg-12 ">
+                                <button type="button" class="btn btn-info tag">有毛的</button>
+                                <button type="button" class="btn btn-info tag">皮卡丘</button>
+                                <button type="button" class="btn btn-info tag">超萌</button>
+                                <button type="button" class="btn btn-info tag">可愛</button>
+                            </div>
+                            <hr class="info">
+
                         </div>
-                        <!-- <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/15.jpg'); ">
-                        </div> -->
+                        <!-- info -->
+                        <div class="info">
+                            <button type="button" class="btn"><i class="fab fa-gratipay"></i><a><%= items[1][i+1] %> </a></button>
+                            <button type="button" class="btn"><i class="fas fa-comment-dots"></i><a><%= items[2][i+1] %></a></button>
+                            <button type="button" class="btn"><i class="far fa-bookmark"></i><a></a></button>
+                        </div>
+                        <!-- info結束 -->
+
+                        <div class="wrapperCard card-img-top "
+                            style="background-image: url( '/imgs/testImgs/15.jpg'); ">
+                        </div>
                     </div>
                     <% } %>
-
                     <!-- listEnd -->
-                </div>
 
+                </div>
             </div>
 
 
@@ -93,11 +104,15 @@
 
 
     <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary footer" onclick="location.href='/articleList'" >所有分類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/articleList/articleMovie'">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/articleList/articleMusic'">音樂類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/articleList/articleBook'">書籍類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/articleList/articleExhibition'">展覽類</button>
+        <button type="button " class="btn btn-secondary footer" onclick="location.href='/articleList'">所有分類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleList/articleMovie'">電影類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleList/articleMusic'">音樂類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleList/articleBook'">書籍類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleList/articleExhibition'">展覽類</button>
 
     </div>
 

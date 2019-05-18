@@ -35,47 +35,43 @@
             <div class="col-sm-1"></div>
             <div class="col-lg-10 content shadow">
                 <div class=" postArticle ">
-                    <h3><%= items[0].artiHead %></h3>
+                    <p class="poster">
+                        <a class="floorTag text-break ">樓主</a> <%= items[0][0].memID %> 於
+                        <%= items[0][0].artiDateTime %>發布
+                    </p>
                     <hr />
 
-                    <p class="content"> <%= items[0].artiCont %></p>
-                    <div class="tagDiv col-lg-12 text-break ">
+                    <h3><%= items[0][0].artiHead %></h3>
+                    <hr />
 
-                        <a class="tag text-break " href="#"> 好玩</a>
-                        <a class="tag text-break " href="#"> 好吃</a>
-                        <a class="tag text-break " href="#"> 沖繩</a>
-                        <a class="tag text-break " href="#"> 自駕遊</a>
-
-                        <a class="tag text-break " href="#"> 有趣</a>
-                        <a class="tag text-break " href="#"> 這個禮拜超開心</a>
-
-                    </div>
-                    <p class="poster">
-                        <a class="floorTag text-break ">樓主</a> <%= items[0].memID %>  於 <%= items[0].artiDateTime %> 發布
+                    <p class="content"><%= items[0][0].artiCont %>
                     </p>
+                    <div class="tagDiv col-lg-12 ">
+                        <button type="button" class="btn btn-info tag">有毛的</button>
+                        <button type="button" class="btn btn-info tag">皮卡丘</button>
+                        <button type="button" class="btn btn-info tag">超萌</button>
+                        <button type="button" class="btn btn-info tag">可愛</button>
+                    </div>
+                    <hr class="info">
 
                 </div>
-
                 <!-- info -->
-                <div class="info d-flex justify-content-between">
-                    <div>
-                        <button type="button" class="btn"><a><i class="fab fa-gratipay" style="font-size:22px;"></i>20
-                            </a></button>
-                        <button type="button" class="btn"><a><i class="fas fa-comment-dots"
-                                    style="font-size:22px;"></i>5</a></button>
-                        <button type="button" class="btn"><a><i class="far fa-bookmark"
-                                    style="font-size:22px;"></i></a></button>
-                    </div>
+                <div class="info">
+                    <button type="button" class="btn"><i
+                            class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
+                    <button type="button" class="btn"><i
+                            class="fas fa-comment-dots"></i><a><%= items[3][0].count %></a></button>
+                    <button type="button" class="btn"><i class="far fa-bookmark"></i></button>
+                    <button type="button" class="btn report">檢舉</button>
 
-                    <div>
-                        <button type="button" class="btn">檢舉</button>
-
-                    </div>
                 </div>
                 <!-- info結束 -->
+
+
             </div>
         </div>
-        <!-- 使用者發文結束' -->
+    </div>
+    <!-- 使用者發文結束' -->
     </div>
     <center>
         <h1>文章留言</h1>
@@ -86,7 +82,6 @@
 
 
     <!-- 文章留言 -->
-    <% for(var i=1; i<items.length; i++) {%>
     <% for(var j=0; j<items[1].length; j++) {%>
     <div class="container-fluid ">
 
@@ -95,32 +90,30 @@
             <div class="col-sm-1"></div>
             <div class="col-lg-10 content">
                 <!-- 文章留言 -->
-                <div class=" message ">
+                <div class="message">
+                    <!-- info -->
+                    <div><button type="button" class="btn info"><i
+                                class="fab fa-gratipay"></i><a><%= items[4][j].count %> </a></button></div>
 
-                    <p class="content"> <%= items[i][j].artiMessCont %></p>
-                    <p class="poster">
-                        <a class="floorTag text-break ">1樓</a> <%= items[i][j].memID %> 於<%= items[i][j].artiMessDateTime %>留言
+                    <div class="poster">
+                        <div class="floor"><a class="floorTag text-break ">1樓</a> <a><%= items[1][j].memID %> 於
+                                <%= items[1][j].artiMessDateTime %>留言</a> </div>
+                        <hr>
+
+                    </div>
+
+                    <!-- info結束 -->
+
+                    <p class="content"> <%= items[1][j].artiMessCont %>
                     </p>
+                    <button type="button" class="btn report">檢舉</button>
 
                 </div>
 
-                <!-- info -->
-                <div class="info d-flex justify-content-between">
-                    <div>
-                        <button type="button" class="btn"><a><i class="fab fa-gratipay" style="font-size:22px;"></i>20
-                            </a></button>
-                    </div>
 
-                    <div>
-                        <button type="button" class="btn">檢舉</button>
-
-                    </div>
-                </div>
-                <!-- info結束 -->
             </div>
         </div>
     </div>
-    <% } %>
     <% } %>
     <!-- 文章留言結束 -->
 
