@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const article = require('./utility/article');
+const article = require('../utility/article');
 var moment = require('moment');
 //接收GET請求 
 router.get('/:artiNum', async function (req, res, next) {

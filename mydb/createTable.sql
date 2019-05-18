@@ -173,8 +173,8 @@ DROP TABLE IF EXISTS "public"."memberCollection";
 CREATE TABLE "public"."memberCollection" (
   "collNum" serial , 
   "memID" varchar(100)	COLLATE "pg_catalog"."default" ,
-	"recomNum" int4 ,
-  "artiNum" int4 ,
+	"recomNum" int4,
+  "artiNum" int4,
 	"collDateTime" TIMESTAMP ,
 
 	FOREIGN KEY("memID") REFERENCES "member"("memID")ON DELETE RESTRICT  ON UPDATE RESTRICT ,

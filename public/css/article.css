@@ -44,7 +44,7 @@ h1 {
 div.content {
     padding: 1em 1.5em 1em 1.5em;
     background-color: #eee;
-    opacity: 0.89;
+    opacity: 0.95;
     margin-bottom: 2em;
 }
 
@@ -68,7 +68,7 @@ div.post {
 }
 
 div.tagDiv {
-    padding: 1em;
+    padding: 1em 0 1em 0;
     word-break: break-all;
 }
 
@@ -82,10 +82,12 @@ a.tag {
     background-color: #3b5998;
     text-decoration: none;
     word-break: break-all;
+    font-size: 0.88em !important;
 }
 
 p.poster {
     text-align: right;
+    font-size: 1em !important;
 }
 
 a.floorTag {
@@ -97,6 +99,7 @@ a.floorTag {
     background-color: #993a3a;
     text-decoration: none;
     word-break: break-all;
+    font-size: 0.88em !important;
 }
 
 
@@ -144,7 +147,7 @@ input.message {
 }
 
 textarea.input {
-    width: 95%;
+    width: 100%;
     height: 200pt;
 }
 

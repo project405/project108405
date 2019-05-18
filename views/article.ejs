@@ -26,14 +26,6 @@
 
     <script src="/javascripts/header.js"></script>
 
-    <!-- <div class="input-group     ">
-            <input type="text" class="form-control search mx-auto" placeholder="搜尋tag、文章或作者"
-                aria-label="Recipient's username" aria-describedby="button-addon2">
-
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-            </div>
-        </div> -->
 
 
     <!-- 使用者發文 -->
@@ -45,6 +37,8 @@
                 <div class=" postArticle ">
                     <h3><%= items[0].artiHead %></h3>
                     <hr />
+
+                    <p class="content"> <%= items[0].artiCont %></p>
                     <div class="tagDiv col-lg-12 text-break ">
 
                         <a class="tag text-break " href="#"> 好玩</a>
@@ -56,26 +50,26 @@
                         <a class="tag text-break " href="#"> 這個禮拜超開心</a>
 
                     </div>
-                    <p class="content"> <%= items[0].artiCont %>
-                    </p>
                     <p class="poster">
-                        <a class="floorTag text-break ">樓主</a> 匿名 於 <%= items[0].artiDateTime %> 發布
+                        <a class="floorTag text-break ">樓主</a> <%= items[0].memID %>  於 <%= items[0].artiDateTime %> 發布
                     </p>
 
                 </div>
 
                 <!-- info -->
                 <div class="info d-flex justify-content-between">
-                    <div class="like">
-                        <a>20個愛心</a>&nbsp;&nbsp;&nbsp;
-                        <a>5個留言</a>&nbsp;&nbsp;&nbsp;
-                        <a>收藏</a>&nbsp;&nbsp;&nbsp;
-                    </div>
                     <div>
+                        <button type="button" class="btn"><a><i class="fab fa-gratipay" style="font-size:22px;"></i>20
+                            </a></button>
+                        <button type="button" class="btn"><a><i class="fas fa-comment-dots"
+                                    style="font-size:22px;"></i>5</a></button>
+                        <button type="button" class="btn"><a><i class="far fa-bookmark"
+                                    style="font-size:22px;"></i></a></button>
                     </div>
 
-                    <div class="like">
-                        檢舉
+                    <div>
+                        <button type="button" class="btn">檢舉</button>
+
                     </div>
                 </div>
                 <!-- info結束 -->
@@ -102,30 +96,24 @@
             <div class="col-lg-10 content">
                 <!-- 文章留言 -->
                 <div class=" message ">
-                    <div class="tagDiv col-lg-12 text-break ">
 
-                        <a class="tag text-break " href="#"> 哈哈哈哈ㄏ</a>
-
-                    </div>
-
-                    <p class="content"><%= items[i][j].artiMessCont %>
-                    </p>
+                    <p class="content"> <%= items[i][j].artiMessCont %></p>
                     <p class="poster">
-                        <a class="floorTag text-break ">1樓</a> 匿名 於 <%= items[i][j].artiMessDateTime %>留言
+                        <a class="floorTag text-break ">1樓</a> <%= items[i][j].memID %> 於<%= items[i][j].artiMessDateTime %>留言
                     </p>
 
                 </div>
 
                 <!-- info -->
                 <div class="info d-flex justify-content-between">
-                    <div class="like">
-                        <a>20個愛心</a>&nbsp;&nbsp;&nbsp;
-                    </div>
                     <div>
+                        <button type="button" class="btn"><a><i class="fab fa-gratipay" style="font-size:22px;"></i>20
+                            </a></button>
                     </div>
 
-                    <div class="like">
-                        檢舉
+                    <div>
+                        <button type="button" class="btn">檢舉</button>
+
                     </div>
                 </div>
                 <!-- info結束 -->
@@ -152,7 +140,8 @@
                         <input type="file" class="form-control-file" id="exampleFormControlFile1">
                     </div>
                 </form>
-                <button type="submit" class="btn btn-dark">發佈留言</button>
+                <a href="#" class="btn btn-secondary btn-lg active float-md-right" role="button"
+                    aria-pressed="true">發佈留言</a>
 
             </div>
 
@@ -161,10 +150,6 @@
         </div>
     </div>
     <!-- replying end -->
-
-    <a href="https://www.blogger.com/blogger.g?blogID=2031514508322140995#" id="gotop">
-        <i class="fa fa-angle-up"></i>
-    </a>
 
     <div class="row d-flex justify-content-center">
         <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
@@ -175,10 +160,9 @@
 
         </div>
 
-
-
-
-
+        <a href="#" id="gotop">
+            <i class="fa fa-angle-up"></i>
+        </a>
 
 
         <!-- Optional JavaScript -->

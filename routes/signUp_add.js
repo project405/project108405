@@ -11,6 +11,7 @@ router.post('/', function (req, res, next) {
     var memPass = req.body.memPass;
     var memCheckPass = req.body.memCheckPass;
     var memMail = req.body.memMail;
+    var memName = req.body.memName;
     var memBirth = req.body.memBirth;
     var memGender = req.body.memGender;
     var checkID;  // 檢查資料庫是否有存在相同的ID
@@ -27,7 +28,7 @@ router.post('/', function (req, res, next) {
     })
 
     setTimeout(function () {
-        if (memID == "" || memPass == "" || memCheckPass == "" || memMail == "" || memBirth == "") {
+        if (memID == "" || memPass == "" || memCheckPass == "" || memMail == "" || memName == "" ||memBirth == "") {
             res.end('<script> alert("輸入的資料不可為空，請重新輸入。"); history.back();</script>');
         } else if (memPass != memCheckPass) {
             res.end('<script> alert("密碼與確認密碼不同，請重新輸入。"); history.back();</script>');
@@ -41,12 +42,14 @@ router.post('/', function (req, res, next) {
             // 建立一個新資料物件
             var newData = {
                 memID: memID,
-                memGender: memGender,
                 memPass: memPass,
+                memBirth: memBirth,
+                memName: memName,
                 memMail: memMail,
-                memBirth: memBirth
+                memGender: memGender
             }
-            console.log(newData);
+            // console.log(newData);
+            
             signUp.createMember(newData).then(d => {
                 if (d == 0) {
                     res.end('<script> alert("新增成功！恭喜你已經成為會員！"); history.back();</script>');

@@ -5,26 +5,37 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
 var session = require('express-session');
 
 // --------------  My routes--------------- 
-var collection_recommend_Router = require('./routes/collectionRecommend');
-var collection_article_Router = require('./routes/collectionArticle');
+var collection_recommend_Router = require('./routes/collection/collectionRecommend');
+var collection_article_Router = require('./routes/collection/collectionArticle');
 var memberRouter = require('./routes/member');
-var articleListRouter = require('./routes/articleList');
-var articleRouter = require('./routes/article');
+var articleListRouter = require('./routes/article/articleList');
+var articleRouter = require('./routes/article/article');
 var signInRouter = require('./routes/signIn');
 var signUpRouter = require('./routes/signUp');
 var signUpAddRouter = require('./routes/signUp_add');
 var userLoginRouter = require('./routes/userLogin');
 
 // ---------------  My four Class -------------------
-var articleMovieRouter = require('./routes/articleMovie');
-var articleMusicRouter = require('./routes/articleMusic');
-var articleBookRouter = require('./routes/articleBook');
-var articleExhibitionRouter = require('./routes/articleExhibition');
+var articleMovieRouter = require('./routes/article/articleMovie');
+var articleMusicRouter = require('./routes/article/articleMusic');
+var articleBookRouter = require('./routes/article/articleBook');
+var articleExhibitionRouter = require('./routes/article/articleExhibition');
+// ---------------  My four collRecommendClass -------------------
+var colleRecomMovieRouter = require('./routes/collection/colleRecomMovie');
+var colleRecomMusicRouter = require('./routes/collection/colleRecomMusic');
+var colleRecomBookRouter = require('./routes/collection/colleRecomBook');
+var colleRecomExhibitionRouter = require('./routes/collection/colleRecomExhibition');
+
+// ---------------  My four collArticleClass -------------------
+var colleArtiMovieRouter = require('./routes/collection/colleArtiMovie');
+var colleArtiMusicRouter = require('./routes/collection/colleArtiMusic');
+var colleArtiBookRouter = require('./routes/collection/colleArtiBook');
+var colleArtiExhibitionRouter = require('./routes/collection/colleArtiExhibition');
+
 var app = express();
 
 // view engine setup
@@ -38,7 +49,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'mysecret', cookie: { maxAge: 60000 }}));
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/article', articleRouter);
 // ---------------  My use  ----------------
 app.use('/collection/recommend',collection_recommend_Router);
@@ -54,7 +64,16 @@ app.use('/articleList/articleMovie',articleMovieRouter);
 app.use('/articleList/articleMusic',articleMusicRouter);
 app.use('/articleList/articleBook',articleBookRouter);
 app.use('/articleList/articleExhibition',articleExhibitionRouter);
-
+// -------------- My use Four collRecomClass ----------------
+app.use('/collection/recommend/movie',colleRecomMovieRouter);
+app.use('/collection/recommend/music',colleRecomMusicRouter);
+app.use('/collection/recommend/book',colleRecomBookRouter);
+app.use('/collection/recommend/exhibition',colleRecomExhibitionRouter);
+// -------------- My use Four collArtiClass ----------------
+app.use('/collection/article/movie',colleArtiMovieRouter);
+app.use('/collection/article/music',colleArtiMusicRouter);
+app.use('/collection/article/book',colleArtiBookRouter);
+app.use('/collection/article/exhibition',colleArtiExhibitionRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

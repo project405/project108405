@@ -3,9 +3,8 @@
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
 var moment = require('moment');
-//------------------------------------------
-// get article list
-//------------------------------------------
+
+//---------  getArticleList() -------------
 var getArticleList = async function () {
     var result = [];
 
@@ -150,7 +149,6 @@ var getHotArticle = async function () {
             });
     }
 
-    // console.log("test=",test[0]);
     return mydata;
 }
 

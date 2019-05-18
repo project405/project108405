@@ -4,7 +4,7 @@
         height: 100%;
         max-width: 100%;
         font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
-        margin: 0 auto;
+        margin: 0;
         padding: 0;
         border: none;
         text-align: center;
@@ -16,60 +16,81 @@
         height: auto;
     }
     
-    div.member {
-        margin-top: 8em;
+    .container-fluid.signIn,
+    .container-fluid.signUp {
+        margin: 5em 0em 0em 0em;
+        padding: 0;
     }
     
-    @media (max-width: 1199px) {
-        div.member {
-            margin-top: 3em;
-        }
-        div.signUp {
-            margin-top: 3em;
-        }
-        div.notify {
-            margin-top: 3em;
-        }
+    h2 {
+        font-size: 1.75em;
+        color: #eee;
+        text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555;
+    }
+    /* --------------------- */
+    /* SIGNIN */
+    /* --------------------- */
+    
+    #signIn form.signIn {
+        margin-bottom: 3em;
+        padding: 0;
     }
     
-    div.thirdParty,
-    div.signIn,
-    div.signUp {
-        margin: 1em;
-        opacity: 0.89;
-        padding: 1em;
-        border: 1px solid #f0f0f0;
+    #signIn form button.right {
+        margin: 0.1em 0.75em 0 0.1em;
+        float: right;
     }
     
-    button.btn {
-        font-size: 1em;
-    }
-    /* SIGNUP */
-    
-    div.signUp {
-        text-align: left;
-        margin-top: 6em;
+    #signIn form.signIn {
         line-height: 2em;
-        padding: 2em 1.5em 2em 1.5em;
+        padding: 1em 0.75em 2em 0.75em;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        margin-bottom: 2em;
     }
     
-    @media (max-width: 1199px) {}
+    @media (max-width: 350px) {
+        #signIn form.signIn {
+            border: none;
+        }
+    }
     
-    #signUp h5 {
-        margin: 0.5em 0 0.5em 0;
+    #signIn button.third,
+    #signIn button.login {
+        margin: 0.75em;
+        float: center !important;
+        width: 85%;
+    }
+    /* --------------------- */
+    /* SIGNUP */
+    /* --------------------- */
+    
+    #signUp form.signUp {
+        line-height: 2em;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 1.5em;
+        margin-bottom: 2em;
+    }
+    
+    @media (max-width: 350px) {
+        #signUp form.signUp {
+            border: none;
+        }
+        .button {
+            margin: 1em;
+        }
+        .container-fluid.signIn,
+        .container-fluid.signUp {
+            margin: 2.5em 0em 0em 0em;
+            padding: 0;
+        }
     }
     
     #signUp button {
-        float: right;
-    }
-    /* notify */
-    
-    #notify div.notify {
-        background-color: #f0f0f0;
-        text-align: left;
-        margin-top: 6em;
-        line-height: 2em;
-        padding: 2em 1.5em 2em 1.5em;
+        margin: 0.75em 0 0.75em 0;
+        width: 100%;
+        float: center;
     }
     /* form */
     
@@ -77,7 +98,7 @@
         border: 1px solid #ddd;
         display: flex;
         flex-direction: row;
-        margin: 1em 0.5em;
+        margin: 0.75em 0 0.75em 0;
     }
     
     .input-icon {
