@@ -17,7 +17,7 @@ body {
 /* article */
 
 div.article {
-    margin-top: 8em;
+    margin-top: 5em;
     opacity: 0.94;
 }
 
@@ -162,7 +162,6 @@ button.footer {
     box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
     padding: 0.75rem 1.25rem;
     height: auto;
-    letter-spacing: 0.15rem;
     border: #f0f0f0 solid 0.75px;
     border-radius: 8px;
 }
@@ -213,4 +212,11 @@ h2 {
     font-size: 2em;
     /* color: #eee; */
     /* text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555; */
+}
+
+
+/* info */
+
+div.info {
+    margin-top: 1.5em;
 }

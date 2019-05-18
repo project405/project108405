@@ -30,10 +30,9 @@ var checkMail = async function (memMail) {
 //---------  createMember() -------------
 var createMember = async function (newData) {
     var result;
-    // 'INSERT INTO member (member, memPass, memBirth, memMail, memGender) VALUES ($1, $2, $3, $4, $5)', [newData.member, newData.memPass, newData.memBirth, newData.memMail,memGender])
-    console.log(newData);
-    await sql('INSERT INTO "member" ("memID", "memPass", "memBirth", "memMail", "memGender") VALUES ($1,$2,$3,$4,$5)',
-        [newData.memID, newData.memPass, newData.memBirth,newData.memMail, newData.memGender])
+    // console.log(newData);
+    await sql('INSERT INTO "member" ("memID", "memPass", "memBirth","memName", "memMail", "memGender") VALUES ($1,$2,$3,$4,$5,$6)',
+        [newData.memID, newData.memPass, newData.memBirth,newData.memName ,newData.memMail, newData.memGender])
         .then((data) => {
             result = 0;
         }, (error) => {
