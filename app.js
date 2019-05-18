@@ -18,7 +18,7 @@ var signInRouter = require('./routes/signIn');
 var signUpRouter = require('./routes/signUp');
 var signUpAddRouter = require('./routes/signUp_add');
 var userLoginRouter = require('./routes/userLogin');
-
+var notifyRouter = require('./routes/notify');
 // ---------------  My four Class -------------------
 var articleMovieRouter = require('./routes/article/articleMovie');
 var articleMusicRouter = require('./routes/article/articleMusic');
@@ -60,6 +60,7 @@ app.use('/signIn',signInRouter);
 app.use('/signUp',signUpRouter);
 app.use('/signUp/add',signUpAddRouter);
 app.use('/login',userLoginRouter);
+app.use('/notify',notifyRouter);
 // -------------- My use Four Class ----------------
 app.use('/articleList/articleMovie',articleMovieRouter);
 app.use('/articleList/articleMusic',articleMusicRouter);
