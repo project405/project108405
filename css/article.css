@@ -2,16 +2,21 @@ html,
 body {
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
-    padding: 0;
     border: none;
     word-wrap: break-word;
-    padding-top: 0.75em;
-    background: url("../imgs/banner.jpg");
+    padding-top: 3em;
+    /* background: url("../imgs/banner.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
-    height: auto;
+    background-size: cover; */
     text-align: justify;
+}
+
+@media (max-width: 750px) {
+    html,
+    body {
+        padding-top: 1.5em;
+    }
 }
 
 
@@ -57,10 +62,6 @@ div.content {
 
 /* ------------------- */
 
-div.post {
-    margin-top: 13em;
-}
-
 @media (max-width: 1199px) {
     div.post {
         margin-top: 2em;
@@ -72,24 +73,6 @@ div.tagDiv {
     word-break: break-all;
 }
 
-a.tag {
-    text-align: left;
-    color: #fff !important;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    line-height: 2.5em;
-    border: 2px solid #3b5998;
-    border-radius: 8px;
-    background-color: #3b5998;
-    text-decoration: none;
-    word-break: break-all;
-    font-size: 0.88em !important;
-}
-
-p.poster {
-    text-align: right;
-    font-size: 1em !important;
-}
-
 a.floorTag {
     text-align: right;
     color: #fff !important;
@@ -99,7 +82,49 @@ a.floorTag {
     background-color: #993a3a;
     text-decoration: none;
     word-break: break-all;
-    font-size: 0.88em !important;
+    font-size: 13px !important;
+}
+
+div.tagDiv {
+    padding: 0em;
+    word-break: break-all;
+    margin: 0em;
+}
+
+button.tag {
+    font-size: 0.75em;
+    border-radius: 8px;
+    padding: 0.3em;
+}
+
+div.floor {
+    margin-bottom: 0.5em;
+}
+
+button.info {
+    float: right;
+    font-size: 1.2em;
+}
+
+button.info:hover {
+    color: #993a3a;
+}
+
+p.content {
+    color: rgb(73, 73, 73);
+}
+
+button.report {
+    float: right !important;
+}
+
+div.floor {
+    margin-bottom: 0.5em;
+}
+
+div.info a {
+    margin: 1em;
+    font-size: 1.25em;
 }
 
 
@@ -126,6 +151,10 @@ hr.separate {
     height: 1.5px;
     border: none;
     color: #d4d4d4;
+}
+
+hr.info {
+    margin-bottom: 0em;
 }
 
 
@@ -164,4 +193,33 @@ textarea.input {
     box-shadow: 4px 4px 3px rgba(20%, 20%, 40%, 0.5);
     box-shadow: 2px 2px 1px rgba(20%, 20%, 40%, 0.5) inset;
     box-shadow: 2px 2px 2px rgba(20%, 20%, 40%, 0.6), 4px 4px 6px rgba(20%, 20%, 40%, 0.4), 6px 6px 12px rgba(20%, 20%, 40%, 0.4);
+}
+
+
+/* icon */
+
+.fa-gratipay,
+.fa-comment-dots,
+.fa-bookmark {
+    font-size: 23px;
+}
+
+div.info {
+    margin-left: -1em;
+}
+
+div.info a {
+    margin: 0.1em;
+    font-size: 1.25em;
+}
+
+div.tagDiv {
+    padding: 0em;
+    margin: 0em;
+}
+
+button.tag {
+    font-size: 0.75em;
+    border-radius: 8px;
+    padding: 0.3em;
 }

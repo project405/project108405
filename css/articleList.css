@@ -82,6 +82,17 @@ a.floorTag {
 }
 
 
+/* card */
+
+div.card-body {
+    padding-bottom: 0em !important;
+}
+
+hr.info {
+    margin-bottom: 0em;
+}
+
+
 /* -------------- */
 
 
@@ -92,20 +103,35 @@ a.floorTag {
 
 div.tagDiv {
     padding: 0em;
-    word-break: break-all;
+    margin: 0em;
 }
 
-a.tag {
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    text-align: left;
-    color: #fff !important;
-    line-height: 2.5em;
-    border: 2px solid #3b5998;
-    border-radius: 8px;
-    background-color: #3b5998;
-    text-decoration: none;
-    word-break: break-all;
+button.tag {
     font-size: 0.75em;
+    border-radius: 8px;
+    padding: 0.3em;
+}
+
+div.floor {
+    margin-bottom: 0.5em;
+}
+
+div.info {
+    margin-left: 0.45em;
+}
+
+
+/* icon */
+
+.fa-gratipay,
+.fa-comment-dots,
+.fa-bookmark {
+    font-size: 23px;
+}
+
+div.info a {
+    margin: 0.3em;
+    font-size: 1.25em;
 }
 
 
@@ -189,7 +215,6 @@ button.search:hover {
 button.search:focus {
     background-color: #4f837f;
     color: white;
-    width: 3em;
 }
 
 button.search:active {
@@ -216,7 +241,3 @@ h2 {
 
 
 /* info */
-
-div.info {
-    margin-top: 1.5em;
-}

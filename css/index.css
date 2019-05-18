@@ -205,17 +205,6 @@ p.poster {
 
 /* tag */
 
-a.floorTag {
-    text-align: right;
-    color: #fff !important;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    border: 2px solid #993a3a;
-    border-radius: 8px;
-    background-color: #993a3a;
-    text-decoration: none;
-    word-break: break-all;
-}
-
 
 /* -------------- */
 
@@ -238,21 +227,43 @@ a.floorTag {
 
 /* -------------- */
 
+button.tag {
+    font-size: 0.75em;
+    border-radius: 8px;
+    padding: 0.3em !important;
+    float: left;
+    margin: 0.1em;
+}
+
 div.tagDiv {
     word-break: break-all;
 }
 
-a.tag {
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    text-align: left;
-    color: #fff !important;
-    line-height: 2.5em;
-    border: 2px solid #3b5998;
-    border-radius: 8px;
-    background-color: #3b5998;
-    text-decoration: none;
-    word-break: break-all;
-    font-size: 0.75em;
+div.tagDiv {
+    padding: 0em;
+    margin: 0em;
+}
+
+div.floor {
+    margin-bottom: 0.5em;
+}
+
+div.info {
+    margin-left: 0.45em;
+}
+
+
+/* icon */
+
+.fa-gratipay,
+.fa-comment-dots,
+.fa-bookmark {
+    font-size: 23px;
+}
+
+div.info a {
+    margin: 0.1em;
+    font-size: 1.25em;
 }
 
 
@@ -326,7 +337,7 @@ form.search::after {
     display: table;
 }
 
-button.btn {
+button.goArticle {
     float: right;
 }
 
