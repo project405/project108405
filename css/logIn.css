@@ -16,10 +16,10 @@
         height: auto;
     }
     
-    .container-fluid.logIn,
-    .container-fluid.signUp {
-        margin-top: 6em;
-        padding: 0;
+    div.logIn,
+    div.signUp {
+        margin: 0em;
+        padding-top: 6em;
     }
     /* --------------------- */
     /* SIGNIN */
@@ -97,7 +97,6 @@
         .container-fluid.logIn,
         .container-fluid.signUp {
             margin: 2.5em 0em 0em 0em;
-            padding: 0;
         }
     }
     

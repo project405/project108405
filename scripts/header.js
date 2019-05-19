@@ -26,8 +26,8 @@ header = '    <div class="header">\
             收藏\
             </a>\
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">\
-                <a class="dropdown-item" href="collectionArticle.html">推薦收藏</a>\
-                <a class="dropdown-item" href="collectionRecommend.html">文章收藏</a>\
+                <a class="dropdown-item" href="collectionRecommend.html">推薦收藏</a>\
+                <a class="dropdown-item" href="collectionArticle.html">文章收藏</a>\
             </div>\
         </li>\
             <li class="nav-item">\
