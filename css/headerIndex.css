@@ -157,7 +157,7 @@ a.dropdown-toggle:active {
 }
 
 div.dropdown-menu {
-    background-color: #0D5146;
+    background-color: #2D4F41;
     opacity: 0.89;
     border-radius: 12px;
     border: 2px solid #AEC1B8;
@@ -166,7 +166,7 @@ div.dropdown-menu {
 
 .dropdown:hover .dropdown-menu {
     display: block;
-    background-color: #0D5146;
+    background-color: #2D4F41;
     padding: 8px;
     border: 2px solid #AEC1B8;
 }
@@ -215,7 +215,7 @@ div.dropdown-menu {
 
 @media (max-width: 1199px) {
     .navbar {
-        background-color: #0D5146;
+        background-color: #2D4F41;
     }
 }
 

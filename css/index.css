@@ -288,27 +288,6 @@ form.search input[type=text] {
 }
 
 
-/* Style the submit button */
-
-form.search button {
-    float: center !important;
-    width: 2.5em;
-    padding: 10px;
-    background: #2196F3;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    /* Prevent double borders */
-    cursor: pointer;
-    border-radius: 8px;
-}
-
-form.search button:hover {
-    background: #0b7dda;
-}
-
-
 /* Clear floats */
 
 form.search::after {
