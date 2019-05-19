@@ -55,9 +55,8 @@
                 <div class="col-12 mb-3 col-lg-8 ">
                     <!-- list -->
                     <% for(var i=0; i<items[0].length; i++) {%>
-                    <div class="card shadow list " onclick="location.href='/article/<%= items[0][i].artiNum %>' "
-                        style="cursor:pointer; ">
-                        <div class="card-body ">
+                    <div class="card shadow list " style="cursor:pointer; ">
+                        <div class="card-body" onclick=" location.href='/article/<%= items[0][i].artiNum %>' ">
                             <div class="poster">
                                 <div class="name">
                                     <p><%= items[0][i].memID %> 於 <%= items[0][i].artiDateTime %>發表</p>
@@ -80,8 +79,10 @@
                         </div>
                         <!-- info -->
                         <div class="info">
-                            <button type="button" class="btn"><i class="fab fa-gratipay"></i><a><%= items[1][i+1] %> </a></button>
-                            <button type="button" class="btn"><i class="fas fa-comment-dots"></i><a><%= items[2][i+1] %></a></button>
+                            <button type="button" class="btn"><i class="fab fa-gratipay"></i><a><%= items[1][i+1] %>
+                                </a></button>
+                            <button type="button" class="btn"><i
+                                    class="fas fa-comment-dots"></i><a><%= items[2][i+1] %></a></button>
                             <button type="button" class="btn"><i class="far fa-bookmark"></i><a></a></button>
                         </div>
                         <!-- info結束 -->

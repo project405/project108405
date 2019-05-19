@@ -54,19 +54,18 @@
 
                 <div class="col-12 mb-3 col-lg-8 ">
                     <!-- list -->
-                    <% for(var i=0; i<items.length; i++) {%>
-                    <div class="card shadow list " onclick="location.href='/article/<%= items[i].artiNum %>' "
-                        style="cursor:pointer; ">
-                        <div class="card-body ">
+                    <% for(var j=0; j<items[0].length; j++) {%>
+                    <div class="card shadow list" style="cursor:pointer; ">
+                        <div class="card-body" onclick="location.href='/article/<%= items[0][j].artiNum %>' ">
                             <div class="poster">
                                 <div class="name">
-                                    <p><%= items[i].memID %> 於 <%= items[i].artiDateTime %>發表</p>
+                                    <p><%= items[0][j].memID %> 於 <%= items[0][j].artiDateTime %>發表</p>
                                 </div>
                                 <hr>
                             </div>
-                            <h3 class="card-title "><%= items[i].artiHead %>
+                            <h3 class="card-title "><%= items[0][j].artiHead %>
                             </h3>
-                            <p class="card-text "><%= items[i].artiCont %>
+                            <p class="card-text "><%= items[0][j].artiCont %>
                             </p>
 
                             <div class="tagDiv col-lg-12 ">
@@ -80,8 +79,10 @@
                         </div>
                         <!-- info -->
                         <div class="info">
-                            <button type="button" class="btn"><i class="fab fa-gratipay"></i><a>1 </a></button>
-                            <button type="button" class="btn"><i class="fas fa-comment-dots"></i><a>2</a></button>
+                            <button type="button" class="btn"><i class="fab fa-gratipay"
+                                    onclick="location.href='#'"></i><%= items[1][j].count %></button>
+                            <button type="button" class="btn"><i
+                                    class="fas fa-comment-dots"></i><a><%= items[2][j].count %></a></button>
                             <button type="button" class="btn"><i class="far fa-bookmark"></i><a></a></button>
                         </div>
                         <!-- info結束 -->
