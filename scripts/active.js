@@ -69,7 +69,10 @@ $("#goDown").click(function() {
 
 
 // (second click) close dropmenu
-
+$('#nav ul>li').click(function() {
+    $(this).find('ul').toggle();
+    alert();
+});
 
 
 //textarea insert image

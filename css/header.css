@@ -151,13 +151,20 @@ div.dropdown-menu {
     background-color: #0D5146;
     opacity: 0.89;
     border-radius: 12px;
+    border: 2px solid #AEC1B8;
 }
 
 .dropdown:hover .dropdown-menu {
     display: block;
     background-color: #0D5146;
     padding: 8px;
-    border: 1px solid #AEC1B8;
+    border: 2px solid #AEC1B8;
+}
+
+.dropdown:hover .dropdown-menu .dropdown-item:not(.disabled):hover,
+.dropdown:hover .dropdown-menu .dropdown-item:not(.disabled):focus {
+    color: #e7f5de;
+    border-radius: 8px;
 }
 
 .dropdown-item:hover {

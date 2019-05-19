@@ -1,5 +1,5 @@
 header = '    <div class="header">\
-<nav class="navbar navbar-expand-lg navbar-light fixed-top ">\
+<nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">\
     <a class="nav-link" href="#">\
     <img class="nav-item" href="index.html" src="imgs/logo.png" width="35px" height="35px " style="opacity:0.8" alt="">\
        <a href="index.html" class="navTitle">文藝富心</a>\
@@ -14,7 +14,7 @@ header = '    <div class="header">\
             </li>\
             <li class="nav-item ">\
                 <a class="nav-link" href="notify.html">\
-                <i class="fas fa-envelope" style="color:white;"></i>\
+                <i class="fas fa-bell"  style="color:white;"></i>\
                 </a>\
             </li>\
             <li class="nav-item ">\

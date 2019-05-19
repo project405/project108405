@@ -381,6 +381,7 @@ div.footer {
 .fa-chevron-circle-down:hover {
     animation: shake 0.9s;
     animation-iteration-count: infinite;
+    cursor: pointer;
 }
 
 button.goArticle:hover {
