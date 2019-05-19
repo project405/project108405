@@ -20,6 +20,8 @@
 
     <link href="/css/header.css" rel="stylesheet" type="text/css" />
     <link href="/css/articleList.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo2.ico" type="image/x-icon" />
 
     <title>文藝富心</title>
 </head>
@@ -33,65 +35,65 @@
     <section id="articleList">
         <div class="container-fluid article">
             <center>
-                <h2>文章列表</h2>
+                <h3>文章列表</h3>
                 <hr class="highlight">
-
-
             </center>
 
             <div class="row d-flex justify-content-center">
-
-                <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-                    <button type="button " class="btn btn-secondary "
-                        onclick="location.href='/articleList'">所有分類</button>
-                    <button type="button " class="btn btn-secondary align-middle"
-                        onclick="location.href='/articleList/articleMovie'">電影類</button>
-                    <button type="button " class="btn btn-secondary align-middle"
-                        onclick="location.href='/articleList/articleMusic'">音樂類</button>
-                    <button type="button " class="btn btn-secondary align-middle"
-                        onclick="location.href='/articleList/articleBook'">書籍類</button>
-                    <button type="button " class="btn btn-secondary align-middle"
-                        onclick="location.href='/articleList/articleExhibition'">展覽類</button>
-
-                </div>
                 <div class="search col-12 d-flex justify-content-center">
                     <!-- Search -->
-                    <form class=" search " action="action_page.php ">
-                        <input type="text " class="search" placeholder="輸入欲搜尋之關鍵字 " name="search ">
-                        <button type="submit "><i class="fa fa-search "></i></button>
+                    <form class="form-inline d-flex">
+
+                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search" id="search"
+                            placeholder="輸入欲搜尋之關鍵字">
+                        <button type="submit" class="search btn-primary mx-auto ">搜尋</button>
                     </form>
+
                     <!-- Search End -->
                 </div>
 
-                <div class="col-12 mb-3 col-lg-10 ">
+                <div class="col-12 mb-3 col-lg-8 ">
+                    <!-- list -->
                     <% for(var i=0; i<items.length; i++) {%>
                     <div class="card shadow list " onclick="location.href='/article/<%= items[i].artiNum %>' "
-                        style="cursor:pointer;">
+                        style="cursor:pointer; ">
                         <div class="card-body ">
+                            <div class="poster">
+                                <div class="name">
+                                    <p><%= items[i].memID %> 於 <%= items[i].artiDateTime %>發表</p>
+                                </div>
+                                <hr>
+                            </div>
                             <h3 class="card-title "><%= items[i].artiHead %>
                             </h3>
                             <p class="card-text "><%= items[i].artiCont %>
                             </p>
-                            <p class="poster ">
-                                <a class="floorTag text-break ">樓主</a> 匿名 於 <%= items[i].artiDateTime %>發佈
-                            </p>
-                            <div class="tagDiv col-lg-12 text-break ">
-                                <a class="tag text-break " href="# "> 可愛</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-                                <a class="tag text-break " href="# "> 有毛的</a>
-                                <a class="tag text-break " href="# "> 萌</a>
+
+                            <div class="tagDiv col-lg-12 ">
+                                <button type="button" class="btn btn-info tag">有毛的</button>
+                                <button type="button" class="btn btn-info tag">皮卡丘</button>
+                                <button type="button" class="btn btn-info tag">超萌</button>
+                                <button type="button" class="btn btn-info tag">可愛</button>
                             </div>
+                            <hr class="info">
+
                         </div>
-                        <!-- <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/15.jpg'); ">
-                        </div> -->
+                        <!-- info -->
+                        <div class="info">
+                            <button type="button" class="btn"><i class="fab fa-gratipay"></i><a>1 </a></button>
+                            <button type="button" class="btn"><i class="fas fa-comment-dots"></i><a>2</a></button>
+                            <button type="button" class="btn"><i class="far fa-bookmark"></i><a></a></button>
+                        </div>
+                        <!-- info結束 -->
+
+                        <div class="wrapperCard card-img-top "
+                            style="background-image: url( '/imgs/testImgs/15.jpg'); ">
+                        </div>
                     </div>
                     <% } %>
+                    <!-- listEnd -->
 
                 </div>
-
             </div>
 
 
@@ -99,11 +101,20 @@
     </section>
     <!-- 文章列表區塊結束 -->
 
-    <a href="https://www.blogger.com/blogger.g?blogID=2031514508322140995# " id="gotop ">
-        <i class="fa fa-angle-up "></i>
-    </a>
 
 
+    <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
+        <button type="button " class="btn btn-secondary footer" onclick="location.href='/articleList'">所有分類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleList/articleMovie'">電影類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleList/articleMusic'">音樂類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleList/articleBook'">書籍類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleList/articleExhibition'">展覽類</button>
+
+    </div>
 
     <div class="container-fluid footer ">
         <p>聯絡我們：10546004@ntub.edu.tw
@@ -111,6 +122,12 @@
         <p>©2018 NTUB</p>
 
     </div>
+
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
