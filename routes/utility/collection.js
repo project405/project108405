@@ -8,6 +8,7 @@ var moment = require('moment');
 var getCollRecommend = async function (memID) {
     var getdata = [];
     var result = [];
+    //---------  取得每個會員收藏的推薦文章編號 -------------
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "recomNum" != 0', [memID])
         .then((data) => {
             // console.log(data.rows);
@@ -15,6 +16,7 @@ var getCollRecommend = async function (memID) {
         }, (error) => {
             getdata = null;
         });
+    //---------  取得收藏的推薦文章編號後，再取得文章內容 -------------
     for (let i = 0; i < getdata.length; i++) {
         await sql('SELECT * FROM "recommend" where "recomNum" = $1', [getdata[i].recomNum])
             .then((data) => {
@@ -30,6 +32,7 @@ var getCollRecommend = async function (memID) {
 var getCollArticle = async function (memID) {
     var getdata = [];
     var result = [];
+    //---------  取得每個會員收藏的文章編號 -------------
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0', [memID])
         .then((data) => {
             // console.log(data.rows);
@@ -37,6 +40,7 @@ var getCollArticle = async function (memID) {
         }, (error) => {
             getdata = null;
         });
+    //---------  取得收藏的文章編號後，再取得文章內容 -------------
     for (let i = 0; i < getdata.length; i++) {
         await sql('SELECT * FROM "article" where "artiNum" = $1', [getdata[i].artiNum])
             .then((data) => {
@@ -245,6 +249,8 @@ var getArtiExhibition = async function (memID) {
 }
 
 // ==================  Four Arti Class  (end)=========================
-module.exports = { getCollRecommend, getCollArticle,
+module.exports = {
+    getCollRecommend, getCollArticle,
     getRecomMovie, getRecomMusic, getRecomBook, getRecomExhibition,
-    getArtiMovie, getArtiMusic, getArtiBook, getArtiExhibition };
+    getArtiMovie, getArtiMusic, getArtiBook, getArtiExhibition
+};
