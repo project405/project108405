@@ -65,14 +65,3 @@ $("#goDown").click(function() {
     });;
     window.scrollTo(ele.offsetLeft, ele.offsetTop);
 });
-
-
-
-// (second click) close dropmenu
-$('#nav ul>li').click(function() {
-    $(this).find('ul').toggle();
-    alert();
-});
-
-
-//textarea insert image

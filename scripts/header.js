@@ -21,7 +21,7 @@ header = '    <div class="header">\
                 <a class="nav-link" href="articleList.html">\
                 文章</a>\
             </li>\
-            <li class="nav-item dropdown">\
+            <li id="dropdown"class="nav-item dropdown">\
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
             收藏\
             </a>\

@@ -13,3 +13,14 @@ $(document).ready(function() {
         }
     });
 });
+
+
+// (second click) close dropmenu
+// var main = function() {
+//     $('.dropdown').click(function() {
+//         alert()
+//         $(this).toggle();
+//     });
+// };
+
+// $(document).ready(main);
