@@ -58,28 +58,17 @@ $("#goBottom").click(function() {
 
 //goDown
 
-$(function() {
-    /* 按下GoTop按鈕時的事件 */
-    $('#goDown').click(function() {
-        $('html,body').animate({ scrollTop: 900 }, 'slow');
-        return false;
 
-    });
-
-    /* 偵測卷軸滑動時，往下滑超過400px就讓GoTop按鈕出現 */
-    $(window).scroll(function() {
-        if ($(this).scrollTop() <= 500) {
-            $('#goDown').fadeIn();
-        } else {
-            $('#goDown').fadeOut();
-        }
-    });
+$("#goDown").click(function() {
+    var ele = document.getElementById('block').scrollIntoView({
+        behavior: 'smooth'
+    });;
+    window.scrollTo(ele.offsetLeft, ele.offsetTop);
 });
 
 
 
-
-
+// (second click) close dropmenu
 
 
 

@@ -11,8 +11,9 @@ body {
 }
 
 .banner {
-    margin-bottom: 25pt;
-    /* opacity: 0.9; */
+    margin-bottom: 4em;
+    /* opacity: 0.6; */
+    width: auto;
     height: 100%;
     padding-top: 10rem;
     padding-bottom: calc(10rem - 72px);
@@ -21,6 +22,12 @@ body {
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: cover;
+}
+
+div.block {
+    height: 1em;
+    position: absolute;
+    bottom: 0%;
 }
 
 
@@ -372,12 +379,12 @@ div.footer {
 }
 
 .fa-chevron-circle-down:hover {
-    animation: shake 0.6s;
+    animation: shake 0.9s;
     animation-iteration-count: infinite;
 }
 
 button.goArticle:hover {
     border: 0.5px dashed #0D5146;
-    animation: shake 0.6s;
+    animation: shake 0.9s;
     animation-iteration-count: infinite;
 }
