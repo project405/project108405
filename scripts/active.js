@@ -51,7 +51,8 @@ $(function() {
 
 $("#goBottom").click(function() {
     var scrollHeight = $('html,body').prop("scrollHeight");
-    $('html,body').animate({ scrollTop: scrollHeight }, 'slow');
+    $('html,body').animate({ scrollTop: scrollHeight }, "normal");
+
 });
 
 
