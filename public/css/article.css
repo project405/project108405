@@ -5,11 +5,11 @@ body {
     border: none;
     word-wrap: break-word;
     padding-top: 3em;
-    background: url("../imgs/article-bac.png");
+    /* background: url("../imgs/article-bac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    text-align: justify;
+    text-align: justify; */
 }
 
 @media (max-width: 750px) {

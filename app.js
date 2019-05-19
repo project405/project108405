@@ -14,7 +14,7 @@ var collection_article_Router = require('./routes/collection/collectionArticle')
 var memberRouter = require('./routes/member');
 var articleListRouter = require('./routes/article/articleList');
 var articleRouter = require('./routes/article/article');
-var signInRouter = require('./routes/signIn');
+var loginRouter = require('./routes/login');
 var signUpRouter = require('./routes/signUp');
 var signUpAddRouter = require('./routes/signUp_add');
 var userLoginRouter = require('./routes/userLogin');
@@ -56,10 +56,10 @@ app.use('/collection/recommend',collection_recommend_Router);
 app.use('/collection/article',collection_article_Router);
 app.use('/member',memberRouter);
 app.use('/articleList',articleListRouter);
-app.use('/signIn',signInRouter);
+app.use('/login',loginRouter);
 app.use('/signUp',signUpRouter);
 app.use('/signUp/add',signUpAddRouter);
-app.use('/login',userLoginRouter);
+app.use('/userlogin',userLoginRouter);
 app.use('/notify',notifyRouter);
 // -------------- My use Four Class ----------------
 app.use('/articleList/articleMovie',articleMovieRouter);
