@@ -18,14 +18,8 @@
     
     .container-fluid.logIn,
     .container-fluid.signUp {
-        margin: 6em 0em 0em 0em;
+        margin-top: 6em;
         padding: 0;
-    }
-    
-    h2 {
-        font-size: 1.75em;
-        color: #eee;
-        text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555;
     }
     /* --------------------- */
     /* SIGNIN */
@@ -60,6 +54,26 @@
         margin: 0.75em;
         float: center !important;
         width: 85%;
+    }
+    
+    #logIn button.fb {
+        background-color: #5a78bb;
+        color: white;
+    }
+    
+    #logIn button.fb:hover {
+        background-color: #3e64b6;
+        transition: 0.3s;
+    }
+    
+    #logIn button.gmail {
+        background-color: #eb6363;
+        color: white;
+    }
+    
+    #logIn button.gmail:hover {
+        background-color: #e94444;
+        transition: 0.3s;
     }
     /* --------------------- */
     /* SIGNUP */

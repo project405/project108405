@@ -36,16 +36,16 @@
 .navbar .navbar-nav .nav-item.show .nav-link:hover,
 .navbar .navbar-nav .nav-item.show .nav-link:focus {
     color: #e7f5de;
-    background-color: #5c3d46;
+    background-color: #2D4F41;
 }
 
 .navbar .navbar-toggle {
-    border-color: #5c3d46;
+    border-color: #2D4F41;
 }
 
 .navbar .navbar-toggle:hover,
 .navbar .navbar-toggle:focus {
-    background-color: #5c3d46;
+    background-color: #2D4F41;
 }
 
 .navbar .navbar-toggle .navbar-toggler-icon {
@@ -75,7 +75,7 @@
     }
     .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item.active {
         color: #e7f5de;
-        background-color: #5c3d46;
+        background-color: #2D4F41;
     }
 }
 
@@ -89,7 +89,7 @@
     }
     .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item.active {
         color: #e7f5de;
-        background-color: #5c3d46;
+        background-color: #2D4F41;
     }
 }
 
@@ -103,7 +103,7 @@
     }
     .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item.active {
         color: #e7f5de;
-        background-color: #5c3d46;
+        background-color: #2D4F41;
     }
 }
 
@@ -117,7 +117,7 @@
     }
     .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item.active {
         color: #e7f5de;
-        background-color: #5c3d46;
+        background-color: #2D4F41;
     }
 }
 
@@ -132,7 +132,7 @@
 
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
     color: #e7f5de;
-    background-color: #5c3d46;
+    background-color: #2D4F41;
 }
 
 
@@ -160,7 +160,7 @@ a.dropdown-toggle:hover {
 }
 
 div.dropdown-menu {
-    background-color: #0D5146;
+    background-color: #2D4F41;
     opacity: 0.89;
     border-radius: 12px;
     border: 2px solid #AEC1B8;
@@ -168,7 +168,7 @@ div.dropdown-menu {
 
 .dropdown:hover .dropdown-menu {
     display: block;
-    background-color: #0D5146;
+    background-color: #2D4F41;
     padding: 8px;
     border: 2px solid #AEC1B8;
 }
@@ -208,14 +208,14 @@ div.dropdown-menu {
 
 .navbar {
     opacity: 0.89;
-    background-color: #0D5146;
+    background-color: #2D4F41;
     /* background-color: #2D4F41;
     /* background-color: #9f9289; */
 }
 
 @media (max-width: 1199px) {
     .navbar {
-        background-color: #0D5146;
+        background-color: #2D4F41;
     }
 }
 
@@ -304,7 +304,7 @@ div.footer {
     height: 10em;
     padding: 2em 1em 1em 1em;
     text-align: center;
-    background-color: #0D5146;
+    background-color: #2D4F41;
     opacity: 0.89;
     color: #fff;
     font-size: 0.75em;

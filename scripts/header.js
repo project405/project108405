@@ -22,12 +22,12 @@ header = '    <div class="header">\
                 文章</a>\
             </li>\
             <li id="dropdown"class="nav-item dropdown">\
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+            <a class="nav-link dropdown-toggle" href="collectionArticle.html" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
             收藏\
             </a>\
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">\
-                <a class="dropdown-item" href="#">推薦收藏</a>\
-                <a class="dropdown-item" href="#">文章收藏</a>\
+                <a class="dropdown-item" href="collectionArticle.html">推薦收藏</a>\
+                <a class="dropdown-item" href="collectionRecommend.html">文章收藏</a>\
             </div>\
         </li>\
             <li class="nav-item">\

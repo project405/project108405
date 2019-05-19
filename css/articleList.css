@@ -3,7 +3,6 @@ body {
     height: 100%;
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
-    margin: 0 auto;
     padding: 0;
     border: none;
     text-align: justify;
@@ -13,22 +12,19 @@ body {
     background-size: cover;
 }
 
+div.container-fluid,
+div.row {
+    margin: 0;
+    padding: 0;
+}
+
 
 /* article */
 
 div.article {
-    margin-top: 6em;
     opacity: 0.94;
+    margin-top: 6em;
 }
-
-@media (max-width: 1199px) {
-    div.article {
-        margin-top: 4em;
-    }
-}
-
-
-/* -------------- */
 
 
 /* card */
@@ -199,6 +195,12 @@ button.search:focus {
 
 button.search:active {
     background-color: #467370 !important;
+}
+
+@media (max-width: 576px) {
+    button.search {
+        width: 50%;
+    }
 }
 
 
