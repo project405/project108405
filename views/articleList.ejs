@@ -69,10 +69,12 @@
                             </p>
 
                             <div class="tagDiv col-lg-12 ">
-                                <button type="button" class="btn btn-info tag">有毛的</button>
-                                <button type="button" class="btn btn-info tag">皮卡丘</button>
-                                <button type="button" class="btn btn-info tag">超萌</button>
-                                <button type="button" class="btn btn-info tag">可愛</button>
+                                <% if ( i < items[3].length ) { %>
+                                <% for(var j=0; j<items[3][i].length; j++) {%>
+                                    <button type="button" class="btn btn-info tag"><%= items[3][i][j] %></button>
+                                <% } %>
+                                <% } %>
+
                             </div>
                             <hr class="info">
 

@@ -15,7 +15,7 @@ router.get('/', function (req, res, next) {
       } else if (data == -1) {
         res.render('notFound');  //導向找不到頁面                
       } else {
-        console.log(data);
+        // console.log(data);
         res.render('collectionArticle', { collData: data });
       }
     })

@@ -10,6 +10,8 @@ var getArticleList = async function () {
     var articleList = [];
     var likeCount = [];
     var messageCount = [];
+    var tagLink = []; 
+    var tag = [];
     var result = [];
     // -----------  取得文章清單 --------------
     await sql('SELECT * FROM "article"')
@@ -46,10 +48,44 @@ var getArticleList = async function () {
                 messageCount = null;
             });
     }
-
+    for (let i = 0; i < articleList.length; i++) {
+        // -----------  取得tagLink表中的 artiNum 方便在 tag表中取得資料 --------------
+        await sql('select * from "tagLinkArticle" where "artiNum" = $1', [articleList[i].artiNum])
+            .then((data) => {
+                // console.log("data=", data.rows);
+                if (data.rows != undefined && data.rows != '') {
+                    tagLink.push(data.rows);
+                }
+            }, (error) => {
+                tagLink = null;
+            });
+    }
+    console.log(tagLink);
+    // -----------  取得文章全部tag --------------
+    //初始化二維陣列
+    for (let i = 0; i < tagLink.length; i++) {
+            tag[i] = [] ; 
+    }
+    // console.log("初始",tag);
+    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
+    for (let i = 0; i < tagLink.length; i++) {
+        for (let j = 0; j < tagLink[i].length; j++) {
+            await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
+                .then((data) => {
+                    // console.log(data.rows[0].tagName);
+                    if (data.rows[0].tagName != undefined) {
+                        tag[i][j] = data.rows[0].tagName;
+                    }
+                }, (error) => {
+                    tag = null;
+                });
+        }
+    }
+    // console.log(tag);
     result[0] = articleList;  //存入文章清單
     result[1] = likeCount;  //存入文章清單每篇的愛心數量
     result[2] = messageCount;
+    result[3] = tag;
     // console.log(result);
     return result;
 }
