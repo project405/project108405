@@ -151,21 +151,27 @@ div.article {
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-category {
     font-family: 'Noto Serif TC', "Merriweather Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-weight: 600;
     text-transform: uppercase;
 }
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name p.title {
-    font-size: 1.25em;
+    font-size: 1em;
     text-align: center;
     font-weight: bold;
 }
 
 #portfolio p.content {
-    font-size: 1em !important;
+    font-size: 0.75em !important;
     padding: 0em 1.25em 0.5em 1.25em;
     text-align: justify;
+}
+
+@media (max-width: 576px) {
+    button.search {
+        width: 50%;
+    }
 }
 
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {

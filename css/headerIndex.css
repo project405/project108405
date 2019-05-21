@@ -246,7 +246,7 @@ a.navTitle {
     width: 50px;
     height: 50px;
     color: #fff;
-    background: #3b5998;
+    background: #6E7DAB;
     opacity: 0.75;
     line-height: 50px;
     border-radius: 50%;
@@ -256,7 +256,7 @@ a.navTitle {
 }
 
 #gotop :hover {
-    background: #3b5998;
+    background: #6E7DAB;
 }
 
 
@@ -271,7 +271,7 @@ a.navTitle {
 hr.highlight {
     margin: 1em 0 2em 0 !important;
     width: 20em;
-    background-color: #436327;
+    background-color: #2D4F41;
     height: 5px;
     border: none;
     color: #d4d4d4;
