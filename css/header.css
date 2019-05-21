@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
 .navbar .navbar-brand:hover,
 .navbar .navbar-brand:focus {
-    color: #e7f5de;
+    color: #678878;
 }
 
 .navbar .navbar-text {
@@ -9,13 +9,13 @@
 }
 
 .navbar .navbar-text a {
-    color: #e7f5de;
+    color: #678878;
     text-align: center !important;
 }
 
 .navbar .navbar-text a:hover,
 .navbar .navbar-text a:focus {
-    color: #e7f5de;
+    color: #678878;
 }
 
 .navbar .navbar-nav .nav-link {
@@ -26,7 +26,7 @@
 
 .navbar .navbar-nav .nav-link:not(.disabled):hover,
 .navbar .navbar-nav .nav-link:not(.disabled):focus {
-    color: #e7f5de;
+    color: #678878;
 }
 
 .navbar .navbar-nav .nav-item.active .nav-link,
@@ -35,7 +35,7 @@
 .navbar .navbar-nav .nav-item.show .nav-link,
 .navbar .navbar-nav .nav-item.show .nav-link:hover,
 .navbar .navbar-nav .nav-item.show .nav-link:focus {
-    color: #e7f5de;
+    color: #678878;
     background-color: #2D4F41;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .navbar .navbar-link:hover {
-    color: #e7f5de;
+    color: #678878;
 }
 
 @media (max-width: 575px) {
@@ -71,10 +71,10 @@
     }
     .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:hover,
     .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-        color: #e7f5de;
+        color: #678878;
     }
     .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item.active {
-        color: #e7f5de;
+        color: #678878;
         background-color: #2D4F41;
     }
 }
@@ -85,10 +85,10 @@
     }
     .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:hover,
     .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-        color: #e7f5de;
+        color: #678878;
     }
     .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item.active {
-        color: #e7f5de;
+        color: #678878;
         background-color: #2D4F41;
     }
 }
@@ -99,10 +99,10 @@
     }
     .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:hover,
     .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-        color: #e7f5de;
+        color: #678878;
     }
     .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item.active {
-        color: #e7f5de;
+        color: #678878;
         background-color: #2D4F41;
     }
 }
@@ -113,10 +113,10 @@
     }
     .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:hover,
     .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-        color: #e7f5de;
+        color: #678878;
     }
     .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item.active {
-        color: #e7f5de;
+        color: #678878;
         background-color: #2D4F41;
     }
 }
@@ -127,11 +127,11 @@
 
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:hover,
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:focus {
-    color: #e7f5de;
+    color: #678878;
 }
 
 .navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
-    color: #e7f5de;
+    color: #678878;
     background-color: #2D4F41;
 }
 
@@ -163,24 +163,24 @@ div.dropdown-menu {
     background-color: #2D4F41;
     opacity: 0.89;
     border-radius: 12px;
-    border: 2px solid #AEC1B8;
+    border: 2px solid #678878;
 }
 
 .dropdown:hover .dropdown-menu {
     display: block;
     background-color: #2D4F41;
     padding: 8px;
-    border: 2px solid #AEC1B8;
+    border: 2px solid #678878;
 }
 
 .dropdown:hover .dropdown-menu .dropdown-item:not(.disabled):hover,
 .dropdown:hover .dropdown-menu .dropdown-item:not(.disabled):focus {
-    color: #AEC1B8;
+    color: #678878;
     border-radius: 8px;
 }
 
 .dropdown-item:hover {
-    background-color: #AEC1B8 !important;
+    background-color: #678878!important;
     border-radius: 8px;
 }
 
@@ -189,13 +189,13 @@ div.dropdown-menu {
 
 .navbar-light .navbar-nav .nav-link:focus,
 .navbar-light .navbar-nav .nav-link:hover {
-    background-color: #AEC1B8 !important;
+    background-color: #678878 !important;
     transition: 0.3s;
 }
 
 .navbar-light .navbar-nav .nav-link:focus,
 .navbar-light .navbar-nav .nav-link:hover .a .img {
-    background-color: #AEC1B8 !important;
+    background-color: #678878 !important;
     transition: 0.3s;
 }
 
@@ -325,10 +325,12 @@ button.tag {
     text-align: left;
     background-color: #5580AA;
     border: none;
+    color: white;
 }
 
 button.tag:hover {
     background-color: #32416e;
+    color: white;
 }
 
 
