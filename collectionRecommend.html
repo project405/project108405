@@ -13,7 +13,7 @@
 
 
     <link href="css/header.css" rel="stylesheet" type="text/css" />
-    <link href="css/articleList.css" rel="stylesheet" type="text/css" />
+    <link href="css/recommend.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="imgs/logo.ico" type="image/x-icon" />
 
@@ -24,115 +24,101 @@
 
     <script src="scripts/header.js"></script>
 
+    <center>
+        <h3>推薦收藏</h3>
+        <hr class="highlight">
+    </center>
+    <div class="search col-lg-3 mx-auto">
+        <!-- Search -->
+        <form class="form-inline d-flex">
+            <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-12" id="search" placeholder="輸入欲搜尋之關鍵字">
+            <button type="submit" class="search btn-primary mx-auto ">搜尋</button>
+        </form>
 
-    <!-- 文章列表區塊 -->
-    <section id="articleList">
-        <div class="container-fluid article">
-            <center>
-                <h3>推薦收藏</h3>
-                <hr class="highlight">
-            </center>
+        <!-- Search End -->
+    </div>
 
-            <div class="row d-flex justify-content-center">
 
-                <div class="search col-lg-3 mx-auto">
-                    <!-- Search -->
-                    <form class="form-inline d-flex">
-                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-12" id="search" placeholder="輸入欲搜尋之關鍵字">
-                        <button type="submit" class="search btn-primary mx-auto ">搜尋</button>
-                    </form>
+    <!-- Portfolio Section -->
+    <section id="portfolio">
 
-                    <!-- Search End -->
-                </div>
-                <div class="w-100"></div>
 
-                <div class="col-12 mb-3 col-lg-8 ">
-                    <!-- list -->
-                    <div class="card shadow list " onclick="location.href='article.html' " style="cursor:pointer; ">
+        <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
 
-                        <div class="card-body ">
-                            <div class="poster">
-                                <div class="name">
-                                    <p>匿名 於 2019-04-30 14:23發表</p>
-                                </div>
-                                <hr>
-                            </div>
-                            <h3 class="card-title ">為什麼有辦法看的下去？
-                            </h3>
-                            <p class="card-text ">為什麼有人有辦法看的下去皮卡丘真人電影 ...
-                            </p>
+            <!-- 電影類推薦 -->
 
-                            <div class="tagDiv col-lg-12 ">
-                                <button type="button" class="btn btn-info tag">有毛的</button>
-                                <button type="button" class="btn btn-info tag">皮卡丘</button>
-                                <button type="button" class="btn btn-info tag">超萌</button>
-                                <button type="button" class="btn btn-info tag">可愛</button>
-                            </div>
-                            <hr class="info">
-
+            <div class="wrapper col-12  col-lg-2" style="background-image: url('imgs/testImgs/1.jpg');">
+                <a class="portfolio-box" href="#">
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">
+                            <p>電影類</p>
                         </div>
-                        <!-- info -->
-                        <div class="info">
-                            <button type="button" class="btn postInfo"><i class="fab fa-gratipay"></i><a>20 </a></button>
-                            <button type="button" class="btn postInfo"><i class="fas fa-comment-dots"></i><a>5</a></button>
-                            <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i><a></a></button>
+                        <div class="project-name">
+                            <p>海角七號</p>
                         </div>
-                        <!-- info結束 -->
-
-                        <!-- <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/15.jpg'); "> -->
                     </div>
-
-                    <div class="w-100"></div>
-
-                    <!-- listEnd -->
-
-                    <!-- list -->
-                    <div class="card shadow list " onclick="location.href='article.html' " style="cursor:pointer; ">
-
-                        <div class="card-body ">
-                            <div class="poster">
-                                <div class="name">
-                                    <p>匿名 於 2019-04-30 14:23發表</p>
-                                </div>
-                                <hr>
-                            </div>
-                            <h3 class="card-title ">為什麼有辦法看的下去？
-                            </h3>
-                            <p class="card-text ">為什麼有人有辦法看的下去皮卡丘真人電影 ...
-                            </p>
-
-                            <div class="tagDiv col-lg-12 ">
-                                <button type="button" class="btn btn-info tag">有毛的</button>
-                                <button type="button" class="btn btn-info tag">皮卡丘</button>
-                                <button type="button" class="btn btn-info tag">超萌</button>
-                                <button type="button" class="btn btn-info tag">可愛</button>
-                            </div>
-
-                        </div>
-
-
-                        <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/12.jpg'); ">
-                        </div>
-                        <!-- info -->
-                        <div class="info">
-                            <button type="button" class="btn"><i class="fab fa-gratipay"></i><a>20 </a></button>
-                            <button type="button" class="btn"><i class="fas fa-comment-dots"></i><a>5</a></button>
-                            <button type="button" class="btn"><i class="far fa-bookmark"></i><a></a></button>
-                        </div>
-                        <!-- info結束 -->
-                    </div>
-                    <!-- listEnd -->
-                </div>
+                </a>
             </div>
+            <!-- 電影類推薦結束 -->
 
-        </div>
 
-        </div>
+            <!-- 音樂類推薦 -->
 
+            <div class="wrapper  col-12  col-lg-2" style="background-image: url('imgs/testImgs/2.jpg');">
+                <a class="portfolio-box" href="#">
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">
+                            <p>音樂類</p>
+                        </div>
+                        <div class="project-name">
+                            Project Name
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- 書籍類推薦 -->
+
+            <!-- 音樂類推薦結束 -->
+
+            <div class="wrapper col-12  col-lg-2" style="background-image: url('imgs/testImgs/11.jpg');">
+                <a class="portfolio-box" href="#">
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">
+                            <p>書籍類</p>
+                        </div>
+                        <div class="project-name">
+                            Project Name
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- 書籍類推薦結束 -->
+
+
+            <!-- 展覽類推薦 -->
+            <div class="wrapper col-12  col-lg-2" style="background-image: url('imgs/testImgs/10.jpg');">
+                <a class="portfolio-box" href="#">
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">
+                            <p>展覽類</p>
+                        </div>
+                        <div class="project-name">
+                            Project Name
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- 展覽類推薦結束 -->
 
         </div>
     </section>
-    <!-- 文章列表區塊結束 -->
+
+    </div>
+
+    </div>
+
+
+    </div>
 
 
 

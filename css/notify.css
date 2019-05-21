@@ -9,10 +9,10 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    padding-top: 3em;
 }
 
 div.table {
-    margin-top: 6em;
     padding: 0;
 }
 
