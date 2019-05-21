@@ -116,10 +116,10 @@ div.article {
 
 .wrapper {
     width: 100%;
-    height: 450px;
+    height: 550px;
     overflow: hidden;
     background-size: cover;
-    background-position: center center;
+    background-position: top center;
     border-radius: .2em;
     border: 3px solid #fff;
 }
@@ -174,7 +174,7 @@ div.hotArticle {
 
 .wrapperCardbig {
     width: 100%;
-    height: 230pt;
+    height: 330pt;
     overflow: hidden;
     background-size: cover;
     background-position: center center;
@@ -185,7 +185,7 @@ div.hotArticle {
 
 .wrapperCardSmall {
     width: 100%;
-    height: 115pt;
+    height: 120pt;
     overflow: hidden;
     background-size: cover;
     background-position: center center;
@@ -216,9 +216,6 @@ p.poster {
     text-align: left;
     font-weight: bolder;
 }
-
-
-/* tag */
 
 
 /* -------------- */

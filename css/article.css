@@ -48,7 +48,7 @@ h1 {
 }
 
 div.content {
-    padding: 1em 1.5em 1em 1.5em;
+    padding: 1em 1em 1em 1em;
     background-color: #eee;
     opacity: 0.95;
     margin-bottom: 2em;
@@ -137,8 +137,7 @@ div.info a {
 /* messageLike*/
 
 
-/* 
-div.like {
+/* div.like {
     float: right;
     width: 20%;
     margin-right: -0.75em;
