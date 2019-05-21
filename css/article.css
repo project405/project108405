@@ -91,7 +91,7 @@ p.content {
 }
 
 div.poster a {
-    font-size: 13px !important;
+    font-size: 1em !important;
 }
 
 button.report {
@@ -135,6 +135,15 @@ div.info a {
 
 
 /* messageLike*/
+
+
+/* 
+div.like {
+    float: right;
+    width: 20%;
+    margin-right: -0.75em;
+    padding: 0;
+} */
 
 button.info {
     float: right;
