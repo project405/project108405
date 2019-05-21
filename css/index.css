@@ -15,8 +15,8 @@ body {
     /* opacity: 0.6; */
     width: auto;
     height: 100%;
-    padding-top: 10rem;
-    padding-bottom: calc(10rem - 72px);
+    padding-top: 10em;
+    padding-bottom: calc(10em - 72px);
     background: url("../imgs/banner.png");
     background-position: center;
     background-repeat: no-repeat;
@@ -93,13 +93,21 @@ div.article {
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-category {
     font-family: 'Noto Serif TC', "Merriweather Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 0.85rem;
+    font-size: 1.5em;
     font-weight: 600;
     text-transform: uppercase;
 }
 
-#portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name {
-    font-size: 1.2rem;
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name p.title {
+    font-size: 1.25em;
+    text-align: center;
+    font-weight: bold;
+}
+
+#portfolio p.content {
+    font-size: 1em !important;
+    padding: 0em 1.25em 0.5em 1.25em;
+    text-align: justify;
 }
 
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {

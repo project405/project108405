@@ -45,20 +45,20 @@ button.footer {
 /* Style the search field */
 
 .form-inline input {
-    -webkit-box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
-    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
-    padding: 0.75rem 1.25rem;
+    -webkit-box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 0.75em 1.25em;
     height: auto;
     border: #f0f0f0 solid 0.75px;
     border-radius: 8px;
 }
 
 button.search {
-    -webkit-box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
-    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
-    padding: 0.75rem 1.25rem;
+    -webkit-box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 0.75em 1.25em;
     font-size: 80%;
-    letter-spacing: .15rem;
+    letter-spacing: .15em;
     border: 0;
     border-radius: 8px;
     font-size: 1em;
@@ -151,13 +151,21 @@ div.article {
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-category {
     font-family: 'Noto Serif TC', "Merriweather Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 1.25rem;
+    font-size: 1.5em;
     font-weight: 600;
     text-transform: uppercase;
 }
 
-#portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name {
-    font-size: 1rem;
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name p.title {
+    font-size: 1.25em;
+    text-align: center;
+    font-weight: bold;
+}
+
+#portfolio p.content {
+    font-size: 1em !important;
+    padding: 0em 1.25em 0.5em 1.25em;
+    text-align: justify;
 }
 
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {

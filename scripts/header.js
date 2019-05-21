@@ -18,6 +18,10 @@ header = '    <div class="header">\
                 </a>\
             </li>\
             <li class="nav-item ">\
+            <a class="nav-link" href="recommendlist.html">\
+            推薦</a>\
+        </li>\
+            <li class="nav-item ">\
                 <a class="nav-link" href="articleList.html">\
                 文章</a>\
             </li>\
