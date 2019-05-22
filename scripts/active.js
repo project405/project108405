@@ -60,25 +60,34 @@ $("#goBottom").click(function() {
 //goDown
 
 
-$("#goDown").click(function() {
-    var ele = document.getElementById('block').scrollIntoView({
-        behavior: 'smooth'
-    });;
-    window.scrollTo(ele.offsetLeft, ele.offsetTop);
+// $("#goDown").click(function() {
+//     var ele = document.getElementById('block').scrollIntoView({
+//         behavior: 'smooth'
+//     });;
+//     window.scrollTo(ele.offsetTop);
+// });
+
+$('#goDown').click(function() {
+    $('html,body').animate({ scrollTop: $('#block').offset().top }, 800);
 });
+
+
 
 
 // login
 
 $("#login").click(function() {
     alert('登入成功');
+
 });
 
 
 $("#login1").click(function() {
-    alert('登入成功');
+    window.location("index.html");
+
 });
 
 $("#login2").click(function() {
-    alert('登入成功');
+    window.location.replace("index.html");
+
 });

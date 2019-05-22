@@ -34,6 +34,9 @@ header = '    <div class="header">\
                 <a class="dropdown-item" href="collectionArticle.html">文章收藏</a>\
             </div>\
         </li>\
+        <li class="nav-item">\
+        <a class="nav-link" href="#">申報</a>\
+        </li>\
             <li class="nav-item">\
                 <a class="nav-link" href="logIn.html">會員</a>\
             </li>\
