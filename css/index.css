@@ -18,7 +18,7 @@ body {
     padding-top: 10em;
     padding-bottom: calc(10em - 72px);
     background: url("../imgs/banner.png");
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: cover;
