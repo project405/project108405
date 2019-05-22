@@ -86,8 +86,8 @@ div.article {
     opacity: 0;
     color: #fff;
     background: RGB(36.1, 52.2, 55.3, 0.9);
-    -webkit-transition: opacity 0.25s ease;
-    transition: opacity 0.25s ease;
+    -webkit-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
     text-align: center;
 }
 

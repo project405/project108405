@@ -49,3 +49,7 @@ body>div.container.table>table>tbody>tr>td {
     width: 15%;
     text-align: center;
 }
+
+tr:hover {
+    cursor: pointer;
+}
