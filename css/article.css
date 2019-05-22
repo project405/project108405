@@ -153,7 +153,11 @@ button.info a {
     font-size: 1em;
 }
 
-button.info:hover {
+button.info:hover,
+button.postInfo:focus,
+button.postInfo:hover,
+button.postInfo:active,
+button.postInfo:visited {
     color: #993a3a;
 }
 

@@ -8,7 +8,7 @@
         padding: 0;
         border: none;
         text-align: center;
-        background: url("../imgs/PlogIn-bac.PNG");
+        background: url("../imgs/logIn-bac.PNG");
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
@@ -19,14 +19,7 @@
     @media (max-width: 992px) {
         html,
         body {
-            height: 100%;
-            max-width: 100%;
-            font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
-            margin: 0;
-            padding: 0;
-            border: none;
-            text-align: center;
-            background: url("../imgs/PlogIn-bac.PNG");
+            background: url("../imgs/phone/PlogIn-bac.PNG");
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;

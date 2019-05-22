@@ -215,6 +215,10 @@ button.footer {
     opacity: 0.89;
 }
 
+button.postInfo:active {
+    color: #993a3a;
+}
+
 @media (max-width: 450px) {
     button.footer {
         font-size: 0.85em;
