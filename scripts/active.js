@@ -66,3 +66,19 @@ $("#goDown").click(function() {
     });;
     window.scrollTo(ele.offsetLeft, ele.offsetTop);
 });
+
+
+// login
+
+$("#login").click(function() {
+    alert('登入成功');
+});
+
+
+$("#login1").click(function() {
+    alert('登入成功');
+});
+
+$("#login2").click(function() {
+    alert('登入成功');
+});
