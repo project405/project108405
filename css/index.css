@@ -184,7 +184,7 @@ div.hotArticle {
 
 .wrapperCardbig {
     width: 100%;
-    height: 330pt;
+    height: 310pt;
     overflow: hidden;
     background-size: cover;
     background-position: center center;
@@ -195,7 +195,7 @@ div.hotArticle {
 
 .wrapperCardSmall {
     width: 100%;
-    height: 120pt;
+    height: 100pt;
     overflow: hidden;
     background-size: cover;
     background-position: center center;
