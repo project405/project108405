@@ -11,9 +11,13 @@ body {
     background-size: cover; */
     text-align: justify;
     padding-top: 3em;
+    height: auto;
+    height: 100%;
+    position: relative;
 }
 
 .container-fluid {
+    position: absolute;
     padding: 0;
     margin: 0;
 }
@@ -35,9 +39,49 @@ textarea.input {
     height: 200pt;
 }
 
-input.title {
-    border-radius: 3px;
-    margin-bottom: 1em;
-    width: 100%;
-    border: 1px solid rgb(100, 100, 100);
+
+/* Pseudo element */
+
+.input-icon-wrap {
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    margin: 0.75em 0 0.75em 0;
+}
+
+.input-icon {
+    background: #fff;
+}
+
+.input-with-icon {
+    border: none;
+    flex: 1;
+}
+
+.input-icon,
+.input-with-icon {
+    padding: 10px;
+}
+
+
+/* ------------------ */
+
+
+/* report */
+
+
+/* ------------------ */
+
+div.report {
+    width: 50%;
+    position: absolute;
+    display: inline-block;
+    background-color: #2D4F41;
+    opacity: 0.89;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    -webkit-overflow-scroll: touch;
 }

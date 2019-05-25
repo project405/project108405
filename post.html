@@ -22,34 +22,65 @@
 <body>
 
     <script src="scripts/header.js"></script>
+    <center>
+        <h3>發佈貼文</h3>
+        <hr class="highlight">
+    </center>
+
     <div class="container-fluid row justify-content-center">
-        <center>
-            <h3>發佈貼文</h3>
-            <hr class="highlight">
-        </center>
         <!-- into multiple lines -->
         <div class="w-100"></div>
         <!-- into multiple lines End -->
 
         <div class="col-lg-8 content">
-            <input type="text" class="title" placeholder="輸入您的標題">
-            <div class="input">
-                <textarea class="input" id="textarea" placeholder="輸入您的內文"></textarea>
-            </div>
+            <form class="post" action="">
+                <div class="input-icon-wrap">
+                    <span class="input-icon"><span class="fas fa-heading"></span></span>
+                    <input type="text" class="input-with-icon title" placeholder="輸入您的標題">
+                </div>
+                <div class="input-icon-wrap">
+                    <span class="input-icon"><span class="fas fas fa-file-alt"></span></span>
+                    <textarea class="input-with-icon input" id="textarea" placeholder="輸入您的內文"></textarea>
 
-
-
-            <form>
+                </div>
                 <div class="form-group">
                     <input type="file" class="form-control-file" id="imgSel">
                 </div>
+                <button type="button" class="btn btn-secondary float-md-right">發佈文章</button>
             </form>
-            <a href="#" class="btn btn-secondary btn-lg active float-md-right" role="button" aria-pressed="true">發佈文章</a>
+
 
         </div>
 
 
     </div>
+
+
+    <p></p>
+
+
+
+
+
+
+
+    <div class="container position-fixed col-lg-8 report ">
+        <form class="report" action="">
+
+            <div class="input-icon-wrap">
+                <span class="input-icon"><span class="fas fa-hands-helping"></span></span>
+                <textarea class="input-with-icon" placeholder="輸入舉報原因及問題"></textarea>
+
+            </div>
+
+            <button type="button" class="btn btn-secondary float-md-right">送出申報</button>
+        </form>
+
+    </div>
+
+
+
+
 
 
 

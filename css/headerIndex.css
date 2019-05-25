@@ -353,3 +353,7 @@ button.tag:hover {
     background-attachment: fixed;
     background-size: cover; */
 }
+
+div.report {
+    background-color: #2D4F41;
+}

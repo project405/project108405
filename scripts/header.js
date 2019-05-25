@@ -43,6 +43,6 @@ header = '    <div class="header">\
         </ul>\
     </div>\
 </nav>\
-</div> ';
+</div>\ ';
 
 document.write(header);
