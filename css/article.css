@@ -10,6 +10,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     text-align: justify;
+    position: relative;
 }
 
 @media (max-width: 750px) {

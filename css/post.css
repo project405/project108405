@@ -14,6 +14,7 @@ body {
     height: auto;
     height: 100%;
     position: relative;
+    -webkit-overflow-scroll: touch;
 }
 
 .container-fluid {
@@ -72,10 +73,18 @@ textarea.input {
 
 /* ------------------ */
 
+.fa-times-circle {
+    margin-top: 0.35em;
+    font-size: 2em;
+    cursor: pointer;
+    color: white;
+}
+
 div.report {
-    width: 50%;
+    display: none;
+    max-width: 50em;
     position: absolute;
-    display: inline-block;
+    max-height: 50em;
     background-color: #2D4F41;
     opacity: 0.89;
     left: 0;
@@ -83,5 +92,13 @@ div.report {
     margin-left: auto;
     margin-right: auto;
     border-radius: 12px;
-    -webkit-overflow-scroll: touch;
+    height: 20em;
+}
+
+textarea.report {
+    height: 200px;
+}
+
+button.report {
+    float: right;
 }

@@ -7,7 +7,6 @@
         margin: 0;
         padding: 0;
         border: none;
-        text-align: center;
         background: url("../imgs/logIn-bac.PNG");
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -30,6 +29,7 @@
     
     div.logIn,
     div.signUp {
+        text-align: center;
         margin: 0em;
         padding-top: 6em;
     }

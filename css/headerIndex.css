@@ -340,20 +340,76 @@ button.tag:hover {
 /* ------------------- */
 
 .shadow {
-    /* border-bottom: 5px solid rgba(0, 0, 0, 0.2);
-    border-right: 5px solid rgba(0, 0, 0, 0.12); */
     border-bottom: 0 none;
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.46);
-    /* background: url("../imgs/article-bac.png");
-    opacity: 0.2;
-    background-repeat: no-repeat;
-    height: 100%;
-    width: auto;
-    background-position: right top;
-    background-attachment: fixed;
-    background-size: cover; */
 }
 
 div.report {
     background-color: #2D4F41;
+}
+
+
+/* ------------------ */
+
+
+/* report */
+
+
+/* ------------------ */
+
+
+/* Pseudo element */
+
+.input-icon-wrap {
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    margin: 0.75em 0 0.75em 0;
+}
+
+.input-icon {
+    background: #fff;
+}
+
+.input-with-icon {
+    border: none;
+    flex: 1;
+}
+
+.input-icon,
+.input-with-icon {
+    padding: 10px;
+}
+
+.fa-times-circle {
+    margin-top: 0.35em;
+    font-size: 2em;
+    cursor: pointer;
+    color: white;
+}
+
+div.report {
+    display: none;
+    max-width: 50em;
+    position: absolute;
+    max-height: 50em;
+    background-color: #2D4F41;
+    opacity: 0.98;
+    top: 25%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    height: 20em;
+    z-index: 10;
+}
+
+textarea.report {
+    height: 200px;
+    width: 100%;
+}
+
+button.report {
+    float: right;
 }

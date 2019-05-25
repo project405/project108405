@@ -35,7 +35,7 @@ header = '    <div class="header">\
             </div>\
         </li>\
         <li class="nav-item">\
-        <a class="nav-link" href="#">申報</a>\
+        <a class="nav-link" id="navReport" href="#" onclick="showReport()">申報</a>\
         </li>\
             <li class="nav-item">\
                 <a class="nav-link" href="logIn.html">會員</a>\
@@ -43,6 +43,19 @@ header = '    <div class="header">\
         </ul>\
     </div>\
 </nav>\
+</div>\
+<div class="container position-fixed col-lg-8 report" id="report">\
+<div id="x"><i class="far fa-times-circle"></i>\
+</div>\
+<div class="form">\
+    <form class="report" action="">\
+        <div class="input-icon-wrap">\
+            <span class="input-icon"><span class="fas fa-hands-helping"></span></span>\
+            <textarea class="input-with-icon report" placeholder="輸入舉報原因及問題"></textarea>\
+        </div>\
+        <button type="button" class="btn btn-danger  report">送出申報</button>\
+    </form>\
+</div>\
 </div>\ ';
 
 document.write(header);

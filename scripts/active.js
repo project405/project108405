@@ -24,7 +24,7 @@ jQuery.fn.extend({
 });
 // 使用
 $(function() {
-    $('textarea').autoHeight();
+    $('#textarea').autoHeight();
 });
 
 
@@ -90,4 +90,16 @@ $("#login1").click(function() {
 $("#login2").click(function() {
     window.location.replace("index.html");
 
+});
+
+
+// report
+
+$(document).ready(function() {
+    $("#x").click(function() {
+        $("#report").hide();
+    });
+    $("#navReport").click(function() {
+        $("#report").show();
+    });
 });
