@@ -41,6 +41,15 @@ textarea.input {
 }
 
 
+/* ------------------ */
+
+
+/* report */
+
+
+/* ------------------ */
+
+
 /* Pseudo element */
 
 .input-icon-wrap {
@@ -63,15 +72,6 @@ textarea.input {
 .input-with-icon {
     padding: 10px;
 }
-
-
-/* ------------------ */
-
-
-/* report */
-
-
-/* ------------------ */
 
 .fa-times-circle {
     margin-top: 0.35em;

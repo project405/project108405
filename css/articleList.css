@@ -1,5 +1,4 @@
-html,
-body {
+html, body {
     height: 100%;
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
@@ -12,12 +11,10 @@ body {
     background-size: cover;
 }
 
-div.container-fluid,
-div.row {
+div.container-fluid, div.row {
     margin: 0;
     padding: 0;
 }
-
 
 /* article */
 
@@ -26,9 +23,7 @@ div.article {
     margin-top: 6em;
 }
 
-
 /* card */
-
 
 /* -------------- */
 
@@ -62,7 +57,6 @@ h3.card-title {
     font-weight: bolder;
 }
 
-
 /* tag */
 
 a.floorTag {
@@ -77,7 +71,6 @@ a.floorTag {
     font-size: 0.75em;
 }
 
-
 /* card */
 
 div.card-body {
@@ -89,12 +82,9 @@ hr.info {
     margin-bottom: 0em;
 }
 
-
 /* -------------- */
 
-
 /* tag */
-
 
 /* -------------- */
 
@@ -111,12 +101,9 @@ div.info {
     margin-left: 0.45em;
 }
 
-
 /* icon */
 
-.fa-gratipay,
-.fa-comment-dots,
-.fa-bookmark {
+.fa-gratipay, .fa-comment-dots, .fa-bookmark {
     font-size: 23px;
 }
 
@@ -125,12 +112,9 @@ div.info a {
     font-size: 1.25em;
 }
 
-
 /* ------------------- */
 
-
 /* search */
-
 
 /* ------------------- */
 
@@ -139,7 +123,6 @@ div.search {
     margin-bottom: 0.75em;
     float: right;
 }
-
 
 /*  button */
 
@@ -155,7 +138,6 @@ button.footer {
         font-size: 0.85em;
     }
 }
-
 
 /* Style the search field */
 
@@ -203,7 +185,6 @@ button.search:active {
     }
 }
 
-
 /* Clear floats */
 
 form.search::after {
@@ -211,7 +192,6 @@ form.search::after {
     clear: both;
     display: table;
 }
-
 
 /* h2 */
 
@@ -221,19 +201,15 @@ h2 {
     /* text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555; */
 }
 
-
 /* ------------------ */
 
-
 /* goPost */
-
 
 /* ------------------ */
 
 .fa-edit {
     margin-right: 0.2em;
 }
-
 
 /* postButton */
 
@@ -247,5 +223,13 @@ div.btnPost {
 
 button.postButton {
     padding: 0.3em;
-    font-size: 0.85em;
+    font-size: 1.1em;
+    background-color: rgb(31, 57, 136);
+    color: white;
+}
+
+@media (max-width: 827px) {
+    button.postButton {
+        font-size: 0.85em;
+    }
 }

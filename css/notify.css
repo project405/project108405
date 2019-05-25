@@ -20,11 +20,7 @@ div.container-fluid {
 
 div.table {
     padding: 0;
-}
-
-.container {
     margin: 0;
-    padding: 0;
 }
 
 body>div.container.table>table>thead>tr>th {
