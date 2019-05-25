@@ -103,3 +103,10 @@ $(document).ready(function() {
         $("#report").show();
     });
 });
+
+
+// AOS animate
+
+AOS.init({
+    duration: 2500
+});
