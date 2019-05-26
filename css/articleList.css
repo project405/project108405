@@ -6,7 +6,7 @@ body {
     padding: 0;
     border: none;
     text-align: justify;
-    background: url("../imgs/article-bac.png");
+    background: url("../imgs/background/articleBac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

@@ -7,7 +7,7 @@ body {
     margin: 0;
     padding-top: 3em;
     border: none;
-    background: url("../imgs/logIn-bac.PNG");
+    background: url("../imgs/background/logInBac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -18,7 +18,7 @@ body {
 @media (max-width: 992px) {
     html,
     body {
-        background: url("../imgs/phone/PlogIn-bac.PNG");
+        background: url("../imgs/background/phone/PlogInBac.PNG");
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
