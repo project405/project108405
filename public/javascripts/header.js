@@ -37,9 +37,18 @@ header = '    <div class="header">\
         <li class="nav-item">\
         <a class="nav-link" id="navReport" href="#" onclick="showReport()">申報</a>\
         </li>\
-            <li class="nav-item">\
-                <a class="nav-link" href="/login">會員</a>\
-            </li>\
+        <li class="nav-item">\
+                <a class="nav-link" href="/login">登入</a>\
+        </li>\
+        <li class="nav-item dropdown">\
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+                會員\
+            </a>\
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">\
+            <a class="dropdown-item" href="member.html">會員資料</a>\
+            <a class="dropdown-item" href="articleManage.html">文章管理</a>\
+        </div>\
+      </li>\
         </ul>\
     </div>\
 </nav>\

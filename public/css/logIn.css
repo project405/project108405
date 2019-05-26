@@ -13,6 +13,7 @@
         background-size: cover;
         width: 100%;
         height: auto;
+        padding: 3em 0 0 0;
     }
     
     @media (max-width: 992px) {
@@ -30,7 +31,6 @@
     div.logIn,
     div.signUp {
         margin: 0em;
-        padding: 6em 0 0 0;
     }
     /* --------------------- */
     /* SIGNIN */
@@ -41,11 +41,11 @@
         padding: 0;
         background-color: #f0f0f0;
         opacity: 0.95;
+        text-align: center;
     }
     
     #logIn form button.center {
         margin: 0.1em 0.75em 0 0.1em;
-        float: center;
     }
     
     #logIn form.logIn {
