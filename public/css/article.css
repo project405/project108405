@@ -5,11 +5,12 @@ body {
     border: none;
     word-wrap: break-word;
     padding-top: 3em;
-    /* background: url("../imgs/article-bac.png");
+    background: url("../imgs/article-bac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    text-align: justify; */
+    text-align: justify;
+    position: relative;
 }
 
 @media (max-width: 750px) {
@@ -47,7 +48,7 @@ h1 {
 }
 
 div.content {
-    padding: 1em 1.5em 1em 1.5em;
+    padding: 1em 1em 1em 1em;
     background-color: #eee;
     opacity: 0.95;
     margin-bottom: 2em;
@@ -69,11 +70,6 @@ div.content {
     }
 }
 
-div.tagDiv {
-    padding: 1em 0 1em 0;
-    margin: 0em;
-}
-
 a.floorTag {
     text-align: right;
     color: #fff !important;
@@ -90,17 +86,12 @@ div.floor {
     margin-bottom: 0.5em;
 }
 
-button.info {
-    float: right;
-    font-size: 1.2em;
-}
-
-button.info:hover {
-    color: #993a3a;
-}
-
 p.content {
     color: rgb(73, 73, 73);
+}
+
+div.poster a {
+    font-size: 1em !important;
 }
 
 button.report {
@@ -116,9 +107,8 @@ button.report {
     font-size: 23px;
 }
 
-div.info {
-    margin-left: -0.9em;
-}
+
+/* tag */
 
 div.tagDiv {
     padding: 0em;
@@ -131,9 +121,45 @@ button.tag {
     padding: 0.45em;
 }
 
+
+/* post */
+
+div.info {
+    margin-left: -0.9em;
+}
+
 div.info a {
     margin: 0.3em;
     font-size: 1.25em;
+}
+
+
+/* messageLike*/
+
+
+/* div.like {
+    float: right;
+    width: 20%;
+    margin-right: -0.75em;
+    padding: 0;
+} */
+
+button.info {
+    float: right;
+    font-size: 1.25em;
+}
+
+button.info a {
+    margin: 0.3em;
+    font-size: 1em;
+}
+
+button.info:hover,
+button.postInfo:focus,
+button.postInfo:hover,
+button.postInfo:active,
+button.postInfo:visited {
+    color: #993a3a;
 }
 
 

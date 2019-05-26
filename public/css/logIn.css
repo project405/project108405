@@ -7,8 +7,7 @@
         margin: 0;
         padding: 0;
         border: none;
-        text-align: center;
-        /* background: url("../imgs/testImgs/background.jpg"); */
+        background: url("../imgs/logIn-bac.PNG");
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
@@ -16,16 +15,23 @@
         height: auto;
     }
     
-    .container-fluid.logIn,
-    .container-fluid.signUp {
-        margin: 6em 0em 0em 0em;
-        padding: 0;
+    @media (max-width: 992px) {
+        html,
+        body {
+            background: url("../imgs/phone/PlogIn-bac.PNG");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            width: 100%;
+            height: auto;
+        }
     }
     
-    h2 {
-        font-size: 1.75em;
-        color: #eee;
-        text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555;
+    div.logIn,
+    div.signUp {
+        text-align: center;
+        margin: 0em;
+        padding-top: 6em;
     }
     /* --------------------- */
     /* SIGNIN */
@@ -61,6 +67,26 @@
         float: center !important;
         width: 85%;
     }
+    
+    #logIn button.fb {
+        background-color: #5a78bb;
+        color: white;
+    }
+    
+    #logIn button.fb:hover {
+        background-color: #3e64b6;
+        transition: 0.3s;
+    }
+    
+    #logIn button.gmail {
+        background-color: #eb6363;
+        color: white;
+    }
+    
+    #logIn button.gmail:hover {
+        background-color: #e94444;
+        transition: 0.3s;
+    }
     /* --------------------- */
     /* SIGNUP */
     /* --------------------- */
@@ -83,7 +109,6 @@
         .container-fluid.logIn,
         .container-fluid.signUp {
             margin: 2.5em 0em 0em 0em;
-            padding: 0;
         }
     }
     
@@ -92,7 +117,7 @@
         width: 100%;
         float: center;
     }
-    /* form */
+    /* Pseudo element */
     
     .input-icon-wrap {
         border: 1px solid #ddd;

@@ -24,7 +24,7 @@ jQuery.fn.extend({
 });
 // 使用
 $(function() {
-    $('textarea').autoHeight();
+    $('#textarea').autoHeight();
 });
 
 
@@ -51,7 +51,8 @@ $(function() {
 
 $("#goBottom").click(function() {
     var scrollHeight = $('html,body').prop("scrollHeight");
-    $('html,body').animate({ scrollTop: scrollHeight }, 'slow');
+    $('html,body').animate({ scrollTop: scrollHeight }, "normal");
+
 });
 
 
@@ -59,17 +60,46 @@ $("#goBottom").click(function() {
 //goDown
 
 
-$("#goDown").click(function() {
-    var ele = document.getElementById('block').scrollIntoView({
-        behavior: 'smooth'
-    });;
-    window.scrollTo(ele.offsetLeft, ele.offsetTop);
+// $("#goDown").click(function() {
+//     var ele = document.getElementById('block').scrollIntoView({
+//         behavior: 'smooth'
+//     });;
+//     window.scrollTo(ele.offsetTop);
+// });
+
+$('#goDown').click(function() {
+    $('html,body').animate({ scrollTop: $('#block').offset().top }, 800);
 });
 
 
 
-// (second click) close dropmenu
+
+// login
+
+// $("#login").click(function() {
+//     alert('登入成功');
+
+// });
 
 
+$("#login1").click(function() {
+    window.location("index.html");
 
-//textarea insert image
+});
+
+$("#login2").click(function() {
+    window.location.replace("index.html");
+
+});
+
+
+// report
+
+$(document).ready(function() {
+    $("#x").click(function() {
+        $("#report").hide();
+    });
+    $("#navReport").click(function() {
+        $("#report").show();
+    });
+});

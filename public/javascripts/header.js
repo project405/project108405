@@ -1,8 +1,8 @@
 header = '    <div class="header">\
-<nav class="navbar navbar-expand-lg navbar-light fixed-top ">\
+<nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">\
     <a class="nav-link" href="#">\
     <img class="nav-item" href="/" src="imgs/logo.png" width="35px" height="35px " style="opacity:0.8" alt="">\
-       <a href="index.html" class="navTitle">文藝富心</a>\
+       <a href="/" class="navTitle">文藝富心</a>\
 </a>\
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\
         <span class="navbar-toggler-icon"></span>\
@@ -14,15 +14,19 @@ header = '    <div class="header">\
             </li>\
             <li class="nav-item ">\
                 <a class="nav-link" href="/notify">\
-                <i class="fas fa-envelope" style="color:white;"></i>\
+                <i class="fas fa-bell"  style="color:white;"></i>\
                 </a>\
             </li>\
+            <li class="nav-item ">\
+            <a class="nav-link" href="/recommendlist">\
+            推薦</a>\
+        </li>\
             <li class="nav-item ">\
                 <a class="nav-link" href="/articleList">\
                 文章</a>\
             </li>\
-            <li class="nav-item dropdown">\
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+            <li id="dropdown"class="nav-item dropdown">\
+            <a class="nav-link dropdown-toggle" href="collectionArticle.html" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
             收藏\
             </a>\
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">\
@@ -30,12 +34,28 @@ header = '    <div class="header">\
                 <a class="dropdown-item" href="/collection/article">文章收藏</a>\
             </div>\
         </li>\
+        <li class="nav-item">\
+        <a class="nav-link" id="navReport" href="#" onclick="showReport()">申報</a>\
+        </li>\
             <li class="nav-item">\
                 <a class="nav-link" href="/login">會員</a>\
             </li>\
         </ul>\
     </div>\
 </nav>\
-</div> ';
+</div>\
+<div class="container position-fixed col-lg-8 report" id="report">\
+<div id="x"><i class="far fa-times-circle"></i>\
+</div>\
+<div class="form">\
+    <form class="report" action="">\
+        <div class="input-icon-wrap">\
+            <span class="input-icon"><span class="fas fa-hands-helping"></span></span>\
+            <textarea class="input-with-icon report" placeholder="輸入舉報原因及問題"></textarea>\
+        </div>\
+        <button type="button" class="btn btn-danger  report">送出申報</button>\
+    </form>\
+</div>\
+</div>\ ';
 
 document.write(header);

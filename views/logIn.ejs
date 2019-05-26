@@ -8,7 +8,6 @@
 
     <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javascripts/navbar.js"></script>
     <script src="/javacripts/active.js"></script>
 
     <!-- Bootstrap CSS -->
@@ -21,6 +20,8 @@
 
     <link href="/css/header.css" rel="stylesheet" type="text/css" />
     <link href="/css/logIn.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
 
     <title>文藝富心</title>
 </head>
@@ -31,16 +32,15 @@
 
 
     <section id="logIn">
-
-        <div class="container-fluid row flex justify-content-center logIn">
+        <div class="container-fluid row flex justify-content-center logIn ">
             <div class="container-fluid">
                 <center>
-                    <h2>登入</h2>
+                    <h3>登入</h3>
                     <hr class="highlight">
 
                 </center>
             </div>
-            <form class="logIn col-12-5" action="/userLogin" method="post" >
+            <form class="logIn col-12-5 shadow" action="/userLogin" method="post">
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fa fa-user"></span></span>
                     <input type="text" class="input-with-icon" id="ID" name="memID" placeholder="帳號">
@@ -60,10 +60,12 @@
             <div class="container-fluid row flex justify-content-center ">
                 <div class="col-12-5 third">
                     <center>
-                        <h4>第三方登入或註冊</h4>
+                        <h4>或</h4>
                         <hr class="highlight">
-                        <button type="button" class="btn btn-danger third">Gmail登入或註冊</button>
-                        <button type="button" class="btn btn-primary third">Facebook登入或註冊</button>
+                        <button type="button" class="btn third gmail" id="login1"
+                            onclick="location.href='/'">Gmail登入或註冊</button>
+                        <button type="button" class="btn third fb" id="login2"
+                            onclick="location.href='/'">Facebook登入或註冊</button>
                     </center>
 
                 </div>
@@ -72,6 +74,7 @@
         </div>
 
     </section>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

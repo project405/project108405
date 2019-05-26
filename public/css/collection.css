@@ -206,6 +206,12 @@ div.search {
     margin: 0.75em 0 0.75em 0;
 }
 
+@media (max-width: 576px) {
+    button.search {
+        width: 90%;
+    }
+}
+
 
 /* Style the search field */
 

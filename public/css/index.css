@@ -15,13 +15,23 @@ body {
     /* opacity: 0.6; */
     width: auto;
     height: 100%;
-    padding-top: 10rem;
-    padding-bottom: calc(10rem - 72px);
+    padding-top: 10em;
+    padding-bottom: calc(10em - 72px);
     background: url("../imgs/banner.png");
-    background-position: center;
+    background-position: center center;
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: cover;
+}
+
+@media (max-width: 650px) {
+    .banner {
+        background: url("../imgs/phone/Pbanner.png");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;
+    }
 }
 
 div.block {
@@ -70,7 +80,7 @@ div.article {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    padding-top: 5em;
+    padding-top: 3em;
     -webkit-box-pack: center top;
     -ms-flex-pack: center;
     justify-content: center;
@@ -86,20 +96,28 @@ div.article {
     opacity: 0;
     color: #fff;
     background: RGB(36.1, 52.2, 55.3, 0.9);
-    -webkit-transition: opacity 0.25s ease;
-    transition: opacity 0.25s ease;
+    -webkit-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
     text-align: center;
 }
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-category {
     font-family: 'Noto Serif TC', "Merriweather Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 0.85rem;
+    font-size: 1.5em;
     font-weight: 600;
     text-transform: uppercase;
 }
 
-#portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name {
-    font-size: 1.2rem;
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name p.title {
+    font-size: 1.25em;
+    text-align: center;
+    font-weight: bold;
+}
+
+#portfolio p.content {
+    font-size: 1em !important;
+    padding: 0em 1.25em 0.5em 1.25em;
+    text-align: justify;
 }
 
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {
@@ -108,10 +126,10 @@ div.article {
 
 .wrapper {
     width: 100%;
-    height: 500px;
+    height: 350px;
     overflow: hidden;
     background-size: cover;
-    background-position: top center;
+    background-position: center center;
     border-radius: .2em;
     border: 3px solid #fff;
 }
@@ -166,7 +184,7 @@ div.hotArticle {
 
 .wrapperCardbig {
     width: 100%;
-    height: 340pt;
+    height: 310pt;
     overflow: hidden;
     background-size: cover;
     background-position: center center;
@@ -177,7 +195,7 @@ div.hotArticle {
 
 .wrapperCardSmall {
     width: 100%;
-    height: 115pt;
+    height: 100pt;
     overflow: hidden;
     background-size: cover;
     background-position: center center;
@@ -208,9 +226,6 @@ p.poster {
     text-align: left;
     font-weight: bolder;
 }
-
-
-/* tag */
 
 
 /* -------------- */
@@ -288,27 +303,6 @@ form.search input[type=text] {
 }
 
 
-/* Style the submit button */
-
-form.search button {
-    float: center !important;
-    width: 2.5em;
-    padding: 10px;
-    background: #2196F3;
-    color: white;
-    font-size: 17px;
-    border: 1px solid grey;
-    border-left: none;
-    /* Prevent double borders */
-    cursor: pointer;
-    border-radius: 8px;
-}
-
-form.search button:hover {
-    background: #0b7dda;
-}
-
-
 /* Clear floats */
 
 form.search::after {
@@ -381,6 +375,7 @@ div.footer {
 .fa-chevron-circle-down:hover {
     animation: shake 0.9s;
     animation-iteration-count: infinite;
+    cursor: pointer;
 }
 
 button.goArticle:hover {

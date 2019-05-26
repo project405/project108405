@@ -9,19 +9,18 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    padding-top: 3em;
+    height: 100%;
 }
 
-div.table {
-    margin-top: 6em;
+div.container-fluid {
+    margin: 0;
     padding: 0;
 }
 
-.container {
-    max-width: 100em;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 0px;
-    padding-right: 0px;
+div.table {
+    padding: 0;
+    margin: 0;
 }
 
 body>div.container.table>table>thead>tr>th {
@@ -36,7 +35,7 @@ body>div.container.table>table>tbody>tr>td {
 
 .table1 {
     text-align: justify;
-    width: 15%;
+    width: 10%;
     text-align: center;
 }
 
@@ -47,6 +46,10 @@ body>div.container.table>table>tbody>tr>td {
 
 .table3 {
     text-align: justify;
-    width: 15%;
+    width: 20%;
     text-align: center;
+}
+
+tr:hover {
+    cursor: pointer;
 }
