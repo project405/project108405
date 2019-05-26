@@ -44,7 +44,7 @@ header = '    <div class="header">\
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                 會員\
             </a>\
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">\
+        <div class="dropdown-menu member  dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">\
             <a class="dropdown-item" href="member.html">會員資料</a>\
             <a class="dropdown-item" href="articleManage.html">文章管理</a>\
         </div>\
