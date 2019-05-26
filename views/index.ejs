@@ -135,14 +135,14 @@
 
     <!-- 熱門文章區塊 -->
 
-    <section id=hotArticle>
+    <section id="hotArticle">
         <div class="container hotArticle">
             <center>
                 <h2>熱門文章</h2>
                 <hr class="highlight">
             </center>
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-7" data-aos="zoom-in">
                     <div class="card  shadow" onclick="location.href='/article/<%= items[0][0].artiNum %>'"
                         style="cursor:pointer;">
 
@@ -172,7 +172,7 @@
                 <!-- 精選右邊上面的格子 -->
                 <div class=" col-lg-5 ">
                     <div class="card shadow" onclick="location.href='/article/<%= items[1][0].artiNum %>'"
-                        style="cursor:pointer;">
+                        style="cursor:pointer;" data-aos="zoom-in">
 
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][0].artiHead %>
@@ -197,7 +197,7 @@
 
                     <!-- 精選右邊下面的格子 -->
                     <div class="card shadow" onclick="location.href='/article/<%= items[2][0].artiNum %>'"
-                        style="cursor:pointer;">
+                        style="cursor:pointer;" data-aos="zoom-in">
 
                         <div class="card-body">
                             <h3 class="card-title"><%= items[2][0].artiHead %>

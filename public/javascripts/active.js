@@ -50,8 +50,7 @@ $(function() {
 //bottom
 
 $("#goBottom").click(function() {
-    var scrollHeight = $('html,body').prop("scrollHeight");
-    $('html,body').animate({ scrollTop: scrollHeight }, "normal");
+    $('html,body').animate({ scrollTop: $('#reply').offset().top }, 1000);
 
 });
 
@@ -60,12 +59,7 @@ $("#goBottom").click(function() {
 //goDown
 
 
-// $("#goDown").click(function() {
-//     var ele = document.getElementById('block').scrollIntoView({
-//         behavior: 'smooth'
-//     });;
-//     window.scrollTo(ele.offsetTop);
-// });
+
 
 $('#goDown').click(function() {
     $('html,body').animate({ scrollTop: $('#block').offset().top }, 800);
@@ -103,5 +97,6 @@ $(document).ready(function() {
     });
     $("#navReport").click(function() {
         $("#report").show();
+        $('.navbar-collapse').collapse('hide');
     });
 });
