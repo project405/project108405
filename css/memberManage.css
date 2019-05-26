@@ -141,7 +141,7 @@ div.radio {
 .radio-custom:checked+.radio-custom-label:before {
     content: "\f00c";
     font-family: 'FontAwesome';
-    color: #bbb;
+    color: black;
 }
 
 .radio-custom:focus+.radio-custom-label {
