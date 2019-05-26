@@ -8,7 +8,7 @@
 
     <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javacripts/active.js"></script>
+    <script src="/javascripts/active.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -59,7 +59,7 @@
                 <a class="portfolio-box" href="#">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            <p>電影類</p>
+                            <p><%= collData[i].recomClass %></p>
                         </div>
                         <div class="project-name">
                             <p class="title"><%= collData[i].recomHead %></p>
@@ -87,11 +87,11 @@
 
 
     <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary footer">所有分類</button>
-        <button type="button " class="btn btn-secondary align-middle footer">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer">音樂類</button>
-        <button type="button " class="btn btn-secondary align-middle footer">書籍類</button>
-        <button type="button " class="btn btn-secondary align-middle footer">展覽類</button>
+        <button type="button " class="btn btn-secondary footer" onclick="location.href='/collection/recommend'">所有分類</button>
+        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/recommend/movie'">電影類</button>
+        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/recommend/music'">音樂類</button>
+        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/recommend/book'">書籍類</button>
+        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/recommend/exhibition'">展覽類</button>
 
     </div>
 

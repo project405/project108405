@@ -53,37 +53,37 @@
                 <div class="w-100"></div>
 
                 <div class="col-12 mb-3 col-lg-8 ">
-                    <% for(var i = 0 ; i<collData.length ; i++ ) {%>
+                    <% for(var i = 0 ; i<collData[0].length ; i++ ) {%>
                     <!-- list -->
                     <div class="card shadow list " onclick="location.href='#' " style="cursor:pointer; ">
 
                         <div class="card-body ">
                             <div class="poster">
                                 <div class="name">
-                                    <p><%= collData[i].memID %> 於 <%= collData[i].artiDateTime %> 發表</p>
+                                    <p><%= collData[0][i].memID %> 於 <%= collData[0][i].artiDateTime %> 發表</p>
                                 </div>
                                 <hr>
                             </div>
-                            <h3 class="card-title "><%= collData[i].artiHead %>
+                            <h3 class="card-title "><%= collData[0][i].artiHead %>
                             </h3>
-                            <p class="card-text "><%= collData[i].artiCont %>
+                            <p class="card-text "><%= collData[0][i].artiCont %>
                             </p>
 
                             <div class="tagDiv col-lg-12 ">
-                                <button type="button" class="btn  tag">有毛的</button>
-                                <button type="button" class="btn  tag">皮卡丘</button>
-                                <button type="button" class="btn  tag">超萌</button>
-                                <button type="button" class="btn  tag">可愛</button>
+                                <% for(var j = 0 ; j<collData[3][i].length ; j++ ) {%>
+                                <button type="button" class="btn  tag"><%= collData[3][i][j] %></button>
+                                <% } %>
                             </div>
                             <hr class="info">
 
                         </div>
                         <!-- info -->
                         <div class="info">
-                            <button type="button" class="btn postInfo"><i class="fab fa-gratipay"></i><a>20
+                            <button type="button" class="btn postInfo"><i
+                                    class="fab fa-gratipay"></i><a><%= collData[1][i].count %>
                                 </a></button>
                             <button type="button" class="btn postInfo"><i
-                                    class="fas fa-comment-dots"></i><a>5</a></button>
+                                    class="fas fa-comment-dots"></i><a><%= collData[2][i].count %></a></button>
                             <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i><a></a></button>
                         </div>
                         <!-- info結束 -->
