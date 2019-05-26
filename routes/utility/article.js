@@ -103,6 +103,8 @@ var getOneArticle = async function (artiNum) {
     var oneArtiMessage = []; //存放文章留言內容
     var oneArtiMessCount = []; //存放文章留言總數
     var oneArtiMessLikeCount = []; //存放留言愛心數量
+    var tagLink = [];
+    var tag = [];
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -159,13 +161,48 @@ var getOneArticle = async function (artiNum) {
                 oneArtiMessLikeCount = null;
             });
     }
-
+    // -----------  取得tagLink表中的 artiNum 方便在 tag表中取得資料 --------------
+    await sql('select * from "tagLinkArticle" where "artiNum" = $1', [artiNum])
+        .then((data) => {
+            // console.log("data=", data.rows);
+            if (data.rows != undefined && data.rows != '') {
+                tagLink.push(data.rows);
+            } else {
+                let tagNull = { "tagNum": "null" };
+                tagLink.push([tagNull]);
+            }
+        }, (error) => {
+            tagLink = null;
+        });
+    console.log("tagLink=", tagLink);
+    // -----------  取得文章全部tag --------------
+    // 初始化二維陣列
+    for (let i = 0; i < tagLink.length; i++) {
+        tag[i] = [];
+    }
+    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
+    for (let i = 0; i < tagLink.length; i++) {
+        for (let j = 0; j < tagLink[i].length; j++) {
+            if (tagLink[i][j].tagNum != 'null') {
+                await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
+                    .then((data) => {
+                        // console.log(data.rows[0].tagName);
+                        if (data.rows[0].tagName != undefined) {
+                            tag[i][j] = data.rows[0].tagName;
+                        }
+                    }, (error) => {
+                        tag = null;
+                    });
+            }
+        }
+    }
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
     result[2] = oneArtiLikeCount;
     result[3] = oneArtiMessCount;
     result[4] = oneArtiMessLikeCount;
-    // console.log(result);
+    result[5] = tag;
+    console.log(tag);
     return result;
 }
 //=========================================

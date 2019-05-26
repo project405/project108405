@@ -56,7 +56,7 @@
             <% for(var i=0; i<collData.length; i++) {%>
             <div class="wrapper col-12  col-lg-2" style="background-image: url('/imgs/recommend/movie1.jpg');">
 
-                <a class="portfolio-box" href="#">
+                <a class="portfolio-box" onclick="location.href='/collection/recommend/one/<%= collData[i].recomNum %>' ">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
                             <p><%= collData[i].recomClass %></p>

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html>
 
@@ -34,19 +35,20 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 content shadow post postArticle">
                 <p class="poster">
-                    <a class="floorTag text-break ">樓主</a> <%= items[0][0].memID %> 於 <%= items[0][0].artiDateTime %>發布
+                    <a class="floorTag text-break ">樓主</a> 管理員 於 <%= items[0][0].recomDateTime %>發布
                 </p>
                 <hr />
 
-                <h3><%= items[0][0].artiHead %></h3>
+                <h3><%= items[0][0].recomHead %></h3>
                 <hr />
 
-                <p class="content"> <%= items[0][0].artiCont %>
+                <p class="content"> <%= items[0][0].recomCont %>
                 </p>
                 <div class="tagDiv col-lg-12 ">
-                    <% for(var i=0; i<items[5][0].length; i++) {%>
-                    <button type="button" class="btn btn-info tag"><%= items[5][0][i] %></button>
-                    <% } %>
+                    <button type="button" class="btn btn-info tag">有毛的</button>
+                    <button type="button" class="btn btn-info tag">皮卡丘</button>
+                    <button type="button" class="btn btn-info tag">超萌</button>
+                    <button type="button" class="btn btn-info tag">可愛</button>
                 </div>
                 <hr class="info">
                 <!-- info -->
@@ -54,7 +56,7 @@
                     <button type="button" class="btn postInfo"><i
                             class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
                     <button type="button" class="btn postInfo"><i
-                            class="fas fa-comment-dots"></i><a><%= items[3][0].count %></a></button>
+                            class="fas fa-comment-dots"></i><a><%= items[2][0].count %></a></button>
                     <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i></button>
                     <button type="button" class="btn report">檢舉</button>
                 </div>
@@ -81,16 +83,15 @@
                     </div>
 
                     <div class="poster">
-                        <div class="floor"><a class="floorTag text-break "><%= j+1 %> 樓</a> <a><%= items[1][j].memID %>
-                                於
-                                <%= items[1][j].artiMessDateTime %>留言</a> </div>
+                        <div class="floor"><a class="floorTag text-break "><%= j+1 %> 樓</a> <a><%= items[1][j].memID %> 於
+                                <%= items[1][j].recomMessDateTime %>留言</a> </div>
                         <hr class="separate">
 
                     </div>
 
                     <!-- info結束 -->
 
-                    <p class="content"> <%= items[1][j].artiMessCont %>
+                    <p class="content"> <%= items[1][j].recomMessCont %>
                     </p>
                     <button type="button" class="btn report">檢舉</button>
                 </div>

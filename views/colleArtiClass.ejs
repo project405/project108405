@@ -8,6 +8,7 @@
 
     <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/active.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -18,7 +19,7 @@
 
 
     <link href="/css/header.css" rel="stylesheet" type="text/css" />
-    <link href="/css/recommend.css" rel="stylesheet" type="text/css" />
+    <link href="/css/articleList.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
 
@@ -28,120 +29,87 @@
 <body>
 
     <script src="/javascripts/header.js"></script>
-    <center>
-        <h3>推薦收藏</h3>
-        <hr class="highlight">
-    </center>
 
 
-    <!-- Portfolio Section -->
-    <section id="portfolio">
-
-            <ul class="pagination pagination-lg justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link " href="/collection/recommend" tabindex="-1">推薦收藏</a>
-                </li>
-                <li class="page-item ">
-                    <a class="page-link" href="/collection/article">文章收藏</a>
-                </li>
-            </ul>
-
+    <!-- 文章列表區塊 -->
+    <section id="articleList">
+        <div class="container-fluid article">
+            <center>
+                <h3>文章收藏</h3>
+                <hr class="highlight">
+            </center>
 
             <div class="row d-flex justify-content-center">
-        <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
-            <div class="search col-lg-5 mx-auto">
-                <!-- Search -->
-                <form class="form-inline d-flex">
-                    <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-10" id="search" placeholder="輸入欲搜尋之關鍵字">
-                    <button type="submit" class="search btn-primary mx-auto col-sm-3">搜尋</button>
-                </form>
-                <!-- Search End -->
-            </div>
-            <div class="w-100"></div>
 
-            <!-- 電影類推薦 -->
+                <div class="search col-lg-5 mx-auto">
+                    <!-- Search -->
+                    <form class="form-inline d-flex">
+                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-10"
+                            id="search" placeholder="輸入欲搜尋之關鍵字">
+                        <button type="submit" class="search btn-primary mx-auto col-sm-3">搜尋</button>
+                    </form>
+                    <!-- Search End -->
+                </div>
+                <div class="w-100"></div>
 
-            <div class="wrapper col-12  col-lg-2" style="background-image: url('imgs/recommend/movie1.jpg');">
-                <a class="portfolio-box" href="#">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                            <p>電影類</p>
-                        </div>
-                        <div class="project-name">
-                            <p class="title">幸福綠皮書</p>
-                            <p class="content">改編自真人實事，描述60年代知名黑人鋼琴家唐薛利和他僱用的義裔司機兼保鑣大嘴東尼， 到美國深南部（Deep South）巡迴演出的公路故事。</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <!-- 電影類推薦結束 -->
-
-                <div class="col-12 mb-3 col-lg-10 ">
-                    <% for(var i=0; i<items.length; i++) {%>
-                    <div class="card shadow list " onclick="location.href='#' ">
+                <div class="col-12 mb-3 col-lg-8 ">
+                    <% for(var i=0; i<items[0].length; i++) {%>
+                    <!-- list -->
+                    <div class="card shadow list " onclick="location.href='#' " style="cursor:pointer; ">
 
                         <div class="card-body ">
-                            <h3 class="card-title "><%= items[i].artiHead %>
+                            <div class="poster">
+                                <div class="name">
+                                    <p><%= items[0][i].memID %> 於 <%= items[0][i].artiDateTime %> 發表</p>
+                                </div>
+                                <hr>
+                            </div>
+                            <h3 class="card-title "><%= items[0][i].artiHead %>
                             </h3>
-                            <p class="card-text "><%= items[i].artiCont %>
+                            <p class="card-text "><%= items[0][i].artiCont %>
                             </p>
-                            <p class="poster ">
-                                <a class="floorTag text-break ">樓主</a> 匿名 於 <%= items[i].artiDateTime %> 發佈
-                            </p>
-                            <div class="tagDiv col-lg-12 text-break ">
-                                <a class="tag text-break " href="# "> 可愛</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
 
-            <div class="wrapper  col-12  col-lg-2" style="background-image: url('imgs/testImgs/11.jpg');">
-                <a class="portfolio-box" href="#">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                            <p>電影類</p>
-                        </div>
-                        <div class="project-name">
-                            <p class="title">黑色名冊</p>
-                            <p class="content">《黑色名冊》，是一部2006年的電影，由保羅·范霍文執導，范氏跟葛拉·索德曼編劇。故事是由真人真事啟發，講述了第二次世界大戰末時一名荷蘭猶太人女子在納粹軍中當臥底的經歷。 </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                            <div class="tagDiv col-lg-12 ">
+                                <% for(var j=0; j<items[3][i].length; j++) {%>
+                                <button type="button" class="btn  tag"><%= items[3][i][j]%></button>
+                                <% } %>
+                            </div>
+                            <hr class="info">
 
-            <!-- 音樂類推薦結束 -->
-            <!-- 書籍類推薦 -->
-
-            <div class="wrapper col-12  col-lg-2" style="background-image: url('imgs/testImgs/18.jpg');">
-                <a class="portfolio-box" href="#">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                            <p>展覽類</p>
                         </div>
-
-                        <div class="wrapperCard card-img-top "
-                            style="background-image: url( '/imgs/testImgs/15.jpg'); ">
+                        <!-- info -->
+                        <div class="info">
+                            <button type="button" class="btn postInfo"><i
+                                    class="fab fa-gratipay"></i><a><%= items[1][i].count %>
+                                </a></button>
+                            <button type="button" class="btn postInfo"><i
+                                    class="fas fa-comment-dots"></i><a><%= items[2][i].count %></a></button>
+                            <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i><a></a></button>
                         </div>
+                        <!-- info結束 -->
+
+                        <!-- <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/15.jpg'); "> -->
                     </div>
                     <% } %>
+                    <div class="w-100"></div>
+
+                    <!-- listEnd -->
+
+
+
                 </div>
 
-
             </div>
-            <!-- 展覽類推薦結束 -->
-            <div class="w-100"></div>
-    </section>
+
 
         </div>
-
-
-    </div>
-
-
-    </div>
+    </section>
+    <!-- 文章列表區塊結束 -->
 
 
 
     <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary align-middle footer"
+        <button type="button " class="btn btn-secondary footer"
             onclick="location.href='/collection/article'">所有分類</button>
         <button type="button " class="btn btn-secondary align-middle footer"
             onclick="location.href='/collection/article/movie'">電影類</button>
@@ -153,7 +121,6 @@
             onclick="location.href='/collection/article/exhibition'">展覽類</button>
 
     </div>
-
 
 
     <a href="#" id="gotop">
@@ -170,8 +137,9 @@
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <script src="/javascripts/active.js"></script>
 </body>
 

@@ -9,6 +9,8 @@ var indexRouter = require('./routes/index');
 var session = require('express-session');
 
 // --------------  My routes--------------- 
+var oneColleRecommend = require('./routes/collection/oneColleRecommend');
+var oneColleArticle = require('./routes/collection/oneColleArticle');
 var collection_recommend_Router = require('./routes/collection/collectionRecommend');
 var collection_article_Router = require('./routes/collection/collectionArticle');
 var memberRouter = require('./routes/member');
@@ -55,6 +57,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'mysecret', cookie: { maxAge: 60000 }}));
 app.use('/', indexRouter);
 app.use('/article', articleRouter);
+app.use('/collection/recommend/one', oneColleRecommend);
+app.use('/collection/article/one', oneColleArticle);
 // ---------------  My use  ----------------
 app.use('/collection/recommend',collection_recommend_Router);
 app.use('/collection/article',collection_article_Router);
@@ -69,7 +73,7 @@ app.use('/recommendList',recommendListRouter);
 app.use('/articleList/post',postRouter);
 app.use('/member/articleManage',articleManageRouter);
 app.use('/member/memberManage',memberManageRouter);
-// -------------- My use Four Class ----------------
+// -------------- My use Four artiClass ----------------
 app.use('/articleList/articleMovie',articleMovieRouter);
 app.use('/articleList/articleMusic',articleMusicRouter);
 app.use('/articleList/articleBook',articleBookRouter);
