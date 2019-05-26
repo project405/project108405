@@ -29,7 +29,7 @@ header = '    <div class="header">\
             <a class="nav-link dropdown-toggle" href="collectionArticle.html" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
             收藏\
             </a>\
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">\
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">\
                 <a class="dropdown-item" href="collectionRecommend.html">推薦收藏</a>\
                 <a class="dropdown-item" href="collectionArticle.html">文章收藏</a>\
             </div>\
@@ -44,9 +44,10 @@ header = '    <div class="header">\
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                 會員\
             </a>\
-        <div class="dropdown-menu member  dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">\
+        <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">\
             <a class="dropdown-item" href="member.html">會員資料</a>\
             <a class="dropdown-item" href="articleManage.html">文章管理</a>\
+            <a class="dropdown-item" href="#">登出</a>\
         </div>\
       </li>\
         </ul>\
