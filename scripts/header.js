@@ -18,7 +18,7 @@ header = '    <div class="header">\
                 </a>\
             </li>\
             <li class="nav-item ">\
-            <a class="nav-link" href="recommendlist.html">\
+            <a class="nav-link" href="recommendList.html">\
             推薦</a>\
         </li>\
             <li class="nav-item ">\
