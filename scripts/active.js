@@ -103,5 +103,6 @@ $(document).ready(function() {
     });
     $("#navReport").click(function() {
         $("#report").show();
+        $('.navbar-collapse').collapse('hide');
     });
 });

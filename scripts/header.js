@@ -35,7 +35,7 @@ header = '    <div class="header">\
             </div>\
         </li>\
         <li class="nav-item">\
-        <a class="nav-link" id="navReport" href="#" onclick="showReport()">申報</a>\
+        <a class="nav-link" id="navReport" href="#">申報</a>\
         </li>\
         <li class="nav-item">\
                 <a class="nav-link" href="logIn.html">登入</a>\
