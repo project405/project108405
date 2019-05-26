@@ -45,7 +45,7 @@ header = '    <div class="header">\
                 會員\
             </a>\
         <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">\
-            <a class="dropdown-item" href="member.html">會員資料</a>\
+            <a class="dropdown-item" href="memberManage.html">會員資料</a>\
             <a class="dropdown-item" href="articleManage.html">文章管理</a>\
             <a class="dropdown-item" href="#">登出</a>\
         </div>\
