@@ -15,12 +15,10 @@ $(document).ready(function() {
 });
 
 
-// (second click) close dropmenu
-// var main = function() {
-//     $('.dropdown').click(function() {
-//         alert()
-//         $(this).toggle();
-//     });
-// };
+//  animation
 
-// $(document).ready(main);
+// AOS animate
+
+AOS.init({
+    duration: 2500
+});

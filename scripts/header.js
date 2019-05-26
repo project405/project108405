@@ -48,12 +48,12 @@ header = '    <div class="header">\
 <div id="x"><i class="far fa-times-circle"></i>\
 </div>\
 <div class="form">\
-    <form class="report" action="">\
+    <form class="report" action="" data-aos="zoom-out-right">\
         <div class="input-icon-wrap">\
             <span class="input-icon"><span class="fas fa-hands-helping"></span></span>\
             <textarea class="input-with-icon report" placeholder="輸入舉報原因及問題"></textarea>\
         </div>\
-        <button type="button" class="btn btn-danger  report">送出申報</button>\
+        <button type="button" class="btn btn-danger report">送出申報</button>\
     </form>\
 </div>\
 </div>\ ';
