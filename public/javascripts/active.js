@@ -76,10 +76,10 @@ $('#goDown').click(function() {
 
 // login
 
-// $("#login").click(function() {
-//     alert('登入成功');
+$("#login").click(function() {
+    alert('登入成功');
 
-// });
+});
 
 
 $("#login1").click(function() {

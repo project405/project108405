@@ -18,12 +18,4 @@ AOS.init({
     duration: 2500
 });
 
-// (second click) close dropmenu
-// var main = function() {
-//     $('.dropdown').click(function() {
-//         alert()
-//         $(this).toggle();
-//     });
-// };
-
-// $(document).ready(main);
+//  animation

@@ -29,9 +29,8 @@
     
     div.logIn,
     div.signUp {
-        text-align: center;
         margin: 0em;
-        padding-top: 6em;
+        padding: 6em 0 0 0;
     }
     /* --------------------- */
     /* SIGNIN */
@@ -40,6 +39,8 @@
     #logIn form.logIn {
         margin-bottom: 3em;
         padding: 0;
+        background-color: #f0f0f0;
+        opacity: 0.95;
     }
     
     #logIn form button.center {
@@ -97,6 +98,8 @@
         border-radius: 12px;
         padding: 1.5em;
         margin-bottom: 2em;
+        background-color: #f0f0f0;
+        opacity: 0.95;
     }
     
     @media (max-width: 350px) {
@@ -126,10 +129,6 @@
         margin: 0.75em 0 0.75em 0;
     }
     
-    .input-icon {
-        background: #fff;
-    }
-    
     .input-with-icon {
         border: none;
         flex: 1;
@@ -140,6 +139,10 @@
         padding: 10px;
     }
     /* radioBox */
+    
+    div.radio {
+        background-color: white;
+    }
     
     .radio-custom {
         opacity: 0;
@@ -160,7 +163,6 @@
     
     .radio-custom+.radio-custom-label:before {
         content: '';
-        background: #fff;
         border: 2px solid #ddd;
         display: inline-block;
         vertical-align: middle;

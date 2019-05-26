@@ -6,6 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!--  js   -->
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/active.js"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -25,24 +29,15 @@
 <body>
 
     <script src="/javascripts/header.js"></script>
-    <center>
-        <h1>文章收藏</h1>
-        <hr class="highlight">
-    </center>
+
+
     <!-- 文章列表區塊 -->
     <section id="articleList">
         <div class="container-fluid article">
-
-
-            <ul class="pagination pagination-lg justify-content-center">
-                <li class="page-item ">
-                    <a class="page-link" href="/collection/recommend">推薦收藏</a>
-                </li>
-                <li class="page-item disabled">
-                    <a class="page-link" href="/collection/article" tabindex=" -1 ">文章收藏</a>
-                </li>
-            </ul>
-
+            <center>
+                <h3>文章收藏</h3>
+                <hr class="highlight">
+            </center>
 
             <div class="row d-flex justify-content-center">
 
@@ -57,81 +52,68 @@
                 </div>
                 <div class="w-100"></div>
 
-
-                <div class="col-12 mb-3 col-lg-10 ">
+                <div class="col-12 mb-3 col-lg-8 ">
                     <% for(var i = 0 ; i<collData.length ; i++ ) {%>
-                    <div class="card shadow list " onclick="location.href='#' ">
+                    <!-- list -->
+                    <div class="card shadow list " onclick="location.href='#' " style="cursor:pointer; ">
 
                         <div class="card-body ">
+                            <div class="poster">
+                                <div class="name">
+                                    <p><%= collData[i].memID %> 於 <%= collData[i].artiDateTime %> 發表</p>
+                                </div>
+                                <hr>
+                            </div>
                             <h3 class="card-title "><%= collData[i].artiHead %>
                             </h3>
                             <p class="card-text "><%= collData[i].artiCont %>
                             </p>
-                            <p class="poster ">
-                                <a class="floorTag text-break ">樓主</a> <%= collData[i].memID %> 於
-                                <%= collData[i].artiDateTime %> 發佈
-                            </p>
-                            <div class="tagDiv col-lg-12 text-break ">
-                                <a class="tag text-break " href="# "> 可愛</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
 
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-                                <a class="tag text-break " href="# "> 皮卡丘</a>
-
-                                <a class="tag text-break " href="# "> 有毛的</a>
-                                <a class="tag text-break " href="# "> 萌</a>
-
-                                <div class="tagDiv col-lg-12 ">
-                                    <button type="button" class="btn  tag">有毛的</button>
-                                    <button type="button" class="btn  tag">皮卡丘</button>
-                                    <button type="button" class="btn  tag">超萌</button>
-                                    <button type="button" class="btn  tag">可愛</button>
-                                </div>
-                                <hr class="info">
-
-                                <div class="wrapperCard card-img-top "
-                                    style="background-image: url( '/imgs/testImgs/15.jpg'); ">
-                                </div>
-                                <!-- info -->
-                                <div class="info">
-                                    <button type="button" class="btn postInfo"><i class="fab fa-gratipay"></i><a>20
-                                        </a></button>
-                                    <button type="button" class="btn postInfo"><i
-                                            class="fas fa-comment-dots"></i><a>5</a></button>
-                                    <button type="button" class="btn postInfo"><i
-                                            class="far fa-bookmark"></i><a></a></button>
-                                </div>
-                                <!-- info結束 -->
-
-                                <!-- <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/15.jpg'); "> -->
+                            <div class="tagDiv col-lg-12 ">
+                                <button type="button" class="btn  tag">有毛的</button>
+                                <button type="button" class="btn  tag">皮卡丘</button>
+                                <button type="button" class="btn  tag">超萌</button>
+                                <button type="button" class="btn  tag">可愛</button>
                             </div>
-                            <% } %>
+                            <hr class="info">
+
                         </div>
+                        <!-- info -->
+                        <div class="info">
+                            <button type="button" class="btn postInfo"><i class="fab fa-gratipay"></i><a>20
+                                </a></button>
+                            <button type="button" class="btn postInfo"><i
+                                    class="fas fa-comment-dots"></i><a>5</a></button>
+                            <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i><a></a></button>
+                        </div>
+                        <!-- info結束 -->
 
-
+                        <!-- <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/15.jpg'); "> -->
                     </div>
+                    <% } %>
+                    <div class="w-100"></div>
+
+                    <!-- listEnd -->
+
+
 
                 </div>
 
-
             </div>
+
+
+        </div>
     </section>
     <!-- 文章列表區塊結束 -->
 
 
 
     <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/article'">所有分類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/article/movie'">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/article/music'">音樂類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/article/book'">書籍類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/article/exhibition'">展覽類</button>
+        <button type="button " class="btn btn-secondary footer">所有分類</button>
+        <button type="button " class="btn btn-secondary align-middle footer">電影類</button>
+        <button type="button " class="btn btn-secondary align-middle footer">音樂類</button>
+        <button type="button " class="btn btn-secondary align-middle footer">書籍類</button>
+        <button type="button " class="btn btn-secondary align-middle footer">展覽類</button>
 
     </div>
 

@@ -1,7 +1,7 @@
 header = '    <div class="header">\
 <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">\
     <a class="nav-link" href="#">\
-    <img class="nav-item" href="/" src="imgs/logo.png" width="35px" height="35px " style="opacity:0.8" alt="">\
+    <img class="nav-item" href="/" src="/imgs/logo.png" width="35px" height="35px " style="opacity:0.8" alt="">\
        <a href="/" class="navTitle">文藝富心</a>\
 </a>\
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\
@@ -48,12 +48,12 @@ header = '    <div class="header">\
 <div id="x"><i class="far fa-times-circle"></i>\
 </div>\
 <div class="form">\
-    <form class="report" action="">\
+    <form class="report" action="" data-aos="zoom-out-right">\
         <div class="input-icon-wrap">\
             <span class="input-icon"><span class="fas fa-hands-helping"></span></span>\
             <textarea class="input-with-icon report" placeholder="輸入舉報原因及問題"></textarea>\
         </div>\
-        <button type="button" class="btn btn-danger  report">送出申報</button>\
+        <button type="button" class="btn btn-danger report">送出申報</button>\
     </form>\
 </div>\
 </div>\ ';
