@@ -379,7 +379,6 @@ div.footer {
 }
 
 button.goArticle:hover {
-    border: 0.5px dashed #0D5146;
     animation: shake 0.9s;
     animation-iteration-count: infinite;
 }

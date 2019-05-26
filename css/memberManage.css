@@ -5,7 +5,7 @@ body {
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
     margin: 0;
-    padding: 0;
+    padding-top: 3em;
     border: none;
     background: url("../imgs/logIn-bac.PNG");
     background-repeat: no-repeat;
@@ -29,7 +29,7 @@ body {
 
 div.member {
     margin: 0em;
-    padding: 6em 0 0 0;
+    padding-bottom: 3em;
 }
 
 
@@ -49,6 +49,8 @@ form.member {
     margin-bottom: 2em;
     background-color: #f0f0f0;
     opacity: 0.95;
+    margin: 0;
+    padding: 0.75em;
 }
 
 @media (max-width: 350px) {

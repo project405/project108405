@@ -15,7 +15,7 @@ body {
 div.container-fluid,
 div.row {
     margin: 0;
-    padding: 0;
+    padding-bottom: 3em;
 }
 
 
@@ -164,8 +164,12 @@ button.footer {
     box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
     padding: 0.75rem 1.25rem;
     height: auto;
-    border: #f0f0f0 solid 0.75px;
+    border: #b3b3b3 solid 0.75px;
     border-radius: 8px;
+}
+
+.form-inline input:focus {
+    border: #b3b3b3 solid 0.75px;
 }
 
 button.search {
@@ -181,20 +185,20 @@ button.search {
 }
 
 button.search {
-    background-color: #64a19d;
+    background-color: rgb(72, 104, 90);
 }
 
 button.search:hover {
-    background-color: #4f837f;
+    background-color: #2D4F41;
 }
 
 button.search:focus {
-    background-color: #4f837f;
+    background-color: #2D4F41;
     color: white;
 }
 
 button.search:active {
-    background-color: #467370 !important;
+    background-color: rgb(11, 51, 35) !important;
 }
 
 @media (max-width: 576px) {
@@ -248,13 +252,13 @@ div.btnPost {
 button.postButton {
     padding: 0.3em;
     font-size: 1.1em;
-    background-color: rgb(31, 57, 136);
+    background-color: #2D4F41;
     color: white;
 }
 
 button.postButton:hover {
     color: white;
-    background-color: rgb(0, 26, 109);
+    background-color: rgb(0, 34, 20);
     opacity: 100%;
 }
 
