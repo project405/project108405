@@ -9,16 +9,22 @@ var indexRouter = require('./routes/index');
 var session = require('express-session');
 
 // --------------  My routes--------------- 
+var oneColleRecommend = require('./routes/collection/oneColleRecommend');
+var oneColleArticle = require('./routes/collection/oneColleArticle');
 var collection_recommend_Router = require('./routes/collection/collectionRecommend');
 var collection_article_Router = require('./routes/collection/collectionArticle');
 var memberRouter = require('./routes/member');
 var articleListRouter = require('./routes/article/articleList');
 var articleRouter = require('./routes/article/article');
-var signInRouter = require('./routes/signIn');
+var loginRouter = require('./routes/login');
 var signUpRouter = require('./routes/signUp');
 var signUpAddRouter = require('./routes/signUp_add');
 var userLoginRouter = require('./routes/userLogin');
 var notifyRouter = require('./routes/notify');
+var recommendListRouter = require('./routes/recommendList');
+var postRouter = require('./routes/post');
+var articleManageRouter = require('./routes/articleManage');
+var memberManageRouter = require('./routes/memberManage');
 // ---------------  My four Class -------------------
 var articleMovieRouter = require('./routes/article/articleMovie');
 var articleMusicRouter = require('./routes/article/articleMusic');
@@ -51,17 +57,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'mysecret', cookie: { maxAge: 60000 }}));
 app.use('/', indexRouter);
 app.use('/article', articleRouter);
+app.use('/collection/recommend/one', oneColleRecommend);
+app.use('/collection/article/one', oneColleArticle);
 // ---------------  My use  ----------------
 app.use('/collection/recommend',collection_recommend_Router);
 app.use('/collection/article',collection_article_Router);
 app.use('/member',memberRouter);
 app.use('/articleList',articleListRouter);
-app.use('/signIn',signInRouter);
+app.use('/login',loginRouter);
 app.use('/signUp',signUpRouter);
 app.use('/signUp/add',signUpAddRouter);
-app.use('/login',userLoginRouter);
+app.use('/userlogin',userLoginRouter);
 app.use('/notify',notifyRouter);
-// -------------- My use Four Class ----------------
+app.use('/recommendList',recommendListRouter);
+app.use('/articleList/post',postRouter);
+app.use('/member/articleManage',articleManageRouter);
+app.use('/member/memberManage',memberManageRouter);
+// -------------- My use Four artiClass ----------------
 app.use('/articleList/articleMovie',articleMovieRouter);
 app.use('/articleList/articleMusic',articleMusicRouter);
 app.use('/articleList/articleBook',articleBookRouter);

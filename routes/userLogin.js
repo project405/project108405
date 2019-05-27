@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 
 //增加引用函式
-const signIn = require('./utility/signIn');
+const login = require('./utility/login');
 
 //接收POST請求
 router.post('/', function (req, res, next) {
     var memID = req.body.memID;                 //取得帳號
     var memPass = req.body.memPass;     //取得密碼
     // console.log(memID);
-    signIn.login(memID, memPass).then(d => {
+    login.userLogin(memID, memPass).then(d => {
         if (d == null) {
             req.session.memID = null;
             req.session.memPass = null;
@@ -19,7 +19,7 @@ router.post('/', function (req, res, next) {
         } else {
             req.session.memID = d.memID;
             req.session.memPass = d.memPass;
-            res.render('user_show', { name: d.memID });   //導向使用者
+            res.render('memberManage', { name: d.memID });   //導向使用者管理頁面
         }
     })
 });

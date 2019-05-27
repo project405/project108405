@@ -12,29 +12,24 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-    <link href="css/header.css" rel="stylesheet" type="text/css" />
-    <link href="css/member.css" rel="stylesheet" type="text/css" />
+    <link href="/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="/css/memberManage.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
 
     <title>文藝富心</title>
 </head>
 
 <body>
-    <script src="scripts/header.js"></script>
-
+    <script src="/javascripts/header.js"></script>
 
     <div class="container-fluid row flex justify-content-center member">
-        <center>
-            <h3>會員資料</h3>
-            <hr class="highlight">
-        </center>
-
-        <div class="w-100"></div>
-
         <form class="member col-12-5" action="">
-            <div class="input-icon-wrap">
-                <span class="input-icon"><span class="fas fa-user-circle"></span></span>
-                <input type="text" class="input-with-icon" id="ID" placeholder="暱稱">
-            </div>
+            <!-- <div class="label-icon-wrap">
+                <span class="label-icon"><span class="fas fa-lock"></span></span>
+                <span type="text" class="label-with-icon align-middle" contenteditable="true"></span>
+            </div> -->
+
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-lock"></span></span>
                 <input type="password" class="input-with-icon" id="password" placeholder="密碼">
@@ -45,7 +40,7 @@
             </div>
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-envelope-open-text"></span></span>
-                <input type="email" class="input-with-icon" id="email" placeholder="email">
+                <input type="email" class="input-with-icon" id="email" placeholder="10546004@ntub.edu.tw">
             </div>
 
 
@@ -55,6 +50,11 @@
             </div>
 
             <div class="input-icon-wrap">
+                <span class="input-icon"><span class="fas fa-home"></span></span>
+                <input type="text" class="input-with-icon" id="address" placeholder="地址">
+            </div>
+
+            <div class="input-icon-wrap radio">
                 <span class="input-icon align-middle"><span class="fas fa-venus-mars"></span></span>
                 <div>
                     <input id="radio-1" class="radio-custom" name="radio-group" type="radio" checked>
@@ -66,11 +66,13 @@
                 </div>
 
             </div>
-            <button type="button" class="btn btn-danger">修改</button>
+            <button type="submit" class="btn btn-dark">提交修改資料</button>
+
+        </form>
 
     </div>
-    </form>
-    </div>
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -78,7 +80,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="scripts/active.js"></script>
+    <script src="/javascripts/active.js"></script>
 </body>
 
 </html>

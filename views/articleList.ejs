@@ -8,7 +8,6 @@
 
     <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javascripts/navbar.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -18,10 +17,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-    <link href="css/header.css" rel="stylesheet" type="text/css" />
-    <link href="css/articleList.css" rel="stylesheet" type="text/css" />
+    <link href="/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="/css/articleList.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="/imgs/logo2.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo(veryBold).ico" type="image/x-icon" />
 
     <title>文藝富心</title>
 </head>
@@ -38,6 +37,10 @@
                 <h3>文章列表</h3>
                 <hr class="highlight">
             </center>
+            <div class="btnPost position-fixed">
+                <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
+                    <i class="fas fa-edit"></i>發表文章</button>
+            </div>
 
             <div class="row d-flex justify-content-center">
                 <div class="search col-12 d-flex justify-content-center">
@@ -52,12 +55,11 @@
                     <!-- Search End -->
                 </div>
 
-                <div class="col-12 mb-3 col-lg-10 ">
+                <div class="col-12 mb-3 col-lg-8 ">
                     <!-- list -->
                     <% for(var i=0; i<items[0].length; i++) {%>
-                    <div class="card shadow list " onclick="location.href='/article/<%= items[0][i].artiNum %>' "
-                        style="cursor:pointer; ">
-                        <div class="card-body ">
+                    <div class="card shadow list " style="cursor:pointer; ">
+                        <div class="card-body" onclick=" location.href='/article/<%= items[0][i].artiNum %>' ">
                             <div class="poster">
                                 <div class="name">
                                     <p><%= items[0][i].memID %> 於 <%= items[0][i].artiDateTime %>發表</p>
@@ -70,18 +72,20 @@
                             </p>
 
                             <div class="tagDiv col-lg-12 ">
-                                <button type="button" class="btn btn-info tag">有毛的</button>
-                                <button type="button" class="btn btn-info tag">皮卡丘</button>
-                                <button type="button" class="btn btn-info tag">超萌</button>
-                                <button type="button" class="btn btn-info tag">可愛</button>
+                                <% for(var j=0; j<items[3][i].length; j++) {%>
+                                <button type="button" class="btn btn-info tag"><%= items[3][i][j] %></button>
+                                <% } %>
+
                             </div>
                             <hr class="info">
 
                         </div>
                         <!-- info -->
                         <div class="info">
-                            <button type="button" class="btn"><i class="fab fa-gratipay"></i><a><%= items[1][i+1] %> </a></button>
-                            <button type="button" class="btn"><i class="fas fa-comment-dots"></i><a><%= items[2][i+1] %></a></button>
+                            <button type="button" class="btn"><i class="fab fa-gratipay"></i><a><%= items[1][i+1] %>
+                                </a></button>
+                            <button type="button" class="btn"><i
+                                    class="fas fa-comment-dots"></i><a><%= items[2][i+1] %></a></button>
                             <button type="button" class="btn"><i class="far fa-bookmark"></i><a></a></button>
                         </div>
                         <!-- info結束 -->

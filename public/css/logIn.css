@@ -7,41 +7,48 @@
         margin: 0;
         padding: 0;
         border: none;
-        text-align: center;
-        /* background: url("../imgs/testImgs/background.jpg"); */
+        background: url("../imgs/logIn-bac.PNG");
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
         width: 100%;
         height: auto;
+        padding: 3em 0 0 0;
     }
     
-    .container-fluid.signIn,
-    .container-fluid.signUp {
-        margin: 5em 0em 0em 0em;
-        padding: 0;
+    @media (max-width: 992px) {
+        html,
+        body {
+            background: url("../imgs/phone/PlogIn-bac.PNG");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            width: 100%;
+            height: auto;
+        }
     }
     
-    h2 {
-        font-size: 1.75em;
-        color: #eee;
-        text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555;
+    div.logIn,
+    div.signUp {
+        margin: 0em;
     }
     /* --------------------- */
     /* SIGNIN */
     /* --------------------- */
     
-    #signIn form.signIn {
+    #logIn form.logIn {
         margin-bottom: 3em;
         padding: 0;
+        background-color: #f0f0f0;
+        opacity: 0.95;
+        text-align: center;
     }
     
-    #signIn form button.right {
+    #logIn form button.center {
         margin: 0.1em 0.75em 0 0.1em;
-        float: right;
     }
     
-    #signIn form.signIn {
+    #logIn form.logIn {
         line-height: 2em;
         padding: 1em 0.75em 2em 0.75em;
         border: 1px solid #ddd;
@@ -50,16 +57,36 @@
     }
     
     @media (max-width: 350px) {
-        #signIn form.signIn {
+        #logIn form.logIn {
             border: none;
         }
     }
     
-    #signIn button.third,
-    #signIn button.login {
+    #logIn button.third,
+    #logIn button.login {
         margin: 0.75em;
         float: center !important;
         width: 85%;
+    }
+    
+    #logIn button.fb {
+        background-color: #5a78bb;
+        color: white;
+    }
+    
+    #logIn button.fb:hover {
+        background-color: #3e64b6;
+        transition: 0.3s;
+    }
+    
+    #logIn button.gmail {
+        background-color: #eb6363;
+        color: white;
+    }
+    
+    #logIn button.gmail:hover {
+        background-color: #e94444;
+        transition: 0.3s;
     }
     /* --------------------- */
     /* SIGNUP */
@@ -71,6 +98,8 @@
         border-radius: 12px;
         padding: 1.5em;
         margin-bottom: 2em;
+        background-color: #f0f0f0;
+        opacity: 0.95;
     }
     
     @media (max-width: 350px) {
@@ -80,10 +109,9 @@
         .button {
             margin: 1em;
         }
-        .container-fluid.signIn,
+        .container-fluid.logIn,
         .container-fluid.signUp {
             margin: 2.5em 0em 0em 0em;
-            padding: 0;
         }
     }
     
@@ -92,17 +120,13 @@
         width: 100%;
         float: center;
     }
-    /* form */
+    /* Pseudo element */
     
     .input-icon-wrap {
         border: 1px solid #ddd;
         display: flex;
         flex-direction: row;
         margin: 0.75em 0 0.75em 0;
-    }
-    
-    .input-icon {
-        background: #fff;
     }
     
     .input-with-icon {
@@ -115,6 +139,10 @@
         padding: 10px;
     }
     /* radioBox */
+    
+    div.radio {
+        background-color: white;
+    }
     
     .radio-custom {
         opacity: 0;
@@ -135,7 +163,6 @@
     
     .radio-custom+.radio-custom-label:before {
         content: '';
-        background: #fff;
         border: 2px solid #ddd;
         display: inline-block;
         vertical-align: middle;

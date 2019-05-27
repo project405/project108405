@@ -5,17 +5,24 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javascripts/navbar.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link href="/css/header.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link type="text/css" href="https://rawgit.com/elrumordelaluz/csshake/master/dist/csshake.min.css">
+    <link href="/css/headerIndex.css" rel="stylesheet" type="text/css" />
     <link href="/css/index.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/aos.css" />
+
 
     <title>文藝富心</title>
 </head>
@@ -26,31 +33,34 @@
 
     <!-- 封面區塊 -->
     <div class="banner">
+        <a id="goDown"> <i class="fas fa-chevron-circle-down"></i>
+        </a>
+        <div id="block" class="block"></div>
     </div>
     <!-- 封面區塊結束 -->
-
-
 
     <!-- Portfolio Section -->
     <section id="portfolio">
         <center>
-            <h2>本周精選推薦</h2>
+            <h2>本週精選推薦</h2>
             <hr class="highlight">
-
         </center>
+
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
 
             <!-- 電影類推薦 -->
 
-            <div class="wrapper col-12  col-lg-5" style="background-image: url('imgs/testImgs/1.jpg');">
+            <div class="wrapper col-12  col-lg-4" style="background-image: url('imgs/recommend/movie1.jpg');"
+                onclick="location.href='recommend.html'" data-aos="fade-right">
                 <a class="portfolio-box" href="#">
-                    <!-- <img class="img-fluid" src="imgs/testImgs/1.jpg" alt=""> -->
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
                             <p>電影類</p>
                         </div>
                         <div class="project-name">
-                            <p>海角七號</p>
+                            <p class="title">幸福綠皮書</p>
+                            <p class="content">改編自真人實事，描述60年代知名黑人鋼琴家唐薛利和他僱用的義裔司機兼保鑣大嘴東尼， 到美國深南部（Deep South）巡迴演出的公路故事。
+                            </p>
                         </div>
                     </div>
                 </a>
@@ -60,30 +70,39 @@
 
             <!-- 音樂類推薦 -->
 
-            <div class="wrapper  col-12  col-lg-5" style="background-image: url('imgs/testImgs/2.jpg');">
+            <div class="wrapper  col-12  col-lg-4" style="background-image: url('imgs/recommend/music1.jpg');"
+                data-aos="fade-right">
                 <a class="portfolio-box" href="#">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            Category
+                            <p>音樂類</p>
                         </div>
                         <div class="project-name">
-                            Project Name
+                            <p class="title">宋冬野 - 知道</p>
+                            <p class="content">作詞：宋冬野 作曲：宋冬野 <br>我要當一個科學家 僕人和藉口伴我生長 夏天藏在西伯利亞 冬天住在蘇門答臘的島上 不在乎螞蟻也不在乎國家
+                                不在乎佛祖也不在乎手槍 把哲學家的拐杖插進這無能的土壤
+                            </p>
                         </div>
                     </div>
                 </a>
             </div>
-            <!-- 書籍類推薦 -->
 
             <!-- 音樂類推薦結束 -->
+            <div class="w-100"></div>
+            <!-- 書籍類推薦 -->
 
-            <div class="wrapper col-12  col-lg-5" style="background-image: url('imgs/testImgs/11.jpg');">
+            <div class="wrapper col-12  col-lg-4" style="background-image: url('imgs/recommend/book1.jpg');"
+                data-aos="fade-right">
                 <a class="portfolio-box" href="#">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            Category
+                            <p>書籍類</p>
                         </div>
                         <div class="project-name">
-                            Project Name
+                            <p class="title">別在走遠後才想起說再見</p>
+                            <p class="content">
+                                「人生由故事串起，故事在人生裡發生。」透過20則穿梭於不同關係之間的故事，那些對你我都有點熟悉的過往，宛若真實世界的搬演，富含了滿載遺憾、無奈、領悟、溫暖的情緒。有些我們選擇遺忘，有些則是故意放手。
+                            </p>
                         </div>
                     </div>
                 </a>
@@ -92,14 +111,19 @@
 
 
             <!-- 展覽類推薦 -->
-            <div class="wrapper col-12  col-lg-5" style="background-image: url('imgs/testImgs/10.jpg');">
+            <div class="wrapper col-12  col-lg-4" style="background-image: url('/imgs/testImgs/21.jpg');"
+                data-aos="fade-right">
                 <a class="portfolio-box" href="#">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            Category
+                            <p>展覽類</p>
                         </div>
                         <div class="project-name">
-                            Project Name
+                            <p class="title">『隨風而行』_黃瑞銘 水彩個展
+                            </p>
+                            <p class="content">
+                                美來自於感動，台灣具足令歐美和亞洲人士感動的元素，台灣很美。在3萬多平方公里的土地上，有超過1千公里的海岸線，也有268座超過3000公尺的高山，多變的地貌形成豐富的景觀。
+                            </p>
                         </div>
                     </div>
                 </a>
@@ -111,14 +135,14 @@
 
     <!-- 熱門文章區塊 -->
 
-    <section id=hotArticle>
+    <section id="hotArticle">
         <div class="container hotArticle">
             <center>
                 <h2>熱門文章</h2>
                 <hr class="highlight">
             </center>
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-7" data-aos="zoom-in">
                     <div class="card  shadow" onclick="location.href='/article/<%= items[0][0].artiNum %>'"
                         style="cursor:pointer;">
 
@@ -133,10 +157,10 @@
                             </p>
 
                             <div class="tagDiv">
-                                <button type="button" class="btn btn-info tag">有毛的</button>
-                                <button type="button" class="btn btn-info tag">皮卡丘</button>
-                                <button type="button" class="btn btn-info tag">超萌</button>
-                                <button type="button" class="btn btn-info tag">可愛</button>
+                                <button type="button" class="btn  tag">黎明的承諾</button>
+                                <button type="button" class="btn  tag">壓抑沉鬱</button>
+                                <button type="button" class="btn  tag">法國</button>
+                                <button type="button" class="btn  tag">大時代</button>
                             </div>
                         </div>
 
@@ -148,7 +172,7 @@
                 <!-- 精選右邊上面的格子 -->
                 <div class=" col-lg-5 ">
                     <div class="card shadow" onclick="location.href='/article/<%= items[1][0].artiNum %>'"
-                        style="cursor:pointer;">
+                        style="cursor:pointer;" data-aos="zoom-in">
 
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][0].artiHead %>
@@ -159,22 +183,21 @@
                                 <%= items[1][0].memID %> 於 <%= items[1][0].artiDateTime %> 發佈
                             </p>
                             <div class="tagDiv">
-                                <button type="button" class="btn btn-info tag">有毛的</button>
-                                <button type="button" class="btn btn-info tag">皮卡丘</button>
-                                <button type="button" class="btn btn-info tag">超萌</button>
-                                <button type="button" class="btn btn-info tag">可愛</button>
+                                <button type="button" class="btn  tag">汪冠宇</button>
+                                <button type="button" class="btn  tag">海浪</button>
+                                <button type="button" class="btn  tag">溫暖歌聲</button>
                             </div>
                         </div>
 
                         <div class="wrapperCardSmall card-img-top"
-                            style="background-image: url('imgs/testImgs/18.png');">
+                            style="background-image: url('/imgs/testImgs/18.png');">
                         </div>
                     </div>
                     <!-- 精選右邊上面的格子結束 -->
 
                     <!-- 精選右邊下面的格子 -->
                     <div class="card shadow" onclick="location.href='/article/<%= items[2][0].artiNum %>'"
-                        style="cursor:pointer;">
+                        style="cursor:pointer;" data-aos="zoom-in">
 
                         <div class="card-body">
                             <h3 class="card-title"><%= items[2][0].artiHead %>
@@ -185,15 +208,15 @@
                                 <%= items[2][0].memID %> 於 <%= items[2][0].artiDateTime %> 發佈
                             </p>
                             <div class="tagDiv">
-                                <button type="button" class="btn btn-info tag">有毛的</button>
-                                <button type="button" class="btn btn-info tag">皮卡丘</button>
-                                <button type="button" class="btn btn-info tag">超萌</button>
-                                <button type="button" class="btn btn-info tag">可愛</button>
+                                <button type="button" class="btn  tag">華山</button>
+                                <button type="button" class="btn  tag">自然森活</button>
+                                <button type="button" class="btn  tag">再生資源</button>
+
                             </div>
                         </div>
 
                         <div class="wrapperCardSmall card-img-top"
-                            style="background-image: url('imgs/testImgs/19.jpeg');">
+                            style="background-image: url('/imgs/testImgs/19.jpeg');">
                         </div>
 
                     </div>
@@ -219,15 +242,26 @@
 
 
 
+    <div class="container-fluid footer d-flex justify-content-center row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-4 aboutUs">
+            <h6>關於我們：</h6>
+            <p>我們身處在一個資料越來越多、意義越來越少的世代，源源不絕的資訊不僅讓人失去學習的熱忱，也錯過了許多生命中原有的樂趣。文藝富心彙整藝文相關資訊與提供討論的空間，讓使用者能在幾分鐘之內得到完善的資訊
+                ，也提供一個安靜的角落給使用者喘息休憩。
+            </p>
+            <h6>聯絡我們：</h6>
+            <p>10546004@ntub.edu.tw</p>
 
+        </div>
 
+        <div class="col-lg-4 aboutUs">
+            <h6>常見問題：</h6>
+            <p>獎勵機制：在推薦底下的留言，我們會透過點擊次數以及愛心次數來篩選出最佳留言，將會寄送精美小獎品給最佳留言者。</p>
+            <p>申報機制：只要對於我們的系統有任何不滿意，都可以透過申報告知系統管理員，讓我們能夠改進，提供使用者更好的操作環境</p>
 
-
-
-    <div class="container-fluid footer">
-        <p>聯絡我們：10546004@ntub.edu.tw
-        </p>
-        <p>©2018 NTUB</p>
+        </div>
+        <div class="col-lg-2">
+        </div>
 
     </div>
 
@@ -247,7 +281,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="/javascripts/aos.js"></script>
     <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/index.js"></script>
+
 </body>
 
 </html>

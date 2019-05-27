@@ -6,7 +6,7 @@ const sql = require('./asyncDB');
 //---------------------------------------------
 // 使用者登入
 //---------------------------------------------
-var login = async function(id, password){   
+var userLogin = async function(id, password){   
     var result;
 
     //取得員工資料
@@ -26,4 +26,4 @@ var login = async function(id, password){
 }
 
 //匯出
-module.exports = {login};
+module.exports = {userLogin};

@@ -6,9 +6,9 @@ const collection = require('../utility/collection');
 router.get('/', function (req, res, next) {
     var memID = req.session.memID;
     if (req.session.memID == null || req.session.memID == undefined) {
-        res.render('signIn');
+        res.render('login');
     } else {
-        collection.getRecomMovie(memID).then(data => {
+        collection.getRecomMovie(memID).then(data => {         
             if (data == null) {
                 res.render('error');  //導向錯誤頁面
             } else if (data == -1) {

@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
+html,
+body {
+    height: 100%;
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: url("../imgs/logIn-bac.PNG");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+}
+
+@media (max-width: 992px) {
+    html,
+    body {
+        background: url("../imgs/phone/PlogIn-bac.PNG");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        width: 100%;
+        height: auto;
+    }
+}
+
+div.member {
+    margin: 0em;
+    padding: 6em 0 0 0;
+}
+
+
+/* --------------------- */
+
+
+/* member */
+
+
+/* --------------------- */
+
+form.member {
+    line-height: 2em;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.5em;
+    margin-bottom: 2em;
+    background-color: #f0f0f0;
+    opacity: 0.95;
+}
+
+@media (max-width: 350px) {
+    form.member {
+        border: none;
+    }
+    div.member .button {
+        margin: 1em;
+    }
+    .container-fluid.member {
+        margin: 2.5em 0em 0em 0em;
+    }
+}
+
+div.member button {
+    margin: 0.75em 0 0.75em 0;
+    width: 100%;
+    float: center;
+}
+
+
+/* ------------- */
+
+
+/* inputbox */
+
+
+/* ------------- */
+
+
+/* Pseudo element */
+
+.input-icon-wrap {
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    margin: 0.75em 0 0.75em 0;
+}
+
+.input-with-icon {
+    border: none;
+    flex: 1;
+}
+
+.input-icon,
+.input-with-icon {
+    padding: 10px;
+}
+
+
+/* radioBox */
+
+div.radio {
+    background-color: white;
+}
+
+.radio-custom {
+    opacity: 0;
+    position: absolute;
+}
+
+.radio-custom,
+.radio-custom-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.radio-custom-label {
+    position: relative;
+}
+
+.radio-custom+.radio-custom-label:before {
+    content: '';
+    border: 2px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.radio-custom+.radio-custom-label:before {
+    border-radius: 50%;
+}
+
+.radio-custom:checked+.radio-custom-label:before {
+    content: "\f00c";
+    font-family: 'FontAwesome';
+    color: #bbb;
+}
+
+.radio-custom:focus+.radio-custom-label {
+    outline: 1px solid #ddd;
+    /* focus style */
+}
+
+
+/* ---------------- */
+
+
+/* span */
+
+
+/* ---------------- */
+
+
+/* Pseudo element */
+
+
+/* 
+.label-icon-wrap {
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    margin: 0.75em 0 0.75em 0;
+    background-color: white;
+}
+
+.label-with-icon {
+    border: none;
+    flex: 1;
+}
+
+.label-icon,
+.label-with-icon {
+    padding: 10px;
+}
+
+div.member label {
+    padding: 0;
+}
+
+span.label-with-icon[contenteditable]:empty::before {
+    content: '輸入新密碼';
+    display: inline-block;
+    color: #a39f9f;
+} */
