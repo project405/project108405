@@ -99,4 +99,8 @@ $(document).ready(function() {
         $("#report").show();
         $('.navbar-collapse').collapse('hide');
     });
+    $("#postReport").click(function() {
+        $("#report").show();
+    });
+
 });

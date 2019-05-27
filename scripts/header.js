@@ -41,7 +41,7 @@ header = '    <div class="header">\
                 <a class="nav-link" href="logIn.html">登入</a>\
         </li>\
         <li class="nav-item dropdown">\
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+        <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                 會員\
             </a>\
         <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">\
@@ -61,9 +61,9 @@ header = '    <div class="header">\
     <form class="report" action="" data-aos="zoom-out-right">\
         <div class="input-icon-wrap">\
             <span class="input-icon"><span class="fas fa-hands-helping"></span></span>\
-            <textarea class="input-with-icon report" placeholder="輸入舉報原因及問題"></textarea>\
+            <textarea class="input-with-icon report" placeholder="輸入舉報原因"></textarea>\
         </div>\
-        <button type="button" class="btn btn-danger report">送出申報</button>\
+        <button type="button" class="btn btn-danger report">送出</button>\
     </form>\
 </div>\
 </div>\ ';

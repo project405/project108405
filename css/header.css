@@ -213,6 +213,12 @@ div.dropdown-menu {
     /* background-color: #9f9289; */
 }
 
+@media (max-width: 992px) {
+    #navbarNav>ul>li a {
+        font-size: 0.75em !important;
+    }
+}
+
 @media (max-width: 1199px) {
     .navbar {
         background-color: #2D4F41;
@@ -279,9 +285,6 @@ hr.highlight {
         width: 80%;
     }
     p {
-        font-size: 1em !important;
-    }
-    p.poster {
         font-size: 0.75em !important;
     }
 }
@@ -386,7 +389,7 @@ div.report {
     position: absolute;
     max-height: 50em;
     background-color: #2D4F41;
-    opacity: 0.9;
+    opacity: 0.95;
     top: 25%;
     left: 0;
     right: 0;

@@ -19,7 +19,7 @@
     @media (max-width: 992px) {
         html,
         body {
-            background: url("../imgs/background/phone/PlogInBac.PNG");
+            background: url("../imgs/background/phone/PlogInBac.png");
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;

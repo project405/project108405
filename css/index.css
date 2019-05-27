@@ -17,7 +17,7 @@ body {
     height: 100%;
     padding-top: 10em;
     padding-bottom: calc(10em - 72px);
-    background: url("../imgs/banner.png");
+    background: url("../imgs/background/banner.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: scroll;
@@ -26,7 +26,7 @@ body {
 
 @media (max-width: 650px) {
     .banner {
-        background: url("../imgs/phone/Pbanner.png");
+        background: url("../imgs/background/phone/Pbanner.png");
         background-position: center center;
         background-repeat: no-repeat;
         background-attachment: scroll;
