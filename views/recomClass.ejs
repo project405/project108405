@@ -8,7 +8,7 @@
 
     <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javascripts/active.js"></script>
+    <script src="/javacripts/active.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -31,14 +31,13 @@
     <script src="/javascripts/header.js"></script>
 
     <center>
-        <h3>推薦收藏</h3>
+        <h3>推薦列表</h3>
         <hr class="highlight">
     </center>
 
 
     <!-- Portfolio Section -->
     <section id="portfolio">
-
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
             <div class="search col-lg-5 mx-auto">
                 <!-- Search -->
@@ -50,21 +49,17 @@
                 <!-- Search End -->
             </div>
             <div class="w-100"></div>
-
-
-            <!-- 收藏區塊 -->
-            <% for(var i=0; i<collData.length; i++) {%>
-            <div class="wrapper col-12  col-lg-2" style="background-image: url('/imgs/recommend/movie1.jpg');">
-
-                <a class="portfolio-box"
-                    onclick="location.href='/collection/recommend/one/<%= collData[i].recomNum %>' ">
+            <!-- 推薦開始 -->
+            <% for(var i = 0 ; i<recomClass.length ; i++){ %>
+            <div class="wrapper col-12  col-lg-2" style="background-image: url('imgs/recommend/movie1.jpg');">
+                <a class="portfolio-box" href="#">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            <p><%= collData[i].recomClass %></p>
+                            <p><%= recomClass[i].recomClass %> </p>
                         </div>
                         <div class="project-name">
-                            <p class="title"><%= collData[i].recomHead %></p>
-                            <p class="content"><%= collData[i].recomCont %>
+                            <p class="title"><%= recomClass[i].recomHead %> </p>
+                            <p class="content"><%= recomClass[i].recomCont %>
                             </p>
                         </div>
                     </div>
@@ -74,7 +69,9 @@
             <div class="w-100"></div>
             <% } %>
             <% } %>
-            <!-- 收藏區塊結束 -->
+            <!-- 推薦結束 -->
+
+
     </section>
 
     </div>
@@ -87,16 +84,11 @@
 
 
     <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary footer"
-            onclick="location.href='/collection/recommend'">所有分類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/recommend/movie'">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/recommend/music'">音樂類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/recommend/book'">書籍類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/recommend/exhibition'">展覽類</button>
+        <button type="button " class="btn btn-secondary footer">所有分類</button>
+        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/recommendList/movie'">電影類</button>
+        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/recommendList/music'">音樂類</button>
+        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/recommendList/music'">書籍類</button>
+        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/recommendList/music'">展覽類</button>
 
     </div>
 

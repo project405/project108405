@@ -23,6 +23,15 @@ var getCollRecommend = async function (memID) {
         await sql('SELECT * FROM "recommend" where "recomNum" = $1', [getdata[i].recomNum])
             .then((data) => {
                 data.rows[0].recomDateTime = moment(data.rows[0].recomDateTime).format("YYYY-MM-DD hh:mm:ss");
+                if (data.rows[0].recomClass == 'movie') {
+                    data.rows[0].recomClass = '電影';
+                } else if (data.rows[0].recomClass == 'music') {
+                    data.rows[0].recomClass = '音樂';
+                } else if (data.rows[0].recomClass == 'book') {
+                    data.rows[0].recomClass = '書籍';
+                } else {
+                    data.rows[0].recomClass = '展覽';
+                }
                 result.push(data.rows[0]);
             }, (error) => {
                 result = null;
@@ -218,6 +227,15 @@ var getRecomMovie = async function (memID) {
                 if (data.rows[0] != undefined) {
                     // console.log(data.rows[0]);
                     data.rows[0].recomDateTime = moment(data.rows[0].recomDateTime).format("YYYY-MM-DD hh:mm:ss");
+                    if (data.rows[0].recomClass == 'movie') {
+                        data.rows[0].recomClass = '電影';
+                    } else if (data.rows[0].recomClass == 'music') {
+                        data.rows[0].recomClass = '音樂';
+                    } else if (data.rows[0].recomClass == 'book') {
+                        data.rows[0].recomClass = '書籍';
+                    } else {
+                        data.rows[0].recomClass = '展覽';
+                    }
                     result.push(data.rows[0]);
                 }
             }, (error) => {
@@ -243,6 +261,15 @@ var getRecomMusic = async function (memID) {
                 if (data.rows[0] != undefined) {
                     // console.log(data.rows[0]);
                     data.rows[0].recomDateTime = moment(data.rows[0].recomDateTime).format("YYYY-MM-DD hh:mm:ss");
+                    if (data.rows[0].recomClass == 'movie') {
+                        data.rows[0].recomClass = '電影';
+                    } else if (data.rows[0].recomClass == 'music') {
+                        data.rows[0].recomClass = '音樂';
+                    } else if (data.rows[0].recomClass == 'book') {
+                        data.rows[0].recomClass = '書籍';
+                    } else {
+                        data.rows[0].recomClass = '展覽';
+                    }
                     result.push(data.rows[0]);
                 }
             }, (error) => {
@@ -267,6 +294,15 @@ var getRecomBook = async function (memID) {
                 if (data.rows[0] != undefined) {
                     // console.log(data.rows[0]);
                     data.rows[0].recomDateTime = moment(data.rows[0].recomDateTime).format("YYYY-MM-DD hh:mm:ss");
+                    if (data.rows[0].recomClass == 'movie') {
+                        data.rows[0].recomClass = '電影';
+                    } else if (data.rows[0].recomClass == 'music') {
+                        data.rows[0].recomClass = '音樂';
+                    } else if (data.rows[0].recomClass == 'book') {
+                        data.rows[0].recomClass = '書籍';
+                    } else {
+                        data.rows[0].recomClass = '展覽';
+                    }
                     result.push(data.rows[0]);
                 }
             }, (error) => {
@@ -291,6 +327,15 @@ var getRecomExhibition = async function (memID) {
                 if (data.rows[0] != undefined) {
                     // console.log(data.rows[0]);
                     data.rows[0].recomDateTime = moment(data.rows[0].recomDateTime).format("YYYY-MM-DD hh:mm:ss");
+                    if (data.rows[0].recomClass == 'movie') {
+                        data.rows[0].recomClass = '電影';
+                    } else if (data.rows[0].recomClass == 'music') {
+                        data.rows[0].recomClass = '音樂';
+                    } else if (data.rows[0].recomClass == 'book') {
+                        data.rows[0].recomClass = '書籍';
+                    } else {
+                        data.rows[0].recomClass = '展覽';
+                    }
                     result.push(data.rows[0]);
                 }
             }, (error) => {

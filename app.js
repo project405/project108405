@@ -21,10 +21,10 @@ var signUpRouter = require('./routes/signUp');
 var signUpAddRouter = require('./routes/signUp_add');
 var userLoginRouter = require('./routes/userLogin');
 var notifyRouter = require('./routes/notify');
-var recommendListRouter = require('./routes/recommendList');
 var postRouter = require('./routes/post');
 var articleManageRouter = require('./routes/articleManage');
 var memberManageRouter = require('./routes/memberManage');
+var recommendListRouter = require('./routes/recommendList');
 // ---------------  My four Class -------------------
 var articleMovieRouter = require('./routes/article/articleMovie');
 var articleMusicRouter = require('./routes/article/articleMusic');
@@ -41,6 +41,11 @@ var colleArtiMovieRouter = require('./routes/collection/colleArtiMovie');
 var colleArtiMusicRouter = require('./routes/collection/colleArtiMusic');
 var colleArtiBookRouter = require('./routes/collection/colleArtiBook');
 var colleArtiExhibitionRouter = require('./routes/collection/colleArtiExhibition');
+// ---------------  My four recomClass -------------------
+var RecomMovieRouter = require('./routes/recomMovie');
+var RecomMusicRouter = require('./routes/recomMusic');
+var RecomBookRouter = require('./routes/recomBook');
+var RecomExhibitionRouter = require('./routes/recomExhibition');
 
 var app = express();
 
@@ -59,6 +64,7 @@ app.use('/', indexRouter);
 app.use('/article', articleRouter);
 app.use('/collection/recommend/one', oneColleRecommend);
 app.use('/collection/article/one', oneColleArticle);
+
 // ---------------  My use  ----------------
 app.use('/collection/recommend',collection_recommend_Router);
 app.use('/collection/article',collection_article_Router);
@@ -88,6 +94,12 @@ app.use('/collection/article/movie',colleArtiMovieRouter);
 app.use('/collection/article/music',colleArtiMusicRouter);
 app.use('/collection/article/book',colleArtiBookRouter);
 app.use('/collection/article/exhibition',colleArtiExhibitionRouter);
+// -------------- My use Four recomClass ----------------
+app.use('/recommendList/movie', RecomMovieRouter);
+app.use('/recommendList/music', RecomMusicRouter);
+app.use('/recommendList/book', RecomBookRouter);
+app.use('/recommendList/exhibition', RecomExhibitionRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

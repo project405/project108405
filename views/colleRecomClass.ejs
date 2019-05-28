@@ -70,6 +70,9 @@
                 </a>
 
             </div>
+            <% if( (i+1) % 4 == 0){ %>
+            <div class="w-100"></div>
+            <% } %>
             <% } %>
             <!-- 收藏區塊結束 -->
 
@@ -87,11 +90,16 @@
 
 
     <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary footer" onclick="location.href='/collection/recommend'">所有分類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/recommend/movie'">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/recommend/music'">音樂類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/recommend/book'">書籍類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/recommend/exhibition'">展覽類</button>
+        <button type="button " class="btn btn-secondary footer"
+            onclick="location.href='/collection/recommend'">所有分類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/collection/recommend/movie'">電影類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/collection/recommend/music'">音樂類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/collection/recommend/book'">書籍類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/collection/recommend/exhibition'">展覽類</button>
 
     </div>
 
