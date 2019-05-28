@@ -8,44 +8,57 @@ var indexRouter = require('./routes/index');
 
 var session = require('express-session');
 
-// --------------  My routes--------------- 
-var oneColleRecommend = require('./routes/collection/oneColleRecommend');
-var oneColleArticle = require('./routes/collection/oneColleArticle');
-var collection_recommend_Router = require('./routes/collection/collectionRecommend');
-var collection_article_Router = require('./routes/collection/collectionArticle');
-var memberRouter = require('./routes/member');
+//=========================================
+//---------  article router ------------
+//=========================================
 var articleListRouter = require('./routes/article/articleList');
 var articleRouter = require('./routes/article/article');
-var loginRouter = require('./routes/login');
-var signUpRouter = require('./routes/signUp');
-var signUpAddRouter = require('./routes/signUp_add');
-var userLoginRouter = require('./routes/userLogin');
-var notifyRouter = require('./routes/notify');
-var postRouter = require('./routes/post');
-var articleManageRouter = require('./routes/articleManage');
-var memberManageRouter = require('./routes/memberManage');
-var recommendListRouter = require('./routes/recommendList');
-// ---------------  My four Class -------------------
+var articleManageRouter = require('./routes/article/articleManage');
+// ---------------  four Class -------------------
 var articleMovieRouter = require('./routes/article/articleMovie');
 var articleMusicRouter = require('./routes/article/articleMusic');
 var articleBookRouter = require('./routes/article/articleBook');
 var articleExhibitionRouter = require('./routes/article/articleExhibition');
-// ---------------  My four collRecommendClass -------------------
+
+//=========================================
+//---------  member router ------------
+//=========================================
+var memberRouter = require('./routes/member/member');
+var memberManageRouter = require('./routes/member/memberManage');
+var loginRouter = require('./routes/member/login');
+var signUpRouter = require('./routes/member/signUp');
+var signUpAddRouter = require('./routes/member/signUp_add');
+var userLoginRouter = require('./routes/member/userLogin');
+var notifyRouter = require('./routes/notify');
+var postRouter = require('./routes/post');
+
+//=========================================
+//---------  collection router ------------
+//=========================================
+var collection_recommend_Router = require('./routes/collection/collectionRecommend');
+var collection_article_Router = require('./routes/collection/collectionArticle');
+var oneColleRecommend = require('./routes/collection/oneColleRecommend');
+var oneColleArticle = require('./routes/collection/oneColleArticle');
+// ---------------  collection recommend Class -------------------
 var colleRecomMovieRouter = require('./routes/collection/colleRecomMovie');
 var colleRecomMusicRouter = require('./routes/collection/colleRecomMusic');
 var colleRecomBookRouter = require('./routes/collection/colleRecomBook');
 var colleRecomExhibitionRouter = require('./routes/collection/colleRecomExhibition');
-
-// ---------------  My four collArticleClass -------------------
+// ---------------  collection article Class -------------------
 var colleArtiMovieRouter = require('./routes/collection/colleArtiMovie');
 var colleArtiMusicRouter = require('./routes/collection/colleArtiMusic');
 var colleArtiBookRouter = require('./routes/collection/colleArtiBook');
 var colleArtiExhibitionRouter = require('./routes/collection/colleArtiExhibition');
-// ---------------  My four recomClass -------------------
-var RecomMovieRouter = require('./routes/recomMovie');
-var RecomMusicRouter = require('./routes/recomMusic');
-var RecomBookRouter = require('./routes/recomBook');
-var RecomExhibitionRouter = require('./routes/recomExhibition');
+
+//=========================================
+//---------  recommend router ------------
+//=========================================
+var recommendListRouter = require('./routes/recommend/recommendList');
+// ---------------  four recommend Class -------------------
+var RecomMovieRouter = require('./routes/recommend/recomMovie');
+var RecomMusicRouter = require('./routes/recommend/recomMusic');
+var RecomBookRouter = require('./routes/recommend/recomBook');
+var RecomExhibitionRouter = require('./routes/recommend/recomExhibition');
 
 var app = express();
 
@@ -58,47 +71,68 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// ---------------  express-session  ----------------
-app.use(session({secret: 'mysecret', cookie: { maxAge: 60000 }}));
-app.use('/', indexRouter);
-app.use('/article', articleRouter);
-app.use('/collection/recommend/one', oneColleRecommend);
-app.use('/collection/article/one', oneColleArticle);
+//=========================================
+//---------  express session ------------
+//=========================================
+app.use(session({secret: 'mysecret', cookie: { maxAge: 6000000 }}));
 
-// ---------------  My use  ----------------
-app.use('/collection/recommend',collection_recommend_Router);
-app.use('/collection/article',collection_article_Router);
-app.use('/member',memberRouter);
+app.use('/', indexRouter);
+//=========================================
+//---------  article use ------------
+//=========================================
+app.use('/article', articleRouter);
 app.use('/articleList',articleListRouter);
+app.use('/articleList/post',postRouter);
+// -------------- four Class use----------------
+app.use('/articleList/articleMovie',articleMovieRouter);
+app.use('/articleList/articleMusic',articleMusicRouter);
+app.use('/articleList/articleBook',articleBookRouter);
+app.use('/articleList/articleExhibition',articleExhibitionRouter);
+
+//=========================================
+//------------  member use ----------------
+//=========================================
+app.use('/member',memberRouter);
+app.use('/member/articleManage',articleManageRouter);
+app.use('/member/memberManage',memberManageRouter);
 app.use('/login',loginRouter);
 app.use('/signUp',signUpRouter);
 app.use('/signUp/add',signUpAddRouter);
 app.use('/userlogin',userLoginRouter);
 app.use('/notify',notifyRouter);
-app.use('/recommendList',recommendListRouter);
-app.use('/articleList/post',postRouter);
-app.use('/member/articleManage',articleManageRouter);
-app.use('/member/memberManage',memberManageRouter);
-// -------------- My use Four artiClass ----------------
-app.use('/articleList/articleMovie',articleMovieRouter);
-app.use('/articleList/articleMusic',articleMusicRouter);
-app.use('/articleList/articleBook',articleBookRouter);
-app.use('/articleList/articleExhibition',articleExhibitionRouter);
-// -------------- My use Four collRecomClass ----------------
+
+//=========================================
+//----------  collection use --------------
+//=========================================
+app.use('/collection/recommend',collection_recommend_Router);
+app.use('/collection/article',collection_article_Router);
+app.use('/collection/recommend/one', oneColleRecommend);
+app.use('/collection/article/one', oneColleArticle);
+// --------- collection recommend four Class use -----------
 app.use('/collection/recommend/movie',colleRecomMovieRouter);
 app.use('/collection/recommend/music',colleRecomMusicRouter);
 app.use('/collection/recommend/book',colleRecomBookRouter);
 app.use('/collection/recommend/exhibition',colleRecomExhibitionRouter);
-// -------------- My use Four collArtiClass ----------------
+// --------- collection article four Class use -----------
 app.use('/collection/article/movie',colleArtiMovieRouter);
 app.use('/collection/article/music',colleArtiMusicRouter);
 app.use('/collection/article/book',colleArtiBookRouter);
 app.use('/collection/article/exhibition',colleArtiExhibitionRouter);
-// -------------- My use Four recomClass ----------------
+
+//=========================================
+//---------  recommend use ------------
+//=========================================
+app.use('/recommendList',recommendListRouter);
+// -------------- four Class ----------------
 app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);
 app.use('/recommendList/book', RecomBookRouter);
 app.use('/recommendList/exhibition', RecomExhibitionRouter);
+
+
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

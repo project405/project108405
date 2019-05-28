@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 //增加引用函式
-const signUp = require('./utility/signUp');
+const signUp = require('../utility/signUp');
 
 //接收POST請求
 router.post('/', function (req, res, next) {

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const recommendList = require('./utility/recommend');
+const recommendList = require('../utility/recommend');
 
 //接收GET請求
 router.get('/', function (req, res, next) {
