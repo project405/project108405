@@ -206,6 +206,13 @@ div.dropdown-menu {
     text-align: center;
 }
 
+@media (max-width: 992px) {
+    #navbarNav>ul>li a {
+        font-size: 0.9em !important;
+        text-decoration: #678878 solid 3px;
+    }
+}
+
 .navbar {
     opacity: 0.89;
     /* background-color: rgb(130, 143, 141); */
@@ -279,7 +286,7 @@ hr.highlight {
         width: 80%;
     }
     p {
-        font-size: 0.75em !important;
+        font-size: 1em !important;
     }
 }
 

@@ -48,6 +48,12 @@ body>div.container.table>table>tbody>tr>td {
     text-align: center;
 }
 
+@media (max-width: 415px) {
+    body {
+        font-size: 0.9em;
+    }
+}
+
 .center {
     text-align: center;
 }

@@ -215,7 +215,8 @@ div.dropdown-menu {
 
 @media (max-width: 992px) {
     #navbarNav>ul>li a {
-        font-size: 0.75em !important;
+        font-size: 0.9em !important;
+        text-decoration: #678878 solid 3px;
     }
 }
 
@@ -285,7 +286,7 @@ hr.highlight {
         width: 80%;
     }
     p {
-        font-size: 0.75em !important;
+        font-size: 1em !important;
     }
 }
 
