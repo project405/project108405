@@ -409,3 +409,7 @@ textarea.report {
 button.report {
     float: right;
 }
+
+body:focus {
+    border: #f0f0f0 solid 1px;
+}

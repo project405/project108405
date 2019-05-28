@@ -4,18 +4,21 @@ body {
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
     border: none;
     padding-top: 3em;
-    background: url("../imgs/article-bac.png");
+    background: url("../imgs/background/articleBac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    text-align: justify;
+    text-align: justify !important;
     position: relative;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 650px) {
     html,
     body {
-        padding-top: 1.5em;
+        background: url("../imgs/background/phone/ParticleBac.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
     }
 }
 
@@ -105,24 +108,36 @@ div.info {
 
 div.info a {
     font-size: 1em;
+    word-break: break-all;
+}
+
+a.name {
+    text-align: justify;
+}
+
+@media (max-width: 450px) {
+    a.next::before {
+        white-space: pre;
+        content: '\A';
+    }
 }
 
 a.dateTime {
-    font-size: 0.9em !important;
+    font-size: 0.85em !important;
     color: rgb(104, 102, 102) !important;
     margin: 0;
-    letter-spacing: none;
 }
 
 .col-sm-1 {
-    width: 40%;
+    width: 25%;
     margin: 0;
 }
 
 .col-sm-2 {
-    width: 60%;
+    width: 35%;
     margin: 0;
     padding: 0;
+    white-space: nowrap;
 }
 
 

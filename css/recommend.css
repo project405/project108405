@@ -14,6 +14,16 @@ body {
     background-size: cover;
 }
 
+@media (max-width: 650px) {
+    html,
+    body {
+        background: url("../imgs/background/phone/PreommendBac.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+}
+
 
 /* ------------------- */
 
