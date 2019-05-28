@@ -123,9 +123,10 @@ a.name {
 }
 
 a.dateTime {
-    font-size: 0.8em !important;
+    font-size: 0.75em !important;
     color: rgb(104, 102, 102) !important;
     margin: 0;
+    white-space: nowrap;
 }
 
 .col-sm-1 {
