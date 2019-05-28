@@ -70,16 +70,20 @@ div.content {
     }
 }
 
+.a {
+    padding: 0;
+    margin: 0;
+}
+
 a.floorTag {
     text-align: right;
     color: #fff !important;
-    padding: 0.2em 0.4em 0.2em 0.4em;
+    padding: 0.1em 0.4em 0.1em 0.4em;
     border: 2px solid #993a3a;
     border-radius: 8px;
     background-color: #993a3a;
     text-decoration: none;
     word-break: break-all;
-    font-size: 13px !important;
 }
 
 div.floor {
@@ -91,11 +95,45 @@ p.content {
 }
 
 div.poster a {
-    font-size: 1em !important;
+    text-align: right !important;
 }
 
 button.report {
     float: right !important;
+}
+
+button.like {
+    float: right !important;
+}
+
+
+/* post */
+
+div.info {
+    margin-left: -0.9em;
+    text-align: justify;
+}
+
+div.info a {
+    font-size: 1em;
+}
+
+a.dateTime {
+    font-size: 0.9em !important;
+    color: rgb(104, 102, 102) !important;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.col-sm-1 {
+    width: 40%;
+    margin: 0;
+}
+
+.col-sm-2 {
+    width: 60%;
+    margin: 0;
+    padding: 0;
 }
 
 
@@ -104,7 +142,12 @@ button.report {
 .fa-gratipay,
 .fa-comment-dots,
 .fa-bookmark {
-    font-size: 23px;
+    font-size: 25px;
+    margin-right: 0.2em;
+}
+
+.fa-bookmark {
+    padding-top: 0.13em;
 }
 
 
@@ -121,39 +164,6 @@ button.tag {
     padding: 0.45em;
 }
 
-
-/* post */
-
-div.info {
-    margin-left: -0.9em;
-}
-
-div.info a {
-    margin: 0.3em;
-    font-size: 1.25em;
-}
-
-
-/* messageLike*/
-
-
-/* div.like {
-    float: right;
-    width: 20%;
-    margin-right: -0.75em;
-    padding: 0;
-} */
-
-button.info {
-    float: right;
-    font-size: 1.25em;
-}
-
-button.info a {
-    margin: 0.3em;
-    font-size: 1em;
-}
-
 button.info:hover,
 button.postInfo:focus,
 button.postInfo:hover,
@@ -163,17 +173,19 @@ button.postInfo:visited {
 }
 
 
-/* ------------------- */
+/*  button */
 
+button.footer {
+    margin: 0.1em;
+    height: 2em;
+    font-size: 1em;
+    opacity: 0.89;
+}
 
-/* footer */
-
-
-/* ------------------- */
-
-.footer-item {
-    margin: 0.25em;
-    opacity: 0.85;
+@media (max-width: 450px) {
+    button.footer {
+        font-size: 0.85em;
+    }
 }
 
 
@@ -190,6 +202,10 @@ hr.separate {
 
 hr.info {
     margin-bottom: 0em;
+}
+
+hr.smallMagin {
+    margin: 0.2em 0 1em 0;
 }
 
 
@@ -213,4 +229,9 @@ input.message {
 textarea.input {
     width: 100%;
     height: 200pt;
+    border: none;
+}
+
+.float-md-right {
+    float: right;
 }

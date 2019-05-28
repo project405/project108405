@@ -57,6 +57,7 @@ textarea.input {
     display: flex;
     flex-direction: row;
     margin: 0.75em 0 0.75em 0;
+    overflow: hidden;
 }
 
 .input-icon {
@@ -100,5 +101,13 @@ textarea.report {
 }
 
 button.report {
+    float: right;
+}
+
+select {
+    padding-bottom: 20em;
+}
+
+button.float-md-right {
     float: right;
 }

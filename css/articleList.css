@@ -117,12 +117,12 @@ div.info {
 .fa-gratipay,
 .fa-comment-dots,
 .fa-bookmark {
-    font-size: 23px;
+    font-size: 25px;
+    margin-right: 0.2em;
 }
 
-div.info a {
-    margin: 0.3em;
-    font-size: 1.25em;
+.fa-bookmark {
+    padding-top: 0.13em;
 }
 
 

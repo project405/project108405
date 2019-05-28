@@ -30,8 +30,12 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-8 content shadow post postArticle">
-                <div class="poster">
-                    <a class="floorTag text-break ">樓主</a> <a> 小美 於 2019-04-30 14:23發布</a>
+                <div class="info d-flex justify-content-between">
+                    <div class="col-sm-1"> <a class="floorTag text-break ">樓主</a></div>
+                    <div> <a>小美</a>
+                        <a class="dateTime"> 於 2019-04-30 14:23發佈</a>
+                    </div>
+                    <div></div>
                 </div>
                 <hr/>
 
@@ -67,17 +71,18 @@
         <!-- 文章留言 -->
 
         <div class="row justify-content-center">
-            <div class="col-lg-8 content shadow">
+            <div class="col-lg-8 content shadow ">
                 <!-- 文章留言 -->
                 <div class="message">
                     <!-- info -->
-                    <div class="like"><button type="button" class="btn info"><i class="fab fa-gratipay"></i><a>3</a></button></div>
-
-                    <div class="poster">
-                        <div class="floor"><a class="floorTag text-break ">1樓</a> <a>楊涵涵 於 2019-04-30 14:23留言</a> </div>
-                        <hr>
+                    <div class="info d-flex justify-content-between align-middle">
+                        <div class="col-sm-1"><a class="floorTag">1樓</a></div>
+                        <div><a>楊涵涵哈哈哈哈</a>
+                            <a class="dateTime"> 於 2019-04-30 14:23留言</a>
+                        </div>
+                        <div class="col-sm-2"><button type="button" class="btn like"><i class="fab fa-gratipay"></i><a>2</a></button></div>
                     </div>
-
+                    <hr class="smallMagin">
                     <!-- info結束 -->
 
                     <p class="content"> 看完你的影評，又再次看了這部電影，能感受到更多不一樣的感受。謝謝妳的分享！！！
@@ -85,6 +90,7 @@
                     <button type="button" class="btn report">檢舉</button>
                 </div>
             </div>
+
         </div>
 
         <!-- 文章留言結束 -->
@@ -94,16 +100,20 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 content shadow">
                 <!-- 文章留言 -->
-                <div class=" message ">
+                <div class="message">
+                    <div class="info d-flex justify-content-between align-middle">
+                        <div class="col-sm-1"><a class="floorTag">2樓</a></div>
+                        <div class="poster"><a>阿華</a>
+                            <a class="dateTime"> 於 2019-04-30 14:23留言</a>
+                        </div>
+                        <div class="col-sm-2"><button type="button" class="btn like"><i class="fab fa-gratipay"></i><a>300</a></button></div>
+                    </div>
+                    <hr class="smallMagin">
+
 
                     <!-- info -->
-                    <div><button type="button" class="btn info"><i class="fab fa-gratipay"></i><a>20</a></button></div>
 
-                    <div class="poster">
-                        <div class="floor"><a class="floorTag text-break ">2樓</a> <a>阿華 於 2019-04-30 14:23留言</a> </div>
-                        <hr>
 
-                    </div>
 
                     <!-- info結束 -->
 
@@ -122,15 +132,15 @@
         <!-- replying -->
         <div class="row replying justify-content-center" id="reply">
             <div class="col-lg-8 content shadow">
-                <div class="input">
-                    <textarea class="input" col="40" id="textarea" placeholder="輸入您要回覆的內容"></textarea>
-                </div>
                 <form>
-                    <div class="form-group">
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <div class="input">
+                        <textarea class="input" col="40" id="textarea" placeholder="輸入您要回覆的內容"></textarea>
                     </div>
+                    <br>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
                 </form>
-                <a href="#" class="btn btn-secondary btn-lg active float-md-right" role="button" aria-pressed="true">發佈留言</a>
+
+                <button type="submit" class="btn btn-secondary active float-md-right">發佈留言</button>
 
             </div>
         </div>
@@ -139,9 +149,9 @@
         <div class="row d-flex justify-content-center">
             <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
 
-                <button type="button" class="btn btn-secondary  footer-item" id="goBottom">去留言</button>
-                <button type="button" class="btn btn-secondary  footer-item">愛心</button>
-                <button type="button" class="btn btn-secondary  footer-item">收藏</button>
+                <button type="button" class="btn btn-secondary footer" id="goBottom">去留言</button>
+                <button type="button" class="btn btn-secondary footer">愛心</button>
+                <button type="button" class="btn btn-secondary footer">收藏</button>
 
             </div>
         </div>
