@@ -98,6 +98,7 @@ div.report {
 
 textarea.report {
     height: 200px;
+    padding: 1em;
 }
 
 button.report {
