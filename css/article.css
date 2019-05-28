@@ -113,6 +113,7 @@ div.info a {
 
 a.name {
     text-align: justify;
+    word-break: break-all;
 }
 
 @media (max-width: 450px) {
