@@ -30,7 +30,7 @@ var getArticleList = async function () {
             .then((data) => {
                 if (data.rows != '' && data.rows != undefined) {
                     // console.log(articleList[i].artiNum , ":" , data.rows[0].count);
-                    likeCount[articleList[i].artiNum] = data.rows[0].count
+                    likeCount[articleList[i].artiNum] = data.rows[0].count;
                 }
             }, (error) => {
                 likeCount = null;
@@ -42,7 +42,7 @@ var getArticleList = async function () {
             .then((data) => {
                 if (data.rows != '' && data.rows != undefined) {
                     // console.log(articleList[i].artiNum , ":" , data.rows[0].count);
-                    messageCount[articleList[i].artiNum] = data.rows[0].count
+                    messageCount[articleList[i].artiNum] = data.rows[0].count;
                 }
             }, (error) => {
                 messageCount = null;
