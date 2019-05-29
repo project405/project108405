@@ -138,7 +138,7 @@
 
 /* ========================================================================= */
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .dropdown-toggle::after {
         display: none;
     }
@@ -215,7 +215,7 @@ div.dropdown-menu {
 
 @media (max-width: 992px) {
     #navbarNav>ul>li a {
-        font-size: 0.9em !important;
+        font-size: 1em !important;
         text-decoration: #678878 solid 3px;
     }
 }

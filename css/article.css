@@ -3,13 +3,20 @@ body {
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
     border: none;
-    padding-top: 1em;
+    padding-top: 3em;
     background: url("../imgs/background/articleBac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     text-align: justify !important;
     position: relative;
+}
+
+@media (max-width: 991px) {
+    html,
+    body {
+        padding-top: 1em;
+    }
 }
 
 @media (max-width: 650px) {
@@ -124,7 +131,7 @@ a.name {
 }
 
 a.dateTime {
-    font-size: 0.75em !important;
+    font-size: 0.9em !important;
     color: rgb(104, 102, 102) !important;
     margin: 0;
     white-space: nowrap;
@@ -148,6 +155,32 @@ div.postArticle .justify-content-between {
 
 div.message .col-sm-1 {
     margin-right: -5em;
+}
+
+
+/*-------------------  */
+
+
+/* justify-content-between */
+
+
+/*-------------------  */
+
+div.postArticle .justify-content-between {
+    margin-right: 4em;
+}
+
+div.message .col-sm-1 {
+    margin-right: -2em;
+}
+
+@media (min-width: 375px) {
+    div.postArticle .justify-content-between {
+        margin-right: 8em;
+    }
+    div.message .col-sm-1 {
+        margin-right: -5em;
+    }
 }
 
 

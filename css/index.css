@@ -369,16 +369,16 @@ div.footer {
     font-size: 3em;
     opacity: 0.5;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 .fa-chevron-circle-down:hover {
-    animation: shake 0.9s;
+    animation: shake 1.5s;
     animation-iteration-count: infinite;
     cursor: pointer;
 }
 
 button.goArticle:hover {
-    animation: shake 0.9s;
+    animation: shake 1.5s;
     animation-iteration-count: infinite;
 }

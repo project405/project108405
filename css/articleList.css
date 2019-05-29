@@ -160,9 +160,10 @@ button.footer {
 /* Style the search field */
 
 .form-inline input {
-    -webkit-box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
-    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
-    padding: 0.75rem 1.25rem;
+    -webkit-box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 0.75em 0.75em;
+    margin-right: 0em;
     height: auto;
     border: #b3b3b3 solid 0.75px;
     border-radius: 8px;
@@ -173,15 +174,15 @@ button.footer {
 }
 
 button.search {
-    -webkit-box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
-    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
-    padding: 0.75rem 1.25rem;
-    font-size: 80%;
-    letter-spacing: .15rem;
+    -webkit-box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
+    box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 0.75em 0!important;
+    margin-left: 0 !important;
+    letter-spacing: .15em;
     border: 0;
     border-radius: 8px;
     font-size: 1em;
-    margin: 0.1em;
+    width: 6em !important;
 }
 
 button.search {
@@ -203,7 +204,9 @@ button.search:active {
 
 @media (max-width: 576px) {
     button.search {
-        width: 90%;
+        width: 50% !important;
+        float: right !important;
+        margin-left: auto !important;
     }
 }
 
