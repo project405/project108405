@@ -3,7 +3,7 @@ body {
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
     border: none;
-    padding-top: 3em;
+    padding-top: 1em;
     background: url("../imgs/background/articleBac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -131,7 +131,7 @@ a.dateTime {
 }
 
 .col-sm-1 {
-    width: 25%;
+    width: 20%;
     margin: 0;
 }
 
@@ -140,6 +140,14 @@ a.dateTime {
     margin: 0;
     padding: 0;
     white-space: nowrap;
+}
+
+div.postArticle .justify-content-between {
+    margin-right: 8em;
+}
+
+div.message .col-sm-1 {
+    margin-right: -5em;
 }
 
 
