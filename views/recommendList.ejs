@@ -6,10 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--  js   -->
-    <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javacripts/active.js"></script>
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -38,29 +34,32 @@
 
     <!-- Portfolio Section -->
     <section id="portfolio">
+
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
+
             <div class="search col-lg-5 mx-auto">
                 <!-- Search -->
                 <form class="form-inline d-flex">
-                    <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-10"
+                    <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-9"
                         id="search" placeholder="輸入欲搜尋之關鍵字">
-                    <button type="submit" class="search btn-primary mx-auto col-sm-3">搜尋</button>
+                    <button type="submit" class="search btn-primary mx-auto">搜尋</button>
                 </form>
                 <!-- Search End -->
             </div>
             <div class="w-100"></div>
+
+
             <!-- 推薦開始 -->
             <% for(var i = 0 ; i<recom.length ; i++){ %>
-            <div class="wrapper col-12  col-lg-2" style="background-image: url('imgs/recommend/movie1.jpg');">
+            <div class="wrapper col-12  col-lg-2" style="background-image: url('/imgs/recommend/movie1.jpg');">
                 <a class="portfolio-box" href="#">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
                             <p><%= recom[i].recomClass %> </p>
                         </div>
                         <div class="project-name">
-                            <p class="title"><%= recom[i].recomHead %> </p>
-                            <p class="content"><%= recom[i].recomCont %>
-                            </p>
+                            <p class="title"><%= recom[i].recomHead %></p>
+                            <p class="content"><%= recom[i].recomCont %></p>
                         </div>
                     </div>
                 </a>
@@ -69,30 +68,22 @@
             <div class="w-100"></div>
             <% } %>
             <% } %>
-            <!-- 推薦結束 -->
-
-
+             <!-- 推薦結束 -->
     </section>
 
-    </div>
+    <div class="fixed-bottom  d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary footer">所有分類</button>
+        <button type="button" class="btn btn-secondary footer">電影類</button>
+        <button type="button" class="btn btn-secondary footer">音樂類</button>
+        <button type="button" class="btn btn-secondary footer">書籍類</button>
+        <button type="button" class="btn btn-secondary footer">展覽類</button>
 
     </div>
 
 
-    </div>
-
-
-
-    <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary footer">所有分類</button>
-        <button type="button " class="btn btn-secondary align-middle footer">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer">音樂類</button>
-        <button type="button " class="btn btn-secondary align-middle footer">書籍類</button>
-        <button type="button " class="btn btn-secondary align-middle footer">展覽類</button>
-
-    </div>
-
-
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
 
 
     <!-- Optional JavaScript -->

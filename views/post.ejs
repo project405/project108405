@@ -46,10 +46,20 @@
                         placeholder="輸入您的內文"></textarea>
 
                 </div>
-                <div class="form-group">
-                    <input type="file" class="form-control-file" id="imgSel">
-                </div>
-                <button type="submit" class="btn btn-secondary float-md-right">發佈文章</button>
+
+                <select id="inputState" class="form-control">
+                    <option>電影類</option>
+                    <option>音樂類</option>
+                    <option>展覽類</option>
+                    <option>書籍類</option>
+                </select>
+
+                <br>
+                <input type="file" class="form-control-file" id="imgSel">
+
+
+
+                <button type="button" class="btn btn-secondary float-md-right">發佈文章</button>
             </form>
 
 
@@ -59,33 +69,9 @@
     </div>
 
 
-    <p></p>
-
-
-
-
-
-
-
-    <div class="container position-fixed col-lg-8 report" id="report">
-        <div id="x"><i class="far fa-times-circle"></i>
-        </div>
-
-        <div class="form">
-            <form class="report" action="">
-
-                <div class="input-icon-wrap">
-                    <span class="input-icon"><span class="fas fa-hands-helping"></span></span>
-                    <textarea class="input-with-icon report" placeholder="輸入舉報原因及問題"></textarea>
-
-                </div>
-
-                <button type="button" class="btn btn-danger  report">送出申報</button>
-            </form>
-        </div>
-
-
-    </div>
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
 
 
 

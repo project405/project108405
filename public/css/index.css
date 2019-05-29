@@ -17,16 +17,16 @@ body {
     height: 100%;
     padding-top: 10em;
     padding-bottom: calc(10em - 72px);
-    background: url("../imgs/banner.png");
+    background: url("../imgs/background/banner.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: cover;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 1024px) {
     .banner {
-        background: url("../imgs/phone/Pbanner.png");
+        background: url("../imgs/background/phone/Pbanner.png");
         background-position: center center;
         background-repeat: no-repeat;
         background-attachment: scroll;
@@ -80,7 +80,7 @@ div.article {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    padding-top: 3em;
+    padding-top: 2em;
     -webkit-box-pack: center top;
     -ms-flex-pack: center;
     justify-content: center;
@@ -102,10 +102,9 @@ div.article {
 }
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-category {
-    font-family: 'Noto Serif TC', "Merriweather Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: 'Noto Serif TC', "Arial", "Segoe UI", "Roboto", "Helvetica Neue";
     font-size: 1.5em;
     font-weight: 600;
-    text-transform: uppercase;
 }
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name p.title {
@@ -367,19 +366,18 @@ div.footer {
     bottom: 5%;
     left: 46.5%;
     font-size: 3em;
-    opacity: 0.5;
+    opacity: 0.65;
     text-decoration: none;
     color: black;
 }
 
 .fa-chevron-circle-down:hover {
-    animation: shake 0.9s;
+    animation: shake 1.5s;
     animation-iteration-count: infinite;
     cursor: pointer;
 }
 
 button.goArticle:hover {
-    border: 0.5px dashed #0D5146;
-    animation: shake 0.9s;
+    animation: shake 1.5s;
     animation-iteration-count: infinite;
 }

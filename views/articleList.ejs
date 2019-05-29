@@ -6,9 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--  js   -->
-    <script src="/javascripts/jquery.min.js"></script>
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -20,7 +17,7 @@
     <link href="/css/header.css" rel="stylesheet" type="text/css" />
     <link href="/css/articleList.css" rel="stylesheet" type="text/css" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="/imgs/logo(veryBold).ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
 
     <title>文藝富心</title>
 </head>
@@ -36,30 +33,35 @@
             <center>
                 <h3>文章列表</h3>
                 <hr class="highlight">
+
             </center>
             <div class="btnPost position-fixed">
-                <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
-                    <i class="fas fa-edit"></i>發表文章</button>
+                <button type="button" class="btn postButton" onclick="location.href='post.html'">
+                    <i class="fas fa-edit"></i>發文</button>
             </div>
 
-            <div class="row d-flex justify-content-center">
-                <div class="search col-12 d-flex justify-content-center">
+
+            <div class="row d-flex justify-content-center no-gutters">
+
+
+                <div class="search col-lg-5 mx-auto ">
                     <!-- Search -->
                     <form class="form-inline d-flex">
-
-                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search" id="search"
-                            placeholder="輸入欲搜尋之關鍵字">
-                        <button type="submit" class="search btn-primary mx-auto ">搜尋</button>
+                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-9"
+                            id="search" placeholder="輸入欲搜尋之關鍵字">
+                        <button type="submit" class="search btn-primary mx-auto">搜尋</button>
                     </form>
-
                     <!-- Search End -->
                 </div>
+
 
                 <div class="col-12 mb-3 col-lg-8 ">
                     <!-- list -->
                     <% for(var i=0; i<items[0].length; i++) {%>
-                    <div class="card shadow list " style="cursor:pointer; ">
-                        <div class="card-body" onclick=" location.href='/article/<%= items[0][i].artiNum %>' ">
+                    <div class="card shadow list " onclick=" location.href='/article/<%= items[0][i].artiNum %>' "
+                        style="cursor:pointer; ">
+
+                        <div class="card-body ">
                             <div class="poster">
                                 <div class="name">
                                     <p><%= items[0][i].memID %> 於 <%= items[0][i].artiDateTime %>發表</p>
@@ -73,32 +75,37 @@
 
                             <div class="tagDiv col-lg-12 ">
                                 <% for(var j=0; j<items[3][i].length; j++) {%>
-                                <button type="button" class="btn btn-info tag"><%= items[3][i][j] %></button>
+                                <button type="button" class="btn  tag"><%= items[3][i][j] %></button>
                                 <% } %>
-
                             </div>
-                            <hr class="info">
+                        </div>
+
+                        <div class="wrapperCard card-img-top "
+                            style="background-image: url( 'imgs/recommend/movie2.jpg'); ">
 
                         </div>
                         <!-- info -->
                         <div class="info">
-                            <button type="button" class="btn"><i class="fab fa-gratipay"></i><a><%= items[1][i+1] %>
+                            <button type="button" class="btn postInfo"><i
+                                    class="fab fa-gratipay"></i><a><%= items[1][i+1] %>
                                 </a></button>
-                            <button type="button" class="btn"><i
+                            <button type="button" class="btn postInfo"><i
                                     class="fas fa-comment-dots"></i><a><%= items[2][i+1] %></a></button>
-                            <button type="button" class="btn"><i class="far fa-bookmark"></i><a></a></button>
+                            <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i><a></a></button>
                         </div>
                         <!-- info結束 -->
 
-                        <div class="wrapperCard card-img-top "
-                            style="background-image: url( '/imgs/testImgs/15.jpg'); ">
-                        </div>
                     </div>
+                    <div class="w-100"></div>
                     <% } %>
                     <!-- listEnd -->
 
                 </div>
             </div>
+
+        </div>
+
+        </div>
 
 
         </div>
@@ -107,25 +114,19 @@
 
 
 
-    <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary footer" onclick="location.href='/articleList'">所有分類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
+    <div class="fixed-bottom  d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary footer" onclick="location.href='/articleList'">所有分類</button>
+        <button type="button" class="btn btn-secondary footer"
             onclick="location.href='/articleList/articleMovie'">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
+        <button type="button" class="btn btn-secondary footer"
             onclick="location.href='/articleList/articleMusic'">音樂類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
+        <button type="button" class="btn btn-secondary footer"
             onclick="location.href='/articleList/articleBook'">書籍類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
+        <button type="button" class="btn btn-secondary footer"
             onclick="location.href='/articleList/articleExhibition'">展覽類</button>
 
     </div>
 
-    <div class="container-fluid footer ">
-        <p>聯絡我們：10546004@ntub.edu.tw
-        </p>
-        <p>©2018 NTUB</p>
-
-    </div>
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>

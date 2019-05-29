@@ -6,10 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--  js   -->
-    <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javascripts/active.js"></script>
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -39,14 +35,14 @@
                 <hr class="highlight">
             </center>
 
-            <div class="row d-flex justify-content-center">
+            <div class="row d-flex justify-content-center  no-gutters ">
 
                 <div class="search col-lg-5 mx-auto">
                     <!-- Search -->
                     <form class="form-inline d-flex">
-                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-10"
+                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-9"
                             id="search" placeholder="輸入欲搜尋之關鍵字">
-                        <button type="submit" class="search btn-primary mx-auto col-sm-3">搜尋</button>
+                        <button type="submit" class="search btn-primary mx-auto">搜尋</button>
                     </form>
                     <!-- Search End -->
                 </div>
@@ -55,12 +51,14 @@
                 <div class="col-12 mb-3 col-lg-8 ">
                     <% for(var i = 0 ; i<collData[0].length ; i++ ) {%>
                     <!-- list -->
-                    <div class="card shadow list " onclick="location.href='/collection/article/one/<%= collData[0][i].artiNum %>'" style="cursor:pointer; ">
+                    <div class="card shadow list "
+                        onclick="location.href='/collection/article/one/<%= collData[0][i].artiNum %>'"
+                        style="cursor:pointer; ">
 
                         <div class="card-body ">
                             <div class="poster">
                                 <div class="name">
-                                    <p><%= collData[0][i].memID %> 於 <%= collData[0][i].artiDateTime %> 發表</p>
+                                    <p><%= collData[0][i].memID %> 於 <%= collData[0][i].artiDateTime %>發表</p>
                                 </div>
                                 <hr>
                             </div>
@@ -79,8 +77,7 @@
                         </div>
                         <!-- info -->
                         <div class="info">
-                            <button type="button" class="btn postInfo"><i
-                                    class="fab fa-gratipay"></i><a><%= collData[1][i].count %>
+                            <button type="button" class="btn postInfo"><i class="fab fa-gratipay"></i><a><%= collData[1][i].count %>
                                 </a></button>
                             <button type="button" class="btn postInfo"><i
                                     class="fas fa-comment-dots"></i><a><%= collData[2][i].count %></a></button>
@@ -90,19 +87,15 @@
 
                         <!-- <div class="wrapperCard card-img-top " style="background-image: url( 'imgs/testImgs/15.jpg'); "> -->
                     </div>
-                    <% } %>
+
                     <div class="w-100"></div>
-
+                    <% } %>
                     <!-- listEnd -->
-
-
-
                 </div>
-
             </div>
 
-
         </div>
+
     </section>
     <!-- 文章列表區塊結束 -->
 
@@ -111,10 +104,9 @@
     <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
         <button type="button " class="btn btn-secondary footer" onclick="location.href='/collection/article'">所有分類</button>
         <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/article/movie'">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/article/music'">音樂類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"  onclick="location.href='/collection/article/music'">音樂類</button>
         <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/article/book'">書籍類</button>
         <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/collection/article/exhibition'">展覽類</button>
-
     </div>
 
 

@@ -37,18 +37,18 @@
             </center>
             <div class="btnPost position-fixed">
                 <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
-                    <i class="fas fa-edit"></i>發表文章</button>
+                    <i class="fas fa-edit"></i>發文</button>
             </div>
 
 
-            <div class="row d-flex justify-content-center">
+            <div class="row d-flex justify-content-center  no-gutters">
 
                 <div class="search col-lg-5 mx-auto">
                     <!-- Search -->
                     <form class="form-inline d-flex">
-                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-10"
+                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-9"
                             id="search" placeholder="輸入欲搜尋之關鍵字">
-                        <button type="submit" class="search btn-primary mx-auto col-sm-3">搜尋</button>
+                        <button type="submit" class="search btn-primary mx-auto">搜尋</button>
                     </form>
                     <!-- Search End -->
                 </div>
@@ -65,7 +65,7 @@
                                 </div>
                                 <hr>
                             </div>
-                            <h3 class="card-title "> <%= myArticle[0][i].artiHead %>
+                            <h3 class="card-title "><%= myArticle[0][i].artiHead %>
                             </h3>
                             <p class="card-text "><%= myArticle[0][i].artiCont %>
                             </p>
@@ -96,7 +96,6 @@
                     <div class="w-100"></div>
                     <% } %>
                     <!-- listEnd -->
-
                 </div>
             </div>
         </div>

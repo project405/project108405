@@ -34,19 +34,27 @@ body>div.container.table>table>tbody>tr>td {
 }
 
 .table1 {
-    text-align: justify;
-    width: 10%;
+    width: 20%;
     text-align: center;
 }
 
 .table2 {
     text-align: justify;
-    width: 70%;
+    width: 60%;
 }
 
 .table3 {
-    text-align: justify;
     width: 20%;
+    text-align: center;
+}
+
+@media (max-width: 415px) {
+    body {
+        font-size: 0.9em;
+    }
+}
+
+.center {
     text-align: center;
 }
 

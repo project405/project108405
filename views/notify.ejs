@@ -6,9 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--  js   -->
-    <script src="/javascripts/jquery.min.js"></script>
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -22,42 +19,47 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
 
-
     <title>文藝富心</title>
 </head>
 
 <body>
     <script src="/javascripts/header.js"></script>
 
-    <div class="container table">
-        <center>
-            <h3>會員通知</h3>
-            <hr class="highlight">
-        </center>
-        <div class="w-100"></div>
+    <center>
+        <h3>會員通知</h3>
+        <hr class="highlight">
+    </center>
+    <div class="w-100"></div>
 
-        <table class="table table-striped">
-            <thead>
-                <tr class="align-middle">
-                    <th scope="col" class="table1 align-middle">編號</th>
-                    <th scope="col" class="table2 align-middle">內容</th>
-                    <th scope="col" class="table3 align-middle">通知日期</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for(var i = 0 ; i < items.length ; i++) { %>
-                <tr>
-                    <th scope="row" class="table1 align-middle"><%= i+1 %></th>
-                    <td class="table2 align-middle">
-                        <p> <%= items[i].memMessCont %></p>
-                    </td>
-                    <td class="table3 align-middle"> <%= items[i].memMessDateTime %> </td>
-                </tr>
-                <% } %>
-            </tbody>
-        </table>
+    <div class="container-fluid">
+        <div class="table row d-flex justify-content-center">
+            <table class="table table-striped col-lg-8">
+                <thead>
+                    <tr class="align-middle">
+                        <th scope="col" class="table1 align-middle">編號</th>
+                        <th scope="col" class="table2 align-middle center">內容</th>
+                        <th scope="col" class="table3 align-middle">日期</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% for(var i = 0 ; i < items.length ; i++) { %>
+                    <tr onclick="location.href='article.html'">
+                        <th scope="row" class="table1 align-middle"><%= i+1 %></th>
+                        <td class="table2 align-middle">
+                            <p><%= items[i].memMessCont %></p>
+                        </td>
+                        <td class="table3 align-middle date"> <%= items[i].memMessDateTime %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
     </div>
 
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
