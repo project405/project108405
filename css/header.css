@@ -262,6 +262,21 @@ a.navTitle {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
+@media (max-width: 575px) {
+    #gotop {
+        position: fixed;
+        bottom: 27px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        line-height: 30px;
+        background: rgb(143, 143, 143);
+        text-align: center;
+        color: #fff;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    }
+}
+
 
 /* -------------- */
 

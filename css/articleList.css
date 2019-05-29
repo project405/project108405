@@ -144,10 +144,11 @@ div.search {
 /*  button */
 
 button.footer {
-    margin: 0.1em;
-    height: 2em;
+    margin: 0.2em;
+    height: auto;
     font-size: 1em;
     opacity: 0.89;
+    padding: 0.2em 0.3em;
 }
 
 @media (max-width: 450px) {

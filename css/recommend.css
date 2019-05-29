@@ -40,22 +40,6 @@ div.search {
 }
 
 
-/*  button */
-
-button.footer {
-    margin: 0.1em;
-    height: 2em;
-    font-size: 1em;
-    opacity: 0.89;
-}
-
-@media (max-width: 450px) {
-    button.footer {
-        font-size: 0.85em;
-    }
-}
-
-
 /* Style the search field */
 
 .form-inline input {
@@ -226,18 +210,19 @@ div.article {
 /*  button */
 
 button.footer {
-    margin: 0.1em;
-    height: 2em;
+    margin: 0.2em;
+    height: auto;
     font-size: 1em;
     opacity: 0.89;
-}
-
-button.postInfo:active {
-    color: #993a3a;
+    padding: 0.2em 0.3em;
 }
 
 @media (max-width: 450px) {
     button.footer {
         font-size: 0.85em;
     }
+}
+
+button.postInfo:active {
+    color: #993a3a;
 }
