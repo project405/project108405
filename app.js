@@ -14,6 +14,7 @@ var session = require('express-session');
 var articleListRouter = require('./routes/article/articleList');
 var articleRouter = require('./routes/article/article');
 var articleManageRouter = require('./routes/article/articleManage');
+var articlePostRouter = require('./routes/articlePost');
 // ---------------  four Class -------------------
 var articleMovieRouter = require('./routes/article/articleMovie');
 var articleMusicRouter = require('./routes/article/articleMusic');
@@ -83,6 +84,7 @@ app.use('/', indexRouter);
 app.use('/article', articleRouter);
 app.use('/articleList',articleListRouter);
 app.use('/articleList/post',postRouter);
+app.use('/article/post',articlePostRouter) ;
 // -------------- four Class use----------------
 app.use('/articleList/articleMovie',articleMovieRouter);
 app.use('/articleList/articleMusic',articleMusicRouter);

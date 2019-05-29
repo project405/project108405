@@ -52,7 +52,7 @@ router.post('/', function (req, res, next) {
             
             signUp.createMember(newData).then(d => {
                 if (d == 0) {
-                    res.end('<script> alert("新增成功！恭喜你已經成為會員！"); history.back();</script>');
+                    res.end('<script> alert("新增成功！恭喜你已經成為會員！");location.replace("/");</script>');
                 } else {
                     res.end('<script> alert("新增失敗！請重新註冊！"); history.back(); </script>');     //顯示註冊失敗訊息
                 }
