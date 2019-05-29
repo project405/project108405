@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
     var memID = req.session.memID;
     if (memID == null || memID == undefined) {
-        res.render('login');
+        res.render('logIn');
     } else {
         res.render('memberManage');
     }

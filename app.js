@@ -26,10 +26,10 @@ var articleExhibitionRouter = require('./routes/article/articleExhibition');
 //=========================================
 var memberRouter = require('./routes/member/member');
 var memberManageRouter = require('./routes/member/memberManage');
-var loginRouter = require('./routes/member/login');
+var logInRouter = require('./routes/member/logIn');
 var signUpRouter = require('./routes/member/signUp');
 var signUpAddRouter = require('./routes/member/signUp_add');
-var userLoginRouter = require('./routes/member/userLogin');
+var userLogInRouter = require('./routes/member/userLogIn');
 var notifyRouter = require('./routes/notify');
 var postRouter = require('./routes/post');
 
@@ -97,10 +97,10 @@ app.use('/articleList/articleExhibition',articleExhibitionRouter);
 app.use('/member',memberRouter);
 app.use('/member/articleManage',articleManageRouter);
 app.use('/member/memberManage',memberManageRouter);
-app.use('/login',loginRouter);
+app.use('/logIn',logInRouter);
 app.use('/signUp',signUpRouter);
 app.use('/signUp/add',signUpAddRouter);
-app.use('/userlogin',userLoginRouter);
+app.use('/userLogIn',userLogInRouter);
 app.use('/notify',notifyRouter);
 
 //=========================================

@@ -13,7 +13,7 @@ router.post('/', function (req, res, next) {
     var postDateTime = moment(new Date()).format("YYYY-MM-DD hh:mm:ss")
     // console.log(moment(new Date()).format("YYYY-MM-DD hh:mm:ss"));
     if (memID == undefined || memID == null) {
-        res.render('login');
+        res.render('logIn');
     } else {
         member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime).then(data =>{
             if (data == 0) {

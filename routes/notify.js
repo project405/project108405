@@ -5,7 +5,7 @@ const notify = require('./utility/notify');
 /* GET home page. */
 router.get('/', function (req, res, next) {
   if (req.session.memID == null || req.session.memID == undefined) {
-    res.render('login');  //導向登入畫面
+    res.render('logIn');  //導向登入畫面
   } else {
     notify.getNotifyList(req.session.memID).then(data => {
       if (data == null) {
