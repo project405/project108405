@@ -75,12 +75,14 @@ div.article {
     display: block;
 }
 
-#portfolio .container-fluid .portfolio-box .portfolio-box-caption {
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption,
+.portfolio-box-caption:hover,
+.portfolio-box-caption:focus {
     display: center;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    padding-top: 3em;
+    padding-top: 2em;
     -webkit-box-pack: center top;
     -ms-flex-pack: center;
     justify-content: center;
@@ -369,7 +371,7 @@ div.footer {
     font-size: 3em;
     opacity: 0.5;
     text-decoration: none;
-    color: white;
+    color: rgb(61, 61, 61);
 }
 
 .fa-chevron-circle-down:hover {
