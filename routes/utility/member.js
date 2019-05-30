@@ -105,9 +105,101 @@ var myArticle = async function (memID) {
     result[0] = article;
     result[1] = articleLikeCount;
     result[2] = articleMessCount;
-    result[3] = tag ; 
+    result[3] = tag;
     return result;
 }
 
+//=========================================
+//----- four_class_articleManage (start)-----
+//=========================================
+//---------  myMovieArticle() -------------
+var myMovieArticle = async function (memID) {
+    var result = [];
+    var movieArticleList = [];
+    var movieArtiLikeCount = [];
+    var movieArtiMessCount = [];
+    var tagLink = [];
+    var tag = [] ;
+    // -----------  取得電影分類文章 --------------
+    await sql('SELECT * FROM "article" WHERE "artiClass" = $1 and "memID" = $2 ', ['movie', memID])
+        .then((data) => {
+            console.log(data.rows);
+            for (let i = 0; i < data.rows.length; i++) {
+                data.rows[i].artiDateTime = moment(data.rows[i].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+            }
+            movieArticleList = data.rows;
+        }, (error) => {
+            movieArticleList = null;
+        });
+    //---------  取得電影文章的愛心數量 -------------
+    for (let i = 0; i < movieArticleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [movieArticleList[i].artiNum])
+            .then((data) => {
+                // console.log(data.rows[0]);
+                movieArtiLikeCount.push(data.rows[0]);
+            }, (error) => {
+                movieArtiLikeCount = null;
+            });
+    }
+    //---------  取得收藏的文章的留言數量 -------------
+    for (let i = 0; i < movieArticleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum"=$1', [movieArticleList[i].artiNum])
+            .then((data) => {
+                // console.log(data.rows[0]);
+                movieArtiMessCount.push(data.rows[0]);
+            }, (error) => {
+                movieArtiMessCount = null;
+            });
+    }
+    // -----------  取得tagLink表中的 artiNum 方便在 tag表中取得資料 --------------
+    for (let i = 0; i < movieArticleList.length; i++) {
+        await sql('select * from "tagLinkArticle" where "artiNum" = $1', [movieArticleList[i].artiNum])
+            .then((data) => {
+                // console.log("data=", data.rows);
+                if (data.rows != undefined && data.rows != '') {
+                    tagLink.push(data.rows);
+                } else {
+                    let tagNull = { "tagNum": "null" };
+                    tagLink.push([tagNull]);
+                }
+            }, (error) => {
+                tagLink = null;
+            });
+    }
+    // console.log("tagLink=", tagLink);
+    // -----------  取得文章全部tag --------------
+    //初始化二維陣列
+    for (let i = 0; i < tagLink.length; i++) {
+        tag[i] = [];
+    }
+    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
+    for (let i = 0; i < tagLink.length; i++) {
+        for (let j = 0; j < tagLink[i].length; j++) {
+            if (tagLink[i][j].tagNum != 'null') {
+                await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
+                    .then((data) => {
+                        // console.log(data.rows[0].tagName);
+                        if (data.rows[0].tagName != undefined) {
+                            tag[i][j] = data.rows[0].tagName;
+                        }
+                    }, (error) => {
+                        tag = null;
+                    });
+            }
+        }
+    }
+    result[0] = movieArticleList;
+    result[1] = movieArtiLikeCount;
+    result[2] = movieArtiMessCount;
+    result[3] = tag ;
+
+    console.log(result);
+    return result;
+}
+
+
 //匯出
-module.exports = { articlePost, myArticle };
+module.exports = {
+    articlePost, myArticle,
+    myMovieArticle
+};

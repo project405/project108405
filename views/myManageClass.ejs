@@ -31,20 +31,19 @@
     <section id="articleList">
         <div class="container-fluid article">
             <center>
-                <h3>文章列表</h3>
+                <h3>我的文章管理</h3>
                 <hr class="highlight">
 
             </center>
             <div class="btnPost position-fixed">
-                <button type="button" class="btn postButton" onclick="location.href='/article/post'">
+                <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
                     <i class="fas fa-edit"></i>發文</button>
             </div>
 
 
-            <div class="row d-flex justify-content-center no-gutters">
+            <div class="row d-flex justify-content-center  no-gutters">
 
-
-                <div class="search col-lg-5 mx-auto ">
+                <div class="search col-lg-5 mx-auto">
                     <!-- Search -->
                     <form class="form-inline d-flex">
                         <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-9"
@@ -54,28 +53,26 @@
                     <!-- Search End -->
                 </div>
 
-
                 <div class="col-12 mb-3 col-lg-8 ">
                     <!-- list -->
-                    <% for(var i=0; i<items[0].length; i++) {%>
-                    <div class="card shadow list " onclick=" location.href='/article/<%= items[0][i].artiNum %>' "
-                        style="cursor:pointer; ">
+                    <% for(var i = 0; i < myArtiClass[0].length ; i++) { %>
+                    <div class="card shadow list " onclick="location.href='article.html'" style="cursor:pointer; ">
 
                         <div class="card-body ">
                             <div class="poster">
                                 <div class="name">
-                                    <p><%= items[0][i].memID %> 於 <%= items[0][i].artiDateTime %>發表</p>
+                                    <p><%= myArtiClass[0][i].memID %> 於 <%= myArtiClass[0][i].artiDateTime %>發表</p>
                                 </div>
                                 <hr>
                             </div>
-                            <h3 class="card-title "><%= items[0][i].artiHead %>
+                            <h3 class="card-title "><%= myArtiClass[0][i].artiHead %>
                             </h3>
-                            <p class="card-text "><%= items[0][i].artiCont %>
+                            <p class="card-text "><%= myArtiClass[0][i].artiCont %>
                             </p>
 
                             <div class="tagDiv col-lg-12 ">
-                                <% for(var j=0; j<items[3][i].length; j++) {%>
-                                <button type="button" class="btn  tag"><%= items[3][i][j] %></button>
+                                <% for(var j = 0; j < myArtiClass[3][i].length ; j++) { %>
+                                <button type="button" class="btn  tag"><%= myArtiClass[3][i][j] %></button>
                                 <% } %>
                             </div>
                         </div>
@@ -87,10 +84,10 @@
                         <!-- info -->
                         <div class="info">
                             <button type="button" class="btn postInfo"><i
-                                    class="fab fa-gratipay"></i><a><%= items[1][i+1] %>
+                                    class="fab fa-gratipay"></i><a><%= myArtiClass[1][i].count %>
                                 </a></button>
                             <button type="button" class="btn postInfo"><i
-                                    class="fas fa-comment-dots"></i><a><%= items[2][i+1] %></a></button>
+                                    class="fas fa-comment-dots"></i><a><%= myArtiClass[2][i].count %></a></button>
                             <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i><a></a></button>
                         </div>
                         <!-- info結束 -->
@@ -99,31 +96,20 @@
                     <div class="w-100"></div>
                     <% } %>
                     <!-- listEnd -->
-
                 </div>
             </div>
-
-        </div>
-
-        </div>
-
-
         </div>
     </section>
     <!-- 文章列表區塊結束 -->
 
 
 
-    <div class="fixed-bottom  d-flex justify-content-center">
-        <button type="button" class="btn btn-secondary footer" onclick="location.href='/articleList'">所有分類</button>
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/articleList/articleMovie'">電影類</button>
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/articleList/articleMusic'">音樂類</button>
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/articleList/articleBook'">書籍類</button>
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/articleList/articleExhibition'">展覽類</button>
+    <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
+        <button type="button " class="btn btn-secondary footer"  onclick="location.href='/articleManage'">所有分類</button>
+        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/articleManage/movie'">電影類</button>
+        <button type="button " class="btn btn-secondary align-middle footer">音樂類</button>
+        <button type="button " class="btn btn-secondary align-middle footer">書籍類</button>
+        <button type="button " class="btn btn-secondary align-middle footer">展覽類</button>
 
     </div>
 

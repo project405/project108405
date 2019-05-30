@@ -13,8 +13,6 @@ var session = require('express-session');
 //=========================================
 var articleListRouter = require('./routes/article/articleList');
 var articleRouter = require('./routes/article/article');
-var articleManageRouter = require('./routes/article/articleManage');
-var articlePostRouter = require('./routes/articlePost');
 // ---------------  four Class -------------------
 var articleMovieRouter = require('./routes/article/articleMovie');
 var articleMusicRouter = require('./routes/article/articleMusic');
@@ -26,12 +24,16 @@ var articleExhibitionRouter = require('./routes/article/articleExhibition');
 //=========================================
 var memberRouter = require('./routes/member/member');
 var memberManageRouter = require('./routes/member/memberManage');
+var articleManageRouter = require('./routes/member/articleManage');
+var articlePostRouter = require('./routes/member/articlePost');
 var logInRouter = require('./routes/member/logIn');
 var signUpRouter = require('./routes/member/signUp');
 var signUpAddRouter = require('./routes/member/signUp_add');
 var userLogInRouter = require('./routes/member/userLogIn');
 var notifyRouter = require('./routes/notify');
 var postRouter = require('./routes/post');
+// ---------------  four Class -------------------
+var myMovieArticleRouter = require('./routes/member/myMovieArticle');
 
 //=========================================
 //---------  collection router ------------
@@ -102,6 +104,8 @@ app.use('/signUp',signUpRouter);
 app.use('/signUp/add',signUpAddRouter);
 app.use('/userLogIn',userLogInRouter);
 app.use('/notify',notifyRouter);
+// -------------- four Class use----------------
+app.use('/articleManage/movie',myMovieArticleRouter);
 
 //=========================================
 //----------  collection use --------------
