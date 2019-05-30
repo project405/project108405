@@ -36,7 +36,23 @@ body {
 div.search {
     width: 100%;
     margin-bottom: 0.75em;
-    float: right;
+}
+
+
+/*  button */
+
+button.footer {
+    margin: 0.2em;
+    height: auto;
+    font-size: 1em;
+    opacity: 0.89;
+    padding: 0.2em 0.3em;
+}
+
+@media (max-width: 450px) {
+    button.footer {
+        font-size: 0.8em;
+    }
 }
 
 
@@ -60,7 +76,7 @@ button.search {
     -webkit-box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
     box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
     padding: 0.75em 0!important;
-    margin-left: 0 !important;
+    margin: 0.5em !important;
     letter-spacing: .15em;
     border: 0;
     border-radius: 8px;
@@ -87,9 +103,9 @@ button.search:active {
 
 @media (max-width: 576px) {
     button.search {
-        width: 50% !important;
-        float: right !important;
+        width: 85% !important;
         margin-left: auto !important;
+        margin-right: auto !important;
     }
 }
 

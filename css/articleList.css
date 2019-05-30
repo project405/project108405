@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
 html,
 body {
     height: 100%;
@@ -109,6 +110,7 @@ div.floor {
 
 div.info {
     margin-left: 0.45em;
+    white-space: nowrap;
 }
 
 
@@ -137,7 +139,6 @@ div.info {
 div.search {
     width: 100%;
     margin-bottom: 0.75em;
-    float: right;
 }
 
 
@@ -153,7 +154,7 @@ button.footer {
 
 @media (max-width: 450px) {
     button.footer {
-        font-size: 0.85em;
+        font-size: 0.8em;
     }
 }
 
@@ -178,7 +179,7 @@ button.search {
     -webkit-box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
     box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
     padding: 0.75em 0!important;
-    margin-left: 0 !important;
+    margin: 0.5em !important;
     letter-spacing: .15em;
     border: 0;
     border-radius: 8px;
@@ -205,9 +206,9 @@ button.search:active {
 
 @media (max-width: 576px) {
     button.search {
-        width: 50% !important;
-        float: right !important;
+        width: 85% !important;
         margin-left: auto !important;
+        margin-right: auto !important;
     }
 }
 
@@ -245,19 +246,14 @@ h2 {
 
 /* postButton */
 
-div.btnPost {
-    position: absolute;
-    left: 90%;
-    top: 10%;
-    z-index: 2;
-    opacity: 0.5;
-}
-
 button.postButton {
-    padding: 0.3em;
-    font-size: 1em;
     background-color: #2D4F41;
     color: white;
+    margin: 0.2em;
+    height: auto;
+    font-size: 1em;
+    opacity: 0.89;
+    padding: 0.2em 0.3em;
 }
 
 button.postButton:hover {
@@ -266,8 +262,8 @@ button.postButton:hover {
     opacity: 100%;
 }
 
-@media (max-width: 827px) {
+@media (max-width: 450px) {
     button.postButton {
-        font-size: 0.85em;
+        font-size: 0.8em;
     }
 }

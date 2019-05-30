@@ -265,7 +265,7 @@ a.navTitle {
 @media (max-width: 575px) {
     #gotop {
         position: fixed;
-        bottom: 27px;
+        bottom: 30px;
         right: 10px;
         width: 40px;
         height: 40px;
