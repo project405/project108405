@@ -174,8 +174,9 @@ div.radio {
     vertical-align: middle;
     margin: 1em;
     cursor: pointer;
-    width: 6em;
+    width: 4.5em;
     font-size: 1em;
+    padding-right: 0;
 }
 
 .radio-custom-label {
