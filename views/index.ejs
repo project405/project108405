@@ -49,88 +49,30 @@
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
 
             <!-- 電影類推薦 -->
-
+            <% for(var i = 0 ; i<items[0].length ; i ++) { %>
             <div class="wrapper col-12  col-lg-4" style="background-image: url('imgs/recommend/movie1.jpg');"
-                onclick="location.href='recommend.html'" data-aos="fade-right">
-                <a class="portfolio-box" href="recommend.html">
+                onclick="location.href='/recommendList'" data-aos="fade-right">
+
+                <a class="portfolio-box" href="/recommendList">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            <p>電影類</p>
+                            <p><%= items[0][i].recomClass %></p>
                         </div>
                         <div class="project-name">
-                            <p class="title">幸福綠皮書</p>
-                            <p class="content">改編自真人實事，描述60年代知名黑人鋼琴家唐薛利和他僱用的義裔司機兼保鑣大嘴東尼， 到美國深南部（Deep South）巡迴演出的公路故事。
+                            <p class="title"><%= items[0][i].recomHead %></p>
+                            <p class="content"><%= items[0][i].recomCont %>
                             </p>
                         </div>
                     </div>
                 </a>
             </div>
-            <!-- 電影類推薦結束 -->
-
-
-            <!-- 音樂類推薦 -->
-
-            <div class="wrapper  col-12  col-lg-4" style="background-image: url('imgs/recommend/music1.jpg');"
-                data-aos="fade-right">
-                <a class="portfolio-box" href="recommend.html">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                            <p>音樂類</p>
-                        </div>
-                        <div class="project-name">
-                            <p class="title">宋冬野 - 知道</p>
-                            <p class="content">作詞：宋冬野 作曲：宋冬野 <br>我要當一個科學家 僕人和藉口伴我生長 夏天藏在西伯利亞 冬天住在蘇門答臘的島上 不在乎螞蟻也不在乎國家
-                                不在乎佛祖也不在乎手槍 把哲學家的拐杖插進這無能的土壤
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- 音樂類推薦結束 -->
+            <% if( (i+1) %2 == 0){ %>
             <div class="w-100"></div>
-            <!-- 書籍類推薦 -->
-
-            <div class="wrapper col-12  col-lg-4" style="background-image: url('imgs/recommend/book1.jpg');"
-                data-aos="fade-right">
-                <a class="portfolio-box" href="recommend.html">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                            <p>書籍類</p>
-                        </div>
-                        <div class="project-name">
-                            <p class="title">別在走遠後才想起說再見</p>
-                            <p class="content">
-                                「人生由故事串起，故事在人生裡發生。」透過20則穿梭於不同關係之間的故事，那些對你我都有點熟悉的過往，宛若真實世界的搬演，富含了滿載遺憾、無奈、領悟、溫暖的情緒。有些我們選擇遺忘，有些則是故意放手。
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <!-- 書籍類推薦結束 -->
-
-
-            <!-- 展覽類推薦 -->
-            <div class="wrapper col-12  col-lg-4" style="background-image: url('imgs/testImgs/21.jpg');"
-                data-aos="fade-right">
-                <a class="portfolio-box" href="recommend.html">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                            <p>展覽類</p>
-                        </div>
-                        <div class="project-name">
-                            <p class="title">『隨風而行』_黃瑞銘 水彩個展
-                            </p>
-                            <p class="content">
-                                美來自於感動，台灣具足令歐美和亞洲人士感動的元素，台灣很美。在3萬多平方公里的土地上，有超過1千公里的海岸線，也有268座超過3000公尺的高山，多變的地貌形成豐富的景觀。
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <!-- 展覽類推薦結束 -->
-
+            <% } %>
+            <% } %>
+            <!-- 電影類推薦結束 -->
         </div>
+
     </section>
 
     <!-- 熱門文章區塊 -->
@@ -143,17 +85,17 @@
             </center>
             <div class="row">
                 <div class="col-lg-7">
-                    <div class="card  shadow" onclick="location.href='/article/<%= items[0][0].artiNum %>'"
+                    <div class="card  shadow" onclick="location.href='/article/<%= items[1][0].artiNum %>'"
                         style="cursor:pointer;">
 
                         <div class="card-body">
-                            <h3 class="card-title"><%= items[0][0].artiHead %>
+                            <h3 class="card-title"><%= items[1][0].artiHead %>
                             </h3>
-                            <p class="card-text"><%= items[0][0].artiCont %>
+                            <p class="card-text"><%= items[1][0].artiCont %>
                             </p>
 
                             <p class="poster">
-                                <%= items[0][0].memID %> 於 <%= items[0][0].artiDateTime %>發佈
+                                <%= items[1][0].memID %> 於 <%= items[1][0].artiDateTime %>發佈
                             </p>
 
                             <div class="tagDiv">
@@ -165,22 +107,22 @@
                         </div>
 
                         <div class="wrapperCardbig card-img-bottom"
-                            style="background-image: url('imgs/testImgs/17.png');">
+                            style="background-image: url('/imgs/testImgs/17.png');">
                         </div>
                     </div>
                 </div>
                 <!-- 精選右邊上面的格子 -->
                 <div class=" col-lg-5">
-                    <div class="card shadow" onclick="location.href='/article/<%= items[1][0].artiNum %>'"
+                    <div class="card shadow" onclick="location.href='/article/<%= items[1][1].artiNum %>'"
                         style="cursor:pointer;">
 
                         <div class="card-body">
-                            <h3 class="card-title"><%= items[1][0].artiHead %>
+                            <h3 class="card-title"><%= items[1][1].artiHead %>
                             </h3>
-                            <p class="card-text"><%= items[1][0].artiCont %>
+                            <p class="card-text"><%= items[1][1].artiCont %>
                             </p>
                             <p class="poster">
-                                <%= items[1][0].memID %> 於 <%= items[1][0].artiDateTime %> 發佈
+                                <%= items[1][1].memID %> 於 <%= items[1][1].artiDateTime %> 發佈
                             </p>
                             <div class="tagDiv">
                                 <button type="button" class="btn  tag">汪冠宇</button>
@@ -196,16 +138,16 @@
                     <!-- 精選右邊上面的格子結束 -->
 
                     <!-- 精選右邊下面的格子 -->
-                    <div class="card shadow" onclick="location.href='/article/<%= items[2][0].artiNum %>'"
+                    <div class="card shadow" onclick="location.href='/article/<%= items[1][2].artiNum %>'"
                         style="cursor:pointer;">
 
                         <div class="card-body">
-                            <h3 class="card-title"><%= items[2][0].artiHead %>
+                            <h3 class="card-title"><%= items[1][2].artiHead %>
                             </h3>
-                            <p class="card-text"><%= items[2][0].artiCont %>
+                            <p class="card-text"><%= items[1][2].artiCont %>
                             </p>
                             <p class="poster">
-                                <%= items[2][0].memID %> 於 <%= items[2][0].artiDateTime %> 發佈
+                                <%= items[1][2].memID %> 於 <%= items[1][2].artiDateTime %> 發佈
                             </p>
                             <div class="tagDiv">
                                 <button type="button" class="btn  tag">華山</button>

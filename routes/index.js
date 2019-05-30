@@ -1,13 +1,13 @@
 var express = require('express');
 var router = express.Router();
 //增加引用函式
-const article = require('./utility/article');
+const index = require('./utility/index');
 var moment = require('moment');
 
 //接收GET請求
 router.get('/', function (req, res, next) {
-    article.getHotArticle().then(data => { //取得artiNum
-        // console.log(data);
+    index.getIndexData().then(data => { //取得artiNum
+        console.log(data);
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data.length > 0) {
