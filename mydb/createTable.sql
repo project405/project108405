@@ -41,7 +41,7 @@ CREATE TABLE "public"."article" (
 	"artiHead" varchar(100),
 	"artiCont" text ,
 	"artiClass" varchar(20) COLLATE "pg_catalog"."default" ,
-	
+	"picture" varchar(255) COLLATE "pg_catalog"."default",
 	FOREIGN KEY("memID") REFERENCES member("memID")ON DELETE RESTRICT  ON UPDATE RESTRICT 
 );
 
