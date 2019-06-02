@@ -4,17 +4,26 @@ body {
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
     border: none;
     word-wrap: break-word;
-    /* padding-top: 0.75em;
-    background: url("../imgs/banner.jpg");
+    background: url("../imgs/background/articleBac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover; */
+    background-size: cover;
     text-align: justify;
     padding-top: 3em;
     height: auto;
     height: 100%;
     position: relative;
     -webkit-overflow-scroll: touch;
+}
+
+@media (max-width: 650px) {
+    html,
+    body {
+        background: url("../imgs/background/phone/ParticleBac.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
 }
 
 .container-fluid {
@@ -57,6 +66,7 @@ textarea.input {
     display: flex;
     flex-direction: row;
     margin: 0.75em 0 0.75em 0;
+    overflow: hidden;
 }
 
 .input-icon {
@@ -97,8 +107,17 @@ div.report {
 
 textarea.report {
     height: 200px;
+    padding: 1em;
 }
 
 button.report {
+    float: right;
+}
+
+select {
+    padding-bottom: 20em;
+}
+
+button.float-md-right {
     float: right;
 }

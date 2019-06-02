@@ -66,29 +66,6 @@ $('#goDown').click(function() {
 });
 
 
-
-
-// login
-
-$("#login").click(function() {
-    alert('登入成功');
-
-});
-
-
-$("#login1").click(function() {
-    window.location("index.html");
-
-});
-
-$("#login2").click(function() {
-    window.location.replace("index.html");
-
-});
-
-
-
-
 // report
 
 $(document).ready(function() {
@@ -99,4 +76,8 @@ $(document).ready(function() {
         $("#report").show();
         $('.navbar-collapse').collapse('hide');
     });
+    $("#postReport").click(function() {
+        $("#report").show();
+    });
+
 });

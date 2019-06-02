@@ -5,9 +5,9 @@ body {
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
     margin: 0;
-    padding: 0;
+    padding-top: 3em;
     border: none;
-    background: url("../imgs/logIn-bac.PNG");
+    background: url("../imgs/background/logInBac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -18,7 +18,7 @@ body {
 @media (max-width: 992px) {
     html,
     body {
-        background: url("../imgs/phone/PlogIn-bac.PNG");
+        background: url("../imgs/background/phone/PlogInBac.PNG");
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: cover;
@@ -29,7 +29,7 @@ body {
 
 div.member {
     margin: 0em;
-    padding: 6em 0 0 0;
+    padding-bottom: 3em;
 }
 
 
@@ -49,6 +49,8 @@ form.member {
     margin-bottom: 2em;
     background-color: #f0f0f0;
     opacity: 0.95;
+    margin: 0;
+    padding: 0.75em;
 }
 
 @media (max-width: 350px) {
@@ -86,6 +88,7 @@ div.member button {
     display: flex;
     flex-direction: row;
     margin: 0.75em 0 0.75em 0;
+    overflow: hidden;
 }
 
 .input-with-icon {
@@ -114,8 +117,10 @@ div.radio {
 .radio-custom-label {
     display: inline-block;
     vertical-align: middle;
-    margin: 5px;
+    margin: 1em;
     cursor: pointer;
+    width: 6em;
+    font-size: 1em;
 }
 
 .radio-custom-label {
@@ -141,7 +146,7 @@ div.radio {
 .radio-custom:checked+.radio-custom-label:before {
     content: "\f00c";
     font-family: 'FontAwesome';
-    color: #bbb;
+    color: black;
 }
 
 .radio-custom:focus+.radio-custom-label {

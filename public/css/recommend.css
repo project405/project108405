@@ -8,10 +8,20 @@ body {
     border: none;
     text-align: justify;
     text-justify: inter-ideograph;
-    background: url("../imgs/collection-bac.png");
+    background: url("../imgs/background/reommendBac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+}
+
+@media (max-width: 650px) {
+    html,
+    body {
+        background: url("../imgs/background/phone/PreommendBac.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
 }
 
 
@@ -30,65 +40,56 @@ div.search {
 }
 
 
-/*  button */
-
-button.footer {
-    margin: 0.1em;
-    height: 2em;
-    font-size: 1em;
-    opacity: 0.89;
-}
-
-@media (max-width: 450px) {
-    button.footer {
-        font-size: 0.85em;
-    }
-}
-
-
 /* Style the search field */
 
 .form-inline input {
     -webkit-box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
     box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
-    padding: 0.75em 1.25em;
+    padding: 0.75em 0.75em;
+    margin-right: 0em;
     height: auto;
-    border: #f0f0f0 solid 0.75px;
+    border: #b3b3b3 solid 0.75px;
     border-radius: 8px;
+}
+
+.form-inline input:focus {
+    border: #b3b3b3 solid 0.75px;
 }
 
 button.search {
     -webkit-box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
     box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
-    padding: 0.75em 1.25em;
-    font-size: 80%;
+    padding: 0.75em 0!important;
+    margin-left: 0 !important;
     letter-spacing: .15em;
     border: 0;
     border-radius: 8px;
     font-size: 1em;
-    margin: 0.1em;
+    width: 6em !important;
 }
 
 button.search {
-    background-color: #64a19d;
+    background-color: rgb(72, 104, 90);
 }
 
 button.search:hover {
-    background-color: #4f837f;
+    background-color: #2D4F41;
 }
 
 button.search:focus {
-    background-color: #4f837f;
+    background-color: #2D4F41;
     color: white;
 }
 
 button.search:active {
-    background-color: #467370 !important;
+    background-color: rgb(11, 51, 35) !important;
 }
 
 @media (max-width: 576px) {
     button.search {
-        width: 50%;
+        width: 50% !important;
+        float: right !important;
+        margin-left: auto !important;
     }
 }
 
@@ -132,7 +133,7 @@ div.article {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    padding-top: 2em;
+    padding-top: 1.5em;
     -webkit-box-pack: center top;
     -ms-flex-pack: center;
     justify-content: center;
@@ -209,18 +210,19 @@ div.article {
 /*  button */
 
 button.footer {
-    margin: 0.1em;
-    height: 2em;
+    margin: 0.2em;
+    height: auto;
     font-size: 1em;
     opacity: 0.89;
-}
-
-button.postInfo:active {
-    color: #993a3a;
+    padding: 0.2em 0.3em;
 }
 
 @media (max-width: 450px) {
     button.footer {
         font-size: 0.85em;
     }
+}
+
+button.postInfo:active {
+    color: #993a3a;
 }

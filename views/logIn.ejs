@@ -32,7 +32,7 @@
 
 
     <section id="logIn">
-        <div class="container-fluid row flex justify-content-center logIn ">
+        <div class="container-fluid row flex justify-content-center logIn no-gutters">
             <div class="container-fluid">
                 <center>
                     <h3>登入</h3>
@@ -40,17 +40,17 @@
                 </center>
 
             </div>
-            <form class="logIn col-12-5 shadow" action="/userLogin" method="post">
-                <div class="input-icon-wrap">
-                    <span class="input-icon"><span class="fa fa-user"></span></span>
+            <form class="logIn col-lg-2 shadow" action="/userLogIn" method="post">
+                <div class="input-icon-wrap ">
+                    <span class="input-icon "><span class="fa fa-user"></span></span>
                     <input type="text" class="input-with-icon" id="ID" name="memID" placeholder="帳號">
                 </div>
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-lock"></span></span>
                     <input type="password" class="input-with-icon" id="password" name="memPass" placeholder="密碼">
                 </div>
-                <button type="submit" class="btn btn-secondary login">登入</button>
-                <button type="button" class="btn btn-light center">忘記密碼</button>
+                <button type="submit" class="btn btn-dark login">登入</button>
+                <button type="button" class="btn btn-secondary center">忘記密碼</button>
 
                 <button type="button" class="btn btn-light center" onclick="location.href='/signUp'">註冊</button>
 
@@ -62,10 +62,8 @@
                     <center>
                         <h4>或</h4>
                         <hr class="highlight">
-                        <button type="button" class="btn third gmail" id="login1"
-                            onclick="location.href='/'">Gmail登入或註冊</button>
-                        <button type="button" class="btn third fb" id="login2"
-                            onclick="location.href='/'">Facebook登入或註冊</button>
+                        <button type="button" class="btn third gmail" onclick="location.href='/'">Gmail登入或註冊</button>
+                        <button type="button" class="btn third fb" onclick="location.href='/'">Facebook登入或註冊</button>
                     </center>
 
                 </div>
