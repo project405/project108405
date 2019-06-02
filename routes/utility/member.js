@@ -7,10 +7,10 @@ const moment = require('moment');
 //================================
 //-------- articlePost() ---------
 //================================
-var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime) {
+var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime,picture) {
     var result;
     //取得員工資料
-    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime") VALUES ($1,$2,$3,$4,$5)', [memID, artiHead, artiCont, artiClass, artiDateTime])
+    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime","picture") VALUES ($1,$2,$3,$4,$5,$6)', [memID, artiHead, artiCont, artiClass, artiDateTime,picture])
         .then((data) => {
             // console.log("data=", data);
             result = 0;

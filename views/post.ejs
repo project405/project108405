@@ -35,7 +35,7 @@
         <!-- into multiple lines End -->
 
         <div class="col-lg-8 content">
-            <form class="post" action="/article/post" method="post">
+            <form class="post" action="/article/post" method="post" enctype="multipart/form-data">
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-heading"></span></span>
                     <input type="text" class="input-with-icon title" name="artiHead" placeholder="輸入您的標題">
@@ -55,7 +55,7 @@
                 </select>
 
                 <br>
-                <input type="file" class="form-control-file" id="imgSel">
+                <input type="file" class="form-control-file" id="imgSel" name="userImg">
 
 
 

@@ -74,6 +74,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//----------------------------------------
+// 可由外部直接取用資料夾
+//----------------------------------------
+app.use(express.static('public/picture'));
+//-----------------------------------------
+
 //=========================================
 //---------  express session ------------
 //=========================================
