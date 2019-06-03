@@ -137,10 +137,10 @@ app.use('/collection/article/exhibition',colleArtiExhibitionRouter);
 //=========================================
 app.use('/recommendList',recommendListRouter);
 // -------------- four Class ----------------
-app.use('/recommendList/movie', RecomMovieRouter);
-app.use('/recommendList/music', RecomMusicRouter);
-app.use('/recommendList/book', RecomBookRouter);
-app.use('/recommendList/exhibition', RecomExhibitionRouter);
+app.use('/recommendList/recommendmovie', RecomMovieRouter);
+app.use('/recommendList/recommendmusic', RecomMusicRouter);
+app.use('/recommendList/recommendbook', RecomBookRouter);
+app.use('/recommendList/recommendexhibition', RecomExhibitionRouter);
 
 
 

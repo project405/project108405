@@ -11,11 +11,13 @@ router.get('/', function (req, res, next) {
         } else if (data == -1) {
             res.render('notFound');  //導向找不到頁面                
         } else {
-            res.render('recomClass', { recomClass: data });  //將資料傳給顯示頁面
+            console.log(data)
+            res.render('recomClass', { recom: data });  //將資料傳給顯示頁面
         }
     })
 
 });
+
 
 
 module.exports = router;

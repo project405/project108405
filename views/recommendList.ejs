@@ -33,7 +33,8 @@
 
 
     <!-- Portfolio Section -->
-    <section id="portfolio">
+    
+    <section id="portfolio"> 
 
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
 
@@ -70,15 +71,21 @@
             <% } %>
              <!-- 推薦結束 -->
     </section>
+    
 
     <div class="fixed-bottom  d-flex justify-content-center">
-        <button type="button" class="btn btn-secondary footer">所有分類</button>
-        <button type="button" class="btn btn-secondary footer">電影類</button>
-        <button type="button" class="btn btn-secondary footer">音樂類</button>
-        <button type="button" class="btn btn-secondary footer">書籍類</button>
-        <button type="button" class="btn btn-secondary footer">展覽類</button>
+        <button type="button" class="btn btn-secondary footer" onclick="location.href='/recommendList'">所有分類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/recommendMovie'">電影類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/recommendMusic'">音樂類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/recommendBook'">書籍類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/recommendExhibition'">展覽類</button>
 
     </div>
+
 
 
     <a href="#" id="gotop">
