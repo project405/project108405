@@ -178,21 +178,6 @@ a.tag {
 }
 
 
-/* ------------------- */
-
-
-/* shadowBox */
-
-
-/* ------------------- */
-
-.shadow {
-    -moz-box-shadow: 2px 2px 2px rgba(20%, 20%, 40%, 0.6), 2px 2px 3px rgba(20%, 20%, 40%, 0.4), 3px 3px 6px rgba(20%, 20%, 40%, 0.4);
-    -webkit-box-shadow: 2px 2px 2px rgba(20%, 20%, 40%, 0.6), 2px 2px 3px rgba(20%, 20%, 40%, 0.4), 3px 3px 6px rgba(20%, 20%, 40%, 0.4);
-    box-shadow: 2px 2px 2px rgba(20%, 20%, 40%, 0.6), 2px 2px 3px rgba(20%, 20%, 40%, 0.4), 3px 3px 6px rgba(20%, 20%, 40%, 0.4);
-}
-
-
 /*  button */
 
 button.footer {
@@ -219,6 +204,12 @@ button.footer {
 
 div.search {
     margin: 0.75em 0 0.75em 0;
+}
+
+@media (max-width: 576px) {
+    button.search {
+        width: 90%;
+    }
 }
 
 

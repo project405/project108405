@@ -1,17 +1,3 @@
-// navbar
-$(document).ready(function() {
-    $(window).on("scroll", function() {
-
-        var wn = $(window).scrollTop();
-
-        if (wn > 120) {
-            $(".navbar").css("background", "#0D5146");
-        } else {
-            $(".navbar").css("background", "");
-        }
-    });
-});
-
 // 隨著留言增加height增加
 
 jQuery.fn.extend({
@@ -38,7 +24,7 @@ jQuery.fn.extend({
 });
 // 使用
 $(function() {
-    $('textarea').autoHeight();
+    $('#textarea').autoHeight();
 });
 
 
@@ -48,7 +34,7 @@ $(function() {
     $('#gotop').click(function() {
         $('html,body').animate({ scrollTop: 0 }, 'slow'); /* 返回到最頂上 */
         return false;
-        2
+
     });
 
     /* 偵測卷軸滑動時，往下滑超過400px就讓GoTop按鈕出現 */
@@ -64,10 +50,34 @@ $(function() {
 //bottom
 
 $("#goBottom").click(function() {
-    var scrollHeight = $('html,body').prop("scrollHeight");
-    $('html,body').animate({ scrollTop: scrollHeight }, 'slow');
+    $('html,body').animate({ scrollTop: $('#reply').offset().top }, 1000);
+
 });
 
 
 
-//textarea insert image
+//goDown
+
+
+
+
+$('#goDown').click(function() {
+    $('html,body').animate({ scrollTop: $('#block').offset().top }, 800);
+});
+
+
+// report
+
+$(document).ready(function() {
+    $("#x").click(function() {
+        $("#report").hide();
+    });
+    $("#navReport").click(function() {
+        $("#report").show();
+        $('.navbar-collapse').collapse('hide');
+    });
+    $("#postReport").click(function() {
+        $("#report").show();
+    });
+
+});

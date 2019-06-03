@@ -6,9 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--  js   -->
-    <script src="/javascripts/jquery.min.js"></script>
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -18,6 +15,8 @@
 
     <link href="/css/header.css" rel="stylesheet" type="text/css" />
     <link href="/css/article.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
 
     <title>文藝富心</title>
 </head>
@@ -30,133 +29,110 @@
 
     <!-- 使用者發文 -->
 
-    <div class="container-fluid post">
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-lg-10 content shadow">
-                <div class=" postArticle ">
-                    <p class="poster">
-                        <a class="floorTag text-break ">樓主</a> <%= items[0][0].memID %> 於
-                        <%= items[0][0].artiDateTime %>發布
-                    </p>
-                    <hr />
-
-                    <h3><%= items[0][0].artiHead %></h3>
-                    <hr />
-
-                    <p class="content"><%= items[0][0].artiCont %>
-                    </p>
-                    <div class="tagDiv col-lg-12 ">
-                        <button type="button" class="btn btn-info tag">有毛的</button>
-                        <button type="button" class="btn btn-info tag">皮卡丘</button>
-                        <button type="button" class="btn btn-info tag">超萌</button>
-                        <button type="button" class="btn btn-info tag">可愛</button>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 content shadow">
+                <div class="info d-flex">
+                    <div><a class="floorTag">樓主</a></div>
+                    <div><a class="name"><%= items[0][0].memID %></a>
+                        <a class="next"></a>
+                        <a class="dateTime">於<%= items[0][0].artiDateTime %>發佈</a>
                     </div>
-                    <hr class="info">
-
                 </div>
+                <hr />
+
+                <h5> <%= items[0][0].artiHead %> </h5>
+                <hr />
+
+                <p class="content"><%= items[0][0].artiCont %>
+                </p>
+
+                <div class="tagDiv col-lg-12 ">
+                    <% for (var i = 0 ; i< items[5][0].length ; i++) { %>
+                    <button type="button" class="btn  tag"><%= items[5][0][i] %></button>
+                    <% } %>
+                </div>
+                <hr class="info">
                 <!-- info -->
                 <div class="info">
-                    <button type="button" class="btn"><i
+                    <button type="button" class="btn postInfo"><i
                             class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
-                    <button type="button" class="btn"><i
+                    <button type="button" class="btn postInfo"><i
                             class="fas fa-comment-dots"></i><a><%= items[3][0].count %></a></button>
-                    <button type="button" class="btn"><i class="far fa-bookmark"></i></button>
-                    <button type="button" class="btn report">檢舉</button>
-
+                    <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i></button>
+                    <button type="button" class="btn report" id="postReport">檢舉</button>
                 </div>
                 <!-- info結束 -->
-
-
             </div>
         </div>
-    </div>
-    <!-- 使用者發文結束' -->
-    </div>
-    <center>
-        <h1>文章留言</h1>
+        <!-- 使用者發文結束' -->
 
-        <hr class="separate">
-    </center>
+        <center>
+            <h1>文章留言</h1>
+            <hr class="separate">
+        </center>
 
+        <!-- 文章留言 -->
 
-
-    <!-- 文章留言 -->
-    <% for(var j=0; j<items[1].length; j++) {%>
-    <div class="container-fluid ">
-
-
-        <div class="row">
-            <div class="col-sm-1"></div>
-            <div class="col-lg-10 content">
+        <div class="row justify-content-center">
+            <% for(var i = 0 ; i < items[1].length ; i ++){ %>
+            <div class="col-lg-8 content shadow">
                 <!-- 文章留言 -->
                 <div class="message">
                     <!-- info -->
-                    <div><button type="button" class="btn info"><i
-                                class="fab fa-gratipay"></i><a><%= items[4][j].count %> </a></button></div>
-
-                    <div class="poster">
-                        <div class="floor"><a class="floorTag text-break ">1樓</a> <a><%= items[1][j].memID %> 於
-                                <%= items[1][j].artiMessDateTime %>留言</a> </div>
-                        <hr>
-
+                    <div class="info d-flex">
+                        <div><a class="floorTag">1樓</a></div>
+                        <div><a class="name"><%= items[1][i].memID %></a>
+                            <a class="next"></a>
+                            <a class="dateTime">於<%= items[1][i].artiMessDateTime %>留言</a>
+                        </div>
+                        <div class="col-sm-1 ml-auto"><button type="button" class="btn like"><i
+                                    class="fab fa-gratipay"></i><%= items[4][i].count %></button></div>
                     </div>
-
+                    <hr class="smallMagin">
                     <!-- info結束 -->
 
-                    <p class="content"> <%= items[1][j].artiMessCont %>
+                    <p class="content"> <%= items[1][i].artiMessCont %>
                     </p>
                     <button type="button" class="btn report">檢舉</button>
-
                 </div>
-
-
             </div>
+            <% } %>
         </div>
-    </div>
-    <% } %>
-    <!-- 文章留言結束 -->
 
-    <!-- replying -->
-
-    <div class="container-fluid replying">
+        <!-- 文章留言結束 -->
 
 
-        <div class="row " id="reply">
-            <div class="col-sm-1"></div>
-            <div class="col-lg-10 content">
-                <div class="input">
-                    <textarea class="input" col="40" id="text" placeholder="輸入您要回覆的內容"></textarea>
-                </div>
+        <!-- replying -->
+        <div class="row replying justify-content-center" id="reply">
+            <div class="col-lg-8 content shadow">
                 <form>
-                    <div class="form-group">
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <div class="input">
+                        <textarea class="input" col="40" id="textarea" placeholder="輸入您要回覆的內容"></textarea>
                     </div>
+                    <br>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
                 </form>
-                <a href="#" class="btn btn-secondary btn-lg active float-md-right" role="button"
-                    aria-pressed="true">發佈留言</a>
+
+                <button type="submit" class="btn btn-secondary active float-md-right">發佈留言</button>
 
             </div>
-
-            <div class="col-sm-1"></div>
-
         </div>
-    </div>
-    <!-- replying end -->
+        <!-- replying end -->
 
-    <div class="row d-flex justify-content-center">
-        <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
+        <div class="row d-flex justify-content-center">
+            <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
 
-            <button type="button" class="btn btn-secondary  footer-item" id="goBottom">去留言</button>
-            <button type="button" class="btn btn-secondary  footer-item">愛心</button>
-            <button type="button" class="btn btn-secondary  footer-item">收藏</button>
+                <button type="button" class="btn btn-secondary footer" id="goBottom">去留言</button>
+                <button type="button" class="btn btn-secondary footer">愛心</button>
+                <button type="button" class="btn btn-secondary footer">收藏</button>
 
+            </div>
         </div>
 
         <a href="#" id="gotop">
             <i class="fa fa-angle-up"></i>
         </a>
-
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -171,6 +147,7 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
             crossorigin="anonymous "></script>
         <script src="/javascripts/active.js "></script>
+
 </body>
 
 </html>

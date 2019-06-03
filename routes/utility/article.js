@@ -10,6 +10,8 @@ var getArticleList = async function () {
     var articleList = [];
     var likeCount = [];
     var messageCount = [];
+    var tagLink = [];
+    var tag = [];
     var result = [];
     // -----------  取得文章清單 --------------
     await sql('SELECT * FROM "article"')
@@ -28,7 +30,7 @@ var getArticleList = async function () {
             .then((data) => {
                 if (data.rows != '' && data.rows != undefined) {
                     // console.log(articleList[i].artiNum , ":" , data.rows[0].count);
-                    likeCount[articleList[i].artiNum] = data.rows[0].count
+                    likeCount[articleList[i].artiNum] = data.rows[0].count;
                 }
             }, (error) => {
                 likeCount = null;
@@ -40,16 +42,55 @@ var getArticleList = async function () {
             .then((data) => {
                 if (data.rows != '' && data.rows != undefined) {
                     // console.log(articleList[i].artiNum , ":" , data.rows[0].count);
-                    messageCount[articleList[i].artiNum] = data.rows[0].count
+                    messageCount[articleList[i].artiNum] = data.rows[0].count;
                 }
             }, (error) => {
                 messageCount = null;
             });
     }
-
+    for (let i = 0; i < articleList.length; i++) {
+        // -----------  取得tagLink表中的 artiNum 方便在 tag表中取得資料 --------------
+        await sql('select * from "tagLinkArticle" where "artiNum" = $1', [articleList[i].artiNum])
+            .then((data) => {
+                // console.log("data=", data.rows);
+                if (data.rows != undefined && data.rows != '') {
+                    tagLink.push(data.rows);
+                } else {
+                    let tagNull = { "tagNum": "null" };
+                    tagLink.push([tagNull]);
+                }
+            }, (error) => {
+                tagLink = null;
+            });
+    }
+    console.log("taglink=", tagLink);
+    // -----------  取得文章全部tag --------------
+    //初始化二維陣列
+    for (let i = 0; i < tagLink.length; i++) {
+        tag[i] = [];
+    }
+    // console.log("初始",tag);
+    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
+    for (let i = 0; i < tagLink.length; i++) {
+        for (let j = 0; j < tagLink[i].length; j++) {
+            if (tagLink[i][j].tagNum != 'null') {
+                await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
+                    .then((data) => {
+                        // console.log(data.rows[0].tagName);
+                        if (data.rows[0].tagName != undefined && data.rows[0].tagName != null) {
+                            tag[i][j] = data.rows[0].tagName;
+                        }
+                    }, (error) => {
+                        tag = null;
+                    });
+            }
+        }
+    }
+    console.log(tag);
     result[0] = articleList;  //存入文章清單
     result[1] = likeCount;  //存入文章清單每篇的愛心數量
     result[2] = messageCount;
+    result[3] = tag;
     // console.log(result);
     return result;
 }
@@ -62,6 +103,8 @@ var getOneArticle = async function (artiNum) {
     var oneArtiMessage = []; //存放文章留言內容
     var oneArtiMessCount = []; //存放文章留言總數
     var oneArtiMessLikeCount = []; //存放留言愛心數量
+    var tagLink = [];
+    var tag = [];
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -118,13 +161,48 @@ var getOneArticle = async function (artiNum) {
                 oneArtiMessLikeCount = null;
             });
     }
-
+    // -----------  取得tagLink表中的 artiNum 方便在 tag表中取得資料 --------------
+    await sql('select * from "tagLinkArticle" where "artiNum" = $1', [artiNum])
+        .then((data) => {
+            // console.log("data=", data.rows);
+            if (data.rows != undefined && data.rows != '') {
+                tagLink.push(data.rows);
+            } else {
+                let tagNull = { "tagNum": "null" };
+                tagLink.push([tagNull]);
+            }
+        }, (error) => {
+            tagLink = null;
+        });
+    console.log("tagLink=", tagLink);
+    // -----------  取得文章全部tag --------------
+    // 初始化二維陣列
+    for (let i = 0; i < tagLink.length; i++) {
+        tag[i] = [];
+    }
+    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
+    for (let i = 0; i < tagLink.length; i++) {
+        for (let j = 0; j < tagLink[i].length; j++) {
+            if (tagLink[i][j].tagNum != 'null') {
+                await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
+                    .then((data) => {
+                        // console.log(data.rows[0].tagName);
+                        if (data.rows[0].tagName != undefined) {
+                            tag[i][j] = data.rows[0].tagName;
+                        }
+                    }, (error) => {
+                        tag = null;
+                    });
+            }
+        }
+    }
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
     result[2] = oneArtiLikeCount;
     result[3] = oneArtiMessCount;
     result[4] = oneArtiMessLikeCount;
-    // console.log(result);
+    result[5] = tag;
+    console.log(tag);
     return result;
 }
 //=========================================
@@ -133,56 +211,192 @@ var getOneArticle = async function (artiNum) {
 //---------  getClassMovie() -------------
 var getClassMovie = async function () {
     var result = [];
-
+    var movieArticleList = [];
+    var movieArtiLikeCount = [];
+    var movieArtiMessLikeCount = [];
+    // -----------  取得電影文章 --------------
     await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['movie'])
         .then((data) => {
-            result = data.rows;
+            // console.log(data.rows);
+            for (let i = 0; i < data.rows.length; i++) {
+                data.rows[i].artiDateTime = moment(data.rows[i].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+            }
+            movieArticleList = data.rows;
         }, (error) => {
-            result = null;
+            movieArticleList = null;
         });
-
+    // -----------  取得電影文章愛心數量 --------------
+    for (let i = 0; i < movieArticleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [movieArticleList[i].artiNum])
+            .then((data) => {
+                // console.log(data.rows[0]);
+                if (data.rows.length > 0) {
+                    movieArtiLikeCount.push(data.rows[0]);
+                } else {
+                    movieArtiLikeCount = -1;
+                }
+            }, (error) => {
+                movieArtiLikeCount = null;
+            });
+    }
+    // -----------  取得電影文章留言數量 --------------
+    for (let i = 0; i < movieArticleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum" = $1', [movieArticleList[i].artiNum])
+            .then((data) => {
+                // console.log(data.rows[0]);
+                movieArtiMessLikeCount.push(data.rows[0]);
+            }, (error) => {
+                movieArtiMessLikeCount = null;
+            });
+    }
+    result[0] = movieArticleList;
+    result[1] = movieArtiLikeCount;
+    result[2] = movieArtiMessLikeCount
+    // console.log(result);
     return result;
 }
 //---------  getClassMusic() -------------
 var getClassMusic = async function () {
     var result = [];
-
+    var musicArticleList = [];
+    var musicArtiLikeCount = [];
+    var musicArtiMessLikeCount = [];
+    // -----------  取得音樂文章 --------------
     await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['music'])
         .then((data) => {
-            result = data.rows;
+            // console.log(data.rows);
+            for (let i = 0; i < data.rows.length; i++) {
+                data.rows[i].artiDateTime = moment(data.rows[i].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+            }
+            musicArticleList = data.rows;
         }, (error) => {
-            result = null;
+            musicArticleList = null;
         });
+    // -----------  取得音樂文章愛心數量 --------------
+    for (let i = 0; i < musicArticleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [musicArticleList[i].artiNum])
+            .then((data) => {
+                // console.log(data.rows[0]);
+                if (data.rows.length > 0) {
+                    musicArtiLikeCount.push(data.rows[0]);
+                } else {
+                    musicArtiLikeCount = -1;
+                }
+            }, (error) => {
+                musicArtiLikeCount = null;
+            });
+    }
+    // -----------  取得音樂文章留言數量 --------------
+    for (let i = 0; i < musicArticleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum" = $1', [musicArticleList[i].artiNum])
+            .then((data) => {
+                // console.log(data.rows[0]);
+                musicArtiMessLikeCount.push(data.rows[0]);
+            }, (error) => {
+                musicArtiMessLikeCount = null;
+            });
+    }
 
+    result[0] = musicArticleList;
+    result[1] = musicArtiLikeCount;
+    result[2] = musicArtiMessLikeCount
     return result;
 }
 //---------  getClassBook() -------------
 var getClassBook = async function () {
     var result = [];
-
+    var bookArticleList = [];
+    var bookArtiLikeCount = [];
+    var bookArtiMessLikeCount = [];
+    // -----------  取得書籍文章 --------------
     await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['book'])
         .then((data) => {
-            result = data.rows;
+            // console.log(data.rows);
+            for (let i = 0; i < data.rows.length; i++) {
+                data.rows[i].artiDateTime = moment(data.rows[i].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+            }
+            bookArticleList = data.rows;
         }, (error) => {
-            result = null;
+            bookArticleList = null;
         });
+    // -----------  取得書籍文章愛心數量 --------------
+    for (let i = 0; i < bookArticleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [bookArticleList[i].artiNum])
+            .then((data) => {
+                // console.log(data.rows[0]);
+                if (data.rows.length > 0) {
+                    bookArtiLikeCount.push(data.rows[0]);
+                } else {
+                    bookArtiLikeCount = -1;
+                }
+            }, (error) => {
+                bookArtiLikeCount = null;
+            });
+    }
+    // -----------  取得書籍文章留言數量 --------------
+    for (let i = 0; i < bookArticleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum" = $1', [bookArticleList[i].artiNum])
+            .then((data) => {
+                // console.log(data.rows[0]);
+                bookArtiMessLikeCount.push(data.rows[0]);
+            }, (error) => {
+                bookArtiMessLikeCount = null;
+            });
+    }
 
+    result[0] = bookArticleList;
+    result[1] = bookArtiLikeCount;
+    result[2] = bookArtiMessLikeCount
     return result;
 }
 //---------  getClassExhibition() -------------
 var getClassExhibition = async function () {
     var result = [];
-
+    var exhibitionArticleList = [];
+    var exhibitionArtiLikeCount = [];
+    var exhibitionArtiMessLikeCount = [];
+    // -----------  取得展覽文章 --------------
     await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['exhibition'])
         .then((data) => {
-            result = data.rows;
+            // console.log(data.rows);
+            for (let i = 0; i < data.rows.length; i++) {
+                data.rows[i].artiDateTime = moment(data.rows[i].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+            }
+            exhibitionArticleList = data.rows;
         }, (error) => {
-            result = null;
+            exhibitionArticleList = null;
         });
+    // -----------  取得展覽文章愛心數量 --------------
+    for (let i = 0; i < exhibitionArticleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [exhibitionArticleList[i].artiNum])
+            .then((data) => {
+                // console.log(data.rows[0]);
+                if (data.rows.length > 0) {
+                    exhibitionArtiLikeCount.push(data.rows[0]);
+                } else {
+                    exhibitionArtiLikeCount = -1;
+                }
+            }, (error) => {
+                exhibitionArtiLikeCount = null;
+            });
+    }
+    // -----------  取得展覽文章留言數量 --------------
+    for (let i = 0; i < exhibitionArticleList.length; i++) {
+        await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum" = $1', [exhibitionArticleList[i].artiNum])
+            .then((data) => {
+                // console.log(data.rows[0]);
+                exhibitionArtiMessLikeCount.push(data.rows[0]);
+            }, (error) => {
+                exhibitionArtiMessLikeCount = null;
+            });
+    }
 
+    result[0] = exhibitionArticleList;
+    result[1] = exhibitionArtiLikeCount;
+    result[2] = exhibitionArtiMessLikeCount
     return result;
 }
-// ========= get_four_class_article (start) ========
+// ========= get_four_class_article (end) ========
 
 //=========================================
 //---------  getHotArticle() -------------

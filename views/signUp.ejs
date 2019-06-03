@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
 
@@ -18,7 +18,9 @@
 
 
     <link href="/css/header.css" rel="stylesheet" type="text/css" />
-    <link href="/css/signin.css" rel="stylesheet" type="text/css" />
+    <link href="/css/logIn.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
 
     <title>文藝富心</title>
 </head>
@@ -26,24 +28,29 @@
 <body>
     <script src="/javascripts/header.js"></script>
 
+    <center>
+        <h3>註冊</h3>
+        <hr class="highlight">
+    </center>
     <section id="signUp">
-        <div class="container-fluid row flex justify-content-center signUp">
-            <form class="signUp col-12-5" action="/signUp/add" method="post">
+        <div class="container-fluid row flex justify-content-center signUp no-gutters">
+            <form class="signUp col-lg-3" action="/signUp/add" method="post">
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fa fa-user"></span></span>
                     <input type="text" class="input-with-icon" id="ID" name="memID" placeholder="帳號">
                 </div>
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-user-circle"></span></span>
-                    <input type="text" class="input-with-icon" id="ID" name="memName" placeholder="暱稱">
+                    <input type="text" class="input-with-icon" id="closeID" name="memName" placeholder="暱稱">
                 </div>
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-lock"></span></span>
-                    <input type="password" class="input-with-icon" id="password" name="memPass"  placeholder="密碼">
+                    <input type="password" class="input-with-icon" id="password" name="memPass" placeholder="密碼">
                 </div>
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-lock"></span></span>
-                    <input type="password" class="input-with-icon" id="check-password" name="memCheckPass" placeholder="確認密碼">
+                    <input type="password" class="input-with-icon" id="check-password" name="memCheckPass"
+                        placeholder="確認密碼">
                 </div>
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-envelope-open-text"></span></span>
@@ -55,7 +62,7 @@
                     <span class="input-icon"><span class="fas fa-birthday-cake"></span></span>
                     <input type="date" class="input-with-icon" id="birthday" name="memBirth" placeholder="生日">
                 </div>
-                <div class="input-icon-wrap">
+                <div class="input-icon-wrap radio">
                     <span class="input-icon align-middle"><span class="fas fa-venus-mars"></span></span>
                     <div>
                         <input id="radio-1" class="radio-custom" name="memGender" value="m" type="radio" checked>
@@ -68,11 +75,13 @@
 
                 </div>
                 <button type="submit" class="btn btn-danger">註冊</button>
+            </form>
 
         </div>
-        </form>
-        </div>
     </section>
+
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
