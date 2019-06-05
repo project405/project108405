@@ -6,7 +6,7 @@ const sql = require('./asyncDB');
 //----------------------------------
 // 確認是否有收藏
 //----------------------------------
-var checkCollArticle = async function (memID,recomNum) {
+var checkCollRecommend = async function (memID,recomNum) {
     var result;
     await sql('SELECT * FROM "memberCollection" WHERE "memID" = $1 and "recomNum" = $2', [memID, recomNum])
         .then((data) => {
@@ -18,9 +18,9 @@ var checkCollArticle = async function (memID,recomNum) {
 }
 
 //----------------------------------
-// 加入收藏文章
+// 加入收藏推薦
 //----------------------------------
-var addCollArticle = async function (memID,recomNum,artiNum,collDateTime) {
+var addCollRecommend = async function (memID,recomNum,artiNum,collDateTime) {
   var result;
   await sql('INSERT INTO "memberCollection" ("memID","recomNum","artiNum","collDateTime") VALUES ($1,$2,$3,$4)', [memID,recomNum,artiNum,collDateTime])
       .then((data) => {
@@ -32,9 +32,9 @@ var addCollArticle = async function (memID,recomNum,artiNum,collDateTime) {
 }
 
 //----------------------------------
-// 刪除收藏文章
+// 刪除收藏推薦
 //----------------------------------
-var delCollArticle = async function(collNum){
+var delCollRecommend = async function(collNum){
   var result;
 
   await sql('DELETE FROM "memberCollection" WHERE "collNum" = $1', [collNum])
