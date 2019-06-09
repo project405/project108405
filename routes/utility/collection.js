@@ -716,8 +716,38 @@ var getArtiExhibition = async function (memID) {
 }
 
 // ========= get_four_class_collArticle (end) ========
+
+//=========================================
+//---------  addCollention() -----------
+//=========================================
+var addCollention = async function (memID,artiNum) {
+    var result ;
+    await sql('INSERT INTO "memberCollection" ("memID","artiNum") VALUES ($1,$2)', [memID,artiNum])
+        .then((data) => {
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result ;
+}
+
+//=========================================
+//---------  delCollention() -----------
+//=========================================
+var delCollention = async function (memID,artiNum) {
+    var result ;
+    await sql('DELETE FROM "memberCollection" WHERE "memID" = $1 and "artiNum"= $2', [memID,artiNum])
+        .then((data) => {
+            console.log("刪除囉~~~~");
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result ;
+}
 module.exports = {
     getCollRecommend, getOneColleRecommend,getCollArticle,
     getRecomMovie, getRecomMusic, getRecomBook, getRecomExhibition,
-    getArtiMovie, getArtiMusic, getArtiBook, getArtiExhibition
+    getArtiMovie, getArtiMusic, getArtiBook, getArtiExhibition,
+    addCollention,delCollention
 };

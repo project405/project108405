@@ -59,12 +59,95 @@
                             class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
                     <button type="button" class="btn postInfo"><i
                             class="fas fa-comment-dots"></i><a><%= items[3][0].count %></a></button>
-                    <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i></button>
+                    <!-- 收藏按鈕 -->
+                    <button type="button" id="unLogIn" class="btn postInfo" style="color:yellow;"
+                        onclick="location.href='/logIn'">
+                        <i class="far fa-bookmark"></i></button>
+
+                    <button type="button" id="addColle" class="btn postInfo" style="color:blue;"
+                        onclick=<%= "addColle(" + items[0][0].artiNum + ")" %>>
+                        <i class="far fa-bookmark"></i></button>
+
+                    <button type="button" id="delColle" class="btn postInfo" style="color:red;"
+                        onclick=<%= "delColle(" + items[0][0].artiNum + ")" %>>
+                        <i class="far fa-bookmark"></i></button>
+
+                    <!-- 如果沒登入 -->
+                    <% if(items[7][0] == undefined) {%>
+                    <script type="text/javascript">
+                        document.getElementById("unLogIn").style.display = "inline";
+                        document.getElementById("addColle").style.display = "none";
+                        document.getElementById("delColle").style.display = "none";
+                    </script>
+
+                    <!-- 如果有登入及沒按過收藏       -->
+                    <% }else if(items[6][0] == 1 && items[7][0] != undefined ) {%>
+                    <script type="text/javascript">
+                        document.getElementById("addColle").style.display = "inline";
+                        document.getElementById("unLogIn").style.display = "none";
+                        document.getElementById("delColle").style.display = "none";
+                    </script>
+                    <!-- 如果有登入及按過收藏 -->
+                    <% }else {%>
+                    <script type="text/javascript">
+                        document.getElementById("delColle").style.display = "inline";
+                        document.getElementById("addColle").style.display = "none";
+                        document.getElementById("unLogIn").style.display = "none";
+                    </script>
+                    <% } %>
                     <button type="button" class="btn report" id="postReport">檢舉</button>
                 </div>
+                <script>
+                    //新增收藏
+                    function addColle(artiNum) {
+                        collection();
+                        $.ajax({
+                            url: '/addCollection',
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data: { "artiNum": artiNum },
+                            success: function (data) {
+                                console.log("yes", data.statusText);
+                            },
+                            error: function (data) {
+                                console.log("失敗", data);
+                            }
+                        });
+                    };
+                    //刪除收藏
+                    function delColle(artiNum) {
+                        // console.log("前端刪除訊息");
+                        cancelCollection();
+                        $.ajax({
+                            url: '/delCollection',
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data: { "artiNum": artiNum },
+                            success: function (data) {
+                                console.log("yes", data.statusText);
+                            },
+                            error: function (data) {
+                                console.log("失敗", data);
+                            }
+                        });
+                    };
+                    //點收藏後改變屬性
+                    function collection() {
+                        document.getElementById("delColle").style.display = "inline";
+                        document.getElementById("unLogIn").style.display = "none";
+                        document.getElementById("addColle").style.display = "none";
+                    }
+                    //取消收藏後改變屬性
+                    function cancelCollection() {
+                        document.getElementById("addColle").style.display = "inline";
+                        document.getElementById("unLogIn").style.display = "none";
+                        document.getElementById("delColle").style.display = "none";
+                    }
+                </script>
                 <!-- info結束 -->
             </div>
         </div>
+
         <!-- 使用者發文結束' -->
 
         <center>

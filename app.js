@@ -13,6 +13,8 @@ var session = require('express-session');
 //=========================================
 var articleListRouter = require('./routes/article/articleList');
 var articleRouter = require('./routes/article/article');
+var addCollectionRouter = require('./routes/collection/addCollection');
+var delCollectionRouter = require('./routes/collection/delCollection');
 // ---------------  four Class -------------------
 var articleMovieRouter = require('./routes/article/articleMovie');
 var articleMusicRouter = require('./routes/article/articleMusic');
@@ -87,6 +89,7 @@ app.use(express.static('public/picture'));
 app.use(session({secret: 'mysecret', cookie: { maxAge: 6000000 }}));
 
 app.use('/', indexRouter);
+
 //=========================================
 //---------  article use ------------
 //=========================================
@@ -94,6 +97,9 @@ app.use('/article', articleRouter);
 app.use('/articleList',articleListRouter);
 app.use('/articleList/post',postRouter);
 app.use('/article/post',articlePostRouter) ;
+app.use('/addCollection',addCollectionRouter);
+app.use('/delCollection',delCollectionRouter);
+
 // -------------- four Class use----------------
 app.use('/articleList/articleMovie',articleMovieRouter);
 app.use('/articleList/articleMusic',articleMusicRouter);

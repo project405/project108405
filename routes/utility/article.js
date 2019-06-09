@@ -97,7 +97,7 @@ var getArticleList = async function () {
 //=========================================
 //---------  getOneArticle() -------------
 //=========================================
-var getOneArticle = async function (artiNum) {
+var getOneArticle = async function (artiNum, memID) {
     var oneArticle = [];  //存放文章內容
     var oneArtiLikeCount = []; //存放文章愛心總數
     var oneArtiMessage = []; //存放文章留言內容
@@ -105,6 +105,7 @@ var getOneArticle = async function (artiNum) {
     var oneArtiMessLikeCount = []; //存放留言愛心數量
     var tagLink = [];
     var tag = [];
+    var isCollection = [];
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -196,13 +197,27 @@ var getOneArticle = async function (artiNum) {
             }
         }
     }
+    // 判斷是否被使用者收藏
+    await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [artiNum, memID])
+        .then((data) => {
+            if(data.rows == null || data.rows == ''){
+                isCollection.push('1');
+            }else{
+                isCollection.push('0');
+            }       
+        }, (error) => {
+            isCollection.push('0');
+        });
+
+
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
     result[2] = oneArtiLikeCount;
     result[3] = oneArtiMessCount;
     result[4] = oneArtiMessLikeCount;
     result[5] = tag;
-    console.log(tag);
+    result[6] = isCollection;
+    // console.log(result);
     return result;
 }
 //=========================================
