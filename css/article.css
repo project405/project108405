@@ -229,11 +229,32 @@ input.message {
     height: auto;
 }
 
-textarea.input {
+div.replyInput {
     width: 100%;
-    height: 200pt;
-    border: none;
+    min-height: 150px;
+    height: auto;
     padding: 1em;
+}
+
+.input:empty::before {
+    color: lightgrey;
+    content: attr(placeholder);
+}
+
+
+/*焦点时内容为空*/
+
+div.replyInput:focus:before {
+    content: none;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-text);
+    color: #2D4F41;
+}
+
+div.replyInput:focus {
+    outline: none;
 }
 
 .float-md-right {

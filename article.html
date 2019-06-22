@@ -128,19 +128,14 @@
 
 
         <!-- replying -->
-        <div class="row replying justify-content-center" id="reply">
+        <div class="row replying justify-content-center" id="reply" onfocus="textLineFocus()">
             <div class="col-lg-8 content shadow">
-                <form>
-                    <div class="input">
-                        <textarea class="input" col="40" id="textarea" placeholder="輸入您要回覆的內容"></textarea>
-                    </div>
-                    <br>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                </form>
+                <div class="replyInput" contenteditable="true" data-text="請輸入回覆內容"></div>
 
-                <button type="submit" class="btn btn-secondary active float-md-right">發佈留言</button>
+                <button type="submit" class="btn btn-dark float-right">提交回覆</button>
 
             </div>
+            <div class="w-100"></div>
         </div>
         <!-- replying end -->
 
