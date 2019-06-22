@@ -6,13 +6,14 @@ var moment = require('moment');
 //=========================================
 //---------  getArticleList() -------------
 //=========================================
-var getArticleList = async function () {
+var getArticleList = async function (memID) {
     var articleList = [];
     var likeCount = [];
     var messageCount = [];
     var tagLink = [];
     var tag = [];
     var result = [];
+    var isCollection = [];
     // -----------  取得文章清單 --------------
     await sql('SELECT * FROM "article"')
         .then((data) => {
@@ -86,11 +87,27 @@ var getArticleList = async function () {
             }
         }
     }
-    console.log(tag);
+    // 判斷是否被使用者收藏
+    for (let i = 0; i < articleList.length; i++) {
+        await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [articleList[i].artiNum, memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isCollection.push('1');
+                } else {
+                    isCollection.push('0');
+                }
+            }, (error) => {
+                isCollection.push('0');
+            });
+    }
+    console.log("isCollection=",isCollection);
+
     result[0] = articleList;  //存入文章清單
     result[1] = likeCount;  //存入文章清單每篇的愛心數量
     result[2] = messageCount;
     result[3] = tag;
+    result[4] = isCollection;
     // console.log(result);
     return result;
 }
@@ -200,11 +217,11 @@ var getOneArticle = async function (artiNum, memID) {
     // 判斷是否被使用者收藏
     await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [artiNum, memID])
         .then((data) => {
-            if(data.rows == null || data.rows == ''){
+            if (data.rows == null || data.rows == '') {
                 isCollection.push('1');
-            }else{
+            } else {
                 isCollection.push('0');
-            }       
+            }
         }, (error) => {
             isCollection.push('0');
         });
