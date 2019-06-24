@@ -7,10 +7,10 @@ const moment = require('moment');
 //================================
 //-------- articlePost() ---------
 //================================
-var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime,picture) {
+var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, picture) {
     var result;
     //取得員工資料
-    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime","picture") VALUES ($1,$2,$3,$4,$5,$6)', [memID, artiHead, artiCont, artiClass, artiDateTime,picture])
+    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime","picture") VALUES ($1,$2,$3,$4,$5,$6)', [memID, artiHead, artiCont, artiClass, artiDateTime, picture])
         .then((data) => {
             // console.log("data=", data);
             result = 0;
@@ -119,7 +119,7 @@ var myMovieArticle = async function (memID) {
     var movieArtiLikeCount = [];
     var movieArtiMessCount = [];
     var tagLink = [];
-    var tag = [] ;
+    var tag = [];
     // -----------  取得電影分類文章 --------------
     await sql('SELECT * FROM "article" WHERE "artiClass" = $1 and "memID" = $2 ', ['movie', memID])
         .then((data) => {
@@ -191,9 +191,38 @@ var myMovieArticle = async function (memID) {
     result[0] = movieArticleList;
     result[1] = movieArtiLikeCount;
     result[2] = movieArtiMessCount;
-    result[3] = tag ;
+    result[3] = tag;
 
     console.log(result);
+    return result;
+}
+
+//=========================================
+//---------  addArticleLike() -----------
+//=========================================
+var addArticleLike = async function (memID, artiNum) {
+    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss") ; 
+    var result;
+    await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [memID, artiNum,addTime])
+        .then((data) => {
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result;
+}
+//=========================================
+//---------  delArticleLike() -----------
+//=========================================
+var delArticleLike = async function (memID, artiNum) {
+    var result;
+    await sql('DELETE FROM "articleLike" WHERE "memID" = $1 and "artiNum"= $2', [memID, artiNum])
+        .then((data) => {
+            console.log("刪除囉~~~~");
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
     return result;
 }
 
@@ -201,5 +230,6 @@ var myMovieArticle = async function (memID) {
 //匯出
 module.exports = {
     articlePost, myArticle,
-    myMovieArticle
+    myMovieArticle,
+    addArticleLike,delArticleLike
 };

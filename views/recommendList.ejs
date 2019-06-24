@@ -52,7 +52,7 @@
             <!-- 推薦開始 -->
             <% for(var i = 0 ; i<recom.length ; i++){ %>
             <div class="wrapper col-12  col-lg-2" style="background-image: url('/imgs/recommend/movie1.jpg');">
-                <a class="portfolio-box" href="#">
+                <a class="portfolio-box" href="/oneRecommend/<%= recom[i].recomNum %>">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
                             <p><%= recom[i].recomClass %> </p>
@@ -68,17 +68,22 @@
             <div class="w-100"></div>
             <% } %>
             <% } %>
-             <!-- 推薦結束 -->
+            <!-- 推薦結束 -->
     </section>
 
     <div class="fixed-bottom  d-flex justify-content-center">
-        <button type="button" class="btn btn-secondary footer">所有分類</button>
-        <button type="button" class="btn btn-secondary footer">電影類</button>
-        <button type="button" class="btn btn-secondary footer">音樂類</button>
-        <button type="button" class="btn btn-secondary footer">書籍類</button>
-        <button type="button" class="btn btn-secondary footer">展覽類</button>
+        <button type="button" class="btn btn-secondary footer" onclick="location.href='/recommendList'">所有分類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/movie'">電影類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/music'">音樂類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/book'">書籍類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/exhibition'">展覽類</button>
 
     </div>
+
 
 
     <a href="#" id="gotop">

@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 
@@ -45,10 +44,9 @@
                 <p class="content"> <%= items[0][0].recomCont %>
                 </p>
                 <div class="tagDiv col-lg-12 ">
-                    <button type="button" class="btn btn-info tag">有毛的</button>
-                    <button type="button" class="btn btn-info tag">皮卡丘</button>
-                    <button type="button" class="btn btn-info tag">超萌</button>
-                    <button type="button" class="btn btn-info tag">可愛</button>
+                    <% for (var i = 0 ; i< items[5][0].length ; i++) { %>
+                    <button type="button" class="btn btn-info tag"><%= items[5][0][i] %></button>
+                    <% } %>
                 </div>
                 <hr class="info">
                 <!-- info -->
@@ -57,8 +55,95 @@
                             class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
                     <button type="button" class="btn postInfo"><i
                             class="fas fa-comment-dots"></i><a><%= items[2][0].count %></a></button>
-                    <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i></button>
+
+                    <!-- 收藏按鈕 -->
+                    <!-- 收藏按鈕 -->
+                    <button type="button" id="unLogIn" class="btn postInfo" style="color:yellow;"
+                        onclick="location.href='/logIn'">
+                        <i class="far fa-bookmark"></i></button>
+
+                    <button type="button" id="addColle" class="btn postInfo" style="color:blue;"
+                        onclick=<%= "addColle(" + items[0][0].recomNum + ")" %>>
+                        <i class="far fa-bookmark"></i></button>
+
+                    <button type="button" id="delColle" class="btn postInfo" style="color:red;"
+                        onclick=<%= "delColle(" + items[0][0].recomNum + ")" %>>
+                        <i class="far fa-bookmark"></i></button>
+
+                    <!-- 檢舉按鈕 -->
                     <button type="button" class="btn report">檢舉</button>
+
+                    <!-- 如果沒登入 -->
+                    <% if(items[7][0] == undefined) {%>
+                    <script type="text/javascript">
+                        document.getElementById("unLogIn").style.display = "inline";
+                        document.getElementById("addColle").style.display = "none";
+                        document.getElementById("delColle").style.display = "none";
+                    </script>
+
+                    <!-- 如果有登入及沒按過收藏       -->
+                    <% }else if(items[6][0] == 1 && items[7][0] != undefined ) {%>
+                    <script type="text/javascript">
+                        document.getElementById("addColle").style.display = "inline";
+                        document.getElementById("unLogIn").style.display = "none";
+                        document.getElementById("delColle").style.display = "none";
+                    </script>
+                    <!-- 如果有登入及按過收藏 -->
+                    <% }else {%>
+                    <script type="text/javascript">
+                        document.getElementById("delColle").style.display = "inline";
+                        document.getElementById("addColle").style.display = "none";
+                        document.getElementById("unLogIn").style.display = "none";
+                    </script>
+                    <% } %>
+
+                    <script>
+                        //新增收藏
+                        function addColle(recomNum) {
+                            collection();
+                            $.ajax({
+                                url: '/addCollection',
+                                type: 'POST',
+                                dataType: 'JSON',
+                                data: { "collectionType": "recommend", "recomNum": recomNum },
+                                success: function (data) {
+                                    console.log("yes", data.statusText);
+                                },
+                                error: function (data) {
+                                    console.log("失敗", data);
+                                }
+                            });
+                        };
+                        //刪除收藏
+                        function delColle(recomNum) {
+                            // console.log("前端刪除訊息");
+                            cancelCollection();
+                            $.ajax({
+                                url: '/delCollection',
+                                type: 'POST',
+                                dataType: 'JSON',
+                                data: { "collectionType": "recommend", "recomNum": recomNum },
+                                success: function (data) {
+                                    console.log("yes", data.statusText);
+                                },
+                                error: function (data) {
+                                    console.log("失敗", data);
+                                }
+                            });
+                        };
+                        //點收藏後改變屬性
+                        function collection() {
+                            document.getElementById("delColle").style.display = "inline";
+                            document.getElementById("unLogIn").style.display = "none";
+                            document.getElementById("addColle").style.display = "none";
+                        }
+                        //取消收藏後改變屬性
+                        function cancelCollection() {
+                            document.getElementById("addColle").style.display = "inline";
+                            document.getElementById("unLogIn").style.display = "none";
+                            document.getElementById("delColle").style.display = "none";
+                        }
+                    </script>
                 </div>
                 <!-- info結束 -->
             </div>
@@ -83,7 +168,8 @@
                     </div>
 
                     <div class="poster">
-                        <div class="floor"><a class="floorTag text-break "><%= j+1 %> 樓</a> <a><%= items[1][j].memID %> 於
+                        <div class="floor"><a class="floorTag text-break "><%= j+1 %> 樓</a> <a><%= items[1][j].memID %>
+                                於
                                 <%= items[1][j].recomMessDateTime %>留言</a> </div>
                         <hr class="separate">
 

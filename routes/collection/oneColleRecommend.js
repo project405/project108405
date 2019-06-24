@@ -7,7 +7,7 @@ const collection = require('../utility/collection');
 router.get('/:recomNum', async function (req, res, next) {
     var recomNum = req.params.recomNum;   //取出參數
     var memID = req.session.memID ; 
-    collection.getOneColleRecommend(recomNum).then(data => {
+    collection.getOneColleRecommend(recomNum,memID).then(data => {
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data == -1) {

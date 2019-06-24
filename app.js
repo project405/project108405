@@ -13,6 +13,9 @@ var session = require('express-session');
 //=========================================
 var articleListRouter = require('./routes/article/articleList');
 var articleRouter = require('./routes/article/article');
+var addCollectionRouter = require('./routes/collection/addCollection');
+var delCollectionRouter = require('./routes/collection/delCollection');
+var likeCountRouter = require('./routes/likeCount') ; 
 // ---------------  four Class -------------------
 var articleMovieRouter = require('./routes/article/articleMovie');
 var articleMusicRouter = require('./routes/article/articleMusic');
@@ -32,6 +35,8 @@ var signUpAddRouter = require('./routes/member/signUp_add');
 var userLogInRouter = require('./routes/member/userLogIn');
 var notifyRouter = require('./routes/notify');
 var postRouter = require('./routes/post');
+var addLikeRouter = require('./routes/member/addLike');
+var delLikeRouter = require('./routes/member/delLike');
 // ---------------  four Class -------------------
 var myMovieArticleRouter = require('./routes/member/myMovieArticle');
 
@@ -57,6 +62,7 @@ var colleArtiExhibitionRouter = require('./routes/collection/colleArtiExhibition
 //---------  recommend router ------------
 //=========================================
 var recommendListRouter = require('./routes/recommend/recommendList');
+var oneRecommendRouter = require('./routes/recommend/oneRecoomend');
 // ---------------  four recommend Class -------------------
 var RecomMovieRouter = require('./routes/recommend/recomMovie');
 var RecomMusicRouter = require('./routes/recommend/recomMusic');
@@ -87,6 +93,7 @@ app.use(express.static('public/picture'));
 app.use(session({secret: 'mysecret', cookie: { maxAge: 6000000 }}));
 
 app.use('/', indexRouter);
+
 //=========================================
 //---------  article use ------------
 //=========================================
@@ -94,6 +101,10 @@ app.use('/article', articleRouter);
 app.use('/articleList',articleListRouter);
 app.use('/articleList/post',postRouter);
 app.use('/article/post',articlePostRouter) ;
+app.use('/addCollection',addCollectionRouter);
+app.use('/delCollection',delCollectionRouter);
+app.use('/likeCount',likeCountRouter);
+
 // -------------- four Class use----------------
 app.use('/articleList/articleMovie',articleMovieRouter);
 app.use('/articleList/articleMusic',articleMusicRouter);
@@ -111,6 +122,8 @@ app.use('/signUp',signUpRouter);
 app.use('/signUp/add',signUpAddRouter);
 app.use('/userLogIn',userLogInRouter);
 app.use('/notify',notifyRouter);
+app.use('/addLike',addLikeRouter);
+app.use('/delLike',delLikeRouter);
 // -------------- four Class use----------------
 app.use('/articleManage/movie',myMovieArticleRouter);
 
@@ -136,6 +149,7 @@ app.use('/collection/article/exhibition',colleArtiExhibitionRouter);
 //---------  recommend use ------------
 //=========================================
 app.use('/recommendList',recommendListRouter);
+app.use('/oneRecommend',oneRecommendRouter) ; 
 // -------------- four Class ----------------
 app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);
