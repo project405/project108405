@@ -8,13 +8,12 @@ router.get('/:artiNum', async function (req, res, next) {
     var artiNum = req.params.artiNum;   //取出參數
     var memID = req.session.memID;
     article.getOneArticle(artiNum,memID).then(data => {
-        data[7] = [memID]; 
         // 測試data
-        // for(let i = 0 ; i<data.length ; i++){
-        //     for (let j = 0 ; j < data[i].length; j++){
-        //         console.log("data[" , i ,"][",j,"]=" ,data[i][j]);
-        //     }
-        // }
+        for(let i = 0 ; i<data.length ; i++){
+            for (let j = 0 ; j < data[i].length; j++){
+                console.log("data[" , i ,"][",j,"]=" ,data[i][j]);
+            }
+        }
         
         if (data == null) {
             res.render('error');  //導向錯誤頁面

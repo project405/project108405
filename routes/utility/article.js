@@ -101,7 +101,7 @@ var getArticleList = async function (memID) {
                 isCollection.push('0');
             });
     }
-    console.log("isCollection=",isCollection);
+    console.log("isCollection=", isCollection);
 
     result[0] = articleList;  //存入文章清單
     result[1] = likeCount;  //存入文章清單每篇的愛心數量
@@ -123,6 +123,7 @@ var getOneArticle = async function (artiNum, memID) {
     var tagLink = [];
     var tag = [];
     var isCollection = [];
+    var isLike = [];
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -225,6 +226,17 @@ var getOneArticle = async function (artiNum, memID) {
         }, (error) => {
             isCollection.push('0');
         });
+    // 判斷是否被使用者案愛心
+    await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2', [artiNum, memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isLike.push('1');
+            } else {
+                isLike.push('0');
+            }
+        }, (error) => {
+            isLike.push('0');
+        });
 
 
     result[0] = oneArticle;
@@ -234,7 +246,9 @@ var getOneArticle = async function (artiNum, memID) {
     result[4] = oneArtiMessLikeCount;
     result[5] = tag;
     result[6] = isCollection;
-    // console.log(result);
+    result[7] = isLike ; 
+    result[8] = [memID] ; 
+    console.log(result);
     return result;
 }
 //=========================================
@@ -482,9 +496,32 @@ var getHotArticle = async function () {
     return mydata;
 }
 
+//=========================================
+//---------  getLikeCount() -------------
+//=========================================
+var getLikeCount = async function (artiNum) {
+    var oneArtiLikeCount = []; //存放文章愛心總數
+    var result = [] ; 
+    // -----------  取得單一文章愛心數量 --------------
+    await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [artiNum])
+        .then((data) => {
+            if (data.rows.length > 0) {
+                oneArtiLikeCount = data.rows;
+            } else {
+                oneArtiLikeCount = -1;
+            }
+        }, (error) => {
+            oneArtiLikeCount = null;
+        });
+
+    result[0] = oneArtiLikeCount;
+    // console.log("result[0] = " , result[0]);
+    // console.log("result[]=",result);
+    return result;
+}
 //匯出
 module.exports = {
     getArticleList, getOneArticle,
     getClassMovie, getClassMusic, getClassBook, getClassExhibition,
-    getHotArticle
+    getHotArticle,getLikeCount
 };
