@@ -43,12 +43,13 @@ var getCollRecommend = async function (memID) {
 //=========================================
 //---------  getOneCollRecom() -------------
 //=========================================
-var getOneColleRecommend = async function (recomNum) {
+var getOneColleRecommend = async function (recomNum,memID) {
     var oneArticle = [];  //存放文章內容
     var oneArtiLikeCount = []; //存放文章愛心總數
     var oneArtiMessage = []; //存放文章留言內容
     var oneArtiMessCount = []; //存放文章留言總數
     var oneArtiMessLikeCount = []; //存放留言愛心數量
+    var isCollection = []; //是否有收藏過
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -105,12 +106,25 @@ var getOneColleRecommend = async function (recomNum) {
                 oneArtiMessLikeCount = null;
             });
     }
+     // 判斷是否被使用者收藏
+     await sql('SELECT "recomNum" FROM "memberCollection" WHERE "recomNum" = $1 and "memID" = $2', [recomNum, memID])
+     .then((data) => {
+         if (data.rows == null || data.rows == '') {
+             isCollection.push('1');
+         } else {
+             isCollection.push('0');
+         }
+     }, (error) => {
+         isCollection.push('0');
+     });
 
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
     result[2] = oneArtiLikeCount;
     result[3] = oneArtiMessCount;
     result[4] = oneArtiMessLikeCount;
+    result[5] = isCollection ; 
+    result[6] = [memID] ; 
     // console.log(result);
     return result;
 }
@@ -720,7 +734,7 @@ var getArtiExhibition = async function (memID) {
 //=========================================
 //---------  addCollention() -----------
 //=========================================
-var addCollention = async function (memID,artiNum) {
+var addColleArticle = async function (memID,artiNum) {
     var result ;
     await sql('INSERT INTO "memberCollection" ("memID","artiNum") VALUES ($1,$2)', [memID,artiNum])
         .then((data) => {
@@ -732,11 +746,40 @@ var addCollention = async function (memID,artiNum) {
 }
 
 //=========================================
+//---------  addColleRecommend() -----------
+//=========================================
+var addColleRecommend = async function (memID,recomNum) {
+    var result ;
+    await sql('INSERT INTO "memberCollection" ("memID","recomNum") VALUES ($1,$2)', [memID,recomNum])
+        .then((data) => {
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result ;
+}
+
+//=========================================
 //---------  delCollention() -----------
 //=========================================
-var delCollention = async function (memID,artiNum) {
+var delColleArticle = async function (memID,artiNum) {
     var result ;
     await sql('DELETE FROM "memberCollection" WHERE "memID" = $1 and "artiNum"= $2', [memID,artiNum])
+        .then((data) => {
+            console.log("刪除囉~~~~");
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result ;
+}
+
+//=========================================
+//---------  delColleRecommend() -----------
+//=========================================
+var delColleRecommend = async function (memID,recomNum) {
+    var result ;
+    await sql('DELETE FROM "memberCollection" WHERE "memID" = $1 and "recomNum"= $2', [memID,recomNum])
         .then((data) => {
             console.log("刪除囉~~~~");
             result = 1;
@@ -749,5 +792,6 @@ module.exports = {
     getCollRecommend, getOneColleRecommend,getCollArticle,
     getRecomMovie, getRecomMusic, getRecomBook, getRecomExhibition,
     getArtiMovie, getArtiMusic, getArtiBook, getArtiExhibition,
-    addCollention,delCollention
+    addColleArticle,delColleArticle,
+    addColleRecommend,delColleRecommend
 };

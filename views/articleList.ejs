@@ -141,7 +141,7 @@
                                         url: '/addCollection',
                                         type: 'POST',
                                         dataType: 'JSON',
-                                        data: { "artiNum": artiNum },
+                                        data: { "collectionType":"article" , "artiNum": artiNum },
                                         success: function (data) {
                                             console.log("yes", data.statusText);
                                         },
@@ -158,7 +158,7 @@
                                         url: '/delCollection',
                                         type: 'POST',
                                         dataType: 'JSON',
-                                        data: { "artiNum": artiNum },
+                                        data: { "collectionType":"article" , "artiNum": artiNum },
                                         success: function (data) {
                                             console.log("yes", data.statusText);
                                         },

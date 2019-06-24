@@ -6,15 +6,27 @@ const collection = require('../utility/collection');
 
 router.post('/', function (req, res, next) {
     var memID = req.session.memID;
-    collection.delCollention(memID, req.body.artiNum).then(data => {
-        if (data == 1) {
-            // console.log("刪除成功");
-            res.send("刪除成功摟!");
-        } else {
-            // console.log("刪除失敗");
-            res.send("新增失敗摟!");
-        }
-    })
+    if (req.body.collectionType == "recommend") {
+        collection.delColleRecommend(memID, req.body.recomNum).then(data => {
+            if (data == 1) {
+                // console.log("刪除成功");
+                res.send("刪除成功摟!");
+            } else {
+                // console.log("刪除失敗");
+                res.send("新增失敗摟!");
+            }
+        })
+    } else {
+        collection.delColleArticle(memID, req.body.artiNum).then(data => {
+            if (data == 1) {
+                // console.log("刪除成功");
+                res.send("刪除成功摟!");
+            } else {
+                // console.log("刪除失敗");
+                res.send("新增失敗摟!");
+            }
+        })
+    }
 });
 
 
