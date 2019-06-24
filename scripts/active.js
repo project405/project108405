@@ -98,34 +98,12 @@ document.querySelector('div[contenteditable="true"]').addEventListener("paste", 
     }, false);
 });
 
-// (function($) {
-//     $.fn.extend({
-//         "insert": function(value) {
-//             //預設引數 
-//             value = $.extend({
-//                 "text": "123"
-//             }, value);
-//             var dthis = $(this)[0]; //將jQuery物件轉換為DOM元素 
-//             //IE下 
-//             if (document.selection) {
-//                 $(dthis).focus(); //輸入元素textara獲取焦點 
-//                 var fus = document.selection.createRange(); //獲取游標位置 
-//                 fus.text = value.text; //在游標位置插入值 
-//                 $(dthis).focus(); ///輸入元素textara獲取焦點 
-//             }
-//             //火狐下標準 
-//             else if (dthis.selectionStart || dthis.selectionStart == '0') {
-//                 var start = dthis.selectionStart; //獲取焦點前座標 
-//                 var end = dthis.selectionEnd; //獲取焦點後坐標 
-//                 //以下這句,應該是在焦點之前,和焦點之後的位置,中間插入我們傳入的值 .然後把這個得到的新值,賦給文字框 
-//                 dthis.value = dthis.value.substring(0, start) + value.text + dthis.value.substring(end, dthis.value.length);
-//             }
-//             //在輸入元素textara沒有定位游標的情況 
-//             else {
-//                 this.value += value.text;
-//                 this.focus();
-//             };
-//             return $(this);
-//         }
-//     })
-// })(jQuery)
+// get current line
+$('#replyInput').on("mouseup", function getPos() {
+    var sel = document.getSelection(),
+        nd = sel.anchorNode,
+        text = nd.textContent.slice(0, sel.focusOffset);
+
+    var lineNum = text.split("\n").length;
+    alert(lineNum);
+});
