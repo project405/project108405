@@ -12,8 +12,9 @@ var getArticleList = async function (memID) {
     var messageCount = [];
     var tagLink = [];
     var tag = [];
-    var result = [];
     var isCollection = [];
+    var isLike = [];
+    var result = [];
     // -----------  取得文章清單 --------------
     await sql('SELECT * FROM "article"')
         .then((data) => {
@@ -101,14 +102,30 @@ var getArticleList = async function (memID) {
                 isCollection.push('0');
             });
     }
-    console.log("isCollection=", isCollection);
+    // 判斷是否被使用者按愛心
+    for (let i = 0; i < articleList.length; i++) {
+        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [articleList[i].artiNum,memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isLike.push('1');
+                } else {
+                    isLike.push('0');
+                }
+            }, (error) => {
+                isLike.push('0');
+            });
+    }
+    // console.log("isCollection=", isCollection);
 
     result[0] = articleList;  //存入文章清單
     result[1] = likeCount;  //存入文章清單每篇的愛心數量
     result[2] = messageCount;
     result[3] = tag;
     result[4] = isCollection;
-    // console.log(result);
+    result[5] = isLike;
+    result[6] = [memID];
+    console.log(result);
     return result;
 }
 //=========================================
@@ -246,8 +263,8 @@ var getOneArticle = async function (artiNum, memID) {
     result[4] = oneArtiMessLikeCount;
     result[5] = tag;
     result[6] = isCollection;
-    result[7] = isLike ; 
-    result[8] = [memID] ; 
+    result[7] = isLike;
+    result[8] = [memID];
     console.log(result);
     return result;
 }
@@ -501,7 +518,7 @@ var getHotArticle = async function () {
 //=========================================
 var getArtiLikeCount = async function (artiNum) {
     var oneArtiLikeCount = []; //存放文章愛心總數
-    var result = [] ; 
+    var result = [];
     // -----------  取得單一文章愛心數量 --------------
     await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [artiNum])
         .then((data) => {
@@ -524,7 +541,7 @@ var getArtiLikeCount = async function (artiNum) {
 //=========================================
 var getRecomLikeCount = async function (recomNum) {
     var oneRecomLikeCount = []; //存放文章愛心總數
-    var result = [] ; 
+    var result = [];
     // -----------  取得單一文章愛心數量 --------------
     await sql('SELECT count("recomNum") FROM "recommendLike" WHERE "recomNum"=$1', [recomNum])
         .then((data) => {
@@ -545,5 +562,5 @@ var getRecomLikeCount = async function (recomNum) {
 module.exports = {
     getArticleList, getOneArticle,
     getClassMovie, getClassMusic, getClassBook, getClassExhibition,
-    getHotArticle,getArtiLikeCount,getRecomLikeCount
+    getHotArticle, getArtiLikeCount, getRecomLikeCount
 };

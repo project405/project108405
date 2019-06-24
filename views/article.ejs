@@ -160,14 +160,15 @@
                     //刪除收藏
                     function delColle(artiNum) {
                         // console.log("前端刪除訊息");
-                        cancelCollection();
+                         cancelCollection();
                         $.ajax({
                             url: '/delCollection',
                             type: 'POST',
                             dataType: 'JSON',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));    
+                                console.log("yes", JSON.stringify(res));
+                               
                             },
                             error: function (res) {
                                 console.log("失敗", JSON.stringify(res));

@@ -7,7 +7,6 @@ var moment = require('moment');
 router.get('/', function (req, res, next) {
     var memID = req.session.memID;
     article.getArticleList(memID).then(data => {
-        data[5] = [memID] ; 
         // console.log(data[3][1].length);
         // console.log(data[0][0]);
         // console.log(data[0].length);
