@@ -148,12 +148,12 @@
                             url: '/addCollection',
                             type: 'POST',
                             dataType: 'JSON',
-                            data: { "artiNum": artiNum },
-                            success: function (data) {
-                                console.log("yes", data.statusText);
+                            data: { "likeType": "article", "artiNum": artiNum },
+                            success: function (res) {
+                                console.log("yes", JSON.stringify(res));
                             },
-                            error: function (data) {
-                                console.log("失敗", data);
+                            error: function (res) {
+                                console.log("失敗", JSON.stringify(res));
                             }
                         });
                     };
@@ -165,12 +165,12 @@
                             url: '/delCollection',
                             type: 'POST',
                             dataType: 'JSON',
-                            data: { "artiNum": artiNum },
-                            success: function (data) {
-                                console.log("yes", data.statusText);
+                            data: { "likeType": "article", "artiNum": artiNum },
+                            success: function (res) {
+                                console.log("yes", JSON.stringify(res));
                             },
-                            error: function (data) {
-                                console.log("失敗", data);
+                            error: function (res) {
+                                console.log("失敗", JSON.stringify(res));
                             }
                         });
                     };
@@ -200,11 +200,11 @@
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
                                 console.log("yes", JSON.stringify(res));
-                                likeCount(artiNum); 
+                                likeCount(artiNum);
                             },
                             error: function (res) {
                                 console.log("失敗", res);
-                                
+
                             }
                         });
 
@@ -219,11 +219,11 @@
                             dataType: 'text',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", res.statusText);
-                                likeCount(artiNum) ; 
+                                console.log("yes", JSON.stringify(res));
+                                likeCount(artiNum);
                             },
                             error: function (res) {
-                                console.log("刪除失敗", res);
+                                console.log("刪除失敗", JSON.stringify(res));
                             }
                         });
 

@@ -201,8 +201,9 @@ var myMovieArticle = async function (memID) {
 //---------  addArticleLike() -----------
 //=========================================
 var addArticleLike = async function (memID, artiNum) {
+    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss") ; 
     var result;
-    await sql('INSERT INTO "articleLike" ("memID","artiNum") VALUES ($1,$2)', [memID, artiNum])
+    await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [memID, artiNum,addTime])
         .then((data) => {
             result = 1;
         }, (error) => {
@@ -224,6 +225,7 @@ var delArticleLike = async function (memID, artiNum) {
         });
     return result;
 }
+
 
 //匯出
 module.exports = {

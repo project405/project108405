@@ -43,6 +43,7 @@ var getOneRecommend = async function (recomNum, memID) {
     var tagLink = [];
     var tag = [];
     var isCollection = [];
+    var isLike = [];
     var result = [];
 
     // -----------  取得單一推薦文章 --------------
@@ -145,6 +146,17 @@ var getOneRecommend = async function (recomNum, memID) {
         }, (error) => {
             isCollection.push('0');
         });
+    // 判斷是否被使用者案愛心
+    await sql('SELECT "recomNum" FROM "recommendLike" WHERE "recomNum" = $1 and "memID" = $2', [recomNum, memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isLike.push('1');
+            } else {
+                isLike.push('0');
+            }
+        }, (error) => {
+            isLike.push('0');
+        });
 
 
     console.log(oneRecomMessLikeCount);
@@ -155,7 +167,8 @@ var getOneRecommend = async function (recomNum, memID) {
     result[4] = oneRecomMessLikeCount;
     result[5] = tag;
     result[6] = isCollection;
-    result[7] = [memID] ;
+    result[7] = isLike;
+    result[8] = [memID];
     // console.log(result);
     return result;
 }
@@ -246,7 +259,39 @@ var getRecomExhibition = async function () {
 //=========================================
 //------ get_four_class_recom (end)------
 //=========================================
+
+//=========================================
+//---------  addRecommendLike() -----------
+//=========================================
+var addRecommendLike = async function (memID, recomNum) {
+    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss") ; 
+    var result;
+    
+    await sql('INSERT INTO "recommendLike" ("memID","recomNum","recomLikeDateTime") VALUES ($1,$2,$3)', [memID, recomNum,addTime])
+        .then((data) => {
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result;
+}
+//=========================================
+//---------  delRecommedLike() -----------
+//=========================================
+var delRecommendLike = async function (memID, recomNum) {
+    var result;
+    await sql('DELETE FROM "recommendLike" WHERE "memID" = $1 and "recomNum"= $2', [memID, recomNum])
+        .then((data) => {
+            console.log("刪除囉~~~~");
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result;
+}
+
 module.exports = {
     getRecommendList, getOneRecommend,
-    getRecomMovie, getRecomMusic, getRecomBook, getRecomExhibition
+    getRecomMovie, getRecomMusic, getRecomBook, getRecomExhibition,
+    addRecommendLike, delRecommendLike
 }

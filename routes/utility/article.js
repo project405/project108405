@@ -497,9 +497,9 @@ var getHotArticle = async function () {
 }
 
 //=========================================
-//---------  getLikeCount() -------------
+//---------  getArtiLikeCount() -------------
 //=========================================
-var getLikeCount = async function (artiNum) {
+var getArtiLikeCount = async function (artiNum) {
     var oneArtiLikeCount = []; //存放文章愛心總數
     var result = [] ; 
     // -----------  取得單一文章愛心數量 --------------
@@ -516,12 +516,34 @@ var getLikeCount = async function (artiNum) {
 
     result[0] = oneArtiLikeCount;
     // console.log("result[0] = " , result[0]);
-    // console.log("result[]=",result);
+    return result;
+}
+
+//=========================================
+//---------  getRecomLikeCount() -------------
+//=========================================
+var getRecomLikeCount = async function (recomNum) {
+    var oneRecomLikeCount = []; //存放文章愛心總數
+    var result = [] ; 
+    // -----------  取得單一文章愛心數量 --------------
+    await sql('SELECT count("recomNum") FROM "recommendLike" WHERE "recomNum"=$1', [recomNum])
+        .then((data) => {
+            if (data.rows.length > 0) {
+                oneRecomLikeCount = data.rows;
+            } else {
+                oneRecomLikeCount = -1;
+            }
+        }, (error) => {
+            oneRecomLikeCount = null;
+        });
+
+    result[0] = oneRecomLikeCount;
+    // console.log("result[0] = " , result[0]);
     return result;
 }
 //匯出
 module.exports = {
     getArticleList, getOneArticle,
     getClassMovie, getClassMusic, getClassBook, getClassExhibition,
-    getHotArticle,getLikeCount
+    getHotArticle,getArtiLikeCount,getRecomLikeCount
 };
