@@ -156,7 +156,7 @@
                     };
                     //刪除收藏
                     function delColle(recomNum) {
-                        // console.log("前端刪除訊息");
+                        // console.log("前端刪除訊息"); 
                         cancelCollection();
                         $.ajax({
                             url: '/delCollection',
@@ -188,8 +188,7 @@
                 <!-- 愛心 ajax script -->
                 <script>
                     //新增愛心
-                    function addLike(recomNum) {
-                        like();
+                    function addLike(recomNum) {      
                         $.ajax({
                             url: '/addLike',
                             type: 'POST',
@@ -198,6 +197,7 @@
                             success: function (res) {
                                 console.log("yes", JSON.stringify(res));
                                 likeCount(recomNum);
+                                like();
                             },
                             error: function (res) {
                                 console.log("失敗", res);
@@ -209,7 +209,6 @@
                     //刪除愛心
                     function delLike(recomNum) {
                         // console.log("前端刪除訊息");
-                        cancelLike();
                         $.ajax({
                             url: '/delLike',
                             type: 'POST',
@@ -218,6 +217,7 @@
                             success: function (res) {
                                 console.log("yes", JSON.stringify(res));
                                 likeCount(recomNum);
+                                cancelLike();
                             },
                             error: function (res) {
                                 console.log("刪除失敗", JSON.stringify(res));
