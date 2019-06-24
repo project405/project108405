@@ -52,7 +52,7 @@
             <!-- 推薦開始 -->
             <% for(var i = 0 ; i<recom.length ; i++){ %>
             <div class="wrapper col-12  col-lg-2" style="background-image: url('/imgs/recommend/movie1.jpg');">
-                <a class="portfolio-box" href="#">
+                <a class="portfolio-box" href="/oneRecommend/<%= recom[i].recomNum %>">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
                             <p><%= recom[i].recomClass %> </p>

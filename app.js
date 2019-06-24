@@ -59,6 +59,7 @@ var colleArtiExhibitionRouter = require('./routes/collection/colleArtiExhibition
 //---------  recommend router ------------
 //=========================================
 var recommendListRouter = require('./routes/recommend/recommendList');
+var oneRecommendRouter = require('./routes/recommend/oneRecoomend');
 // ---------------  four recommend Class -------------------
 var RecomMovieRouter = require('./routes/recommend/recomMovie');
 var RecomMusicRouter = require('./routes/recommend/recomMusic');
@@ -142,6 +143,7 @@ app.use('/collection/article/exhibition',colleArtiExhibitionRouter);
 //---------  recommend use ------------
 //=========================================
 app.use('/recommendList',recommendListRouter);
+app.use('/oneRecommend',oneRecommendRouter) ; 
 // -------------- four Class ----------------
 app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);
