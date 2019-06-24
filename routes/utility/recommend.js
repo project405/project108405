@@ -155,6 +155,7 @@ var getOneRecommend = async function (recomNum, memID) {
     result[4] = oneRecomMessLikeCount;
     result[5] = tag;
     result[6] = isCollection;
+    result[7] = [memID] ;
     // console.log(result);
     return result;
 }

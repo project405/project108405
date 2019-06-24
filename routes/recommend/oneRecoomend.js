@@ -7,14 +7,12 @@ router.get('/:recomNum', async function (req, res, next) {
     var recomNum = req.params.recomNum;   //取出參數
     var memID = req.session.memID;
     recommend.getOneRecommend(recomNum, memID).then(data => {
-        data[7] = [memID];
         // 測試data
         // for(let i = 0 ; i<data.length ; i++){
         //     for (let j = 0 ; j < data[i].length; j++){
         //         console.log("data[" , i ,"][",j,"]=" ,data[i][j]);
         //     }
         // }
-        console.log(data[4]);
 
         if (data == null) {
             res.render('error');  //導向錯誤頁面

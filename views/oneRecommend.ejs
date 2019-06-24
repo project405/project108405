@@ -105,7 +105,7 @@
                             url: '/addCollection',
                             type: 'POST',
                             dataType: 'JSON',
-                            data: { "recomNum": recomNum },
+                            data: { "collectionType":"recommend" , "recomNum": recomNum },
                             success: function (data) {
                                 console.log("yes", data.statusText);
                             },
@@ -122,7 +122,7 @@
                             url: '/delCollection',
                             type: 'POST',
                             dataType: 'JSON',
-                            data: { "recomNum": recomNum },
+                            data: { "collectionType":"recommend" ,"recomNum": recomNum },
                             success: function (data) {
                                 console.log("yes", data.statusText);
                             },
