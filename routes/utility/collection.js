@@ -43,13 +43,15 @@ var getCollRecommend = async function (memID) {
 //=========================================
 //---------  getOneCollRecom() -------------
 //=========================================
-var getOneColleRecommend = async function (recomNum,memID) {
+var getOneColleRecommend = async function (recomNum, memID) {
     var oneArticle = [];  //存放文章內容
     var oneArtiLikeCount = []; //存放文章愛心總數
     var oneArtiMessage = []; //存放文章留言內容
     var oneArtiMessCount = []; //存放文章留言總數
     var oneArtiMessLikeCount = []; //存放留言愛心數量
     var isCollection = []; //是否有收藏過
+    var tagLink = [];
+    var tag = [];
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -106,25 +108,61 @@ var getOneColleRecommend = async function (recomNum,memID) {
                 oneArtiMessLikeCount = null;
             });
     }
-     // 判斷是否被使用者收藏
-     await sql('SELECT "recomNum" FROM "memberCollection" WHERE "recomNum" = $1 and "memID" = $2', [recomNum, memID])
-     .then((data) => {
-         if (data.rows == null || data.rows == '') {
-             isCollection.push('1');
-         } else {
-             isCollection.push('0');
-         }
-     }, (error) => {
-         isCollection.push('0');
-     });
+
+    // -----------  取得tagLink表中的 recomNum 方便在 tag表中取得資料 --------------
+    await sql('select * from "tagLinkArticle" where "artiNum" = $1', [artiNum])
+        .then((data) => {
+            // console.log("data=", data.rows);
+            if (data.rows != undefined && data.rows != '') {
+                tagLink.push(data.rows);
+            } else {
+                let tagNull = { "tagNum": "null" };
+                tagLink.push([tagNull]);
+            }
+        }, (error) => {
+            tagLink = null;
+        });
+    console.log("tagLink=", tagLink);
+    // -----------  取得文章全部tag --------------
+    // 初始化二維陣列
+    for (let i = 0; i < tagLink.length; i++) {
+        tag[i] = [];
+    }
+    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
+    for (let i = 0; i < tagLink.length; i++) {
+        for (let j = 0; j < tagLink[i].length; j++) {
+            if (tagLink[i][j].tagNum != 'null') {
+                await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
+                    .then((data) => {
+                        // console.log(data.rows[0].tagName);
+                        if (data.rows[0].tagName != undefined) {
+                            tag[i][j] = data.rows[0].tagName;
+                        }
+                    }, (error) => {
+                        tag = null;
+                    });
+            }
+        }
+    }
+    // 判斷是否被使用者收藏
+    await sql('SELECT "recomNum" FROM "memberCollection" WHERE "recomNum" = $1 and "memID" = $2', [recomNum, memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isCollection.push('1');
+            } else {
+                isCollection.push('0');
+            }
+        }, (error) => {
+            isCollection.push('0');
+        });
 
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
     result[2] = oneArtiLikeCount;
     result[3] = oneArtiMessCount;
     result[4] = oneArtiMessLikeCount;
-    result[5] = isCollection ; 
-    result[6] = [memID] ; 
+    result[5] = isCollection;
+    result[6] = [memID];
     // console.log(result);
     return result;
 }
@@ -549,11 +587,11 @@ var getArtiMusic = async function (memID) {
 //---------  getArtiBook() -------------
 var getArtiBook = async function (memID) {
     var getdata = [];
-    var collArtiBook = [] ; 
-    var collArtiLikeCount = [] ;
-    var collArtiMessLikeCount = [] ;
-    var tagLink = [] ;
-    var tag = [] ; 
+    var collArtiBook = [];
+    var collArtiLikeCount = [];
+    var collArtiMessLikeCount = [];
+    var tagLink = [];
+    var tag = [];
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
         .then((data) => {
@@ -640,11 +678,11 @@ var getArtiBook = async function (memID) {
 //---------  getArtiExhibition() -------------
 var getArtiExhibition = async function (memID) {
     var getdata = [];
-    var collArtiExhibition = [] ;
-    var collArtiLikeCount = [] ;
-    var collArtiMessLikeCount = [] ; 
-    var tagLink = [] ; 
-    var tag = [] ; 
+    var collArtiExhibition = [];
+    var collArtiLikeCount = [];
+    var collArtiMessLikeCount = [];
+    var tagLink = [];
+    var tag = [];
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
         .then((data) => {
@@ -734,64 +772,64 @@ var getArtiExhibition = async function (memID) {
 //=========================================
 //---------  addCollention() -----------
 //=========================================
-var addColleArticle = async function (memID,artiNum) {
-    var result ;
-    await sql('INSERT INTO "memberCollection" ("memID","artiNum") VALUES ($1,$2)', [memID,artiNum])
+var addColleArticle = async function (memID, artiNum) {
+    var result;
+    await sql('INSERT INTO "memberCollection" ("memID","artiNum") VALUES ($1,$2)', [memID, artiNum])
         .then((data) => {
             result = 1;
         }, (error) => {
             result = 0;
         });
-    return result ;
+    return result;
 }
 
 //=========================================
 //---------  addColleRecommend() -----------
 //=========================================
-var addColleRecommend = async function (memID,recomNum) {
-    var result ;
-    await sql('INSERT INTO "memberCollection" ("memID","recomNum") VALUES ($1,$2)', [memID,recomNum])
+var addColleRecommend = async function (memID, recomNum) {
+    var result;
+    await sql('INSERT INTO "memberCollection" ("memID","recomNum") VALUES ($1,$2)', [memID, recomNum])
         .then((data) => {
             result = 1;
         }, (error) => {
             result = 0;
         });
-    return result ;
+    return result;
 }
 
 //=========================================
 //---------  delCollention() -----------
 //=========================================
-var delColleArticle = async function (memID,artiNum) {
-    var result ;
-    await sql('DELETE FROM "memberCollection" WHERE "memID" = $1 and "artiNum"= $2', [memID,artiNum])
+var delColleArticle = async function (memID, artiNum) {
+    var result;
+    await sql('DELETE FROM "memberCollection" WHERE "memID" = $1 and "artiNum"= $2', [memID, artiNum])
         .then((data) => {
             console.log("刪除囉~~~~");
             result = 1;
         }, (error) => {
             result = 0;
         });
-    return result ;
+    return result;
 }
 
 //=========================================
 //---------  delColleRecommend() -----------
 //=========================================
-var delColleRecommend = async function (memID,recomNum) {
-    var result ;
-    await sql('DELETE FROM "memberCollection" WHERE "memID" = $1 and "recomNum"= $2', [memID,recomNum])
+var delColleRecommend = async function (memID, recomNum) {
+    var result;
+    await sql('DELETE FROM "memberCollection" WHERE "memID" = $1 and "recomNum"= $2', [memID, recomNum])
         .then((data) => {
             console.log("刪除囉~~~~");
             result = 1;
         }, (error) => {
             result = 0;
         });
-    return result ;
+    return result;
 }
 module.exports = {
-    getCollRecommend, getOneColleRecommend,getCollArticle,
+    getCollRecommend, getOneColleRecommend, getCollArticle,
     getRecomMovie, getRecomMusic, getRecomBook, getRecomExhibition,
     getArtiMovie, getArtiMusic, getArtiBook, getArtiExhibition,
-    addColleArticle,delColleArticle,
-    addColleRecommend,delColleRecommend
+    addColleArticle, delColleArticle,
+    addColleRecommend, delColleRecommend
 };

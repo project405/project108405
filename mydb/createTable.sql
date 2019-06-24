@@ -397,7 +397,7 @@ CREATE TABLE "public"."tagLinkArticle" (
   "tagLinkArtiNum" serial , 
   "artiNum" int4 , 
 	"tagNum" int4 ,
-"recommendNum" int4 ,
+"recomNum" int4 ,
 	FOREIGN KEY("artiNum") REFERENCES "article"("artiNum")ON DELETE CASCADE  ON UPDATE RESTRICT ,
 	FOREIGN KEY("tagNum") REFERENCES "tag"("tagNum")ON DELETE RESTRICT  ON UPDATE RESTRICT 
 );
