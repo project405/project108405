@@ -44,10 +44,9 @@
                 <p class="content"> <%= items[0][0].recomCont %>
                 </p>
                 <div class="tagDiv col-lg-12 ">
-                    <button type="button" class="btn btn-info tag">有毛的</button>
-                    <button type="button" class="btn btn-info tag">皮卡丘</button>
-                    <button type="button" class="btn btn-info tag">超萌</button>
-                    <button type="button" class="btn btn-info tag">可愛</button>
+                    <% for (var i = 0 ; i< items[5][0].length ; i++) { %>
+                    <button type="button" class="btn btn-info tag"><%= items[5][0][i] %></button>
+                    <% } %>
                 </div>
                 <hr class="info">
                 <!-- info -->
@@ -75,7 +74,7 @@
                     <button type="button" class="btn report">檢舉</button>
 
                     <!-- 如果沒登入 -->
-                    <% if(items[6][0] == undefined) {%>
+                    <% if(items[7][0] == undefined) {%>
                     <script type="text/javascript">
                         document.getElementById("unLogIn").style.display = "inline";
                         document.getElementById("addColle").style.display = "none";
@@ -83,7 +82,7 @@
                     </script>
 
                     <!-- 如果有登入及沒按過收藏       -->
-                    <% }else if(items[5][0] == 1 && items[6][0] != undefined ) {%>
+                    <% }else if(items[6][0] == 1 && items[7][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("addColle").style.display = "inline";
                         document.getElementById("unLogIn").style.display = "none";

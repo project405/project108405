@@ -110,7 +110,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     }
 
     // -----------  取得tagLink表中的 recomNum 方便在 tag表中取得資料 --------------
-    await sql('select * from "tagLinkArticle" where "artiNum" = $1', [artiNum])
+    await sql('select * from "tagLinkArticle" where "recomNum" = $1', [recomNum])
         .then((data) => {
             // console.log("data=", data.rows);
             if (data.rows != undefined && data.rows != '') {
@@ -161,8 +161,9 @@ var getOneColleRecommend = async function (recomNum, memID) {
     result[2] = oneArtiLikeCount;
     result[3] = oneArtiMessCount;
     result[4] = oneArtiMessLikeCount;
-    result[5] = isCollection;
-    result[6] = [memID];
+    result[5] = tag ;
+    result[6] = isCollection;
+    result[7] = [memID];
     // console.log(result);
     return result;
 }
