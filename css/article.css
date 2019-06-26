@@ -242,7 +242,7 @@ div.replyInput {
 }
 
 
-/*焦点时内容为空*/
+/*focus時内容為空*/
 
 div.replyInput:focus:before {
     content: none;
@@ -259,4 +259,19 @@ div.replyInput:focus {
 
 .float-md-right {
     float: right;
+}
+
+div[contenteditable=true]>div {
+    padding: 0;
+}
+
+button.imgPost {
+    /* display: none; */
+    width: 1.5em;
+    height: 1.5em;
+    background: url("../imgs/icon/img.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    border: none;
 }
