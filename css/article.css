@@ -234,6 +234,7 @@ div.replyInput {
     min-height: 150px;
     height: auto;
     padding: 1em;
+    overflow: hidden;
 }
 
 .input:empty::before {
