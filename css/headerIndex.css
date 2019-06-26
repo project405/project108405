@@ -429,3 +429,8 @@ textarea.report {
 button.report {
     float: right;
 }
+
+::selection {
+    background: #2D4F41;
+    color: white;
+}

@@ -235,6 +235,11 @@ div.replyInput {
     height: auto;
     padding: 1em;
     overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.89;
+    margin-bottom: 1em;
+    border-radius: 8px;
+    caret-color: #993a3a;
 }
 
 .input:empty::before {
@@ -251,11 +256,12 @@ div.replyInput:focus:before {
 
 [contentEditable=true]:empty:not(:focus):before {
     content: attr(data-text);
-    color: #2D4F41;
+    color: black;
 }
 
 div.replyInput:focus {
     outline: none;
+    cursor: pointer;
 }
 
 .float-md-right {
@@ -266,13 +272,15 @@ div[contenteditable=true]>div {
     padding: 0;
 }
 
-button.imgPost {
-    /* display: none; */
-    width: 1.5em;
-    height: 1.5em;
-    background: url("../imgs/icon/img.png");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    border: none;
+input[type="file"] {
+    position: fixed;
+    right: 100%;
+    bottom: 100%;
+    cursor: pointer;
+}
+
+#upload-img {
+    max-height: 350px;
+    max-width: 60%;
+    cursor: pointer;
 }

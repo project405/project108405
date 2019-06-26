@@ -199,7 +199,6 @@ $(function() {
         // 讀取fileList陣列(上傳多個檔案的話)
         for (var i = 0; i < fileList.length; i++) {
             var file = fileList[i];
-
             /**
              * 如果有要POST檔案到後端才會用到這行
              * test將會是POST檔案的名稱
@@ -212,8 +211,10 @@ $(function() {
             // 解析檔案
             var reader = new FileReader();
             reader.onload = (function(file) {
+
                 return function(event) {
                     var src = event.target.result // 圖片的編碼 , 格式為base64
+
                     var title = escape(file.name);
                     var img = '<img id="upload-img" src="' + src + '" title="' + title + '" />';
 
@@ -250,3 +251,40 @@ $(function() {
         });
     });
 })
+
+
+//图片按比例缩放
+var flag = false;
+
+function DrawImage(ImgD) {
+    var image = new Image();
+    var iwidth = 160; //定义允许图片宽度，当宽度大于这个值时等比例缩小
+    var iheight = 120; //定义允许图片高度，当宽度大于这个值时等比例缩小
+    image.src = ImgD.src;
+    if (image.width > 0 && image.height > 0) {
+        flag = true;
+        if (image.width / image.height >= iwidth / iheight) {
+            if (image.width > iwidth) {
+                ImgD.width = iwidth;
+                ImgD.height = (image.height * iwidth) / image.width;
+            } else {
+                ImgD.width = image.width;
+                ImgD.height = image.height;
+            }
+
+
+            ImgD.alt = image.width + "×" + image.height;
+        } else {
+            if (image.height > iheight) {
+                ImgD.height = iheight;
+                ImgD.width = (image.width * iheight) / image.height;
+            } else {
+                ImgD.width = image.width;
+                ImgD.height = image.height;
+            }
+            ImgD.alt = image.width + "×" + image.height;
+        }
+    }
+}
+//调用：<img src="图片" onload="javascript:DrawImage(this)">
+//-->

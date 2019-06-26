@@ -429,3 +429,8 @@ button.report {
 body:focus {
     border: #f0f0f0 solid 1px;
 }
+
+::selection {
+    background: #2D4F41;
+    color: white;
+}
