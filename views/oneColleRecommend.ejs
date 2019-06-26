@@ -51,12 +51,50 @@
                 <hr class="info">
                 <!-- info -->
                 <div class="info">
-                    <button type="button" class="btn postInfo"><i
+                    <!-- 愛心按鈕 -->
+                    <button type="button" id="LikeUnLogIn" class="btn postInfo" style="color:yellow"
+                        onclick="location.href='/logIn'"><i
                             class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
+                    <button type="button" id="addLike" class="btn postInfo" style="color:blue"
+                        onclick=<%= "addLike(" + items[0][0].recomNum + ")" %>> <i class="fab fa-gratipay"></i><a
+                            id="addLikeCount"> <%= items[2][0].count %> </a></button>
+                    <button type="button" id="delLike" class="btn postInfo" style="color:red"
+                        onclick=<%= "delLike(" + items[0][0].recomNum + ")" %>><i class="fab fa-gratipay"></i><a
+                            id="delLikeCount"><%= items[2][0].count %></a></button>
+                    <!-- 如果沒登入 -->
+                    <% if(items[8][0] == undefined) {%>
+                    <script type="text/javascript">
+                        document.getElementById("LikeUnLogIn").style.display = "inline";
+                        document.getElementById("addLike").style.display = "none";
+                        document.getElementById("delLike").style.display = "none";
+                    </script>
+
+                    <!-- 如果有登入及沒按過愛心       -->
+                    <% }else if(items[7][0] == 1 && items[8][0] != undefined ) {%>
+                    <script type="text/javascript">
+                        document.getElementById("addLike").style.display = "inline";
+                        document.getElementById("LikeUnLogIn").style.display = "none";
+                        document.getElementById("delLike").style.display = "none";
+                    </script>
+                    <!-- 如果有登入及按過愛心 -->
+                    <% }else if(items[7][0] == 0 && items[8][0] != undefined) {%>
+                    <script type="text/javascript">
+                        document.getElementById("delLike").style.display = "inline";
+                        document.getElementById("addLike").style.display = "none";
+                        document.getElementById("LikeUnLogIn").style.display = "none";
+                    </script>
+                    <% } else {%>
+                    <script type="text/javascript">
+                        document.getElementById("delLike").style.display = "none";
+                        document.getElementById("addLike").style.display = "none";
+                        document.getElementById("LikeUnLogIn").style.display = "none";
+                    </script>
+                    <% } %>
+
+                    <!-- 留言數量按鈕 -->
                     <button type="button" class="btn postInfo"><i
                             class="fas fa-comment-dots"></i><a><%= items[2][0].count %></a></button>
 
-                    <!-- 收藏按鈕 -->
                     <!-- 收藏按鈕 -->
                     <button type="button" id="unLogIn" class="btn postInfo" style="color:yellow;"
                         onclick="location.href='/logIn'">
@@ -74,7 +112,7 @@
                     <button type="button" class="btn report">檢舉</button>
 
                     <!-- 如果沒登入 -->
-                    <% if(items[7][0] == undefined) {%>
+                    <% if(items[8][0] == undefined) {%>
                     <script type="text/javascript">
                         document.getElementById("unLogIn").style.display = "inline";
                         document.getElementById("addColle").style.display = "none";
@@ -82,21 +120,28 @@
                     </script>
 
                     <!-- 如果有登入及沒按過收藏       -->
-                    <% }else if(items[6][0] == 1 && items[7][0] != undefined ) {%>
+                    <% }else if(items[6][0] == 1 && items[8][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("addColle").style.display = "inline";
                         document.getElementById("unLogIn").style.display = "none";
                         document.getElementById("delColle").style.display = "none";
                     </script>
                     <!-- 如果有登入及按過收藏 -->
-                    <% }else {%>
+                    <% }else if(items[6][0] == 0 && items[8][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("delColle").style.display = "inline";
                         document.getElementById("addColle").style.display = "none";
                         document.getElementById("unLogIn").style.display = "none";
                     </script>
+                    <% } else {%>
+                    <script type="text/javascript">
+                        document.getElementById("delColle").style.display = "none";
+                        document.getElementById("addColle").style.display = "none";
+                        document.getElementById("unLogIn").style.display = "none";
+                    </script>
                     <% } %>
 
+                    <!-- 收藏 ajax script  -->
                     <script>
                         //新增收藏
                         function addColle(recomNum) {
@@ -142,6 +187,78 @@
                             document.getElementById("addColle").style.display = "inline";
                             document.getElementById("unLogIn").style.display = "none";
                             document.getElementById("delColle").style.display = "none";
+                        }
+                    </script>
+
+                    <!-- 愛心 ajax script -->
+                    <script>
+                        //新增愛心
+                        function addLike(recomNum) {
+                            $.ajax({
+                                url: '/addLike',
+                                type: 'POST',
+                                dataType: 'text',
+                                data: { "likeType": "recommend", "recomNum": recomNum },
+                                success: function (res) {
+                                    console.log("yes", JSON.stringify(res));
+                                    likeCount(recomNum);
+                                    like();
+                                },
+                                error: function (res) {
+                                    console.log("失敗", res);
+
+                                }
+                            });
+
+                        };
+                        //刪除愛心
+                        function delLike(recomNum) {
+                            // console.log("前端刪除訊息");     
+                            $.ajax({
+                                url: '/delLike',
+                                type: 'POST',
+                                dataType: 'text',
+                                data: { "likeType": "recommend", "recomNum": recomNum },
+                                success: function (res) {
+                                    console.log("yes", JSON.stringify(res));
+                                    likeCount(recomNum);
+                                    cancelLike();
+                                },
+                                error: function (res) {
+                                    console.log("刪除失敗", JSON.stringify(res));
+                                }
+                            });
+
+                        };
+                        //點愛心後改變屬性
+                        function like() {
+                            document.getElementById("delLike").style.display = "inline";
+                            document.getElementById("LikeUnLogIn").style.display = "none";
+                            document.getElementById("addLike").style.display = "none";
+                        }
+                        //取消愛心後改變屬性
+                        function cancelLike() {
+                            document.getElementById("addLike").style.display = "inline";
+                            document.getElementById("LikeUnLogIn").style.display = "none";
+                            document.getElementById("delLike").style.display = "none";
+                        }
+                        function likeCount(recomNum) {
+                            $.ajax({
+                                url: '/likeCount',
+                                type: 'POST',
+                                dataType: 'JSON',
+                                data: { "likeType": "recommend", "recomNum": recomNum },
+                                success: function (res) {
+                                    // console.log("yes", reponse.responseText);
+                                    console.log("yes", JSON.stringify(res));
+                                    document.getElementById("addLikeCount").innerHTML = JSON.stringify(res);
+                                    document.getElementById("delLikeCount").innerHTML = JSON.stringify(res);
+                                },
+                                error: function (res) {
+                                    console.log("no", JSON.stringify(res));
+                                }
+
+                            });
                         }
                     </script>
                 </div>

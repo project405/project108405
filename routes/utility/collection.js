@@ -52,6 +52,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     var isCollection = []; //是否有收藏過
     var tagLink = [];
     var tag = [];
+    var isLike = []; //是否有過愛心
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -155,15 +156,27 @@ var getOneColleRecommend = async function (recomNum, memID) {
         }, (error) => {
             isCollection.push('0');
         });
+    // 判斷是否被使用者案愛心
+    await sql('SELECT "recomNum" FROM "recommendLike" WHERE "recomNum" = $1 and "memID" = $2', [recomNum, memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isLike.push('1');
+            } else {
+                isLike.push('0');
+            }
+        }, (error) => {
+            isLike.push('0');
+        });
 
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
     result[2] = oneArtiLikeCount;
     result[3] = oneArtiMessCount;
     result[4] = oneArtiMessLikeCount;
-    result[5] = tag ;
+    result[5] = tag;
     result[6] = isCollection;
-    result[7] = [memID];
+    result[7] = isLike ; 
+    result[8] = [memID];
     // console.log(result);
     return result;
 }
