@@ -35,7 +35,8 @@ div.post {
     background-color: #d4d4d4;
 }
 
-div.titleInput {
+div.titleInput,
+div.postInput {
     width: 100%;
     min-height: 50px;
     height: auto;
@@ -49,18 +50,21 @@ div.titleInput {
     cursor: text;
 }
 
+div.title {
+    min-height: 50px;
+}
+
 div.postInput {
-    width: 100%;
     min-height: 250px;
-    height: auto;
-    padding: 1em;
-    overflow: hidden;
-    background-color: rgb(255, 255, 255);
-    opacity: 0.89;
-    margin-bottom: 1em;
-    border-radius: 8px;
-    caret-color: #993a3a;
-    cursor: text;
+}
+
+div.titleInput::before {
+    font-family: 'Font Awesome 5 Free';
+    display: inline-block;
+    padding-right: 6px;
+    vertical-align: middle;
+    content: "\f1dc";
+    font-weight: 800;
 }
 
 div.titleInput:focus,
@@ -82,6 +86,7 @@ div.replyInput:focus:before {
 }
 
 [contentEditable=true]:empty:not(:focus):before {
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
     content: attr(data-text);
     color: black;
 }
@@ -97,10 +102,4 @@ input[type="file"] {
     max-height: 350px;
     max-width: 60%;
     cursor: pointer;
-}
-
-button.submitReply {
-    height: 2.4em;
-    float: right;
-    text-align: right;
 }

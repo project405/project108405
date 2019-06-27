@@ -187,6 +187,7 @@ document.querySelector('div[contenteditable="true"]').addEventListener("paste", 
 // var position = inputText.selectionStart;
 // alert(position);
 
+
 $(function() {
 
     // 選取到檔案後開始動作
@@ -225,6 +226,8 @@ $(function() {
 
                     // 到這邊 , 我們已經能後用js存取圖片並顯示了
                     $('#replyInput').append('<div id="replyInput">' + img + '</div>');
+                    $('#postInput').append('<div id="postInput">' + img + '</div>');
+
                 };
             })(file);
 
