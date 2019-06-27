@@ -26,44 +26,36 @@
         <h3>發佈貼文</h3>
         <hr class="highlight">
     </center>
+    <div class="row post col-lg-8 content shadow">
+        <div class="titleInput" contenteditable="true" role="textbox" data-text="請輸入您的標題"></div>
+        <div class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容"></div>
+        <label class="btn btn-dark" style="cursor: pointer">
+            <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
+            <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
+        </label>
 
-    <div class="container-fluid row justify-content-center">
-        <!-- into multiple lines -->
-        <div class="w-100"></div>
-        <!-- into multiple lines End -->
-
-        <div class="col-lg-8 content">
-            <form class="post" action="">
-                <div class="input-icon-wrap">
-                    <span class="input-icon"><span class="fas fa-heading"></span></span>
-                    <input type="text" class="input-with-icon title" placeholder="輸入您的標題">
-                </div>
-                <div class="input-icon-wrap">
-                    <span class="input-icon"><span class="fas fas fa-file-alt"></span></span>
-                    <textarea class="input-with-icon input" id="textarea" placeholder="輸入您的內文"></textarea>
-
-                </div>
-
-                <select id="inputState" class="form-control">
-                        <option>電影類</option>
-                        <option>音樂類</option>
-                        <option>展覽類</option>
-                        <option>書籍類</option>
-               </select>
-
-                <br>
-                <input type="file" class="form-control-file" id="imgSel">
-
-
-
-                <button type="button" class="btn btn-secondary float-md-right">發佈文章</button>
-            </form>
-
-
-        </div>
-
+        <button type="submit" class="btn btn-danger float-right submitReply">提交回覆</button>
 
     </div>
+
+
+    <!-- <div class="row replying justify-content-center col-lg-8 " id="reply" spellcheck="false">
+            <div class="content shadow">
+                <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="請輸入回覆內容"></div>
+                <label class="btn btn-dark" style="cursor: pointer">
+
+                <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
+                <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
+                
+                </label>
+
+                <button type="submit" class="btn btn-danger float-right">提交回覆</button>
+
+            </div>
+
+        </div> -->
+
+
 
 
     <a href="#" id="gotop">

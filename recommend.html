@@ -131,17 +131,17 @@
 
 
         <!-- replying -->
-        <div class="row replying justify-content-center" id="reply">
+        <div class="row replying justify-content-center" id="reply" spellcheck="false">
             <div class="col-lg-8 content shadow">
-                <div class="input">
-                    <textarea class="input" col="40" id="text" placeholder="輸入您要回覆的內容"></textarea>
-                </div>
-                <form>
-                    <div class="form-group">
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                </form>
-                <a href="#" class="btn btn-secondary btn-lg active float-md-right" role="button" aria-pressed="true">發佈留言</a>
+                <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="請輸入回覆內容"></div>
+                <label class="btn btn-dark" style="cursor: pointer">
+    
+                    <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
+                    <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
+                    
+                    </label>
+
+                <button type="submit" class="btn btn-danger float-right submitReply">提交回覆</button>
 
             </div>
         </div>

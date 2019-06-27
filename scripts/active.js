@@ -182,6 +182,11 @@ document.querySelector('div[contenteditable="true"]').addEventListener("paste", 
 // }
 
 
+// var inputText = document.getElementById('#replyInput');
+// text.focus();
+// var position = inputText.selectionStart;
+// alert(position);
+
 $(function() {
 
     // 選取到檔案後開始動作
@@ -216,7 +221,7 @@ $(function() {
                     var src = event.target.result // 圖片的編碼 , 格式為base64
 
                     var title = escape(file.name);
-                    var img = '<img id="upload-img" src="' + src + '" title="' + title + '" />';
+                    var img = '<img id="upload-img" src="' + src + '" title="' + title + '" /> ';
 
                     // 到這邊 , 我們已經能後用js存取圖片並顯示了
                     $('#replyInput').append('<div id="replyInput">' + img + '</div>');
@@ -251,40 +256,3 @@ $(function() {
         });
     });
 })
-
-
-//图片按比例缩放
-var flag = false;
-
-function DrawImage(ImgD) {
-    var image = new Image();
-    var iwidth = 160; //定义允许图片宽度，当宽度大于这个值时等比例缩小
-    var iheight = 120; //定义允许图片高度，当宽度大于这个值时等比例缩小
-    image.src = ImgD.src;
-    if (image.width > 0 && image.height > 0) {
-        flag = true;
-        if (image.width / image.height >= iwidth / iheight) {
-            if (image.width > iwidth) {
-                ImgD.width = iwidth;
-                ImgD.height = (image.height * iwidth) / image.width;
-            } else {
-                ImgD.width = image.width;
-                ImgD.height = image.height;
-            }
-
-
-            ImgD.alt = image.width + "×" + image.height;
-        } else {
-            if (image.height > iheight) {
-                ImgD.height = iheight;
-                ImgD.width = (image.width * iheight) / image.height;
-            } else {
-                ImgD.width = image.width;
-                ImgD.height = image.height;
-            }
-            ImgD.alt = image.width + "×" + image.height;
-        }
-    }
-}
-//调用：<img src="图片" onload="javascript:DrawImage(this)">
-//-->

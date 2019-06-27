@@ -1,7 +1,7 @@
 header = '    <div class="header">\
 <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">\
     <a class="nav-link" href="index.html">\
-    <img class="nav-item" href="index.html" src="imgs/logo.png" width="35px" height="35px " style="opacity:0.8" alt="">\
+    <img class="nav-item" href="index.html" src="imgs/logo.png" width="30px" height="30px " style="opacity:0.8" alt="">\
        <a href="index.html" class="navTitle">文藝富心</a>\
 </a>\
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\

@@ -240,6 +240,7 @@ div.replyInput {
     margin-bottom: 1em;
     border-radius: 8px;
     caret-color: #993a3a;
+    cursor: text;
 }
 
 .input:empty::before {
@@ -261,7 +262,7 @@ div.replyInput:focus:before {
 
 div.replyInput:focus {
     outline: none;
-    cursor: pointer;
+    cursor: text;
 }
 
 .float-md-right {
