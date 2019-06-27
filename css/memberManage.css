@@ -32,6 +32,10 @@ div.member {
     padding-bottom: 3em;
 }
 
+input:focus {
+    outline: rgba(45, 79, 65, 0.329) dashed 3px;
+}
+
 
 /* --------------------- */
 
@@ -146,13 +150,10 @@ div.radio {
 
 .radio-custom:checked+.radio-custom-label:before {
     content: "\f00c";
+    font-size: 25px;
+    line-height: 25px;
     font-family: 'FontAwesome';
     color: black;
-}
-
-.radio-custom:focus+.radio-custom-label {
-    outline: 1px solid #ddd;
-    /* focus style */
 }
 
 

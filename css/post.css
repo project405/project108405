@@ -58,19 +58,23 @@ div.postInput {
     min-height: 250px;
 }
 
-div.titleInput::before {
+div.titleInput:before {
     font-family: 'Font Awesome 5 Free';
     display: inline-block;
     padding-right: 6px;
     vertical-align: middle;
     content: "\f1dc";
     font-weight: 800;
+    opacity: 0.65;
 }
 
 div.titleInput:focus,
 div.postInput:focus {
     outline: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: 0.3s ease-in-out;
     cursor: text;
+    display: block;
 }
 
 .input:empty::before {

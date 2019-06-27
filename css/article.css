@@ -263,6 +263,11 @@ div.replyInput:focus:before {
 div.replyInput:focus {
     outline: none;
     cursor: text;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0.98;
+    transition: 0.3s ease-in-out;
+    cursor: text;
+    display: block;
 }
 
 .float-md-right {
