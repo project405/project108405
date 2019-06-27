@@ -34,6 +34,7 @@ div.member {
 
 input:focus {
     outline: rgba(45, 79, 65, 0.329) dashed 3px;
+    overflow: hidden;
 }
 
 

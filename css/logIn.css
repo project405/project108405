@@ -37,6 +37,7 @@ div.signUp {
 
 input:focus {
     outline: rgba(45, 79, 65, 0.329) dashed 3px;
+    overflow: hidden;
 }
 
 
@@ -99,6 +100,10 @@ input:focus {
 #logIn button.gmail:hover {
     background-color: #e94444;
     transition: 0.3s;
+}
+
+#logIn button.gmail:focus {
+    box-shadow: 0 0 0 0.2rem #e9444459;
 }
 
 

@@ -247,21 +247,49 @@ $(function() {
          */
 
         // 新增要POST的變數 , 然後塞入formData內
-        formData.append('action', 'uploadImg');
+        // formData.append('action', 'uploadImg');
 
-        $.ajax({
-            url: 'upload.php',
-            data: formData,
-            cache: false,
-            contentType: false,
-            processData: false,
-            type: 'POST',
-            success: function(data) {
-                console.log(data);
-            },
-            error: function(err) {
-                console.log(err);
-            }
-        });
+        // $.ajax({
+        //     url: 'upload.php',
+        //     data: formData,
+        //     cache: false,
+        //     contentType: false,
+        //     processData: false,
+        //     type: 'POST',
+        //     success: function(data) {
+        //         console.log(data);
+        //     },
+        //     error: function(err) {
+        //         console.log(err);
+        //     }
+        // });
     });
-})
+});
+
+
+// tag chip
+// $('.chips').material_chip();
+
+// $('.chips-placeholder').material_chip({
+//     placeholder: 'Enter a tag',
+//     secondaryPlaceholder: '+Tag',
+// });
+
+// $('.chips').on('chip.delete', function(event, chip) {
+//     console.log(chip.tag);
+// });
+
+// var tagValue = document.getElementsByClassName(chip).value;
+// alert(tagValue);
+
+$(document).ready(function() {
+
+
+    $('.chips-autocomplete').material_chip({
+        secondaryPlaceholder: '請輸入Tag',
+        placeholder: '+Tag',
+        autocompleteData: {
+
+        }
+    });
+});
