@@ -11,6 +11,17 @@ body {
     height: auto;
 }
 
+
+/* 
+body {
+    background: #fafafa;
+    padding: 10px;
+}
+
+h1 {
+    margin-top: 0;
+} */
+
 @media (max-width: 650px) {
     html,
     body {
@@ -102,6 +113,8 @@ input[type="file"] {
     cursor: pointer;
 }
 
+input[type="file"]:focus {}
+
 #upload-img {
     max-height: 350px;
     max-width: 60%;
@@ -116,3 +129,36 @@ input[type="file"] {
 
 
 /* ******************** */
+
+.bootstrap-tagsinput {
+    border: none !important;
+    background-color: none;
+}
+
+div.tag input {
+    border: none !important;
+    overflow: hidden;
+}
+
+span.tag {
+    font-size: 0.9em;
+    background-color: #5580AA;
+    display: inline;
+    padding: 0.4em 0.6em;
+    line-height: 2.5em;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.bootstrap-tagsinput .tag [data-role="remove"]:after {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f057";
+    font-weight: 800;
+    font-size: 5px;
+}
