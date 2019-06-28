@@ -10,7 +10,7 @@ header = '    <div class="header">\
     <div class="collapse navbar-collapse" id="navbarNav">\
         <ul class="navbar-nav ml-auto">\
         <li class="nav-item">\
-            <a class="nav-link" href="recomPost.html">\
+            <a class="nav-link" href="recommendPost.html">\
             新增推薦</a>\
         </li>\
         <li class="nav-item">\

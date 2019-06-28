@@ -164,7 +164,6 @@ span.tag {
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow: hidden;
-    opacity: 0.9;
 }
 
 .bootstrap-tagsinput .tag [data-role="remove"]:after {
