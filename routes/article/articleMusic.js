@@ -6,7 +6,8 @@ var moment = require('moment');
 
 //接收GET請求
 router.get('/', function (req, res, next) {
-    article.getClassMusic().then(data => {
+    var memID = req.session.memID ;
+    article.getClassMusic(memID).then(data => {
         console.log(data);
         if (data == null) {
             res.render('error');  //導向錯誤頁面

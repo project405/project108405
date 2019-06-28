@@ -25,7 +25,10 @@
 
     <script src="/javascripts/header.js"></script>
 
+
+
     <!-- 使用者發文 -->
+
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-8 content shadow">
@@ -91,7 +94,7 @@
                         document.getElementById("LikeUnLogIn").style.display = "none";
                     </script>
                     <% } %>
-
+                    
                     <!-- 留言數量按鈕 -->
                     <button type="button" class="btn postInfo"><i
                             class="fas fa-comment-dots"></i><a><%= items[3][0].count %></a></button>
@@ -307,7 +310,6 @@
                         document.getElementById("MessLikeUnLogIn" + artiNum + artiMessNum).style.display = "none";
                         document.getElementById("MessDelLike" + artiNum + artiMessNum).style.display = "none";
                     }
-                    //取得留言愛心數
                     function MessLikeCount(artiNum, artiMessNum) {
                         $.ajax({
                             url: '/likeCount',
@@ -323,12 +325,15 @@
                             error: function (res) {
                                 console.log("no", JSON.stringify(res));
                             }
+
                         });
                     }
+
                 </script>
                 <!-- info結束 -->
             </div>
         </div>
+
         <!-- 使用者發文結束' -->
 
         <center>
@@ -403,6 +408,9 @@
                             document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
                         </script>
                         <% } %>
+
+
+
                     </div>
                     <hr class="smallMagin">
                     <!-- info結束 -->
@@ -413,23 +421,24 @@
             </div>
             <% } %>
         </div>
+
         <!-- 文章留言結束 -->
 
+
         <!-- replying -->
-        <div class="row replying justify-content-center" id="reply" spellcheck="false">
+        <div class="row replying justify-content-center" id="reply">
             <div class="col-lg-8 content shadow">
-                <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="請輸入回覆內容"></div>
-                <label class="btn btn-dark" style="cursor: pointer">
+                <form>
+                    <div class="input">
+                        <textarea class="input" col="40" id="textarea" placeholder="輸入您要回覆的內容"></textarea>
+                    </div>
+                    <br>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </form>
 
-                    <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
-                    <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
-
-                </label>
-
-                <button type="submit" class="btn btn-danger float-right submitReply">提交回覆</button>
+                <button type="submit" class="btn btn-secondary active float-md-right">發佈留言</button>
 
             </div>
-
         </div>
         <!-- replying end -->
 
@@ -446,20 +455,20 @@
         <a href="#" id="gotop">
             <i class="fa fa-angle-up"></i>
         </a>
-    </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
-        crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
-        crossorigin="anonymous "></script>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
-        crossorigin="anonymous "></script>
-    <script src="/javascripts/active.js "></script>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+            crossorigin="anonymous "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+            crossorigin="anonymous "></script>
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+            crossorigin="anonymous "></script>
+        <script src="/javascripts/active.js "></script>
 
 </body>
 

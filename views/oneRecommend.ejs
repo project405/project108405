@@ -188,7 +188,7 @@
                 <!-- 愛心 ajax script -->
                 <script>
                     //新增愛心
-                    function addLike(recomNum) {      
+                    function addLike(recomNum) {
                         $.ajax({
                             url: '/addLike',
                             type: 'POST',
@@ -296,20 +296,19 @@
         </div>
 
         <!-- 文章留言結束 -->
-
-
+        
         <!-- replying -->
-        <div class="row replying justify-content-center" id="reply">
+        <div class="row replying justify-content-center" id="reply" spellcheck="false">
             <div class="col-lg-8 content shadow">
-                <form>
-                    <div class="input">
-                        <textarea class="input" col="40" id="textarea" placeholder="輸入您要回覆的內容"></textarea>
-                    </div>
-                    <br>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                </form>
+                <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="請輸入回覆內容"></div>
+                <label class="btn btn-dark" style="cursor: pointer">
 
-                <button type="submit" class="btn btn-secondary active float-md-right">發佈留言</button>
+                    <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
+                    <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
+
+                </label>
+
+                <button type="submit" class="btn btn-danger float-right submitReply">提交回覆</button>
 
             </div>
         </div>

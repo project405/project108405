@@ -6,7 +6,8 @@ var moment = require('moment');
 
 //接收GET請求
 router.get('/', function(req, res, next) {
-    article.getClassBook().then(data => {
+    var memID = req.session.memID ;
+    article.getClassBook(memID).then(data => {
         for(let i = 0 ; i < data.length ; i++){
             data[i].artiDateTime = moment(data[i].artiDateTime).format("YYYY-MM-DD HH:mm:ss");
         }

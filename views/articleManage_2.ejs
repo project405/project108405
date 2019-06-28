@@ -35,14 +35,13 @@
                 <hr class="highlight">
 
             </center>
+
             <div class="btnPost position-fixed">
                 <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
                     <i class="fas fa-edit"></i>發文</button>
             </div>
 
-
             <div class="row d-flex justify-content-center  no-gutters">
-
                 <div class="search col-lg-5 mx-auto">
                     <!-- Search -->
                     <form class="form-inline d-flex">
@@ -55,24 +54,23 @@
 
                 <div class="col-12 mb-3 col-lg-8 ">
                     <!-- list -->
-                    <% for(var i = 0; i < myArtiClass[0].length ; i++) { %>
+                    <% for(var i = 0; i < myArticle[0].length ; i++) { %>
                     <div class="card shadow list " onclick="location.href='article.html'" style="cursor:pointer; ">
-
                         <div class="card-body ">
                             <div class="poster">
                                 <div class="name">
-                                    <p><%= myArtiClass[0][i].memID %> 於 <%= myArtiClass[0][i].artiDateTime %>發表</p>
+                                    <p><%= myArticle[0][i].memID %> 於 <%= myArticle[0][i].artiDateTime %>發表</p>
                                 </div>
                                 <hr>
                             </div>
-                            <h3 class="card-title "><%= myArtiClass[0][i].artiHead %>
+                            <h3 class="card-title "><%= myArticle[0][i].artiHead %>
                             </h3>
-                            <p class="card-text "><%= myArtiClass[0][i].artiCont %>
+                            <p class="card-text "><%= myArticle[0][i].artiCont %>
                             </p>
 
                             <div class="tagDiv col-lg-12 ">
-                                <% for(var j = 0; j < myArtiClass[3][i].length ; j++) { %>
-                                <button type="button" class="btn  tag"><%= myArtiClass[3][i][j] %></button>
+                                <% for(var j = 0; j < myArticle[3][i].length ; j++) { %>
+                                <button type="button" class="btn  tag"><%= myArticle[3][i][j] %></button>
                                 <% } %>
                             </div>
                         </div>
@@ -84,10 +82,10 @@
                         <!-- info -->
                         <div class="info">
                             <button type="button" class="btn postInfo"><i
-                                    class="fab fa-gratipay"></i><a><%= myArtiClass[1][i].count %>
+                                    class="fab fa-gratipay"></i><a><%= myArticle[1][i].count %>
                                 </a></button>
                             <button type="button" class="btn postInfo"><i
-                                    class="fas fa-comment-dots"></i><a><%= myArtiClass[2][i].count %></a></button>
+                                    class="fas fa-comment-dots"></i><a><%= myArticle[2][i].count %></a></button>
                             <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i><a></a></button>
                         </div>
                         <!-- info結束 -->

@@ -33,17 +33,25 @@
             <center>
                 <h3>文章列表</h3>
                 <hr class="highlight">
+
             </center>
+            <div class="btnPost position-fixed">
+                <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
+                    <i class="fas fa-edit"></i>發文</button>
+            </div>
+
 
             <div class="row d-flex justify-content-center no-gutters">
-                <div class="search col-lg-6 mx-auto ">
+                <div class="search col-lg-5 mx-auto ">
                     <!-- Search -->
                     <form class="form-inline d-flex">
-                        <input type="text" class="form-control search col-sm-9" id="search" placeholder="輸入欲搜尋之關鍵字">
+                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-9"
+                            id="search" placeholder="輸入欲搜尋之關鍵字">
                         <button type="submit" class="search btn-primary mx-auto">搜尋</button>
                     </form>
                     <!-- Search End -->
                 </div>
+
 
                 <div class="col-12 mb-3 col-lg-8 ">
                     <!-- list -->
@@ -60,7 +68,7 @@
                             </h3>
                             <p class="card-text "><%= items[0][i].artiCont %>
                             </p>
-                            <!-- tag -->
+
                             <div class="tagDiv col-lg-12 ">
                                 <% for(var j=0; j<items[3][i].length; j++) {%>
                                 <button type="button" class="btn  tag"><%= items[3][i][j] %></button>
@@ -173,11 +181,11 @@
                                         type: 'POST',
                                         dataType: 'JSON',
                                         data: { "collectionType": "article", "artiNum": artiNum },
-                                        success: function (res) {
-                                            console.log("yes", JSON.stringify(res));
+                                        success: function (data) {
+                                            console.log("yes", data.statusText);
                                         },
-                                        error: function (res) {
-                                            console.log("失敗", JSON.stringify(res));
+                                        error: function (data) {
+                                            console.log("失敗", data);
                                         }
                                     });
                                 };
@@ -190,11 +198,11 @@
                                         type: 'POST',
                                         dataType: 'JSON',
                                         data: { "collectionType": "article", "artiNum": artiNum },
-                                        success: function (res) {
-                                            console.log("yes", JSON.stringify(res));
+                                        success: function (data) {
+                                            console.log("yes", data.statusText);
                                         },
-                                        error: function (res) {
-                                            console.log("失敗", JSON.stringify(res));
+                                        error: function (data) {
+                                            console.log("失敗", data);
                                         }
                                     });
                                 };
@@ -285,18 +293,25 @@
                                 }
                             </script>
                         </div>
+
+
                         <!-- info結束 -->
                         <div class="w-100"></div>
                     </div>
+
                     <% } %>
                     <!-- listEnd -->
+
                 </div>
             </div>
         </div>
     </section>
     <!-- 文章列表區塊結束 -->
 
+
+
     <div class="fixed-bottom  d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary footer" onclick="location.href='/articleList'">所有分類</button>
         <button type="button" class="btn btn-secondary footer"
             onclick="location.href='/articleList/articleMovie'">電影類</button>
         <button type="button" class="btn btn-secondary footer"
@@ -305,17 +320,15 @@
             onclick="location.href='/articleList/articleBook'">書籍類</button>
         <button type="button" class="btn btn-secondary footer"
             onclick="location.href='/articleList/articleExhibition'">展覽類</button>
-        <button type="button" class="btn btn-secondary footer" onclick="location.href='/articleList'">全部</button>
 
-        <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
-            <i class="fas fa-edit"></i>發文</button>
     </div>
 
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
     </a>
-    
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -265,7 +265,7 @@ a.navTitle {
 @media (max-width: 575px) {
     #gotop {
         position: fixed;
-        bottom: 27px;
+        bottom: 30px;
         right: 10px;
         width: 40px;
         height: 40px;
@@ -414,11 +414,17 @@ div.report {
     border-radius: 12px;
     height: 20em;
     z-index: 10;
+    caret-color: #2D4F41;
 }
 
 textarea.report {
     height: 200px;
     width: 100%;
+    overflow-y: visible;
+}
+
+textarea.report:focus {
+    outline: rgba(45, 79, 65, 0.452) dashed 3px;
 }
 
 button.report {
@@ -427,4 +433,22 @@ button.report {
 
 body:focus {
     border: #f0f0f0 solid 1px;
+}
+
+::selection {
+    background: #2D4F41;
+    color: white;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+    -webkit-text-fill-color: black;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+textarea:focus {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
 }

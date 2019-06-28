@@ -35,6 +35,11 @@ div.signUp {
     padding-bottom: 3em;
 }
 
+input:focus {
+    outline: rgba(45, 79, 65, 0.329) dashed 3px;
+    overflow: hidden;
+}
+
 
 /* --------------------- */
 
@@ -95,6 +100,10 @@ div.signUp {
 #logIn button.gmail:hover {
     background-color: #e94444;
     transition: 0.3s;
+}
+
+#logIn button.gmail:focus {
+    box-shadow: 0 0 0 0.2rem #e9444459;
 }
 
 
@@ -174,8 +183,9 @@ div.radio {
     vertical-align: middle;
     margin: 1em;
     cursor: pointer;
-    width: 6em;
+    width: 4.5em;
     font-size: 1em;
+    padding-right: 0;
 }
 
 .radio-custom-label {
@@ -200,11 +210,8 @@ div.radio {
 
 .radio-custom:checked+.radio-custom-label:before {
     content: "\f00c";
+    font-size: 25px;
+    line-height: 25px;
     font-family: 'FontAwesome';
     color: black;
-}
-
-.radio-custom:focus+.radio-custom-label {
-    outline: 1px solid #ddd;
-    /* focus style */
 }

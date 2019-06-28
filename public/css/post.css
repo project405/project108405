@@ -3,17 +3,12 @@ body {
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
     border: none;
-    word-wrap: break-word;
     background: url("../imgs/background/articleBac.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    text-align: justify;
     padding-top: 3em;
     height: auto;
-    height: 100%;
-    position: relative;
-    -webkit-overflow-scroll: touch;
 }
 
 @media (max-width: 650px) {
@@ -26,98 +21,154 @@ body {
     }
 }
 
-.container-fluid {
-    position: absolute;
-    padding: 0;
-    margin: 0;
-}
-
 div.content {
-    padding: 1em;
-    background: #f0f0f0;
-    border-radius: 8px;
+    padding: 1em 1em 1em 1em;
+    background-color: #eee;
+    opacity: 0.95;
+    margin-bottom: 1em;
+    border-radius: 12px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-textarea.input {
+div.post {
+    background-color: #d4d4d4;
+}
+
+div.titleInput,
+div.postInput {
     width: 100%;
+    min-height: 50px;
     height: auto;
+    padding: 0.75em;
+    margin-bottom: 1em;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.89;
     border-radius: 8px;
+    caret-color: #993a3a;
+    cursor: text;
+    text-align: justify;
 }
 
-textarea.input {
-    width: 100%;
-    height: 200pt;
+div.title {
+    min-height: 50px;
+}
+
+div.postInput {
+    min-height: 250px;
+}
+
+#postInto {
+    min-height: 150px;
+}
+
+div.titleInput:before {
+    font-family: 'Font Awesome 5 Free';
+    display: inline-block;
+    padding-right: 6px;
+    vertical-align: middle;
+    content: "\f1dc";
+    font-weight: 800;
+    opacity: 0.65;
+}
+
+div.titleInput:focus,
+div.postInput:focus {
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: 0.3s ease-in-out;
+    cursor: text;
+    display: block;
+}
+
+.input:empty::before {
+    color: lightgrey;
+    content: attr(placeholder);
 }
 
 
-/* ------------------ */
+/*focus時内容為空*/
+
+div.replyInput:focus:before {
+    content: none;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    content: attr(data-text);
+    color: black;
+}
+
+input[type="file"] {
+    position: fixed;
+    right: 100%;
+    bottom: 100%;
+    cursor: pointer;
+}
+
+input[type="file"]:focus {}
+
+#upload-img {
+    max-height: 350px;
+    max-width: 60%;
+    cursor: pointer;
+}
 
 
-/* report */
+/* ******************** */
 
 
-/* ------------------ */
+/* classification */
 
 
-/* Pseudo element */
+/* ******************** */
 
-.input-icon-wrap {
-    border: 1px solid #ddd;
-    display: flex;
-    flex-direction: row;
-    margin: 0.75em 0 0.75em 0;
+#inputState {
+    margin-bottom: 1em;
+}
+
+option {
+    border-radius: 100px;
+}
+
+
+/* ******************** */
+
+
+/* chip */
+
+
+/* ******************** */
+
+div .bootstrap-tagsinput {
+    border: none !important;
+}
+
+div.tag input {
+    border: none !important;
     overflow: hidden;
 }
 
-.input-icon {
-    background: #fff;
+span.tag {
+    font-size: 0.9em;
+    background-color: #5580AA;
+    display: inline;
+    padding: 0.4em 0.6em;
+    line-height: 2.5em;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
-.input-with-icon {
-    border: none;
-    flex: 1;
-}
-
-.input-icon,
-.input-with-icon {
-    padding: 10px;
-}
-
-.fa-times-circle {
-    margin-top: 0.35em;
-    font-size: 2em;
-    cursor: pointer;
-    color: white;
-}
-
-div.report {
-    display: none;
-    max-width: 50em;
-    position: absolute;
-    max-height: 50em;
-    background-color: #2D4F41;
-    opacity: 0.89;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 12px;
-    height: 20em;
-}
-
-textarea.report {
-    height: 200px;
-    padding: 1em;
-}
-
-button.report {
-    float: right;
-}
-
-select {
-    padding-bottom: 20em;
-}
-
-button.float-md-right {
-    float: right;
+.bootstrap-tagsinput .tag [data-role="remove"]:after {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f057";
+    font-weight: 800;
+    font-size: 5px;
 }

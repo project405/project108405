@@ -351,64 +351,66 @@
                 <!-- 文章留言 -->
                 <div class="message">
                     <!-- info -->
-                    <!-- 愛心按鈕 -->
-                    <div class="col-sm-3 ml-auto"> </div>
-                    <button type="button" id=<%= "MessLikeUnLogIn" + items[0][0].recomNum + items[1][j].recomMessNum %>
-                        class="btn info" style="color:yellow" onclick="location.href='/logIn'"><i
-                            class="fab fa-gratipay"></i><a><%= items[4][j].count %></a></button>
-
-                    <button type="button" id=<%= "MessAddLike"+ items[0][0].recomNum + items[1][j].recomMessNum %>
-                        class="btn info" style="color:blue"
-                        onclick=<%= "MessAddLike(" + items[0][0].recomNum + "," + items[1][j].recomMessNum + ")" %>>
-                        <i class="fab fa-gratipay"></i>
-                        <a id=<%="MessAddLikeCount" + items[0][0].recomNum + items[1][j].recomMessNum %>>
-                            <%= items[4][j].count %>
-                        </a>
-                    </button>
-
-                    <button type="button" id=<%= "MessDelLike" + items[0][0].recomNum + items[1][j].recomMessNum %>
-                        class="btn info" style="color:red"
-                        onclick=<%= "MessDelLike(" + items[0][0].recomNum + "," + items[1][j].recomMessNum + ")" %>>
-                        <i class="fab fa-gratipay"></i>
-                        <a id=<%= "MessDelLikeCount" + items[0][0].recomNum + items[1][j].recomMessNum %>>
-                            <%= items[4][j].count %></a>
-                    </button>
-                    <!-- 如果沒登入 -->
-                    <% if(items[8][0] == undefined) {%>
-                    <script type="text/javascript">
-                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "inline";
-                        document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                        document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                    </script>
-                    <!-- 如果有登入及沒按過愛心       -->
-                    <% }else if(items[9][j] == 1 && items[8][0] != undefined ) {%>
-                    <script type="text/javascript">
-                        document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%=  items[1][j].recomMessNum %>").style.display = "inline";
-                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                        document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                    </script>
-                    <!-- 如果有登入及按過愛心 -->
-                    <% }else if(items[9][j] == 0 && items[8][0] != undefined ) {%>
-                    <script type="text/javascript">
-                        document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "inline";
-                        document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                    </script>
-                    <% }else {%>
-                    <script type="text/javascript">
-                        document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                        document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                    </script>
-                    <% } %>
-
-                    <div class="poster">
-                        <div class="floor"><a class="floorTag text-break "><%= j+1 %> 樓</a> <a><%= items[1][j].memID %>
+                    <div class="info d-flex">
+                        <!-- 樓層、發文者及留言時間按鈕 -->
+                        <div class="floor"><a class="floorTag text-break "><%= j+1 %> 樓</a>
+                            <a><%= items[1][j].memID %>
                                 於
-                                <%= items[1][j].recomMessDateTime %>留言</a> </div>
-                        <hr class="separate">
+                                <%= items[1][j].recomMessDateTime %>留言</a>
+                        </div>
+                        <!-- 愛心按鈕 -->
+                        <div class="col-sm-3 ml-auto"> </div>
+                        <button type="button"
+                            id=<%= "MessLikeUnLogIn" + items[0][0].recomNum + items[1][j].recomMessNum %>
+                            class="btn info" style="color:yellow" onclick="location.href='/logIn'"><i
+                                class="fab fa-gratipay"></i><a><%= items[4][j].count %></a></button>
 
+                        <button type="button" id=<%= "MessAddLike"+ items[0][0].recomNum + items[1][j].recomMessNum %>
+                            class="btn info" style="color:blue"
+                            onclick=<%= "MessAddLike(" + items[0][0].recomNum + "," + items[1][j].recomMessNum + ")" %>>
+                            <i class="fab fa-gratipay"></i>
+                            <a id=<%="MessAddLikeCount" + items[0][0].recomNum + items[1][j].recomMessNum %>>
+                                <%= items[4][j].count %>
+                            </a>
+                        </button>
+
+                        <button type="button" id=<%= "MessDelLike" + items[0][0].recomNum + items[1][j].recomMessNum %>
+                            class="btn info" style="color:red"
+                            onclick=<%= "MessDelLike(" + items[0][0].recomNum + "," + items[1][j].recomMessNum + ")" %>>
+                            <i class="fab fa-gratipay"></i>
+                            <a id=<%= "MessDelLikeCount" + items[0][0].recomNum + items[1][j].recomMessNum %>>
+                                <%= items[4][j].count %></a>
+                        </button>
+                        <!-- 如果沒登入 -->
+                        <% if(items[8][0] == undefined) {%>
+                        <script type="text/javascript">
+                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "inline";
+                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                        </script>
+                        <!-- 如果有登入及沒按過愛心       -->
+                        <% }else if(items[9][j] == 1 && items[8][0] != undefined ) {%>
+                        <script type="text/javascript">
+                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%=  items[1][j].recomMessNum %>").style.display = "inline";
+                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                        </script>
+                        <!-- 如果有登入及按過愛心 -->
+                        <% }else if(items[9][j] == 0 && items[8][0] != undefined ) {%>
+                        <script type="text/javascript">
+                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "inline";
+                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                        </script>
+                        <% }else {%>
+                        <script type="text/javascript">
+                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                        </script>
+                        <% } %>
                     </div>
+                    <hr class="smallMagin">
 
                     <!-- info結束 -->
 
@@ -422,20 +424,21 @@
         <!-- 文章留言結束 -->
 
         <!-- replying -->
-        <div class="row replying justify-content-center" id="reply">
+        <div class="row replying justify-content-center" id="reply" spellcheck="false">
             <div class="col-lg-8 content shadow">
-                <div class="input">
-                    <textarea class="input" col="40" id="text" placeholder="輸入您要回覆的內容"></textarea>
+                <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="請輸入回覆內容">
                 </div>
-                <form>
-                    <div class="form-group">
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                </form>
-                <a href="#" class="btn btn-secondary btn-lg active float-md-right" role="button"
-                    aria-pressed="true">發佈留言</a>
+                <label class="btn btn-dark" style="cursor: pointer">
+
+                    <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
+                    <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
+
+                </label>
+
+                <button type="submit" class="btn btn-danger float-right submitReply">提交回覆</button>
 
             </div>
+
         </div>
         <!-- replying end -->
 

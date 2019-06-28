@@ -1,7 +1,7 @@
 header = '    <div class="header">\
 <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">\
-    <a class="nav-link" href="#">\
-    <img class="nav-item" href="/" src="/imgs/logo.png" width="35px" height="35px " style="opacity:0.8" alt="">\
+    <a class="nav-link" href="/">\
+    <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8" alt="">\
        <a href="/" class="navTitle">文藝富心</a>\
 </a>\
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">\
@@ -9,7 +9,11 @@ header = '    <div class="header">\
     </button>\
     <div class="collapse navbar-collapse" id="navbarNav">\
         <ul class="navbar-nav ml-auto">\
-            <li class="nav-item">\
+        <li class="nav-item">\
+            <a class="nav-link" href="recommendPost.html">\
+            新增推薦</a>\
+        </li>\
+        <li class="nav-item">\
                 <a class="nav-link " href="/">首頁 <span class="sr-only">(current)</span></a>\
             </li>\
             <li class="nav-item ">\

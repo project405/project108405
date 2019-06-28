@@ -35,14 +35,8 @@
                 <hr class="highlight">
 
             </center>
-            <div class="btnPost position-fixed">
-                <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
-                    <i class="fas fa-edit"></i>發文</button>
-            </div>
-
 
             <div class="row d-flex justify-content-center  no-gutters">
-
                 <div class="search col-lg-5 mx-auto">
                     <!-- Search -->
                     <form class="form-inline d-flex">
@@ -56,10 +50,9 @@
                 <div class="col-12 mb-3 col-lg-8 ">
                     <!-- list -->
                     <% for(var i = 0; i < myArticle[0].length ; i++) { %>
-                    <div class="card shadow list " onclick="location.href='article.html'" style="cursor:pointer; ">
-
-                        <div class="card-body ">
-                            <div class="poster">
+                    <div class="card shadow list " style="cursor:pointer; ">
+                        <div class="card-body " onclick="location.href='article.html'">
+                            <div class=" poster">
                                 <div class="name">
                                     <p><%= myArticle[0][i].memID %> 於 <%= myArticle[0][i].artiDateTime %>發表</p>
                                 </div>
@@ -67,8 +60,7 @@
                             </div>
                             <h3 class="card-title "><%= myArticle[0][i].artiHead %>
                             </h3>
-                            <p class="card-text "><%= myArticle[0][i].artiCont %>
-                            </p>
+                            <p class="card-text "><%= myArticle[0][i].artiCont %></p>
 
                             <div class="tagDiv col-lg-12 ">
                                 <% for(var j = 0; j < myArticle[3][i].length ; j++) { %>
@@ -83,12 +75,216 @@
                         </div>
                         <!-- info -->
                         <div class="info">
-                            <button type="button" class="btn postInfo"><i
-                                    class="fab fa-gratipay"></i><a><%= myArticle[1][i].count %>
-                                </a></button>
+                            <!-- 愛心按鈕 -->
+                            <button type="button" id=<%= "LikeUnLogIn" + myArticle[0][i].artiNum %> class="btn postInfo"
+                                style="color:yellow" onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
+                                <a><%= myArticle[1][i].count %></a></button>
+                            <button type="button" id=<%="addLike" + myArticle[0][i].artiNum %> class="btn postInfo"
+                                style="color:blue" onclick=<%= "addLike(" + myArticle[0][i].artiNum + ")" %>>
+                                <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + myArticle[0][i].artiNum %>>
+                                    <%= myArticle[1][i].count %> </a> </button>
+                            <button type="button" id=<%= "delLike" + myArticle[0][i].artiNum %> class="btn postInfo"
+                                style="color:red" onclick=<%= "delLike(" + myArticle[0][i].artiNum + ")" %>>
+                                <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + myArticle[0][i].artiNum %>>
+                                    <%= myArticle[1][i].count %></a></button>
+                            <!-- 如果沒登入 -->
+                            <% if(myArticle[6][0] == undefined) {%>
+                            <script type="text/javascript">
+                                document.getElementById("LikeUnLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
+                                document.getElementById("addLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                document.getElementById("delLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                            </script>
+                            <!-- 如果有登入及沒按過愛心       -->
+                            <% }else if(myArticle[5][i] == 1 && myArticle[6][0] != undefined ) {%>
+                            <script type="text/javascript">
+                                document.getElementById("addLike" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
+                                document.getElementById("LikeUnLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                document.getElementById("delLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                            </script>
+                            <!-- 如果有登入及按過愛心 -->
+                            <% }else if(myArticle[5][i] == 0 && myArticle[6][0] != undefined ) {%>
+                            <script type="text/javascript">
+                                document.getElementById("delLike" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
+                                document.getElementById("addLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                document.getElementById("LikeUnLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                            </script>
+                            <% }else {%>
+                            <script type="text/javascript">
+                                document.getElementById("delLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                document.getElementById("addLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                document.getElementById("LikeUnLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                            </script>
+                            <% } %>
+
+                            <!-- 留言數量按鈕 -->
                             <button type="button" class="btn postInfo"><i
                                     class="fas fa-comment-dots"></i><a><%= myArticle[2][i].count %></a></button>
-                            <button type="button" class="btn postInfo"><i class="far fa-bookmark"></i><a></a></button>
+
+                            <!-- 收藏按鈕 -->
+                            <button type="button" id=<%= "unLogIn" + myArticle[0][i].artiNum %> class="btn postInfo"
+                                style="color:yellow; display: inline" onclick="location.href='/logIn'">
+                                <i class="far fa-bookmark"></i></button>
+                            <button type="button" id=<%=  "addColle" + myArticle[0][i].artiNum %> class="btn postInfo"
+                                style="color:blue; display: inline"
+                                onclick=<%= "addColle(" + myArticle[0][i].artiNum + ")" %>>
+                                <i class="far fa-bookmark"></i></button>
+                            <button type="button" id=<%= "delColle" + myArticle[0][i].artiNum %> class="btn postInfo"
+                                style="color:red; display: inline"
+                                onclick=<%= "delColle(" + myArticle[0][i].artiNum + ")" %>>
+                                <i class="far fa-bookmark"></i></button>
+
+                            <!--  收藏按鈕控制 -->
+                            <% if(myArticle[6][0] == undefined) {%>
+                            <script type="text/javascript">
+                                document.getElementById("unLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
+                                document.getElementById("addColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                document.getElementById("delColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                console.log("1");
+                            </script>
+                            <% }else if(myArticle[4][i] == 1 && myArticle[6][0] != undefined ) {%>
+                            <script type="text/javascript">
+                                document.getElementById("addColle" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
+                                document.getElementById("unLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                document.getElementById("delColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                console.log("2");
+                            </script>
+                            <% }else if(myArticle[4][i] == 0 && myArticle[6][0] != undefined ) {%>
+                            <script type="text/javascript">
+                                document.getElementById("delColle" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
+                                document.getElementById("addColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                document.getElementById("unLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                console.log("3");
+                            </script>
+                            <% }else {%>
+                            <script type="text/javascript">
+                                document.getElementById("delColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                document.getElementById("addColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                document.getElementById("unLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                console.log("3");
+                            </script>
+                            <% } %>
+
+                            <!-- 收藏 ajax script -->
+                            <script>
+                                //新增收藏
+                                function addColle(artiNum) {
+                                    collection(artiNum);
+                                    $.ajax({
+                                        url: '/addCollection',
+                                        type: 'POST',
+                                        dataType: 'text',
+                                        data: { "collectionType": "article", "artiNum": artiNum },
+                                        success: function (res) {
+                                            console.log("yes", JSON.stringify(res));
+                                        },
+                                        error: function (res) {
+                                            console.log("失敗", JSON.stringify(res));
+                                        }
+                                    });
+                                };
+                                //刪除收藏
+                                function delColle(artiNum) {
+                                    // console.log("前端刪除訊息");
+                                    cancelCollection(artiNum);
+                                    $.ajax({
+                                        url: '/delCollection',
+                                        type: 'POST',
+                                        dataType: 'JSON',
+                                        data: { "collectionType": "article", "artiNum": artiNum },
+                                        success: function (res) {
+                                            console.log("yes", JSON.stringify(res));
+                                        },
+                                        error: function (res) {
+                                            console.log("失敗", JSON.stringify(res));
+                                        }
+                                    });
+                                };
+                                //點收藏後改變屬性
+                                function collection(artiNum) {
+                                    document.getElementById("delColle" + artiNum).style.display = "inline";
+                                    document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                                    document.getElementById("addColle" + artiNum).style.display = "none";
+                                }
+                                //取消收藏後改變屬性
+                                function cancelCollection(artiNum) {
+                                    document.getElementById("addColle" + artiNum).style.display = "inline";
+                                    document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                                    document.getElementById("delColle" + artiNum).style.display = "none";
+                                }
+
+                            </script>
+                            <!-- 愛心 ajax script -->
+                            <script>
+                                //新增愛心
+                                function addLike(artiNum) {
+                                    $.ajax({
+                                        url: '/addLike',
+                                        type: 'POST',
+                                        dataType: 'text',
+                                        data: { "likeType": "article", "artiNum": artiNum },
+                                        success: function (res) {
+                                            console.log("yes", JSON.stringify(res));
+                                            likeCount(artiNum);
+                                            like(artiNum);
+                                        },
+                                        error: function (res) {
+                                            console.log("失敗", res);
+
+                                        }
+                                    });
+
+                                };
+                                //刪除愛心
+                                function delLike(artiNum) {
+                                    // console.log("前端刪除訊息");     
+                                    $.ajax({
+                                        url: '/delLike',
+                                        type: 'POST',
+                                        dataType: 'text',
+                                        data: { "likeType": "article", "artiNum": artiNum },
+                                        success: function (res) {
+                                            console.log("yes", JSON.stringify(res));
+                                            likeCount(artiNum);
+                                            cancelLike(artiNum);
+                                        },
+                                        error: function (res) {
+                                            console.log("刪除失敗", JSON.stringify(res));
+                                        }
+                                    });
+
+                                };
+                                //點愛心後改變屬性
+                                function like(artiNum) {
+                                    console.log("like", artiNum);
+                                    document.getElementById("delLike" + artiNum).style.display = "inline";
+                                    document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                                    document.getElementById("addLike" + artiNum).style.display = "none";
+                                }
+                                //取消愛心後改變屬性
+                                function cancelLike(artiNum) {
+                                    document.getElementById("addLike" + artiNum).style.display = "inline";
+                                    document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                                    document.getElementById("delLike" + artiNum).style.display = "none";
+                                }
+                                function likeCount(artiNum) {
+                                    $.ajax({
+                                        url: '/likeCount',
+                                        type: 'POST',
+                                        dataType: 'JSON',
+                                        data: { "likeType": "article", "artiNum": artiNum },
+                                        success: function (res) {
+                                            // console.log("yes", reponse.responseText);
+                                            console.log("yes", JSON.stringify(res));
+                                            document.getElementById("addLikeCount" + artiNum).innerHTML = JSON.stringify(res);
+                                            document.getElementById("delLikeCount" + artiNum).innerHTML = JSON.stringify(res);
+                                        },
+                                        error: function (res) {
+                                            console.log("no", JSON.stringify(res));
+                                        }
+
+                                    });
+                                }
+                            </script>
                         </div>
                         <!-- info結束 -->
 
@@ -105,19 +301,23 @@
 
 
     <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary footer"  onclick="location.href='/articleManage'">所有分類</button>
-        <button type="button " class="btn btn-secondary align-middle footer" onclick="location.href='/articleManage/movie'">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer">音樂類</button>
-        <button type="button " class="btn btn-secondary align-middle footer">書籍類</button>
-        <button type="button " class="btn btn-secondary align-middle footer">展覽類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleManage/movie'">電影類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleManage/music'">音樂類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleManage/book'">書籍類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleManage/exhibition'">展覽類</button>
+        <button type="button " class="btn btn-secondary footer" onclick="location.href='/member/articleManage'">全部</button>
+        <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
+            <i class="fas fa-edit"></i>發文</button>
 
     </div>
-
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
     </a>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

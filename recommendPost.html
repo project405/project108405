@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css">
+
+
+    <link href="css/header.css" rel="stylesheet" type="text/css" />
+    <link href="css/post.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="imgs/logo.ico" type="image/x-icon" />
+    <title>文藝富心</title>
+</head>
+
+<body>
+
+    <script src="scripts/header.js"></script>
+    <center>
+        <h3>新增推薦</h3>
+        <hr class="highlight">
+    </center>
+    <div class="justify-content-center">
+        <div class="post col-lg-8 content shadow">
+
+            <select id="inputState" class="form-control">
+                <option>電影類</option>
+                <option>音樂類</option>
+                <option>展覽類</option>
+                <option>書籍類</option>
+            </select>
+
+            <div class="titleInput input-with-icon title" contenteditable="true" role="textbox" data-text="請輸入您的標題"></div>
+
+            <div id="postInto" class="postInput" contenteditable="true" role="textbox" data-text="簡介內容"></div>
+
+            <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容"></div>
+
+            <div class="tag content col-lg-12">
+                <input type="text" data-role="tagsinput" id="tagInput" class="form-control" placeholder=" + tag" />
+            </div>
+            <label class="btn btn-dark" style="cursor: pointer">
+                <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp"/>
+                <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
+                </label>
+
+
+            <button type="submit" class="btn btn-danger float-right submitReply">提交回覆</button>
+
+        </div>
+    </div>
+
+
+
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+
+
+    <script src="scripts/active.js"></script>
+
+</body>
+
+</html>

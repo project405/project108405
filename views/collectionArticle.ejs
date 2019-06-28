@@ -37,11 +37,10 @@
 
             <div class="row d-flex justify-content-center  no-gutters ">
 
-                <div class="search col-lg-5 mx-auto">
+                <div class="search col-lg-6 mx-auto ">
                     <!-- Search -->
                     <form class="form-inline d-flex">
-                        <input type="text" class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 search col-sm-9"
-                            id="search" placeholder="輸入欲搜尋之關鍵字">
+                        <input type="text" class="form-control search col-sm-9" id="search" placeholder="輸入欲搜尋之關鍵字">
                         <button type="submit" class="search btn-primary mx-auto">搜尋</button>
                     </form>
                     <!-- Search End -->
@@ -77,15 +76,15 @@
                         <!-- info -->
                         <div class="info">
                             <!-- 愛心按鈕 -->
-                            <button type="button" id=<%= "LikeUnLogIn" + collData[0][i].artiNum %> class="btn postInfo" style="color:yellow"
-                                onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
+                            <button type="button" id=<%= "LikeUnLogIn" + collData[0][i].artiNum %> class="btn postInfo"
+                                style="color:yellow" onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
                                 <a><%= collData[1][i].count %></a></button>
-                            <button type="button" id=<%="addLike" + collData[0][i].artiNum %> class="btn postInfo" style="color:blue"
-                                onclick=<%= "addLike(" + collData[0][i].artiNum + ")" %>>
+                            <button type="button" id=<%="addLike" + collData[0][i].artiNum %> class="btn postInfo"
+                                style="color:blue" onclick=<%= "addLike(" + collData[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + collData[0][i].artiNum %>>
                                     <%= collData[1][i].count %></a> </button>
-                            <button type="button" id=<%= "delLike" + collData[0][i].artiNum %> class="btn postInfo" style="color:red"
-                                onclick=<%= "delLike(" + collData[0][i].artiNum + ")" %>>
+                            <button type="button" id=<%= "delLike" + collData[0][i].artiNum %> class="btn postInfo"
+                                style="color:red" onclick=<%= "delLike(" + collData[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + collData[0][i].artiNum %>>
                                     <%= collData[1][i].count %></a></button>
                             <!-- 如果沒登入 -->
@@ -305,8 +304,6 @@
 
 
     <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary footer"
-            onclick="location.href='/collection/article'">所有分類</button>
         <button type="button " class="btn btn-secondary align-middle footer"
             onclick="location.href='/collection/article/movie'">電影類</button>
         <button type="button " class="btn btn-secondary align-middle footer"
@@ -315,6 +312,8 @@
             onclick="location.href='/collection/article/book'">書籍類</button>
         <button type="button " class="btn btn-secondary align-middle footer"
             onclick="location.href='/collection/article/exhibition'">展覽類</button>
+        <button type="button " class="btn btn-secondary footer"
+            onclick="location.href='/collection/article'">全部</button>
     </div>
 
 

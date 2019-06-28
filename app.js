@@ -39,6 +39,9 @@ var addLikeRouter = require('./routes/member/addLike');
 var delLikeRouter = require('./routes/member/delLike');
 // ---------------  four Class -------------------
 var myMovieArticleRouter = require('./routes/member/myMovieArticle');
+var myMusicArticleRouter = require('./routes/member/myMusicArticle');
+var myBookArticleRouter = require('./routes/member/myBookArticle');
+var myExhibitionArticleRouter = require('./routes/member/myExhibitionArticle');
 
 //=========================================
 //---------  collection router ------------
@@ -126,7 +129,9 @@ app.use('/addLike',addLikeRouter);
 app.use('/delLike',delLikeRouter);
 // -------------- four Class use----------------
 app.use('/articleManage/movie',myMovieArticleRouter);
-
+app.use('/articleManage/music',myMusicArticleRouter);
+app.use('/articleManage/book',myBookArticleRouter);
+app.use('/articleManage/exhibition',myExhibitionArticleRouter);
 //=========================================
 //----------  collection use --------------
 //=========================================

@@ -28,12 +28,19 @@
         <h3>發佈貼文</h3>
         <hr class="highlight">
     </center>
+    <div class="justify-content-center">
+        <div class="post col-lg-8 content shadow">
+            <select id="inputState" class="form-control" onchange="styleselect()">
+                <option value="1">電影類</option>
+                <option value="2">音樂類</option>
+                <option value="3">展覽類</option>
+                <option value="4">書籍類</option>
+            </select>
 
-    <div class="container-fluid row justify-content-center">
-        <!-- into multiple lines -->
-        <div class="w-100"></div>
-        <!-- into multiple lines End -->
+            <div class="titleInput input-with-icon title" contenteditable="true" role="textbox" data-text="請輸入您的標題"></div>
+            <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容"></div>
 
+<<<<<<< HEAD:views/post.ejs
         <div class="col-lg-8 content">
             <form class="post" action="/article/post" method="post" enctype="multipart/form-data">
                 <div class="input-icon-wrap">
@@ -44,9 +51,14 @@
                     <span class="input-icon"><span class="fas fas fa-file-alt"></span></span>
                     <textarea class="input-with-icon input" id="textarea" name="artiCont"
                         placeholder="輸入您的內文"></textarea>
+=======
+            <div class="tag content col-lg-12">
+                <input type="text" data-role="tagsinput" id="tagInput" class="form-control" placeholder=" + tag" />
+            </div>
+>>>>>>> fc465ee4b0071ee0a2795e974fe341730a27a778:post.html
 
-                </div>
 
+<<<<<<< HEAD:views/post.ejs
                 <select id="inputState" class="form-control" name="artiClass">
                     <option value="movie">電影類</option>
                     <option value="music">音樂類</option>
@@ -61,20 +73,29 @@
 
                 <button type="submit" class="btn btn-secondary float-md-right">發佈文章</button>
             </form>
+=======
+
+
+
+
+            <label class="btn btn-dark" style="cursor: pointer">
+            <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp"/>
+            <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
+            </label>
+>>>>>>> fc465ee4b0071ee0a2795e974fe341730a27a778:post.html
+
+            <button type="submit" class="btn btn-danger float-right submitReply">提交回覆</button>
+
 
 
         </div>
-
-
     </div>
+
 
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
     </a>
-
-
-
 
 
 
@@ -92,6 +113,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
         crossorigin="anonymous "></script>
     <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/form.js"></script>
 </body>
 
 </html>

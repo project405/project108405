@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
     if (memID == null || memID == undefined) {
         res.render('login');
     } else {
-        member.myMovieArticle(memID).then(data => {
+        member.myMusicArticle(memID).then(data => {
             console.log(data);
             if (data == null) {
                 res.render('error');
