@@ -9,7 +9,11 @@ header = '    <div class="header">\
     </button>\
     <div class="collapse navbar-collapse" id="navbarNav">\
         <ul class="navbar-nav ml-auto">\
-            <li class="nav-item">\
+        <li class="nav-item">\
+            <a class="nav-link" href="recomPost.html">\
+            新增推薦</a>\
+        </li>\
+        <li class="nav-item">\
                 <a class="nav-link " href="index.html">首頁 <span class="sr-only">(current)</span></a>\
             </li>\
             <li class="nav-item ">\

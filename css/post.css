@@ -11,17 +11,6 @@ body {
     height: auto;
 }
 
-
-/* 
-body {
-    background: #fafafa;
-    padding: 10px;
-}
-
-h1 {
-    margin-top: 0;
-} */
-
 @media (max-width: 650px) {
     html,
     body {
@@ -59,6 +48,7 @@ div.postInput {
     border-radius: 8px;
     caret-color: #993a3a;
     cursor: text;
+    text-align: justify;
 }
 
 div.title {
@@ -67,6 +57,10 @@ div.title {
 
 div.postInput {
     min-height: 250px;
+}
+
+#postInto {
+    min-height: 150px;
 }
 
 div.titleInput:before {
@@ -125,12 +119,29 @@ input[type="file"]:focus {}
 /* ******************** */
 
 
+/* classification */
+
+
+/* ******************** */
+
+#inputState {
+    margin-bottom: 1em;
+}
+
+option {
+    border-radius: 100px;
+}
+
+
+/* ******************** */
+
+
 /* chip */
 
 
 /* ******************** */
 
-.bootstrap-tagsinput {
+div .bootstrap-tagsinput {
     border: none !important;
 }
 

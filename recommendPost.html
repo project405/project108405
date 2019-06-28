@@ -25,38 +25,35 @@
 
     <script src="scripts/header.js"></script>
     <center>
-        <h3>發佈貼文</h3>
+        <h3>新增推薦</h3>
         <hr class="highlight">
     </center>
     <div class="justify-content-center">
         <div class="post col-lg-8 content shadow">
-            <select id="inputState" class="form-control" onchange="styleselect()">
-                <option value="1">電影類</option>
-                <option value="2">音樂類</option>
-                <option value="3">展覽類</option>
-                <option value="4">書籍類</option>
+
+            <select id="inputState" class="form-control">
+                <option>電影類</option>
+                <option>音樂類</option>
+                <option>展覽類</option>
+                <option>書籍類</option>
             </select>
 
             <div class="titleInput input-with-icon title" contenteditable="true" role="textbox" data-text="請輸入您的標題"></div>
+
+            <div id="postInto" class="postInput" contenteditable="true" role="textbox" data-text="簡介內容"></div>
+
             <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容"></div>
 
             <div class="tag content col-lg-12">
                 <input type="text" data-role="tagsinput" id="tagInput" class="form-control" placeholder=" + tag" />
             </div>
-
-
-
-
-
-
             <label class="btn btn-dark" style="cursor: pointer">
-            <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp"/>
-            <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
-            </label>
+                <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp"/>
+                <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
+                </label>
+
 
             <button type="submit" class="btn btn-danger float-right submitReply">提交回覆</button>
-
-
 
         </div>
     </div>
@@ -83,7 +80,6 @@
 
 
     <script src="scripts/active.js"></script>
-    <script src="scripts/form.js"></script>
 
 </body>
 
