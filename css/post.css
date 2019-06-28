@@ -36,7 +36,7 @@ div.content {
     padding: 1em 1em 1em 1em;
     background-color: #eee;
     opacity: 0.95;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
     border-radius: 12px;
     margin-left: auto;
     margin-right: auto;
@@ -132,7 +132,6 @@ input[type="file"]:focus {}
 
 .bootstrap-tagsinput {
     border: none !important;
-    background-color: none;
 }
 
 div.tag input {
@@ -154,6 +153,7 @@ span.tag {
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow: hidden;
+    opacity: 0.9;
 }
 
 .bootstrap-tagsinput .tag [data-role="remove"]:after {

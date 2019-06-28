@@ -5,6 +5,18 @@ $(function() {
     });
 });
 
+// tag div css
+$(function() {
+    $("input").focus(function() {
+        $("div.tag").css("box-shadow", "0 5px 15px rgba(0, 0, 0, 0.3)");
+        $("div.tag").css("transition", "0.3s ease-in-out");
+    });
+    $("input").blur(function() {
+        $("div.tag").css("box-shadow", "none");
+
+    });
+});
+
 // 隨著留言增加height增加
 // jQuery.fn.extend({
 //     autoHeight: function() {
@@ -63,9 +75,6 @@ $("#goBottom").click(function() {
 
 
 //goDown
-
-
-
 
 $('#goDown').click(function() {
     $('html,body').animate({ scrollTop: $('#block').offset().top }, 800);
