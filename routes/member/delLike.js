@@ -27,8 +27,19 @@ router.post('/', function (req, res, next) {
             }
         })
     } else if (req.body.likeType == "articleMess") {
-        var mydata = {"artiMessNum":req.body.artiMessNum , "artiNum":req.body.artiNum};
+        var mydata = { "artiMessNum": req.body.artiMessNum, "artiNum": req.body.artiNum };
         member.delArticleMessLike(memID, req.body.artiMessNum).then(data => {
+            if (data == 1) {
+                // console.log("刪除成功");
+                res.send(mydata);
+            } else {
+                // console.log("刪除失敗");
+                res.send("刪除文章留言愛心失敗摟!");
+            }
+        })
+    } else if (req.body.likeType == "recommendMess") {
+        var mydata = { "recomMessNum": req.body.recomMessNum, "recomNum": req.body.recomNum };
+        member.delRecommendMessLike(memID, req.body.recomMessNum).then(data => {
             if (data == 1) {
                 // console.log("刪除成功");
                 res.send(mydata);

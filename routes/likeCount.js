@@ -38,6 +38,17 @@ router.post('/', function (req, res, next) {
                 res.send("新增失敗摟!");
             }
         })
+    } else if (req.body.likeType == "recommendMess") {
+        article.getRecomMessLikeCount(req.body.recomMessNum).then(data => {
+            if (data != undefined || data != null) {
+                // console.log(data[0][0].count);
+                var mydata = { "recomMessNum": req.body.recomMessNum, "recomNum": req.body.recomNum, "data": data[0][0].count };
+                res.send(mydata);
+            } else {
+                // console.log("新增失敗");
+                res.send("新增失敗摟!");
+            }
+        })
     }
 });
 

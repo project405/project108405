@@ -597,10 +597,33 @@ var getArtiMessLikeCount = async function (artiMessNum) {
     // console.log("result[0] = " , result[0]);
     return result;
 }
+
+//=========================================
+//---------  getRecomMessLikeCount() -------------
+//=========================================
+var getRecomMessLikeCount = async function (recomMessNum) {
+    var recomMessNumCount = []; //存放文章愛心總數
+    var result = [];
+    // -----------  取得單一文章愛心數量 --------------
+    await sql('SELECT count("recomMessNum") FROM "recommendMessageLike" WHERE "recomMessNum"=$1', [recomMessNum])
+        .then((data) => {
+            if (data.rows.length > 0) {
+                recomMessNumCount = data.rows;
+            } else {
+                recomMessNumCount = -1;
+            }
+        }, (error) => {
+            recomMessNumCount = null;
+        });
+
+    result[0] = recomMessNumCount;
+    // console.log("result[0] = " , result[0]);
+    return result;
+}
 //匯出
 module.exports = {
     getArticleList, getOneArticle,
     getClassMovie, getClassMusic, getClassBook, getClassExhibition,
     getHotArticle, getArtiLikeCount, getRecomLikeCount,
-    getArtiMessLikeCount
+    getArtiMessLikeCount,getRecomMessLikeCount
 };

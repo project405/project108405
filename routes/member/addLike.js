@@ -29,8 +29,8 @@ router.post('/', function (req, res, next) {
         })
 
     } else if (req.body.likeType == "articleMess") {
-        var mydata = {"artiMessNum":req.body.artiMessNum , "artiNum":req.body.artiNum};
-        member.addArticleMessLike(memID,req.body.artiMessNum).then(data => {
+        var mydata = { "artiMessNum": req.body.artiMessNum, "artiNum": req.body.artiNum };
+        member.addArticleMessLike(memID, req.body.artiMessNum).then(data => {
             if (data == 1) {
                 console.log("新增留言愛心成功");
                 res.send(mydata);
@@ -40,6 +40,17 @@ router.post('/', function (req, res, next) {
             }
         })
 
+    } else if (req.body.likeType == "recommendMess") {
+        var mydata = { "recomMessNum": req.body.recomMessNum, "recomNum": req.body.recomNum };
+        member.addRecommendMessLike(memID, req.body.recomMessNum).then(data => {
+            if (data == 1) {
+                console.log("新增留言愛心成功");
+                res.send(mydata);
+            } else {
+                console.log("新增文章愛心失敗");
+                res.send("新增失敗摟!");
+            }
+        })
     }
 });
 
