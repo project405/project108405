@@ -3,13 +3,13 @@ $(window).load(function() {
 })
 
 function styleselect() {
-    if (document.getElementById('globalstyleselect').value == "3") {
+    if (document.getElementById('globalstyleselect').value == "1") {
         $("#stylediv").html('<b>Boca Style</b>');
     }
     if (document.getElementById('globalstyleselect').value == "2") {
         $("#stylediv").html('<b>Bella Style</b>');
     }
 }
-if (document.getElementById('globalstyleselect').value == "1") {
+if (document.getElementById('globalstyleselect').value == "3") {
     $("#stylediv").html('<b>Terra Style</b>');
 }

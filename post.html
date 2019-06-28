@@ -40,21 +40,18 @@
             <div class="titleInput input-with-icon title" contenteditable="true" role="textbox" data-text="請輸入您的標題"></div>
             <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容"></div>
 
+
             <div class="tag content col-lg-12">
                 <input type="text" data-role="tagsinput" id="tagInput" class="form-control" placeholder=" + tag" />
             </div>
 
-
-
-
-
-
-            <label class="btn btn-dark" style="cursor: pointer">
-            <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp"/>
-            <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
-            </label>
-
-            <button type="submit" class="btn btn-danger float-right submitReply">提交回覆</button>
+            <!-- <div class="text-right"> -->
+            <label class="btn btn-dark col-lg-2" style="cursor: pointer">
+                            <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp"/>
+                            <i class="fas fa-images" style="padding-right:5px"></i>加圖片
+                            </label>
+            <!-- </div> -->
+            <button type="submit" class="btn btn-danger col-lg-2 float-right">提交回覆</button>
 
 
 
@@ -83,6 +80,7 @@
 
 
     <script src="scripts/active.js"></script>
+    <script src="scripts/post.js"></script>
     <script src="scripts/form.js"></script>
 
 </body>

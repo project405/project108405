@@ -35,6 +35,12 @@ div.post {
     background-color: #d4d4d4;
 }
 
+@media (max-width: 992px) {
+    div.post {
+        padding-bottom: 4em;
+    }
+}
+
 div.titleInput,
 div.postInput {
     width: 100%;
@@ -170,5 +176,5 @@ span.tag {
     font-family: 'Font Awesome 5 Free';
     content: "\f057";
     font-weight: 800;
-    font-size: 5px;
+    font-size: 15px;
 }
