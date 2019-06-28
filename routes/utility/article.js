@@ -104,7 +104,7 @@ var getArticleList = async function (memID) {
     }
     // 判斷是否被使用者按愛心
     for (let i = 0; i < articleList.length; i++) {
-        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [articleList[i].artiNum,memID])
+        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [articleList[i].artiNum, memID])
             .then((data) => {
                 console.log(data.rows);
                 if (data.rows == null || data.rows == '') {
@@ -141,6 +141,7 @@ var getOneArticle = async function (artiNum, memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var isMessLike = []; //判斷留言愛心是否被按過
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -254,6 +255,21 @@ var getOneArticle = async function (artiNum, memID) {
         }, (error) => {
             isLike.push('0');
         });
+    // 判斷留言是否被按過愛心
+    for (var i = 0; i < oneArtiMessage.length; i++) {
+        await sql('SELECT "artiMessNum" FROM "articleMessageLike" WHERE "artiMessNum" = $1 and "memID" = $2', [oneArtiMessage[i].artiMessNum, memID])
+            .then((data) => {
+                console.log("data.rows=", data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isMessLike[i] = '1';
+                } else {
+                    isMessLike[i] = '0';
+                }
+            }, (error) => {
+                isMessLike[i] = '0';
+            });
+    }
+
 
 
     result[0] = oneArticle;
@@ -265,7 +281,8 @@ var getOneArticle = async function (artiNum, memID) {
     result[6] = isCollection;
     result[7] = isLike;
     result[8] = [memID];
-    console.log(result);
+    result[9] = isMessLike;
+    console.log(isMessLike);
     return result;
 }
 //=========================================
@@ -558,9 +575,55 @@ var getRecomLikeCount = async function (recomNum) {
     // console.log("result[0] = " , result[0]);
     return result;
 }
+//=========================================
+//---------  getArtiMessLikeCount() -------------
+//=========================================
+var getArtiMessLikeCount = async function (artiMessNum) {
+    var artiMessNumCount = []; //存放文章愛心總數
+    var result = [];
+    // -----------  取得單一文章愛心數量 --------------
+    await sql('SELECT count("artiMessNum") FROM "articleMessageLike" WHERE "artiMessNum"=$1', [artiMessNum])
+        .then((data) => {
+            if (data.rows.length > 0) {
+                artiMessNumCount = data.rows;
+            } else {
+                artiMessNumCount = -1;
+            }
+        }, (error) => {
+            artiMessNumCount = null;
+        });
+
+    result[0] = artiMessNumCount;
+    // console.log("result[0] = " , result[0]);
+    return result;
+}
+
+//=========================================
+//---------  getRecomMessLikeCount() -------------
+//=========================================
+var getRecomMessLikeCount = async function (recomMessNum) {
+    var recomMessNumCount = []; //存放文章愛心總數
+    var result = [];
+    // -----------  取得單一文章愛心數量 --------------
+    await sql('SELECT count("recomMessNum") FROM "recommendMessageLike" WHERE "recomMessNum"=$1', [recomMessNum])
+        .then((data) => {
+            if (data.rows.length > 0) {
+                recomMessNumCount = data.rows;
+            } else {
+                recomMessNumCount = -1;
+            }
+        }, (error) => {
+            recomMessNumCount = null;
+        });
+
+    result[0] = recomMessNumCount;
+    // console.log("result[0] = " , result[0]);
+    return result;
+}
 //匯出
 module.exports = {
     getArticleList, getOneArticle,
     getClassMovie, getClassMusic, getClassBook, getClassExhibition,
-    getHotArticle, getArtiLikeCount, getRecomLikeCount
+    getHotArticle, getArtiLikeCount, getRecomLikeCount,
+    getArtiMessLikeCount,getRecomMessLikeCount
 };

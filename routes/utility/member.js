@@ -201,9 +201,9 @@ var myMovieArticle = async function (memID) {
 //---------  addArticleLike() -----------
 //=========================================
 var addArticleLike = async function (memID, artiNum) {
-    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss") ; 
+    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
     var result;
-    await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [memID, artiNum,addTime])
+    await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [memID, artiNum, addTime])
         .then((data) => {
             result = 1;
         }, (error) => {
@@ -226,10 +226,68 @@ var delArticleLike = async function (memID, artiNum) {
     return result;
 }
 
+//=========================================
+//---------  addArticleMessLike() -----------
+//=========================================
+var addArticleMessLike = async function (memID, artiMessNum) {
+    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
+    var result;
+    await sql('INSERT INTO "articleMessageLike" ("memID","artiMessNum","artiMessLikeDateTime") VALUES ($1,$2,$3)', [memID, artiMessNum, addTime])
+        .then((data) => {
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result;
+}
+//=========================================
+//---------  delArticleMessLike() -----------
+//=========================================
+var delArticleMessLike = async function (memID, artiMessNum) {
+    var result;
+    await sql('DELETE FROM "articleMessageLike" WHERE "memID" = $1 and "artiMessNum"= $2', [memID, artiMessNum])
+        .then((data) => {
+            console.log("刪除囉~~~~");
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result;
+}
+//=========================================
+//---------  addRecommendMessLike() -----------
+//=========================================
+var addRecommendMessLike = async function (memID, recomMessNum) {
+    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
+    var result;
+    await sql('INSERT INTO "recommendMessageLike" ("memID","recomMessNum","recomMessLikeDateTime") VALUES ($1,$2,$3)', [memID, recomMessNum, addTime])
+        .then((data) => {
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result;
+}
+//=========================================
+//---------  delRecommendMessLike() -----------
+//=========================================
+var delRecommendMessLike = async function (memID, recomMessNum) {
+    var result;
+    await sql('DELETE FROM "recommendMessageLike" WHERE "memID" = $1 and "recomMessNum"= $2', [memID, recomMessNum])
+        .then((data) => {
+            console.log("刪除囉~~~~");
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result;
+}
 
 //匯出
 module.exports = {
     articlePost, myArticle,
     myMovieArticle,
-    addArticleLike,delArticleLike
+    addArticleLike, delArticleLike,
+    addArticleMessLike, delArticleMessLike,
+    addRecommendMessLike,delRecommendMessLike
 };

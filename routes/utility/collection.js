@@ -44,14 +44,16 @@ var getCollRecommend = async function (memID) {
 //---------  getOneCollRecom() -------------
 //=========================================
 var getOneColleRecommend = async function (recomNum, memID) {
-    var oneArticle = [];  //存放文章內容
-    var oneArtiLikeCount = []; //存放文章愛心總數
-    var oneArtiMessage = []; //存放文章留言內容
-    var oneArtiMessCount = []; //存放文章留言總數
-    var oneArtiMessLikeCount = []; //存放留言愛心數量
+    var oneRecommend = [];  //存放文章內容
+    var oneRecomLikeCount = []; //存放文章愛心總數
+    var oneRecomMessage = []; //存放文章留言內容
+    var oneRecomMessCount = []; //存放文章留言總數
+    var oneRecomMessLikeCount = []; //存放留言愛心數量
     var isCollection = []; //是否有收藏過
     var tagLink = [];
     var tag = [];
+    var isLike = []; //是否有過愛心
+    var isMessLike = []; //判斷留言愛心是否被按過
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -60,24 +62,24 @@ var getOneColleRecommend = async function (recomNum, memID) {
             if (data.rows.length > 0) {
                 // console.log(data.rows);
                 data.rows[0].recomDateTime = moment(data.rows[0].recomDateTime).format("YYYY-MM-DD hh:mm:ss");
-                oneArticle = data.rows;
+                oneRecommend = data.rows;
             } else {
-                oneArticle = -1;
+                oneRecommend = -1;
             }
         }, (error) => {
-            oneArticle = null;
+            oneRecommend = null;
         });
     // -----------  取得單一文章愛心數量 --------------
     await sql('SELECT count("recomNum") FROM "recommendLike" WHERE "recomNum"=$1', [recomNum])
         .then((data) => {
             if (data.rows.length > 0) {
                 // console.log(data.rows);
-                oneArtiLikeCount = data.rows;
+                oneRecomLikeCount = data.rows;
             } else {
-                oneArtiLikeCount = -1;
+                oneRecomLikeCount = -1;
             }
         }, (error) => {
-            oneArtiLikeCount = null;
+            oneRecomLikeCount = null;
         });
     // -----------  取得單一文章所有留言 --------------
     await sql('SELECT * FROM "recommendMessage" WHERE "recomNum" = $1', [recomNum])
@@ -86,26 +88,26 @@ var getOneColleRecommend = async function (recomNum, memID) {
             for (let i = 0; i < data.rows.length; i++) {
                 data.rows[i].recomMessDateTime = moment(data.rows[i].recomMessDateTime).format("YYYY-MM-DD hh:mm:ss");
             }
-            oneArtiMessage = data.rows;
+            oneRecomMessage = data.rows;
         }, (error) => {
-            oneArtiMessage = null;
+            oneRecomMessage = null;
         });
     // -----------  取得單一文章留言數量 --------------
     await sql('SELECT count("recomNum") FROM "recommendMessage" WHERE "recomNum" = $1', [recomNum])
         .then((data) => {
             // console.log(data.rows);
-            oneArtiMessCount = data.rows;
+            oneRecomMessCount = data.rows;
         }, (error) => {
-            oneArtiMessCount = null;
+            oneRecomMessCount = null;
         });
     // -----------  取得每篇文章留言的愛心數量 --------------
-    for (let i = 0; i < oneArtiMessage.length; i++) {
-        await sql('SELECT count("recomMessNum") FROM "recommendMessageLike" WHERE "recomMessNum" = $1', [oneArtiMessage[i].recomMessNum])
+    for (let i = 0; i < oneRecomMessage.length; i++) {
+        await sql('SELECT count("recomMessNum") FROM "recommendMessageLike" WHERE "recomMessNum" = $1', [oneRecomMessage[i].recomMessNum])
             .then((data) => {
                 // console.log(data.rows[0]);
-                oneArtiMessLikeCount.push(data.rows[0]);
+                oneRecomMessLikeCount.push(data.rows[0]);
             }, (error) => {
-                oneArtiMessLikeCount = null;
+                oneRecomMessLikeCount = null;
             });
     }
 
@@ -155,15 +157,41 @@ var getOneColleRecommend = async function (recomNum, memID) {
         }, (error) => {
             isCollection.push('0');
         });
-
-    result[0] = oneArticle;
-    result[1] = oneArtiMessage;
-    result[2] = oneArtiLikeCount;
-    result[3] = oneArtiMessCount;
-    result[4] = oneArtiMessLikeCount;
-    result[5] = tag ;
+    // 判斷是否被使用者案愛心
+    await sql('SELECT "recomNum" FROM "recommendLike" WHERE "recomNum" = $1 and "memID" = $2', [recomNum, memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isLike.push('1');
+            } else {
+                isLike.push('0');
+            }
+        }, (error) => {
+            isLike.push('0');
+        });
+    // 判斷 "留言" 是否被按過愛心
+    for (var i = 0; i < oneRecomMessage.length; i++) {
+        await sql('SELECT "recomMessNum" FROM "recommendMessageLike" WHERE "recomMessNum" = $1 and "memID" = $2', [oneRecomMessage[i].recomMessNum, memID])
+            .then((data) => {
+                console.log("data.rows=", data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isMessLike[i] = '1';
+                } else {
+                    isMessLike[i] = '0';
+                }
+            }, (error) => {
+                isMessLike[i] = '0';
+            });
+    }
+    result[0] = oneRecommend;
+    result[1] = oneRecomMessage;
+    result[2] = oneRecomLikeCount;
+    result[3] = oneRecomMessCount;
+    result[4] = oneRecomMessLikeCount;
+    result[5] = tag;
     result[6] = isCollection;
-    result[7] = [memID];
+    result[7] = isLike;
+    result[8] = [memID];
+    result[9] = isMessLike;
     // console.log(result);
     return result;
 }
@@ -177,6 +205,8 @@ var getCollArticle = async function (memID) {
     var colleArtiMessCount = [];
     var tagLink = [];
     var tag = [];
+    var isCollection = [];
+    var isLike = [];
     var result = [];
     //---------  取得每個會員收藏的文章編號 -------------
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0', [memID])
@@ -254,11 +284,42 @@ var getCollArticle = async function (memID) {
             }
         }
     }
+    // 判斷是否被使用者收藏
+    for (let i = 0; i < colleArticle.length; i++) {
+        await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [colleArticle[i].artiNum, memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isCollection.push('1');
+                } else {
+                    isCollection.push('0');
+                }
+            }, (error) => {
+                isCollection.push('0');
+            });
+    }
+    // 判斷是否被使用者按愛心
+    for (let i = 0; i < colleArticle.length; i++) {
+        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [colleArticle[i].artiNum, memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isLike.push('1');
+                } else {
+                    isLike.push('0');
+                }
+            }, (error) => {
+                isLike.push('0');
+            });
+    }
     // console.log(tag) ;
     result[0] = colleArticle;
     result[1] = colleArtiLikeCount;
     result[2] = colleArtiMessCount;
     result[3] = tag;
+    result[4] = isCollection;
+    result[5] = isLike;
+    result[6] = [memID]
     return result;
 }
 //=========================================
@@ -411,6 +472,8 @@ var getArtiMovie = async function (memID) {
     var collArtiMessLikeCount = [];
     var tagLink = [];
     var tag = [];
+    var isCollection = [];
+    var isLike = [];
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
         .then((data) => {
@@ -487,10 +550,41 @@ var getArtiMovie = async function (memID) {
             }
         }
     }
+    // 判斷是否被使用者收藏
+    for (let i = 0; i < collArtiMovie.length; i++) {
+        await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [collArtiMovie[i].artiNum, memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isCollection.push('1');
+                } else {
+                    isCollection.push('0');
+                }
+            }, (error) => {
+                isCollection.push('0');
+            });
+    }
+    // 判斷是否被使用者按愛心
+    for (let i = 0; i < collArtiMovie.length; i++) {
+        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [collArtiMovie[i].artiNum, memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isLike.push('1');
+                } else {
+                    isLike.push('0');
+                }
+            }, (error) => {
+                isLike.push('0');
+            });
+    }
     result[0] = collArtiMovie;
     result[1] = collArtiLikeCount;
     result[2] = collArtiMessLikeCount;
     result[3] = tag;
+    result[4] = isCollection;
+    result[5] = isLike;
+    result[6] = [memID];
     // console.log(result);
     return result;
 }
@@ -502,6 +596,8 @@ var getArtiMusic = async function (memID) {
     var collArtiMessLikeCount = [];
     var tagLink = [];
     var tag = [];
+    var isCollection = [];
+    var isLike = [];
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
         .then((data) => {
@@ -578,10 +674,41 @@ var getArtiMusic = async function (memID) {
             }
         }
     }
+    // 判斷是否被使用者收藏
+    for (let i = 0; i < collArtiMusic.length; i++) {
+        await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [collArtiMusic[i].artiNum, memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isCollection.push('1');
+                } else {
+                    isCollection.push('0');
+                }
+            }, (error) => {
+                isCollection.push('0');
+            });
+    }
+    // 判斷是否被使用者按愛心
+    for (let i = 0; i < collArtiMusic.length; i++) {
+        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [collArtiMusic[i].artiNum, memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isLike.push('1');
+                } else {
+                    isLike.push('0');
+                }
+            }, (error) => {
+                isLike.push('0');
+            });
+    }
     result[0] = collArtiMusic;
     result[1] = collArtiLikeCount;
     result[2] = collArtiMessLikeCount;
     result[3] = tag;
+    result[4] = isCollection;
+    result[5] = isLike;
+    result[6] = [memID];
     // console.log(result);
     return result;
 }
@@ -593,6 +720,8 @@ var getArtiBook = async function (memID) {
     var collArtiMessLikeCount = [];
     var tagLink = [];
     var tag = [];
+    var isCollection = [];
+    var isLike = [];
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
         .then((data) => {
@@ -669,10 +798,42 @@ var getArtiBook = async function (memID) {
             }
         }
     }
+    // 判斷是否被使用者收藏
+    for (let i = 0; i < collArtiBook.length; i++) {
+        await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [collArtiBook[i].artiNum, memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isCollection.push('1');
+                } else {
+                    isCollection.push('0');
+                }
+            }, (error) => {
+                isCollection.push('0');
+            });
+    }
+    // 判斷是否被使用者按愛心
+    for (let i = 0; i < collArtiBook.length; i++) {
+        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [collArtiBook[i].artiNum, memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isLike.push('1');
+                } else {
+                    isLike.push('0');
+                }
+            }, (error) => {
+                isLike.push('0');
+            });
+    }
     result[0] = collArtiBook;
     result[1] = collArtiLikeCount;
     result[2] = collArtiMessLikeCount;
     result[3] = tag;
+    result[4] = isCollection;
+    result[5] = isLike;
+    result[6] = [memID];
+
     // console.log(result);
     return result;
 }
@@ -760,10 +921,41 @@ var getArtiExhibition = async function (memID) {
             }
         }
     }
+    // 判斷是否被使用者收藏
+    for (let i = 0; i < collArtiExhibition.length; i++) {
+        await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [collArtiExhibition[i].artiNum, memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isCollection.push('1');
+                } else {
+                    isCollection.push('0');
+                }
+            }, (error) => {
+                isCollection.push('0');
+            });
+    }
+    // 判斷是否被使用者按愛心
+    for (let i = 0; i < collArtiExhibition.length; i++) {
+        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [collArtiExhibition[i].artiNum, memID])
+            .then((data) => {
+                console.log(data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isLike.push('1');
+                } else {
+                    isLike.push('0');
+                }
+            }, (error) => {
+                isLike.push('0');
+            });
+    }
     result[0] = collArtiExhibition;
     result[1] = collArtiLikeCount;
     result[2] = collArtiMessLikeCount;
     result[3] = tag;
+    result[4] = isCollection;
+    result[5] = isLike;
+    result[6] = [memID];
     // console.log(result);
     return result;
 }
@@ -774,8 +966,9 @@ var getArtiExhibition = async function (memID) {
 //---------  addCollention() -----------
 //=========================================
 var addColleArticle = async function (memID, artiNum) {
+    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
     var result;
-    await sql('INSERT INTO "memberCollection" ("memID","artiNum") VALUES ($1,$2)', [memID, artiNum])
+    await sql('INSERT INTO "memberCollection" ("memID","artiNum","collDateTime") VALUES ($1,$2,$3)', [memID, artiNum, addTime])
         .then((data) => {
             result = 1;
         }, (error) => {

@@ -12,7 +12,6 @@ router.post('/', function (req, res, next) {
             if (data == 1) {
                 console.log("新增成功");
                 res.send("新增成功摟!");
-                // res.end('<script>document.getElementById("test").style.color = "red"; history.back()</script>');
             } else {
                 console.log("新增失敗");
                 res.send("新增失敗摟!");
