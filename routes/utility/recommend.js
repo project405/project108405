@@ -44,6 +44,7 @@ var getOneRecommend = async function (recomNum, memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var isMessLike = []; //判斷留言愛心是否被按過
     var result = [];
 
     // -----------  取得單一推薦文章 --------------
@@ -157,6 +158,20 @@ var getOneRecommend = async function (recomNum, memID) {
         }, (error) => {
             isLike.push('0');
         });
+    // 判斷留言是否被按過愛心
+    for (var i = 0; i < oneRecomMessage.length; i++) {
+        await sql('SELECT "recomMessNum" FROM "recommendMessageLike" WHERE "recomMessNum" = $1 and "memID" = $2', [oneRecomMessage[i].recomMessNum, memID])
+            .then((data) => {
+                console.log("data.rows=", data.rows);
+                if (data.rows == null || data.rows == '') {
+                    isMessLike[i] = '1';
+                } else {
+                    isMessLike[i] = '0';
+                }
+            }, (error) => {
+                isMessLike[i] = '0';
+            });
+    }
 
 
     console.log(oneRecomMessLikeCount);
@@ -169,6 +184,7 @@ var getOneRecommend = async function (recomNum, memID) {
     result[6] = isCollection;
     result[7] = isLike;
     result[8] = [memID];
+    result[9] = isMessLike ; 
     // console.log(result);
     return result;
 }
@@ -264,10 +280,10 @@ var getRecomExhibition = async function () {
 //---------  addRecommendLike() -----------
 //=========================================
 var addRecommendLike = async function (memID, recomNum) {
-    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss") ; 
+    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
     var result;
-    
-    await sql('INSERT INTO "recommendLike" ("memID","recomNum","recomLikeDateTime") VALUES ($1,$2,$3)', [memID, recomNum,addTime])
+
+    await sql('INSERT INTO "recommendLike" ("memID","recomNum","recomLikeDateTime") VALUES ($1,$2,$3)', [memID, recomNum, addTime])
         .then((data) => {
             result = 1;
         }, (error) => {
