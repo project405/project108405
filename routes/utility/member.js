@@ -170,7 +170,7 @@ var modifyMember = async function (memPass, memBirth, memMail, memGender, memAdd
 var getOriginalMail = async function (memID) {
     var result;
     // -----------  修改會員資料 --------------
-    await sql('SELECT "memMail" from "member" where "memID" = $1' , [memID])
+    await sql('SELECT "memMail" from "member" where "memID" = $1', [memID])
         .then((data) => {
             result = data.rows;
         }, (error) => {
@@ -682,7 +682,7 @@ var delArticleLike = async function (memID, artiNum) {
 }
 
 //=========================================
-//---------  addArticleMessLike() -----------
+//---------  addArticleMessLike() ---------
 //=========================================
 var addArticleMessLike = async function (memID, artiMessNum) {
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
@@ -696,7 +696,7 @@ var addArticleMessLike = async function (memID, artiMessNum) {
     return result;
 }
 //=========================================
-//---------  delArticleMessLike() -----------
+//---------  delArticleMessLike() ---------
 //=========================================
 var delArticleMessLike = async function (memID, artiMessNum) {
     var result;
@@ -710,7 +710,7 @@ var delArticleMessLike = async function (memID, artiMessNum) {
     return result;
 }
 //=========================================
-//---------  addRecommendMessLike() -----------
+//---------  addRecommendMessLike() -------
 //=========================================
 var addRecommendMessLike = async function (memID, recomMessNum) {
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
@@ -724,7 +724,7 @@ var addRecommendMessLike = async function (memID, recomMessNum) {
     return result;
 }
 //=========================================
-//---------  delRecommendMessLike() -----------
+//---------  delRecommendMessLike() -------
 //=========================================
 var delRecommendMessLike = async function (memID, recomMessNum) {
     var result;
@@ -737,12 +737,55 @@ var delRecommendMessLike = async function (memID, recomMessNum) {
         });
     return result;
 }
+//=========================================
+//--------------  report() ----------------
+//=========================================
+var report = async function (memID, artiNum, artiMessNum, recomMessNum, reportReason) {
+    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
+    var result;
+    if (artiNum == null && artiMessNum == null && recomMessNum == null) {
+        await sql('INSERT INTO "report" ("memID","reportReason","reportDateTime") VALUES ($1,$2,$3)', [memID, reportReason, addTime])
+            .then((data) => {
+                console.log("舉報成功~~~~");
+                result = 1;
+            }, (error) => {
+                result = 0;
+            });
+    } else if (artiNum != null) {
+        await sql('INSERT INTO "report" ("memID","artiNum","reportReason","reportDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, reportReason, addTime])
+            .then((data) => {
+                console.log("舉報成功~~~~");
+                result = 1;
+            }, (error) => {
+                result = 0;
+            });
+    } else if (artiMessNum != null) {
+        await sql('INSERT INTO "report" ("memID","artiMessNum","reportReason","reportDateTime") VALUES ($1,$2,$3,$4)', [memID, artiMessNum, reportReason, addTime])
+            .then((data) => {
+                console.log("舉報成功~~~~");
+                result = 1;
+            }, (error) => {
+                result = 0;
+            });
+    } else if (recomMessNum != null) {
+        await sql('INSERT INTO "report" ("memID","recomMessNum","reportReason","reportDateTime") VALUES ($1,$2,$3,$4)', [memID, recomMessNum, reportReason, addTime])
+            .then((data) => {
+                console.log("舉報成功~~~~");
+                result = 1;
+            }, (error) => {
+                result = 0;
+            });
+    }
+
+    return result;
+}
 
 //匯出
 module.exports = {
-    articlePost, myArticle, modifyMember,getOriginalMail,
+    articlePost, myArticle, modifyMember, getOriginalMail,
     myMovieArticle, myMusicArticle, myBookArticle, myExhibitionArticle,
     addArticleLike, delArticleLike,
     addArticleMessLike, delArticleMessLike,
-    addRecommendMessLike, delRecommendMessLike
+    addRecommendMessLike, delRecommendMessLike,
+    report
 };

@@ -408,6 +408,7 @@ CREATE TABLE "public"."tagLinkArticle" (
 DROP TABLE IF EXISTS "public"."report";
 CREATE TABLE "public"."report" (
   "reportNum" serial , 
+"memID" varchar(100)	COLLATE "pg_catalog"."default" ,
   "artiNum" int4 , 
 	"artiMessNum" int4 ,
 	"recomMessNum" int4 , 

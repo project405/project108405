@@ -513,10 +513,10 @@ INSERT INTO "memberPrefer" ("memID","preferNum","degree") VALUES
 -- ------------------------------
 --    Insert Into report
 -- ------------------------------
-INSERT INTO "report" ("artiNum","artiMessNum","recomMessNum","reportReason","reportDateTime") VALUES
-(1,null,null,'太色情了吧','2019-06-29 06:45:00'),
-(2,null,null,'不知道在說啥','2019-06-29 06:45:00'),
-(null,1,null,'亂打一通','2019-06-29 06:45:00'),
-(null,2,null,'欠檢舉','2019-06-29 06:45:00'),
-(null,null,1,'就想檢舉阿','2019-06-29 06:45:00'),
-(null,null,2,'封鎖他!!!','2019-06-29 06:45:00');
+INSERT INTO "report" ("memID","artiNum","artiMessNum","recomMessNum","reportReason","reportDateTime") VALUES
+('abc123',1,null,null,'太色情了吧','2019-06-29 06:45:00'),
+('abc123',2,null,null,'不知道在說啥','2019-06-29 06:45:00'),
+('abc123',null,1,null,'亂打一通','2019-06-29 06:45:00'),
+('abc123',null,2,null,'欠檢舉','2019-06-29 06:45:00'),
+('abc123',null,null,1,'就想檢舉阿','2019-06-29 06:45:00'),
+('abc123',null,null,2,'封鎖他!!!','2019-06-29 06:45:00');
