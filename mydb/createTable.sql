@@ -412,6 +412,7 @@ CREATE TABLE "public"."report" (
 	"artiMessNum" int4 ,
 	"recomMessNum" int4 , 
 	"reportReason" text ,
+	"reportDateTime" TIMESTAMP ,
 	
 	FOREIGN KEY("artiNum") REFERENCES "article"("artiNum")ON DELETE CASCADE  ON UPDATE RESTRICT ,
 	FOREIGN KEY("artiMessNum") REFERENCES "articleMessage"("artiMessNum")ON DELETE CASCADE  ON UPDATE RESTRICT ,
