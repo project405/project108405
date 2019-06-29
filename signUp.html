@@ -29,46 +29,55 @@
     </center>
     <section id="signUp">
         <div class="container-fluid row flex justify-content-center signUp no-gutters">
-            <form class="signUp col-lg-4" action="">
+            <form class="signUp col-lg-4" action="" onchange="checkValue()">
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fa fa-user"></span></span>
-                    <input type="text" class="input-with-icon" id="ID" placeholder="帳號" minlength:10 maxlength:20 required>
+                    <input type="text" class="input-with-icon" id="ID" placeholder="帳號" required onchange="idValidateForm()">
                 </div>
+                <p id="idAlarm"></p>
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-user-circle"></span></span>
-                    <input type="text" class="input-with-icon" id="closeID" placeholder="暱稱" minlength:3 maxlength:10 required>
+                    <input type="text" class="input-with-icon" id="closeId" placeholder="暱稱（日後不得修改）" required onchange="closeIdValidateForm()">
                 </div>
+                <p id="closeIdAlarm"></p>
+
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-lock"></span></span>
-                    <input type="password" class="input-with-icon" id="password" placeholder="密碼">
+                    <input type="password" class="input-with-icon" id="password" placeholder="密碼" required onchange="passcheck()">
                 </div>
+                <p id="passwordAlarm"></p>
+
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-lock"></span></span>
-                    <input type="password" class="input-with-icon" id="check-password" placeholder="確認密碼">
+                    <input type="password" class="input-with-icon" id="checkPassword" placeholder="確認密碼" required onchange="passcheck()">
                 </div>
+                <p id="checkPasswordAlarm"></p>
+
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-envelope-open-text"></span></span>
-                    <input type="email" class="input-with-icon" id="email" placeholder="email">
+                    <input type="email" class="input-with-icon" id="email" placeholder="email" required>
                 </div>
 
 
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-birthday-cake"></span></span>
-                    <input type="date" class="input-with-icon" id="birthday" placeholder="生日">
+                    <input type="date" class="input-with-icon" id="birthday" placeholder="生日" required onchange="birthdayValidateForm()">
                 </div>
+                <p id="birthdayAlarm"></p>
+
                 <div class="input-icon-wrap radio">
                     <span class="input-icon align-middle"><span class="fas fa-venus-mars"></span></span>
                     <div>
-                        <input id="radio-1" class="radio-custom" name="radio-group" type="radio" checked>
+                        <input id="radio-1" class="radio-custom" name="radio-group" type="radio" required>
                         <label for="radio-1" class="radio-custom-label">男生</label>
                     </div>
                     <div>
-                        <input id="radio-2" class="radio-custom" name="radio-group" type="radio">
+                        <input id="radio-2" class="radio-custom" name="radio-group" type="radio" required>
                         <label for="radio-2" class="radio-custom-label">女生</label>
                     </div>
 
                 </div>
-                <button type="submit" class="btn btn-danger">註冊</button>
+                <button type="submit" id="submit" class="btn btn-danger" disabled>註冊</button>
             </form>
 
         </div>
@@ -82,8 +91,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
-    <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+
     <script src="scripts/active.js"></script>
     <script src="scripts/validate.js"></script>
 

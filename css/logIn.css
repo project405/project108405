@@ -31,7 +31,7 @@ body {
 div.logIn,
 div.signUp {
     width: 100%;
-    padding: 0 1em 0 1em;
+    padding: 0 0.5em;
     padding-bottom: 3em;
 }
 
@@ -214,4 +214,17 @@ div.radio {
     line-height: 25px;
     font-family: 'FontAwesome';
     color: black;
+}
+
+
+/* validate */
+
+p {
+    text-align: right;
+    color: #eb6363;
+    font-weight: bolder;
+}
+
+i.alarm {
+    font-size: 15pt;
 }

@@ -1,32 +1,5 @@
 var check = [];
 
-function idValidateForm() {
-    var id = document.getElementById("ID").value;
-    var exception = /^[A-Za-z0-9_]+$/;
-
-    if (id != "" && id.length > 5 && id.length < 21 && exception.test(id)) {
-        document.getElementById("idAlarm").innerHTML = '';
-        return check[0] = true;
-    } else {
-        document.getElementById("idAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 帳號須在 6-20 個字元內，符號只允許 _ 底線 符號';
-        return check[0] = false;
-
-    }
-
-}
-
-function closeIdValidateForm() {
-    var closeId = document.getElementById("closeId").value;
-    if (closeId != "" && closeId.length > 2 && closeId.length < 13) {
-        document.getElementById("closeIdAlarm").innerHTML = '';
-        return check[1] = true;
-
-    } else {
-        document.getElementById("closeIdAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 暱稱須在 3-12 字內';
-        return check[1] = false;
-    }
-}
-
 function passcheck() {
     passwordValidateForm();
     checkPasswordValidateForm();
@@ -36,11 +9,11 @@ function passwordValidateForm() {
     var password = document.getElementById("password").value;
     if (password != "" && password.length > 5 && password.length < 40) {
         document.getElementById("passwordAlarm").innerHTML = '';
-        return check[2] = true;
+        return check[0] = true;
 
     } else {
         document.getElementById("passwordAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 密碼至少 6字元';
-        return check[2] = false;
+        return check[0] = false;
     }
 }
 
@@ -48,16 +21,14 @@ function checkPasswordValidateForm() {
     var checkPassword = document.getElementById("checkPassword").value;
     var password = document.getElementById("password").value;
 
-
     if (checkPassword != password) {
         document.getElementById("checkPasswordAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 確認密碼與密碼不相同';
-        return check[3] = false;
+        return check[1] = false;
 
     } else {
         document.getElementById("checkPasswordAlarm").innerHTML = '';
-        return check[3] = true;
+        return check[1] = true;
     }
-
 }
 
 function birthdayValidateForm() {
@@ -83,26 +54,35 @@ function birthdayValidateForm() {
 
     if (age > 5 && age < 91) {
         document.getElementById("birthdayAlarm").innerHTML = '';
-        return check[4] = true;
+        return check[2] = true;
     } else {
         document.getElementById("birthdayAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 請輸入正確生日';
-        return check[4] = false;
+        return check[2] = false;
     }
 }
 
 function checkValue() {
-    var checkStep = 0;
-    for (i = 0; i < check.length; i++) {
-        if (check[i] == true) {
-            checkStep = checkStep + 1;
-        } else {
-            document.getElementById("submit").disabled = true;
-            break;
-        }
-    };
+    var password = document.getElementById("password").value;
+    var checkPassword = document.getElementById("checkPassword").value;
 
-    if (checkStep == 5) {
-        document.getElementById("submit").disabled = false;
+    if (password != "" || checkPassword != "checkPassword") {
+        if (check[0] == false || check[1] == false) {
+            document.getElementById("submit").disabled = true;
+        } else {
+            document.getElementById("submit").disabled = false;
+        }
 
     }
+
+    var birthday = document.getElementById("birthday").value;
+
+    if (birthday != "") {
+        if (check[2] == false) {
+            document.getElementById("submit").disabled = true;
+
+        } else {
+            document.getElementById("submit").disabled = false;
+        }
+    }
+
 }

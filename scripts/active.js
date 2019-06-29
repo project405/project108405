@@ -95,9 +95,9 @@ $(document).ready(function() {
             function(e) {
                 var container = $("#report");
 
-                //如果click的目標不是容器
+                //如果click的目標不是reportDiv
                 if (!container.is(e.target) && container.has(e.target).length === 0) {
-                    container.hide();
+                    container.hide("slow");
                 }
             });
     });
@@ -108,23 +108,11 @@ $(document).ready(function() {
             function(e) {
                 var container = $("#report");
 
-                //如果click的目標不是容器
+                //如果click的目標不是reportDiv
                 if (!container.is(e.target) && container.has(e.target).length === 0) {
-                    container.hide();
+                    container.hide("slow");
                 }
             });
     });
 
-
 });
-
-
-
-// $(document).click(function() {
-//     alert("me");
-// });
-// $("body").click(function(e) {
-//     e.stopPropagation(); // This is the preferred method.
-//     return false; // This should not be used unless you do not want
-//     // any click events registering inside the div
-// });

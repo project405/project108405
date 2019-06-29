@@ -158,43 +158,14 @@ div.radio {
 }
 
 
-/* ---------------- */
+/* validate */
 
-
-/* span */
-
-
-/* ---------------- */
-
-
-/* Pseudo element */
-
-
-/* 
-.label-icon-wrap {
-    border: 1px solid #ddd;
-    display: flex;
-    flex-direction: row;
-    margin: 0.75em 0 0.75em 0;
-    background-color: white;
+p {
+    text-align: right;
+    color: #eb6363;
+    font-weight: bolder;
 }
 
-.label-with-icon {
-    border: none;
-    flex: 1;
+i.alarm {
+    font-size: 15pt;
 }
-
-.label-icon,
-.label-with-icon {
-    padding: 10px;
-}
-
-div.member label {
-    padding: 0;
-}
-
-span.label-with-icon[contenteditable]:empty::before {
-    content: '輸入新密碼';
-    display: inline-block;
-    color: #a39f9f;
-} */
