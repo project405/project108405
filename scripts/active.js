@@ -85,14 +85,46 @@ $('#goDown').click(function() {
 
 $(document).ready(function() {
     $("#x").click(function() {
-        $("#report").hide();
-    });
-    $("#navReport").click(function() {
-        $("#report").show();
-        $('.navbar-collapse').collapse('hide');
-    });
-    $("#postReport").click(function() {
-        $("#report").show();
+        $("#report").hide("slow");
     });
 
+    $("#navReport").click(function() {
+        $("#report").show("slow");
+        $('.navbar-collapse').collapse('hide');
+        $(document).mouseup(
+            function(e) {
+                var container = $("#report");
+
+                //如果click的目標不是容器
+                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    container.hide();
+                }
+            });
+    });
+
+    $("#postReport").click(function() {
+        $("#report").show("slow");
+        $(document).mouseup(
+            function(e) {
+                var container = $("#report");
+
+                //如果click的目標不是容器
+                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    container.hide();
+                }
+            });
+    });
+
+
 });
+
+
+
+// $(document).click(function() {
+//     alert("me");
+// });
+// $("body").click(function(e) {
+//     e.stopPropagation(); // This is the preferred method.
+//     return false; // This should not be used unless you do not want
+//     // any click events registering inside the div
+// });
