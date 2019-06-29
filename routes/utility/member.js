@@ -143,6 +143,41 @@ var myArticle = async function (memID) {
     return result;
 }
 
+//================================
+//--------- modifyMember() -------
+//================================
+var modifyMember = async function (memPass, memBirth, memMail, memGender, memAddr, memID) {
+    var result;
+    console.log(memPass);
+    console.log(memBirth);
+    console.log(memMail);
+    console.log(memGender);
+    console.log(memAddr);
+    console.log(memID);
+
+    // -----------  修改會員資料 --------------
+    await sql('UPDATE "member" SET "memPass" = $1, "memBirth" = $2, "memMail" = $3, "memGender" = $4, "memAddr" = $5 WHERE "memID" = $6 ', [memPass, memBirth, memMail, memGender, memAddr, memID])
+        .then((data) => {
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result;
+}
+//================================
+//--------- getOriginalMail() -------
+//================================
+var getOriginalMail = async function (memID) {
+    var result;
+    // -----------  修改會員資料 --------------
+    await sql('SELECT "memMail" from "member" where "memID" = $1' , [memID])
+        .then((data) => {
+            result = data.rows;
+        }, (error) => {
+            result = 0;
+        });
+    return result;
+}
 //=========================================
 //----- four_class_articleManage (start)-----
 //=========================================
@@ -153,8 +188,8 @@ var myMovieArticle = async function (memID) {
     var movieArtiMessCount = [];
     var tagLink = [];
     var tag = [];
-    var isCollection = [] ;
-    var isLike = [] ; 
+    var isCollection = [];
+    var isLike = [];
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -271,8 +306,8 @@ var myMusicArticle = async function (memID) {
     var musicArtiMessCount = [];
     var tagLink = [];
     var tag = [];
-    var isCollection = [] ;
-    var isLike = [] ;
+    var isCollection = [];
+    var isLike = [];
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -389,8 +424,8 @@ var myBookArticle = async function (memID) {
     var bookArtiMessCount = [];
     var tagLink = [];
     var tag = [];
-    var isCollection = [] ;
-    var isLike = [] ;
+    var isCollection = [];
+    var isLike = [];
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -507,10 +542,10 @@ var myExhibitionArticle = async function (memID) {
     var exhibitionArtiMessCount = [];
     var tagLink = [];
     var tag = [];
-    var isCollection = [] ; 
-    var isLike = [] ; 
+    var isCollection = [];
+    var isLike = [];
     var result = [];
-    
+
     // -----------  取得電影分類文章 --------------
     await sql('SELECT * FROM "article" WHERE "artiClass" = $1 and "memID" = $2 ', ['exhibition', memID])
         .then((data) => {
@@ -705,8 +740,8 @@ var delRecommendMessLike = async function (memID, recomMessNum) {
 
 //匯出
 module.exports = {
-    articlePost, myArticle,
-    myMovieArticle,myMusicArticle,myBookArticle,myExhibitionArticle,
+    articlePost, myArticle, modifyMember,getOriginalMail,
+    myMovieArticle, myMusicArticle, myBookArticle, myExhibitionArticle,
     addArticleLike, delArticleLike,
     addArticleMessLike, delArticleMessLike,
     addRecommendMessLike, delRecommendMessLike
