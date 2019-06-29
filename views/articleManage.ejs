@@ -24,8 +24,89 @@
 
 <body>
 
-    <script src="/javascripts/header.js"></script>
-
+    <!-- ============================================= -->
+    <!-- --------------- navbar ---------------------- -->
+    <!-- ============================================= -->
+    <div class="header">
+        <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">
+            <a class="nav-link" href="/">
+                <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8"
+                    alt="">
+                <a href="/" class="navTitle">文藝富心</a>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="recommendPost.html">
+                            新增推薦</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/">首頁 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/notify">
+                            <i class="fas fa-bell" style="color:white;"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/recommendlist">
+                            推薦</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/articleList">
+                            文章</a>
+                    </li>
+                    <li id="dropdown" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="collectionArticle.html" id="navbarDropdownMenuLink"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            收藏
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>
+                            <a class="dropdown-item" href="/collection/article">文章收藏</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">登入</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            會員
+                        </a>
+                        <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/member/memberManage">會員資料</a>
+                            <a class="dropdown-item" href="/member/articleManage">文章管理</a>
+                            <a class="dropdown-item" href="/logOut">登出</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container position-fixed col-lg-8 report" id="report">
+        <div id="x"><i class="far fa-times-circle"></i>
+        </div>
+        <div class="form">
+            <form class="report" action="" data-aos="zoom-out-right">
+                <div class="input-icon-wrap">
+                    <span class="input-icon"><span class="fas fa-hands-helping"></span></span>
+                    <textarea class="input-with-icon report" placeholder="輸入舉報原因"></textarea>
+                </div>
+                <button type="button" class="btn btn-danger report">送出</button>
+            </form>
+        </div>
+    </div>
+    <!-- ============================================= -->
+    <!-- ------------- navbar end -------------------- -->
+    <!-- ============================================= -->
 
     <!-- 文章列表區塊 -->
     <section id="articleList">
@@ -77,10 +158,10 @@
                         <div class="info">
                             <!-- 愛心按鈕 -->
                             <button type="button" id=<%= "LikeUnLogIn" + myArticle[0][i].artiNum %> class="btn postInfo"
-                               onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
+                                onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
                                 <a><%= myArticle[1][i].count %></a></button>
                             <button type="button" id=<%="addLike" + myArticle[0][i].artiNum %> class="btn postInfo"
-                               onclick=<%= "addLike(" + myArticle[0][i].artiNum + ")" %>>
+                                onclick=<%= "addLike(" + myArticle[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + myArticle[0][i].artiNum %>>
                                     <%= myArticle[1][i].count %> </a> </button>
                             <button type="button" id=<%= "delLike" + myArticle[0][i].artiNum %> class="btn postInfo"
@@ -122,11 +203,10 @@
 
                             <!-- 收藏按鈕 -->
                             <button type="button" id=<%= "unLogIn" + myArticle[0][i].artiNum %> class="btn postInfo"
-                                 display: inline" onclick="location.href='/logIn'">
+                                display: inline" onclick="location.href='/logIn'">
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%=  "addColle" + myArticle[0][i].artiNum %> class="btn postInfo"
-                               display: inline"
-                                onclick=<%= "addColle(" + myArticle[0][i].artiNum + ")" %>>
+                                display: inline" onclick=<%= "addColle(" + myArticle[0][i].artiNum + ")" %>>
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%= "delColle" + myArticle[0][i].artiNum %> class="btn postInfo"
                                 style="color:#c93737" display: inline"
@@ -309,7 +389,8 @@
             onclick="location.href='/articleManage/book'">書籍類</button>
         <button type="button " class="btn btn-secondary align-middle footer"
             onclick="location.href='/articleManage/exhibition'">展覽類</button>
-        <button type="button " class="btn btn-secondary footer" onclick="location.href='/member/articleManage'">全部</button>
+        <button type="button " class="btn btn-secondary footer"
+            onclick="location.href='/member/articleManage'">全部</button>
         <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
             <i class="fas fa-edit"></i>發文</button>
 
