@@ -71,7 +71,6 @@ function checkValue() {
         } else {
             document.getElementById("submit").disabled = false;
         }
-
     }
 
     var birthday = document.getElementById("birthday").value;
