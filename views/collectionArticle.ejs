@@ -77,14 +77,14 @@
                         <div class="info">
                             <!-- 愛心按鈕 -->
                             <button type="button" id=<%= "LikeUnLogIn" + collData[0][i].artiNum %> class="btn postInfo"
-                                style="color:yellow" onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
+                                onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
                                 <a><%= collData[1][i].count %></a></button>
                             <button type="button" id=<%="addLike" + collData[0][i].artiNum %> class="btn postInfo"
-                                style="color:blue" onclick=<%= "addLike(" + collData[0][i].artiNum + ")" %>>
+                                onclick=<%= "addLike(" + collData[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + collData[0][i].artiNum %>>
                                     <%= collData[1][i].count %></a> </button>
                             <button type="button" id=<%= "delLike" + collData[0][i].artiNum %> class="btn postInfo"
-                                style="color:red" onclick=<%= "delLike(" + collData[0][i].artiNum + ")" %>>
+                                style="color:#c93737" onclick=<%= "delLike(" + collData[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + collData[0][i].artiNum %>>
                                     <%= collData[1][i].count %></a></button>
                             <!-- 如果沒登入 -->
@@ -121,15 +121,13 @@
 
                             <!-- 收藏按鈕 -->
                             <button type="button" id=<%= "unLogIn" + collData[0][i].artiNum %> class="btn postInfo"
-                                style="color:yellow; display: inline" onclick="location.href='/logIn'">
+                                onclick="location.href='/logIn'">
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%=  "addColle" + collData[0][i].artiNum %> class="btn postInfo"
-                                style="color:blue; display: inline"
                                 onclick=<%= "addColle(" + collData[0][i].artiNum + ")" %>>
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%= "delColle" + collData[0][i].artiNum %> class="btn postInfo"
-                                style="color:red; display: inline"
-                                onclick=<%= "delColle(" + collData[0][i].artiNum + ")" %>>
+                                style="color:#c93737" onclick=<%= "delColle(" + collData[0][i].artiNum + ")" %>>
                                 <i class="far fa-bookmark"></i></button>
 
                             <!-- 判斷每一個按鈕 是否有登入、是否有被按過 -->

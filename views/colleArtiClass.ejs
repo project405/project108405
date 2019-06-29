@@ -81,14 +81,14 @@
                         <div class="info">
                             <!-- 愛心按鈕 -->
                             <button type="button" id=<%= "LikeUnLogIn" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:yellow" onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
+                                 onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
                                 <a><%= items[1][i].count %></a></button>
                             <button type="button" id=<%="addLike" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:blue" onclick=<%= "addLike(" + items[0][i].artiNum + ")" %>>
+                                onclick=<%= "addLike(" + items[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + items[0][i].artiNum %>>
                                     <%= items[1][i].count %></a> </button>
                             <button type="button" id=<%= "delLike" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:red" onclick=<%= "delLike(" + items[0][i].artiNum + ")" %>>
+                                style="color:#c93737" onclick=<%= "delLike(" + items[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + items[0][i].artiNum %>>
                                     <%= items[1][i].count %></a></button>
                             <!-- 如果沒登入 -->
@@ -125,14 +125,14 @@
 
                             <!-- 收藏按鈕 -->
                             <button type="button" id=<%= "unLogIn" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:yellow; display: inline" onclick="location.href='/logIn'">
+                                display: inline" onclick="location.href='/logIn'">
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%=  "addColle" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:blue; display: inline"
+                                display: inline"
                                 onclick=<%= "addColle(" + items[0][i].artiNum + ")" %>>
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%= "delColle" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:red; display: inline"
+                                style="color:#c93737; display: inline"
                                 onclick=<%= "delColle(" + items[0][i].artiNum + ")" %>>
                                 <i class="far fa-bookmark"></i></button>
 

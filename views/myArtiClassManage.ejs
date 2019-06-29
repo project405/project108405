@@ -77,15 +77,15 @@
                         <!-- info -->
                         <div class="info">
                             <!-- 愛心按鈕 -->
-                            <button type="button" id=<%= "LikeUnLogIn" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                style="color:yellow" onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
+                            <button type="button" id=<%= "LikeUnLogIn" + myArtiClass[0][i].artiNum %>
+                                class="btn postInfo" onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
                                 <a><%= myArtiClass[1][i].count %></a></button>
                             <button type="button" id=<%="addLike" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                style="color:blue" onclick=<%= "addLike(" + myArtiClass[0][i].artiNum + ")" %>>
+                                onclick=<%= "addLike(" + myArtiClass[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + myArtiClass[0][i].artiNum %>>
                                     <%= myArtiClass[1][i].count %> </a> </button>
                             <button type="button" id=<%= "delLike" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                style="color:red" onclick=<%= "delLike(" + myArtiClass[0][i].artiNum + ")" %>>
+                                style="color:#c93737" onclick=<%= "delLike(" + myArtiClass[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + myArtiClass[0][i].artiNum %>>
                                     <%= myArtiClass[1][i].count %></a></button>
                             <!-- 如果沒登入 -->
@@ -123,16 +123,14 @@
 
                             <!-- 收藏按鈕 -->
                             <button type="button" id=<%= "unLogIn" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                style="color:yellow; display: inline" onclick="location.href='/logIn'">
+                                onclick="location.href='/logIn'">
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%=  "addColle" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                style="color:blue; display: inline"
                                 onclick=<%= "addColle(" + myArtiClass[0][i].artiNum + ")" %>>
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%= "delColle" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                style="color:red; display: inline"
-                                onclick=<%= "delColle(" + myArtiClass[0][i].artiNum + ")" %>>
-                                <i class="far fa-bookmark"></i></button>
+                                style="color:#c93737" onclick=<%= "delColle(" + myArtiClass[0][i].artiNum + ")" %>>
+                                <i class=" far fa-bookmark"></i></button>
 
                             <!--  收藏按鈕控制 -->
                             <% if(myArtiClass[6][0] == undefined) {%>
@@ -300,23 +298,24 @@
     <!-- 文章列表區塊結束 -->
 
     <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-            <button type="button " class="btn btn-secondary align-middle footer"
-                onclick="location.href='/articleManage/movie'">電影類</button>
-            <button type="button " class="btn btn-secondary align-middle footer"
-                onclick="location.href='/articleManage/music'">音樂類</button>
-            <button type="button " class="btn btn-secondary align-middle footer"
-                onclick="location.href='/articleManage/book'">書籍類</button>
-            <button type="button " class="btn btn-secondary align-middle footer"
-                onclick="location.href='/articleManage/exhibition'">展覽類</button>
-            <button type="button " class="btn btn-secondary footer" onclick="location.href='/member/articleManage'">全部</button>
-            <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
-                <i class="fas fa-edit"></i>發文</button>
-    
-        </div>
-    
-        <a href="#" id="gotop">
-            <i class="fa fa-angle-up"></i>
-        </a>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleManage/movie'">電影類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleManage/music'">音樂類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleManage/book'">書籍類</button>
+        <button type="button " class="btn btn-secondary align-middle footer"
+            onclick="location.href='/articleManage/exhibition'">展覽類</button>
+        <button type="button " class="btn btn-secondary footer"
+            onclick="location.href='/member/articleManage'">全部</button>
+        <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
+            <i class="fas fa-edit"></i>發文</button>
+
+    </div>
+
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

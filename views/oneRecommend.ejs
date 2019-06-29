@@ -56,13 +56,12 @@
                 <!-- info -->
                 <div class="info">
                     <!-- 愛心按鈕 -->
-                    <button type="button" id="LikeUnLogIn" class="btn postInfo" style="color:yellow"
-                        onclick="location.href='/logIn'"><i
+                    <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/logIn'"><i
                             class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
-                    <button type="button" id="addLike" class="btn postInfo" style="color:blue"
-                        onclick=<%= "addLike(" + items[0][0].recomNum + ")" %>> <i class="fab fa-gratipay"></i><label
-                            id="addLikeCount"> <%= items[2][0].count %> </label></button>
-                    <button type="button" id="delLike" class="btn postInfo" style="color:red"
+                    <button type="button" id="addLike" class="btn postInfo"
+                        onclick=<%= "addLike(" + items[0][0].recomNum + ")" %>> <i class="fab fa-gratipay"></i><a
+                            id="addLikeCount"> <%= items[2][0].count %> </a></button>
+                    <button type="button" id="delLike" class="btn postInfo" style="color:#c93737"
                         onclick=<%= "delLike(" + items[0][0].recomNum + ")" %>><i class="fab fa-gratipay"></i><a
                             id="delLikeCount"><%= items[2][0].count %></a></button>
                     <!-- 如果沒登入 -->
@@ -99,15 +98,14 @@
                     <button type="button" class="btn postInfo"><i
                             class="fas fa-comment-dots"></i><a><%= items[3][0].count %></a></button>
                     <!-- 收藏按鈕 -->
-                    <button type="button" id="unLogIn" class="btn postInfo" style="color:yellow;"
-                        onclick="location.href='/logIn'">
+                    <button type="button" id="unLogIn" class="btn postInfo" onclick="location.href='/logIn'">
                         <i class="far fa-bookmark"></i></button>
 
-                    <button type="button" id="addColle" class="btn postInfo" style="color:blue;"
+                    <button type="button" id="addColle" class="btn postInfo"
                         onclick=<%= "addColle(" + items[0][0].recomNum + ")" %>>
                         <i class="far fa-bookmark"></i></button>
 
-                    <button type="button" id="delColle" class="btn postInfo" style="color:red;"
+                    <button type="button" id="delColle" class="btn postInfo" style="color:#c93737;"
                         onclick=<%= "delColle(" + items[0][0].recomNum + ")" %>>
                         <i class="far fa-bookmark"></i></button>
 
@@ -356,11 +354,11 @@
                         <div class="col-sm-3 ml-auto"> </div>
                         <button type="button"
                             id=<%= "MessLikeUnLogIn" + items[0][0].recomNum + items[1][i].recomMessNum %>
-                            class="btn info" style="color:yellow" onclick="location.href='/logIn'"><i
+                            class="btn info" onclick="location.href='/logIn'"><i
                                 class="fab fa-gratipay"></i><a><%= items[4][i].count %></a></button>
 
                         <button type="button" id=<%= "MessAddLike"+ items[0][0].recomNum + items[1][i].recomMessNum %>
-                            class="btn info" style="color:blue"
+                            class="btn info"
                             onclick=<%= "MessAddLike(" + items[0][0].recomNum + "," + items[1][i].recomMessNum + ")" %>>
                             <i class="fab fa-gratipay"></i>
                             <a id=<%="MessAddLikeCount" + items[0][0].recomNum + items[1][i].recomMessNum %>>
@@ -369,7 +367,7 @@
                         </button>
 
                         <button type="button" id=<%= "MessDelLike" + items[0][0].recomNum + items[1][i].recomMessNum %>
-                            class="btn info" style="color:red"
+                            class="btn info" style="color:#c93737"
                             onclick=<%= "MessDelLike(" + items[0][0].recomNum + "," + items[1][i].recomMessNum + ")" %>>
                             <i class="fab fa-gratipay"></i>
                             <a id=<%= "MessDelLikeCount" + items[0][0].recomNum + items[1][i].recomMessNum %>>

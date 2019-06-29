@@ -76,14 +76,14 @@
                         <div class="info">
                             <!-- 愛心按鈕 -->
                             <button type="button" id=<%= "LikeUnLogIn" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:yellow" onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
+                                onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
                                 <a><%= items[1][i].count %></a></button>
                             <button type="button" id=<%="addLike" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:blue" onclick=<%= "addLike(" + items[0][i].artiNum + ")" %>>
+                                onclick=<%= "addLike(" + items[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + items[0][i].artiNum %>>
                                     <%= items[1][i].count %> </a> </button>
                             <button type="button" id=<%= "delLike" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:red" onclick=<%= "delLike(" + items[0][i].artiNum + ")" %>>
+                                style="color:#c93737" onclick=<%= "delLike(" + items[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + items[0][i].artiNum %>>
                                     <%= items[1][i].count %></a></button>
                             <!-- 如果沒登入 -->
@@ -121,14 +121,13 @@
 
                             <!-- 收藏按鈕 -->
                             <button type="button" id=<%= "unLogIn" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:yellow; display: inline" onclick="location.href='/logIn'">
+                                display: inline" onclick="location.href='/logIn'">
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%=  "addColle" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:blue; display: inline"
-                                onclick=<%= "addColle(" + items[0][i].artiNum + ")" %>>
+                                display: inline" onclick=<%= "addColle(" + items[0][i].artiNum + ")" %>>
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%= "delColle" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:red; display: inline"
+                                style="color:#c93737" display: inline"
                                 onclick=<%= "delColle(" + items[0][i].artiNum + ")" %>>
                                 <i class="far fa-bookmark"></i></button>
                             <!--  收藏按鈕控制 -->
@@ -296,24 +295,24 @@
     <!-- 文章列表區塊結束 -->
 
     <div class="fixed-bottom  d-flex justify-content-center">
-            <button type="button" class="btn btn-secondary footer"
-                onclick="location.href='/articleList/articleMovie'">電影類</button>
-            <button type="button" class="btn btn-secondary footer"
-                onclick="location.href='/articleList/articleMusic'">音樂類</button>
-            <button type="button" class="btn btn-secondary footer"
-                onclick="location.href='/articleList/articleBook'">書籍類</button>
-            <button type="button" class="btn btn-secondary footer"
-                onclick="location.href='/articleList/articleExhibition'">展覽類</button>
-            <button type="button" class="btn btn-secondary footer" onclick="location.href='/articleList'">全部</button>
-    
-            <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
-                <i class="fas fa-edit"></i>發文</button>
-        </div>
-    
-    
-        <a href="#" id="gotop">
-            <i class="fa fa-angle-up"></i>
-        </a>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/articleList/articleMovie'">電影類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/articleList/articleMusic'">音樂類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/articleList/articleBook'">書籍類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/articleList/articleExhibition'">展覽類</button>
+        <button type="button" class="btn btn-secondary footer" onclick="location.href='/articleList'">全部</button>
+
+        <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
+            <i class="fas fa-edit"></i>發文</button>
+    </div>
+
+
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
