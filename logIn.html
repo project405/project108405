@@ -43,10 +43,15 @@
                     <span class="input-icon"><span class="fas fa-lock"></span></span>
                     <input type="password" class="input-with-icon" id="password" placeholder="密碼">
                 </div>
-                <button type="button" class="btn btn-dark login">登入</button>
-                <button type="button" class="btn btn-secondary center">忘記密碼</button>
 
-                <button type="button" class="btn btn-secondary center" onclick="location.href='signUp.html'">註冊</button>
+                <input type="text" id="input" class="inputValidateCode" placeholder="輸入驗證碼" />
+                <input type="button" id="checkCode" class="code" onclick="createCode()" />
+                <span class="changeCode " href="#" onclick="createCode()"><i class="fas fa-sync-alt"></i></span><br>
+
+                <button type="button" class="btn btn-dark login" onclick="validateCode()">登入</button>
+                <br>
+                <button type="button" class="btn btn-secondary sameWidth">忘記密碼</button>
+                <button type="button" class="btn btn-secondary sameWidth" onclick="location.href='signUp.html'">註冊</button>
 
 
             </form>
@@ -56,8 +61,8 @@
                     <center>
                         <h4>或</h4>
                         <hr class="highlight">
-                        <button type="button" class="btn third gmail">Gmail登入或註冊</button>
-                        <button type="button" class="btn third fb">Facebook登入或註冊</button>
+                        <button type="button" class="btn third gmail col-sm-12">Gmail登入或註冊</button>
+                        <button type="button" class="btn third fb  col-sm-12">Facebook登入或註冊</button>
                     </center>
 
                 </div>
@@ -77,7 +82,7 @@
 
 
     <script src="scripts/active.js"></script>
-    <script src="scripts/validate.js"></script>
+    <script src="scripts/validateCode.js"></script>
 
 </body>
 

@@ -50,7 +50,7 @@ $(function() {
                     var src = event.target.result // 圖片的編碼 , 格式為base64
 
                     var title = escape(file.name);
-                    var img = '<img id="upload-img" src="' + src + '" title="' + title + '" /> ';
+                    var img = '<img class="upload-img" src="' + src + '" title="' + title + '" /> ';
 
                     // 到這邊 , 我們已經能後用js存取圖片並顯示了
                     $('#replyInput').append('<div id="replyInput">' + img + '</div>');
