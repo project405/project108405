@@ -117,6 +117,7 @@ input[type="file"] {
     max-height: 350px;
     max-width: 60%;
     cursor: pointer;
+    border-radius: 8px;
 }
 
 
