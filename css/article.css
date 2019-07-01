@@ -230,7 +230,7 @@ div.replyInput {
     opacity: 0.89;
     margin-bottom: 1em;
     border-radius: 8px;
-    caret-color: #993a3a;
+    caret-color: #2D4F41;
     cursor: text;
 }
 
@@ -280,4 +280,6 @@ input[type="file"] {
     max-height: 350px;
     max-width: 60%;
     cursor: pointer;
+    border-radius: 8px;
+    padding: 0.5em 0.25em;
 }
