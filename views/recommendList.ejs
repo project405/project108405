@@ -39,10 +39,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
+                    <!-- 如果帳號不是管理員則不顯示 -->
+                    <% if(recom[2] == undefined){ %>
+                    <li class="nav-item" style="display: none">
+                        <a class="nav-link" href="recommendPost.html">
+                            新增推薦</a>
+                    </li>
+                    <!-- 如果帳號是一般會員 -->
+                    <% }else {%>
                     <li class="nav-item">
                         <a class="nav-link" href="recommendPost.html">
                             新增推薦</a>
                     </li>
+                    <% } %>
                     <li class="nav-item">
                         <a class="nav-link " href="/">首頁 <span class="sr-only">(current)</span></a>
                     </li>
@@ -72,9 +81,19 @@
                     <li class="nav-item">
                         <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>
                     </li>
+                    <!-- 已經登入的話 login 隱藏 -->
+                    <% if(recom[1][0] != undefined){ %>
+                    <li class="nav-item" style="display: none">
+                        <a class="nav-link" href="/login">登入</a>
+                    </li>
+                    <!-- 如果還沒登入 login 顯示 -->
+                    <% }else {%>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">登入</a>
                     </li>
+                    <% } %>
+                    <!-- 已經登入的話"會員"下拉式清單 顯示 -->
+                    <% if(recom[1][0] != undefined){ %>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -86,6 +105,20 @@
                             <a class="dropdown-item" href="/logOut">登出</a>
                         </div>
                     </li>
+                    <!-- 如果還沒登入則隱藏"會員"清單 -->
+                    <% }else {%>
+                    <li class="nav-item dropdown" style="display: none">
+                        <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            會員
+                        </a>
+                        <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/member/memberManage">會員資料</a>
+                            <a class="dropdown-item" href="/member/articleManage">文章管理</a>
+                            <a class="dropdown-item" href="/logOut">登出</a>
+                        </div>
+                    </li>
+                    <% } %>
                 </ul>
             </div>
         </nav>
@@ -94,15 +127,16 @@
         <div id="x"><i class="far fa-times-circle"></i>
         </div>
         <div class="form">
-            <form class="report" action="" data-aos="zoom-out-right">
+            <form class="report" action="/report" method="POST" data-aos="zoom-out-right">
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-hands-helping"></span></span>
-                    <textarea class="input-with-icon report" placeholder="輸入舉報原因"></textarea>
+                    <textarea class="input-with-icon report" name="reportReason" placeholder="輸入舉報原因"></textarea>
                 </div>
-                <button type="button" class="btn btn-danger report">送出</button>
+                <button type="submit" class="btn btn-danger report">送出</button>
             </form>
         </div>
     </div>
+
     <!-- ============================================= -->
     <!-- ------------- navbar end -------------------- -->
     <!-- ============================================= -->
@@ -130,16 +164,16 @@
 
 
             <!-- 推薦開始 -->
-            <% for(var i = 0 ; i<recom.length ; i++){ %>
+            <% for(var i = 0 ; i<recom[0].length ; i++){ %>
             <div class="wrapper col-12  col-lg-2" style="background-image: url('/imgs/recommend/movie1.jpg');">
-                <a class="portfolio-box" href="/oneRecommend/<%= recom[i].recomNum %>">
+                <a class="portfolio-box" href="/oneRecommend/<%= recom[0][i].recomNum %>">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            <p><%= recom[i].recomClass %> </p>
+                            <p><%= recom[0][i].recomClass %> </p>
                         </div>
                         <div class="project-name">
-                            <p class="title"><%= recom[i].recomHead %></p>
-                            <p class="content"><%= recom[i].recomCont %></p>
+                            <p class="title"><%= recom[0][i].recomHead %></p>
+                            <p class="content"><%= recom[0][i].recomCont %></p>
                         </div>
                     </div>
                 </a>

@@ -5,6 +5,26 @@ const sql = require('./asyncDB');
 const moment = require('moment');
 
 //================================
+//-------- checkAuthority() ---------
+//================================
+var checkAuthority = async function (memID) {
+    var result;
+    await sql('SELECT "memAuthority" FROM "member" where "memID" = $1 ', [memID])
+        .then((data) => {
+            if (data.rows[0] == undefined || data.rows[0] == null) {
+                result = undefined;
+            } else {
+                result = data.rows[0].memAuthority;
+                // console.log("權限:", data.rows[0].memAuthority);
+            }
+        }, (error) => {
+            result = undefined;
+        });
+    return result;
+}
+
+
+//================================
 //-------- articlePost() ---------
 //================================
 var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, picture) {
@@ -35,6 +55,7 @@ var myArticle = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority;
     var result = [];
     //--------- get myArticle ----------
     await sql('SELECT * FROM "article" WHERE "memID" = $1', [memID])
@@ -132,6 +153,16 @@ var myArticle = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await this.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = article;
     result[1] = articleLikeCount;
     result[2] = articleMessCount;
@@ -139,6 +170,7 @@ var myArticle = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID]
+    result[7] = checkAuthority;
     console.log(result);
     return result;
 }
@@ -147,13 +179,7 @@ var myArticle = async function (memID) {
 //--------- modifyMember() -------
 //================================
 var modifyMember = async function (memPass, memBirth, memMail, memGender, memAddr, memID) {
-    var result;
-    console.log(memPass);
-    console.log(memBirth);
-    console.log(memMail);
-    console.log(memGender);
-    console.log(memAddr);
-    console.log(memID);
+    var result = [];
 
     // -----------  修改會員資料 --------------
     await sql('UPDATE "member" SET "memPass" = $1, "memBirth" = $2, "memMail" = $3, "memGender" = $4, "memAddr" = $5 WHERE "memID" = $6 ', [memPass, memBirth, memMail, memGender, memAddr, memID])
@@ -162,6 +188,7 @@ var modifyMember = async function (memPass, memBirth, memMail, memGender, memAdd
         }, (error) => {
             result = 0;
         });
+
     return result;
 }
 //================================
@@ -190,6 +217,7 @@ var myMovieArticle = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority;
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -288,6 +316,16 @@ var myMovieArticle = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await this.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = movieArticleList;
     result[1] = movieArtiLikeCount;
     result[2] = movieArtiMessCount;
@@ -295,6 +333,7 @@ var myMovieArticle = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
+    result[7] = checkAuthority;
     console.log(result);
     return result;
 }
@@ -308,6 +347,7 @@ var myMusicArticle = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority;
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -406,6 +446,16 @@ var myMusicArticle = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await this.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = musicArticleList;
     result[1] = musicArtiLikeCount;
     result[2] = musicArtiMessCount;
@@ -413,6 +463,7 @@ var myMusicArticle = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
+    result[7] = checkAuthority;
     console.log(result);
     return result;
 }
@@ -426,6 +477,7 @@ var myBookArticle = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority;
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -524,6 +576,16 @@ var myBookArticle = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await this.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = bookArticleList;
     result[1] = bookArtiLikeCount;
     result[2] = bookArtiMessCount;
@@ -531,6 +593,7 @@ var myBookArticle = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
+    result[7] = checkAuthority;
     console.log(result);
     return result;
 }
@@ -544,6 +607,7 @@ var myExhibitionArticle = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority ; 
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -642,6 +706,16 @@ var myExhibitionArticle = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await this.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = exhibitionArticleList;
     result[1] = exhibitionArtiLikeCount;
     result[2] = exhibitionArtiMessCount;
@@ -649,6 +723,7 @@ var myExhibitionArticle = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
+    result[7] = checkAuthority ; 
     console.log(result);
     return result;
 }
@@ -787,5 +862,5 @@ module.exports = {
     addArticleLike, delArticleLike,
     addArticleMessLike, delArticleMessLike,
     addRecommendMessLike, delRecommendMessLike,
-    report
+    report, checkAuthority
 };

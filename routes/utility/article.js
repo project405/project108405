@@ -2,6 +2,7 @@
 
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
+const member = require('./member');
 var moment = require('moment');
 //=========================================
 //---------  getArticleList() -------------
@@ -14,6 +15,7 @@ var getArticleList = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority = [];
     var result = [];
     // -----------  取得文章清單 --------------
     await sql('SELECT * FROM "article"')
@@ -118,7 +120,16 @@ var getArticleList = async function (memID) {
             });
     }
     // console.log("isCollection=", isCollection);
-
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = articleList;  //存入文章清單
     result[1] = likeCount;  //存入文章清單每篇的愛心數量
     result[2] = messageCount;
@@ -126,6 +137,7 @@ var getArticleList = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
+    result[7] = checkAuthority;
     console.log(result);
     return result;
 }
@@ -143,6 +155,7 @@ var getOneArticle = async function (artiNum, memID) {
     var isCollection = [];
     var isLike = [];
     var isMessLike = []; //判斷留言愛心是否被按過
+    var checkAuthority;
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -270,8 +283,16 @@ var getOneArticle = async function (artiNum, memID) {
                 isMessLike[i] = '0';
             });
     }
-
-
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
 
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
@@ -283,7 +304,8 @@ var getOneArticle = async function (artiNum, memID) {
     result[7] = isLike;
     result[8] = [memID];
     result[9] = isMessLike;
-    console.log(isMessLike);
+    result[10] = checkAuthority;
+    console.log("result=", result[10]);
     return result;
 }
 //=========================================
@@ -298,6 +320,7 @@ var getClassMovie = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority;
     var result = [];
     // -----------  取得電影文章 --------------
     await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['movie'])
@@ -401,6 +424,16 @@ var getClassMovie = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = movieArticleList;
     result[1] = movieArtiLikeCount;
     result[2] = movieArtiMessLikeCount;
@@ -408,6 +441,7 @@ var getClassMovie = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
+    result[7] = checkAuthority;
     // console.log(result);
     return result;
 }
@@ -420,6 +454,7 @@ var getClassMusic = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority;
     var result = [];
     // -----------  取得音樂文章 --------------
     await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['music'])
@@ -523,8 +558,18 @@ var getClassMusic = async function (memID) {
                 isLike.push('0');
             });
     }
-    console.log("result =", result);
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
 
+    console.log("result =", result);
     result[0] = musicArticleList;
     result[1] = musicArtiLikeCount;
     result[2] = musicArtiMessLikeCount;
@@ -532,6 +577,7 @@ var getClassMusic = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
+    result[7] = checkAuthority
     return result;
 }
 //---------  getClassBook() -------------
@@ -543,6 +589,7 @@ var getClassBook = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority;
     var result = [];
     // -----------  取得書籍文章 --------------
     await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['book'])
@@ -646,6 +693,16 @@ var getClassBook = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     console.log("result =", result);
 
     result[0] = bookArticleList;
@@ -654,7 +711,8 @@ var getClassBook = async function (memID) {
     result[3] = tag;
     result[4] = isCollection;
     result[5] = isLike;
-    result[6] = [memID]
+    result[6] = [memID];
+    result[7] = checkAuthority;
     return result;
 }
 //---------  getClassExhibition() -------------
@@ -664,8 +722,9 @@ var getClassExhibition = async function (memID) {
     var exhibitionArtiMessLikeCount = [];
     var tagLink = [];
     var tag = [];
-    var isCollection = [] ; 
-    var isLike = [] ;
+    var isCollection = [];
+    var isLike = [];
+    var checkAuthority;
     var result = [];
     // -----------  取得展覽文章 --------------
     await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['exhibition'])
@@ -769,15 +828,26 @@ var getClassExhibition = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     console.log("result =", result);
 
     result[0] = exhibitionArticleList;
     result[1] = exhibitionArtiLikeCount;
     result[2] = exhibitionArtiMessLikeCount;
     result[3] = tag;
-    result[4] = isCollection ; 
-    result[5] = isLike ; 
-    result[6] = [memID]
+    result[4] = isCollection;
+    result[5] = isLike;
+    result[6] = [memID];
+    result[7] = checkAuthority;
     return result;
 }
 // ========= get_four_class_article (end) ========

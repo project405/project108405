@@ -10,7 +10,13 @@ router.get('/', function (req, res, next) {
     if (memID == null || memID == undefined) {
         res.render('logIn');
     } else {
-        res.render('memberManage');
+        member.checkAuthority(memID).then(data => {
+            var mydata = [] ;
+            mydata[0] = data ; 
+            mydata[1] = memID ; 
+            console.log(mydata);
+            res.render('memberManage',{items:mydata});
+        })
     }
 
 });
@@ -53,6 +59,7 @@ router.post('/', function (req, res, next) {
         } else {
             member.modifyMember(memberData.memPass, memberData.memBirth, memberData.memMail, memberData.memGender, memberData.memAddr, memberData.memID).
                 then(data => {
+                    console.log(data);
                     if (data == 1) {
                         res.end('<script> alert("修改成功！");location.replace("/");</script>');
                     } else {

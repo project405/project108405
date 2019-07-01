@@ -10,7 +10,9 @@ CREATE TABLE "public"."member" (
 	"memMail" varchar(100) COLLATE "pg_catalog"."default" ,
 	"memGender" char(1) COLLATE "pg_catalog"."default" ,
 	"memNoti" BOOLEAN DEFAULT FALSE , 
-	"memAddr" varchar(100) COLLATE "pg_catalog"."default"
+	"memAddr" varchar(100) COLLATE "pg_catalog"."default",
+"memAuthority" char(4) 
+
 );
 COMMENT ON COLUMN "public"."member"."memGender" IS 'M or F';
 COMMENT ON COLUMN "public"."member"."memNoti" IS 'T or F';

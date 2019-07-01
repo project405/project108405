@@ -1,9 +1,9 @@
 ﻿-- ------------------------------
 --    Insert Into member 
 -- ------------------------------
-INSERT INTO "member" ("memID", "memPass", "memName", "memBirth", "memMail", "memGender", "memAddr", "memNoti") VALUES
-('abc123','abc123','chin','1997-09-28','10546007@ntub.edu.tw','m','深坑','t'),
-('abc456','abc456','wat','1998-08-07','10546004@ntub.edu.tw','f','三重','f');
+INSERT INTO "member" ("memID", "memPass", "memName", "memBirth", "memMail", "memGender", "memAddr", "memNoti", "memAuthority") VALUES
+('abc123','abc123','chin','1997-09-28','10546007@ntub.edu.tw','m','深坑','t','boss'),
+('abc456','abc456','wat','1998-08-07','10546004@ntub.edu.tw','f','三重','f',null);
 
 -- ------------------------------
 --    Insert Into article 

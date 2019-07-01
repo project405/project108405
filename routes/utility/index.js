@@ -2,18 +2,19 @@
 
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
+const member = require('./member');
 var moment = require('moment');
 
 //=========================================
 //---------  getIndexData() -----------
 //=========================================
-var getIndexData = async function () {
+var getIndexData = async function (memID) {
     var weekRecommend = [];
-    var fourRecommend = [] ;
-    var movie = true ; 
-    var book = true ; 
-    var music = true ;
-    var exhibition = true ; 
+    var fourRecommend = [];
+    var movie = true;
+    var book = true;
+    var music = true;
+    var exhibition = true;
     //熱門文章
     var mydata = [];
     var articleLikeCount = [] //存放 articleLike表中裡面的 artiNum欄位
@@ -21,6 +22,7 @@ var getIndexData = async function () {
     var times = 0; //作為判斷是否取得三篇文章的開關
     var hotArticle = [];  //存放前三名熱門文章
     var artiLike = [];
+    var checkAuthority;
     var result = [];
     // -----------  每週推薦 --------------
     await sql('SELECT * FROM "recommend"')
@@ -43,18 +45,18 @@ var getIndexData = async function () {
             weekRecommend = null;
         });
     for (var i = 0; i < weekRecommend.length; i++) {
-        if (weekRecommend[i].recomClass == '電影' && movie){
+        if (weekRecommend[i].recomClass == '電影' && movie) {
             fourRecommend.push(weekRecommend[i]);
-            movie = false ; 
-        }else if(weekRecommend[i].recomClass == '音樂' && music){
+            movie = false;
+        } else if (weekRecommend[i].recomClass == '音樂' && music) {
             fourRecommend.push(weekRecommend[i]);
-            music = false ;
-        }else if(weekRecommend[i].recomClass == '書籍' && book){
+            music = false;
+        } else if (weekRecommend[i].recomClass == '書籍' && book) {
             fourRecommend.push(weekRecommend[i]);
-            book = false ;
-        }else if(weekRecommend[i].recomClass == '展覽' && exhibition){
+            book = false;
+        } else if (weekRecommend[i].recomClass == '展覽' && exhibition) {
             fourRecommend.push(weekRecommend[i]);
-            exhibition = false ;
+            exhibition = false;
         }
     }
     // -----------  熱門文章 --------------
@@ -95,9 +97,21 @@ var getIndexData = async function () {
                 mydata = null;
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+
     result[0] = fourRecommend;
     result[1] = mydata;
-    console.log("1",result[1]);
+    result[2] = [memID];
+    result[3] = checkAuthority;
     return result;
 }
 module.exports = { getIndexData };

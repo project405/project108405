@@ -2,6 +2,7 @@
 
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
+const member = require('./member');
 var moment = require('moment');
 
 //=========================================
@@ -9,6 +10,7 @@ var moment = require('moment');
 //=========================================
 var getCollRecommend = async function (memID) {
     var getdata = [];
+    var checkAuthority;
     var result = [];
     //---------  取得每個會員收藏的推薦文章編號 -------------
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "recomNum" != 0', [memID])
@@ -32,11 +34,24 @@ var getCollRecommend = async function (memID) {
                 } else {
                     data.rows[0].recomClass = '展覽';
                 }
+                console.log("Data.rows", data.rows[0]);
                 result.push(data.rows[0]);
             }, (error) => {
                 result = null;
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+    result.push(memID);
+    result.push(checkAuthority);
     return result;
 }
 
@@ -54,6 +69,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     var tag = [];
     var isLike = []; //是否有過愛心
     var isMessLike = []; //判斷留言愛心是否被按過
+    var checkAuthority;
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -182,6 +198,16 @@ var getOneColleRecommend = async function (recomNum, memID) {
                 isMessLike[i] = '0';
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = oneRecommend;
     result[1] = oneRecomMessage;
     result[2] = oneRecomLikeCount;
@@ -192,6 +218,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     result[7] = isLike;
     result[8] = [memID];
     result[9] = isMessLike;
+    result[10] = checkAuthority;
     // console.log(result);
     return result;
 }
@@ -207,6 +234,7 @@ var getCollArticle = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority;
     var result = [];
     //---------  取得每個會員收藏的文章編號 -------------
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0', [memID])
@@ -312,6 +340,16 @@ var getCollArticle = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     // console.log(tag) ;
     result[0] = colleArticle;
     result[1] = colleArtiLikeCount;
@@ -319,7 +357,8 @@ var getCollArticle = async function (memID) {
     result[3] = tag;
     result[4] = isCollection;
     result[5] = isLike;
-    result[6] = [memID]
+    result[6] = [memID];
+    result[7] = checkAuthority;
     return result;
 }
 //=========================================
@@ -328,6 +367,7 @@ var getCollArticle = async function (memID) {
 //---------  getRecomMovie() -------------
 var getRecomMovie = async function (memID) {
     var getdata = [];
+    var checkAuthority;
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "recomNum" != 0 ', [memID])
         .then((data) => {
@@ -356,12 +396,24 @@ var getRecomMovie = async function (memID) {
                 result = null;
             });
     }
-
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+    result.push(memID);
+    result.push(checkAuthority);
     return result;
 }
 //---------  getRecomMusic() -------------
 var getRecomMusic = async function (memID) {
     var getdata = [];
+    var checkAuthority ; 
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "recomNum" != 0 ', [memID])
         .then((data) => {
@@ -390,11 +442,24 @@ var getRecomMusic = async function (memID) {
                 result = null;
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+    result.push(memID);
+    result.push(checkAuthority);
     return result;
 }
 //---------  getRecomBook() -------------
 var getRecomBook = async function (memID) {
     var getdata = [];
+    var checkAuthority;
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "recomNum" != 0 ', [memID])
         .then((data) => {
@@ -423,11 +488,24 @@ var getRecomBook = async function (memID) {
                 result = null;
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+    result.push(memID);
+    result.push(checkAuthority);
     return result;
 }
 //---------  getRecomExhibition() -------------
 var getRecomExhibition = async function (memID) {
     var getdata = [];
+    var checkAuthority;
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "recomNum" != 0 ', [memID])
         .then((data) => {
@@ -456,6 +534,18 @@ var getRecomExhibition = async function (memID) {
                 result = null;
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+    result.push(memID);
+    result.push(checkAuthority);
     return result;
 }
 // ========= get_four_class_collRecommend (end) ========
@@ -474,6 +564,7 @@ var getArtiMovie = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority;
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
         .then((data) => {
@@ -578,6 +669,16 @@ var getArtiMovie = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = collArtiMovie;
     result[1] = collArtiLikeCount;
     result[2] = collArtiMessLikeCount;
@@ -585,6 +686,7 @@ var getArtiMovie = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
+    result[7] = checkAuthority;
     // console.log(result);
     return result;
 }
@@ -598,6 +700,7 @@ var getArtiMusic = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority;
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
         .then((data) => {
@@ -702,6 +805,16 @@ var getArtiMusic = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = collArtiMusic;
     result[1] = collArtiLikeCount;
     result[2] = collArtiMessLikeCount;
@@ -709,6 +822,7 @@ var getArtiMusic = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
+    result[7] = checkAuthority;
     // console.log(result);
     return result;
 }
@@ -722,6 +836,7 @@ var getArtiBook = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
+    var checkAuthority;
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
         .then((data) => {
@@ -826,6 +941,16 @@ var getArtiBook = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = collArtiBook;
     result[1] = collArtiLikeCount;
     result[2] = collArtiMessLikeCount;
@@ -833,7 +958,7 @@ var getArtiBook = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
-
+    result[7] = checkAuthority;
     // console.log(result);
     return result;
 }
@@ -845,6 +970,7 @@ var getArtiExhibition = async function (memID) {
     var collArtiMessLikeCount = [];
     var tagLink = [];
     var tag = [];
+    var checkAuthority;
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0 ', [memID])
         .then((data) => {
@@ -949,6 +1075,16 @@ var getArtiExhibition = async function (memID) {
                 isLike.push('0');
             });
     }
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
     result[0] = collArtiExhibition;
     result[1] = collArtiLikeCount;
     result[2] = collArtiMessLikeCount;
@@ -956,6 +1092,7 @@ var getArtiExhibition = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
+    result[7] = checkAuthority;
     // console.log(result);
     return result;
 }

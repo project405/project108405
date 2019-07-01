@@ -3,6 +3,7 @@ var router = express.Router();
 
 //增加引用函式
 const logIn = require('../utility/logIn');
+const member = require('../utility/member');
 
 //接收POST請求
 router.post('/', function (req, res, next) {
@@ -19,7 +20,14 @@ router.post('/', function (req, res, next) {
         } else {
             req.session.memID = d.memID;
             req.session.memPass = d.memPass;
-            res.render('memberManage', { name: d.memID });   //導向使用者管理頁面
+            member.checkAuthority(memID).then(data => {
+                var mydata = [];
+                mydata[0] = data;
+                mydata[1] = memID;
+                console.log(mydata);
+                res.render('memberManage', { items: mydata });
+            })
+            // res.render('memberManage', { name: d.memID });   //導向使用者管理頁面
         }
     })
 });
