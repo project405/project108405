@@ -56,6 +56,7 @@ $(function() {
                     $('#replyInput').append('<div id="replyInput">' + img + '</div>');
                     $('#postInput').append('<div id="postInput">' + img + '</div>');
 
+
                 };
             })(file);
 
