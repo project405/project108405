@@ -9,12 +9,16 @@ header = '    <div class="header">\
     </button>\
     <div class="collapse navbar-collapse" id="navbarNav">\
         <ul class="navbar-nav ml-auto">\
+        <div>\
+        <input type="text" class="navSearch"/>\
+        <button class="btn btn-light navSearch"><i class="fas fa-search"></i></button>\
+        </div>\
         <li class="nav-item">\
-            <a class="nav-link" href="recommendPost.html">\
+            <a class="nav-link" href="recommendPost.html" style="display:none;">\
             新增推薦</a>\
         </li>\
         <li class="nav-item">\
-                <a class="nav-link " href="index.html">首頁 <span class="sr-only">(current)</span></a>\
+                <a class="nav-link " href="index.html">首頁<span class="sr-only">(current)</span></a>\
             </li>\
             <li class="nav-item ">\
                 <a class="nav-link" href="notify.html">\
@@ -45,7 +49,7 @@ header = '    <div class="header">\
                 <a class="nav-link" href="logIn.html">登入</a>\
         </li>\
         <li class="nav-item dropdown">\
-        <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+        <a  style="display:none;" class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                 會員\
             </a>\
         <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">\

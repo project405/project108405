@@ -90,6 +90,10 @@ a.floorTag {
     margin: 0 0.5em 0 1em;
 }
 
+a.name {
+    word-break: break-all;
+}
+
 p.content {
     color: rgb(73, 73, 73);
 }
@@ -122,6 +126,8 @@ button.like {
 div.info {
     margin-left: -0.5em;
     white-space: nowrap;
+    word-break: break-all;
+    overflow: hidden;
 }
 
 @media (max-width: 450px) {

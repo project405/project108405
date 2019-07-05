@@ -267,9 +267,11 @@ div.radio {
 p {
     text-align: right;
     color: #eb6363;
-    font-weight: bolder;
+    /* font-weight: bolder; */
+    font-size: 0.75em;
+    padding-left: 2em;
 }
 
 i.alarm {
-    font-size: 15pt;
+    font-size: 12.5pt;
 }
