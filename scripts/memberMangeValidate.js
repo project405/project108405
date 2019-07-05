@@ -7,12 +7,12 @@ function passcheck() {
 
 function passwordValidateForm() {
     var password = document.getElementById("password").value;
-    if (password != "" && password.length > 5 && password.length < 40) {
+    if (password != "" && password.length > 7 && password.length < 40) {
         document.getElementById("passwordAlarm").innerHTML = '';
         return check[0] = true;
 
     } else {
-        document.getElementById("passwordAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 密碼至少 6字元';
+        document.getElementById("passwordAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 密碼至少 8 字元';
         return check[0] = false;
     }
 }

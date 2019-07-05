@@ -9,9 +9,9 @@ header = '    <div class="header">\
     </button>\
     <div class="collapse navbar-collapse" id="navbarNav">\
         <ul class="navbar-nav ml-auto">\
-        <div>\
+        <div class="searchSection">\
         <input type="text" class="navSearch"/>\
-        <button class="btn btn-light navSearch"><i class="fas fa-search"></i></button>\
+        <button class="btn navSearch"><i class="fas fa-search"></i></button>\
         </div>\
         <li class="nav-item">\
             <a class="nav-link" href="recommendPost.html" style="display:none;">\
@@ -20,16 +20,16 @@ header = '    <div class="header">\
         <li class="nav-item">\
                 <a class="nav-link " href="index.html">首頁<span class="sr-only">(current)</span></a>\
             </li>\
-            <li class="nav-item ">\
+            <li class="nav-item">\
                 <a class="nav-link" href="notify.html">\
                 <i class="fas fa-bell"  style="color:white;"></i>\
                 </a>\
             </li>\
-            <li class="nav-item ">\
+            <li class="nav-item">\
             <a class="nav-link" href="recommendList.html">\
             推薦</a>\
         </li>\
-            <li class="nav-item ">\
+            <li class="nav-item">\
                 <a class="nav-link" href="articleList.html">\
                 文章</a>\
             </li>\
