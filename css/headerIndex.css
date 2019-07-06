@@ -468,3 +468,52 @@ textarea:focus {
     border-radius: 4px;
     background: rgb(155, 155, 155);
 }
+
+
+/* **********************/
+
+
+/* searchSection */
+
+
+/* **********************/
+
+div.searchSection {
+    flex-direction: row;
+    justify-content: flex-start;
+    /* margin-right: 1em; */
+    /* position: absolute;
+    left: 15%; */
+    text-align: center;
+}
+
+input.navSearch {
+    border-radius: 6px;
+    outline: none;
+    margin: 0.5em 0em;
+    /* background-color: rgb(21, 48, 36); */
+    border: none;
+    box-shadow: none;
+    padding-left: 0.6em;
+    /* width: 15em; */
+}
+
+input.navSearch:focus,
+input.navSearch:hover {
+    background-color: rgb(255, 255, 255) !important;
+    transition-duration: 1.5s;
+}
+
+button.navSearch,
+button.navSearch:hover {
+    padding: 0.1em 0.4em;
+    /* background-color: #2D4F41; */
+    color: white;
+    margin-bottom: 0.25em;
+}
+
+button.navSearch:focus {
+    background-color: #678878 !important;
+    box-shadow: none;
+    outline: none;
+}

@@ -84,13 +84,14 @@ a.floorTag {
     text-align: right;
     color: #fff !important;
     padding: 0.1em 0.4em 0.1em 0.4em;
+    border: 2px solid #993a3a;
     border-radius: 8px;
-    background-color: #c93737;
+    background-color: #993a3a;
     white-space: nowrap;
     margin: 0 0.5em 0 1em;
 }
 
-a.name {
+div.nameTime {
     word-break: break-all;
 }
 
@@ -106,6 +107,7 @@ button.like {
     float: left !important;
     padding: 0;
     margin: 0;
+    white-space: nowrap;
 }
 
 .col-sm-1 {
@@ -125,9 +127,6 @@ button.like {
 
 div.info {
     margin-left: -0.5em;
-    white-space: nowrap;
-    word-break: break-all;
-    overflow: hidden;
 }
 
 @media (max-width: 450px) {
@@ -169,23 +168,6 @@ button.tag {
     font-size: 0.75em;
     border-radius: 8px;
     padding: 0.45em;
-}
-
-
-/*  button */
-
-button.footer {
-    margin: 0.2em;
-    height: auto;
-    font-size: 1em;
-    opacity: 0.89;
-    padding: 0.2em 0.3em;
-}
-
-@media (max-width: 450px) {
-    button.footer {
-        font-size: 0.85em;
-    }
 }
 
 
