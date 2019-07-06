@@ -519,6 +519,7 @@ button.navSearch:hover {
     margin-bottom: 0.25em;
 }
 
+button.navSearch:hover,
 button.navSearch:focus {
     background-color: #678878 !important;
     box-shadow: none;

@@ -31,11 +31,11 @@
     <div class="justify-content-center">
         <div class="post col-lg-8 content shadow">
 
-            <select id="inputState" class="form-control">
-                <option>電影類</option>
-                <option>音樂類</option>
-                <option>展覽類</option>
-                <option>書籍類</option>
+            <select id="inputState" class="form-control" onchange="styleselect()">
+                <option value="1">電影類</option>
+                <option value="2">音樂類</option>
+                <option value="3">展覽類</option>
+                <option value="4">書籍類</option>
             </select>
 
             <div class="titleInput input-with-icon title" contenteditable="true" role="textbox" data-text="請輸入您的標題"></div>
@@ -52,7 +52,14 @@
                 <i class="fas fa-images" style="padding-right:5px"></i>加圖片
             </label>
 
-            <button type="submit" class="btn btn-danger col-lg-2 float-right">提交回覆</button>
+            <div id="inputData">
+                <br>
+                <form id="infoForm">
+
+                </form>
+            </div>
+
+            <button type="submit" class="btn btn-danger col-lg-2 float-right" style="margin-top:1em;">提交回覆</button>
 
         </div>
     </div>
