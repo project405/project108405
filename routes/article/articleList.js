@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const article = require('../utility/article');
-var moment = require('moment');
+
 //接收GET請求
 router.get('/', function (req, res, next) {
     var memID = req.session.memID;
@@ -11,9 +11,11 @@ router.get('/', function (req, res, next) {
         // console.log(data[0][0]);
         // console.log(data[0].length);
         // console.log(data[1][1]);
-        // for (let i = 0; i < data.length; i++) {
-        //     data[i].artiDateTime = moment(data[i].artiDateTime).format("YYYY-MM-DD HH:mm:ss");
+        // for (var i = 0; i < data[0].length; i++) {
+        //     console.log(data[0][i].artiCont);
         // }
+
+        console.log("data=",data);
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data.length > 0) {

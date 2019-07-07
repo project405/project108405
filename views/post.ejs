@@ -6,6 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!--  js   -->
+    <script src="/javascripts/jquery.min.js"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -30,18 +33,20 @@
     </center>
     <div class="justify-content-center">
         <div class="post col-lg-8 content shadow">
+
             <select id="inputState" class="form-control" onchange="styleselect()">
-                <option value="1">電影類</option>
-                <option value="2">音樂類</option>
-                <option value="3">展覽類</option>
-                <option value="4">書籍類</option>
+                <option value="movie">電影類</option>
+                <option value="music">音樂類</option>
+                <option value="exhibition">展覽類</option>
+                <option value="book">書籍類</option>
             </select>
 
-            <div class="titleInput input-with-icon title" contenteditable="true" role="textbox" data-text="請輸入您的標題"></div>
+            <div id="artiHead" class="titleInput input-with-icon title" name="artiHead" contenteditable="true"
+                role="textbox" data-text="請輸入您的標題">
+            </div>
             <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容"></div>
 
-<<<<<<< HEAD:views/post.ejs
-        <div class="col-lg-8 content">
+            <!-- <div class="col-lg-8 content">
             <form class="post" action="/article/post" method="post" enctype="multipart/form-data">
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fa-heading"></span></span>
@@ -50,16 +55,13 @@
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fas fas fa-file-alt"></span></span>
                     <textarea class="input-with-icon input" id="textarea" name="artiCont"
-                        placeholder="輸入您的內文"></textarea>
-=======
+                        placeholder="輸入您的內文"></textarea> -->
             <div class="tag content col-lg-12">
                 <input type="text" data-role="tagsinput" id="tagInput" class="form-control" placeholder=" + tag" />
             </div>
->>>>>>> fc465ee4b0071ee0a2795e974fe341730a27a778:post.html
 
 
-<<<<<<< HEAD:views/post.ejs
-                <select id="inputState" class="form-control" name="artiClass">
+            <!-- <select id="inputState" class="form-control" name="artiClass">
                     <option value="movie">電影類</option>
                     <option value="music">音樂類</option>
                     <option value="exhibition">展覽類</option>
@@ -72,21 +74,94 @@
 
 
                 <button type="submit" class="btn btn-secondary float-md-right">發佈文章</button>
-            </form>
-=======
-
-
-
-
+            </form> -->
             <label class="btn btn-dark" style="cursor: pointer">
-            <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp"/>
-            <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
+                <input id="file-selector" name="userImg" type="file" multiple="multiple"
+                    accept=".jpg,.png,.gif,.tif,.bmp" />
+                <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
             </label>
->>>>>>> fc465ee4b0071ee0a2795e974fe341730a27a778:post.html
 
-            <button type="submit" class="btn btn-danger float-right submitReply">提交回覆</button>
+            <button type="submit" class="btn btn-danger float-right submitReply" onclick="test()">提交回覆</button>
 
+            <script>
+                var formData = new FormData(); //用formData來存取要傳送的所有資料
+                //上傳檔案按鈕有變動就執行
+                $("#file-selector").change(function () {
+                    var file = $("#file-selector")[0];  //取得檔案
+                    //如果有檔案就要加入formData
+                    if (file.files.length) {
+                        for (var i = 0; i < file.files.length; i++) {
+                            $("#postInput").html(document.getElementById("postInput").innerHTML + "\\:imgLocation");
+                        }
+                        // if (document.getElementById("postInput").innerHTML.match("<img") == null) {
+                        //     file.value = '';
+                        // }
 
+                        for (var i in file.files) {
+                            formData.append('userImg', file.files[i]);
+                        }
+
+                    }
+                });
+                function test() {
+                    var artiHead = document.getElementById("artiHead").innerHTML;
+                    var img = [];
+                    var artiCont = [];
+                    var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
+                    // 取得內容
+                    artiData.forEach(function (element) {
+                        artiCont.push(element.innerText);
+                    }, this);
+                    console.log(artiCont);
+
+                    var tagInput = document.querySelectorAll("span.tag"); //取得所有<span class="tag"> 的內容
+                    var tag = []; //以陣列形式存放
+                    var artiClass = document.getElementById("inputState").value;
+
+                    if (artiHead.trim() == "") {
+                        artiHead = undefined;
+                        // artiCont = undefined;
+                    }
+
+                    formData.append('artiHead', artiHead);
+                    formData.append('artiCont', artiCont);
+                    formData.append('artiClass', artiClass);
+                    // console.log(file.files[1]);
+                    // console.log(file.files[0]);
+
+                    //取得tag 
+                    tagInput.forEach(function (element) {
+                        tag.push(element.innerText);
+                    }, this);
+
+                    formData.append('tag', tag);
+
+                    $.ajax({
+                        url: '/article/post',
+                        type: 'POST',
+                        dataType: 'TEXT',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            console.log("yes", res);
+                            if (res == "請進行登入") {
+                                alert(res);
+                                location.replace("/logIn");
+                            } else if (res == "發文成功") {
+                                alert(res);
+                                location.replace("/articleList");
+                            } else {
+                                alert(res);
+                            }
+                        },
+                        error: function (res) {
+                            // console.log("失敗", res);
+                        }
+                    });
+                }
+
+            </script>
 
         </div>
     </div>
@@ -102,17 +177,24 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
-        crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
-        crossorigin="anonymous "></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
-        crossorigin="anonymous "></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+
+
     <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/post.js"></script>
     <script src="/javascripts/form.js"></script>
 </body>
 

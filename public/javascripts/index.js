@@ -1,6 +1,6 @@
 // navbar
-$(document).ready(function () {
-    $(window).on("scroll", function () {
+$(document).ready(function() {
+    $(window).on("scroll", function() {
 
         var wn = $(window).scrollTop();
 
@@ -18,8 +18,11 @@ $(document).ready(function () {
     });
 });
 
+
+//  animation
+
+// AOS animate
+
 AOS.init({
     duration: 2500
 });
-
-//  animation

@@ -27,18 +27,66 @@ var checkAuthority = async function (memID) {
 //================================
 //-------- articlePost() ---------
 //================================
-var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, picture) {
+var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, imgData, tag) {
     var result;
-    //取得員工資料
-    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime","picture") VALUES ($1,$2,$3,$4,$5,$6)', [memID, artiHead, artiCont, artiClass, artiDateTime, picture])
+    var artiNum = - 1;
+    var tagNum = [];
+    //新增文章
+    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime") VALUES ($1,$2,$3,$4,$5)', [memID, artiHead, artiCont, artiClass, artiDateTime])
         .then((data) => {
-            // console.log("data=", data);
             result = 0;
         }, (error) => {
             result = 1;
         });
 
-    //回傳物件
+    //查詢新增文章的文章編號
+    await sql('SELECT "artiNum" from "article" where "memID"= $1 and "artiHead" = $2 and "artiCont" = $3 and "artiClass" = $4 and "artiDateTime" = $5 ', [memID, artiHead, artiCont, artiClass, artiDateTime])
+        .then((data) => {
+            console.log("data.rows=", data.rows);
+            artiNum = data.rows[0].artiNum;
+            console.log("artiNum=", artiNum);
+        }, (error) => {
+            result = 1;
+        });
+    //新增tag 
+    for (var i = 0; i < tag.length; i++) {
+        await sql('INSERT into "tag" ("tagName") VALUES ($1)', [tag[i]])
+            .then((data) => {
+                result = 0;
+            }, (error) => {
+                result = 1;
+            });
+
+    }
+    //查詢tagNum
+    for (var i = 0; i < tag.length; i++) {
+        await sql('SELECT "tagNum" from "tag" where "tagName" = $1', [tag[i]])
+            .then((data) => {
+                // console.log("data.rows=", data.rows);
+                tagNum[i] = data.rows[0].tagNum;
+            }, (error) => {
+                result = 1;
+            });
+    }
+    //新增tagLink
+    for (var i = 0; i < tagNum.length; i++) {
+        await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum[i]])
+            .then((data) => {
+                result = 0;
+            }, (error) => {
+                result = 1;
+            });
+    }
+    //新增img
+    for (var i = 0; i < imgData.length; i++) {
+        await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
+            .then((data) => {
+                result = 0;
+            }, (error) => {
+                result = 1;
+            });
+    }
+
     // console.log(result);
     return result;
 }
@@ -607,7 +655,7 @@ var myExhibitionArticle = async function (memID) {
     var tag = [];
     var isCollection = [];
     var isLike = [];
-    var checkAuthority ; 
+    var checkAuthority;
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -723,7 +771,7 @@ var myExhibitionArticle = async function (memID) {
     result[4] = isCollection;
     result[5] = isLike;
     result[6] = [memID];
-    result[7] = checkAuthority ; 
+    result[7] = checkAuthority;
     console.log(result);
     return result;
 }

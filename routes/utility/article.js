@@ -16,6 +16,7 @@ var getArticleList = async function (memID) {
     var isCollection = [];
     var isLike = [];
     var checkAuthority = [];
+    var imgs = [];
     var result = [];
     // -----------  取得文章清單 --------------
     await sql('SELECT * FROM "article"')
@@ -130,6 +131,19 @@ var getArticleList = async function (memID) {
             console.log("Authority=", checkAuthority);
         }
     })
+
+    //取得照片
+    for (let i = 0; i < articleList.length; i++) {
+        await sql('SELECT "imgName" FROM "image" WHERE "artiNum" = $1', [articleList[i].artiNum])
+            .then((data) => {
+                console.log("data.rows=", data.rows);
+                imgs[articleList[i].artiNum] = data.rows[0].imgName;
+
+            }, (error) => {
+                // isLike.push('0');
+            });
+    }
+
     result[0] = articleList;  //存入文章清單
     result[1] = likeCount;  //存入文章清單每篇的愛心數量
     result[2] = messageCount;
@@ -138,6 +152,7 @@ var getArticleList = async function (memID) {
     result[5] = isLike;
     result[6] = [memID];
     result[7] = checkAuthority;
+    result[8] = imgs;
     console.log(result);
     return result;
 }

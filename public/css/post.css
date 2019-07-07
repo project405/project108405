@@ -172,3 +172,11 @@ span.tag {
     font-weight: 800;
     font-size: 5px;
 }
+
+img.upload-img {
+    max-height: 450px;
+    max-width: 70%;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 0.35em;
+}
