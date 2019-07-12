@@ -1,9 +1,12 @@
 // 點擊其他地方收navbar
-// $(function() {
-//     $(document).click(function(event) {
-//         $('.navbar-collapse').collapse('hide');
-//     });
-// });
+$(function() {
+    $(document).click(function(event) {
+        $('.navbar-collapse').collapse('hide');
+    });
+    $('.navbar-collapse').click(function(event){
+        event.stopPropagation();
+    });
+});
 
 // tag div css
 $(function() {

@@ -197,6 +197,9 @@ span.tag {
     margin: 0.5em;
     border: #f4f4f4 solid 0.5px;
     border-radius: 8px;
+    height:2.5em;
+    box-shadow: none !important;
+    width: 15em;
 }
 
 #inputData textarea {
