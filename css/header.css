@@ -525,3 +525,9 @@ button.navSearch:focus {
     box-shadow: none;
     outline: none;
 }
+
+
+button.postInfo:focus{
+    outline: 0;
+    box-shadow:none  !important;
+}   
