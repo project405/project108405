@@ -495,7 +495,7 @@ input.navSearch {
     border-radius: 6px;
     outline: none;
     margin: 0.5em 0em;
-    background-color: rgb(21, 48, 36);
+    /* background-color: rgb(21, 48, 36); */
     border: none;
     box-shadow: none;
     padding-left: 0.6em;
@@ -512,7 +512,7 @@ input.navSearch:focus, input.navSearch:hover {
 
 button.navSearch, button.navSearch:hover {
     padding: 0.1em 0.4em;
-    background-color: #2D4F41;
+    /* background-color: #2D4F41; */
     color: white;
     margin-bottom: 0.25em;
     width: 2em;
