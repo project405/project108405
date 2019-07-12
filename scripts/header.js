@@ -10,8 +10,8 @@ header = '    <div class="header">\
     <div class="collapse navbar-collapse" id="navbarNav">\
         <ul class="navbar-nav ml-auto">\
         <div class="searchSection">\
-        <input type="text" class="navSearch"/>\
-        <button type="submit" class="btn navSearch"><i class="fas fa-search"></i></button>\
+            <input type="text" class="navSearch"/>\
+            <button type="submit" class="btn navSearch"><i class="fas fa-search"></i></button>\
         </div>\
         <li class="nav-item">\
             <a class="nav-link" href="recommendPost.html">\
