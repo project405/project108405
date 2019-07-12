@@ -274,9 +274,3 @@ img.upload-img {
     border-radius: 12px;
     padding: 0.35em;
 }
-
-.btn.focus,
-.btn:focus {
-    outline: 0;
-    box-shadow:none  !important;
-}

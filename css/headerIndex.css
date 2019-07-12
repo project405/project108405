@@ -455,6 +455,8 @@ textarea:focus {
 
 ::-webkit-scrollbar {
     width: 5px;
+    background-color: #fff;
+
 }
 
  ::-webkit-scrollbar-track {
