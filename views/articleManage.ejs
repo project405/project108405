@@ -172,9 +172,9 @@
                                 </div>
                                 <hr>
                             </div>
-                            <h3 class="card-title "><%= myArticle[0][i].artiHead %>
+                            <h3 class="card-title "><%- myArticle[0][i].artiHead %>
                             </h3>
-                            <p class="card-text "><%= myArticle[0][i].artiCont %></p>
+                            <p class="card-text "><%- myArticle[0][i].artiCont %></p>
 
                             <div class="tagDiv col-lg-12 ">
                                 <% for(var j = 0; j < myArticle[3][i].length ; j++) { %>
@@ -184,7 +184,7 @@
                         </div>
 
                         <div class="wrapperCard card-img-top "
-                            style="background-image: url( 'imgs/recommend/movie2.jpg'); ">
+                            style="background-image: url( '/userImg/<%= myArticle[8][myArticle[0][i].artiNum] %>'); ">
 
                         </div>
                         <!-- info -->

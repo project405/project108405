@@ -41,7 +41,7 @@
                     <!-- 如果帳號不是管理員則不顯示 -->
                     <% if(items[10] == undefined){ %>
                     <li class="nav-item" style="display: none">
-                        <a class="nav-link" href="recommendPost.html" >
+                        <a class="nav-link" href="recommendPost.html">
                             新增推薦</a>
                     </li>
                     <!-- 如果帳號是一般會員 -->
@@ -83,7 +83,7 @@
                     <!-- 已經登入的話 login 隱藏 -->
                     <% if(items[8][0] != undefined){ %>
                     <li class="nav-item" style="display: none">
-                        <a class="nav-link" href="/login" >登入</a>
+                        <a class="nav-link" href="/login">登入</a>
                     </li>
                     <!-- 如果還沒登入 login 顯示 -->
                     <% }else {%>
@@ -153,10 +153,11 @@
                 </div>
                 <hr />
 
-                <h5> <%= items[0][0].artiHead %> </h5>
+                <h5> <%- items[0][0].artiHead %> </h5>
                 <hr />
 
-                <p class="content"><%= items[0][0].artiCont %>
+                <p class="content"><%- items[0][0].artiCont %>
+
                 </p>
                 <!-- tag -->
                 <div class="tagDiv col-lg-12 ">
@@ -168,7 +169,7 @@
                 <!-- info -->
                 <div class="info">
                     <!-- 愛心按鈕 -->
-                    <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/logIn'"><i
+                    <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/logIn'"> <i
                             class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
                     <button type="button" id="addLike" class="btn postInfo"
                         onclick=<%= "addLike(" + items[0][0].artiNum + ")" %>> <i class="fab fa-gratipay"></i><a

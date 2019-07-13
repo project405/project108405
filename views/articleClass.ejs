@@ -170,9 +170,9 @@
                                 </div>
                                 <hr>
                             </div>
-                            <h3 class="card-title "><%= items[0][i].artiHead %>
+                            <h3 class="card-title "><%- items[0][i].artiHead %>
                             </h3>
-                            <p class="card-text "><%= items[0][i].artiCont %>
+                            <p class="card-text "><%- items[0][i].artiCont %>
                             </p>
                             <!-- tag -->
                             <div class="tagDiv col-lg-12 ">
@@ -181,11 +181,12 @@
                                 <% } %>
                             </div>
                         </div>
-
+                        <% if(items[8][items[0][i].artiNum]){%>
                         <div class="wrapperCard card-img-top "
-                            style="background-image: url( '/userImg/<%= items[0][i].picture %>'); ">
+                            style="background-image: url( '/userImg/<%= items[8][items[0][i].artiNum] %>'); ">
 
                         </div>
+                        <% } %>
                         <!-- info -->
                         <div class="info">
                             <!-- 愛心按鈕 -->

@@ -104,6 +104,7 @@ var myArticle = async function (memID) {
     var isCollection = [];
     var isLike = [];
     var checkAuthority;
+    var imgs = [];
     var result = [];
     //--------- get myArticle ----------
     await sql('SELECT * FROM "article" WHERE "memID" = $1', [memID])
@@ -211,6 +212,18 @@ var myArticle = async function (memID) {
             console.log("Authority=", checkAuthority);
         }
     })
+    //取得第一張照片
+    for (let i = 0; i < article.length; i++) {
+        await sql('SELECT "imgName" FROM "image" WHERE "artiNum" = $1', [article[i].artiNum])
+            .then((data) => {
+                console.log("data.rows=", data.rows);
+                if (data.rows != "") {
+                    imgs[article[i].artiNum] = data.rows[0].imgName;
+                }
+            }, (error) => {
+                imgs[article[i].artiNum] = null;
+            });
+    }
     result[0] = article;
     result[1] = articleLikeCount;
     result[2] = articleMessCount;
@@ -219,6 +232,7 @@ var myArticle = async function (memID) {
     result[5] = isLike;
     result[6] = [memID]
     result[7] = checkAuthority;
+    result[8] = imgs;
     console.log(result);
     return result;
 }
@@ -266,6 +280,7 @@ var myMovieArticle = async function (memID) {
     var isCollection = [];
     var isLike = [];
     var checkAuthority;
+    var imgs = [];
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -374,6 +389,18 @@ var myMovieArticle = async function (memID) {
             console.log("Authority=", checkAuthority);
         }
     })
+    //取得第一張照片
+    for (let i = 0; i < movieArticleList.length; i++) {
+        await sql('SELECT "imgName" FROM "image" WHERE "artiNum" = $1', [movieArticleList[i].artiNum])
+            .then((data) => {
+                console.log("data.rows=", data.rows);
+                if (data.rows != "") {
+                    imgs[movieArticleList[i].artiNum] = data.rows[0].imgName;
+                }
+            }, (error) => {
+                imgs[movieArticleList[i].artiNum] = null;
+            });
+    }
     result[0] = movieArticleList;
     result[1] = movieArtiLikeCount;
     result[2] = movieArtiMessCount;
@@ -382,6 +409,7 @@ var myMovieArticle = async function (memID) {
     result[5] = isLike;
     result[6] = [memID];
     result[7] = checkAuthority;
+    result[8] = imgs;
     console.log(result);
     return result;
 }
@@ -396,6 +424,7 @@ var myMusicArticle = async function (memID) {
     var isCollection = [];
     var isLike = [];
     var checkAuthority;
+    var imgs = [];
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -504,6 +533,18 @@ var myMusicArticle = async function (memID) {
             console.log("Authority=", checkAuthority);
         }
     })
+    //取得第一張照片
+    for (let i = 0; i < musicArticleList.length; i++) {
+        await sql('SELECT "imgName" FROM "image" WHERE "artiNum" = $1', [musicArticleList[i].artiNum])
+            .then((data) => {
+                console.log("data.rows=", data.rows);
+                if (data.rows != "") {
+                    imgs[musicArticleList[i].artiNum] = data.rows[0].imgName;
+                }
+            }, (error) => {
+                imgs[musicArticleList[i].artiNum] = null;
+            });
+    }
     result[0] = musicArticleList;
     result[1] = musicArtiLikeCount;
     result[2] = musicArtiMessCount;
@@ -512,6 +553,7 @@ var myMusicArticle = async function (memID) {
     result[5] = isLike;
     result[6] = [memID];
     result[7] = checkAuthority;
+    result[8] = imgs;
     console.log(result);
     return result;
 }
@@ -526,6 +568,7 @@ var myBookArticle = async function (memID) {
     var isCollection = [];
     var isLike = [];
     var checkAuthority;
+    var imgs = [];
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -634,6 +677,18 @@ var myBookArticle = async function (memID) {
             console.log("Authority=", checkAuthority);
         }
     })
+    //取得第一張照片
+    for (let i = 0; i < bookArticleList.length; i++) {
+        await sql('SELECT "imgName" FROM "image" WHERE "artiNum" = $1', [bookArticleList[i].artiNum])
+            .then((data) => {
+                console.log("data.rows=", data.rows);
+                if (data.rows != "") {
+                    imgs[bookArticleList[i].artiNum] = data.rows[0].imgName;
+                }
+            }, (error) => {
+                imgs[bookArticleList[i].artiNum] = null;
+            });
+    }
     result[0] = bookArticleList;
     result[1] = bookArtiLikeCount;
     result[2] = bookArtiMessCount;
@@ -642,6 +697,7 @@ var myBookArticle = async function (memID) {
     result[5] = isLike;
     result[6] = [memID];
     result[7] = checkAuthority;
+    result[8] = imgs;
     console.log(result);
     return result;
 }
@@ -656,6 +712,7 @@ var myExhibitionArticle = async function (memID) {
     var isCollection = [];
     var isLike = [];
     var checkAuthority;
+    var imgs = [];
     var result = [];
 
     // -----------  取得電影分類文章 --------------
@@ -730,7 +787,7 @@ var myExhibitionArticle = async function (memID) {
     for (let i = 0; i < exhibitionArticleList.length; i++) {
         await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [exhibitionArticleList[i].artiNum, memID])
             .then((data) => {
-                console.log(data.rows);
+                // console.log(data.rows);
                 if (data.rows == null || data.rows == '') {
                     isCollection.push('1');
                 } else {
@@ -744,7 +801,7 @@ var myExhibitionArticle = async function (memID) {
     for (let i = 0; i < exhibitionArticleList.length; i++) {
         await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [exhibitionArticleList[i].artiNum, memID])
             .then((data) => {
-                console.log(data.rows);
+                // console.log(data.rows);
                 if (data.rows == null || data.rows == '') {
                     isLike.push('1');
                 } else {
@@ -764,6 +821,19 @@ var myExhibitionArticle = async function (memID) {
             console.log("Authority=", checkAuthority);
         }
     })
+    //取得第一張照片
+    for (let i = 0; i < exhibitionArticleList.length; i++) {
+        await sql('SELECT "imgName" FROM "image" WHERE "artiNum" = $1', [exhibitionArticleList[i].artiNum])
+            .then((data) => {
+                // console.log("data.rows=", data.rows);
+                if (data.rows != "") {
+                    imgs[exhibitionArticleList[i].artiNum] = data.rows[0].imgName;
+                }
+            }, (error) => {
+                imgs[exhibitionArticleList[i].artiNum] = null;
+            });
+    }
+    console.log("imgs= ", imgs);
     result[0] = exhibitionArticleList;
     result[1] = exhibitionArtiLikeCount;
     result[2] = exhibitionArtiMessCount;
@@ -772,7 +842,8 @@ var myExhibitionArticle = async function (memID) {
     result[5] = isLike;
     result[6] = [memID];
     result[7] = checkAuthority;
-    console.log(result);
+    result[8] = imgs;
+    console.log(result[8]);
     return result;
 }
 //=========================================

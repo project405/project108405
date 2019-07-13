@@ -174,19 +174,24 @@
                                 </div>
                                 <hr>
                             </div>
-                            <h3 class="card-title "><%= collData[0][i].artiHead %>
+                            <h3 class="card-title "><%- collData[0][i].artiHead %>
                             </h3>
-                            <p class="card-text "><%= collData[0][i].artiCont %>
+                            <p class="card-text "><%- collData[0][i].artiCont %>
                             </p>
-
+                            <!-- tag -->
                             <div class="tagDiv col-lg-12 ">
                                 <% for(var j = 0 ; j<collData[3][i].length ; j++ ) {%>
                                 <button type="button" class="btn  tag"><%= collData[3][i][j] %></button>
                                 <% } %>
                             </div>
                             <hr class="info">
-
                         </div>
+                        <!-- 照片 -->
+                        <% if(collData[8][collData[0][i].artiNum]){%>
+                        <div class="wrapperCard card-img-top "
+                            style="background-image: url( '/userImg/<%= collData[8][collData[0][i].artiNum] %>'); ">
+                        </div>
+                        <% } %>
                         <!-- info -->
                         <div class="info">
                             <!-- 愛心按鈕 -->

@@ -235,6 +235,7 @@ var getCollArticle = async function (memID) {
     var isCollection = [];
     var isLike = [];
     var checkAuthority;
+    var imgs = [];
     var result = [];
     //---------  取得每個會員收藏的文章編號 -------------
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "artiNum" != 0', [memID])
@@ -350,6 +351,18 @@ var getCollArticle = async function (memID) {
             console.log("Authority=", checkAuthority);
         }
     })
+    //取得第一張照片
+    for (let i = 0; i < colleArticle.length; i++) {
+        await sql('SELECT "imgName" FROM "image" WHERE "artiNum" = $1', [colleArticle[i].artiNum])
+            .then((data) => {
+                // console.log("data.rows=", data.rows);
+                if (data.rows != "") {
+                    imgs[colleArticle[i].artiNum] = data.rows[0].imgName;
+                }
+            }, (error) => {
+                imgs[colleArticle[i].artiNum] = null;
+            });
+    }
     // console.log(tag) ;
     result[0] = colleArticle;
     result[1] = colleArtiLikeCount;
@@ -359,6 +372,7 @@ var getCollArticle = async function (memID) {
     result[5] = isLike;
     result[6] = [memID];
     result[7] = checkAuthority;
+    result[8] = imgs ;
     return result;
 }
 //=========================================
@@ -413,7 +427,7 @@ var getRecomMovie = async function (memID) {
 //---------  getRecomMusic() -------------
 var getRecomMusic = async function (memID) {
     var getdata = [];
-    var checkAuthority ; 
+    var checkAuthority;
     var result = [];
     await sql('SELECT * FROM "memberCollection" where "memID" = $1 and "recomNum" != 0 ', [memID])
         .then((data) => {
