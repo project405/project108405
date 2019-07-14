@@ -30,7 +30,7 @@ function validateCode() {    
         return false;
             
     } else { //輸入正確時   
-        document.getElementById(login).submit();
+        document.getElementById("login").submit();
         return check = true;    
 
     }
