@@ -262,6 +262,28 @@ a.navTitle {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
+#aboutUsButton {
+    padding: 5px;
+    position: fixed;
+    z-index: 90;
+    right: 35px;
+    bottom: 90px;
+    width: 40px;
+    height: 40px;
+    opacity: 0.75;
+    line-height: 40px;
+    border-radius: 50%;
+    transition: all 0.5s;
+    text-align: center;
+    background: rgb(189, 189, 189);
+    cursor: pointer;
+}
+
+#aboutUsButton>i {
+    font-size: 20px;
+    color: white;
+}
+
 @media (max-width: 575px) {
     #gotop {
         position: fixed;
@@ -359,10 +381,6 @@ button.tag:hover {
     box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.46);
 }
 
-div.report {
-    background-color: #2D4F41;
-}
-
 
 /* ------------------ */
 
@@ -372,74 +390,26 @@ div.report {
 
 /* ------------------ */
 
-
-/* Pseudo element */
-
-.input-icon-wrap {
-    border: 1px solid #ddd;
-    display: flex;
-    flex-direction: row;
-    margin: 0.75em 0 0.75em 0;
-}
-
-.input-icon {
-    background: #fff;
-}
-
-.input-with-icon {
-    border: none;
-    flex: 1;
-}
-
-.input-icon,
-.input-with-icon {
-    padding: 10px;
-}
-
-.fa-times-circle {
-    margin-top: 0.35em;
-    font-size: 2em;
-    cursor: pointer;
-    color: white;
-}
-
-div.report {
-    display: none;
-    max-width: 50em;
-    position: absolute;
-    max-height: 50em;
-    background-color: #2D4F41;
-    opacity: 0.95;
-    top: 25%;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 12px;
-    height: 20em;
-    z-index: 10;
-    caret-color: #2D4F41;
-}
-
 textarea.report {
     height: 200px;
     width: 100%;
     overflow-y: visible;
+    border-radius: 8px;
+    padding: 0.75em;
 }
 
-textarea.report:focus {
+textarea:focus {
+    box-shadow: none;
     outline: none;
 }
 
-button.report {
-    float: right;
-}
-
-::selection {
+ ::selection {
     background: #2D4F41;
     color: white;
 }
 
+
+/* 
 input:-webkit-autofill,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
@@ -451,7 +421,7 @@ input[type=text]:focus,
 input[type=password]:focus,
 textarea:focus {
     -webkit-box-shadow: 0 0 0 1000px white inset;
-}
+} */
 
 ::-webkit-scrollbar {
     width: 5px;

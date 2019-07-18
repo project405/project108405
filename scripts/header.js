@@ -43,7 +43,7 @@ header = '    <div class="header">\
             </div>\
         </li>\
         <li class="nav-item">\
-        <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>\
+        <a class="nav-link" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
         </li>\
         <li class="nav-item">\
                 <a class="nav-link" href="logIn.html">登入</a>\
@@ -62,17 +62,22 @@ header = '    <div class="header">\
     </div>\
 </nav>\
 </div>\
-<div class="container position-fixed col-lg-8 report" id="report">\
-<div id="x"><i class="far fa-times-circle"></i>\
-</div>\
-<div class="form">\
-    <form class="report" action="" data-aos="zoom-out-right">\
-        <div class="input-icon-wrap">\
-            <span class="input-icon"><span class="fas fa-hands-helping"></span></span>\
-            <textarea class="input-with-icon report" placeholder="輸入舉報原因"></textarea>\
+<div class="modal fade" id="report" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">\
+<div class="modal-dialog modal-dialog-centered" role="document">\
+    <div class="modal-content">\
+        <div class="modal-header">\
+            <h5 class="modal-title" id="exampleModalCenterTitle">申報</h5>\
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+            <span aria-hidden="true">&times;</span>\
+          </button>\
         </div>\
-        <button type="button" class="btn btn-danger report">送出</button>\
-    </form>\
+        <div class="modal-body" style="padding:1em;">\
+            <textarea class="report"></textarea>\
+        </div>\
+        <div class="modal-footer">\
+            <button type="button" class="btn btn-danger">提交</button>\
+        </div>\
+    </div>\
 </div>\
 </div>\ ';
 

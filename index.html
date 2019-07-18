@@ -31,7 +31,10 @@
     <div class="banner">
         <a id="goDown"> <i class="fas fa-chevron-circle-down"></i>
         </a>
-        <div id="block" class="block"></div>
+        <!-- <button class="btn btn-dark" style="position:absolute;bottom:10%;right:10%">關於我們</button> -->
+
+        <div id="block" class="block">
+        </div>
     </div>
     <!-- 封面區塊結束 -->
 
@@ -258,6 +261,23 @@
         <i class="fa fa-angle-up"></i>
     </a>
 
+    <a id="aboutUsButton" data-toggle="modal" data-target="#exampleModalCenter">
+        <i class="fas fa-question"></i>
+    </a>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">關於我們：</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body" style="padding:1em;">
+                    我們每週五會推薦給大家四種不一樣的藝文創作，分別為電影、音樂、展覽、書籍類型，希望大家可以好好享受藝文作品所帶來的感動。 </div>
+            </div>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
