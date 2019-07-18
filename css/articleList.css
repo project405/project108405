@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
-html,
-body {
+html, body {
     height: 100%;
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
@@ -13,12 +12,19 @@ body {
     background-size: cover;
 }
 
-div.container-fluid,
-div.row {
-    margin: 0;
-    padding-bottom: 3em;
+@media (max-width: 1024px) {
+    html, body {
+        background: url("../imgs/background/phone/ParticleBac.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
 }
 
+div.container-fluid, div.row {
+    margin: 0;
+    padding-bottom: 2em;
+}
 
 /* article */
 
@@ -27,21 +33,18 @@ div.article {
     margin-top: 6em;
 }
 
-
 /* card */
-
 
 /* -------------- */
 
 .wrapperCard {
     width: 100%;
-    height: 180pt;
     overflow: hidden;
     background-size: cover;
-    background-position: center center;
-    border-radius: .2em;
+    /* background-position: center center; */
+    border-radius: 8px;
     border: 3px solid #fff;
-    text-align: left !important;
+    /* text-align: left !important; */
 }
 
 p.poster {
@@ -63,7 +66,6 @@ h3.card-title {
     font-weight: bolder;
 }
 
-
 /* tag */
 
 a.floorTag {
@@ -78,7 +80,6 @@ a.floorTag {
     font-size: 0.75em;
 }
 
-
 /* card */
 
 div.card-body {
@@ -90,22 +91,26 @@ hr.info {
     margin-bottom: 0em;
 }
 
-
 /* -------------- */
 
-
 /* tag */
-
 
 /* -------------- */
 
 div.tagDiv {
     padding: 0em;
-    margin-bottom: 1em;
 }
 
 div.floor {
     margin-bottom: 0.5em;
+}
+
+div.articleContent {
+    padding-left: 0;
+}
+
+div.seperate {
+    padding-bottom: 1em;
 }
 
 div.info {
@@ -113,12 +118,9 @@ div.info {
     white-space: nowrap;
 }
 
-
 /* icon */
 
-.fa-gratipay,
-.fa-comment-dots,
-.fa-bookmark {
+.fa-gratipay, .fa-comment-dots, .fa-bookmark {
     font-size: 25px;
     margin-right: 0.2em;
 }
@@ -126,7 +128,6 @@ div.info {
 .fa-bookmark {
     padding-top: 0.13em;
 }
-
 
 /*  button */
 
@@ -144,7 +145,6 @@ button.footer {
     }
 }
 
-
 /* h2 */
 
 h2 {
@@ -153,19 +153,15 @@ h2 {
     /* text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000, 1px 1px 5px #555; */
 }
 
-
 /* ------------------ */
 
-
 /* goPost */
-
 
 /* ------------------ */
 
 .fa-edit {
     margin-right: 0.2em;
 }
-
 
 /* postButton */
 
@@ -189,4 +185,13 @@ button.postButton:hover {
     button.postButton {
         font-size: 0.8em;
     }
+}
+
+/* 限制行數 */
+
+.limitLine {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

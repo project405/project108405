@@ -381,23 +381,19 @@ textarea:focus {
     outline: none;
 }
 
- ::selection {
+::selection {
     background: #2D4F41;
     color: white;
 }
 
 
 /* 
-input:-webkit-autofill,
-textarea:-webkit-autofill,
-select:-webkit-autofill {
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset;
     -webkit-text-fill-color: black;
 }
 
-input[type=text]:focus,
-input[type=password]:focus,
-textarea:focus {
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
     -webkit-box-shadow: 0 0 0 1000px white inset;
 } */
 
@@ -410,17 +406,18 @@ textarea:focus {
 
 /* **********************/
 
- ::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 5px;
+    background-color: #fff;
 }
 
- ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     -webkit-border-radius: 10px;
     border-radius: 10px;
     margin: 80px 0 5px 0;
 }
 
- ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     -webkit-border-radius: 4px;
     border-radius: 4px;
     background: rgb(155, 155, 155);
@@ -442,6 +439,11 @@ div.searchSection {
     /* position: absolute;
     left: 15%; */
     text-align: center;
+    float: center;
+    overflow: hidden;
+    width: 18em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input.navSearch {
@@ -452,7 +454,10 @@ input.navSearch {
     border: none;
     box-shadow: none;
     padding-left: 0.6em;
-    /* width: 15em; */
+    box-sizing: border-box;
+    /* 使元素的寬度包括padding margin, border*/
+    -moz-box-sizing: border-box;
+    width: 15em;
 }
 
 input.navSearch:focus,
@@ -467,6 +472,7 @@ button.navSearch:hover {
     background-color: #2D4F41;
     color: white;
     margin-bottom: 0.25em;
+    width: 2em;
 }
 
 button.navSearch:hover,
@@ -474,4 +480,9 @@ button.navSearch:focus {
     background-color: #678878 !important;
     box-shadow: none;
     outline: none;
+}
+
+button.postInfo:focus {
+    outline: 0;
+    box-shadow: none !important;
 }

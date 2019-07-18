@@ -27,8 +27,11 @@ function validateCode() {    
                 
         alert("驗證碼輸入錯誤！"); //則彈出驗證碼輸入錯誤    
         createCode(); //刷新驗證碼
+        return false;
             
     } else { //輸入正確時   
+        document.getElementById("login").submit();
         return check = true;    
+
     }
 }

@@ -425,6 +425,7 @@ textarea:focus {
 
 ::-webkit-scrollbar {
     width: 5px;
+    background-color: #fff;
 }
 
  ::-webkit-scrollbar-track {
@@ -455,6 +456,11 @@ div.searchSection {
     /* position: absolute;
     left: 15%; */
     text-align: center;
+    float: center;
+    overflow: hidden;
+    width: 18em;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 input.navSearch {
@@ -465,7 +471,10 @@ input.navSearch {
     border: none;
     box-shadow: none;
     padding-left: 0.6em;
-    /* width: 15em; */
+    box-sizing: border-box;
+    /* 使元素的寬度包括padding margin, border*/
+    -moz-box-sizing: border-box;
+    width: 15em;
 }
 
 input.navSearch:focus,
@@ -480,8 +489,10 @@ button.navSearch:hover {
     /* background-color: #2D4F41; */
     color: white;
     margin-bottom: 0.25em;
+    width: 2em;
 }
 
+button.navSearch:hover,
 button.navSearch:focus {
     background-color: #678878 !important;
     box-shadow: none;

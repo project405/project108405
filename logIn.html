@@ -34,7 +34,7 @@
                 </center>
 
             </div>
-            <form class="logIn col-lg-3 shadow" action="">
+            <form class="logIn col-lg-3 shadow" id='login' action="">
                 <div class="input-icon-wrap ">
                     <span class="input-icon "><span class="fa fa-user"></span></span>
                     <input type="text" class="input-with-icon" id="ID" placeholder="帳號" maxlength="20">
@@ -48,7 +48,7 @@
                 <input type="button" id="checkCode" class="code" onclick="createCode()" />
                 <span class="changeCode " href="#" onclick="createCode()"><i class="fas fa-sync-alt"></i></span><br>
 
-                <button type="button" class="btn btn-dark login" onclick="validateCode()">登入</button>
+                <button type="button" class="btn btn-dark login" onclick="validateCode()" return false;>登入</button>
                 <br>
                 <button type="button" class="btn btn-secondary sameWidth">忘記密碼</button>
                 <button type="button" class="btn btn-secondary sameWidth" onclick="location.href='signUp.html'">註冊</button>
