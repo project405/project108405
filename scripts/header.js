@@ -10,19 +10,16 @@ header = '    <div class="header">\
     <div class="collapse navbar-collapse" id="navbarNav">\
         <ul class="navbar-nav ml-auto">\
         <div class="searchSection">\
-            <input type="text" class="navSearch"/>\
-            <button type="submit" class="btn navSearch"><i class="fas fa-search"></i></button>\
+        <input type="text" class="navSearch"/>\
+        <button class="btn navSearch"><i class="fas fa-search"></i></button>\
         </div>\
         <li class="nav-item">\
-            <a class="nav-link" href="recommendPost.html">\
+            <a class="nav-link" href="recommendPost.html" style="display:none;">\
             新增推薦</a>\
         </li>\
         <li class="nav-item">\
                 <a class="nav-link " href="index.html">首頁<span class="sr-only">(current)</span></a>\
             </li>\
-            <li class="nav-item">\
-            <a class="nav-link " href="post.html"><i class="far fa-edit" style="margin-right:5px;"></i>發文<span class="sr-only">(current)</span></a>\
-        </li>\
             <li class="nav-item">\
                 <a class="nav-link" href="notify.html">\
                 <i class="fas fa-bell"  style="color:white;"></i>\
@@ -46,13 +43,13 @@ header = '    <div class="header">\
             </div>\
         </li>\
         <li class="nav-item">\
-        <a class="nav-link" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
+        <a class="nav-link" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
         </li>\
         <li class="nav-item">\
                 <a class="nav-link" href="logIn.html">登入</a>\
         </li>\
         <li class="nav-item dropdown">\
-        <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+        <a style="display:none;" class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                 會員\
             </a>\
         <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">\
@@ -69,7 +66,7 @@ header = '    <div class="header">\
 <div class="modal-dialog modal-dialog-centered" role="document">\
     <div class="modal-content">\
         <div class="modal-header">\
-            <h5 class="modal-title" id="exampleModalCenterTitle">申報</h5>\
+            <h5 class="modal-title" id="exampleModalCenterTitle">申報：</h5>\
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
             <span aria-hidden="true">&times;</span>\
           </button>\

@@ -3,7 +3,7 @@ $(function() {
     $(document).click(function(event) {
         $('.navbar-collapse').collapse('hide');
     });
-    $('.navbar-collapse').click(function(event){
+    $('.navbar-collapse').click(function(event) {
         event.stopPropagation();
     });
 });
@@ -16,7 +16,6 @@ $(function() {
     });
     $("input").blur(function() {
         $("div.tag").css("box-shadow", "none");
-
     });
 });
 
@@ -51,13 +50,13 @@ $(function() {
 //if word too long 
 
 $(".wrapText").each(function() {
- 
+
     //取得內容
     var str = $(this).html();
- 
+
     //截取内容75字
     var subStr = str.substring(0, 100);
- 
+
     //如果長度大於75就添加省略號否則就填空
     var data = subStr + (str.length > 75 ? '...' : '');
     $(this).html(data);
@@ -65,15 +64,15 @@ $(".wrapText").each(function() {
 
 
 $(".wrapBigHotSectionText").each(function() {
- 
+
     //取得內容
     var str = $(this).html();
- 
+
     //截取内容75字
     var subStr = str.substring(0, 200);
- 
+
     //如果長度大於75就添加省略號否則就填空
-    var data = subStr + (str.length > 75 ? '...' : '');
+    var data = subStr + (str.length > 200 ? '...' : '');
     $(this).html(data);
 });
 
@@ -84,24 +83,20 @@ $(function() {
     $('#gotop').click(function() {
         $('html,body').animate({ scrollTop: 0 }, 'slow'); /* 返回到最頂上 */
         return false;
-
     });
-
     /* 偵測卷軸滑動時，往下滑超過400px就讓GoTop按鈕出現 */
     $(window).scroll(function() {
         if ($(this).scrollTop() > 400) {
             $('#gotop').fadeIn();
         } else {
             $('#gotop').fadeOut();
-        }
+        };
     });
 });
 
 //bottom
-
 $("#goBottom").click(function() {
     $('html,body').animate({ scrollTop: $('#reply').offset().top }, 1000);
-
 });
 
 
@@ -110,41 +105,4 @@ $("#goBottom").click(function() {
 
 $('#goDown').click(function() {
     $('html,body').animate({ scrollTop: $('#block').offset().top }, 800);
-});
-
-
-// report
-
-$(document).ready(function() {
-    $("#x").click(function() {
-        $("#report").hide("slow");
-    });
-
-    $("#navReport").click(function() {
-        $("#report").show("slow");
-        $('.navbar-collapse').collapse('hide');
-        $(document).mouseup(
-            function(e) {
-                var container = $("#report");
-
-                //如果click的目標不是reportDiv
-                if (!container.is(e.target) && container.has(e.target).length === 0) {
-                    container.hide("slow");
-                }
-            });
-    });
-
-    $("#postReport").click(function() {
-        $("#report").show("slow");
-        $(document).mouseup(
-            function(e) {
-                var container = $("#report");
-
-                //如果click的目標不是reportDiv
-                if (!container.is(e.target) && container.has(e.target).length === 0) {
-                    container.hide("slow");
-                }
-            });
-    });
-
 });

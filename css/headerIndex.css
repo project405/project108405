@@ -314,8 +314,15 @@ hr.highlight {
     background-color: #2D4F41;
     height: 5px;
     border: none;
-    color: #d4d4d4;
     border-radius: 50%;
+}
+
+hr.leftSeperate {
+    width: 13em;
+    margin-left: 0;
+    border-top: 5px solid rgb(71, 71, 71);
+    border-radius: 0 8px 8px 0;
+    margin: 0 0 2em 1em;
 }
 
 @media (max-width: 450px) {
