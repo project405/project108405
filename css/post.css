@@ -44,7 +44,7 @@ div.post {
 } */
 
 input.titleInput,
-div.postInput {
+textarea.postInput {
     width: 100%;
     min-height: 50px;
     height: auto;
@@ -57,6 +57,7 @@ div.postInput {
     caret-color: #2D4F41;
     cursor: text;
     text-align: justify;
+    border:none;
 }
 
 div.title {
@@ -66,6 +67,7 @@ div.title {
 div.postInput {
     min-height: 250px;
 }
+
 
 #postInto {
     min-height: 150px;
@@ -82,12 +84,14 @@ input.titleInput:before {
 } */
 
 input.titleInput:focus,
-div.postInput:focus {
+textarea.postInput:focus {
     outline: none;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transition: 0.3s ease-in-out;
     cursor: text;
     display: block;
+    border:none;
+
 }
 
 .input:empty::before {

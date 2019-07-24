@@ -387,6 +387,23 @@ textarea:focus {
 }
 
 
+a.helper {
+    background-color: rgb(206, 52, 52);
+    border-radius: .25rem;
+    margin: 0 0.25em;
+    text-align: center !important;
+    display: block;
+    padding: .5rem 0.5rem;
+}
+
+li.helperContainer:hover {
+    background-color: rgb(146, 37, 37) !important;
+}
+
+a.helper:hover {
+    clear: both;
+    background-color: rgb(146, 37, 37) !important;
+}
 /* 
 input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset;

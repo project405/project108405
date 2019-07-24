@@ -49,7 +49,7 @@ header = '    <div class="header">\
                 <a class="nav-link" href="logIn.html">登入</a>\
         </li>\
         <li class="nav-item">\
-            <a class="nav-link btn-danger" id="aboutUsButton" data-toggle="modal" data-target="#aboutUsDiv" style="cursor: pointer;">\
+            <a class=" helper" id="aboutUsButton" data-toggle="modal" data-target="#aboutUsDiv" style="cursor: pointer;">\
             小幫手</a>\
           </li>\
         <li class="nav-item dropdown">\
