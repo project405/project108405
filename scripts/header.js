@@ -48,6 +48,10 @@ header = '    <div class="header">\
         <li class="nav-item">\
                 <a class="nav-link" href="logIn.html">登入</a>\
         </li>\
+        <li class="nav-item">\
+            <a class="nav-link btn-danger" id="aboutUsButton" data-toggle="modal" data-target="#aboutUsDiv" style="cursor: pointer;">\
+            小幫手</a>\
+          </li>\
         <li class="nav-item dropdown">\
         <a style="display:none;" class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                 會員\

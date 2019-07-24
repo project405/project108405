@@ -262,28 +262,6 @@ a.navTitle {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
-#aboutUsButton {
-    padding: 5px;
-    position: fixed;
-    z-index: 90;
-    right: 35px;
-    bottom: 90px;
-    width: 40px;
-    height: 40px;
-    opacity: 0.75;
-    line-height: 40px;
-    border-radius: 50%;
-    transition: all 0.5s;
-    text-align: center;
-    background: rgb(189, 189, 189);
-    cursor: pointer;
-}
-
-#aboutUsButton>i {
-    font-size: 20px;
-    color: white;
-}
-
 @media (max-width: 575px) {
     #gotop {
         position: fixed;
