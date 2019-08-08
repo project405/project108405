@@ -151,25 +151,26 @@
     </center>
 
 
+    <div class="d-flex justify-content-center" style="margin-bottom: 1.5em;">
+        <button type="button " class="btn btn-secondary footer"
+            onclick="location.href='/collection/recommend/movie'">電影類</button>
+        <button type="button " class="btn btn-secondary footer"
+            onclick="location.href='/collection/recommend/music'">音樂類</button>
+        <button type="button " class="btn btn-secondary footer"
+            onclick="location.href='/collection/recommend/book'">書籍類</button>
+        <button type="button " class="btn btn-secondary footer"
+            onclick="location.href='/collection/recommend/exhibition'">展覽類</button>
+        <button type="button " class="btn btn-secondary footer"
+            onclick="location.href='/collection/recommend'">全部</button>
+    </div>
+
     <!-- Portfolio Section -->
     <section id="portfolio">
-
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend ">
-            <div class="search col-lg-6 mx-auto ">
-                <!-- Search -->
-                <form class="form-inline d-flex">
-                    <input type="text" class="form-control search col-sm-9" id="search" placeholder="輸入欲搜尋之關鍵字">
-                    <button type="submit" class="search btn-primary mx-auto">搜尋</button>
-                </form>
-                <!-- Search End -->
-            </div>
-            <div class="w-100"></div>
-
 
             <!-- 收藏區塊 -->
             <% for(var i=0; i<items.length-2; i++) {%>
             <div class="wrapper col-12  col-lg-2" style="background-image: url('/imgs/recommend/movie1.jpg');">
-
                 <a class="portfolio-box" onclick="location.href='/collection/recommend/one/<%= items[i].recomNum %>'">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
@@ -182,7 +183,6 @@
                         </div>
                     </div>
                 </a>
-
             </div>
             <% if( (i+1) % 4 == 0){ %>
             <div class="w-100"></div>
@@ -192,27 +192,6 @@
         </div>
         <div class="w-100"></div>
     </section>
-
-
-
-
-
-    <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/recommend/movie'">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/recommend/music'">音樂類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/recommend/book'">書籍類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/collection/recommend/exhibition'">展覽類</button>
-        <button type="button " class="btn btn-secondary footer"
-            onclick="location.href='/collection/recommend'">全部</button>
-
-    </div>
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

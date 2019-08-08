@@ -15,7 +15,7 @@ var articleListRouter = require('./routes/article/articleList');
 var articleRouter = require('./routes/article/article');
 var addCollectionRouter = require('./routes/collection/addCollection');
 var delCollectionRouter = require('./routes/collection/delCollection');
-var likeCountRouter = require('./routes/likeCount') ; 
+var likeCountRouter = require('./routes/likeCount');
 // ---------------  four Class -------------------
 var articleMovieRouter = require('./routes/article/articleMovie');
 var articleMusicRouter = require('./routes/article/articleMusic');
@@ -95,7 +95,7 @@ app.use(express.static('public/picture'));
 //=========================================
 //---------  express session ------------
 //=========================================
-app.use(session({secret: 'mysecret', cookie: { maxAge: 6000000 }}));
+app.use(session({ secret: 'mysecret', cookie: { maxAge: 6000000 } }));
 
 app.use('/', indexRouter);
 
@@ -103,62 +103,62 @@ app.use('/', indexRouter);
 //---------  article use ------------
 //=========================================
 app.use('/article', articleRouter);
-app.use('/articleList',articleListRouter);
-app.use('/articleList/post',postRouter);
-app.use('/article/post',articlePostRouter) ;
-app.use('/addCollection',addCollectionRouter);
-app.use('/delCollection',delCollectionRouter);
-app.use('/likeCount',likeCountRouter);
+app.use('/articleList', articleListRouter);
+app.use('/articleList/post', postRouter);
+app.use('/article/post', articlePostRouter);
+app.use('/addCollection', addCollectionRouter);
+app.use('/delCollection', delCollectionRouter);
+app.use('/likeCount', likeCountRouter);
 
 // -------------- four Class use----------------
-app.use('/articleList/articleMovie',articleMovieRouter);
-app.use('/articleList/articleMusic',articleMusicRouter);
-app.use('/articleList/articleBook',articleBookRouter);
-app.use('/articleList/articleExhibition',articleExhibitionRouter);
+app.use('/articleList/articleMovie', articleMovieRouter);
+app.use('/articleList/articleMusic', articleMusicRouter);
+app.use('/articleList/articleBook', articleBookRouter);
+app.use('/articleList/articleExhibition', articleExhibitionRouter);
 
 //=========================================
 //------------  member use ----------------
 //=========================================
-app.use('/member',memberRouter);
-app.use('/member/articleManage',articleManageRouter);
-app.use('/member/memberManage',memberManageRouter);
-app.use('/logIn',logInRouter);
-app.use('/logOut',logOutRouter);
-app.use('/signUp',signUpRouter);
-app.use('/signUp/add',signUpAddRouter);
-app.use('/userLogIn',userLogInRouter);
-app.use('/notify',notifyRouter);
-app.use('/addLike',addLikeRouter);
-app.use('/delLike',delLikeRouter);
-app.use('/report',reportRouter);
+app.use('/member', memberRouter);
+app.use('/member/articleManage', articleManageRouter);
+app.use('/member/memberManage', memberManageRouter);
+app.use('/logIn', logInRouter);
+app.use('/logOut', logOutRouter);
+app.use('/signUp', signUpRouter);
+app.use('/signUp/add', signUpAddRouter);
+app.use('/userLogIn', userLogInRouter);
+app.use('/notify', notifyRouter);
+app.use('/addLike', addLikeRouter);
+app.use('/delLike', delLikeRouter);
+app.use('/report', reportRouter);
 // -------------- four Class use----------------
-app.use('/articleManage/movie',myMovieArticleRouter);
-app.use('/articleManage/music',myMusicArticleRouter);
-app.use('/articleManage/book',myBookArticleRouter);
-app.use('/articleManage/exhibition',myExhibitionArticleRouter);
+app.use('/articleManage/movie', myMovieArticleRouter);
+app.use('/articleManage/music', myMusicArticleRouter);
+app.use('/articleManage/book', myBookArticleRouter);
+app.use('/articleManage/exhibition', myExhibitionArticleRouter);
 //=========================================
 //----------  collection use --------------
 //=========================================
-app.use('/collection/recommend',collection_recommend_Router);
-app.use('/collection/article',collection_article_Router);
+app.use('/collection/recommend', collection_recommend_Router);
+app.use('/collection/article', collection_article_Router);
 app.use('/collection/recommend/one', oneColleRecommend);
 app.use('/collection/article/one', oneColleArticle);
 // --------- collection recommend four Class use -----------
-app.use('/collection/recommend/movie',colleRecomMovieRouter);
-app.use('/collection/recommend/music',colleRecomMusicRouter);
-app.use('/collection/recommend/book',colleRecomBookRouter);
-app.use('/collection/recommend/exhibition',colleRecomExhibitionRouter);
+app.use('/collection/recommend/movie', colleRecomMovieRouter);
+app.use('/collection/recommend/music', colleRecomMusicRouter);
+app.use('/collection/recommend/book', colleRecomBookRouter);
+app.use('/collection/recommend/exhibition', colleRecomExhibitionRouter);
 // --------- collection article four Class use -----------
-app.use('/collection/article/movie',colleArtiMovieRouter);
-app.use('/collection/article/music',colleArtiMusicRouter);
-app.use('/collection/article/book',colleArtiBookRouter);
-app.use('/collection/article/exhibition',colleArtiExhibitionRouter);
+app.use('/collection/article/movie', colleArtiMovieRouter);
+app.use('/collection/article/music', colleArtiMusicRouter);
+app.use('/collection/article/book', colleArtiBookRouter);
+app.use('/collection/article/exhibition', colleArtiExhibitionRouter);
 
 //=========================================
 //---------  recommend use ------------
 //=========================================
-app.use('/recommendList',recommendListRouter);
-app.use('/oneRecommend',oneRecommendRouter) ; 
+app.use('/recommendList', recommendListRouter);
+app.use('/oneRecommend', oneRecommendRouter);
 // -------------- four Class ----------------
 app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);
@@ -171,19 +171,19 @@ app.use('/recommendList/exhibition', RecomExhibitionRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.use(function (req, res, next) {
+    next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;

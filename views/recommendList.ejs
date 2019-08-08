@@ -147,22 +147,21 @@
     </center>
 
 
+    <div class="d-flex justify-content-center" style="margin-bottom:1.5em;">
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/movie'">電影類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/music'">音樂類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/book'">書籍類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/exhibition'">展覽類</button>
+        <button type="button" class="btn btn-secondary footer" onclick="location.href='/recommendList'">全部</button>
+    </div>
+
     <!-- Portfolio Section -->
     <section id="portfolio">
-
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
-
-            <div class="search col-lg-6 mx-auto ">
-                <!-- Search -->
-                <form class="form-inline d-flex">
-                    <input type="text" class="form-control search col-sm-9" id="search" placeholder="輸入欲搜尋之關鍵字">
-                    <button type="submit" class="search btn-primary mx-auto">搜尋</button>
-                </form>
-                <!-- Search End -->
-            </div>
-            <div class="w-100"></div>
-
-
             <!-- 推薦開始 -->
             <% for(var i = 0 ; i<recom[0].length ; i++){ %>
             <div class="wrapper col-12  col-lg-2" style="background-image: url('/imgs/recommend/movie1.jpg');">
@@ -183,27 +182,12 @@
             <% } %>
             <% } %>
             <!-- 推薦結束 -->
+        </div>
     </section>
-
-    <div class="fixed-bottom  d-flex justify-content-center">
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/movie'">電影類</button>
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/music'">音樂類</button>
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/book'">書籍類</button>
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/exhibition'">展覽類</button>
-        <button type="button" class="btn btn-secondary footer" onclick="location.href='/recommendList'">全部</button>
-
-    </div>
-
-
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
     </a>
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

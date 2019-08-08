@@ -6,9 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!--  js   -->
-    <script src="/javascripts/jquery.min.js"></script>
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -18,6 +15,8 @@
 
     <link href="/css/header.css" rel="stylesheet" type="text/css" />
     <link href="/css/article.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
 
     <title>文藝富心</title>
 </head>
@@ -69,8 +68,8 @@
                             文章</a>
                     </li>
                     <li id="dropdown" class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="collectionArticle.html" id="navbarDropdownMenuLink"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             收藏
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -142,30 +141,34 @@
     <!-- ============================================= -->
 
     <!-- 使用者發文 -->
-
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-lg-8 content shadow post postArticle">
-                <p class="poster">
-                    <a class="floorTag text-break ">樓主</a> 管理員 於 <%= items[0][0].recomDateTime %>發布
-                </p>
+            <div class="col-lg-8 content shadow">
+                <div class="info d-flex">
+                    <div><a class="floorTag">樓主</a></div>
+                    <div><a><%= items[0][0].memID %></a>
+                        <a class="next"></a>
+                        <a class="dateTime">於<%= items[0][0].recomDateTime %>發佈</a>
+                    </div>
+                </div>
                 <hr />
 
-                <h3><%= items[0][0].recomHead %></h3>
+                <h5><%= items[0][0].recomHead %></h5>
                 <hr />
 
-                <p class="content"> <%= items[0][0].recomCont %>
+                <p class="content"> <%- items[0][0].recomCont %>
                 </p>
+                <!-- tag -->
                 <div class="tagDiv col-lg-12 ">
                     <% for (var i = 0 ; i< items[5][0].length ; i++) { %>
-                    <button type="button" class="btn btn-info tag"><%= items[5][0][i] %></button>
+                    <button type="button" class="btn  tag"><%= items[5][0][i] %></button>
                     <% } %>
                 </div>
                 <hr class="info">
                 <!-- info -->
                 <div class="info">
                     <!-- 愛心按鈕 -->
-                    <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/logIn'"><i
+                    <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/logIn'"> <i
                             class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
                     <button type="button" id="addLike" class="btn postInfo"
                         onclick=<%= "addLike(" + items[0][0].recomNum + ")" %>> <i class="fab fa-gratipay"></i><a
@@ -204,8 +207,8 @@
                     <% } %>
 
                     <!-- 留言數量按鈕 -->
-                    <button type="button" class="btn postInfo"><i
-                            class="fas fa-comment-dots"></i><a><%= items[2][0].count %></a></button>
+                    <button type="button" class="btn postInfo" id="goBottom"><i
+                            class="fas fa-comment-dots"></i><a><%= items[3][0].count %></a></button>
 
                     <!-- 收藏按鈕 -->
                     <button type="button" id="unLogIn" class="btn postInfo" onclick="location.href='/logIn'">
@@ -215,12 +218,9 @@
                         onclick=<%= "addColle(" + items[0][0].recomNum + ")" %>>
                         <i class="far fa-bookmark"></i></button>
 
-                    <button type="button" id="delColle" class="btn postInfo" style="color:#c93737;"
+                    <button type="button" id="delColle" class="btn postInfo"
                         onclick=<%= "delColle(" + items[0][0].recomNum + ")" %>>
-                        <i class="far fa-bookmark"></i></button>
-
-                    <!-- 檢舉按鈕 -->
-                    <button type="button" class="btn report">檢舉</button>
+                        <i class="fas fa-bookmark"></i></button>
 
                     <!-- 如果沒登入 -->
                     <% if(items[8][0] == undefined) {%>
@@ -238,212 +238,207 @@
                         document.getElementById("delColle").style.display = "none";
                     </script>
                     <!-- 如果有登入及按過收藏 -->
-                    <% }else if(items[6][0] == 0 && items[8][0] != undefined ) {%>
+                    <% }else {%>
                     <script type="text/javascript">
                         document.getElementById("delColle").style.display = "inline";
                         document.getElementById("addColle").style.display = "none";
                         document.getElementById("unLogIn").style.display = "none";
                     </script>
-                    <% } else {%>
-                    <script type="text/javascript">
-                        document.getElementById("delColle").style.display = "none";
-                        document.getElementById("addColle").style.display = "none";
-                        document.getElementById("unLogIn").style.display = "none";
-                    </script>
                     <% } %>
-
-                    <!-- 收藏 ajax script  -->
-                    <script>
-                        //新增收藏
-                        function addColle(recomNum) {
-                            collection();
-                            $.ajax({
-                                url: '/addCollection',
-                                type: 'POST',
-                                dataType: 'JSON',
-                                data: { "collectionType": "recommend", "recomNum": recomNum },
-                                success: function (data) {
-                                    console.log("yes", data.statusText);
-                                },
-                                error: function (data) {
-                                    console.log("失敗", data);
-                                }
-                            });
-                        };
-                        //刪除收藏
-                        function delColle(recomNum) {
-                            // console.log("前端刪除訊息");
-                            cancelCollection();
-                            $.ajax({
-                                url: '/delCollection',
-                                type: 'POST',
-                                dataType: 'JSON',
-                                data: { "collectionType": "recommend", "recomNum": recomNum },
-                                success: function (data) {
-                                    console.log("yes", data.statusText);
-                                },
-                                error: function (data) {
-                                    console.log("失敗", data);
-                                }
-                            });
-                        };
-                        //點收藏後改變屬性
-                        function collection() {
-                            document.getElementById("delColle").style.display = "inline";
-                            document.getElementById("unLogIn").style.display = "none";
-                            document.getElementById("addColle").style.display = "none";
-                        }
-                        //取消收藏後改變屬性
-                        function cancelCollection() {
-                            document.getElementById("addColle").style.display = "inline";
-                            document.getElementById("unLogIn").style.display = "none";
-                            document.getElementById("delColle").style.display = "none";
-                        }
-                    </script>
-
-                    <!-- 愛心 ajax script -->
-                    <script>
-                        //新增愛心
-                        function addLike(recomNum) {
-                            $.ajax({
-                                url: '/addLike',
-                                type: 'POST',
-                                dataType: 'text',
-                                data: { "likeType": "recommend", "recomNum": recomNum },
-                                success: function (res) {
-                                    console.log("yes", JSON.stringify(res));
-                                    likeCount(recomNum);
-                                    like();
-                                },
-                                error: function (res) {
-                                    console.log("失敗", res);
-
-                                }
-                            });
-
-                        };
-                        //刪除愛心
-                        function delLike(recomNum) {
-                            // console.log("前端刪除訊息");     
-                            $.ajax({
-                                url: '/delLike',
-                                type: 'POST',
-                                dataType: 'text',
-                                data: { "likeType": "recommend", "recomNum": recomNum },
-                                success: function (res) {
-                                    console.log("yes", JSON.stringify(res));
-                                    likeCount(recomNum);
-                                    cancelLike();
-                                },
-                                error: function (res) {
-                                    console.log("刪除失敗", JSON.stringify(res));
-                                }
-                            });
-
-                        };
-                        //點愛心後改變屬性
-                        function like() {
-                            document.getElementById("delLike").style.display = "inline";
-                            document.getElementById("LikeUnLogIn").style.display = "none";
-                            document.getElementById("addLike").style.display = "none";
-                        }
-                        //取消愛心後改變屬性
-                        function cancelLike() {
-                            document.getElementById("addLike").style.display = "inline";
-                            document.getElementById("LikeUnLogIn").style.display = "none";
-                            document.getElementById("delLike").style.display = "none";
-                        }
-                        function likeCount(recomNum) {
-                            $.ajax({
-                                url: '/likeCount',
-                                type: 'POST',
-                                dataType: 'JSON',
-                                data: { "likeType": "recommend", "recomNum": recomNum },
-                                success: function (res) {
-                                    // console.log("yes", reponse.responseText);
-                                    console.log("yes", JSON.stringify(res));
-                                    document.getElementById("addLikeCount").innerHTML = JSON.stringify(res);
-                                    document.getElementById("delLikeCount").innerHTML = JSON.stringify(res);
-                                },
-                                error: function (res) {
-                                    console.log("no", JSON.stringify(res));
-                                }
-
-                            });
-                        }
-                        // =========================
-                        // ------ 留言新增愛心 ------
-                        // =========================
-                        //增加留言愛心
-                        function MessAddLike(recomNum, recomMessNum) {
-                            $.ajax({
-                                url: '/addLike',
-                                type: 'POST',
-                                dataType: 'JSON',
-                                data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
-                                success: function (res) {
-                                    console.log("yes", JSON.stringify(res));
-                                    MessLikeCount(res.recomNum, res.recomMessNum);
-                                    MessLike(res.recomNum, res.recomMessNum);
-                                },
-                                error: function (res) {
-                                    console.log("失敗", res);
-
-                                }
-                            });
-
-                        };
-                        //刪除留言愛心
-                        function MessDelLike(recomNum, recomMessNum) {
-                            // console.log("前端刪除訊息");     
-                            $.ajax({
-                                url: '/delLike',
-                                type: 'POST',
-                                dataType: 'JSON',
-                                data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
-                                success: function (res) {
-                                    console.log("yes", JSON.stringify(res));
-                                    MessLikeCount(res.recomNum, res.recomMessNum);
-                                    cancelMessLike(res.recomNum, res.recomMessNum);
-                                },
-                                error: function (res) {
-                                    console.log("刪除失敗", JSON.stringify(res));
-                                }
-                            });
-
-                        };
-                        //點留言愛心後改變屬性
-                        function MessLike(recomNum, recomMessNum) {
-                            document.getElementById("MessDelLike" + recomNum + recomMessNum).style.display = "inline";
-                            document.getElementById("MessLikeUnLogIn" + recomNum + recomMessNum).style.display = "none";
-                            document.getElementById("MessAddLike" + recomNum + recomMessNum).style.display = "none";
-                        }
-                        //取消留言愛心後改變屬性
-                        function cancelMessLike(recomNum, recomMessNum) {
-                            document.getElementById("MessAddLike" + recomNum + recomMessNum).style.display = "inline";
-                            document.getElementById("MessLikeUnLogIn" + recomNum + recomMessNum).style.display = "none";
-                            document.getElementById("MessDelLike" + recomNum + recomMessNum).style.display = "none";
-                        }
-                        function MessLikeCount(recomNum, recomMessNum) {
-                            $.ajax({
-                                url: '/likeCount',
-                                type: 'POST',
-                                dataType: 'JSON',
-                                data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
-                                success: function (res) {
-                                    // console.log("yes", reponse.responseText);
-                                    console.log("yes", JSON.stringify(res));
-                                    document.getElementById("MessAddLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
-                                    document.getElementById("MessDelLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
-                                },
-                                error: function (res) {
-                                    console.log("no", JSON.stringify(res));
-                                }
-
-                            });
-                        }
-                    </script>
+                    <button type="button" class="btn report" id="postReport">檢舉</button>
                 </div>
+                <!-- 收藏 ajax script  -->
+                <script>
+                    //新增收藏
+                    function addColle(recomNum) {
+                        collection();
+                        $.ajax({
+                            url: '/addCollection',
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data: { "likeType": "recommend", "recomNum": recomNum },
+                            success: function (res) {
+                                console.log("yes", JSON.stringify(res));
+                            },
+                            error: function (res) {
+                                console.log("失敗", JSON.stringify(res));
+                            }
+                        });
+                    };
+                    //刪除收藏
+                    function delColle(recomNum) {
+                        // console.log("前端刪除訊息");
+                        cancelCollection();
+                        $.ajax({
+                            url: '/delCollection',
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data: { "likeType": "recommend", "recomNum": recomNum },
+                            success: function (res) {
+                                console.log("yes", JSON.stringify(res));
+
+                            },
+                            error: function (res) {
+                                console.log("失敗", JSON.stringify(res));
+                            }
+                        });
+                    };
+                    //點收藏後改變屬性
+                    function collection() {
+                        document.getElementById("delColle").style.display = "inline";
+                        document.getElementById("unLogIn").style.display = "none";
+                        document.getElementById("addColle").style.display = "none";
+                    }
+                    //取消收藏後改變屬性
+                    function cancelCollection() {
+                        document.getElementById("addColle").style.display = "inline";
+                        document.getElementById("unLogIn").style.display = "none";
+                        document.getElementById("delColle").style.display = "none";
+                    }
+                </script>
+
+                <!-- 愛心 ajax script -->
+                <script>
+                    //新增愛心
+                    function addLike(recomNum) {
+                        $.ajax({
+                            url: '/addLike',
+                            type: 'POST',
+                            dataType: 'text',
+                            data: { "likeType": "recommend", "recomNum": recomNum },
+                            success: function (res) {
+                                console.log("yes", JSON.stringify(res));
+                                likeCount(recomNum);
+                                like();
+                            },
+                            error: function (res) {
+                                console.log("失敗", res);
+
+                            }
+                        });
+
+                    };
+                    //刪除愛心
+                    function delLike(recomNum) {
+                        // console.log("前端刪除訊息");     
+                        $.ajax({
+                            url: '/delLike',
+                            type: 'POST',
+                            dataType: 'text',
+                            data: { "likeType": "recommend", "recomNum": recomNum },
+                            success: function (res) {
+                                console.log("yes", JSON.stringify(res));
+                                likeCount(recomNum);
+                                cancelLike();
+                            },
+                            error: function (res) {
+                                console.log("刪除失敗", JSON.stringify(res));
+                            }
+                        });
+
+                    };
+                    //點愛心後改變屬性
+                    function like() {
+                        document.getElementById("delLike").style.display = "inline";
+                        document.getElementById("LikeUnLogIn").style.display = "none";
+                        document.getElementById("addLike").style.display = "none";
+                    }
+                    //取消愛心後改變屬性
+                    function cancelLike() {
+                        document.getElementById("addLike").style.display = "inline";
+                        document.getElementById("LikeUnLogIn").style.display = "none";
+                        document.getElementById("delLike").style.display = "none";
+                    }
+                    function likeCount(recomNum) {
+                        $.ajax({
+                            url: '/likeCount',
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data: { "likeType": "recommend", "recomNum": recomNum },
+                            success: function (res) {
+                                // console.log("yes", reponse.responseText);
+                                console.log("yes", JSON.stringify(res));
+                                document.getElementById("addLikeCount").innerHTML = JSON.stringify(res);
+                                document.getElementById("delLikeCount").innerHTML = JSON.stringify(res);
+                            },
+                            error: function (res) {
+                                console.log("no", JSON.stringify(res));
+                            }
+
+                        });
+                    }
+                    // =========================
+                    // ------ 留言新增愛心 ------
+                    // =========================
+                    //增加留言愛心
+                    function MessAddLike(recomNum, recomMessNum) {
+                        $.ajax({
+                            url: '/addLike',
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
+                            success: function (res) {
+                                console.log("yes", JSON.stringify(res));
+                                MessLikeCount(res.recomNum, res.recomMessNum);
+                                MessLike(res.recomNum, res.recomMessNum);
+                            },
+                            error: function (res) {
+                                console.log("失敗", res);
+
+                            }
+                        });
+
+                    };
+                    //刪除留言愛心
+                    function MessDelLike(recomNum, recomMessNum) {
+                        // console.log("前端刪除訊息");     
+                        $.ajax({
+                            url: '/delLike',
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
+                            success: function (res) {
+                                console.log("yes", JSON.stringify(res));
+                                MessLikeCount(res.recomNum, res.recomMessNum);
+                                cancelMessLike(res.recomNum, res.recomMessNum);
+                            },
+                            error: function (res) {
+                                console.log("刪除失敗", JSON.stringify(res));
+                            }
+                        });
+
+                    };
+                    //點留言愛心後改變屬性
+                    function MessLike(recomNum, recomMessNum) {
+                        document.getElementById("MessDelLike" + recomNum + recomMessNum).style.display = "inline";
+                        document.getElementById("MessLikeUnLogIn" + recomNum + recomMessNum).style.display = "none";
+                        document.getElementById("MessAddLike" + recomNum + recomMessNum).style.display = "none";
+                    }
+                    //取消留言愛心後改變屬性
+                    function cancelMessLike(recomNum, recomMessNum) {
+                        document.getElementById("MessAddLike" + recomNum + recomMessNum).style.display = "inline";
+                        document.getElementById("MessLikeUnLogIn" + recomNum + recomMessNum).style.display = "none";
+                        document.getElementById("MessDelLike" + recomNum + recomMessNum).style.display = "none";
+                    }
+                    //取得留言愛心數
+                    function MessLikeCount(recomNum, recomMessNum) {
+                        $.ajax({
+                            url: '/likeCount',
+                            type: 'POST',
+                            dataType: 'JSON',
+                            data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
+                            success: function (res) {
+                                // console.log("yes", reponse.responseText);
+                                console.log("yes", JSON.stringify(res));
+                                document.getElementById("MessAddLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
+                                document.getElementById("MessDelLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
+                            },
+                            error: function (res) {
+                                console.log("no", JSON.stringify(res));
+                            }
+                        });
+                    }
+                </script>
                 <!-- info結束 -->
             </div>
         </div>
@@ -451,136 +446,133 @@
 
         <center>
             <h1>文章留言</h1>
-
             <hr class="separate">
         </center>
 
         <!-- 文章留言 -->
-        <% for(var j=0; j<items[1].length; j++) {%>
+
         <div class="row justify-content-center">
+            <% for(var i = 0 ; i < items[1].length ; i ++){ %>
             <div class="col-lg-8 content shadow">
                 <!-- 文章留言 -->
                 <div class="message">
                     <!-- info -->
                     <div class="info d-flex">
-                        <!-- 樓層、發文者及留言時間按鈕 -->
-                        <div class="floor"><a class="floorTag text-break "><%= j+1 %> 樓</a>
-                            <a><%= items[1][j].memID %>
-                                於
-                                <%= items[1][j].recomMessDateTime %>留言</a>
+                        <div><a class="floorTag"><%= i+1 %> 樓</a></div>
+                        <div><a class="name"><%= items[1][i].memID %></a>
+                            <a class="next"></a>
+                            <a class="dateTime">於<%= items[1][i].recomMessDateTime %>留言</a>
                         </div>
                         <!-- 愛心按鈕 -->
                         <div class="col-sm-3 ml-auto"> </div>
                         <button type="button"
-                            id=<%= "MessLikeUnLogIn" + items[0][0].recomNum + items[1][j].recomMessNum %>
-                            class="btn info" onclick="location.href='/logIn'"><i
-                                class="fab fa-gratipay"></i><a><%= items[4][j].count %></a></button>
+                            id=<%= "MessLikeUnLogIn" + items[0][0].recomNum + items[1][i].recomMessNum %> class="btn like"
+                            onclick="location.href='/logIn'"><i
+                                class="fab fa-gratipay"></i><a><%= items[4][i].count %></a></button>
 
-                        <button type="button" id=<%= "MessAddLike"+ items[0][0].recomNum + items[1][j].recomMessNum %>
-                            class="btn info"
-                            onclick=<%= "MessAddLike(" + items[0][0].recomNum + "," + items[1][j].recomMessNum + ")" %>>
+                        <button type="button" id=<%= "MessAddLike"+ items[0][0].recomNum + items[1][i].recomMessNum %>
+                            class="btn like"
+                            onclick=<%= "MessAddLike(" + items[0][0].recomNum + "," + items[1][i].recomMessNum + ")" %>>
                             <i class="fab fa-gratipay"></i>
-                            <a id=<%="MessAddLikeCount" + items[0][0].recomNum + items[1][j].recomMessNum %>>
-                                <%= items[4][j].count %>
+                            <a id=<%="MessAddLikeCount" + items[0][0].recomNum + items[1][i].recomMessNum %>>
+                                <%= items[4][i].count %>
                             </a>
                         </button>
 
-                        <button type="button" id=<%= "MessDelLike" + items[0][0].recomNum + items[1][j].recomMessNum %>
-                            class="btn info" style="color:#c93737"
-                            onclick=<%= "MessDelLike(" + items[0][0].recomNum + "," + items[1][j].recomMessNum + ")" %>>
+                        <button type="button" id=<%= "MessDelLike" + items[0][0].recomNum + items[1][i].recomMessNum %>
+                            class="btn like" style="color:#c93737"
+                            onclick=<%= "MessDelLike(" + items[0][0].recomNum + "," + items[1][i].recomMessNum + ")" %>>
                             <i class="fab fa-gratipay"></i>
-                            <a id=<%= "MessDelLikeCount" + items[0][0].recomNum + items[1][j].recomMessNum %>>
-                                <%= items[4][j].count %></a>
+                            <a id=<%= "MessDelLikeCount" + items[0][0].recomNum + items[1][i].recomMessNum %>>
+                                <%= items[4][i].count %></a>
                         </button>
+
                         <!-- 如果沒登入 -->
                         <% if(items[8][0] == undefined) {%>
                         <script type="text/javascript">
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "inline";
-                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "inline";
+                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
                         </script>
                         <!-- 如果有登入及沒按過愛心       -->
-                        <% }else if(items[9][j] == 1 && items[8][0] != undefined ) {%>
+                        <% }else if(items[9][i] == 1 && items[8][0] != undefined ) {%>
                         <script type="text/javascript">
-                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%=  items[1][j].recomMessNum %>").style.display = "inline";
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%=  items[1][i].recomMessNum %>").style.display = "inline";
+                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
                         </script>
                         <!-- 如果有登入及按過愛心 -->
-                        <% }else if(items[9][j] == 0 && items[8][0] != undefined ) {%>
+                        <% }else if(items[9][i] == 0 && items[8][0] != undefined ) {%>
                         <script type="text/javascript">
-                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "inline";
-                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "inline";
+                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
                         </script>
                         <% }else {%>
                         <script type="text/javascript">
-                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][j].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
+                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
                         </script>
                         <% } %>
                     </div>
                     <hr class="smallMagin">
-
                     <!-- info結束 -->
-
-                    <p class="content"> <%= items[1][j].recomMessCont %>
+                    <p class="content"> <%= items[1][i].recomMessCont %>
                     </p>
                     <button type="button" class="btn report">檢舉</button>
                 </div>
             </div>
+            <% } %>
         </div>
-        <% } %>
         <!-- 文章留言結束 -->
 
         <!-- replying -->
         <div class="row replying justify-content-center" id="reply" spellcheck="false">
             <div class="col-lg-8 content shadow">
-                <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="請輸入回覆內容">
-                </div>
-                <label class="btn btn-dark" style="cursor: pointer">
+                <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="請輸入回覆內容"></div>
 
+                <label class="btn btn-dark col-lg-2" style="cursor: pointer">
                     <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
-                    <i class="fas fa-images" style="padding-right:5px"></i>上傳圖片
-
+                    <i class="fas fa-images" style="padding-right:5px"></i>加圖片
                 </label>
 
-                <button type="submit" class="btn btn-danger float-right submitReply">提交回覆</button>
+                <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none">提交回覆</button>
 
             </div>
 
         </div>
         <!-- replying end -->
 
-        <div class="row d-flex justify-content-center">
+        <!-- <div class="row d-flex justify-content-center">
             <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
 
-                <button type="button" class="btn btn-secondary  footer-item" id="goBottom">去留言</button>
-                <button type="button" class="btn btn-secondary  footer-item">愛心</button>
-                <button type="button" class="btn btn-secondary  footer-item">收藏</button>
+                <button type="button" class="btn btn-secondary footer" id="goBottom">去留言</button>
+                <button type="button" class="btn btn-secondary footer">愛心</button>
+                <button type="button" class="btn btn-secondary footer">收藏</button>
 
             </div>
-        </div>
+        </div> -->
 
         <a href="#" id="gotop">
             <i class="fa fa-angle-up"></i>
         </a>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+        crossorigin="anonymous "></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+        crossorigin="anonymous "></script>
+    <script src="/javascripts/active.js "></script>
 
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
-            crossorigin="anonymous "></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
-            crossorigin="anonymous "></script>
-        <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
-            crossorigin="anonymous "></script>
-        <script src="/javascripts/active.js "></script>
 </body>
 
 </html>

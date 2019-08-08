@@ -149,16 +149,20 @@
                 <hr class="highlight">
             </center>
 
-            <div class="row d-flex justify-content-center no-gutters">
-                <div class="search col-lg-6 mx-auto ">
-                    <!-- Search -->
-                    <form class="form-inline d-flex">
-                        <input type="text" class="form-control search col-sm-9" id="search" placeholder="輸入欲搜尋之關鍵字">
-                        <button type="submit" class="search btn-primary mx-auto">搜尋</button>
-                    </form>
-                    <!-- Search End -->
-                </div>
+            <div class="d-flex justify-content-center" style="margin-bottom: 1.5em">
+                <button type="button" class="btn btn-secondary footer"
+                    onclick="location.href='/articleList/articleMovie'">電影類</button>
+                <button type="button" class="btn btn-secondary footer"
+                    onclick="location.href='/articleList/articleMusic'">音樂類</button>
+                <button type="button" class="btn btn-secondary footer"
+                    onclick="location.href='/articleList/articleBook'">書籍類</button>
+                <button type="button" class="btn btn-secondary footer"
+                    onclick="location.href='/articleList/articleExhibition'">展覽類</button>
+                <button type="button" class="btn btn-secondary footer"
+                    onclick="location.href='/articleList'">全部</button>
+            </div>
 
+            <div class="row d-flex justify-content-center no-gutters">
                 <div class="col-12 mb-3 col-lg-8 ">
                     <!-- list -->
                     <% for(var i=0; i<items[0].length; i++) {%>
@@ -170,23 +174,28 @@
                                 </div>
                                 <hr>
                             </div>
-                            <h3 class="card-title "><%- items[0][i].artiHead %>
-                            </h3>
-                            <p class="card-text "><%- items[0][i].artiCont %>
-                            </p>
-                            <!-- tag -->
-                            <div class="tagDiv col-lg-12 ">
-                                <% for(var j=0; j<items[3][i].length; j++) {%>
-                                <button type="button" class="btn  tag"><%= items[3][i][j] %></button>
+                            <div class="row seperate">
+                                <div class="col-sm-9 articleContent">
+                                    <h3 class="card-title "><%- items[0][i].artiHead %>
+                                    </h3>
+                                    <p class="card-text limitLine"><%- items[0][i].artiCont %>
+                                    </p>
+                                    <!-- tag -->
+                                    <div class="tagDiv col-lg-12 ">
+                                        <% for(var j=0; j<items[3][i].length; j++) {%>
+                                        <button type="button" class="btn  tag"><%= items[3][i][j] %></button>
+                                        <% } %>
+                                    </div>
+                                </div>
+
+                                <!-- imgs  -->
+                                <% if(items[8][items[0][i].artiNum]){%>
+                                <div class="wrapperCard card-img-top "
+                                    style="background-image: url( '/userImg/<%= items[8][items[0][i].artiNum] %>'); ">
+                                </div>
                                 <% } %>
                             </div>
                         </div>
-                        <% if(items[8][items[0][i].artiNum]){%>
-                        <div class="wrapperCard card-img-top "
-                            style="background-image: url( '/userImg/<%= items[8][items[0][i].artiNum] %>'); ">
-
-                        </div>
-                        <% } %>
                         <!-- info -->
                         <div class="info">
                             <!-- 愛心按鈕 -->
@@ -242,9 +251,9 @@
                                 display: inline" onclick=<%= "addColle(" + items[0][i].artiNum + ")" %>>
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%= "delColle" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:#c93737" display: inline"
+                                style="display: inline"
                                 onclick=<%= "delColle(" + items[0][i].artiNum + ")" %>>
-                                <i class="far fa-bookmark"></i></button>
+                                <i class="fas fa-bookmark"></i></button>
                             <!--  收藏按鈕控制 -->
                             <% if(items[6][0] == undefined) {%>
                             <script type="text/javascript">
@@ -408,22 +417,6 @@
         </div>
     </section>
     <!-- 文章列表區塊結束 -->
-
-    <div class="fixed-bottom  d-flex justify-content-center">
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/articleList/articleMovie'">電影類</button>
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/articleList/articleMusic'">音樂類</button>
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/articleList/articleBook'">書籍類</button>
-        <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/articleList/articleExhibition'">展覽類</button>
-        <button type="button" class="btn btn-secondary footer" onclick="location.href='/articleList'">全部</button>
-
-        <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
-            <i class="fas fa-edit"></i>發文</button>
-    </div>
-
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>

@@ -9,10 +9,16 @@ $(document).ready(function() {
             $(".navbar").css("opacity", "0.85");
             $(".navbar").css("transition", "0.5s ease-in-out");
             $(".navbar").css("box-shadow", " 0 5px 15px rgba(0,0,0,0.3)");
+            $(".navbar").css("box-shadow", " 0 5px 15px rgba(0,0,0,0.3)");
+            $("input.navSearch").css("background-color", " rgb(21, 48, 36)");
+
 
         } else {
             $(".navbar").css("background", "");
             $(".navbar").css("box-shadow", "none");
+            $("input.navSearch").css("background-color", "white");
+            $("button.navSearch").css("background-color", "none");
+
 
         }
     });
