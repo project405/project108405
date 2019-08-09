@@ -2,25 +2,22 @@
 
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
-var moment = require('moment');
+const member = require('./member');
 
 //=========================================
 //---------  getIndexData() -----------
 //=========================================
-var getIndexData = async function () {
+var getIndexData = async function (memID) {
     var weekRecommend = [];
-    var fourRecommend = [] ;
-    var movie = true ; 
-    var book = true ; 
-    var music = true ;
-    var exhibition = true ; 
-    //熱門文章
-    var mydata = [];
-    var articleLikeCount = [] //存放 articleLike表中裡面的 artiNum欄位
-    var max = 0; // 尋找在articleLike表中 出現最多次的artiNum
-    var times = 0; //作為判斷是否取得三篇文章的開關
+    var fourRecommend = [];
+    var movie = true;
+    var book = true;
+    var music = true;
+    var exhibition = true;
     var hotArticle = [];  //存放前三名熱門文章
-    var artiLike = [];
+    var checkAuthority;
+    var imgs = [];
+    var tag = [] ;
     var result = [];
     // -----------  每週推薦 --------------
     await sql('SELECT * FROM "recommend"')
@@ -41,63 +38,78 @@ var getIndexData = async function () {
             weekRecommend = data.rows;
         }, (error) => {
             weekRecommend = null;
-        });
+        })
+
+    // 將推薦的movie改為中文
     for (var i = 0; i < weekRecommend.length; i++) {
-        if (weekRecommend[i].recomClass == '電影' && movie){
+        if (weekRecommend[i].recomClass == '電影' && movie) {
             fourRecommend.push(weekRecommend[i]);
-            movie = false ; 
-        }else if(weekRecommend[i].recomClass == '音樂' && music){
+            movie = false;
+        } else if (weekRecommend[i].recomClass == '音樂' && music) {
             fourRecommend.push(weekRecommend[i]);
-            music = false ;
-        }else if(weekRecommend[i].recomClass == '書籍' && book){
+            music = false;
+        } else if (weekRecommend[i].recomClass == '書籍' && book) {
             fourRecommend.push(weekRecommend[i]);
-            book = false ;
-        }else if(weekRecommend[i].recomClass == '展覽' && exhibition){
+            book = false;
+        } else if (weekRecommend[i].recomClass == '展覽' && exhibition) {
             fourRecommend.push(weekRecommend[i]);
-            exhibition = false ;
+            exhibition = false;
         }
     }
     // -----------  熱門文章 --------------
-    await sql('select "articleLike"."artiNum" from "articleLike"')
+    await sql('SELECT * FROM "articleListDataView" ORDER BY "likeCount" DESC , "artiDateTime" DESC LIMIT 3')
         .then((data) => {
-            artiLike = data.rows;
-            //初始化陣列 
-            for (let i = 0; i <= artiLike.length; i++) {
-                articleLikeCount[i] = 0;
-            }
-            //將取得的文章編號做計算 (articleLikeCount陣列維度代表第幾篇文章 裡面的值代表共有幾個讚)
-            for (let i = 0; i < artiLike.length; i++) {
-                articleLikeCount[artiLike[i].artiNum] += 1;
-            }
-            // console.log(articleLikeCount);
-            //尋找前三名
-            max = Math.max(...articleLikeCount);  //取得最大值
-            while (times < 3) {
-                for (let i = 1; i <= articleLikeCount.length; i++) {
-                    if (times == 3) break;
-                    if (articleLikeCount[i] == max) {
-                        hotArticle[times] = i;
-                        times += 1;
-                    }
-                }
-                max -= 1;
+            if (!data.rows) {
+                hotArticle = undefined;
+            } else {
+                hotArticle = data.rows;
             }
         }, (error) => {
-            artiLike = null;
+            hotArticle = undefined;
         });
-    // 撈前三篇文章的資訊
-    for (let i = 0; i < 3; i++) {
-        await sql('select * from "article" where "artiNum" = $1 ', [hotArticle[i]])
-            .then((data) => {
-                data.rows[0].artiDateTime = moment(data.rows[0].artiDateTime).format("YYYY-MM-DD HH:mm:ss");
-                mydata[i] = data.rows[0];
-            }, (error) => {
-                mydata = null;
-            });
-    }
+
+    // ----------- 取得 tag -----------
+    await sql('SELECT * FROM "articleTagView"')
+        .then((data) => {
+            if (!data.rows) {
+                tag = undefined;
+            } else {
+                tag = data.rows;
+            }
+        }, (error) => {
+            tag = undefined;
+        });
+
+
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+
+    //----------- 取得照片 ----------- 
+    await sql('SELECT "artiNum" , "imgName" FROM "image"')
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                imgs = undefined;
+            } else {
+                imgs = data.rows;
+            }
+        }, (error) => {
+            imgs = undefined;
+        });
+
     result[0] = fourRecommend;
-    result[1] = mydata;
-    console.log("1",result[1]);
+    result[1] = hotArticle;
+    result[2] = [memID];
+    result[3] = checkAuthority;
+    result[4] = imgs;
+    result[5] = tag ; 
     return result;
 }
 module.exports = { getIndexData };

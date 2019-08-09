@@ -239,6 +239,10 @@ p.poster {
     margin-top: 0.75em;
 }
 
+#hotArticle button:focus {
+    box-shadow: none;
+}
+
 
 /* -------------- */
 
@@ -319,6 +323,7 @@ button.goArticle {
 
 div.footer {
     margin-top: 5em;
+    padding-bottom: 4em;
 }
 
 

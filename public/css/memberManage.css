@@ -32,6 +32,11 @@ div.member {
     padding-bottom: 3em;
 }
 
+input:focus {
+    outline: rgba(45, 79, 65, 0.329) dashed 3px;
+    overflow: hidden;
+}
+
 
 /* --------------------- */
 
@@ -119,8 +124,9 @@ div.radio {
     vertical-align: middle;
     margin: 1em;
     cursor: pointer;
-    width: 6em;
+    width: 4.5em;
     font-size: 1em;
+    padding-right: 0;
 }
 
 .radio-custom-label {
@@ -145,53 +151,21 @@ div.radio {
 
 .radio-custom:checked+.radio-custom-label:before {
     content: "\f00c";
+    font-size: 25px;
+    line-height: 25px;
     font-family: 'FontAwesome';
     color: black;
 }
 
-.radio-custom:focus+.radio-custom-label {
-    outline: 1px solid #ddd;
-    /* focus style */
+
+/* validate */
+
+p {
+    text-align: right;
+    color: #eb6363;
+    font-weight: bolder;
 }
 
-
-/* ---------------- */
-
-
-/* span */
-
-
-/* ---------------- */
-
-
-/* Pseudo element */
-
-
-/* 
-.label-icon-wrap {
-    border: 1px solid #ddd;
-    display: flex;
-    flex-direction: row;
-    margin: 0.75em 0 0.75em 0;
-    background-color: white;
+i.alarm {
+    font-size: 15pt;
 }
-
-.label-with-icon {
-    border: none;
-    flex: 1;
-}
-
-.label-icon,
-.label-with-icon {
-    padding: 10px;
-}
-
-div.member label {
-    padding: 0;
-}
-
-span.label-with-icon[contenteditable]:empty::before {
-    content: '輸入新密碼';
-    display: inline-block;
-    color: #a39f9f;
-} */

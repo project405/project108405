@@ -11,10 +11,16 @@ router.get('/', function (req, res, next) {
     } else {
         member.myMovieArticle(memID).then(data => {
             console.log(data);
+            for (var i = 0; i < data[0].length; i++) {
+                if (data[0][i].artiCont.match("\\:imgLocation") != null) {
+                    console.log("近來囉");
+                    data[0][i].artiCont = data[0][i].artiCont.replace(/\\:imgLocation/g, "");
+                }
+            }
             if (data == null) {
                 res.render('error');
             } else if (data.length > 0) {
-                res.render('myManageClass', { myArtiClass: data });
+                res.render('myArtiClassManage', { myArtiClass: data });
             } else {
                 res.render('notFound');
             }

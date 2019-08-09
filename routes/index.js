@@ -2,12 +2,18 @@ var express = require('express');
 var router = express.Router();
 //增加引用函式
 const index = require('./utility/index');
-var moment = require('moment');
 
 //接收GET請求
 router.get('/', function (req, res, next) {
-    index.getIndexData().then(data => { //取得artiNum
-        console.log(data);
+    var memID = req.session.memID;
+    index.getIndexData(memID).then(data => { 
+        // 取代圖片文字為空字串
+        for (var i = 0; i < data[1].length; i++) {
+            if (data[1][i].artiCont.match("\\:imgLocation") != null) {
+                data[1][i].artiCont = data[1][i].artiCont.replace(/\\:imgLocation/g, "");
+            }
+        }
+        
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data.length > 0) {

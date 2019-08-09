@@ -1,9 +1,9 @@
 ﻿-- ------------------------------
 --    Insert Into member 
 -- ------------------------------
-INSERT INTO "member" ("memID", "memPass", "memName", "memBirth", "memMail", "memGender", "memAddr", "memNoti") VALUES
-('abc123','abc123','chin','1997-09-28','10546007@ntub.edu.tw','m','深坑','t'),
-('abc456','abc456','wat','1998-08-07','10546004@ntub.edu.tw','f','三重','f');
+INSERT INTO "member" ("memID", "memPass", "memName", "memBirth", "memMail", "memGender", "memAddr", "memNoti", "memAuthority") VALUES
+('abc123','abc123','chin','1997-09-28','10546007@ntub.edu.tw','m','深坑','t','boss'),
+('abc456','abc456','wat','1998-08-07','10546004@ntub.edu.tw','f','三重','f',null);
 
 -- ------------------------------
 --    Insert Into article 
@@ -513,10 +513,10 @@ INSERT INTO "memberPrefer" ("memID","preferNum","degree") VALUES
 -- ------------------------------
 --    Insert Into report
 -- ------------------------------
-INSERT INTO "report" ("artiNum","artiMessNum","recomMessNum","reportReason") VALUES
-(1,null,null,'太色情了吧'),
-(2,null,null,'不知道在說啥'),
-(null,1,null,'亂打一通'),
-(null,2,null,'欠檢舉'),
-(null,null,1,'就想檢舉阿'),
-(null,null,2,'封鎖他!!!');
+INSERT INTO "report" ("memID","artiNum","artiMessNum","recomMessNum","reportReason","reportDateTime") VALUES
+('abc123',1,null,null,'太色情了吧','2019-06-29 06:45:00'),
+('abc123',2,null,null,'不知道在說啥','2019-06-29 06:45:00'),
+('abc123',null,1,null,'亂打一通','2019-06-29 06:45:00'),
+('abc123',null,2,null,'欠檢舉','2019-06-29 06:45:00'),
+('abc123',null,null,1,'就想檢舉阿','2019-06-29 06:45:00'),
+('abc123',null,null,2,'封鎖他!!!','2019-06-29 06:45:00');

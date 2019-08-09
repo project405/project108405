@@ -10,7 +10,9 @@ CREATE TABLE "public"."member" (
 	"memMail" varchar(100) COLLATE "pg_catalog"."default" ,
 	"memGender" char(1) COLLATE "pg_catalog"."default" ,
 	"memNoti" BOOLEAN DEFAULT FALSE , 
-	"memAddr" varchar(100) COLLATE "pg_catalog"."default"
+	"memAddr" varchar(100) COLLATE "pg_catalog"."default",
+"memAuthority" char(4) 
+
 );
 COMMENT ON COLUMN "public"."member"."memGender" IS 'M or F';
 COMMENT ON COLUMN "public"."member"."memNoti" IS 'T or F';
@@ -408,13 +410,35 @@ CREATE TABLE "public"."tagLinkArticle" (
 DROP TABLE IF EXISTS "public"."report";
 CREATE TABLE "public"."report" (
   "reportNum" serial , 
+"memID" varchar(100)	COLLATE "pg_catalog"."default" ,
   "artiNum" int4 , 
 	"artiMessNum" int4 ,
 	"recomMessNum" int4 , 
 	"reportReason" text ,
+	"reportDateTime" TIMESTAMP ,
 	
 	FOREIGN KEY("artiNum") REFERENCES "article"("artiNum")ON DELETE CASCADE  ON UPDATE RESTRICT ,
 	FOREIGN KEY("artiMessNum") REFERENCES "articleMessage"("artiMessNum")ON DELETE CASCADE  ON UPDATE RESTRICT ,
 FOREIGN KEY("recomMessNum") REFERENCES "recommendMessage"("recomMessNum")ON DELETE CASCADE  ON UPDATE RESTRICT 	
 );
 	ALTER TABLE "public"."report" ADD CONSTRAINT "report_pkey" PRIMARY KEY ("reportNum");
+
+-- ------------------------------
+--    Create image table 
+-- ------------------------------
+DROP TABLE IF EXISTS "public"."image";
+CREATE TABLE "public"."image" (
+  "imgNum" serial , 
+  "memID" varchar(100)	COLLATE "pg_catalog"."default" ,
+	"artiNum" int4 ,
+"artiMessNum" int4 ,
+"recomMessNum" int4 ,
+"imgName" text ,
+"imgDateTime" timestamp	,
+FOREIGN KEY("memID") REFERENCES "member"("memID")ON DELETE CASCADE  ON UPDATE RESTRICT ,
+FOREIGN KEY("artiNum") REFERENCES "article"("artiNum")ON DELETE CASCADE  ON UPDATE RESTRICT ,
+FOREIGN KEY("artiMessNum") REFERENCES "articleMessage"("artiMessNum")ON DELETE CASCADE  ON UPDATE RESTRICT ,
+FOREIGN KEY("recomMessNum") REFERENCES "recommendMessage"("recomMessNum")ON DELETE CASCADE  ON UPDATE RESTRICT 
+);
+	ALTER TABLE "public"."image" ADD CONSTRAINT "image_pkey" PRIMARY KEY ("imgNum");
+

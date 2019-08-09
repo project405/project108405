@@ -26,13 +26,21 @@ body {
         width: 100%;
         height: auto;
     }
+    span.changeCode {
+        margin: 1em 0.1em;
+    }
 }
 
 div.logIn,
 div.signUp {
     width: 100%;
-    padding: 0 1em 0 1em;
+    padding: 0 0.5em;
     padding-bottom: 3em;
+}
+
+input:focus {
+    outline: rgba(45, 79, 65, 0.329) dashed 3px;
+    overflow: hidden;
 }
 
 
@@ -43,6 +51,15 @@ div.signUp {
 
 
 /* --------------------- */
+
+#logIn button.login {
+    margin: 1em 0 !important;
+    width: 80%;
+}
+
+button.sameWidth {
+    width: 40%;
+}
 
 #logIn form.logIn {
     margin-bottom: 3em;
@@ -72,9 +89,8 @@ div.signUp {
 
 #logIn button.third,
 #logIn button.login {
-    margin: 0.75em;
+    margin: 0.5em;
     float: center !important;
-    width: 85%;
 }
 
 #logIn button.fb {
@@ -95,6 +111,44 @@ div.signUp {
 #logIn button.gmail:hover {
     background-color: #e94444;
     transition: 0.3s;
+}
+
+#logIn button.gmail:focus {
+    box-shadow: 0 0 0 0.2rem #e9444459;
+}
+
+.code {
+    font-family: Arial;
+    font-style: italic;
+    font-weight: bold;
+    border: 0;
+    letter-spacing: 3px;
+    color: #2D4F41;
+    margin-left: 0.5em;
+}
+
+input.code {
+    width: 6em;
+}
+
+input.inputValidateCode {
+    width: 8em;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+span.changeCode {
+    color: #2D4F41;
+    text-decoration: none;
+    font-weight: bolder;
+    text-decoration: #2D4F41;
+    cursor: pointer;
+    margin: 0.1em;
+}
+
+i.fa-sync-alt {
+    color: black;
+    font-size: 20px;
 }
 
 
@@ -174,8 +228,9 @@ div.radio {
     vertical-align: middle;
     margin: 1em;
     cursor: pointer;
-    width: 6em;
+    width: 4.5em;
     font-size: 1em;
+    padding-right: 0;
 }
 
 .radio-custom-label {
@@ -200,11 +255,23 @@ div.radio {
 
 .radio-custom:checked+.radio-custom-label:before {
     content: "\f00c";
+    font-size: 25px;
+    line-height: 25px;
     font-family: 'FontAwesome';
     color: black;
 }
 
-.radio-custom:focus+.radio-custom-label {
-    outline: 1px solid #ddd;
-    /* focus style */
+
+/* validate */
+
+p {
+    text-align: right;
+    color: #eb6363;
+    /* font-weight: bolder; */
+    font-size: 0.75em;
+    padding-left: 2em;
+}
+
+i.alarm {
+    font-size: 12.5pt;
 }

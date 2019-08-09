@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
 html,
 body {
     height: 100%;
@@ -12,10 +13,21 @@ body {
     background-size: cover;
 }
 
+@media (max-width: 1024px) {
+    html,
+    body {
+        background: url("../imgs/background/phone/ParticleBac.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+    
+}
+
 div.container-fluid,
 div.row {
     margin: 0;
-    padding-bottom: 3em;
+    padding-bottom: 2em;
 }
 
 
@@ -34,13 +46,12 @@ div.article {
 
 .wrapperCard {
     width: 100%;
-    height: 180pt;
     overflow: hidden;
     background-size: cover;
-    background-position: center center;
-    border-radius: .2em;
+    /* background-position: center center; */
+    border-radius: 8px;
     border: 3px solid #fff;
-    text-align: left !important;
+    /* text-align: left !important; */
 }
 
 p.poster {
@@ -50,6 +61,12 @@ p.poster {
 
 #articleList .card {
     margin-bottom: 1em;
+    display:-webkit-box;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-height: 4;
 }
 
 .card-text {
@@ -100,15 +117,23 @@ hr.info {
 
 div.tagDiv {
     padding: 0em;
-    margin-bottom: 1em;
+    
 }
 
 div.floor {
     margin-bottom: 0.5em;
 }
+div.articleContent{
+    padding-left: 0;
+}
+
+div.seperate{
+    padding-bottom: 1em;
+}
 
 div.info {
     margin-left: 0.45em;
+    white-space: nowrap;
 }
 
 
@@ -126,21 +151,6 @@ div.info {
 }
 
 
-/* ------------------- */
-
-
-/* search */
-
-
-/* ------------------- */
-
-div.search {
-    width: 100%;
-    margin-bottom: 0.75em;
-    float: right;
-}
-
-
 /*  button */
 
 button.footer {
@@ -153,71 +163,8 @@ button.footer {
 
 @media (max-width: 450px) {
     button.footer {
-        font-size: 0.85em;
+        font-size: 0.8em;
     }
-}
-
-
-/* Style the search field */
-
-.form-inline input {
-    -webkit-box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
-    box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
-    padding: 0.75em 0.75em;
-    margin-right: 0em;
-    height: auto;
-    border: #b3b3b3 solid 0.75px;
-    border-radius: 8px;
-}
-
-.form-inline input:focus {
-    border: #b3b3b3 solid 0.75px;
-}
-
-button.search {
-    -webkit-box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
-    box-shadow: 0 0.1875em 0.1875em 0 rgba(0, 0, 0, 0.1) !important;
-    padding: 0.75em 0!important;
-    margin-left: 0 !important;
-    letter-spacing: .15em;
-    border: 0;
-    border-radius: 8px;
-    font-size: 1em;
-    width: 6em !important;
-}
-
-button.search {
-    background-color: rgb(72, 104, 90);
-}
-
-button.search:hover {
-    background-color: #2D4F41;
-}
-
-button.search:focus {
-    background-color: #2D4F41;
-    color: white;
-}
-
-button.search:active {
-    background-color: rgb(11, 51, 35) !important;
-}
-
-@media (max-width: 576px) {
-    button.search {
-        width: 50% !important;
-        float: right !important;
-        margin-left: auto !important;
-    }
-}
-
-
-/* Clear floats */
-
-form.search::after {
-    content: "";
-    clear: both;
-    display: table;
 }
 
 
@@ -245,19 +192,14 @@ h2 {
 
 /* postButton */
 
-div.btnPost {
-    position: absolute;
-    left: 90%;
-    top: 10%;
-    z-index: 2;
-    opacity: 0.5;
-}
-
 button.postButton {
-    padding: 0.3em;
-    font-size: 1em;
     background-color: #2D4F41;
     color: white;
+    margin: 0.2em;
+    height: auto;
+    font-size: 1em;
+    opacity: 0.89;
+    padding: 0.2em 0.3em;
 }
 
 button.postButton:hover {
@@ -266,8 +208,24 @@ button.postButton:hover {
     opacity: 100%;
 }
 
-@media (max-width: 827px) {
+@media (max-width: 450px) {
     button.postButton {
-        font-size: 0.85em;
+        font-size: 0.8em;
     }
+}
+
+
+img.upload-img {
+    max-height: 450px;
+    max-width: 70%;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 0.35em;
+}
+
+.limitLine {
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

@@ -11,6 +11,12 @@ router.get('/', function (req, res, next) {
   } else {
     collection.getCollArticle(req.session.memID).then(data => {
       console.log(data);
+      for (var i = 0; i < data[0].length; i++) {
+        if (data[0][i].artiCont.match("\\:imgLocation") != null) {
+          console.log("近來囉");
+          data[0][i].artiCont = data[0][i].artiCont.replace(/\\:imgLocation/g, "");
+        }
+      }
       if (data == null) {
         res.render('error');  //導向錯誤頁面
       } else if (data == -1) {

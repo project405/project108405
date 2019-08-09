@@ -32,7 +32,7 @@ var storage = multer.diskStorage({
         buf = buf.replace('|', '');
         buf = buf.replace('\"', '');
         buf += imgType;
-        imgName = moment(Date.now()).format("YYYY-MM-DD_hh-mm-ss") + "--" + buf;
+        imgName = Date.now() + "--" + buf;
         //設定檔案名稱並儲存
         cb(null, imgName);
     }
@@ -43,45 +43,97 @@ var upload = multer({
 
 
 //post請求
-router.post('/', upload.single('userImg'), function (req, res, next) {
+router.post('/', upload.array('userImg', 3), function (req, res, next) {
     var memID = req.session.memID;
     var artiHead = req.body.artiHead;
     var artiCont = req.body.artiCont;
     var artiClass = req.body.artiClass;
-    var postDateTime = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
-    var picture = imgName;
+    console.log(req.body);
+    var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
+    var tagData = [];
+    var imgData = [];
+    // console.log(req.files);
+    //將所有換行符號替代成<br> 
+    artiCont = artiCont.replace(/\n/g, "<br>");
+
+    for (var i in req.files) {
+        imgData.push(req.files[i].filename);
+        console.log("files= ", req.files[i]);
+        // if (artiCont.match("\\:imgLocation") != null) {
+        //     console.log("近來囉");
+        //     // artiCont = artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
+        //     artiCont = artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + req.files[i].filename + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
+        // }
+
+    }
+
+    console.log(artiCont);
+    // console.log(imgData);
+    // tag
+    if (req.body.tag != '') {
+        tagData = req.body.tag.split(",");
+    }
     // console.log("typeof", typeof req.file);
     if (memID == undefined || memID == null) {
-        res.render('logIn');
+        if (req.body.userImg != 'undefined') {
+            for (var i = 0; i < imgData.length; i++) {
+                fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+            }
+        }
+        res.send("請進行登入");
     } else {
-        console.log(req.file,imgType);
+        // console.log(req.file,imgType);
         if (typeof (req.file) != 'undefined') {
             //如果檔案超過限制大小
-            if (req.file.size > maxSize) { 
+            if (req.file.size > maxSize) {
                 isRender = false;
-                picture = null ;
-                fs.unlinkSync('public/userImg/' + imgName); //刪除檔案
-                res.write('<head><meta charset="utf-8"/></head>');
-                res.end('<script> alert("圖片過大，僅接受1M以下的圖片"); history.back();</script>');
+                for (var i = 0; i < imgData.length; i++) {
+                    fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                }
+                res.send("圖片過大，僅接受1M以下的圖片");
             }
-             //如果檔案類型不符合規定
-            if ((imgType != '.png' && imgType != '.jpg' && imgType != '.jpeg' && imgType !='.jfif') && isRender) {
+            //如果檔案類型不符合規定
+            if ((imgType != '.png' && imgType != '.jpg' && imgType != '.jpeg' && imgType != '.jfif') && isRender) {
                 isRender = false;
-                picture = null ;
-                fs.unlinkSync('public/userImg/' + imgName);
-                res.write('<head><meta charset="utf-8"/></head>');
-                res.end('<script> alert("只能上傳.jpg , .png , .jpeg , .jfif 類型的檔案"); history.back();</script>');
+                for (var i = 0; i < imgData.length; i++) {
+                    fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                }
+                res.send("只能上傳.jpg , .png , .jpeg , .jfif 類型的檔案");
             }
         }
         if (isRender) {
-            member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, picture).then(data => {
-                if (data == 0) {
-                    res.redirect('/articleList');
-                } else {
-                    res.render('error');  //導向錯誤頁面
+            if (artiHead == 'undefined' || artiCont == '') {
+                if (req.body.userImg != 'undefined') {
+                    for (var i = 0; i < imgData.length; i++) {
+                        fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                    }
                 }
-
-            })
+                res.send("標題及內容不可為空，請重新輸入");
+            } else {
+                if (req.body.userImg == 'undefined') {
+                    for (var i = 0; i < imgData.length; i++) {
+                        fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                    }
+                }
+                member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData).then(data => {
+                    if (data == 0) {
+                        console.log("發文成功");
+                        res.send("發文成功");
+                    } else {
+                        for (var i = 0; i < imgData.length; i++) {
+                            fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                        }
+                        console.log("發文失敗");
+                        res.send("發文失敗");
+                    }
+                })
+            }
+        } else {
+            for (var i = 0; i < imgData.length; i++) {
+                fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+            }
+            console.log("發文失敗");
+            res.send("發文失敗");
         }
     }
 

@@ -2,18 +2,17 @@ var express = require('express');
 var router = express.Router();
 
 const article = require('../utility/article');
-var moment = require('moment');
+
 //接收GET請求
 router.get('/', function (req, res, next) {
     var memID = req.session.memID;
     article.getArticleList(memID).then(data => {
-        // console.log(data[3][1].length);
-        // console.log(data[0][0]);
-        // console.log(data[0].length);
-        // console.log(data[1][1]);
-        // for (let i = 0; i < data.length; i++) {
-        //     data[i].artiDateTime = moment(data[i].artiDateTime).format("YYYY-MM-DD HH:mm:ss");
-        // }
+        for (var i = 0; i < data[0].length; i++) {
+            if (data[0][i].artiCont.match("\\:imgLocation") != null) {
+                data[0][i].artiCont = data[0][i].artiCont.replace(/\\:imgLocation/g, "");
+            }
+        }
+
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data.length > 0) {
