@@ -51,7 +51,7 @@
                             新增推薦</a>
                     </li>
                     <!-- 如果帳號是一般會員 -->
-                    <% }else {%>
+                    <% } else { %>
                     <li class="nav-item">
                         <a class="nav-link" href="recommendPost.html">
                             新增推薦</a>
@@ -74,8 +74,8 @@
                             文章</a>
                     </li>
                     <li id="dropdown" class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             收藏
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -92,7 +92,7 @@
                         <a class="nav-link" href="/login">登入</a>
                     </li>
                     <!-- 如果還沒登入 login 顯示 -->
-                    <% }else {%>
+                    <% } else { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">登入</a>
                     </li>
@@ -111,7 +111,7 @@
                         </div>
                     </li>
                     <!-- 如果還沒登入則隱藏"會員"清單 -->
-                    <% }else {%>
+                    <% } else { %>
                     <li class="nav-item dropdown" style="display: none">
                         <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -212,21 +212,29 @@
                             <p class="poster">
                                 <%= items[1][0].memID %> 於 <%= items[1][0].artiDateTime %>發佈
                             </p>
+                            
                             <!-- tag -->
                             <div class="tagDiv">
-                                <button type="button" class="btn  tag">黎明的承諾</button>
-                                <button type="button" class="btn  tag">壓抑沉鬱</button>
-                                <button type="button" class="btn  tag">法國</button>
-                                <button type="button" class="btn  tag">大時代</button>
-                                <button type="button" class="btn  tag">大時代</button>
-
+                                <% if(items[5] != undefined) { %>
+                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                        <% if(items[5].artiNum == items[1][0].artiNum) { %>
+                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                                
                             </div>
                         </div>
+
                         <!-- imgs -->
-                        <% if(items[4][items[1][0].artiNum]){%>
-                        <div class="wrapperCardbig card-img-bottom"
-                            style="background-image: url( '/userImg/<%= items[4][items[1][0].artiNum] %>'); ">
-                        </div>
+                        <% if(items[4] != undefined ){%>
+                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
+                                <% if (items[1][0].artiNum == items[4][j].artiNum){ %>
+                                    <div class="wrapperCardbig card-img-bottom"
+                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                                    </div>
+                                <% } %>
+                            <% } %>
                         <% } %>
                     </div>
                 </div>
@@ -243,17 +251,28 @@
                             <p class="poster">
                                 <%= items[1][1].memID %> 於 <%= items[1][1].artiDateTime %> 發佈
                             </p>
+
+                            <!-- tag -->
                             <div class="tagDiv">
-                                <button type="button" class="btn  tag">汪冠宇</button>
-                                <button type="button" class="btn  tag">海浪</button>
-                                <button type="button" class="btn  tag">溫暖歌聲</button>
+                                <% if(items[5] != undefined) { %>
+                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                        <% if(items[5].artiNum == items[1][1].artiNum) { %>
+                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
                             </div>
                         </div>
+
                         <!-- imgs -->
-                        <% if(items[4][items[1][1].artiNum]){%>
-                        <div class="wrapperCardbig card-img-bottom"
-                            style="background-image: url( '/userImg/<%= items[4][items[1][1].artiNum] %>'); ">
-                        </div>
+                        <% if(items[4] != undefined ){ %>
+                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
+                                <% if (items[1][1].artiNum == items[4][j].artiNum){ %>
+                                    <div class="wrapperCardbig card-img-bottom"
+                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                                    </div>
+                                <% } %>
+                            <% } %>
                         <% } %>
                     </div>
                     <!-- 精選右邊上面的格子結束 -->
@@ -271,18 +290,28 @@
                             <p class="poster">
                                 <%= items[1][2].memID %> 於 <%= items[1][2].artiDateTime %> 發佈
                             </p>
-                            <div class="tagDiv">
-                                <button type="button" class="btn  tag">華山</button>
-                                <button type="button" class="btn  tag">自然森活</button>
-                                <button type="button" class="btn  tag">再生資源</button>
 
+                            <!-- tag -->
+                            <div class="tagDiv">
+                                <% if(items[5] != undefined) { %>
+                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                        <% if(items[5].artiNum == items[1][2].artiNum) { %>
+                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
                             </div>
                         </div>
-                        <!-- imgs -->
-                        <% if(items[4][items[1][2].artiNum]){%>
-                        <div class="wrapperCardbig card-img-bottom"
-                            style="background-image: url( '/userImg/<%= items[4][items[1][2].artiNum] %>'); ">
-                        </div>
+
+                         <!-- imgs -->
+                         <% if(items[4] != undefined ) { %>
+                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
+                                <% if (items[1][2].artiNum == items[4][j].artiNum){ %>
+                                    <div class="wrapperCardbig card-img-bottom"
+                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                                    </div>
+                                <% } %>
+                            <% } %>
                         <% } %>
 
                     </div>

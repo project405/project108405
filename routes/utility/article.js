@@ -289,7 +289,7 @@ var getArticleClassList = async function (articleClass , memID){
             isLike = undefined;
         });  
 
-         //----------- 取得第一張照片 ----------- 
+    //----------- 取得照片 ----------- 
     await sql('SELECT "artiNum" , "imgName" FROM "image"')
     .then((data) => {
         if (data.rows == null || data.rows == '') {
@@ -312,8 +312,6 @@ var getArticleClassList = async function (articleClass , memID){
         }
     })
 
-   
-
     result[0] = articleList ;
     result[1] = tag ; 
     result[2] = isCollection ;
@@ -327,54 +325,54 @@ var getArticleClassList = async function (articleClass , memID){
 //=========================================
 //---------  getHotArticle() -------------
 //=========================================
-var getHotArticle = async function () {
-    var result = [];
-    var mydata = [];
-    var articleLikeCount = [] //存放 articleLike表中裡面的 artiNum欄位
-    var max = 0; // 尋找在articleLike表中 出現最多次的artiNum
-    var times = 0; //作為判斷是否取得三篇文章的開關
-    var hotArticle = [];  //存放前三名熱門文章
+// var getHotArticle = async function () {
+//     var result = [];
+//     var mydata = [];
+//     var articleLikeCount = [] //存放 articleLike表中裡面的 artiNum欄位
+//     var max = 0; // 尋找在articleLike表中 出現最多次的artiNum
+//     var times = 0; //作為判斷是否取得三篇文章的開關
+//     var hotArticle = [];  //存放前三名熱門文章
 
-    await sql('select "articleLike"."artiNum" from "articleLike"')
-        .then((data) => {
-            result = data.rows;
-            //初始化陣列 
-            for (let i = 0; i <= result.length; i++) {
-                articleLikeCount[i] = 0;
-            }
-            //將取得的文章編號做計算 (articleLikeCount陣列維度代表第幾篇文章 裡面的值代表共有幾個讚)
-            for (let i = 0; i < result.length; i++) {
-                articleLikeCount[result[i].artiNum] += 1;
-            }
-            // console.log(articleLikeCount);
-            //尋找前三名
-            max = Math.max(...articleLikeCount);  //取得最大值
-            while (times < 3) {
-                for (let i = 1; i <= articleLikeCount.length; i++) {
-                    if (times == 3) break;
-                    if (articleLikeCount[i] == max) {
-                        hotArticle[times] = i;
-                        times += 1;
-                    }
-                }
-                max -= 1;
-            }
-        }, (error) => {
-            result = null;
-        });
-    // 撈前三篇文章的資訊
-    for (let i = 0; i < 3; i++) {
-        await sql('select * from "article" where "artiNum" = $1 ', [hotArticle[i]])
-            .then((data) => {
-                data.rows[0].artiDateTime = moment(data.rows[0].artiDateTime).format("YYYY-MM-DD HH:mm:ss");
-                mydata[i] = data.rows;
-            }, (error) => {
-                mydata = null;
-            });
-    }
+//     await sql('select "articleLike"."artiNum" from "articleLike"')
+//         .then((data) => {
+//             result = data.rows;
+//             //初始化陣列 
+//             for (let i = 0; i <= result.length; i++) {
+//                 articleLikeCount[i] = 0;
+//             }
+//             //將取得的文章編號做計算 (articleLikeCount陣列維度代表第幾篇文章 裡面的值代表共有幾個讚)
+//             for (let i = 0; i < result.length; i++) {
+//                 articleLikeCount[result[i].artiNum] += 1;
+//             }
+//             // console.log(articleLikeCount);
+//             //尋找前三名
+//             max = Math.max(...articleLikeCount);  //取得最大值
+//             while (times < 3) {
+//                 for (let i = 1; i <= articleLikeCount.length; i++) {
+//                     if (times == 3) break;
+//                     if (articleLikeCount[i] == max) {
+//                         hotArticle[times] = i;
+//                         times += 1;
+//                     }
+//                 }
+//                 max -= 1;
+//             }
+//         }, (error) => {
+//             result = null;
+//         });
+//     // 撈前三篇文章的資訊
+//     for (let i = 0; i < 3; i++) {
+//         await sql('select * from "article" where "artiNum" = $1 ', [hotArticle[i]])
+//             .then((data) => {
+//                 data.rows[0].artiDateTime = moment(data.rows[0].artiDateTime).format("YYYY-MM-DD HH:mm:ss");
+//                 mydata[i] = data.rows;
+//             }, (error) => {
+//                 mydata = null;
+//             });
+//     }
 
-    return mydata;
-}
+//     return mydata;
+// }
 
 //=========================================
 //---------  getArtiLikeCount() -------------
@@ -470,6 +468,6 @@ var getRecomMessLikeCount = async function (recomMessNum) {
 module.exports = {
     getArticleList, getOneArticle,
     getArticleClassList,
-    getHotArticle, getArtiLikeCount, getRecomLikeCount,
+    getArtiLikeCount, getRecomLikeCount,
     getArtiMessLikeCount, getRecomMessLikeCount
 };
