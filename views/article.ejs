@@ -39,7 +39,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <!-- 如果帳號不是管理員則不顯示 -->
-                    <% if(items[10] == undefined){ %>
+                    <% if(items[8] == undefined){ %>
                     <li class="nav-item" style="display: none">
                         <a class="nav-link" href="recommendPost.html">
                             新增推薦</a>
@@ -81,7 +81,7 @@
                         <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>
                     </li>
                     <!-- 已經登入的話 login 隱藏 -->
-                    <% if(items[8][0] != undefined){ %>
+                    <% if(items[7][0] != undefined){ %>
                     <li class="nav-item" style="display: none">
                         <a class="nav-link" href="/login">登入</a>
                     </li>
@@ -92,7 +92,7 @@
                     </li>
                     <% } %>
                     <!-- 已經登入的話"會員"下拉式清單 顯示 -->
-                    <% if(items[8][0] != undefined){ %>
+                    <% if(items[7][0] != undefined){ %>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -160,8 +160,8 @@
                 </p>
                 <!-- tag -->
                 <div class="tagDiv col-lg-12 ">
-                    <% for (var i = 0 ; i< items[5][0].length ; i++) { %>
-                    <button type="button" class="btn  tag"><%= items[5][0][i] %></button>
+                    <% for (var i = 0 ; i< items[2].length ; i++) { %>
+                        <button type="button" class="btn  tag"><%= items[2][i].tagName %></button>
                     <% } %>
                 </div>
                 <hr class="info">
@@ -169,35 +169,36 @@
                 <div class="info">
                     <!-- 愛心按鈕 -->
                     <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/logIn'"> <i
-                            class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
+                            class="fab fa-gratipay"></i><a><%= items[0][0].likeCount %></a></button>
                     <button type="button" id="addLike" class="btn postInfo"
                         onclick=<%= "addLike(" + items[0][0].artiNum + ")" %>> <i class="fab fa-gratipay"></i><a
-                            id="addLikeCount"> <%= items[2][0].count %> </a></button>
+                            id="addLikeCount"> <%= items[0][0].likeCount %> </a></button>
                     <button type="button" id="delLike" class="btn postInfo" style="color:#c93737"
                         onclick=<%= "delLike(" + items[0][0].artiNum + ")" %>><i class="fab fa-gratipay"></i><a
-                            id="delLikeCount"><%= items[2][0].count %></a></button>
+                            id="delLikeCount"><%= items[0][0].likeCount %> </a></button>
                     <!-- 如果沒登入 -->
-                    <% if(items[8][0] == undefined) {%>
+                    <% if(items[7][0] == undefined) {%>
                     <script type="text/javascript">
                         document.getElementById("LikeUnLogIn").style.display = "inline";
                         document.getElementById("addLike").style.display = "none";
                         document.getElementById("delLike").style.display = "none";
                     </script>
 
-                    <!-- 如果有登入及沒按過愛心       -->
-                    <% }else if(items[7][0] == 1 && items[8][0] != undefined ) {%>
+                    <!-- 如果有登入及沒按過愛心 -->
+                    <% }else if(items[4] == undefined && items[7][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("addLike").style.display = "inline";
                         document.getElementById("LikeUnLogIn").style.display = "none";
                         document.getElementById("delLike").style.display = "none";
                     </script>
                     <!-- 如果有登入及按過愛心 -->
-                    <% }else if(items[7][0] == 0 && items[8][0] != undefined) {%>
+                    <% }else if(items[4][0] != undefined && items[7][0] != undefined) {%>
                     <script type="text/javascript">
                         document.getElementById("delLike").style.display = "inline";
                         document.getElementById("addLike").style.display = "none";
                         document.getElementById("LikeUnLogIn").style.display = "none";
                     </script>
+                    <!-- 邏輯錯誤 -->
                     <% } else {%>
                     <script type="text/javascript">
                         document.getElementById("delLike").style.display = "none";
@@ -208,7 +209,7 @@
 
                     <!-- 留言數量按鈕 -->
                     <button type="button" class="btn postInfo" id="goBottom"><i
-                            class="fas fa-comment-dots"></i><a><%= items[3][0].count %></a></button>
+                            class="fas fa-comment-dots"></i><a><%= items[0][0].messCount %></a></button>
 
                     <!-- 收藏按鈕 -->
                     <button type="button" id="unLogIn" class="btn postInfo" onclick="location.href='/logIn'">
@@ -223,22 +224,22 @@
                         <i class="fas fa-bookmark"></i></button>
 
                     <!-- 如果沒登入 -->
-                    <% if(items[8][0] == undefined) {%>
+                    <% if(items[7][0] == undefined) {%>
                     <script type="text/javascript">
                         document.getElementById("unLogIn").style.display = "inline";
                         document.getElementById("addColle").style.display = "none";
                         document.getElementById("delColle").style.display = "none";
                     </script>
 
-                    <!-- 如果有登入及沒按過收藏       -->
-                    <% }else if(items[6][0] == 1 && items[8][0] != undefined ) {%>
+                    <!-- 如果有登入及沒按過收藏 -->
+                    <% }else if(items[3] == undefined && items[7][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("addColle").style.display = "inline";
                         document.getElementById("unLogIn").style.display = "none";
                         document.getElementById("delColle").style.display = "none";
                     </script>
                     <!-- 如果有登入及按過收藏 -->
-                    <% }else {%>
+                    <% }else if(items[3] != undefined && items[7][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("delColle").style.display = "inline";
                         document.getElementById("addColle").style.display = "none";
@@ -468,14 +469,14 @@
                         <button type="button"
                             id=<%= "MessLikeUnLogIn" + items[0][0].artiNum + items[1][i].artiMessNum %> class="btn like"
                             onclick="location.href='/logIn'"><i
-                                class="fab fa-gratipay"></i><a><%= items[4][i].count %></a></button>
+                                class="fab fa-gratipay"></i><a><%= items[1][i].likeCount %></a></button>
 
                         <button type="button" id=<%= "MessAddLike"+ items[0][0].artiNum + items[1][i].artiMessNum %>
                             class="btn like"
                             onclick=<%= "MessAddLike(" + items[0][0].artiNum + "," + items[1][i].artiMessNum + ")" %>>
                             <i class="fab fa-gratipay"></i>
                             <a id=<%="MessAddLikeCount" + items[0][0].artiNum + items[1][i].artiMessNum %>>
-                                <%= items[4][i].count %>
+                                <%= items[1][i].likeCount %>
                             </a>
                         </button>
 
@@ -484,30 +485,41 @@
                             onclick=<%= "MessDelLike(" + items[0][0].artiNum + "," + items[1][i].artiMessNum + ")" %>>
                             <i class="fab fa-gratipay"></i>
                             <a id=<%= "MessDelLikeCount" + items[0][0].artiNum + items[1][i].artiMessNum %>>
-                                <%= items[4][i].count %></a>
+                                <%= items[1][i].likeCount %>
+                            </a>
                         </button>
 
                         <!-- 如果沒登入 -->
-                        <% if(items[8][0] == undefined) {%>
+                        <% if(items[7][0] == undefined) {%>
                         <script type="text/javascript">
                             document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "inline";
                             document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
                             document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
                         </script>
-                        <!-- 如果有登入及沒按過愛心       -->
-                        <% }else if(items[9][i] == 1 && items[8][0] != undefined ) {%>
-                        <script type="text/javascript">
-                            document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%=  items[1][i].artiMessNum %>").style.display = "inline";
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                            document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                        </script>
-                        <!-- 如果有登入及按過愛心 -->
-                        <% }else if(items[9][i] == 0 && items[8][0] != undefined ) {%>
-                        <script type="text/javascript">
-                            document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "inline";
-                            document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                        </script>
+                        <!-- 如果有登入 -->
+                        <% }else if(items[7][0] != undefined ) {%>
+                            <% var isLike = false %>
+                            <% if(items[5] != undefined){ %>
+                                <% for(var j = 0 ; j < items[5].length ; j++) { %>
+                                    <!-- 如果有按愛心 -->
+                                    <% if (items[5][j].artiMessNum == items[1][i].artiMessNum){ %>
+                                        <script type="text/javascript">
+                                            document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "inline";
+                                            document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                                        </script>
+                                        <% isLike = true %>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                            <!-- 如果沒有按過愛心 -->
+                            <% if( isLike == false ){ %> 
+                                <script type="text/javascript">
+                                    document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%=  items[1][i].artiMessNum %>").style.display = "inline";
+                                    document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                                    document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                                </script>
+                            <% } %>
                         <% }else {%>
                         <script type="text/javascript">
                             document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
@@ -543,16 +555,6 @@
 
         </div>
         <!-- replying end -->
-
-        <!-- <div class="row d-flex justify-content-center">
-            <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-
-                <button type="button" class="btn btn-secondary footer" id="goBottom">去留言</button>
-                <button type="button" class="btn btn-secondary footer">愛心</button>
-                <button type="button" class="btn btn-secondary footer">收藏</button>
-
-            </div>
-        </div> -->
 
         <a href="#" id="gotop">
             <i class="fa fa-angle-up"></i>
