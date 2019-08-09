@@ -40,13 +40,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <!-- 如果帳號不是管理員則不顯示 -->
-                    <% if(items[7] == undefined){ %>
+                    <% if(items[6] == undefined){ %>
                     <li class="nav-item" style="display: none">
                         <a class="nav-link" href="recommendPost.html">
                             新增推薦</a>
                     </li>
                     <!-- 如果帳號是一般會員 -->
-                    <% }else {%>
+                    <% } else { %>
                     <li class="nav-item">
                         <a class="nav-link" href="recommendPost.html">
                             新增推薦</a>
@@ -82,18 +82,18 @@
                         <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>
                     </li>
                     <!-- 已經登入的話 login 隱藏 -->
-                    <% if(items[6][0] != undefined){ %>
+                    <% if(items[5][0] != undefined){ %>
                     <li class="nav-item" style="display: none">
                         <a class="nav-link" href="/login">登入</a>
                     </li>
                     <!-- 如果還沒登入 login 顯示 -->
-                    <% }else {%>
+                    <% } else { %>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">登入</a>
                     </li>
                     <% } %>
                     <!-- 已經登入的話"會員"下拉式清單 顯示 -->
-                    <% if(items[6][0] != undefined){ %>
+                    <% if(items[5][0] != undefined){ %>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -182,17 +182,26 @@
                                     </p>
                                     <!-- tag -->
                                     <div class=" tagDiv col-lg-12 ">
-                                        <% for(var j=0; j<items[3][i].length; j++) {%>
-                                        <button type=" button" class="btn  tag"><%= items[3][i][j] %></button>
+                                        <% if(items[1] != undefined) { %>
+                                            <% for(var j=0; j<items[1].length; j++) {%>
+                                                <% if(items[0][i].artiNum == items[1][j].artiNum){ %>     
+                                                    <button type=" button" class="btn  tag"><%= items[1][j].tagName %></button>                            
+                                                <% } %>
+                                            <% } %>
                                         <% } %>
                                     </div>
                                 </div>
-                                
+
                                 <!-- imgs  -->
-                                <% if(items[8][items[0][i].artiNum]){%>
-                                <div class="wrapperCard card-img-top col-lg-3"
-                                    style="background-image: url( '/userImg/<%= items[8][items[0][i].artiNum] %>'); ">
-                                </div>
+                                <% if(items[3].length != undefined) { %>
+                                    <% for(var j = 0 ; j<items[3].length ; j++) { %>
+                                        <% if (items[0][i].artiNum == items[3][j].artiNum){ %>
+                                            <div class="wrapperCard card-img-top col-lg-3"
+                                                style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
+                                            </div>
+                                            <% break %>
+                                        <% } %>
+                                    <% } %>
                                 <% } %>
                             </div>
                         </div>
@@ -201,47 +210,56 @@
                             <!-- 愛心按鈕 -->
                             <button type="button" id=<%= "LikeUnLogIn" + items[0][i].artiNum %> class="btn postInfo"
                                 onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
-                                <a><%= items[1][i+1] %></a></button>
+                                <a><%= items[0][i].likeCount %></a></button>
                             <button type="button" id=<%="addLike" + items[0][i].artiNum %> class="btn postInfo"
                                 onclick=<%= "addLike(" + items[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + items[0][i].artiNum %>>
-                                    <%= items[1][i+1] %> </a> </button>
+                                    <%= items[0][i].likeCount %> </a> </button>
                             <button type="button" id=<%= "delLike" + items[0][i].artiNum %> class="btn postInfo"
                                 style="color:#c93737" onclick=<%= "delLike(" + items[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + items[0][i].artiNum %>>
-                                    <%= items[1][i+1] %></a></button>
+                                    <%= items[0][i].likeCount %></a></button>
                             <!-- 如果沒登入 -->
-                            <% if(items[6][0] == undefined) {%>
+                            <% if(items[5][0] == undefined) {%>              
                             <script type="text/javascript">
                                 document.getElementById("LikeUnLogIn" + "<%= items[0][i].artiNum %>").style.display = "inline";
                                 document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "none";
                                 document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "none";
                             </script>
-                            <!-- 如果有登入及沒按過愛心       -->
-                            <% }else if(items[5][i] == 1 && items[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("LikeUnLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "none";
-                            </script>
-                            <!-- 如果有登入及按過愛心 -->
-                            <% }else if(items[5][i] == 0 && items[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("LikeUnLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
-                            </script>
-                            <% }else {%>
-                            <script type="text/javascript">
-                                document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("LikeUnLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
-                            </script>
+                            <!-- 如果有登入-->
+                            <% } else if(items[5][0] != undefined ) { %>
+                                <!-- 判斷是否有按過愛心 -->
+                                <% var isLike = false %>
+                                <%  for (var j = 0; j < items[2].length ; j++) { %>
+                                    <!-- 如果有按過愛心 -->
+                                    <% if(items[0][i].artiNum == items[2][j].artiNum ) { %>
+                                        <script type="text/javascript">                                  
+                                            document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "inline";
+                                            document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                            document.getElementById("LikeUnLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                        </script>
+                                        <% isLike = true %>
+                                    <% } %>
+                                <% } %>
+                                <!-- 如果沒按過愛心 -->
+                                <% if(isLike == false ){ %>
+                                    <script type="text/javascript">
+                                        document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "inline";
+                                        document.getElementById("LikeUnLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                        document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                    </script>
+                                <% } %>
+                            <% } else { %>
+                                <script type="text/javascript">
+                                    document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                    document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                    document.getElementById("LikeUnLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                </script>
                             <% } %>
 
                             <!-- 留言數量按鈕 -->
                             <button type="button" class="btn postInfo"><i
-                                    class="fas fa-comment-dots"></i><a><%= items[2][i+1] %></a></button>
+                                    class="fas fa-comment-dots"></i><a><%= items[0][i].messCount %></a></button>
 
                             <!-- 收藏按鈕 -->
                             <button type="button" id=<%= "unLogIn" + items[0][i].artiNum %> class="btn postInfo"
@@ -255,33 +273,42 @@
                                 <i class="fas fa-bookmark"></i></button>
 
                             <!--  收藏按鈕控制 -->
-                            <% if(items[6][0] == undefined) {%>
-                            <script type="text/javascript">
-                                document.getElementById("unLogIn" + "<%= items[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("addColle" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("delColle" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                console.log("1");
-                            </script>
-                            <% }else if(items[4][i] == 1 && items[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("addColle" + "<%= items[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("unLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("delColle" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                console.log("2");
-                            </script>
-                            <% }else if(items[4][i] == 0 && items[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("delColle" + "<%= items[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("addColle" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("unLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                console.log("3");
-                            </script>
+                            <!-- 如果登入 -->
+                            <% if(items[5][0] == undefined) {%>
+                                <script type="text/javascript">
+                                    document.getElementById("unLogIn" + "<%= items[0][i].artiNum %>").style.display = "inline";
+                                    document.getElementById("addColle" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                    document.getElementById("delColle" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                </script>
+                            <!-- 如果有登入 -->
+                            <%  }else if(items[5][0] != undefined ) { %>
+                                <% var isCollection = false %>
+                                <% if(items[4] != undefined){ %>
+                                    <% for(var j = 0 ; j < items[4].length ; j++) { %>
+                                        <!-- 如果有收藏 -->
+                                        <% if (items[4][j].artiNum == items[0][i].artiNum){ %>
+                                            <script type="text/javascript">
+                                                document.getElementById("delColle" + "<%= items[0][i].artiNum %>").style.display = "inline";
+                                                document.getElementById("addColle" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                                document.getElementById("unLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                            </script>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                                <!-- 如果沒收藏 -->
+                                <% if( isCollection == false ){ %>
+                                    <script type="text/javascript">
+                                        document.getElementById("addColle" + "<%= items[0][i].artiNum %>").style.display = "inline";
+                                        document.getElementById("unLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                        document.getElementById("delColle" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                    </script>
+                                <% } %>                         
+                            <!-- 錯誤流程 -->
                             <% }else {%>
                             <script type="text/javascript">
                                 document.getElementById("delColle" + "<%= items[0][i].artiNum %>").style.display = "none";
                                 document.getElementById("addColle" + "<%= items[0][i].artiNum %>").style.display = "none";
                                 document.getElementById("unLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                console.log("3");
                             </script>
                             <% } %>
 
@@ -436,6 +463,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="/javascripts/active.js"></script>
+    
 </body>
 
 </html>

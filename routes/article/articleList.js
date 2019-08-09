@@ -7,22 +7,12 @@ const article = require('../utility/article');
 router.get('/', function (req, res, next) {
     var memID = req.session.memID;
     article.getArticleList(memID).then(data => {
-        // console.log(data[3][1].length);
-        // console.log(data[0][0]);
-        // console.log(data[0].length);
-        // console.log(data[1][1]);
-        // for (var i = 0; i < data[0].length; i++) {
-        //     console.log(data[0][i].artiCont);
-        // }
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].artiCont.match("\\:imgLocation") != null) {
-                console.log("近來囉");
                 data[0][i].artiCont = data[0][i].artiCont.replace(/\\:imgLocation/g, "");
             }
         }
 
-
-        console.log("data=", data);
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data.length > 0) {
