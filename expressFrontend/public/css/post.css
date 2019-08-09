@@ -1,0 +1,214 @@
+html,
+body {
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    border: none;
+    background: url("../imgs/background/articleBac.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    padding-top: 3em;
+    height: auto;
+}
+
+@media (max-width: 650px) {
+    html,
+    body {
+        background: url("../imgs/background/phone/ParticleBac.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+}
+
+div.content {
+    padding: 1em 1em 1em 1em;
+    background-color: #eee;
+    opacity: 0.95;
+    margin-bottom: 1em;
+    border-radius: 12px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.post {
+    background-color: #d4d4d4;
+    overflow: auto;
+}
+
+
+/* @media (max-width: 992px) {
+    div.post {
+        padding-bottom: 4em;
+    }
+} */
+
+input.titleInput,
+textarea.postInput {
+    width: 100%;
+    min-height: 50px;
+    height: auto;
+    padding: 0.75em;
+    margin-bottom: 1em;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.89;
+    border-radius: 8px;
+    caret-color: #2D4F41;
+    cursor: text;
+    text-align: justify;
+    border:none;
+}
+
+div.title {
+    min-height: 50px;
+}
+
+div.postInput {
+    min-height: 250px;
+}
+
+
+#postInto {
+    min-height: 150px;
+}
+/* 
+input.titleInput:before {
+    font-family: 'Font Awesome 5 Free';
+    display: inline-block;
+    padding-right: 6px;
+    vertical-align: middle;
+    content: "\f1dc";
+    font-weight: 800;
+    opacity: 0.65;
+} */
+
+input.titleInput:focus,
+textarea.postInput:focus {
+    outline: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: 0.3s ease-in-out;
+    cursor: text;
+    display: block;
+    border:none;
+
+}
+
+.input:empty::before {
+    color: lightgrey;
+    content: attr(placeholder);
+}
+
+
+/*focus時内容為空*/
+
+div.replyInput:focus:before {
+    content: none;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    content: attr(data-text);
+    color: #747474;
+}
+
+input[type="file"] {
+    position: fixed;
+    right: 100%;
+    bottom: 100%;
+    cursor: pointer;
+}
+
+img.upload-img {
+    max-height: 450px;
+    max-width: 70%;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 0.35em;
+}
+
+
+/* ******************** */
+
+
+/* classification */
+
+
+/* ******************** */
+
+#inputState {
+    margin-bottom: 1em;
+}
+
+option {
+    border-radius: 100px;
+}
+
+
+/* ******************** */
+
+
+/* chip */
+
+
+/* ******************** */
+
+div .bootstrap-tagsinput {
+    border: none !important;
+}
+
+div.tag input {
+    border: none !important;
+    overflow: hidden;
+}
+
+span.tag {
+    font-size: 0.9em;
+    background-color: #5580AA;
+    display: inline;
+    padding: 0.4em 0.6em;
+    line-height: 2.5em;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.bootstrap-tagsinput .tag [data-role="remove"]:after {
+    font-family: 'Font Awesome 5 Free';
+    content: "\f057";
+    font-weight: 800;
+    font-size: 15px;
+}
+
+
+/* **************** */
+
+
+/* 4class input */
+
+
+/* **************** */
+
+#inputData input,
+#inputData select {
+    padding: 0.25em 0.5em;
+    margin: 0.5em;
+    border: #f4f4f4 solid 0.5px;
+    border-radius: 8px;
+    height:2.5em;
+    box-shadow: none !important;
+    width: 15em;
+}
+
+#inputData textarea {
+    padding: 0.25em 0.5em;
+    margin-left: 0.5em;
+    border: #f4f4f4 solid 0.5px;
+    border-radius: 8px;
+}
