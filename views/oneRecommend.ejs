@@ -172,12 +172,13 @@
                 <!-- info -->
                 <div class="info">
                     <!-- 愛心按鈕 -->
-                    <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/logIn'"> <i
-                            class="fab fa-gratipay"></i><a><%= items[0][0].likeCount %></a></button>
-                    <button type="button" id="addLike" class="btn postInfo"
+                    <button type="button" id="LikeUnLogIn" class="btn postInfo" style="display:none" 
+                            onclick="location.href='/logIn'"> <i class="fab fa-gratipay"></i><a>
+                            <%= items[0][0].likeCount %></a></button>
+                    <button type="button" id="addLike" class="btn postInfo" style="display:none" 
                         onclick=<%= "addLike(" + items[0][0].recomNum + ")" %>> <i class="fab fa-gratipay"></i><a
                             id="addLikeCount"> <%= items[0][0].likeCount %> </a></button>
-                    <button type="button" id="delLike" class="btn postInfo" style="color:#c93737"
+                    <button type="button" id="delLike" class="btn postInfo" style="color:#c93737; display: none"
                         onclick=<%= "delLike(" + items[0][0].recomNum + ")" %>><i class="fab fa-gratipay"></i><a
                             id="delLikeCount"><%= items[0][0].likeCount %></a></button>
                     <!-- 如果沒登入 -->
@@ -202,12 +203,6 @@
                         document.getElementById("addLike").style.display = "none";
                         document.getElementById("LikeUnLogIn").style.display = "none";
                     </script>
-                    <% } else {%>
-                    <script type="text/javascript">
-                        document.getElementById("delLike").style.display = "none";
-                        document.getElementById("addLike").style.display = "none";
-                        document.getElementById("LikeUnLogIn").style.display = "none";
-                    </script>
                     <% } %>
 
                     <!-- 留言數量按鈕 -->
@@ -215,7 +210,8 @@
                             class="fas fa-comment-dots"></i><a><%= items[0][0].messCount %></a></button>
 
                     <!-- 收藏按鈕 -->
-                    <button type="button" id="unLogIn" class="btn postInfo" style="display:none" onclick="location.href='/logIn'">
+                    <button type="button" id="unLogIn" class="btn postInfo" style="display:none" 
+                        onclick="location.href='/logIn'">
                         <i class="far fa-bookmark"></i></button>
 
                     <button type="button" id="addColle" class="btn postInfo" style="display:none"
@@ -512,7 +508,7 @@
                                     </script>
                                     <% isLike = true %>
                                 <% } %>
-                                <% } %>
+                            <% } %>
                         <% } %>
                         <!-- 如果沒有按過愛心 -->
                         <% if( isLike == false ){ %> 
