@@ -43,13 +43,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
+
                     <!-- 如果帳號不是管理員則不顯示 -->
-                    <% if(collData[collData.length-1] == undefined){ %>
+                    <% if(collData[2][0] == undefined){ %>
                     <li class="nav-item" style="display: none">
                         <a class="nav-link" href="recommendPost.html">
                             新增推薦</a>
                     </li>
-                    <!-- 如果帳號是一般會員 -->
+                    
+                    <!-- 如果帳號是管理員 -->
                     <% }else {%>
                     <li class="nav-item">
                         <a class="nav-link" href="recommendPost.html">
@@ -85,19 +87,22 @@
                     <li class="nav-item">
                         <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>
                     </li>
+
                     <!-- 已經登入的話 login 隱藏 -->
-                    <% if(collData[collData.length-2] != undefined){ %>
+                    <% if(collData[1] != undefined){ %>
                     <li class="nav-item" style="display: none">
                         <a class="nav-link" href="/login">登入</a>
                     </li>
+
                     <!-- 如果還沒登入 login 顯示 -->
                     <% }else {%>
                     <li class="nav-item">
                         <a class="nav-link" href="/login">登入</a>
                     </li>
                     <% } %>
+
                     <!-- 已經登入的話"會員"下拉式清單 顯示 -->
-                    <% if(collData[collData.length-2] != undefined){ %>
+                    <% if(collData[1] != undefined){ %>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
                             role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -109,6 +114,7 @@
                             <a class="dropdown-item" href="/logOut">登出</a>
                         </div>
                     </li>
+
                     <!-- 如果還沒登入則隱藏"會員"清單 -->
                     <% }else {%>
                     <li class="nav-item dropdown" style="display: none">
@@ -169,17 +175,30 @@
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend ">
 
             <!-- 收藏區塊 -->
-            <% for(var i=0; i<collData.length-2; i++) { %>
-            <div class="wrapper col-12  col-lg-2" style="background-image: url('/imgs/recommend/movie1.jpg');">
+            <% for(var i = 0; i < collData[0].length ; i++) { %>
+                <!-- 如果有抓到圖片 -->
+                <% isImg = false %> 
+                <% for(var j = 0 ; j < collData[3].length ; j++ ) { %>
+                    <% if(collData[0][i].recomNum == collData[3][j].recomNum){ %>
+                        <div class="wrapper col-12  col-lg-2" 
+                        style="background-image: url('/imgs/recommend/<%= collData[3][j].imgName %>');">
+                    <% isImg = true %>
+                <% } %>
+            <% } %>
+            <!-- 如果沒抓到半張圖片 -->
+            <% if(isImg == false) { %>
+                <div class="wrapper col-12  col-lg-2">
+            <% } %>
+
                 <a class="portfolio-box"
-                    onclick="location.href='/collection/recommend/one/<%= collData[i].recomNum %>' ">
+                    onclick="location.href='/collection/recommend/one/<%= collData[0][i].recomNum %>' ">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
-                            <p><%= collData[i].recomClass %></p>
+                            <p><%= collData[0][i].recomClass %></p>
                         </div>
                         <div class="project-name">
-                            <p class="title"><%= collData[i].recomHead %></p>
-                            <p class="content"><%= collData[i].recomCont %>
+                            <p class="title"><%= collData[0][i].recomHead %></p>
+                            <p class="content"><%= collData[0][i].recomCont %>
                             </p>
                         </div>
                     </div>
