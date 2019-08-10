@@ -6,11 +6,12 @@ $(document).ready(function() {
     //     event.stopPropagation();
     // });
 
-    $("input").focus(function() {
+    $("#tagInput").focus(function() {
         $("div.tag").css("box-shadow", "0 5px 15px rgba(0, 0, 0, 0.3)");
         $("div.tag").css("transition", "0.3s ease-in-out");
+        $("#tagInput").css("box-shadow", "none");
     });
-    $("input").blur(function() {
+    $("#tagInput").blur(function() {
         $("div.tag").css("box-shadow", "none");
     });
 

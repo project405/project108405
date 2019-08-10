@@ -86,10 +86,9 @@ input.titleInput:before {
 input.titleInput:focus,
 textarea.postInput:focus {
     outline: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
     transition: 0.3s ease-in-out;
     cursor: text;
-    display: block;
     border:none;
 
 }
