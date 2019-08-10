@@ -44,7 +44,8 @@ div.post {
 } */
 
 input.titleInput,
-textarea.postInput {
+div.postInput,
+textarea.introInput {
     width: 100%;
     min-height: 50px;
     height: auto;
@@ -69,7 +70,7 @@ div.postInput {
 }
 
 
-#postInto {
+#postIntro {
     min-height: 150px;
 }
 /* 
@@ -84,7 +85,8 @@ input.titleInput:before {
 } */
 
 input.titleInput:focus,
-textarea.postInput:focus {
+div.postInput:focus,
+textarea.introInput:focus {
     outline: none;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
     transition: 0.3s ease-in-out;
