@@ -4,33 +4,34 @@
 const sql = require('./asyncDB');
 const member = require('./member');
 var moment = require('moment');
+
 //=========================================
 //---------  getRecommendList() -----------
 //=========================================
 var getRecommendList = async function (memID) {
     var RecommendList = [];
     var checkAuthority;
+    var imgs = [] ; 
     var result = [];
     // -----------  取得文章清單 --------------
-    await sql('SELECT * FROM "recommend"')
+    await sql('SELECT "recomNum"' +
+                ' ,to_char("recomDateTime", \'YYYY-MM-DD\') AS "recomDateTime" '+
+                ' ,"recomHead" '+
+                ' ,"recomCont" '+
+                ' , CASE WHEN "recomClass" = \'movie\' THEN \'電影\' '+
+                '        WHEN "recomClass" = \'music\' THEN \'音樂\' '+
+                '        WHEN "recomClass" = \'book\'  THEN \'書籍\' '+
+                '        WHEN "recomClass" = \'exhibition\' THEN \'展覽\' '+
+                '   END AS "recomClass" '+
+              ' FROM "recommend" '+
+              ' ORDER BY "recomDateTime" DESC')
         .then((data) => {
-            // console.log("data=", data.rows);
-            for (let i = 0; i < data.rows.length; i++) {
-                // console.log(data.rows[i].recomClass);
-                if (data.rows[i].recomClass == 'movie') {
-                    data.rows[i].recomClass = '電影';
-                } else if (data.rows[i].recomClass == 'music') {
-                    data.rows[i].recomClass = '音樂';
-                } else if (data.rows[i].recomClass == 'book') {
-                    data.rows[i].recomClass = '書籍';
-                } else {
-                    data.rows[i].recomClass = '展覽';
-                }
-            }
+            console.log(data.rows);
             RecommendList = data.rows;
         }, (error) => {
             RecommendList = null;
         });
+
     //取得權限
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
@@ -41,9 +42,22 @@ var getRecommendList = async function (memID) {
             console.log("Authority=", checkAuthority);
         }
     })
+
+    //----------- 取得照片 ----------- 
+    await sql('SELECT "recomNum" , "imgName" FROM "image"')
+    .then((data) => {
+        if (!data.rows) {
+            imgs = undefined;
+        } else {
+            imgs = data.rows;
+        }
+    }, (error) => {
+        imgs = undefined;
+    });
     result[0] = RecommendList;
     result[1] = [memID];
     result[2] = checkAuthority;
+    result[3] = imgs ;
     return result;
 }
 

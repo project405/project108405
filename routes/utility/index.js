@@ -10,8 +10,8 @@ const member = require('./member');
 var getIndexData = async function (memID) {
     var weekRecommend = [];
     var fourRecommend = [];
-    var movie = true;
-    var book = true;
+    var movie = true; //判斷是否找過 (只取一篇)
+    var book = true; 
     var music = true;
     var exhibition = true;
     var hotArticle = [];  //存放前三名熱門文章
@@ -22,7 +22,7 @@ var getIndexData = async function (memID) {
     // -----------  每週推薦 --------------
     await sql('SELECT * FROM "recommend"')
         .then((data) => {
-            // console.log("data=", data.rows);
+            // 將每周推薦的類別改為中文
             for (let i = 0; i < data.rows.length; i++) {
                 // console.log(data.rows[i].recomClass);
                 if (data.rows[i].recomClass == 'movie') {
@@ -40,7 +40,7 @@ var getIndexData = async function (memID) {
             weekRecommend = null;
         })
 
-    // 將推薦的movie改為中文
+    // 只各取一篇出來
     for (var i = 0; i < weekRecommend.length; i++) {
         if (weekRecommend[i].recomClass == '電影' && movie) {
             fourRecommend.push(weekRecommend[i]);
@@ -93,9 +93,9 @@ var getIndexData = async function (memID) {
     })
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "artiNum" , "imgName" FROM "image"')
+    await sql('SELECT "recomNum" , "imgName" FROM "image"')
         .then((data) => {
-            if (data.rows == null || data.rows == '') {
+            if (!data.rows) {
                 imgs = undefined;
             } else {
                 imgs = data.rows;
