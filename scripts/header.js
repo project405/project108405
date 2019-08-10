@@ -83,6 +83,20 @@ header = '    <div class="header">\
         </div>\
     </div>\
 </div>\
+</div>\
+<div class="modal fade" id="aboutUsDiv" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">\
+<div class="modal-dialog modal-dialog-centered" role="document">\
+    <div class="modal-content">\
+        <div class="modal-header">\
+            <h5 class="modal-title" id="exampleModalCenterTitle">關於我們：</h5>\
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
+            <span aria-hidden="true">&times;</span>\
+          </button>\
+        </div>\
+        <div class="modal-body" style="padding:1em;">\
+            我們每週五會推薦給大家四種不一樣的藝文創作，分別為電影、音樂、展覽、書籍類型，希望大家可以好好享受藝文作品所帶來的感動。 </div>\
+    </div>\
+</div>\
 </div>\ ';
 
 document.write(header);
