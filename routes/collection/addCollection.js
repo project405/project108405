@@ -6,8 +6,7 @@ const collection = require('../utility/collection');
 
 router.post('/', function (req, res, next) {
     var memID = req.session.memID;
-
-    if (req.body.collectionType == "recommend") {
+    if (req.body.likeType == "recommend") {
         collection.addColleRecommend(memID, req.body.recomNum).then(data => {
             if (data == 1) {
                 console.log("新增成功");

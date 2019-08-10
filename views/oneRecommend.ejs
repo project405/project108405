@@ -39,7 +39,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <!-- 如果帳號不是管理員則不顯示 -->
-                    <% if(items[10] == undefined){ %>
+                    <% if(items[7] == undefined){ %>
                     <li class="nav-item" style="display: none">
                         <a class="nav-link" href="recommendPost.html">
                             新增推薦</a>
@@ -158,9 +158,11 @@
 
                 <p class="content"> <%- items[0][0].recomCont %>
                 </p>
+
+                <!-- tag -->
                 <div class="tagDiv col-lg-12 ">
-                    <% for (var i = 0 ; i< items[5][0].length ; i++) { %>
-                    <button type="button" class="btn  tag"><%= items[5][0][i] %></button>
+                    <% for (var i = 0 ; i< items[2][0].length ; i++) { %>
+                        <button type="button" class="btn  tag"><%= items[2][i].tagName %></button>
                     <% } %>
                 </div>
 
@@ -169,13 +171,13 @@
                 <div class="info">
                     <!-- 愛心按鈕 -->
                     <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/logIn'"> <i
-                            class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
+                            class="fab fa-gratipay"></i><a><%= items[0][0].likeCount %></a></button>
                     <button type="button" id="addLike" class="btn postInfo"
                         onclick=<%= "addLike(" + items[0][0].recomNum + ")" %>> <i class="fab fa-gratipay"></i><a
-                            id="addLikeCount"> <%= items[2][0].count %> </a></button>
+                            id="addLikeCount"> <%= items[0][0].likeCount %> </a></button>
                     <button type="button" id="delLike" class="btn postInfo" style="color:#c93737"
                         onclick=<%= "delLike(" + items[0][0].recomNum + ")" %>><i class="fab fa-gratipay"></i><a
-                            id="delLikeCount"><%= items[2][0].count %></a></button>
+                            id="delLikeCount"><%= items[0][0].likeCount %></a></button>
                     <!-- 如果沒登入 -->
                     <% if(items[8][0] == undefined) {%>
                     <script type="text/javascript">
@@ -184,15 +186,15 @@
                         document.getElementById("delLike").style.display = "none";
                     </script>
 
-                    <!-- 如果有登入及沒按過愛心       -->
-                    <% }else if(items[7][0] == 1 && items[8][0] != undefined ) {%>
+                    <!-- 如果有登入及沒按過愛心 -->
+                    <% }else if(items[4][0] == undefined && items[8][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("addLike").style.display = "inline";
                         document.getElementById("LikeUnLogIn").style.display = "none";
                         document.getElementById("delLike").style.display = "none";
                     </script>
                     <!-- 如果有登入及按過愛心 -->
-                    <% }else if(items[7][0] == 0 && items[8][0] != undefined) {%>
+                    <% }else if(items[4][0] != undefined && items[8][0] != undefined) {%>
                     <script type="text/javascript">
                         document.getElementById("delLike").style.display = "inline";
                         document.getElementById("addLike").style.display = "none";
@@ -208,17 +210,17 @@
 
                     <!-- 留言數量按鈕 -->
                     <button type="button" class="btn postInfo" id="goBottom"><i
-                            class="fas fa-comment-dots"></i><a><%= items[3][0].count %></a></button>
+                            class="fas fa-comment-dots"></i><a><%= items[0][0].messCount %></a></button>
 
                     <!-- 收藏按鈕 -->
-                    <button type="button" id="unLogIn" class="btn postInfo" onclick="location.href='/logIn'">
+                    <button type="button" id="unLogIn" class="btn postInfo" style="display:none" onclick="location.href='/logIn'">
                         <i class="far fa-bookmark"></i></button>
 
-                    <button type="button" id="addColle" class="btn postInfo"
+                    <button type="button" id="addColle" class="btn postInfo" style="display:none"
                         onclick=<%= "addColle(" + items[0][0].recomNum + ")" %>>
                         <i class="far fa-bookmark"></i></button>
 
-                    <button type="button" id="delColle" class="btn postInfo"
+                    <button type="button" id="delColle" class="btn postInfo" style="display:none"
                         onclick=<%= "delColle(" + items[0][0].recomNum + ")" %>>
                         <i class="fas fa-bookmark"></i></button>
 
@@ -231,14 +233,14 @@
                     </script>
 
                     <!-- 如果有登入及沒按過收藏       -->
-                    <% }else if(items[6][0] == 1 && items[8][0] != undefined ) {%>
+                    <% }else if(items[5] == undefined && items[8][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("addColle").style.display = "inline";
                         document.getElementById("unLogIn").style.display = "none";
                         document.getElementById("delColle").style.display = "none";
                     </script>
                     <!-- 如果有登入及按過收藏 -->
-                    <% }else {%>
+                    <% }else if(items[5] != undefined && items[8][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("delColle").style.display = "inline";
                         document.getElementById("addColle").style.display = "none";
@@ -248,7 +250,56 @@
                     <button type="button" class="btn report" id="postReport">檢舉</button>
                 </div>
 
-                <!-- 愛心 ajax script -->
+                <!-- 收藏 ajax script  -->
+                <script>
+                        //新增收藏
+                        function addColle(recomNum) {
+                            collection();
+                            $.ajax({
+                                url: '/addCollection',
+                                type: 'POST',
+                                dataType: 'JSON',
+                                data: { "likeType": "recommend", "recomNum": recomNum },
+                                success: function (res) {
+                                    console.log("yes", JSON.stringify(res));
+                                },
+                                error: function (res) {
+                                    console.log("失敗", JSON.stringify(res));
+                                }
+                            });
+                        };
+                        //刪除收藏
+                        function delColle(recomNum) {
+                            cancelCollection();
+                            $.ajax({
+                                url: '/delCollection',
+                                type: 'POST',
+                                dataType: 'JSON',
+                                data: { "likeType": "recommend", "recomNum": recomNum },
+                                success: function (res) {
+                                    console.log("yes", JSON.stringify(res));
+
+                                },
+                                error: function (res) {
+                                    console.log("失敗", JSON.stringify(res));
+                                }
+                            });
+                        };
+                        //點收藏後改變屬性
+                        function collection() {
+                            document.getElementById("delColle").style.display = "inline";
+                            document.getElementById("unLogIn").style.display = "none";
+                            document.getElementById("addColle").style.display = "none";
+                        }
+                        //取消收藏後改變屬性
+                        function cancelCollection() {
+                            document.getElementById("addColle").style.display = "inline";
+                            document.getElementById("unLogIn").style.display = "none";
+                            document.getElementById("delColle").style.display = "none";
+                        }
+                </script>
+
+                <!-- 推薦文章愛心 ajax script -->
                 <script>
                     //新增愛心
                     function addLike(recomNum) {
@@ -418,24 +469,24 @@
                     <!-- 愛心按鈕 -->
                     <div class="col-sm-3 ml-auto"> </div>
                     <button type="button" id=<%= "MessLikeUnLogIn" + items[0][0].recomNum + items[1][i].recomMessNum %>
-                        class="btn like" onclick="location.href='/logIn'"><i
-                            class="fab fa-gratipay"></i><a><%= items[4][i].count %></a></button>
+                        class="btn like" style="display:none" onclick="location.href='/logIn'"><i
+                            class="fab fa-gratipay"></i><a><%= items[1][i].likeCount %></a></button>
 
                     <button type="button" id=<%= "MessAddLike"+ items[0][0].recomNum + items[1][i].recomMessNum %>
-                        class="btn like"
+                        class="btn like" style="display:none"
                         onclick=<%= "MessAddLike(" + items[0][0].recomNum + "," + items[1][i].recomMessNum + ")" %>>
                         <i class="fab fa-gratipay"></i>
                         <a id=<%="MessAddLikeCount" + items[0][0].recomNum + items[1][i].recomMessNum %>>
-                            <%= items[4][i].count %>
+                            <%= items[1][i].likeCount %>
                         </a>
                     </button>
 
                     <button type="button" id=<%= "MessDelLike" + items[0][0].recomNum + items[1][i].recomMessNum %>
-                        class="btn like" style="color:#c93737"
+                        class="btn like" style="color:#c93737; display:none"
                         onclick=<%= "MessDelLike(" + items[0][0].recomNum + "," + items[1][i].recomMessNum + ")" %>>
                         <i class="fab fa-gratipay"></i>
                         <a id=<%= "MessDelLikeCount" + items[0][0].recomNum + items[1][i].recomMessNum %>>
-                            <%= items[4][i].count %></a>
+                            <%= items[1][i].likeCount %></a>
                     </button>
 
                     <!-- 如果沒登入 -->
@@ -445,26 +496,30 @@
                         document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
                         document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
                     </script>
-                    <!-- 如果有登入及沒按過愛心       -->
-                    <% }else if(items[9][i] == 1 && items[8][0] != undefined ) {%>
-                    <script type="text/javascript">
-                        document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%=  items[1][i].recomMessNum %>").style.display = "inline";
-                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
-                        document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
-                    </script>
-                    <!-- 如果有登入及按過愛心 -->
-                    <% }else if(items[9][i] == 0 && items[8][0] != undefined ) {%>
-                    <script type="text/javascript">
-                        document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "inline";
-                        document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
-                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
-                    </script>
-                    <% }else {%>
-                    <script type="text/javascript">
-                        document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
-                        document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
-                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
-                    </script>
+                    <!-- 如果有登入 -->
+                    <% }else if(items[8][0] != undefined ) {%>
+                        <% var isLike = false %>
+                        <% if(items[6] != undefined){ %>
+                            <% for(var j = 0 ; j < items[6].length ; j++) { %>
+                                 <!-- 如果有按愛心 -->
+                                 <% if (items[6][j].recomMessNum == items[1][i].recomMessNum){ %>
+                                    <script type="text/javascript">
+                                        document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "inline";
+                                        document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
+                                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
+                                    </script>
+                                    <% isLike = true %>
+                                <% } %>
+                                <% } %>
+                        <% } %>
+                        <!-- 如果沒有按過愛心 -->
+                        <% if( isLike == false ){ %> 
+                            <script type="text/javascript">
+                                document.getElementById("MessAddLike" + "<%= items[0][0].recomNum %>" + "<%=  items[1][i].recomMessNum %>").style.display = "inline";
+                                document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
+                                document.getElementById("MessDelLike" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
+                            </script>
+                        <% } %>
                     <% } %>
                 </div>
                 <hr class="smallMagin">

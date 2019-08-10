@@ -6,13 +6,13 @@ const collection = require('../utility/collection');
 
 router.post('/', function (req, res, next) {
     var memID = req.session.memID;
-    if (req.body.collectionType == "recommend") {
+    console.log(req.body) ;
+    if (req.body.likeType == "recommend") {
         collection.delColleRecommend(memID, req.body.recomNum).then(data => {
+            console.log("近來囉");
             if (data == 1) {
-                // console.log("刪除成功");
                 res.send("刪除成功摟!");
             } else {
-                // console.log("刪除失敗");
                 res.send("新增失敗摟!");
             }
         })

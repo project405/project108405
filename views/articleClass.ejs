@@ -309,7 +309,7 @@
                                         url: '/addCollection',
                                         type: 'POST',
                                         dataType: 'JSON',
-                                        data: { "collectionType": "article", "artiNum": artiNum },
+                                        data: { "likeType": "article", "artiNum": artiNum },
                                         success: function (data) {
                                             console.log("yes", data.statusText);
                                         },
@@ -326,7 +326,7 @@
                                         url: '/delCollection',
                                         type: 'POST',
                                         dataType: 'JSON',
-                                        data: { "collectionType": "article", "artiNum": artiNum },
+                                        data: { "likeType": "article", "artiNum": artiNum },
                                         success: function (data) {
                                             console.log("yes", data.statusText);
                                         },
