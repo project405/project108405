@@ -8,7 +8,8 @@ router.get('/', function (req, res, next) {
     if (req.session.memID == null || req.session.memID == undefined) {
         res.render('logIn');
     } else {
-        collection.getRecomMovie(memID).then(data => {         
+        collection.getCollRecomClassList(memID, '電影').then(data => {      
+            console.log(data);   
             if (data == null) {
                 res.render('error');  //導向錯誤頁面
             } else if (data == -1) {
