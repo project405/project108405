@@ -6,7 +6,7 @@ var express = require('express');
 //增加引用函式
 // const collection = require('./utility/collection');
 const index = require('./routes/utility/index');
-// const recommend = require('./utility/recommend');
+const recommend = require('./routes/utility/recommend');
 
 //----------------------------------------
 // 填入自己在Line Developers的channel值
@@ -77,63 +77,15 @@ var bot = linebot({
 //         }
 //     );
 // });
-//------------本週推薦------------
-// bot.on('message', function(event) {    
-//     event.source.profile().then(
-//         function (profile) {
-//             //取得使用者資料
-//             const userName = profile.displayName;
-//             const userId = profile.userId;
-	    
-//             //使用者傳來的按鈕文字
-//             const text = event.message.text;
-//             //存放本週推薦資料
-//             let msg = [];
-//             //呼叫API取得本週推薦
-//             if (text == "本週推薦"){
-            
-//                 recommend.getRecomMovie(text).then(data => { 
-//                     msg.push({'type':'text', 'text':data[0].recomClass},
-//                             {'type':'text', 'text':data[0].recomHead},
-//                             {'type':'text', 'text':data[0].recomCont}) 
-//                     event.reply(msg); 
-//                 })
-                
-//                 recommend.getRecomMusic(text).then(data => {     
-//                     msg.push({'type':'text', 'text':data[0].recomClass},
-//                             {'type':'text', 'text':data[0].recomHead},
-//                             {'type':'text', 'text':data[0].recomCont}) 
-//                     event.reply(msg);         
-//                 })
 
-//                 recommend.getRecomBook(text).then(data => {      
-//                     msg.push({'type':'text', 'text':data[0].recomClass},
-//                             {'type':'text', 'text':data[0].recomHead},
-//                             {'type':'text', 'text':data[0].recomCont}) 
-//                     event.reply(msg); 
-//                 })
-
-//                 recommend.getRecomExhibition(text).then(data => {  
-//                     msg.push({'type':'text', 'text':data[0].recomClass},
-//                             {'type':'text', 'text':data[0].recomHead},
-//                             {'type':'text', 'text':data[0].recomCont}) 
-//                     console.log(msg);  
-//                     event.reply(msg);                                  
-//                 })
-                        
-//             }
-             
-//         }
-//     );
-// });
 //------------ 熱門文章 ------------
 bot.on('message', function(event) {    
     
 	    
-    //使用者傳來的學號
+    //使用者傳來的文字
     const text = event.message.text;
     
-    //呼叫API取得學生資料
+    //呼叫indexAPI取得熱門文章
     if (text == "熱門文章"){
         index.getIndexData(text).then(data => {  
             
@@ -149,6 +101,56 @@ bot.on('message', function(event) {
              
         })  
     }
+});
+//--------------------------------
+//------------ 本週推薦 ------------
+bot.on('message', function(event) {    
+    event.source.profile().then(
+        function (profile) {
+            //取得使用者資料
+            const userName = profile.displayName;
+            const userId = profile.userId;
+	    
+            //使用者傳來的按鈕文字
+            const text = event.message.text;
+            //存放本週推薦資料
+            let msg = [];
+            //呼叫API取得本週推薦
+            if (text == "本週推薦"){
+            
+                recommend.getRecomMovie(text).then(data => { 
+                    msg.push({'type':'text', 'text':data[0].recomClass},
+                            {'type':'text', 'text':data[0].recomHead},
+                            {'type':'text', 'text':data[0].recomCont}) 
+                    event.reply(msg); 
+                })
+                
+                recommend.getRecomMusic(text).then(data => {     
+                    msg.push({'type':'text', 'text':data[0].recomClass},
+                            {'type':'text', 'text':data[0].recomHead},
+                            {'type':'text', 'text':data[0].recomCont}) 
+                    event.reply(msg);         
+                })
+
+                recommend.getRecomBook(text).then(data => {      
+                    msg.push({'type':'text', 'text':data[0].recomClass},
+                            {'type':'text', 'text':data[0].recomHead},
+                            {'type':'text', 'text':data[0].recomCont}) 
+                    event.reply(msg); 
+                })
+
+                recommend.getRecomExhibition(text).then(data => {  
+                    msg.push({'type':'text', 'text':data[0].recomClass},
+                            {'type':'text', 'text':data[0].recomHead},
+                            {'type':'text', 'text':data[0].recomCont}) 
+                    console.log(msg);  
+                    event.reply(msg);                                  
+                })
+                        
+            }
+             
+        }
+    );
 });
 //--------------------------------
 
