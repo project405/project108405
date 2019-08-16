@@ -147,7 +147,19 @@ bot.on('message', function(event) {
             //         {'type':'text', 'text':data[0].recomHead},
             //         {'type':'text', 'text':data[0].recomCont}) 
             // event.reply(msg); 
-        });           
+        }); 
+        recommend.getRecomExhibition(text).then(data => { 
+            console.log(data[0][0].recomClass)
+            event.reply([
+                {'type':'text', 'text':data[0][0].recomClass},
+                {'type':'text', 'text':data[0][0].recomHead},
+                {'type':'text', 'text':data[0][0].recomCont}
+            ]);   
+            // msg.push({'type':'text', 'text':data[0].recomClass},
+            //         {'type':'text', 'text':data[0].recomHead},
+            //         {'type':'text', 'text':data[0].recomCont}) 
+            // event.reply(msg); 
+        });          
     }      
 });
 //--------------------------------
