@@ -152,7 +152,7 @@ bot.on('message', function(event) {
                         event.reply([
                             {'type':'text', 'text':data[1][0]},
                             {'type':'text', 'text':data[1][1]},
-                            {'type':'text', 'text':data[1][2]},
+                            {'type':'text', 'text':data[1][2]}
                         ]);   
                     }  
                 })  
