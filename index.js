@@ -128,37 +128,33 @@ var bot = linebot({
 // });
 
 bot.on('message', function(event) {    
-    event.source.profile().then(
-        function (profile) {
-            //取得使用者資料
-            const userName = profile.displayName;
-            const userId = profile.userId;
+    
 	    
-            //使用者傳來的學號
-            const text = event.message.text;
-          
-            //呼叫API取得學生資料
-            if (text == "熱門文章"){
-                index.getIndexData(text).then(data => {  
-                    if (data == -1){
-                        event.reply('找不到資料');
-                    }else if(data == -9){                    
-                        event.reply('執行錯誤');
-                    }else{
-                        // console.log(data[1][0]);
-                        // console.log(data[1][1]);
-                        // console.log(data[1][2]);
-                        
-                        event.reply([
-                            {'type':'text', 'text':data[1][0]},
-                            {'type':'text', 'text':data[1][1]},
-                            {'type':'text', 'text':data[1][2]}
-                        ]);   
-                    }  
-                })  
-            }
-        }
-    );
+    //使用者傳來的學號
+    const text = event.message.text;
+    
+    //呼叫API取得學生資料
+    if (text == "熱門文章"){
+        index.getIndexData(text).then(data => {  
+            if (data == -1){
+                event.reply('找不到資料');
+            }else if(data == -9){                    
+                event.reply('執行錯誤');
+            }else{
+                // console.log(data[1][0]);
+                // console.log(data[1][1]);
+                // console.log(data[1][2]);
+                
+                event.reply([
+                    {'type':'text', 'text':data[1][0]},
+                    {'type':'text', 'text':data[1][1]},
+                    {'type':'text', 'text':data[1][2]}
+                ]);   
+            }  
+        })  
+    }
+        
+    
 });
 
 
