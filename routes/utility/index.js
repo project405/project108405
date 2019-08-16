@@ -111,7 +111,7 @@ var getIndexData = async function (memID) {
     result[3] = checkAuthority;
     result[4] = imgs;
     result[5] = tag ; 
-    console.log(result[1]);
+    console.log(result[1].artiHead);
     return result;
 }
 module.exports = { getIndexData };
