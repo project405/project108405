@@ -88,7 +88,7 @@ bot.on('message', function(event) {
     if (text == "熱門文章"){
         index.getIndexData(text).then(data => {  
             
-            console.log(data[1][0]);
+            // console.log(data[1][0]);
             // console.log(data[1][1]);
             // console.log(data[1][2]);
             
@@ -123,7 +123,19 @@ bot.on('message', function(event) {
             //         {'type':'text', 'text':data[0].recomHead},
             //         {'type':'text', 'text':data[0].recomCont}) 
             // event.reply(msg); 
-        })              
+        }) 
+        recommend.getRecomMusic(text).then(data => { 
+            console.log(data[0][0].recomClass)
+            event.reply([
+                {'type':'text', 'text':data[0][0].recomClass},
+                {'type':'text', 'text':data[0][0].recomHead},
+                {'type':'text', 'text':data[0][0].recomCont}
+            ]);   
+            // msg.push({'type':'text', 'text':data[0].recomClass},
+            //         {'type':'text', 'text':data[0].recomHead},
+            //         {'type':'text', 'text':data[0].recomCont}) 
+            // event.reply(msg); 
+        })          
     }      
 });
 //--------------------------------
