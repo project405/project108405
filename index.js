@@ -81,7 +81,6 @@ var bot = linebot({
 //------------ 熱門文章 ------------
 bot.on('message', function(event) {    
     
-	    
     //使用者傳來的文字
     const text = event.message.text;
     
@@ -105,9 +104,8 @@ bot.on('message', function(event) {
 //--------------------------------
 //------------ 本週推薦 ------------
 bot.on('message', function(event) {    
-    
 
-    //使用者傳來的按鈕文字
+    //使用者傳來的文字
     const text = event.message.text;
     //存放本週推薦資料
     // let msg = [];
@@ -115,7 +113,7 @@ bot.on('message', function(event) {
     if (text == "本週推薦"){
     
         recommend.getRecomMovie(text).then(data => { 
-            console.log(data)
+            console.log(data[0])
             // event.reply([
             //     {'type':'text', 'text':data[1][0]},
             //     {'type':'text', 'text':data[1][1]},
