@@ -1,7 +1,8 @@
 {
   "name": "project405",
   "version": "0.0.0",
-  "private": false,
+  "private": true,
+  "main": "index.js",
   "scripts": {
     "start": "node ./bin/www"
   },
