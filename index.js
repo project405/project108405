@@ -113,7 +113,7 @@ bot.on('message', function(event) {
     if (text == "本週推薦"){
     
         recommend.getRecomMovie(text).then(data => { 
-            console.log(data[0][0].recomClass)
+            console.log("1",data[0][0].recomClass)
             event.reply([
                 {'type':'text', 'text':data[0][0].recomClass},
                 {'type':'text', 'text':data[0][0].recomHead},
@@ -125,7 +125,7 @@ bot.on('message', function(event) {
             // event.reply(msg); 
         }); 
         recommend.getRecomMusic(text).then(data => { 
-            console.log(data[0][0].recomClass)
+            console.log("2",data[0][0].recomClass)
             event.reply([
                 {'type':'text', 'text':data[0][0].recomClass},
                 {'type':'text', 'text':data[0][0].recomHead},
@@ -137,7 +137,7 @@ bot.on('message', function(event) {
             // event.reply(msg); 
         });
         recommend.getRecomBook(text).then(data => { 
-            console.log(data[0][0].recomClass)
+            console.log("3",data[0][0].recomClass)
             event.reply([
                 {'type':'text', 'text':data[0][0].recomClass},
                 {'type':'text', 'text':data[0][0].recomHead},
@@ -149,7 +149,7 @@ bot.on('message', function(event) {
             // event.reply(msg); 
         }); 
         recommend.getRecomExhibition(text).then(data => { 
-            console.log(data[0][0].recomClass)
+            console.log("4",data[0][0].recomClass)
             event.reply([
                 {'type':'text', 'text':data[0][0].recomClass},
                 {'type':'text', 'text':data[0][0].recomHead},
