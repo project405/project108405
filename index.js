@@ -135,20 +135,23 @@ bot.on('message', function(event) {
             const userId = profile.userId;
 	    
             //使用者傳來的學號
-            const no = event.message.text;
+            const text = event.message.text;
           
             //呼叫API取得學生資料
-            index.getIndexData(no).then(data => {  
+            index.getIndexData(text).then(data => {  
                 if (data == -1){
                     event.reply('找不到資料');
                 }else if(data == -9){                    
                     event.reply('執行錯誤');
                 }else{
-                    event.reply([
-                        {'type':'text', 'text':data.stuno},
-                        {'type':'text', 'text':data.stuname},
-                        {'type':'text', 'text':data.gender}]
-                    );  
+                    console.log(data);
+                    // event.reply([
+                    //     {'type':'text', 'text':data[0].recomHead},
+                    //     {'type':'text', 'text':data[0].recomCont},
+                    //     {'type':'text', 'text':data[0].recomClass},
+                    //     {'type':'text', 'text':userName},
+                    //     {'type':'text', 'text':"http://weiting.nctu.me/logIn.html/"+userId}]
+                    // );   
                 }  
             })  
         }
