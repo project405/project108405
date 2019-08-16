@@ -60,18 +60,18 @@ bot.on('message', function(event) {
           
             //呼叫API取得熱門文章
             // if (text == "熱門"){
-                index.getIndexData().then(data => {  
-                    // console.log(data);
-                    console.log(data);
-                    // event.reply([
-                    //     {'type':'text', 'text':data[0].recomHead},
-                    //     {'type':'text', 'text':data[0].recomCont},
-                    //     {'type':'text', 'text':data[0].recomClass},
-                    //     {'type':'text', 'text':userName},
-                    //     {'type':'text', 'text':"http://weiting.nctu.me/logIn.html/"+userId}]
-                    // );  
+                // index.getIndexData().then(data => {  
+                //     // console.log(data);
+                //     console.log(data);
+                //     // event.reply([
+                //     //     {'type':'text', 'text':data[0].recomHead},
+                //     //     {'type':'text', 'text':data[0].recomCont},
+                //     //     {'type':'text', 'text':data[0].recomClass},
+                //     //     {'type':'text', 'text':userName},
+                //     //     {'type':'text', 'text':"http://weiting.nctu.me/logIn.html/"+userId}]
+                //     // );  
                   
-                }) 
+                // }) 
             // }
              
         }
