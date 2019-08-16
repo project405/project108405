@@ -4,9 +4,9 @@
 var linebot = require('linebot');
 var express = require('express');
 //增加引用函式
-// const collection = require('./utility/collection');
-// const index = require('./utility/index');
-// const recommend = require('./utility/recommend');
+const collection = require('./utility/collection');
+const index = require('./utility/index');
+const recommend = require('./utility/recommend');
 
 //----------------------------------------
 // 填入自己在Line Developers的channel值
@@ -62,7 +62,7 @@ bot.on('message', function(event) {
             // if (text == "熱門"){
                 index.getIndexData().then(data => {  
                     // console.log(data);
-                    console.log(data[0]);
+                    console.log(data);
                     // event.reply([
                     //     {'type':'text', 'text':data[0].recomHead},
                     //     {'type':'text', 'text':data[0].recomCont},
