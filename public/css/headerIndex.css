@@ -1,0 +1,525 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
+.navbar .navbar-brand:hover,
+.navbar .navbar-brand:focus {
+    color: #678878;
+}
+
+.navbar .navbar-text {
+    color: #5c868d;
+}
+
+.navbar .navbar-text a {
+    color: #678878;
+    text-align: center !important;
+}
+
+.navbar .navbar-text a:hover,
+.navbar .navbar-text a:focus {
+    color: #678878;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: #5c868d;
+    border-radius: .25rem;
+    margin: 0 0.25em;
+}
+
+.navbar .navbar-nav .nav-link:not(.disabled):hover,
+.navbar .navbar-nav .nav-link:not(.disabled):focus {
+    color: #678878;
+}
+
+.navbar .navbar-nav .nav-item.active .nav-link,
+.navbar .navbar-nav .nav-item.active .nav-link:hover,
+.navbar .navbar-nav .nav-item.active .nav-link:focus,
+.navbar .navbar-nav .nav-item.show .nav-link,
+.navbar .navbar-nav .nav-item.show .nav-link:hover,
+.navbar .navbar-nav .nav-item.show .nav-link:focus {
+    color: #678878;
+    background-color: #2D4F41;
+}
+
+.navbar .navbar-toggle {
+    border-color: #2D4F41;
+}
+
+.navbar .navbar-toggle:hover,
+.navbar .navbar-toggle:focus {
+    background-color: #2D4F41;
+}
+
+.navbar .navbar-toggle .navbar-toggler-icon {
+    color: #5c868d;
+}
+
+.navbar .navbar-collapse,
+.navbar .navbar-form {
+    border-color: #5c868d;
+}
+
+.navbar .navbar-link {
+    color: #5c868d;
+}
+
+.navbar .navbar-link:hover {
+    color: #678878;
+}
+
+@media (max-width: 575px) {
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #5c868d;
+    }
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #678878;
+    }
+    .navbar-expand-sm .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #678878;
+        background-color: #2D4F41;
+    }
+}
+
+@media (max-width: 767px) {
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #5c868d;
+    }
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #678878;
+    }
+    .navbar-expand-md .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #678878;
+        background-color: #2D4F41;
+    }
+}
+
+@media (max-width: 991px) {
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #5c868d;
+    }
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #678878;
+    }
+    .navbar-expand-lg .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #678878;
+        background-color: #2D4F41;
+    }
+}
+
+@media (max-width: 1199px) {
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item {
+        color: #5c868d;
+    }
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+        color: #678878;
+    }
+    .navbar-expand-xl .navbar-nav .show .dropdown-menu .dropdown-item.active {
+        color: #678878;
+        background-color: #2D4F41;
+    }
+}
+
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item {
+    color: #5c868d;
+}
+
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:hover,
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item:focus {
+    color: #678878;
+}
+
+.navbar-expand .navbar-nav .show .dropdown-menu .dropdown-item.active {
+    color: #678878;
+    background-color: #2D4F41;
+}
+
+
+/* ========================================================================= */
+
+@media (max-width: 992px) {
+    .dropdown-toggle::after {
+        display: none;
+    }
+}
+
+
+/* drop menu */
+
+a.dropdown-toggle {
+    color: white;
+}
+
+a.dropdown-toggle:hover,
+a.dropdown-toggle:active {
+    background-color: none;
+}
+
+div.dropdown-menu {
+    background-color: #2D4F41;
+    opacity: 0.89;
+    border-radius: 12px;
+    border: 2px solid #678878;
+    transition: 0.3s;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    background-color: #2D4F41;
+    padding: 8px;
+    border: 2px solid #678878;
+}
+
+.dropdown:hover .dropdown-menu .dropdown-item:not(.disabled):hover,
+.dropdown:hover .dropdown-menu .dropdown-item:not(.disabled):focus {
+    color: #678878;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.dropdown-item:hover {
+    background-color: #678878 !important;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+
+/* navbar文字hover */
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+    background-color: #678878 !important;
+    transition: 0.3s;
+}
+
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover .a .img {
+    background-color: #678878 !important;
+    transition: 0.3s;
+}
+
+#navbarNav>ul>li a {
+    font-size: 1.1em;
+    color: white;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    text-align: center;
+}
+
+@media (max-width: 992px) {
+    #navbarNav>ul>li a {
+        font-size: 0.9em !important;
+        text-decoration: #678878 solid 3px;
+    }
+}
+
+.navbar {
+    opacity: 0.89;
+    /* background-color: rgb(130, 143, 141); */
+    /* background-color: #2D4F41;
+    /* background-color: #9f9289; */
+}
+
+@media (max-width: 1199px) {
+    .navbar {
+        background-color: #2D4F41;
+    }
+}
+
+a.navTitle {
+    font-size: 1.15em !important;
+    color: white !important;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    text-align: center;
+    text-decoration: none;
+}
+
+
+/* ------------------- */
+
+
+/* goto */
+
+
+/* ------------------- */
+
+#gotop {
+    padding: 5px;
+    position: fixed;
+    z-index: 90;
+    right: 30px;
+    bottom: 31px;
+    display: none;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    background: rgb(143, 143, 143);
+    opacity: 0.75;
+    line-height: 50px;
+    border-radius: 50%;
+    transition: all 0.5s;
+    text-align: center;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 575px) {
+    #gotop {
+        position: fixed;
+        bottom: 30px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        line-height: 30px;
+        background: rgb(143, 143, 143);
+        text-align: center;
+        color: #fff;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    }
+}
+
+
+/* -------------- */
+
+
+/* hr */
+
+
+/* -------------- */
+
+hr.highlight {
+    margin: 1em 0 2em 0 !important;
+    width: 20em;
+    background-color: #2D4F41;
+    height: 5px;
+    border: none;
+    color: #d4d4d4;
+    border-radius: 50%;
+}
+
+@media (max-width: 450px) {
+    hr.highlight {
+        width: 80%;
+    }
+    p {
+        font-size: 1em !important;
+    }
+}
+
+
+/* -------------- */
+
+
+/* footer */
+
+
+/* -------------- */
+
+div.footer {
+    width: 100%;
+    text-align: justify;
+    background-color: #2D4F41;
+    opacity: 0.89;
+    color: #fff;
+    font-size: 0.75em;
+    opacity: 0.89;
+    color: #fff;
+    margin: 7em 0 0 0 !important;
+    padding: 3em 0 3em 0;
+}
+
+
+/* tag */
+
+button.tag {
+    font-size: 0.75em;
+    border-radius: 8px;
+    padding: 0.45em;
+    text-align: left;
+    background-color: #5580AA;
+    border: none;
+    color: white;
+}
+
+button.tag:hover {
+    background-color: #32416e;
+    color: white;
+}
+
+
+/* ------------------- */
+
+
+/* shadowBox */
+
+
+/* ------------------- */
+
+.shadow {
+    border-bottom: 0 none;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.46);
+}
+
+div.report {
+    background-color: #2D4F41;
+}
+
+
+/* ------------------ */
+
+
+/* report */
+
+
+/* ------------------ */
+
+
+/* Pseudo element */
+
+.input-icon-wrap {
+    border: 1px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    margin: 0.75em 0 0.75em 0;
+}
+
+.input-icon {
+    background: #fff;
+}
+
+.input-with-icon {
+    border: none;
+    flex: 1;
+}
+
+.input-icon,
+.input-with-icon {
+    padding: 10px;
+}
+
+.fa-times-circle {
+    margin-top: 0.35em;
+    font-size: 2em;
+    cursor: pointer;
+    color: white;
+}
+
+div.report {
+    display: none;
+    max-width: 50em;
+    position: absolute;
+    max-height: 50em;
+    background-color: #2D4F41;
+    opacity: 0.95;
+    top: 25%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 12px;
+    height: 20em;
+    z-index: 10;
+    caret-color: #2D4F41;
+}
+
+textarea.report {
+    height: 200px;
+    width: 100%;
+    overflow-y: visible;
+}
+
+textarea.report:focus {
+    outline: none;
+}
+
+button.report {
+    float: right;
+}
+
+::selection {
+    background: #2D4F41;
+    color: white;
+}
+/* 
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+    -webkit-text-fill-color: black;
+}
+
+input[type=text]:focus,
+input[type=password]:focus,
+textarea:focus {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+} */
+
+::-webkit-scrollbar {
+    width: 5px;
+    background-color: #fff;
+
+}
+
+ ::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    margin: 80px 0 5px 0;
+}
+
+ ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background: rgb(155, 155, 155);
+}
+
+/* **********************/
+
+/* searchSection */
+
+/* **********************/
+
+div.searchSection {
+    flex-direction: row;
+    justify-content: flex-start;
+    /* margin-right: 1em; */
+    /* position: absolute;
+    left: 15%; */
+    text-align: center;
+    float: center;
+    overflow: hidden;
+    width: 18em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input.navSearch {
+    border-radius: 6px;
+    outline: none;
+    margin: 0.5em 0em;
+    /* background-color: rgb(21, 48, 36); */
+    border: none;
+    box-shadow: none;
+    padding-left: 0.6em;
+    box-sizing: border-box;
+    /* 使元素的寬度包括padding margin, border*/
+    -moz-box-sizing: border-box;
+    width: 15em;
+}
+
+input.navSearch:focus, input.navSearch:hover {
+    background-color: rgb(255, 255, 255) !important;
+    transition-duration: 1.5s;
+}
+
+button.navSearch, button.navSearch:hover {
+    padding: 0.1em 0.4em;
+    /* background-color: #2D4F41; */
+    color: white;
+    margin-bottom: 0.25em;
+    width: 2em;
+}
+
+button.navSearch:hover, button.navSearch:focus {
+    background-color: #678878 !important;
+    box-shadow: none;
+    outline: none;
+}

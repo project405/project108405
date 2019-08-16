@@ -1,0 +1,157 @@
+html,
+body {
+    height: 100%;
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    margin: 0 auto;
+    padding-top: 3em;
+    border: none;
+    text-align: justify;
+    text-justify: inter-ideograph;
+    background: url("../imgs/background/reommendBac.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+@media (max-width: 650px) {
+    html,
+    body {
+        background: url("../imgs/background/phone/PreommendBac.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+    }
+}
+
+
+/*  button */
+
+button.footer {
+    margin: 0.2em;
+    height: auto;
+    font-size: 1em;
+    opacity: 0.89;
+    padding: 0.2em 0.3em;
+}
+
+@media (max-width: 450px) {
+    button.footer {
+        font-size: 0.8em;
+    }
+}
+
+
+/* -------------- */
+
+
+/* portfolio */
+
+
+/* -------------- */
+
+div.recommend {
+    margin-bottom: 5em;
+}
+
+div.article {
+    height: 200%;
+}
+
+#portfolio .container {
+    max-width: 1920px;
+}
+
+#portfolio .container .portfolio-box {
+    position: relative;
+    display: block;
+}
+
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption {
+    display: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 1em;
+    -webkit-box-pack: center top;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    opacity: 0;
+    color: #fff;
+    background: RGB(36.1, 52.2, 55.3, 0.9);
+    -webkit-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
+    text-align: center;
+}
+
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-category {
+    font-family: 'Noto Serif TC', "Merriweather Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1.25em;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+#portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name p.title {
+    font-size: 1em;
+    text-align: center;
+    font-weight: bold;
+}
+
+#portfolio p.content {
+    font-size: 0.75em !important;
+    padding: 0em 1.25em 0.5em 1.25em;
+    text-align: justify;
+}
+
+#portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {
+    opacity: 1;
+}
+
+.wrapper {
+    width: 100%;
+    height: 225px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: top center;
+    border-radius: .2em;
+    border: 3px solid #fff;
+}
+
+.portfolio-box {
+    height: 600px;
+}
+
+#portfolio>div>div>div>a>img {
+    width: 450pt;
+    height: 200%;
+    object-fit: cover;
+    /* Scale the image so it covers whole area, thus will likely crop */
+    object-position: center;
+    /* Center the image within the element */
+}
+
+
+/*  button */
+
+button.footer {
+    margin: 0.2em;
+    height: auto;
+    font-size: 1em;
+    opacity: 0.89;
+    padding: 0.2em 0.3em;
+}
+
+@media (max-width: 450px) {
+    button.footer {
+        font-size: 0.85em;
+    }
+}

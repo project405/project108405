@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--  js   -->
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/active.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link href="/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="/css/logIn.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
+
+    <title>文藝富心</title>
+</head>
+
+<body>
+    <!-- ============================================= -->
+    <!-- --------------- navbar ---------------------- -->
+    <!-- ============================================= -->
+    <div class="header">
+        <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">
+            <a class="nav-link" href="/">
+                <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8"
+                    alt="">
+                <a href="/" class="navTitle">文藝富心</a>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link " href="/">首頁 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/notify">
+                            <i class="fas fa-bell" style="color:white;"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/recommendlist">
+                            推薦</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/articleList">
+                            文章</a>
+                    </li>
+                    <li id="dropdown" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="collectionArticle.html" id="navbarDropdownMenuLink"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            收藏
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>
+                            <a class="dropdown-item" href="/collection/article">文章收藏</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">登入</a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container position-fixed col-lg-8 report" id="report">
+        <div id="x"><i class="far fa-times-circle"></i>
+        </div>
+        <div class="form">
+            <form class="report" action="/report" method="POST" data-aos="zoom-out-right">
+                <div class="input-icon-wrap">
+                    <span class="input-icon"><span class="fas fa-hands-helping"></span></span>
+                    <textarea class="input-with-icon report" name="reportReason" placeholder="輸入舉報原因"></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger report">送出</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- ------------- navbar end -------------------- -->
+    <!-- ============================================= -->
+
+    <section id="logIn">
+        <div class="container-fluid row flex justify-content-center logIn no-gutters">
+            <div class="container-fluid">
+                <center>
+                    <h3>登入</h3>
+                    <hr class="highlight">
+                </center>
+
+            </div>
+            <form class="logIn col-lg-3 shadow" id="login" action="/userLogIn" method="post">
+                <div class="input-icon-wrap ">
+                    <span class="input-icon "><span class="fa fa-user"></span></span>
+                    <input type="text" class="input-with-icon" id="ID" name="memID" placeholder="帳號" maxlength="20">
+                </div>
+                <div class="input-icon-wrap">
+                    <span class="input-icon"><span class="fas fa-lock"></span></span>
+                    <input type="password" class="input-with-icon" id="password" name="memPass" placeholder="密碼">
+                </div>
+
+                <input type="text" id="input" class="inputValidateCode" name="code" placeholder="輸入驗證碼" />
+                <input type="button" id="checkCode" class="code" onclick="createCode()" />
+                <span class="changeCode " href="#" onclick="createCode()"><i class="fas fa-sync-alt"></i></span><br>
+
+                <button type="button" class="btn btn-dark login" onclick="validateCode()" return false;>登入</button>
+                <br>
+                <button type="button" class="btn btn-secondary sameWidth">忘記密碼</button>
+                <button type="button" class="btn btn-secondary sameWidth" onclick="location.href='/signUp'">註冊</button>
+
+
+            </form>
+
+            <div class="container-fluid row flex justify-content-center ">
+                <div class="col-12-5 third">
+                    <center>
+                        <h4>或</h4>
+                        <hr class="highlight">
+                        <button type="button" class="btn third gmail col-sm-12">Gmail登入或註冊</button>
+                        <button type="button" class="btn third fb  col-sm-12">Facebook登入或註冊</button>
+                    </center>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/validateCode.js"></script>
+
+</body>
+
+</html>

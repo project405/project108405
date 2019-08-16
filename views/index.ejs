@@ -1,0 +1,385 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--  js   -->
+    <script src="/javascripts/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link type="text/css" href="https://rawgit.com/elrumordelaluz/csshake/master/dist/csshake.min.css">
+    <link href="/css/headerIndex.css" rel="stylesheet" type="text/css" />
+    <link href="/css/index.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/aos.css" />
+
+
+    <title>文藝富心</title>
+</head>
+
+<body>
+    <!-- ============================================= -->
+    <!-- --------------- navbar ---------------------- -->
+    <!-- ============================================= -->
+    <div class="header">
+        <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">
+            <a class="nav-link" href="/">
+                <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8"
+                    alt="">
+                <a href="/" class="navTitle">文藝富心</a>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <!-- 如果帳號不是管理員則不顯示 -->
+                    <% if(items[3] == undefined){ %>
+                    <li class="nav-item" style="display: none">
+                        <a class="nav-link" href="recommendPost.html">
+                            新增推薦</a>
+                    </li>
+                    <!-- 如果帳號是一般會員 -->
+                    <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="recommendPost.html">
+                            新增推薦</a>
+                    </li>
+                    <% } %>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/">首頁 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/notify">
+                            <i class="fas fa-bell" style="color:white;"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/recommendlist">
+                            推薦</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/articleList">
+                            文章</a>
+                    </li>
+                    <li id="dropdown" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            收藏
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>
+                            <a class="dropdown-item" href="/collection/article">文章收藏</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>
+                    </li>
+                    <!-- 已經登入的話 login 隱藏 -->
+                    <% if(items[2][0] != undefined){ %>
+                    <li class="nav-item" style="display: none">
+                        <a class="nav-link" href="/login">登入</a>
+                    </li>
+                    <!-- 如果還沒登入 login 顯示 -->
+                    <% } else { %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">登入</a>
+                    </li>
+                    <% } %>
+                    <!-- 已經登入的話"會員"下拉式清單 顯示 -->
+                    <% if(items[2][0] != undefined){ %>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            會員
+                        </a>
+                        <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/member/memberManage">會員資料</a>
+                            <a class="dropdown-item" href="/member/articleManage">文章管理</a>
+                            <a class="dropdown-item" href="/logOut">登出</a>
+                        </div>
+                    </li>
+                    <!-- 如果還沒登入則隱藏"會員"清單 -->
+                    <% } else { %>
+                    <li class="nav-item dropdown" style="display: none">
+                        <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
+                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            會員
+                        </a>
+                        <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/member/memberManage">會員資料</a>
+                            <a class="dropdown-item" href="/member/articleManage">文章管理</a>
+                            <a class="dropdown-item" href="/logOut">登出</a>
+                        </div>
+                    </li>
+                    <% } %>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container position-fixed col-lg-8 report" id="report">
+        <div id="x"><i class="far fa-times-circle"></i>
+        </div>
+        <div class="form">
+            <form class="report" action="/report" method="POST" data-aos="zoom-out-right">
+                <div class="input-icon-wrap">
+                    <span class="input-icon"><span class="fas fa-hands-helping"></span></span>
+                    <textarea class="input-with-icon report" name="reportReason" placeholder="輸入舉報原因"></textarea>
+                </div>
+                <button type="submit" class="btn btn-danger report">送出</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ============================================= -->
+    <!-- ------------- navbar end -------------------- -->
+    <!-- ============================================= -->
+
+    <!-- 封面區塊 -->
+    <div class="banner">
+        <a id="goDown"> <i class="fas fa-chevron-circle-down"></i>
+        </a>
+        <div id="block" class="block"></div>
+    </div>
+    <!-- 封面區塊結束 -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <center>
+            <h2>本週精選推薦</h2>
+            <hr class="highlight">
+        </center>
+
+        <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
+
+            <!-- 推薦 -->
+            <% for(var i = 0 ; i<items[0].length ; i ++) { %>
+            <div class="wrapper col-12  col-lg-4" style="background-image: url('imgs/recommend/movie1.jpg');"
+                onclick="location.href='/recommendList'" data-aos="fade-right">
+                <a class="portfolio-box" href="/oneRecommend/<%= items[0][i].recomNum %>">
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">
+                            <p><%= items[0][i].recomClass %></p>
+                        </div>
+                        <div class="project-name">
+                            <p class="title"><%= items[0][i].recomHead %></p>
+                            </p>
+                            <p class="content wrapText"><%- items[0][i].recomCont %>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <% if( (i+1) %2 == 0){ %>
+            <div class="w-100"></div>
+            <% } %>
+            <% } %>
+            <!-- 推薦結束 -->
+        </div>
+    </section>
+
+    <!-- 熱門文章區塊 -->
+
+    <section id="hotArticle">
+        <div class="container hotArticle">
+            <center>
+                <h2>熱門文章</h2>
+                <hr class="highlight">
+            </center>
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="card  shadow" onclick="location.href='/article/<%= items[1][0].artiNum %>'"
+                        style="cursor:pointer;">
+
+                        <div class="card-body">
+                            <h3 class="card-title"><%= items[1][0].artiHead %>
+                            </h3>
+                            <p class="card-text wrapBigHotSectionText">
+                                <%- items[1][0].artiCont %>
+                            </p>
+
+                            <p class="poster">
+                                <%= items[1][0].memID %> 於 <%= items[1][0].artiDateTime %>發佈
+                            </p>
+                            
+                            <!-- tag -->
+                            <div class="tagDiv">
+                                <% if(items[5] != undefined) { %>
+                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                        <% if(items[5].artiNum == items[1][0].artiNum) { %>
+                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                                
+                            </div>
+                        </div>
+
+                        <!-- imgs -->
+                        <% if(items[4] != undefined ){%>
+                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
+                                <% if (items[1][0].artiNum == items[4][j].artiNum){ %>
+                                    <div class="wrapperCardbig card-img-bottom"
+                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                </div>
+                <!-- 精選右邊上面的格子 -->
+                <div class=" col-lg-5">
+                    <div class="card shadow" onclick="location.href='/article/<%= items[1][1].artiNum %>'"
+                        style="cursor:pointer;">
+
+                        <div class="card-body">
+                            <h3 class="card-title"><%= items[1][1].artiHead %>
+                            </h3>
+                            <p class="card-text wrapText"><%- items[1][1].artiCont %>
+                            </p>
+                            <p class="poster">
+                                <%= items[1][1].memID %> 於 <%= items[1][1].artiDateTime %> 發佈
+                            </p>
+
+                            <!-- tag -->
+                            <div class="tagDiv">
+                                <% if(items[5] != undefined) { %>
+                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                        <% if(items[5].artiNum == items[1][1].artiNum) { %>
+                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <!-- imgs -->
+                        <% if(items[4] != undefined ){ %>
+                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
+                                <% if (items[1][1].artiNum == items[4][j].artiNum){ %>
+                                    <div class="wrapperCardbig card-img-bottom"
+                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <!-- 精選右邊上面的格子結束 -->
+
+                    <!-- 精選右邊下面的格子 -->
+                    <div class="card shadow" onclick="location.href='/article/<%= items[1][2].artiNum %>'"
+                        style="cursor:pointer;">
+
+                        <div class="card-body">
+                            <h3 class="card-title"><%= items[1][2].artiHead %>
+                            </h3>
+                            <p class="card-text wrapText">
+                                <%- items[1][2].artiCont %>
+                            </p>
+                            <p class="poster">
+                                <%= items[1][2].memID %> 於 <%= items[1][2].artiDateTime %> 發佈
+                            </p>
+
+                            <!-- tag -->
+                            <div class="tagDiv">
+                                <% if(items[5] != undefined) { %>
+                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                        <% if(items[5].artiNum == items[1][2].artiNum) { %>
+                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+
+                         <!-- imgs -->
+                         <% if(items[4] != undefined ) { %>
+                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
+                                <% if (items[1][2].artiNum == items[4][j].artiNum){ %>
+                                    <div class="wrapperCardbig card-img-bottom"
+                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        <% } %>
+
+                    </div>
+
+                </div>
+                <!-- 精選右邊下面的格子結束 -->
+
+
+
+
+            </div>
+
+            <div class="col-12 goArticleList">
+                <button type="button" class="btn goArticle" onclick="location.href='articleList.html'">
+                    <h5>前往文章列表 <i class="fas fa-arrow-alt-circle-right"></i></h5>
+                </button>
+
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- 熱門文章區塊結束 -->
+
+
+
+    <div class="container-fluid footer d-flex justify-content-center row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-4 aboutUs">
+            <h6>關於我們：</h6>
+            <p>我們身處在一個資料越來越多、意義越來越少的世代，源源不絕的資訊不僅讓人失去學習的熱忱，也錯過了許多生命中原有的樂趣。文藝富心彙整藝文相關資訊與提供討論的空間，讓使用者能在幾分鐘之內得到完善的資訊，也提供一個安靜的角落給使用者喘息休憩。
+            </p>
+            <h6>聯絡我們：</h6>
+            <p>10546004@ntub.edu.tw</p>
+
+        </div>
+
+        <div class="col-lg-4 aboutUs">
+            <h6>常見問題：</h6>
+            <p>獎勵機制：在推薦底下的留言，我們會透過點擊次數以及愛心次數來篩選出最佳留言，將會寄送精美小獎品給最佳留言者。</p>
+            <p>申報機制：只要對於我們的系統有任何建議，都可以透過申報通知系統管理員，讓文藝富心團隊能夠改進，提供給使用者更好的環境</p>
+
+        </div>
+        <div class="col-lg-2">
+        </div>
+
+    </div>
+
+
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="/javascripts/aos.js"></script>
+    <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/index.js"></script>
+
+</body>
+
+</html>
