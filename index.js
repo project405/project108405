@@ -5,7 +5,7 @@ var linebot = require('linebot');
 var express = require('express');
 //增加引用函式
 // const collection = require('./utility/collection');
-// const index = require('./utility/index');
+const index = require('./routes/utility/index');
 // const recommend = require('./utility/recommend');
 
 //----------------------------------------
@@ -127,8 +127,32 @@ var bot = linebot({
 //     );
 // });
 
-bot.on('message', function(event) {
-    event.reply('Hello, 你好');  
+bot.on('message', function(event) {    
+    event.source.profile().then(
+        function (profile) {
+            //取得使用者資料
+            const userName = profile.displayName;
+            const userId = profile.userId;
+	    
+            //使用者傳來的學號
+            const no = event.message.text;
+          
+            //呼叫API取得學生資料
+            index.getIndexData(no).then(data => {  
+                if (data == -1){
+                    event.reply('找不到資料');
+                }else if(data == -9){                    
+                    event.reply('執行錯誤');
+                }else{
+                    event.reply([
+                        {'type':'text', 'text':data.stuno},
+                        {'type':'text', 'text':data.stuname},
+                        {'type':'text', 'text':data.gender}]
+                    );  
+                }  
+            })  
+        }
+    );
 });
 
 
