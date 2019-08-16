@@ -115,9 +115,9 @@ bot.on('message', function(event) {
         recommend.getRecomMovie(text).then(data => { 
             console.log(data[0][0].recomClass)
             event.reply([
-                {'type':'text', 'text':data[0][0]},
-                {'type':'text', 'text':data[1][1]},
-                {'type':'text', 'text':data[1][2]}
+                {'type':'text', 'text':data[0][0].recomClass},
+                {'type':'text', 'text':data[0][0].recomHead},
+                {'type':'text', 'text':data[0][0].recomCont}
             ]);   
             // msg.push({'type':'text', 'text':data[0].recomClass},
             //         {'type':'text', 'text':data[0].recomHead},
