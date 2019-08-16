@@ -145,7 +145,9 @@ bot.on('message', function(event) {
                     }else if(data == -9){                    
                         event.reply('執行錯誤');
                     }else{
-                        console.log(data[1][0](3));
+                        console.log(data[1][0]);
+                        console.log(data[1][1]);
+                        console.log(data[1][2]);
                         // console.log(data.result[1][1][4]);
                         // console.log(data.result[1][2][4]);
                         // event.reply([
