@@ -93,6 +93,7 @@ var getIndexData = async function (memID) {
     })
 
     //----------- 取得照片 ----------- 
+    console.log(hotArticle);
     await sql('SELECT "artiNum" , "imgName" FROM "image"')
         .then((data) => {
             if (data.rows == null || data.rows == '') {
