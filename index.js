@@ -4,9 +4,9 @@
 var linebot = require('linebot');
 var express = require('express');
 //增加引用函式
-const collection = require('./utility/collection');
-const index = require('./utility/index');
-const recommend = require('./utility/recommend');
+// const collection = require('./utility/collection');
+// const index = require('./utility/index');
+// const recommend = require('./utility/recommend');
 
 //----------------------------------------
 // 填入自己在Line Developers的channel值
@@ -48,35 +48,35 @@ var bot = linebot({
 //     );
 // });
 
-bot.on('message', function(event) {    
-    event.source.profile().then(
-        function (profile) {
-            //取得使用者資料
-            const userName = profile.displayName;
-            const userId = profile.userId;
+// bot.on('message', function(event) {    
+//     event.source.profile().then(
+//         function (profile) {
+//             //取得使用者資料
+//             const userName = profile.displayName;
+//             const userId = profile.userId;
 	    
-            //使用者傳來的學號
-            const text = event.message.text;
+//             //使用者傳來的學號
+//             const text = event.message.text;
           
-            //呼叫API取得熱門文章
-            // if (text == "熱門"){
-                // index.getIndexData().then(data => {  
-                //     // console.log(data);
-                //     console.log(data);
-                //     // event.reply([
-                //     //     {'type':'text', 'text':data[0].recomHead},
-                //     //     {'type':'text', 'text':data[0].recomCont},
-                //     //     {'type':'text', 'text':data[0].recomClass},
-                //     //     {'type':'text', 'text':userName},
-                //     //     {'type':'text', 'text':"http://weiting.nctu.me/logIn.html/"+userId}]
-                //     // );  
+//             //呼叫API取得熱門文章
+//             // if (text == "熱門"){
+//                 index.getIndexData().then(data => {  
+//                     // console.log(data);
+//                     console.log(data[0].weekRecommend);
+//                     // event.reply([
+//                     //     {'type':'text', 'text':data[0].recomHead},
+//                     //     {'type':'text', 'text':data[0].recomCont},
+//                     //     {'type':'text', 'text':data[0].recomClass},
+//                     //     {'type':'text', 'text':userName},
+//                     //     {'type':'text', 'text':"http://weiting.nctu.me/logIn.html/"+userId}]
+//                     // );  
                   
-                // }) 
-            // }
+//                 }) 
+//             // }
              
-        }
-    );
-});
+//         }
+//     );
+// });
 //------------本週推薦------------
 // bot.on('message', function(event) {    
 //     event.source.profile().then(
@@ -127,6 +127,9 @@ bot.on('message', function(event) {
 //     );
 // });
 
+bot.on('message', function(event) {
+    event.reply('Hello, 你好');  
+});
 
 
 
