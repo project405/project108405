@@ -113,7 +113,7 @@ bot.on('message', function(event) {
     if (text == "本週推薦"){
     
         recommend.getRecomMovie(text).then(data => { 
-            console.log(data[0])
+            console.log(data[0][0])
             // event.reply([
             //     {'type':'text', 'text':data[1][0]},
             //     {'type':'text', 'text':data[1][1]},
