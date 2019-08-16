@@ -126,7 +126,7 @@ var bot = linebot({
 //         }
 //     );
 // });
-
+//------------ 熱門文章 ------------
 bot.on('message', function(event) {    
     
 	    
@@ -136,26 +136,22 @@ bot.on('message', function(event) {
     //呼叫API取得學生資料
     if (text == "熱門文章"){
         index.getIndexData(text).then(data => {  
-            if (data == -1){
-                event.reply('找不到資料');
-            }else if(data == -9){                    
-                event.reply('執行錯誤');
-            }else{
-                console.log(data[1][0]);
-                console.log(data[1][1]);
-                console.log(data[1][2]);
-                
-                // event.reply([
-                //     {'type':'text', 'text':data[1][0]},
-                //     {'type':'text', 'text':data[1][1]},
-                //     {'type':'text', 'text':data[1][2]}
-                // ]);   
-            }  
+            
+            console.log(data[1][0]);
+            console.log(data[1][1]);
+            console.log(data[1][2]);
+            
+            // event.reply([
+            //     {'type':'text', 'text':data[1][0]},
+            //     {'type':'text', 'text':data[1][1]},
+            //     {'type':'text', 'text':data[1][2]}
+            // ]);   
+             
         })  
     }
-        
-    
 });
+//--------------------------------
+
 
 
 
