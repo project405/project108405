@@ -105,52 +105,29 @@ bot.on('message', function(event) {
 //--------------------------------
 //------------ 本週推薦 ------------
 bot.on('message', function(event) {    
-    event.source.profile().then(
-        function (profile) {
-            //取得使用者資料
-            const userName = profile.displayName;
-            const userId = profile.userId;
-	    
-            //使用者傳來的按鈕文字
-            const text = event.message.text;
-            //存放本週推薦資料
-            let msg = [];
-            //呼叫API取得本週推薦
-            if (text == "本週推薦"){
-            
-                recommend.getRecomMovie(text).then(data => { 
-                    msg.push({'type':'text', 'text':data[0].recomClass},
-                            {'type':'text', 'text':data[0].recomHead},
-                            {'type':'text', 'text':data[0].recomCont}) 
-                    event.reply(msg); 
-                })
-                
-                recommend.getRecomMusic(text).then(data => {     
-                    msg.push({'type':'text', 'text':data[0].recomClass},
-                            {'type':'text', 'text':data[0].recomHead},
-                            {'type':'text', 'text':data[0].recomCont}) 
-                    event.reply(msg);         
-                })
+    
 
-                recommend.getRecomBook(text).then(data => {      
-                    msg.push({'type':'text', 'text':data[0].recomClass},
-                            {'type':'text', 'text':data[0].recomHead},
-                            {'type':'text', 'text':data[0].recomCont}) 
-                    event.reply(msg); 
-                })
-
-                recommend.getRecomExhibition(text).then(data => {  
-                    msg.push({'type':'text', 'text':data[0].recomClass},
-                            {'type':'text', 'text':data[0].recomHead},
-                            {'type':'text', 'text':data[0].recomCont}) 
-                    console.log(msg);  
-                    event.reply(msg);                                  
-                })
-                        
-            }
-             
-        }
-    );
+    //使用者傳來的按鈕文字
+    const text = event.message.text;
+    //存放本週推薦資料
+    // let msg = [];
+    //呼叫API取得本週推薦
+    if (text == "本週推薦"){
+    
+        recommend.getRecomMovie(text).then(data => { 
+            console.log(data)
+            // event.reply([
+            //     {'type':'text', 'text':data[1][0]},
+            //     {'type':'text', 'text':data[1][1]},
+            //     {'type':'text', 'text':data[1][2]}
+            // ]);   
+            // msg.push({'type':'text', 'text':data[0].recomClass},
+            //         {'type':'text', 'text':data[0].recomHead},
+            //         {'type':'text', 'text':data[0].recomCont}) 
+            // event.reply(msg); 
+        })
+                    
+    }      
 });
 //--------------------------------
 
