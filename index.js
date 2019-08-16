@@ -146,6 +146,8 @@ bot.on('message', function(event) {
                         event.reply('執行錯誤');
                     }else{
                         console.log(data.result[1][0][4]);
+                        console.log(data.result[1][1][4]);
+                        console.log(data.result[1][2][4]);
                         // event.reply([
                         //     {'type':'text', 'text':data[0].recomHead},
                         //     {'type':'text', 'text':data[0].recomCont},
