@@ -137,15 +137,15 @@ bot.on('message', function(event) {
     if (text == "熱門文章"){
         index.getIndexData(text).then(data => {  
             
-            console.log(data[1][0]);
-            console.log(data[1][1]);
-            console.log(data[1][2]);
+            // console.log(data[1][0]);
+            // console.log(data[1][1]);
+            // console.log(data[1][2]);
             
-            // event.reply([
-            //     {'type':'text', 'text':data[1][0]},
-            //     {'type':'text', 'text':data[1][1]},
-            //     {'type':'text', 'text':data[1][2]}
-            // ]);   
+            event.reply([
+                {'type':'text', 'text':data[1][0]},
+                {'type':'text', 'text':data[1][1]},
+                {'type':'text', 'text':data[1][2]}
+            ]);   
              
         })  
     }
