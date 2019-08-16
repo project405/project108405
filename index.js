@@ -144,9 +144,7 @@ bot.on('message', function(event) {
                 }else if(data == -9){                    
                     event.reply('執行錯誤');
                 }else{
-                    console.log(data[0].artiHead);
-                    console.log(data.artiCont);
-                    
+                    console.log(data.hotArticle);
                     // event.reply([
                     //     {'type':'text', 'text':data[0].recomHead},
                     //     {'type':'text', 'text':data[0].recomCont},
