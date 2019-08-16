@@ -113,7 +113,7 @@ bot.on('message', function(event) {
     if (text == "本週推薦"){
     
         recommend.getRecomMovie(text).then(data => { 
-            console.log(data[0][0])
+            console.log(data[0][0].recomClass)
             event.reply([
                 {'type':'text', 'text':data[0][0]},
                 {'type':'text', 'text':data[1][1]},
@@ -123,8 +123,7 @@ bot.on('message', function(event) {
             //         {'type':'text', 'text':data[0].recomHead},
             //         {'type':'text', 'text':data[0].recomCont}) 
             // event.reply(msg); 
-        })
-                    
+        })              
     }      
 });
 //--------------------------------
