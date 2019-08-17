@@ -90,10 +90,7 @@ bot.on('message', function(event) {
                 // console.log(data[0][0].recomCont);
                 // console.log("1",data[0][0].recomClass)
                 event.reply([
-                    {'type':'text', 'text':data[0][0].recomClass},
-                    {'type':'text', 'text':data[0][0].recomHead},
-                    {'type':'text', 'text':data[0][0].recomCont},
-                    
+                    {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont}          
                 ]);   
                 console.log(data[0][0])
             });     
