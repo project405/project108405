@@ -92,6 +92,7 @@ bot.on('message', function async(event) {
             });     
 
         } 
+        console.log('recommendData來瞜！！！',recommendData)
                 // console.log(data[0][0].recomClass);
                 // console.log(data[0][0].recomHead);
                 // console.log(data[0][0].recomCont);
