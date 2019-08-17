@@ -89,21 +89,21 @@ bot.on('message',async function (event) {
                 console.log('==========================>')
                 // console.log('data!!!!!!!',data[0][0])
                 recommendData.push(data[0][0]);
-                console.log('recommendData來瞜~~~',recommendData)
+                console.log('recommendData',recommendData)
                 // console.log('recommendData=============>',recommendData)
             }); 
         })
 
-        console.log('recommendData外面的',recommendData)
+        console.log('recommendDataOutside',recommendData)
         // console.log(data[0][0].recomClass);
         // console.log(data[0][0].recomHead);
         // console.log(data[0][0].recomCont);
         // console.log("1",data[0][0].recomClass)
         event.reply([
-            // {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
-            // {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
-            // {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
-            // {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont}          
+            {'type':'text', 'text':`${recommendData[0].recomClass}${recommendData[0].recomHead}${recommendData[0].recomCont}`},
+            {'type':'text', 'text':`${recommendData[1].recomClass}${recommendData[1].recomHead}${recommendData[1].recomCont}`},
+            {'type':'text', 'text':`${recommendData[2].recomClass}${recommendData[2].recomHead}${recommendData[2].recomCont}`},
+            {'type':'text', 'text':`${recommendData[3].recomClass}${recommendData[3].recomHead}${recommendData[3].recomCont}`}   
         ]);
         // event.reply([
         //     {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont}          
