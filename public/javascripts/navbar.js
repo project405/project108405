@@ -1,9 +1,7 @@
 $(document).ready(() => {
-    console.log("navbar");
     $.ajax({
         type: "GET",
         url: '/checkStatus',
-        // data: {"input":"input"},
         success: function (data) {
           //data[0] = memID , data[1] = Authority
           //如果沒登入
