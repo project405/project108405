@@ -73,6 +73,7 @@ var RecomMovieRouter = require('./routes/recommend/recomMovie');
 var RecomMusicRouter = require('./routes/recommend/recomMusic');
 var RecomBookRouter = require('./routes/recommend/recomBook');
 var RecomExhibitionRouter = require('./routes/recommend/recomExhibition');
+var CheckStatus = require('./routes/checkStatus');
 
 var app = express();
 
@@ -164,6 +165,7 @@ app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);
 app.use('/recommendList/book', RecomBookRouter);
 app.use('/recommendList/exhibition', RecomExhibitionRouter);
+app.use('/checkStatus',CheckStatus);
 
 
 
