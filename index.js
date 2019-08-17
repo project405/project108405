@@ -73,7 +73,7 @@ bot.on('message', function(event) {
 });
 //--------------------------------
 //------------ 本週推薦 ------------
-bot.on('message', function async(event) {    
+bot.on('message',async function (event) {    
 
     //使用者傳來的文字
     const text = event.message.text;
