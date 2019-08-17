@@ -79,6 +79,7 @@ bot.on('message', function async(event) {
     const text = event.message.text;
     //存放本週推薦類別
     let msg = ['電影','音樂','書籍','展覽'];
+    let recommend = [];
     //呼叫API取得本週推薦
     if (text == "本週推薦"){
         for(let i = 0;i<msg.length;i++){
