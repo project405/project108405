@@ -78,10 +78,10 @@ bot.on('message', function(event) {
     //使用者傳來的文字
     const text = event.message.text;
     //存放本週推薦資料
-    // let msg = [];
+    let msg = ['電影','音樂','書籍','展覽'];
     //呼叫API取得本週推薦
     // if (text == "本週推薦"){
-        
+    for(let i = 0;i<msg.length;i++){
         recommend.getRecomClassList(text).then(data => { 
             console.log(data);
             // console.log("1",data[0][0].recomClass)
@@ -91,7 +91,8 @@ bot.on('message', function(event) {
             //     {'type':'text', 'text':data[0][0].recomCont}
             // ]);   
              
-        });           
+        });
+    }           
     // }      
 });
 //--------------------------------
