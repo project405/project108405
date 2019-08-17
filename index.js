@@ -83,16 +83,17 @@ bot.on('message', function async(event) {
     //呼叫API取得本週推薦
     if (text == "本週推薦"){
 
-        for (let msg of msgs){
-            console.log('B');
+        await msgs.map((msg,index)=>{
+            console.log(index , msg)
             recommend.getRecomClassList(msg).then(data => { 
                 console.log('==========================>')
                 // console.log('data!!!!!!!',data[0][0])
                 recommendData.push(data[0][0]);
                 console.log('recommendData來瞜~~~',recommendData)
                 // console.log('recommendData=============>',recommendData)
-            });     
-        }
+            }); 
+        })
+
         console.log('recommendData外面的',recommendData)
         // console.log(data[0][0].recomClass);
         // console.log(data[0][0].recomHead);
