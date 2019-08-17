@@ -8,6 +8,7 @@ const moment = require('moment');
 //-------- checkAuthority() ---------
 //================================
 var checkAuthority = async function (memID) {
+    console.log("近來囉");
     var result;
     await sql('SELECT "memAuthority" FROM "member" where "memID" = $1 ', [memID])
         .then((data) => {

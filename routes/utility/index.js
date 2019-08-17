@@ -98,20 +98,20 @@ var getIndexData = async function (memID) {
             });
     }
     //取得權限
-    await member.checkAuthority(memID).then(data => {
-        if (data != undefined) {
-            checkAuthority = data;
-            console.log("Authority=", checkAuthority);
-        } else {
-            checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
-        }
-    })
+    // await member.checkAuthority(memID).then(data => {
+    //     if (data != undefined) {
+    //         checkAuthority = data;
+    //         console.log("Authority=", checkAuthority);
+    //     } else {
+    //         checkAuthority = undefined;
+    //         console.log("Authority=", checkAuthority);
+    //     }
+    // })
 
     result[0] = fourRecommend;
     result[1] = mydata;
     result[2] = [memID];
-    result[3] = checkAuthority;
+    // result[3] = checkAuthority;
     return result;
 }
 module.exports = { getIndexData };
