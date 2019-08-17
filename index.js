@@ -80,8 +80,8 @@ bot.on('message', function(event) {
     //存放本週推薦資料
     // let msg = [];
     //呼叫API取得本週推薦
-    if (text == "本週推薦"){
-    
+    // if (text == "本週推薦"){
+        
         recommend.getRecomClassList(text).then(data => { 
             console.log(data);
             // console.log("1",data[0][0].recomClass)
@@ -90,13 +90,9 @@ bot.on('message', function(event) {
             //     {'type':'text', 'text':data[0][0].recomHead},
             //     {'type':'text', 'text':data[0][0].recomCont}
             // ]);   
-            // msg.push({'type':'text', 'text':data[0].recomClass},
-            //         {'type':'text', 'text':data[0].recomHead},
-            //         {'type':'text', 'text':data[0].recomCont}) 
-            // event.reply(msg); 
-        }); 
-               
-    }      
+             
+        });           
+    // }      
 });
 //--------------------------------
 
