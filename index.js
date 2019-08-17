@@ -91,22 +91,21 @@ bot.on('message', function async(event) {
                 console.log('recommendData=============>',recommendData)
             });     
 
+        } 
                 // console.log(data[0][0].recomClass);
                 // console.log(data[0][0].recomHead);
                 // console.log(data[0][0].recomCont);
                 // console.log("1",data[0][0].recomClass)
                 event.reply([
-                    {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
-                    {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
-                    {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
-                    {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont}          
+                    // {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
+                    // {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
+                    // {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
+                    // {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont}          
                 ]);
                 // event.reply([
                 //     {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont}          
                 // ]);   
-                console.log(data[0][0])
-
-        }           
+          
     }      
 });
 //--------------------------------
