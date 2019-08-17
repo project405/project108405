@@ -91,8 +91,9 @@ bot.on('message',function (event) {
                 recommendData.push(data[0][0]);
                 console.log('recommendData來瞜~~~',recommendData)
                 // console.log('recommendData=============>',recommendData)
-            }); 
-        }).then();
+            }).then(); 
+        })
+
 
         console.log('recommendData外面的',recommendData)
         // console.log(data[0][0].recomClass);
