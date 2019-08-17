@@ -81,16 +81,19 @@ bot.on('message', function async(event) {
     let msg = ['電影','音樂','書籍','展覽'];
     //呼叫API取得本週推薦
     if (text == "本週推薦"){
+        let recommendData = [];
         for(let i = 0;i<msg.length;i++){
             console.log('B');
             recommend.getRecomClassList(msg[i]).then(data => { 
                 console.log('==========================>')
-
                 console.log(data[0][0])
+                recommendData.push(data[0][0]);
                 // console.log(data[0][0].recomClass);
                 // console.log(data[0][0].recomHead);
                 // console.log(data[0][0].recomCont);
                 // console.log("1",data[0][0].recomClass)
+            });     
+            console.log(recommendData)
                 event.reply([
                     {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
                     {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
@@ -100,8 +103,7 @@ bot.on('message', function async(event) {
                 // event.reply([
                 //     {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont}          
                 // ]);   
-                console.log(data[0][0])
-            });     
+                // console.log(data[0][0])
 
         }           
     }      
