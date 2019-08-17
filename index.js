@@ -81,18 +81,17 @@ bot.on('message', function async(event) {
     let msg = ['電影','音樂','書籍','展覽'];
     //呼叫API取得本週推薦
     if (text == "本週推薦"){
-        let recommendData = [];
         for(let i = 0;i<msg.length;i++){
             console.log('B');
             recommend.getRecomClassList(msg[i]).then(data => { 
                 console.log('==========================>')
                 console.log('data!!!!!!!',data[0][0])
-                recommendData.push(data[0][0]);
-                console.log('recommendData來瞜~~~',recommendData)
+                this.recommendData.push(data[0][0]);
+                console.log('recommendData來瞜~~~',this.recommendData)
                 // console.log('recommendData=============>',recommendData)
             });     
         } 
-        console.log('recommendData來瞜！！！',recommendData)
+        console.log('recommendData來瞜！！！',this.recommendData)
                 // console.log(data[0][0].recomClass);
                 // console.log(data[0][0].recomHead);
                 // console.log(data[0][0].recomCont);
