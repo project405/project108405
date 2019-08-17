@@ -48,36 +48,6 @@ var bot = linebot({
 //     );
 // });
 
-// bot.on('message', function(event) {    
-//     event.source.profile().then(
-//         function (profile) {
-//             //取得使用者資料
-//             const userName = profile.displayName;
-//             const userId = profile.userId;
-	    
-//             //使用者傳來的學號
-//             const text = event.message.text;
-          
-//             //呼叫API取得熱門文章
-//             // if (text == "熱門"){
-//                 index.getIndexData().then(data => {  
-//                     // console.log(data);
-//                     console.log(data[0].weekRecommend);
-//                     // event.reply([
-//                     //     {'type':'text', 'text':data[0].recomHead},
-//                     //     {'type':'text', 'text':data[0].recomCont},
-//                     //     {'type':'text', 'text':data[0].recomClass},
-//                     //     {'type':'text', 'text':userName},
-//                     //     {'type':'text', 'text':"http://weiting.nctu.me/logIn.html/"+userId}]
-//                     // );  
-                  
-//                 }) 
-//             // }
-             
-//         }
-//     );
-// });
-
 //------------ 熱門文章 ------------
 bot.on('message', function(event) {    
     
@@ -112,54 +82,20 @@ bot.on('message', function(event) {
     //呼叫API取得本週推薦
     if (text == "本週推薦"){
     
-        recommend.getRecomMovie(text).then(data => { 
-            console.log("1",data[0][0].recomClass)
-            event.reply([
-                {'type':'text', 'text':data[0][0].recomClass},
-                {'type':'text', 'text':data[0][0].recomHead},
-                {'type':'text', 'text':data[0][0].recomCont}
-            ]);   
+        recommend.getRecomClassList(text).then(data => { 
+            console.log(data);
+            // console.log("1",data[0][0].recomClass)
+            // event.reply([
+            //     {'type':'text', 'text':data[0][0].recomClass},
+            //     {'type':'text', 'text':data[0][0].recomHead},
+            //     {'type':'text', 'text':data[0][0].recomCont}
+            // ]);   
             // msg.push({'type':'text', 'text':data[0].recomClass},
             //         {'type':'text', 'text':data[0].recomHead},
             //         {'type':'text', 'text':data[0].recomCont}) 
             // event.reply(msg); 
         }); 
-        recommend.getRecomMusic(text).then(data => { 
-            console.log("2",data[0][0].recomClass)
-            event.reply([
-                {'type':'text', 'text':data[0][0].recomClass},
-                {'type':'text', 'text':data[0][0].recomHead},
-                {'type':'text', 'text':data[0][0].recomCont}
-            ]);   
-            // msg.push({'type':'text', 'text':data[0].recomClass},
-            //         {'type':'text', 'text':data[0].recomHead},
-            //         {'type':'text', 'text':data[0].recomCont}) 
-            // event.reply(msg); 
-        });
-        recommend.getRecomBook(text).then(data => { 
-            console.log("3",data[0][0].recomClass)
-            event.reply([
-                {'type':'text', 'text':data[0][0].recomClass},
-                {'type':'text', 'text':data[0][0].recomHead},
-                {'type':'text', 'text':data[0][0].recomCont}
-            ]);   
-            // msg.push({'type':'text', 'text':data[0].recomClass},
-            //         {'type':'text', 'text':data[0].recomHead},
-            //         {'type':'text', 'text':data[0].recomCont}) 
-            // event.reply(msg); 
-        }); 
-        recommend.getRecomExhibition(text).then(data => { 
-            console.log("4",data[0][0].recomClass)
-            event.reply([
-                {'type':'text', 'text':data[0][0].recomClass},
-                {'type':'text', 'text':data[0][0].recomHead},
-                {'type':'text', 'text':data[0][0].recomCont}
-            ]);   
-            // msg.push({'type':'text', 'text':data[0].recomClass},
-            //         {'type':'text', 'text':data[0].recomHead},
-            //         {'type':'text', 'text':data[0].recomCont}) 
-            // event.reply(msg); 
-        });          
+               
     }      
 });
 //--------------------------------
