@@ -73,7 +73,7 @@ bot.on('message', function(event) {
 });
 //--------------------------------
 //------------ 本週推薦 ------------
-bot.on('message',function (event) {    
+bot.on('message',async function (event) {    
 
     //使用者傳來的文字
     const text = event.message.text;
@@ -84,9 +84,9 @@ bot.on('message',function (event) {
     //呼叫API取得本週推薦
     if (text == "本週推薦") {
 
-        msgs.map( async(msg,index) => {
+        msgs.map( (msg,index) => {
             console.log(index)
-            await recommend.getRecomClassList(msg).then(data => { 
+                recommend.getRecomClassList(msg).then(data => { 
                 console.log('==========================>')
                 // console.log('data!!!!!!!',data[0][0])
                 recommendData.push(data[0][0]);
