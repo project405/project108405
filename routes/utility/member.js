@@ -4,9 +4,9 @@
 const sql = require('./asyncDB');
 const moment = require('moment');
 
-//================================
-//-------- checkAuthority() ---------
-//================================
+//==============================
+//------ checkAuthority() ------
+//==============================
 var checkAuthority = async function (memID) {
     var result;
     await sql('SELECT "memAuthority" FROM "member" where "memID" = $1 ', [memID])
@@ -15,7 +15,6 @@ var checkAuthority = async function (memID) {
                 result = undefined;
             } else {
                 result = data.rows[0].memAuthority;
-                // console.log("權限:", data.rows[0].memAuthority);
             }
         }, (error) => {
             result = undefined;
@@ -28,23 +27,33 @@ var checkAuthority = async function (memID) {
 //-------- articlePost() ---------
 //================================
 var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, imgData, tag) {
-    var result;
-    var artiNum = - 1;
+    var artiNum ;
     var tagNum = [];
+    var result;
+
     //新增文章
-    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime") VALUES ($1,$2,$3,$4,$5)', [memID, artiHead, artiCont, artiClass, artiDateTime])
+    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime") VALUES ($1,$2,$3,$4,$5); '+
+             ' SELECT currval(\'"article_artiNum_seq1"\') AS "artiNum" '
+             , [memID, artiHead, artiCont, artiClass, artiDateTime])
         .then((data) => {
-            result = 0;
+            if(!data.rows){
+                artiNum = undefined ;
+                console.log("ARtiBum =" ,artiNum);
+            }else{
+                
+                artiNum = data.rows[0].artiNum ;
+                console.log("ARtiBum =" ,artiNum);
+            }
         }, (error) => {
-            result = 1;
+            artiNum = undefined ;
         });
 
     //查詢新增文章的文章編號
     await sql('SELECT "artiNum" from "article" where "memID"= $1 and "artiHead" = $2 and "artiCont" = $3 and "artiClass" = $4 and "artiDateTime" = $5 ', [memID, artiHead, artiCont, artiClass, artiDateTime])
         .then((data) => {
             console.log("data.rows=", data.rows);
-            artiNum = data.rows[0].artiNum;
-            console.log("artiNum=", artiNum);
+            // artiNum = data.rows[0].artiNum;
+            // console.log("artiNum=", artiNum);
         }, (error) => {
             result = 1;
         });
