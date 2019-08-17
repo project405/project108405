@@ -83,7 +83,7 @@ bot.on('message',function (event) {
     //呼叫API取得本週推薦
     if (text == "本週推薦") {
 
-        msgs.map((msg,index) => {
+        const goMap = msgs.map((msg,index) => {
             console.log(index)
             recommend.getRecomClassList(msg).then(data => { 
                 console.log('==========================>')
