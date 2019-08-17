@@ -87,7 +87,8 @@ bot.on('message', function async(event) {
             recommend.getRecomClassList(msg[i]).then(data => { 
                 console.log('==========================>')
                 console.log('data!!!!!!!',data[0][0])
-                this.recommendData.push(data[0][0]);
+                recommendData.push(data[0][0]);
+                console.log('recommendData來瞜~~~',recommendData)
                 // console.log('recommendData=============>',recommendData)
             });     
         } 
