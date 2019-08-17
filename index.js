@@ -82,22 +82,25 @@ bot.on('message', function(event) {
     //呼叫API取得本週推薦
     if (text == "本週推薦"){
         for(let i = 0;i<msg.length;i++){
-            recommend.getRecomClassList(msg[i]).then(data => { 
-                console.log(data[0][0])
-                // console.log(data[0][0].recomClass);
-                // console.log(data[0][0].recomHead);
-                // console.log(data[0][0].recomCont);
-                // console.log("1",data[0][0].recomClass)
-                event.reply([
-                    {'type':'text', 'text':data[0][0].recomClass},
-                    {'type':'text', 'text':data[0][0].recomHead},
-                    {'type':'text', 'text':data[0][0].recomCont},
-                    
-                ]);   
-                console.log(data[0][0])
+            setTimeout(function(){
+                console.log('B');
+                recommend.getRecomClassList(msg[i]).then(data => { 
+                    console.log(data[0][0])
+                    // console.log(data[0][0].recomClass);
+                    // console.log(data[0][0].recomHead);
+                    // console.log(data[0][0].recomCont);
+                    // console.log("1",data[0][0].recomClass)
+                    event.reply([
+                        {'type':'text', 'text':data[0][0].recomClass},
+                        {'type':'text', 'text':data[0][0].recomHead},
+                        {'type':'text', 'text':data[0][0].recomCont},
+                        
+                    ]);   
+                    console.log(data[0][0])
+     
+                });
+            },1000);
 
-                
-            });
         }           
     }      
 });
