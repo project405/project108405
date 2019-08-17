@@ -94,6 +94,8 @@ bot.on('message', function(event) {
                     {'type':'text', 'text':data[0][0].recomCont},
                     
                 ]);   
+                console.log(data[0][0])
+
                 
             });
         }           
