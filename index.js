@@ -79,7 +79,7 @@ bot.on('message', function async(event) {
     const text = event.message.text;
     //存放本週推薦類別
     let msg = ['電影','音樂','書籍','展覽'];
-    let recommend = [];
+    let recommendData = [];
     //呼叫API取得本週推薦
     if (text == "本週推薦"){
         for(let i = 0;i<msg.length;i++){
@@ -87,8 +87,8 @@ bot.on('message', function async(event) {
             recommend.getRecomClassList(msg[i]).then(data => { 
                 console.log('==========================>')
                 // console.log('data!!!!!!!',data[0][0])
-                this.recommendData.push(data[0][0]);
-                console.log('recommendData來瞜~~~',this.recommendData)
+                recommendData.push(data[0][0]);
+                console.log('recommendData來瞜~~~',recommendData)
                 // console.log('recommendData=============>',recommendData)
             });     
         } 
