@@ -77,7 +77,7 @@ bot.on('message', function async(event) {
 
     //使用者傳來的文字
     const text = event.message.text;
-    //存放本週推薦資料
+    //存放本週推薦類別
     let msg = ['電影','音樂','書籍','展覽'];
     //呼叫API取得本週推薦
     if (text == "本週推薦"){
@@ -92,8 +92,14 @@ bot.on('message', function async(event) {
                 // console.log(data[0][0].recomCont);
                 // console.log("1",data[0][0].recomClass)
                 event.reply([
+                    {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
+                    {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
+                    {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont},
                     {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont}          
-                ]);   
+                ]);
+                // event.reply([
+                //     {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont}          
+                // ]);   
                 console.log(data[0][0])
             });     
 
