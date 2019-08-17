@@ -73,29 +73,29 @@ bot.on('message', function(event) {
 });
 //--------------------------------
 //------------ 本週推薦 ------------
-bot.on('message',async function (event) {    
+bot.on('message',function (event) {    
 
     //使用者傳來的文字
     const text = event.message.text;
     //存放本週推薦類別
     let msgs = ['電影','音樂','書籍','展覽'];
-    this.recommendData = [];
+    let recommendData = [];
     // let recommendData = [];
     //呼叫API取得本週推薦
     if (text == "本週推薦") {
 
-        await msgs.map((msg,index) => {
+        msgs.map(async(msg,index) => {
             console.log(index)
-            recommend.getRecomClassList(msg).then(data => { 
+            await recommend.getRecomClassList(msg).then(data => { 
                 console.log('==========================>')
                 // console.log('data!!!!!!!',data[0][0])
-                this.recommendData.push(data[0][0]);
+                recommendData.push(data[0][0]);
                 console.log('recommendData',recommendData)
                 // console.log('recommendData=============>',recommendData)
             }); 
         })
 
-        console.log('recommendDataOutside',this.recommendData)
+        console.log('recommendDataOutside',recommendData)
         // console.log(data[0][0].recomClass);
         // console.log(data[0][0].recomHead);
         // console.log(data[0][0].recomCont);
