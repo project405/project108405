@@ -84,7 +84,7 @@ bot.on('message',function (event) {
     //呼叫API取得本週推薦
     if (text == "本週推薦") {
 
-        msgs.map(async(msg,index) => {
+        msgs.map( async(msg,index) => {
             console.log(index)
             await recommend.getRecomClassList(msg).then(data => { 
                 console.log('==========================>')
