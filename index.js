@@ -92,9 +92,7 @@ bot.on('message', function(event) {
                     {'type':'text', 'text':data[0][0].recomClass},
                     {'type':'text', 'text':data[0][0].recomHead},
                     {'type':'text', 'text':data[0][0].recomCont},
-                    {'type':'text', 'text':data[0][0].recomClass},
-                    {'type':'text', 'text':data[0][0].recomHead},
-                    {'type':'text', 'text':data[0][0].recomCont}
+                    
                 ]);   
                 
             });
