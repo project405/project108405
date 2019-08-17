@@ -83,6 +83,7 @@ bot.on('message', function(event) {
     if (text == "本週推薦"){
         for(let i = 0;i<msg.length;i++){
             recommend.getRecomClassList(msg[i]).then(data => { 
+                console.log(data[0][0])
                 // console.log(data[0][0].recomClass);
                 // console.log(data[0][0].recomHead);
                 // console.log(data[0][0].recomCont);
