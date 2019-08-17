@@ -73,7 +73,7 @@ bot.on('message', function(event) {
 });
 //--------------------------------
 //------------ 本週推薦 ------------
-bot.on('message',function (event) {    
+bot.on('message',async function (event) {    
 
     //使用者傳來的文字
     const text = event.message.text;
@@ -83,7 +83,7 @@ bot.on('message',function (event) {
     //呼叫API取得本週推薦
     if (text == "本週推薦") {
 
-        const goMap = msgs.map((msg,index) => {
+        await msgs.map((msg,index) => {
             console.log(index)
             recommend.getRecomClassList(msg).then(data => { 
                 console.log('==========================>')
@@ -91,9 +91,8 @@ bot.on('message',function (event) {
                 recommendData.push(data[0][0]);
                 console.log('recommendData來瞜~~~',recommendData)
                 // console.log('recommendData=============>',recommendData)
-            }).then(); 
+            }); 
         })
-
 
         console.log('recommendData外面的',recommendData)
         // console.log(data[0][0].recomClass);
