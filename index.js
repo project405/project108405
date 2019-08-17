@@ -83,7 +83,7 @@ bot.on('message', function async(event) {
     //呼叫API取得本週推薦
     if (text == "本週推薦"){
 
-        for await(let msg of msg.length){
+        for (let msg of msg.length){
             console.log('B');
             recommend.getRecomClassList(msg[i]).then(data => { 
                 console.log('==========================>')
