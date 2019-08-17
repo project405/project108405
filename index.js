@@ -80,22 +80,22 @@ bot.on('message', function(event) {
     //存放本週推薦資料
     let msg = ['電影','音樂','書籍','展覽'];
     //呼叫API取得本週推薦
-    // if (text == "本週推薦"){
-    for(let i = 0;i<msg.length;i++){
-        recommend.getRecomClassList(msg[i]).then(data => { 
-            // console.log(data[0][0].recomClass);
-            // console.log(data[0][0].recomHead);
-            // console.log(data[0][0].recomCont);
-            // console.log("1",data[0][0].recomClass)
-            event.reply([
-                {'type':'text', 'text':data[0][0].recomClass},
-                {'type':'text', 'text':data[0][0].recomHead},
-                {'type':'text', 'text':data[0][0].recomCont}
-            ]);   
-             
-        });
-    }           
-    // }      
+    if (text == "本週推薦"){
+        for(let i = 0;i<msg.length;i++){
+            recommend.getRecomClassList(msg[i]).then(data => { 
+                // console.log(data[0][0].recomClass);
+                // console.log(data[0][0].recomHead);
+                // console.log(data[0][0].recomCont);
+                // console.log("1",data[0][0].recomClass)
+                event.reply([
+                    {'type':'text', 'text':data[0][0].recomClass},
+                    {'type':'text', 'text':data[0][0].recomHead},
+                    {'type':'text', 'text':data[0][0].recomCont}
+                ]);   
+                
+            });
+        }           
+    }      
 });
 //--------------------------------
 
