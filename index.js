@@ -85,7 +85,7 @@ bot.on('message', function async(event) {
 
         for (let msg of msg.length){
             console.log('B');
-            recommend.getRecomClassList(msg[i]).then(data => { 
+            recommend.getRecomClassList(msg).then(data => { 
                 console.log('==========================>')
                 // console.log('data!!!!!!!',data[0][0])
                 recommendData.push(data[0][0]);
