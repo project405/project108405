@@ -84,7 +84,7 @@ bot.on('message',async function (event) {
     if (text == "本週推薦"){
 
         await msgs.map((msg,index)=>{
-            console.log(index , msg)
+            console.log(index)
             recommend.getRecomClassList(msg).then(data => { 
                 console.log('==========================>')
                 // console.log('data!!!!!!!',data[0][0])
