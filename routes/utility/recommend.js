@@ -250,6 +250,7 @@ var getRecomClassList = async function (recomClass,memID) {
         .then((data) => {
             if(data.rows.length > 0){
                 result.push(data.rows);
+                console.log(result);
             }else{
                 result.push([]);
             }
