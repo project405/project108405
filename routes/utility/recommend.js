@@ -242,7 +242,7 @@ var getOneRecommend = async function (recomNum, memID) {
 // }
 
 //---------  getRecomClassList() -------------
-var getRecomClassList = async function (recomClass,memID) {
+var getRecomClassList = async function () {
     
     let result = [];
     // (1)
