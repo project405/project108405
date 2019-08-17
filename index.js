@@ -73,7 +73,7 @@ bot.on('message', function(event) {
 });
 //--------------------------------
 //------------ 本週推薦 ------------
-bot.on('message', function(event) {    
+bot.on('message', function async(event) {    
 
     //使用者傳來的文字
     const text = event.message.text;
@@ -84,6 +84,8 @@ bot.on('message', function(event) {
         for(let i = 0;i<msg.length;i++){
             console.log('B');
             recommend.getRecomClassList(msg[i]).then(data => { 
+                console.log('==========================>')
+
                 console.log(data[0][0])
                 // console.log(data[0][0].recomClass);
                 // console.log(data[0][0].recomHead);
