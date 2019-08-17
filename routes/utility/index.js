@@ -93,6 +93,7 @@ var getIndexData = async function (memID) {
     })
 
     //----------- 取得照片 ----------- 
+    
     await sql('SELECT "artiNum" , "imgName" FROM "image"')
         .then((data) => {
             if (data.rows == null || data.rows == '') {
@@ -110,6 +111,7 @@ var getIndexData = async function (memID) {
     result[3] = checkAuthority;
     result[4] = imgs;
     result[5] = tag ; 
+    
     return result;
 }
 module.exports = { getIndexData };
