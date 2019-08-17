@@ -101,10 +101,10 @@ bot.on('message',function (event) {
         // console.log(data[0][0].recomCont);
         // console.log("1",data[0][0].recomClass)
         event.reply([
-            {'type':'text', 'text':`${recommendData[0].recomClass}${recommendData[0].recomHead}${recommendData[0].recomCont}`},
-            {'type':'text', 'text':`${recommendData[1].recomClass}${recommendData[1].recomHead}${recommendData[1].recomCont}`},
-            {'type':'text', 'text':`${recommendData[2].recomClass}${recommendData[2].recomHead}${recommendData[2].recomCont}`},
-            {'type':'text', 'text':`${recommendData[3].recomClass}${recommendData[3].recomHead}${recommendData[3].recomCont}`}   
+            // {'type':'text', 'text':`${recommendData[0].recomClass}${recommendData[0].recomHead}${recommendData[0].recomCont}`},
+            // {'type':'text', 'text':`${recommendData[1].recomClass}${recommendData[1].recomHead}${recommendData[1].recomCont}`},
+            // {'type':'text', 'text':`${recommendData[2].recomClass}${recommendData[2].recomHead}${recommendData[2].recomCont}`},
+            // {'type':'text', 'text':`${recommendData[3].recomClass}${recommendData[3].recomHead}${recommendData[3].recomCont}`}   
         ]);
         // event.reply([
         //     {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont}          
