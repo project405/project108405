@@ -65,7 +65,10 @@ div.content {
     border-radius: 12px;
 }
 
-
+button.like{
+    outline: none !important;
+    box-shadow: none !important;
+}
 /* ------------------- */
 
 
@@ -91,6 +94,10 @@ a.floorTag {
     margin: 0 0.5em 0 1em;
 }
 
+div.nameTime {
+    word-break: break-all;
+}
+
 p.content {
     color: rgb(73, 73, 73);
 }
@@ -99,10 +106,16 @@ button.report {
     float: right !important;
 }
 
+
+div.likeContainer{
+    margin-right:1em;
+}
+
 button.like {
     float: left !important;
     padding: 0;
     margin: 0;
+    white-space: nowrap;
 }
 
 .col-sm-1 {
@@ -122,7 +135,6 @@ button.like {
 
 div.info {
     margin-left: -0.5em;
-    white-space: nowrap;
 }
 
 @media (max-width: 450px) {
@@ -164,31 +176,6 @@ button.tag {
     font-size: 0.75em;
     border-radius: 8px;
     padding: 0.45em;
-}
-
-button.info:hover,
-button.postInfo:focus,
-button.postInfo:hover,
-button.postInfo:active,
-button.postInfo:visited {
-    color: #993a3a;
-}
-
-
-/*  button */
-
-button.footer {
-    margin: 0.2em;
-    height: auto;
-    font-size: 1em;
-    opacity: 0.89;
-    padding: 0.2em 0.3em;
-}
-
-@media (max-width: 450px) {
-    button.footer {
-        font-size: 0.85em;
-    }
 }
 
 
@@ -239,7 +226,7 @@ div.replyInput {
     opacity: 0.89;
     margin-bottom: 1em;
     border-radius: 8px;
-    caret-color: #993a3a;
+    caret-color: #2D4F41;
     cursor: text;
 }
 
@@ -285,8 +272,10 @@ input[type="file"] {
     cursor: pointer;
 }
 
-#upload-img {
-    max-height: 350px;
-    max-width: 60%;
+img.upload-img {
+    max-height: 450px;
+    max-width: 70%;
     cursor: pointer;
+    border-radius: 12px;
+    padding: 0.35em;
 }

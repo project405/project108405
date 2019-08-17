@@ -33,7 +33,15 @@ div.content {
 
 div.post {
     background-color: #d4d4d4;
+    overflow: auto;
 }
+
+
+/* @media (max-width: 992px) {
+    div.post {
+        padding-bottom: 4em;
+    }
+} */
 
 div.titleInput,
 div.postInput {
@@ -46,7 +54,7 @@ div.postInput {
     background-color: rgb(255, 255, 255);
     opacity: 0.89;
     border-radius: 8px;
-    caret-color: #993a3a;
+    caret-color: #2D4F41;
     cursor: text;
     text-align: justify;
 }
@@ -107,12 +115,12 @@ input[type="file"] {
     cursor: pointer;
 }
 
-input[type="file"]:focus {}
-
-#upload-img {
-    max-height: 350px;
-    max-width: 60%;
+img.upload-img {
+    max-height: 450px;
+    max-width: 70%;
     cursor: pointer;
+    border-radius: 12px;
+    padding: 0.35em;
 }
 
 
@@ -164,19 +172,39 @@ span.tag {
     white-space: pre-wrap;
     word-wrap: break-word;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .bootstrap-tagsinput .tag [data-role="remove"]:after {
     font-family: 'Font Awesome 5 Free';
     content: "\f057";
     font-weight: 800;
-    font-size: 5px;
+    font-size: 15px;
 }
 
-img.upload-img {
-    max-height: 450px;
-    max-width: 70%;
-    cursor: pointer;
-    border-radius: 12px;
-    padding: 0.35em;
+
+/* **************** */
+
+
+/* 4class input */
+
+
+/* **************** */
+
+#inputData input,
+#inputData select {
+    padding: 0.25em 0.5em;
+    margin: 0.5em;
+    border: #f4f4f4 solid 0.5px;
+    border-radius: 8px;
+    height:2.5em;
+    box-shadow: none !important;
+    width: 15em;
+}
+
+#inputData textarea {
+    padding: 0.25em 0.5em;
+    margin-left: 0.5em;
+    border: #f4f4f4 solid 0.5px;
+    border-radius: 8px;
 }

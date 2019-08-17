@@ -53,17 +53,18 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
     var tagData = [];
     var imgData = [];
     // console.log(req.files);
-    //將換行符號替代成<br> 
+    //將所有換行符號替代成<br> 
     artiCont = artiCont.replace(/\n/g, "<br>");
 
     for (var i in req.files) {
         imgData.push(req.files[i].filename);
         console.log("files= ", req.files[i]);
-        if (artiCont.match("\\:imgLocation") != null) {
-            console.log("近來囉");
-            artiCont = artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
-        }
-        // artiCont = artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img id='upload-img' src='/userImg/" + req.files[i].filename + "' ></div>");
+        // if (artiCont.match("\\:imgLocation") != null) {
+        //     console.log("近來囉");
+        //     // artiCont = artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
+        //     artiCont = artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + req.files[i].filename + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
+        // }
+
     }
 
     console.log(artiCont);

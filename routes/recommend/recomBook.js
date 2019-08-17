@@ -5,7 +5,7 @@ const recommend = require('../utility/recommend');
 //接收GET請求
 router.get('/', function (req, res, next) {
     var memID = req.session.memID ; 
-    recommend.getRecomBook(memID).then(data => {
+    recommend.getRecomClassList('書籍', memID).then(data => {
         console.log(data);
         if (data == null) {
             res.render('error');  //導向錯誤頁面

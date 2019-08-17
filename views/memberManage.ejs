@@ -146,21 +146,22 @@
         <hr class="highlight">
     </center>
     <div class="container-fluid row flex justify-content-center member">
-        <form class="member col-lg-4" action="/member/memberManage" method="POST">
-            <!-- <div class="label-icon-wrap">
-                <span class="label-icon"><span class="fas fa-lock"></span></span>
-                <span type="text" class="label-with-icon align-middle" contenteditable="true"></span>
-            </div> -->
+        <form class="member col-lg-4" action="/member/memberManage" method="POST" onchange="checkValue()">
 
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-lock"></span></span>
-                <input type="password" class="input-with-icon" id="password" name="memPass" placeholder="新密碼">
+                <input type="password" class="input-with-icon" id="password" name="memPass" placeholder="新密碼"
+                    onchange="passcheck()">
             </div>
+            <p id="passwordAlarm"></p>
+
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-lock"></span></span>
-                <input type="password" class="input-with-icon" id="check-password" name="memCheckPass"
-                    placeholder="確認新密碼">
+                <input type="password" class="input-with-icon" id="checkPassword" name="memCheckPass"
+                    placeholder="確認新密碼" onchange="passcheck()">
             </div>
+            <p id="checkPasswordAlarm"></p>
+
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-envelope-open-text"></span></span>
                 <input type="email" class="input-with-icon" id="email" name="memMail"
@@ -170,8 +171,10 @@
 
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-birthday-cake"></span></span>
-                <input type="date" class="input-with-icon" id="birthday" name="memBirth" placeholder="生日">
+                <input type="date" class="input-with-icon" id="birthday" name="memBirth" placeholder="生日"
+                    onchange="birthdayValidateForm()">
             </div>
+            <p id="birthdayAlarm"></p>
 
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-home"></span></span>
@@ -181,16 +184,16 @@
             <div class="input-icon-wrap radio">
                 <span class="input-icon align-middle"><span class="fas fa-venus-mars"></span></span>
                 <div>
-                    <input id="radio-1" class="radio-custom" name="memGender" type="radio" value="m" checked>
+                    <input id="radio-1" class="radio-custom" name="memGender" value="m" type="radio">
                     <label for="radio-1" class="radio-custom-label">男生</label>
                 </div>
                 <div>
-                    <input id="radio-2" class="radio-custom" name="memGender" type="radio" value="f">
+                    <input id="radio-2" class="radio-custom" name="memGender" value="f" type="radio">
                     <label for="radio-2" class="radio-custom-label">女生</label>
                 </div>
 
             </div>
-            <button type="submit" class="btn btn-dark">提交修改資料</button>
+            <button type="submit" class="btn btn-dark" id="submit">提交修改資料</button>
 
         </form>
 
@@ -211,6 +214,8 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/memberMangeValidate.js"></script>
+
 </body>
 
 </html>

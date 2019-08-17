@@ -150,32 +150,46 @@
         <hr class="highlight">
     </center>
 
+    <div class="d-flex justify-content-center" style="margin-bottom:1.5em;">
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/movie'">電影類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/music'">音樂類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/book'">書籍類</button>
+        <button type="button" class="btn btn-secondary footer"
+            onclick="location.href='/recommendList/exhibition'">展覽類</button>
+        <button type="button" class="btn btn-secondary footer" onclick="location.href='/recommendList'">全部</button>
+    </div>
 
     <!-- Portfolio Section -->
     <section id="portfolio">
 
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
-            <div class="search col-lg-6 mx-auto ">
-                <!-- Search -->
-                <form class="form-inline d-flex">
-                    <input type="text" class="form-control search col-sm-9" id="search" placeholder="輸入欲搜尋之關鍵字">
-                    <button type="submit" class="search btn-primary mx-auto">搜尋</button>
-                </form>
-                <!-- Search End -->
-            </div>
-
-            <div class="w-100"></div>
             <!-- 推薦開始 -->
             <% for(var i = 0 ; i<recom[0].length ; i++){ %>
-            <div class="wrapper col-12  col-lg-2" style="background-image: url('/imgs/recommend/movie1.jpg');">
-                <a class="portfolio-box" href="/oneRecommend/<%= recom[0][i].recomNum %>">">
+
+            <!-- 如果有抓到圖片 -->
+            <% isImg = false %> 
+            <% for(var j = 0 ; j<recom[3].length ; j++ ) { %>
+                <% if(recom[0][i].recomNum == recom[3][j].recomNum){ %>
+                    <div class="wrapper col-12  col-lg-2" 
+                    style="background-image: url('/imgs/recommend/<%= recom[3][j].imgName %>');">
+                    <% isImg = true %>
+                <% } %>
+            <% } %>
+            <!-- 如果沒抓到半張圖片 -->
+            <% if(isImg == false) { %>
+                <div class="wrapper col-12  col-lg-2">
+            <% } %>
+                <a class="portfolio-box" href="/oneRecommend/<%= recom[0][i].recomNum %>">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
                             <p><%= recom[0][i].recomClass %> </p>
                         </div>
                         <div class="project-name">
                             <p class="title"><%= recom[0][i].recomHead %> </p>
-                            <p class="content"><%= recom[0][i].recomCont %>
+                            <p class="content wrapText"><%= recom[0][i].recomCont %>
                             </p>
                         </div>
                     </div>
@@ -186,34 +200,8 @@
             <% } %>
             <% } %>
             <!-- 推薦結束 -->
-
-
+        </div>
     </section>
-
-    </div>
-
-    </div>
-
-
-    </div>
-
-
-
-    <div class=" buttons fixed-bottom  d-flex justify-content-center align-middle">
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/recommendList/movie'">電影類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/recommendList/music'">音樂類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/recommendList/book'">書籍類</button>
-        <button type="button " class="btn btn-secondary align-middle footer"
-            onclick="location.href='/recommendList/music'">展覽類</button>
-        <button type="button " class="btn btn-secondary footer">全部</button>
-
-    </div>
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

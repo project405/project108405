@@ -50,11 +50,24 @@
 
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
 
-            <!-- 電影類推薦 -->
+            <!-- 推薦 -->
             <% for(var i = 0 ; i<items[0].length ; i ++) { %>
-            <div class="wrapper col-12  col-lg-4" style="background-image: url('imgs/recommend/movie1.jpg');"
-                onclick="location.href='/recommendList'" data-aos="fade-right">
 
+            <!-- 如果有抓到圖片 -->
+            <% isImg = false %> 
+            <% for(var j = 0 ; j<items[4].length ; j++ ) { %>
+                <% if(items[0][i].recomNum == items[4][j].recomNum){ %>
+                    <div class="wrapper col-12  col-lg-4" 
+                        style="background-image: url('imgs/recommend/<%= items[4][j].imgName%>');"
+                        onclick="location.href='/recommendList'" data-aos="fade-right">
+                    <% isImg = true %>
+                <% } %>
+            <% } %>
+             <!-- 如果沒抓到半張圖片 -->
+            <% if(isImg == false) { %>
+                <div class="wrapper col-12  col-lg-4" onclick="location.href='/recommendList'" data-aos="fade-right" > 
+            <% } %>
+            
                 <a class="portfolio-box" href="/oneRecommend/<%= items[0][i].recomNum %>">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
@@ -62,7 +75,8 @@
                         </div>
                         <div class="project-name">
                             <p class="title"><%= items[0][i].recomHead %></p>
-                            <p class="content"><%= items[0][i].recomCont %>
+                            </p>
+                            <p class="content wrapText"><%- items[0][i].recomCont %>
                             </p>
                         </div>
                     </div>
@@ -72,9 +86,8 @@
             <div class="w-100"></div>
             <% } %>
             <% } %>
-            <!-- 電影類推薦結束 -->
+            <!-- 推薦結束 -->
         </div>
-
     </section>
 
     <!-- 熱門文章區塊 -->
@@ -93,24 +106,37 @@
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][0].artiHead %>
                             </h3>
-                            <p class="card-text"><%= items[1][0].artiCont %>
+                            <p class="card-text wrapBigHotSectionText">
+                                <%- items[1][0].artiCont %>
                             </p>
 
                             <p class="poster">
                                 <%= items[1][0].memID %> 於 <%= items[1][0].artiDateTime %>發佈
                             </p>
-
+                            
+                            <!-- tag -->
                             <div class="tagDiv">
-                                <button type="button" class="btn  tag">黎明的承諾</button>
-                                <button type="button" class="btn  tag">壓抑沉鬱</button>
-                                <button type="button" class="btn  tag">法國</button>
-                                <button type="button" class="btn  tag">大時代</button>
+                                <% if(items[5] != undefined) { %>
+                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                        <% if(items[5].artiNum == items[1][0].artiNum) { %>
+                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                                
                             </div>
                         </div>
 
-                        <div class="wrapperCardbig card-img-bottom"
-                            style="background-image: url('/imgs/testImgs/17.png');">
-                        </div>
+                        <!-- imgs -->
+                        <% if(items[4] != undefined ){%>
+                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
+                                <% if (items[1][0].artiNum == items[4][j].artiNum){ %>
+                                    <div class="wrapperCardbig card-img-bottom"
+                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        <% } %>
                     </div>
                 </div>
                 <!-- 精選右邊上面的格子 -->
@@ -121,21 +147,34 @@
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][1].artiHead %>
                             </h3>
-                            <p class="card-text"><%= items[1][1].artiCont %>
+                            <p class="card-text wrapText"><%- items[1][1].artiCont %>
                             </p>
                             <p class="poster">
                                 <%= items[1][1].memID %> 於 <%= items[1][1].artiDateTime %> 發佈
                             </p>
+
+                            <!-- tag -->
                             <div class="tagDiv">
-                                <button type="button" class="btn  tag">汪冠宇</button>
-                                <button type="button" class="btn  tag">海浪</button>
-                                <button type="button" class="btn  tag">溫暖歌聲</button>
+                                <% if(items[5] != undefined) { %>
+                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                        <% if(items[5].artiNum == items[1][1].artiNum) { %>
+                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
                             </div>
                         </div>
 
-                        <div class="wrapperCardSmall card-img-top"
-                            style="background-image: url('/imgs/testImgs/18.png');">
-                        </div>
+                        <!-- imgs -->
+                        <% if(items[4] != undefined ){ %>
+                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
+                                <% if (items[1][1].artiNum == items[4][j].artiNum){ %>
+                                    <div class="wrapperCardbig card-img-bottom"
+                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        <% } %>
                     </div>
                     <!-- 精選右邊上面的格子結束 -->
 
@@ -146,22 +185,35 @@
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][2].artiHead %>
                             </h3>
-                            <p class="card-text"><%= items[1][2].artiCont %>
+                            <p class="card-text wrapText">
+                                <%- items[1][2].artiCont %>
                             </p>
                             <p class="poster">
                                 <%= items[1][2].memID %> 於 <%= items[1][2].artiDateTime %> 發佈
                             </p>
-                            <div class="tagDiv">
-                                <button type="button" class="btn  tag">華山</button>
-                                <button type="button" class="btn  tag">自然森活</button>
-                                <button type="button" class="btn  tag">再生資源</button>
 
+                            <!-- tag -->
+                            <div class="tagDiv">
+                                <% if(items[5] != undefined) { %>
+                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                        <% if(items[5].artiNum == items[1][2].artiNum) { %>
+                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
                             </div>
                         </div>
 
-                        <div class="wrapperCardSmall card-img-top"
-                            style="background-image: url('/imgs/testImgs/19.jpeg');">
-                        </div>
+                         <!-- imgs -->
+                         <% if(items[4] != undefined ) { %>
+                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
+                                <% if (items[1][2].artiNum == items[4][j].artiNum){ %>
+                                    <div class="wrapperCardbig card-img-bottom"
+                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                                    </div>
+                                <% } %>
+                            <% } %>
+                        <% } %>
 
                     </div>
 
@@ -174,8 +226,8 @@
             </div>
 
             <div class="col-12 goArticleList">
-                <button type="button" class="btn goArticle" onclick="location.href='/articleList'">
-                    <h3>前往文章列表 <i class="fas fa-arrow-right"></i></h3>
+                <button type="button" class="btn goArticle" onclick="location.href='articleList.html'">
+                    <h5>前往文章列表 <i class="fas fa-arrow-alt-circle-right"></i></h5>
                 </button>
 
             </div>
@@ -190,8 +242,7 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-4 aboutUs">
             <h6>關於我們：</h6>
-            <p>我們身處在一個資料越來越多、意義越來越少的世代，源源不絕的資訊不僅讓人失去學習的熱忱，也錯過了許多生命中原有的樂趣。文藝富心彙整藝文相關資訊與提供討論的空間，讓使用者能在幾分鐘之內得到完善的資訊
-                ，也提供一個安靜的角落給使用者喘息休憩。
+            <p>我們身處在一個資料越來越多、意義越來越少的世代，源源不絕的資訊不僅讓人失去學習的熱忱，也錯過了許多生命中原有的樂趣。文藝富心彙整藝文相關資訊與提供討論的空間，讓使用者能在幾分鐘之內得到完善的資訊，也提供一個安靜的角落給使用者喘息休憩。
             </p>
             <h6>聯絡我們：</h6>
             <p>10546004@ntub.edu.tw</p>
@@ -201,7 +252,7 @@
         <div class="col-lg-4 aboutUs">
             <h6>常見問題：</h6>
             <p>獎勵機制：在推薦底下的留言，我們會透過點擊次數以及愛心次數來篩選出最佳留言，將會寄送精美小獎品給最佳留言者。</p>
-            <p>申報機制：只要對於我們的系統有任何不滿意，都可以透過申報告知系統管理員，讓我們能夠改進，提供使用者更好的操作環境</p>
+            <p>申報機制：只要對於我們的系統有任何建議，都可以透過申報通知系統管理員，讓文藝富心團隊能夠改進，提供給使用者更好的環境</p>
 
         </div>
         <div class="col-lg-2">
@@ -213,6 +264,7 @@
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
     </a>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

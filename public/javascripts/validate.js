@@ -4,11 +4,11 @@ function idValidateForm() {
     var id = document.getElementById("ID").value;
     var exception = /^[A-Za-z0-9_]+$/;
 
-    if (id != "" && id.length > 5 && id.length < 21 && exception.test(id)) {
+    if (id != "" && id.length > 7 && exception.test(id) && id.search(/^[A-Za-z]+$/) && id.search(/^[0-9]+$/)) {
         document.getElementById("idAlarm").innerHTML = '';
         return check[0] = true;
     } else {
-        document.getElementById("idAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 帳號須在 6-20 個字元內，符號只允許 _ 底線 符號';
+        document.getElementById("idAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 英數混合 8 字元以上，符號只允許 _ 底線。';
         return check[0] = false;
 
     }
@@ -34,12 +34,12 @@ function passcheck() {
 
 function passwordValidateForm() {
     var password = document.getElementById("password").value;
-    if (password != "" && password.length > 5 && password.length < 40) {
+    if (password != "" && password.length > 7 && password.length < 40) {
         document.getElementById("passwordAlarm").innerHTML = '';
         return check[2] = true;
 
     } else {
-        document.getElementById("passwordAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 密碼至少 6字元';
+        document.getElementById("passwordAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 密碼至少 8 字元';
         return check[2] = false;
     }
 }

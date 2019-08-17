@@ -431,6 +431,7 @@ CREATE TABLE "public"."image" (
   "imgNum" serial , 
   "memID" varchar(100)	COLLATE "pg_catalog"."default" ,
 	"artiNum" int4 ,
+"recomNum" int4,
 "artiMessNum" int4 ,
 "recomMessNum" int4 ,
 "imgName" text ,

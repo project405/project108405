@@ -3,6 +3,9 @@ $(function() {
     $(document).click(function(event) {
         $('.navbar-collapse').collapse('hide');
     });
+    $('.navbar-collapse').click(function(event){
+        event.stopPropagation();
+    });
 });
 
 // tag div css
@@ -44,6 +47,35 @@ $(function() {
 // $(function() {
 //     $('#textarea').autoHeight();
 // });
+
+//if word too long 
+
+$(".wrapText").each(function() {
+ 
+    //取得內容
+    var str = $(this).html();
+ 
+    //截取内容75字
+    var subStr = str.substring(0, 100);
+ 
+    //如果長度大於75就添加省略號否則就填空
+    var data = subStr + (str.length > 75 ? '...' : '');
+    $(this).html(data);
+});
+
+
+$(".wrapBigHotSectionText").each(function() {
+ 
+    //取得內容
+    var str = $(this).html();
+ 
+    //截取内容75字
+    var subStr = str.substring(0, 200);
+ 
+    //如果長度大於75就添加省略號否則就填空
+    var data = subStr + (str.length > 75 ? '...' : '');
+    $(this).html(data);
+});
 
 
 //gotop

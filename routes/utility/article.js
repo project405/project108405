@@ -4,123 +4,193 @@
 const sql = require('./asyncDB');
 const member = require('./member');
 var moment = require('moment');
+
 //=========================================
 //---------  getArticleList() -------------
 //=========================================
 var getArticleList = async function (memID) {
     var articleList = [];
-    var likeCount = [];
-    var messageCount = [];
-    var tagLink = [];
+    var tag ;
+    var isCollection  ;
+    var isLike ;
+    var checkAuthority = [];
+    var imgs ;
+    var result = [];
+
+    // -----------  取得文章清單 --------------
+    await sql('SELECT * FROM "articleListDataView"')
+        .then((data) => {
+            articleList = data.rows;
+        }, (error) => {
+            articleList = undefined;
+        });
+
+    // ----------- 取得tag -----------
+    await sql('SELECT * FROM "articleTagView"')
+        .then((data) => {
+           tag = data.rows;
+        }, (error) => {
+            tag = undefined;
+        });
+
+    // ----------- 判斷是否被使用者按愛心 -----------
+    await sql('SELECT "memID","artiNum" FROM "articleLike" WHERE "memID" = $1 ',[memID])
+    .then((data) => {
+        if (data.rows == null || data.rows == '') {
+            isLike = undefined;
+        } else {
+            isLike = data.rows;
+        }
+    }, (error) => {
+        isLike = undefined;
+    });
+
+    // ----------- 判斷是否被使用者收藏 -----------
+    await sql('SELECT "memID" , "artiNum" FROM "memberCollection" WHERE "memID" = $1', [memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isCollection = undefined; 
+            } else {
+                isCollection = data.rows ;
+            }
+        }, (error) => {
+            isCollection = undefined ; 
+        });
+
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("權限=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("權限=", checkAuthority);
+        }
+    })
+
+    //取得第一張照片
+    await sql('SELECT "artiNum" , "imgName" FROM "image"')
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                imgs = undefined;
+            } else {
+                imgs = data.rows;
+            }
+        }, (error) => {
+            imgs = undefined;
+        });
+
+    result[0] = articleList;  //存入文章清單
+    result[1] = tag;
+    result[2] = isLike ; 
+    result[3] = imgs ;
+    result[4] = isCollection;
+    result[5] = [memID];
+    result[6] = checkAuthority;
+    console.log(result);
+    return result;
+}
+
+//=========================================
+//---------  getOneArticle() -------------
+//=========================================
+var getOneArticle = async function (artiNum, memID) {
+    var oneArticle = [];  //存放文章內容
+    var oneArtiMessage = []; //存放文章留言內容
     var tag = [];
     var isCollection = [];
     var isLike = [];
-    var checkAuthority = [];
+    var isMessLike = []; //判斷留言愛心是否被按過
+    var checkAuthority;
     var imgs = [];
     var result = [];
-    // -----------  取得文章清單 --------------
-    await sql('SELECT * FROM "article"')
+
+    // -----------  取得單一文章 --------------
+    await sql('SELECT * FROM "articleListDataView" WHERE "artiNum" = $1', [artiNum])
+        .then((data) => {
+            if (data.rows.length > 0) {
+                // console.log("單一文章",data.rows);
+                oneArticle = data.rows;
+            } else {
+                oneArticle = -1;
+            }
+        }, (error) => {
+            oneArticle = null;
+        });
+    // -----------  取得單一文章所有留言 --------------
+    await sql('SELECT "Mess"."artiMessNum" '+
+                ' ,"Mess"."memID" '+
+                ' ,to_char("Mess"."artiMessDateTime",\'YYYY-MM-DD\') AS "artiMessDateTime" '+
+                ' ,"Mess"."artiMessCont" '+
+                ' ,count("MessLike"."artiMessNum") AS "likeCount" '+
+                ' FROM "articleMessage" AS "Mess" '+
+                    ' LEFT JOIN "articleMessageLike" AS "MessLike" '+
+                        ' ON "Mess"."artiMessNum" = "MessLike"."artiMessNum" '+
+                ' WHERE "Mess"."artiNum" = $1 '+
+                ' GROUP BY "Mess"."artiMessNum" '+
+                    ' ,"Mess"."memID" '+
+                    ' ,"Mess"."artiMessDateTime" '+
+                    ' ,"Mess"."artiMessCont"', [artiNum])
+        .then((data) => {
+            // console.log("單一文章留言",data.rows);
+            oneArtiMessage = data.rows;
+        }, (error) => {
+            oneArtiMessage = null;
+        });
+
+    // -----------  取得tag --------------
+    await sql('SELECT "tagName" FROM "articleTagView" WHERE "artiNum" = $1', [artiNum])
         .then((data) => {
             // console.log("data=", data.rows);
-            for (let i = 0; i < data.rows.length; i++) {
-                data.rows[i].artiDateTime = moment(data.rows[i].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+            if (!data.rows) {
+                tag = undefined ;
+            } else {
+                tag = data.rows ;
             }
-            articleList = data.rows;
         }, (error) => {
-            articleList = null;
+            tag  = undefined ;
         });
-    // -----------  取得文章清單每篇的愛心數量 --------------
-    for (let i = 0; i < articleList.length; i++) {
-        await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [articleList[i].artiNum])
-            .then((data) => {
-                if (data.rows != '' && data.rows != undefined) {
-                    // console.log(articleList[i].artiNum , ":" , data.rows[0].count);
-                    likeCount[articleList[i].artiNum] = data.rows[0].count;
-                }
-            }, (error) => {
-                likeCount = null;
-            });
-    }
-    // -----------  取得文章清單每篇的留言數量 --------------
-    for (let i = 0; i < articleList.length; i++) {
-        await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum"=$1', [articleList[i].artiNum])
-            .then((data) => {
-                if (data.rows != '' && data.rows != undefined) {
-                    // console.log(articleList[i].artiNum , ":" , data.rows[0].count);
-                    messageCount[articleList[i].artiNum] = data.rows[0].count;
-                }
-            }, (error) => {
-                messageCount = null;
-            });
-    }
-    // ----------- tag -----------
-    for (let i = 0; i < articleList.length; i++) {
-        // -----------  取得tagLink表中的 artiNum 方便在 tag表中取得資料 --------------
-        await sql('select * from "tagLinkArticle" where "artiNum" = $1', [articleList[i].artiNum])
-            .then((data) => {
-                // console.log("data=", data.rows);
-                if (data.rows != undefined && data.rows != '') {
-                    tagLink.push(data.rows);
-                } else {
-                    let tagNull = { "tagNum": "null" };
-                    tagLink.push([tagNull]);
-                }
-            }, (error) => {
-                tagLink = null;
-            });
-    }
-    console.log("taglink=", tagLink);
-    // -----------  取得文章全部tag --------------
-    //初始化二維陣列
-    for (let i = 0; i < tagLink.length; i++) {
-        tag[i] = [];
-    }
-    // console.log("初始",tag);
-    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
-    for (let i = 0; i < tagLink.length; i++) {
-        for (let j = 0; j < tagLink[i].length; j++) {
-            if (tagLink[i][j].tagNum != 'null') {
-                await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
-                    .then((data) => {
-                        // console.log(data.rows[0].tagName);
-                        if (data.rows[0].tagName != undefined && data.rows[0].tagName != null) {
-                            tag[i][j] = data.rows[0].tagName;
-                        }
-                    }, (error) => {
-                        tag = null;
-                    });
-            }
-        }
-    }
+
     // 判斷是否被使用者收藏
-    for (let i = 0; i < articleList.length; i++) {
-        await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [articleList[i].artiNum, memID])
-            .then((data) => {
-                console.log(data.rows);
-                if (data.rows == null || data.rows == '') {
-                    isCollection.push('1');
-                } else {
-                    isCollection.push('0');
-                }
-            }, (error) => {
-                isCollection.push('0');
-            });
-    }
-    // 判斷是否被使用者按愛心
-    for (let i = 0; i < articleList.length; i++) {
-        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [articleList[i].artiNum, memID])
-            .then((data) => {
-                console.log(data.rows);
-                if (data.rows == null || data.rows == '') {
-                    isLike.push('1');
-                } else {
-                    isLike.push('0');
-                }
-            }, (error) => {
-                isLike.push('0');
-            });
-    }
-    // console.log("isCollection=", isCollection);
+    await sql('SELECT "memID" , "artiNum" FROM "memberCollection" WHERE "memID" = $1 AND "artiNum" = $2', [memID, artiNum])
+        .then((data) => {  
+            if (!data.rows) {   
+                isCollection = undefined;
+            } else {
+                isCollection = data.rows;
+            }
+        }, (error) => {
+            isCollection = undefined;
+        });
+
+    // 文章是否被使用者按過愛心
+    await sql('SELECT "artiNum" FROM "articleLike" WHERE "memID" = $1 AND "artiNum" = $2', [memID, artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                isLike = undefined;
+            } else {
+                isLike = data.rows;
+            }
+        }, (error) => {
+            isLike = undefined;
+        });
+
+    // 留言是否被使用者按過愛心
+    await sql('SELECT "Mess"."artiMessNum" '+
+            ' FROM "articleMessage" AS "Mess" '+
+                ' INNER JOIN "articleMessageLike" AS "MessLike" '+
+                    ' ON "Mess"."artiMessNum" = "MessLike"."artiMessNum" '+
+            ' WHERE "Mess"."artiNum" = $1 AND "MessLike"."memID" = $2 ', [artiNum, memID])
+        .then((data) => {
+            console.log("留言是否被按過愛心", data.rows);
+            if (!data.rows) {
+                isMessLike = undefined ; 
+            } else {
+                isMessLike = data.rows ; 
+            }
+        }, (error) => {
+            isMessLike = undefined ; 
+        });
     //取得權限
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
@@ -133,790 +203,123 @@ var getArticleList = async function (memID) {
     })
 
     //取得照片
-    for (let i = 0; i < articleList.length; i++) {
-        await sql('SELECT "imgName" FROM "image" WHERE "artiNum" = $1', [articleList[i].artiNum])
-            .then((data) => {
-                console.log("data.rows=", data.rows);
-                imgs[articleList[i].artiNum] = data.rows[0].imgName;
-
-            }, (error) => {
-                // isLike.push('0');
-            });
-    }
-
-    result[0] = articleList;  //存入文章清單
-    result[1] = likeCount;  //存入文章清單每篇的愛心數量
-    result[2] = messageCount;
-    result[3] = tag;
-    result[4] = isCollection;
-    result[5] = isLike;
-    result[6] = [memID];
-    result[7] = checkAuthority;
-    result[8] = imgs;
-    console.log(result);
-    return result;
-}
-//=========================================
-//---------  getOneArticle() -------------
-//=========================================
-var getOneArticle = async function (artiNum, memID) {
-    var oneArticle = [];  //存放文章內容
-    var oneArtiLikeCount = []; //存放文章愛心總數
-    var oneArtiMessage = []; //存放文章留言內容
-    var oneArtiMessCount = []; //存放文章留言總數
-    var oneArtiMessLikeCount = []; //存放留言愛心數量
-    var tagLink = [];
-    var tag = [];
-    var isCollection = [];
-    var isLike = [];
-    var isMessLike = []; //判斷留言愛心是否被按過
-    var checkAuthority;
-    var result = [];
-
-    // -----------  取得單一文章 --------------
-    await sql('SELECT * FROM "article" WHERE "artiNum" = $1', [artiNum])
+    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiNum" = $1',[artiNum])
         .then((data) => {
-            if (data.rows.length > 0) {
-                // console.log(data.rows);
-                data.rows[0].artiDateTime = moment(data.rows[0].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
-                oneArticle = data.rows;
+            if (!data.rows) {
+                imgs = undefined;
             } else {
-                oneArticle = -1;
+                imgs = data.rows;
             }
         }, (error) => {
-            oneArticle = null;
+            imgs = undefined;
         });
-    // -----------  取得單一文章愛心數量 --------------
-    await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [artiNum])
-        .then((data) => {
-            if (data.rows.length > 0) {
-                // console.log(data.rows);
-                oneArtiLikeCount = data.rows;
-            } else {
-                oneArtiLikeCount = -1;
-            }
-        }, (error) => {
-            oneArtiLikeCount = null;
-        });
-    // -----------  取得單一文章所有留言 --------------
-    await sql('SELECT * FROM "articleMessage" WHERE "artiNum" = $1', [artiNum])
-        .then((data) => {
-            // console.log(data.rows);
-            for (let i = 0; i < data.rows.length; i++) {
-                data.rows[i].artiMessDateTime = moment(data.rows[i].artiMessDateTime).format("YYYY-MM-DD hh:mm:ss");
-            }
-            oneArtiMessage = data.rows;
-        }, (error) => {
-            oneArtiMessage = null;
-        });
-    // -----------  取得單一文章留言數量 --------------
-    await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum" = $1', [artiNum])
-        .then((data) => {
-            // console.log(data.rows);
-            oneArtiMessCount = data.rows;
-        }, (error) => {
-            oneArtiMessCount = null;
-        });
-    // -----------  取得每篇文章留言的愛心數量 --------------
-    for (let i = 0; i < oneArtiMessage.length; i++) {
-        await sql('SELECT count("artiMessNum") FROM "articleMessageLike" WHERE "artiMessNum" = $1', [oneArtiMessage[i].artiMessNum])
-            .then((data) => {
-                // console.log(data.rows[0]);
-                oneArtiMessLikeCount.push(data.rows[0]);
-            }, (error) => {
-                oneArtiMessLikeCount = null;
-            });
-    }
-    // -----------  取得tagLink表中的 artiNum 方便在 tag表中取得資料 --------------
-    await sql('select * from "tagLinkArticle" where "artiNum" = $1', [artiNum])
-        .then((data) => {
-            // console.log("data=", data.rows);
-            if (data.rows != undefined && data.rows != '') {
-                tagLink.push(data.rows);
-            } else {
-                let tagNull = { "tagNum": "null" };
-                tagLink.push([tagNull]);
-            }
-        }, (error) => {
-            tagLink = null;
-        });
-    console.log("tagLink=", tagLink);
-    // -----------  取得文章全部tag --------------
-    // 初始化二維陣列
-    for (let i = 0; i < tagLink.length; i++) {
-        tag[i] = [];
-    }
-    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
-    for (let i = 0; i < tagLink.length; i++) {
-        for (let j = 0; j < tagLink[i].length; j++) {
-            if (tagLink[i][j].tagNum != 'null') {
-                await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
-                    .then((data) => {
-                        // console.log(data.rows[0].tagName);
-                        if (data.rows[0].tagName != undefined) {
-                            tag[i][j] = data.rows[0].tagName;
-                        }
-                    }, (error) => {
-                        tag = null;
-                    });
-            }
-        }
-    }
-    // 判斷是否被使用者收藏
-    await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [artiNum, memID])
-        .then((data) => {
-            if (data.rows == null || data.rows == '') {
-                isCollection.push('1');
-            } else {
-                isCollection.push('0');
-            }
-        }, (error) => {
-            isCollection.push('0');
-        });
-    // 判斷是否被使用者案愛心
-    await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2', [artiNum, memID])
-        .then((data) => {
-            if (data.rows == null || data.rows == '') {
-                isLike.push('1');
-            } else {
-                isLike.push('0');
-            }
-        }, (error) => {
-            isLike.push('0');
-        });
-    // 判斷留言是否被按過愛心
-    for (var i = 0; i < oneArtiMessage.length; i++) {
-        await sql('SELECT "artiMessNum" FROM "articleMessageLike" WHERE "artiMessNum" = $1 and "memID" = $2', [oneArtiMessage[i].artiMessNum, memID])
-            .then((data) => {
-                console.log("data.rows=", data.rows);
-                if (data.rows == null || data.rows == '') {
-                    isMessLike[i] = '1';
-                } else {
-                    isMessLike[i] = '0';
-                }
-            }, (error) => {
-                isMessLike[i] = '0';
-            });
-    }
-    //取得權限
-    await member.checkAuthority(memID).then(data => {
-        if (data != undefined) {
-            checkAuthority = data;
-            console.log("Authority=", checkAuthority);
-        } else {
-            checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
-        }
-    })
-
+        
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
-    result[2] = oneArtiLikeCount;
-    result[3] = oneArtiMessCount;
-    result[4] = oneArtiMessLikeCount;
-    result[5] = tag;
-    result[6] = isCollection;
-    result[7] = isLike;
-    result[8] = [memID];
-    result[9] = isMessLike;
-    result[10] = checkAuthority;
-    console.log("result=", result[10]);
+    result[2] = tag;
+    result[3] = isCollection;
+    result[4] = isLike;
+    result[5] = isMessLike;
+    result[6] = imgs;
+    result[7] = [memID];
+    result[8] = checkAuthority;
+   
+
     return result;
 }
+
+
 //=========================================
-//----- get_four_class_article (start)-----
+//---------  getArticleClassList() --------
 //=========================================
-//---------  getClassMovie() -------------
-var getClassMovie = async function (memID) {
-    var movieArticleList = [];
-    var movieArtiLikeCount = [];
-    var movieArtiMessLikeCount = [];
-    var tagLink = [];
-    var tag = [];
-    var isCollection = [];
+var getArticleClassList = async function (articleClass , memID){
+    var articleList = [] ; 
+    var tag = [] ;
+    var isCollection = [] ;
     var isLike = [];
-    var checkAuthority;
-    var result = [];
-    // -----------  取得電影文章 --------------
-    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['movie'])
+    var imgs = [] ; 
+    var checkAuthority = [] ;
+    var result = [] ; 
+    // -----------  取得分類文章 --------------
+    await sql('SELECT * FROM "articleListDataView" WHERE "artiClass" = $1', [articleClass])
         .then((data) => {
-            // console.log(data.rows);
-            for (let i = 0; i < data.rows.length; i++) {
-                data.rows[i].artiDateTime = moment(data.rows[i].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
+            if (!data.rows) {
+                articleList = undefined;
+            } else {
+                articleList = data.rows;
             }
-            movieArticleList = data.rows;
+            console.log(articleList) ;
         }, (error) => {
-            movieArticleList = null;
+            articleList = null;
         });
-    // -----------  取得電影文章愛心數量 --------------
-    for (let i = 0; i < movieArticleList.length; i++) {
-        await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [movieArticleList[i].artiNum])
-            .then((data) => {
-                // console.log(data.rows[0]);
-                if (data.rows.length > 0) {
-                    movieArtiLikeCount.push(data.rows[0]);
-                } else {
-                    movieArtiLikeCount = -1;
-                }
-            }, (error) => {
-                movieArtiLikeCount = null;
-            });
-    }
-    // -----------  取得電影文章留言數量 --------------
-    for (let i = 0; i < movieArticleList.length; i++) {
-        await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum" = $1', [movieArticleList[i].artiNum])
-            .then((data) => {
-                // console.log(data.rows[0]);
-                movieArtiMessLikeCount.push(data.rows[0]);
-            }, (error) => {
-                movieArtiMessLikeCount = null;
-            });
-    }
-    // ----------- tag -----------
-    for (let i = 0; i < movieArticleList.length; i++) {
-        // -----------  取得tagLink表中的 artiNum 方便在 tag表中取得資料 --------------
-        await sql('select * from "tagLinkArticle" where "artiNum" = $1', [movieArticleList[i].artiNum])
-            .then((data) => {
-                // console.log("data=", data.rows);
-                if (data.rows != undefined && data.rows != '') {
-                    tagLink.push(data.rows);
-                } else {
-                    let tagNull = { "tagNum": "null" };
-                    tagLink.push([tagNull]);
-                }
-            }, (error) => {
-                tagLink = null;
-            });
-    }
-    console.log("taglink=", tagLink);
-    // -----------  取得文章全部tag --------------
-    //初始化二維陣列
-    for (let i = 0; i < tagLink.length; i++) {
-        tag[i] = [];
-    }
-    // console.log("初始",tag);
-    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
-    for (let i = 0; i < tagLink.length; i++) {
-        for (let j = 0; j < tagLink[i].length; j++) {
-            if (tagLink[i][j].tagNum != 'null') {
-                await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
-                    .then((data) => {
-                        // console.log(data.rows[0].tagName);
-                        if (data.rows[0].tagName != undefined && data.rows[0].tagName != null) {
-                            tag[i][j] = data.rows[0].tagName;
-                        }
-                    }, (error) => {
-                        tag = null;
-                    });
+
+    // ----------- 取得 tag -----------
+    await sql('SELECT * FROM "articleTagView"')
+        .then((data) => {
+            if (!data.rows) {
+                tag = undefined;
+            } else {
+                tag = data.rows;
             }
+        }, (error) => {
+            tag = undefined;
+        });
+
+    // ----------- 判斷是否被使用者收藏 -----------
+    await sql('SELECT "memID" , "artiNum" FROM "memberCollection" WHERE "memID" = $1', [memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isCollection = undefined; 
+            } else {
+                isCollection = data.rows ;
+            }
+        }, (error) => {
+            isCollection = undefined ; 
+        });
+
+    // ----------- 判斷是否被使用者按愛心 -----------
+    await sql('SELECT "memID","artiNum" FROM "articleLike" WHERE "memID" = $1 ',[memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isLike = undefined;
+            } else {
+                isLike = data.rows;
+            }
+        }, (error) => {
+            isLike = undefined;
+        });  
+
+    //----------- 取得照片 ----------- 
+    await sql('SELECT "artiNum" , "imgName" FROM "image"')
+    .then((data) => {
+        if (data.rows == null || data.rows == '') {
+            imgs = undefined;
+        } else {
+            imgs = data.rows;
         }
-    }
-    // 判斷是否被使用者收藏
-    for (let i = 0; i < movieArticleList.length; i++) {
-        await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [movieArticleList[i].artiNum, memID])
-            .then((data) => {
-                console.log(data.rows);
-                if (data.rows == null || data.rows == '') {
-                    isCollection.push('1');
-                } else {
-                    isCollection.push('0');
-                }
-            }, (error) => {
-                isCollection.push('0');
-            });
-    }
-    // 判斷是否被使用者按愛心
-    for (let i = 0; i < movieArticleList.length; i++) {
-        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [movieArticleList[i].artiNum, memID])
-            .then((data) => {
-                console.log(data.rows);
-                if (data.rows == null || data.rows == '') {
-                    isLike.push('1');
-                } else {
-                    isLike.push('0');
-                }
-            }, (error) => {
-                isLike.push('0');
-            });
-    }
-    //取得權限
+    }, (error) => {
+        imgs = undefined;
+    });      
+
+    // ----------- 取得權限 -----------
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
             checkAuthority = data;
-            console.log("Authority=", checkAuthority);
+            console.log("權限=", checkAuthority);
         } else {
             checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
-        }
-    })
-    result[0] = movieArticleList;
-    result[1] = movieArtiLikeCount;
-    result[2] = movieArtiMessLikeCount;
-    result[3] = tag;
-    result[4] = isCollection;
-    result[5] = isLike;
-    result[6] = [memID];
-    result[7] = checkAuthority;
-    // console.log(result);
-    return result;
-}
-//---------  getClassMusic() -------------
-var getClassMusic = async function (memID) {
-    var musicArticleList = [];
-    var musicArtiLikeCount = [];
-    var musicArtiMessLikeCount = [];
-    var tagLink = [];
-    var tag = [];
-    var isCollection = [];
-    var isLike = [];
-    var checkAuthority;
-    var result = [];
-    // -----------  取得音樂文章 --------------
-    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['music'])
-        .then((data) => {
-            // console.log(data.rows);
-            for (let i = 0; i < data.rows.length; i++) {
-                data.rows[i].artiDateTime = moment(data.rows[i].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
-            }
-            musicArticleList = data.rows;
-        }, (error) => {
-            musicArticleList = null;
-        });
-    // -----------  取得音樂文章愛心數量 --------------
-    for (let i = 0; i < musicArticleList.length; i++) {
-        await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [musicArticleList[i].artiNum])
-            .then((data) => {
-                // console.log(data.rows[0]);
-                if (data.rows.length > 0) {
-                    musicArtiLikeCount.push(data.rows[0]);
-                } else {
-                    musicArtiLikeCount = -1;
-                }
-            }, (error) => {
-                musicArtiLikeCount = null;
-            });
-    }
-    // -----------  取得音樂文章留言數量 --------------
-    for (let i = 0; i < musicArticleList.length; i++) {
-        await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum" = $1', [musicArticleList[i].artiNum])
-            .then((data) => {
-                // console.log(data.rows[0]);
-                musicArtiMessLikeCount.push(data.rows[0]);
-            }, (error) => {
-                musicArtiMessLikeCount = null;
-            });
-    }
-    // ----------- tag -----------
-    for (let i = 0; i < musicArticleList.length; i++) {
-        // -----------  取得tagLink表中的 artiNum 方便在 tag表中取得資料 --------------
-        await sql('select * from "tagLinkArticle" where "artiNum" = $1', [musicArticleList[i].artiNum])
-            .then((data) => {
-                // console.log("data=", data.rows);
-                if (data.rows != undefined && data.rows != '') {
-                    tagLink.push(data.rows);
-                } else {
-                    let tagNull = { "tagNum": "null" };
-                    tagLink.push([tagNull]);
-                }
-            }, (error) => {
-                tagLink = null;
-            });
-    }
-    // console.log("taglink=", tagLink);
-    // -----------  取得文章全部tag --------------
-    //初始化二維陣列
-    for (let i = 0; i < tagLink.length; i++) {
-        tag[i] = [];
-    }
-    // console.log("初始",tag);
-    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
-    for (let i = 0; i < tagLink.length; i++) {
-        for (let j = 0; j < tagLink[i].length; j++) {
-            if (tagLink[i][j].tagNum != 'null') {
-                await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
-                    .then((data) => {
-                        // console.log(data.rows[0].tagName);
-                        if (data.rows[0].tagName != undefined && data.rows[0].tagName != null) {
-                            tag[i][j] = data.rows[0].tagName;
-                        }
-                    }, (error) => {
-                        tag = null;
-                    });
-            }
-        }
-    }
-    // 判斷是否被使用者收藏
-    for (let i = 0; i < musicArticleList.length; i++) {
-        await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [musicArticleList[i].artiNum, memID])
-            .then((data) => {
-                console.log(data.rows);
-                if (data.rows == null || data.rows == '') {
-                    isCollection.push('1');
-                } else {
-                    isCollection.push('0');
-                }
-            }, (error) => {
-                isCollection.push('0');
-            });
-    }
-    // 判斷是否被使用者按愛心
-    for (let i = 0; i < musicArticleList.length; i++) {
-        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [musicArticleList[i].artiNum, memID])
-            .then((data) => {
-                console.log(data.rows);
-                if (data.rows == null || data.rows == '') {
-                    isLike.push('1');
-                } else {
-                    isLike.push('0');
-                }
-            }, (error) => {
-                isLike.push('0');
-            });
-    }
-    //取得權限
-    await member.checkAuthority(memID).then(data => {
-        if (data != undefined) {
-            checkAuthority = data;
-            console.log("Authority=", checkAuthority);
-        } else {
-            checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
+            console.log("權限=", checkAuthority);
         }
     })
 
-    console.log("result =", result);
-    result[0] = musicArticleList;
-    result[1] = musicArtiLikeCount;
-    result[2] = musicArtiMessLikeCount;
-    result[3] = tag;
-    result[4] = isCollection;
-    result[5] = isLike;
-    result[6] = [memID];
-    result[7] = checkAuthority
-    return result;
-}
-//---------  getClassBook() -------------
-var getClassBook = async function (memID) {
-    var bookArticleList = [];
-    var bookArtiLikeCount = [];
-    var bookArtiMessLikeCount = [];
-    var tagLink = [];
-    var tag = [];
-    var isCollection = [];
-    var isLike = [];
-    var checkAuthority;
-    var result = [];
-    // -----------  取得書籍文章 --------------
-    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['book'])
-        .then((data) => {
-            // console.log(data.rows);
-            for (let i = 0; i < data.rows.length; i++) {
-                data.rows[i].artiDateTime = moment(data.rows[i].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
-            }
-            bookArticleList = data.rows;
-        }, (error) => {
-            bookArticleList = null;
-        });
-    // -----------  取得書籍文章愛心數量 --------------
-    for (let i = 0; i < bookArticleList.length; i++) {
-        await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [bookArticleList[i].artiNum])
-            .then((data) => {
-                // console.log(data.rows[0]);
-                if (data.rows.length > 0) {
-                    bookArtiLikeCount.push(data.rows[0]);
-                } else {
-                    bookArtiLikeCount = -1;
-                }
-            }, (error) => {
-                bookArtiLikeCount = null;
-            });
-    }
-    // -----------  取得書籍文章留言數量 --------------
-    for (let i = 0; i < bookArticleList.length; i++) {
-        await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum" = $1', [bookArticleList[i].artiNum])
-            .then((data) => {
-                // console.log(data.rows[0]);
-                bookArtiMessLikeCount.push(data.rows[0]);
-            }, (error) => {
-                bookArtiMessLikeCount = null;
-            });
-    }
-    // ----------- tag -----------
-    for (let i = 0; i < bookArticleList.length; i++) {
-        // -----------  取得tagLink表中的 artiNum 方便在 tag表中取得資料 --------------
-        await sql('select * from "tagLinkArticle" where "artiNum" = $1', [bookArticleList[i].artiNum])
-            .then((data) => {
-                // console.log("data=", data.rows);
-                if (data.rows != undefined && data.rows != '') {
-                    tagLink.push(data.rows);
-                } else {
-                    let tagNull = { "tagNum": "null" };
-                    tagLink.push([tagNull]);
-                }
-            }, (error) => {
-                tagLink = null;
-            });
-    }
-    // console.log("taglink=", tagLink);
-    // -----------  取得文章全部tag --------------
-    //初始化二維陣列
-    for (let i = 0; i < tagLink.length; i++) {
-        tag[i] = [];
-    }
-    // console.log("初始",tag);
-    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
-    for (let i = 0; i < tagLink.length; i++) {
-        for (let j = 0; j < tagLink[i].length; j++) {
-            if (tagLink[i][j].tagNum != 'null') {
-                await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
-                    .then((data) => {
-                        // console.log(data.rows[0].tagName);
-                        if (data.rows[0].tagName != undefined && data.rows[0].tagName != null) {
-                            tag[i][j] = data.rows[0].tagName;
-                        }
-                    }, (error) => {
-                        tag = null;
-                    });
-            }
-        }
-    }
-    // 判斷是否被使用者收藏
-    for (let i = 0; i < bookArticleList.length; i++) {
-        await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [bookArticleList[i].artiNum, memID])
-            .then((data) => {
-                console.log(data.rows);
-                if (data.rows == null || data.rows == '') {
-                    isCollection.push('1');
-                } else {
-                    isCollection.push('0');
-                }
-            }, (error) => {
-                isCollection.push('0');
-            });
-    }
-    // 判斷是否被使用者按愛心
-    for (let i = 0; i < bookArticleList.length; i++) {
-        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [bookArticleList[i].artiNum, memID])
-            .then((data) => {
-                console.log(data.rows);
-                if (data.rows == null || data.rows == '') {
-                    isLike.push('1');
-                } else {
-                    isLike.push('0');
-                }
-            }, (error) => {
-                isLike.push('0');
-            });
-    }
-    //取得權限
-    await member.checkAuthority(memID).then(data => {
-        if (data != undefined) {
-            checkAuthority = data;
-            console.log("Authority=", checkAuthority);
-        } else {
-            checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
-        }
-    })
-    console.log("result =", result);
-
-    result[0] = bookArticleList;
-    result[1] = bookArtiLikeCount;
-    result[2] = bookArtiMessLikeCount;
-    result[3] = tag;
-    result[4] = isCollection;
-    result[5] = isLike;
-    result[6] = [memID];
-    result[7] = checkAuthority;
-    return result;
-}
-//---------  getClassExhibition() -------------
-var getClassExhibition = async function (memID) {
-    var exhibitionArticleList = [];
-    var exhibitionArtiLikeCount = [];
-    var exhibitionArtiMessLikeCount = [];
-    var tagLink = [];
-    var tag = [];
-    var isCollection = [];
-    var isLike = [];
-    var checkAuthority;
-    var result = [];
-    // -----------  取得展覽文章 --------------
-    await sql('SELECT * FROM "article" WHERE "artiClass" = $1', ['exhibition'])
-        .then((data) => {
-            // console.log(data.rows);
-            for (let i = 0; i < data.rows.length; i++) {
-                data.rows[i].artiDateTime = moment(data.rows[i].artiDateTime).format("YYYY-MM-DD hh:mm:ss");
-            }
-            exhibitionArticleList = data.rows;
-        }, (error) => {
-            exhibitionArticleList = null;
-        });
-    // -----------  取得展覽文章愛心數量 --------------
-    for (let i = 0; i < exhibitionArticleList.length; i++) {
-        await sql('SELECT count("artiNum") FROM "articleLike" WHERE "artiNum"=$1', [exhibitionArticleList[i].artiNum])
-            .then((data) => {
-                // console.log(data.rows[0]);
-                if (data.rows.length > 0) {
-                    exhibitionArtiLikeCount.push(data.rows[0]);
-                } else {
-                    exhibitionArtiLikeCount = -1;
-                }
-            }, (error) => {
-                exhibitionArtiLikeCount = null;
-            });
-    }
-    // -----------  取得展覽文章留言數量 --------------
-    for (let i = 0; i < exhibitionArticleList.length; i++) {
-        await sql('SELECT count("artiNum") FROM "articleMessage" WHERE "artiNum" = $1', [exhibitionArticleList[i].artiNum])
-            .then((data) => {
-                // console.log(data.rows[0]);
-                exhibitionArtiMessLikeCount.push(data.rows[0]);
-            }, (error) => {
-                exhibitionArtiMessLikeCount = null;
-            });
-    }
-    // ----------- tag -----------
-    for (let i = 0; i < exhibitionArticleList.length; i++) {
-        // -----------  取得tagLink表中的 artiNum 方便在 tag表中取得資料 --------------
-        await sql('select * from "tagLinkArticle" where "artiNum" = $1', [exhibitionArticleList[i].artiNum])
-            .then((data) => {
-                // console.log("data=", data.rows);
-                if (data.rows != undefined && data.rows != '') {
-                    tagLink.push(data.rows);
-                } else {
-                    let tagNull = { "tagNum": "null" };
-                    tagLink.push([tagNull]);
-                }
-            }, (error) => {
-                tagLink = null;
-            });
-    }
-    // console.log("taglink=", tagLink);
-    // -----------  取得文章全部tag --------------
-    //初始化二維陣列
-    for (let i = 0; i < tagLink.length; i++) {
-        tag[i] = [];
-    }
-    // console.log("初始",tag);
-    // 將tagLink二維陣列，去tag表中取得每一篇文章所有的標籤名稱
-    for (let i = 0; i < tagLink.length; i++) {
-        for (let j = 0; j < tagLink[i].length; j++) {
-            if (tagLink[i][j].tagNum != 'null') {
-                await sql('select "tagName" from "tag" where "tagNum" = $1', [tagLink[i][j].tagNum])
-                    .then((data) => {
-                        // console.log(data.rows[0].tagName);
-                        if (data.rows[0].tagName != undefined && data.rows[0].tagName != null) {
-                            tag[i][j] = data.rows[0].tagName;
-                        }
-                    }, (error) => {
-                        tag = null;
-                    });
-            }
-        }
-    }
-    // 判斷是否被使用者收藏
-    for (let i = 0; i < exhibitionArticleList.length; i++) {
-        await sql('SELECT "artiNum" FROM "memberCollection" WHERE "artiNum" = $1 and "memID" = $2', [exhibitionArticleList[i].artiNum, memID])
-            .then((data) => {
-                console.log(data.rows);
-                if (data.rows == null || data.rows == '') {
-                    isCollection.push('1');
-                } else {
-                    isCollection.push('0');
-                }
-            }, (error) => {
-                isCollection.push('0');
-            });
-    }
-    // 判斷是否被使用者按愛心
-    for (let i = 0; i < exhibitionArticleList.length; i++) {
-        await sql('SELECT "artiNum" FROM "articleLike" WHERE "artiNum" = $1 and "memID" = $2 ', [exhibitionArticleList[i].artiNum, memID])
-            .then((data) => {
-                console.log(data.rows);
-                if (data.rows == null || data.rows == '') {
-                    isLike.push('1');
-                } else {
-                    isLike.push('0');
-                }
-            }, (error) => {
-                isLike.push('0');
-            });
-    }
-    //取得權限
-    await member.checkAuthority(memID).then(data => {
-        if (data != undefined) {
-            checkAuthority = data;
-            console.log("Authority=", checkAuthority);
-        } else {
-            checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
-        }
-    })
-    console.log("result =", result);
-
-    result[0] = exhibitionArticleList;
-    result[1] = exhibitionArtiLikeCount;
-    result[2] = exhibitionArtiMessLikeCount;
-    result[3] = tag;
-    result[4] = isCollection;
-    result[5] = isLike;
-    result[6] = [memID];
-    result[7] = checkAuthority;
-    return result;
-}
-// ========= get_four_class_article (end) ========
-
-//=========================================
-//---------  getHotArticle() -------------
-//=========================================
-var getHotArticle = async function () {
-    var result = [];
-    var mydata = [];
-    var articleLikeCount = [] //存放 articleLike表中裡面的 artiNum欄位
-    var max = 0; // 尋找在articleLike表中 出現最多次的artiNum
-    var times = 0; //作為判斷是否取得三篇文章的開關
-    var hotArticle = [];  //存放前三名熱門文章
-
-    await sql('select "articleLike"."artiNum" from "articleLike"')
-        .then((data) => {
-            result = data.rows;
-            //初始化陣列 
-            for (let i = 0; i <= result.length; i++) {
-                articleLikeCount[i] = 0;
-            }
-            //將取得的文章編號做計算 (articleLikeCount陣列維度代表第幾篇文章 裡面的值代表共有幾個讚)
-            for (let i = 0; i < result.length; i++) {
-                articleLikeCount[result[i].artiNum] += 1;
-            }
-            // console.log(articleLikeCount);
-            //尋找前三名
-            max = Math.max(...articleLikeCount);  //取得最大值
-            while (times < 3) {
-                for (let i = 1; i <= articleLikeCount.length; i++) {
-                    if (times == 3) break;
-                    if (articleLikeCount[i] == max) {
-                        hotArticle[times] = i;
-                        times += 1;
-                    }
-                }
-                max -= 1;
-            }
-        }, (error) => {
-            result = null;
-        });
-    // 撈前三篇文章的資訊
-    for (let i = 0; i < 3; i++) {
-        await sql('select * from "article" where "artiNum" = $1 ', [hotArticle[i]])
-            .then((data) => {
-                data.rows[0].artiDateTime = moment(data.rows[0].artiDateTime).format("YYYY-MM-DD HH:mm:ss");
-                mydata[i] = data.rows;
-            }, (error) => {
-                mydata = null;
-            });
-    }
-
-    return mydata;
+    result[0] = articleList ;
+    result[1] = tag ; 
+    result[2] = isCollection ;
+    result[3] = isLike ;
+    result[4] = imgs ;
+    result[5] = [memID] ;
+    result[6] = checkAuthority ;
+    return result ; 
 }
 
 //=========================================
@@ -1012,7 +415,7 @@ var getRecomMessLikeCount = async function (recomMessNum) {
 //匯出
 module.exports = {
     getArticleList, getOneArticle,
-    getClassMovie, getClassMusic, getClassBook, getClassExhibition,
-    getHotArticle, getArtiLikeCount, getRecomLikeCount,
+    getArticleClassList,
+    getArtiLikeCount, getRecomLikeCount,
     getArtiMessLikeCount, getRecomMessLikeCount
 };
