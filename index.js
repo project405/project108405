@@ -99,7 +99,7 @@ bot.on('message', function(event) {
                     console.log(data[0][0])
      
                 });
-            },1000);
+            },20000);
 
         }           
     }      
