@@ -33,7 +33,7 @@ div.member {
 }
 
 input:focus {
-    outline: rgba(45, 79, 65, 0.329) dashed 3px;
+    outline: none;
     overflow: hidden;
 }
 
@@ -94,11 +94,15 @@ div.member button {
     flex-direction: row;
     margin: 0.75em 0 0.75em 0;
     overflow: hidden;
+    border-radius: 10px;
+    background-color: white;
 }
 
 .input-with-icon {
     border: none;
     flex: 1;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
 .input-icon,
