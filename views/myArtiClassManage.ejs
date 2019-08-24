@@ -53,7 +53,7 @@
                     <!-- list -->
                     <% for(var i = 0; i < myArtiClass[0].length ; i++) { %>
                     <div class="card shadow list " style="cursor:pointer; ">
-                        <div class="card-body " onclick="location.href='article.html'">
+                        <div class="card-body " onclick="location.href='/article/<%= myArticle[0][i].artiNum %>'">
                             <div class="poster">
                                 <div class="name">
                                     <p><%= myArtiClass[0][i].memID %> 於 <%= myArtiClass[0][i].artiDateTime %>發表</p>
