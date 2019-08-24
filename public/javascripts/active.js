@@ -1,20 +1,23 @@
 // 點擊其他地方收navbar
-$(function() {
-    $(document).click(function(event) {
-        $('.navbar-collapse').collapse('hide');
-    });
-    $('.navbar-collapse').click(function(event){
-        event.stopPropagation();
-    });
-});
+// $(function() {
+//     $(document).click(function(event) {
+//         $('.navbar-collapse').collapse('hide');
+//     });
+//     $('.navbar-collapse').click(function(event){
+//         event.stopPropagation();
+//     });
+// });
 
 // tag div css
 $(function() {
     $("input").focus(function() {
         $("div.tag").css("box-shadow", "0 5px 15px rgba(0, 0, 0, 0.3)");
         $("div.tag").css("transition", "0.3s ease-in-out");
+        $("#tagInput").css("box-shadow", "none");
+
     });
     $("input").blur(function() {
+        $("div.tag").css("box-shadow", "none");
         $("div.tag").css("box-shadow", "none");
 
     });

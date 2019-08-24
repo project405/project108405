@@ -39,7 +39,7 @@ div.signUp {
 }
 
 input:focus {
-    outline: rgba(45, 79, 65, 0.329) dashed 3px;
+    outline:none;
     overflow: hidden;
 }
 
@@ -129,12 +129,15 @@ button.sameWidth {
 
 input.code {
     width: 6em;
+    border-radius: 10px;
+    background-color: #ddd;
 }
 
 input.inputValidateCode {
     width: 8em;
     text-align: center;
     border: 1px solid #ddd;
+    border-radius: 10px;
 }
 
 span.changeCode {
@@ -197,12 +200,15 @@ i.fa-sync-alt {
     display: flex;
     flex-direction: row;
     margin: 0.75em 0 0.75em 0;
+    background-color: white;
+    border-radius: 10px; 
 }
 
 .input-with-icon {
     border: none;
     flex: 1;
     overflow: hidden;
+    border-radius: 10px; 
 }
 
 .input-icon,

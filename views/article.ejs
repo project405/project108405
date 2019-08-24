@@ -41,7 +41,7 @@
                 <h5><%= items[0][0].artiHead %></h5>
                 <hr />
 
-                <p class="content"> <%- items[0][0].artiCont %>
+                <p class="content"> <%- items[0][0].replyCont %>
                 </p>
                 <!-- tag -->
                 <div class="tagDiv col-lg-12 ">
@@ -434,7 +434,7 @@
                     <i class="fas fa-images" style="padding-right:5px"></i>加圖片
                 </label>
 
-                <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none">提交回覆</button>
+                <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none" onclick="test()">提交回覆</button>
 
             </div>
 
@@ -445,6 +445,66 @@
             <i class="fa fa-angle-up"></i>
         </a>
     </div>
+
+    
+            <script>
+                var formData = new FormData(); //用formData來存取要傳送的所有資料
+                //上傳檔案按鈕有變動就執行
+                $("#file-selector").change(function () {
+                    var file = $("#file-selector")[0];  //取得檔案
+                    //如果有檔案就要加入formData
+                    if (file.files.length) {
+                        for (var i = 0; i < file.files.length; i++) {
+                            $("#replyInput").html(document.getElementById("replyInput").innerHTML + "\\:imgLocation");
+                        }
+                        // if (document.getElementById("postInput").innerHTML.match("<img") == null) {
+                        //     file.value = '';
+                        // }
+
+                        for (var i in file.files) {
+                            formData.append('userImg', file.files[i]);
+                        }
+
+                    }
+                });
+                function test() {
+                    var img = [];
+                    var replyCont = [];
+                    var artiData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
+                    // 取得內容
+                    artiData.forEach(function (element) {
+                        replyCont.push(element.innerText);
+                    }, this);
+                    console.log(replyCont);
+
+                    formData.append('replyCont', replyCont);
+
+                    $.ajax({
+                        url: '/article/post',
+                        type: 'POST',
+                        dataType: 'TEXT',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            console.log("yes", res);
+                            if (res == "請進行登入") {
+                                alert(res);
+                                location.replace("/logIn");
+                            } else if (res == "留言成功") {
+                                alert(res);
+                                location.replace("/articleList");
+                            } else {
+                                alert(res);
+                            }
+                        },
+                        error: function (res) {
+                            // console.log("失敗", res);
+                        }
+                    });
+                }
+
+            </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
