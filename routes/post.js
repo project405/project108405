@@ -13,8 +13,8 @@ router.get('/', function (req, res, next) {
          if (data != undefined) {
             postData.push(data);
             res.render("post", { items: postData });
-         }else{
-            console.log("無取得帳號權限資料") ; 
+         } else {
+            console.log("無取得帳號權限資料");
             res.render("post", { items: postData });
          }
       })

@@ -3,10 +3,10 @@ $(document).ready(() => {
         type: "GET",
         url: '/checkStatus',
         success: function (data) {
-          //data[0] = memID , data[1] = Authority
-          //如果沒登入
-          if(!data[0]){
-            document.getElementById('header').innerHTML = '\
+            //data[0] = memID , data[1] = Authority
+            //如果沒登入
+            if (!data[0]) {
+                document.getElementById('header').innerHTML = '\
                 <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">\
                     <a class="nav-link" href="/">\
                         <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8" alt="">\
@@ -36,6 +36,10 @@ $(document).ready(() => {
                             <li class="nav-item">\
                                 <a class="nav-link" href="/articleList">\
                                     文章</a>\
+                            </li>\
+                            <li class="nav-item">\
+                            <a class="nav-link" href="/articleList/post">\
+                            <i class="fas fa-pen"></i>&nbsp;發文</a>\
                             </li>\
                             <li id="dropdown" class="nav-item dropdown">\
                                 <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
@@ -93,9 +97,9 @@ $(document).ready(() => {
                     </div>\
                 </div>\
             </div>\ '
-          //如果有登入也有新增推薦權限
-          }else if (data[0] && data[1]){
-            document.getElementById('header').innerHTML = '\
+                //如果有登入也有新增推薦權限
+            } else if (data[0] && data[1]) {
+                document.getElementById('header').innerHTML = '\
                 <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">\
                     <a class="nav-link" href="/">\
                         <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8" alt="">\
@@ -129,6 +133,10 @@ $(document).ready(() => {
                             <li class="nav-item">\
                                 <a class="nav-link" href="/articleList">\
                                     文章</a>\
+                            </li>\
+                            <li class="nav-item">\
+                            <a class="nav-link" href="/articleList/post">\
+                            <i class="fas fa-pen"></i>&nbsp;發文</a>\
                             </li>\
                             <li id="dropdown" class="nav-item dropdown">\
                                 <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
@@ -193,9 +201,9 @@ $(document).ready(() => {
                     </div>\
                 </div>\
             </div>\ '
-          //如果有登入可是沒推薦權限
-          }else if (data[0] && !data[1] ){
-            document.getElementById('header').innerHTML = '\
+                //如果有登入可是沒推薦權限
+            } else if (data[0] && !data[1]) {
+                document.getElementById('header').innerHTML = '\
             <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">\
                 <a class="nav-link" href="/">\
                     <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8" alt="">\
@@ -225,6 +233,10 @@ $(document).ready(() => {
                         <li class="nav-item">\
                             <a class="nav-link" href="/articleList">\
                                 文章</a>\
+                        </li>\
+                        <li class="nav-item">\
+                        <a class="nav-link" href="/articleList/post">\
+                        <i class="fas fa-pen"></i>&nbsp;發文</a>\
                         </li>\
                         <li id="dropdown" class="nav-item dropdown">\
                             <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
@@ -289,7 +301,7 @@ $(document).ready(() => {
                 </div>\
             </div>\
         </div>\ '
-          }
+            }
         }
     });
 });
