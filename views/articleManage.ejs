@@ -67,18 +67,26 @@
                                     <p class="card-text limitLine">
                                         <%- myArticle[0][i].artiCont %></p>
                                     </p>
-                                    <!-- tag -->
-                                    <div class="tagDiv col-lg-12 ">
-                                        <% for(var j = 0; j < myArticle[3][i].length ; j++) { %>
-                                        <button type="button" class="btn  tag"><%= myArticle[3][i][j] %></button>
+                                     <!-- tag -->
+                                     <div class=" tagDiv col-lg-12 ">
+                                        <% if(myArticle[1] != undefined) { %>
+                                            <% for(var j=0; j<myArticle[1].length; j++) {%>
+                                                <% if(myArticle[0][i].artiNum == myArticle[1][j].artiNum){ %>     
+                                                    <button type=" button" class="btn  tag"><%= myArticle[1][j].tagName %></button>                            
+                                                <% } %>
+                                            <% } %>
                                         <% } %>
                                     </div>
                                 </div>
                                 <!-- imgs -->
-                                <% if(myArticle[8][myArticle[0][i].artiNum]){%>
-                                <div class="wrapperCard card-img-top col-lg-3"
-                                    style="background-image: url( '/userImg/<%= myArticle[8][myArticle[0][i].artiNum] %>'); ">
-                                </div>
+                                <% if(myArticle[2] != undefined) { %>
+                                    <% for(var j = 0 ; j<myArticle[2].length ; j++) { %>
+                                        <% if (myArticle[0][i].artiNum == myArticle[2][j].artiNum){ %>
+                                            <div class="wrapperCard card-img-top col-lg-3"
+                                                style="background-image: url( '/userImg/<%= myArticle[2][j].imgName %>'); ">
+                                                <% break %> <!-- 取得一張照片就結束 -->
+                                        <% } %>
+                                    <% } %>
                                 <% } %>
                             </div>
                         </div>
@@ -87,91 +95,78 @@
                         <div class="info">
                             <!-- 愛心按鈕 -->
                             <button type="button" id=<%= "LikeUnLogIn" + myArticle[0][i].artiNum %> class="btn postInfo"
-                                onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
-                                <a><%= myArticle[1][i].count %></a></button>
+                                style="display:none" onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
+                                <a><%= myArticle[0][i].likeCount %></a></button>
                             <button type="button" id=<%="addLike" + myArticle[0][i].artiNum %> class="btn postInfo"
-                                onclick=<%= "addLike(" + myArticle[0][i].artiNum + ")" %>>
+                                style="display:none" onclick=<%= "addLike(" + myArticle[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + myArticle[0][i].artiNum %>>
-                                    <%= myArticle[1][i].count %> </a> </button>
+                                        <%= myArticle[0][i].likeCount %> </a> </button>
                             <button type="button" id=<%= "delLike" + myArticle[0][i].artiNum %> class="btn postInfo"
-                                style="color:#c93737" onclick=<%= "delLike(" + myArticle[0][i].artiNum + ")" %>>
+                                style="color:#c93737; display:none" onclick=<%= "delLike(" + myArticle[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + myArticle[0][i].artiNum %>>
-                                    <%= myArticle[1][i].count %></a></button>
-                            <!-- 如果沒登入 -->
-                            <% if(myArticle[6][0] == undefined) {%>
-                            <script type="text/javascript">
-                                document.getElementById("LikeUnLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("addLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("delLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                            </script>
-                            <!-- 如果有登入及沒按過愛心       -->
-                            <% }else if(myArticle[5][i] == 1 && myArticle[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("addLike" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("LikeUnLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("delLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                            </script>
-                            <!-- 如果有登入及按過愛心 -->
-                            <% }else if(myArticle[5][i] == 0 && myArticle[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("delLike" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("addLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("LikeUnLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                            </script>
-                            <% }else {%>
-                            <script type="text/javascript">
-                                document.getElementById("delLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("addLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("LikeUnLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                            </script>
+                                        <%= myArticle[0][i].likeCount %></a></button>
+
+                            <!-- 判斷是否有按過愛心 -->
+                            <% var isLike = false %>
+                            <%  for (var j = 0; j < myArticle[3].length ; j++) { %>
+                                <!-- 如果有按過愛心 -->
+                                <% if(myArticle[0][i].artiNum == myArticle[3][j].artiNum ) { %>
+                                    <script type="text/javascript">                                  
+                                        document.getElementById("delLike" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
+                                        document.getElementById("addLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                        document.getElementById("LikeUnLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                    </script>
+                                    <% isLike = true %>
+                                <% } %>
+                            <% } %>
+                            <!-- 如果沒按過愛心 -->
+                            <% if(isLike == false ){ %>
+                                <script type="text/javascript">
+                                    document.getElementById("addLike" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
+                                    document.getElementById("LikeUnLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                    document.getElementById("delLike" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                </script>
                             <% } %>
 
                             <!-- 留言數量按鈕 -->
                             <button type="button" class="btn postInfo"><i
-                                    class="fas fa-comment-dots"></i><a><%= myArticle[2][i].count %></a></button>
+                                    class="fas fa-comment-dots"></i><a><%= myArticle[0][i].messCount %></a></button>
 
                             <!-- 收藏按鈕 -->
                             <button type="button" id=<%= "unLogIn" + myArticle[0][i].artiNum %> class="btn postInfo"
-                                display: inline" onclick="location.href='/logIn'">
+                                style="display: none" onclick="location.href='/logIn'">
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%=  "addColle" + myArticle[0][i].artiNum %> class="btn postInfo"
-                                display: inline" onclick=<%= "addColle(" + myArticle[0][i].artiNum + ")" %>>
+                                style="display: none" onclick=<%= "addColle(" + myArticle[0][i].artiNum + ")" %>>
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%= "delColle" + myArticle[0][i].artiNum %> class="btn postInfo"
-                                style="display: inline" onclick=<%= "delColle(" + myArticle[0][i].artiNum + ")" %>>
+                                style="display: none" onclick=<%= "delColle(" + myArticle[0][i].artiNum + ")" %>>
                                 <i class="fas fa-bookmark"></i></button>
 
                             <!--  收藏按鈕控制 -->
-                            <% if(myArticle[6][0] == undefined) {%>
-                            <script type="text/javascript">
-                                document.getElementById("unLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("addColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("delColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                console.log("1");
-                            </script>
-                            <% }else if(myArticle[4][i] == 1 && myArticle[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("addColle" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("unLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("delColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                console.log("2");
-                            </script>
-                            <% }else if(myArticle[4][i] == 0 && myArticle[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("delColle" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("addColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("unLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                console.log("3");
-                            </script>
-                            <% }else {%>
-                            <script type="text/javascript">
-                                document.getElementById("delColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("addColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("unLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
-                                console.log("3");
-                            </script>
-                            <% } %>
-
+                            <% var isCollection = false %>
+                                <% if(myArticle[4] != undefined){ %>
+                                    <% for(var j = 0 ; j < myArticle[4].length ; j++) { %>
+                                        <!-- 如果有收藏 -->
+                                        <% if (myArticle[4][j].artiNum == myArticle[0][i].artiNum){ %>
+                                            <script type="text/javascript">
+                                                document.getElementById("delColle" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
+                                                document.getElementById("addColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                                document.getElementById("unLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                            </script>
+                                            <% isCollection = true %>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                                <!-- 如果沒收藏 -->
+                                <% if( isCollection == false ){ %>
+                                    <script type="text/javascript">
+                                        document.getElementById("addColle" + "<%= myArticle[0][i].artiNum %>").style.display = "inline";
+                                        document.getElementById("unLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                        document.getElementById("delColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
+                                    </script>
+                                <% } %>          
+                                
                             <!-- 收藏 ajax script -->
                             <script>
                                 //新增收藏
