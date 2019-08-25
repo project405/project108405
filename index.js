@@ -140,7 +140,7 @@ bot.on('message', function(event) {
 
                 //將訊息推給所有使用者
                 bot.push(
-                    allUsers, {
+                    {
                     "type": "template",
                     "altText": "這是一個輪播樣板",
                     "template": {
