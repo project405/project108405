@@ -127,64 +127,66 @@ bot.on('postback', function(event) {
 //--------------------------------
 // 機器人接受訊息的處理
 //--------------------------------
-bot.on('message', function(event) {    
-    const text = event.message.text;
-    const userId = profile.userId;
-    if (text == "本週推薦") {
-        recommend.getFourRecomClassList().then(data => {  
-            if (data == -1){
-                event.reply('找不到資料');
-            }else if(data == -9){                    
-                event.reply('執行錯誤');
-            }else{
-                let msg = [];
+bot.on('message', function(event) {  
+    event.source.profile().then(
+        function (profile) {  
+            const text = event.message.text;
+            const userId = profile.userId;
+            if (text == "本週推薦") {
+                recommend.getFourRecomClassList().then(data => {  
+                    if (data == -1){
+                        event.reply('找不到資料');
+                    }else if(data == -9){                    
+                        event.reply('執行錯誤');
+                    }else{
+                        let msg = [];
 
-                //準備食物卡片樣式
-                data.forEach(item => {
-                        console.log(item[0].recomHead)
-                    msg.push({
-                        "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item[0].picture,
-                        "imageBackgroundColor": "#FFFFFF",
-                        "title": item[0].recomHead,
-                        "text": item[0].recomCont,
-                        "actions": [
-                            {
-                                "type": "postback",
-                                "label": "1顆星",
-                                "data": item[0].recomNum + "&1"
+                        //準備食物卡片樣式
+                        data.forEach(item => {
+                                console.log(item[0].recomHead)
+                            msg.push({
+                                "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item[0].picture,
+                                "imageBackgroundColor": "#FFFFFF",
+                                "title": item[0].recomHead,
+                                "text": item[0].recomCont,
+                                "actions": [
+                                    {
+                                        "type": "postback",
+                                        "label": "1顆星",
+                                        "data": item[0].recomNum + "&1"
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "label": "2顆星",
+                                        "data": item[0].recomNum + "&2"
+                                    },
+                                    {
+                                        "type": "postback",
+                                        "label": "3顆星",
+                                        "data": item[0].recomNum + "&3"
+                                    }
+                                ]
+                            }); 
+                            
+                            
+                        });
+                        console.log("msg!!!!!!",msg);
+                        //將訊息推給所有使用者
+                        bot.push(
+                            userId, {
+                            "type": "template",
+                            "altText": "這是一個輪播樣板",
+                            "template": {
+                                "type": "carousel",
+                                "columns":msg
                             },
-                            {
-                                "type": "postback",
-                                "label": "2顆星",
-                                "data": item[0].recomNum + "&2"
-                            },
-                            {
-                                "type": "postback",
-                                "label": "3顆星",
-                                "data": item[0].recomNum + "&3"
+                            "imageAspectRatio": "rectangle",
+                            "imageSize": "cover"    
                             }
-                        ]
-                    }); 
-                    
-                    
-                });
-                console.log("msg!!!!!!",msg);
-                //將訊息推給所有使用者
-                bot.push(
-                    {
-                    "type": "template",
-                    "altText": "這是一個輪播樣板",
-                    "template": {
-                        "type": "carousel",
-                        "columns":msg
-                    },
-                    "imageAspectRatio": "rectangle",
-                    "imageSize": "cover"    
-                    }
-                );  
-            }  
-        })  
-    
+                        );  
+                    }  
+                })  
+            
     };
 });
 //--------------------------------
