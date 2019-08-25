@@ -86,6 +86,7 @@ bot.on('message',async function (event) {
         
         msgs.map( (msg,index) => {
             console.log(index)
+            console.log(msg)
             recommend.getRecomClassList().then(data => { 
                 console.log('==========================>')
                 // console.log('data!!!!!!!',data[0][0])
