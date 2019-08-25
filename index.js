@@ -99,11 +99,11 @@ bot.on('message',async function (event) {
 
         recommend.getFourRecomClassList().then(data =>{
                 console.log("data!!!!!!",data);
-                event.reply({'type':'text', 'text':msgs[0],'text':data[0].recomHead},
-                            {'type':'text', 'text':msgs[1],'text':data[1].recomHead},
-                            {'type':'text', 'text':msgs[2],'text':data[2].recomHead},
-                            {'type':'text', 'text':msgs[3],'text':data[3].recomHead}
-                )
+                event.reply({'type':'text', 'text':msgs[0],'text':data[0].recomHead}
+                            // {'type':'text', 'text':msgs[1],'text':data[1].recomHead},
+                            // {'type':'text', 'text':msgs[2],'text':data[2].recomHead},
+                            // {'type':'text', 'text':msgs[3],'text':data[3].recomHead}
+                );
         });
 
 
