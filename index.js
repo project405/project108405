@@ -83,8 +83,8 @@ bot.on('message',async function (event) {
     // let recommendData = [];
     //呼叫API取得本週推薦
     if (text == "本週推薦") {
-        event.reply("asd");
-        // msgs.map( (msg,index) => {
+        
+        msgs.map( (msg,index) => {
             console.log(index)
             recommend.getRecomClassList().then(data => { 
                 console.log('==========================>')
@@ -93,7 +93,7 @@ bot.on('message',async function (event) {
                 console.log('recommendData',recommendData)
                 // console.log('recommendData=============>',recommendData)
             }); 
-        // })
+        })
 
         console.log('recommendDataOutside',recommendData)
         // console.log(data[0][0].recomClass);
