@@ -72,7 +72,7 @@ bot.on('message', function(event) {
     }
 });
 //--------------------------------
-//------------ 本週推薦 ------------
+//------------ 本週推薦(成功)) ------------
 // bot.on('message',async function (event) {    
 
 //     //使用者傳來的文字
@@ -102,7 +102,6 @@ bot.on('message', function(event) {
 bot.on('message', function(event) {    
     const text = event.message.text;
     if (text == "本週推薦") {
-            
         recommend.getFourRecomClassList().then(data => {  
             if (data == -1){
                 event.reply('找不到資料');
@@ -114,7 +113,7 @@ bot.on('message', function(event) {
                 //準備食物卡片樣式
                 data.forEach(item => {
                     msg.push({
-                        "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.photo,
+                        "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.picture,
                         "imageBackgroundColor": "#FFFFFF",
                         "title": item.recomHead,
                         "text": item.recomCont,
