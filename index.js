@@ -128,8 +128,8 @@ bot.on('postback', function(event) {
 // 機器人接受訊息的處理
 //--------------------------------
 bot.on('message', function(event) {  
-    event.source.profile().then(
-        function (profile) {  
+    // event.source.profile().then(
+        // function (profile) {  
             const text = event.message.text;
             // const userId = profile.userId;
             if (text == "本週推薦") {
@@ -187,8 +187,8 @@ bot.on('message', function(event) {
                     }  
                 })  
             }
-        }    
-    );
+        // }    
+    // );
 });
 //--------------------------------
 
