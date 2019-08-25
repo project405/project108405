@@ -193,109 +193,53 @@ var getOneRecommend = async function (recomNum, memID) {
 //---- getRecomClassList () ----
 //==============================
 //---------  getRecomClassList() -------------
-// var getRecomClassList = async function (recomClass,memID) {
-//     var recommendData = [];
-//     var checkAuthority;
-//     var imgs = [] ;
-//     var result = [];
-//     // -----------  取得文章清單 --------------
-//     await sql('SELECT * FROM "recommendListDataView" WHERE "recomClass" = $1', [recomClass])
-//         .then((data) => {
-//           if(!data.rows){
-//             recommendData = undefined ;
-//           }else{
-//             recommendData = data.rows ;
-//           }
-//         }, (error) => {
-//             recommendData = undefined ;
-//         });
-
-//     //取得權限
-//     await member.checkAuthority(memID).then(data => {
-//         if (data != undefined) {
-//             checkAuthority = data;
-//             console.log("Authority=", checkAuthority);
-//         } else {
-//             checkAuthority = undefined;
-//             console.log("Authority=", checkAuthority);
-//         }
-//     })
-
-//     //----------- 取得照片 ----------- 
-//     await sql('SELECT "recomNum" , "imgName" FROM "image"')
-//     .then((data) => {
-//         if (!data.rows) {
-//             imgs = undefined;
-//         } else {
-//             imgs = data.rows;
-//         }
-//     }, (error) => {
-//         imgs = undefined;
-//     });
-
-//     result[0] = recommendData;
-//     result[1] = [memID];
-//     result[2] = checkAuthority;
-//     result[3] = imgs ; 
-
-//     return result;
-// }
-
-//---------  getRecomClassList() -------------
-var getRecomClassList = async function () {
-    
-    let result = [];
-    // (1)
-    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['movie'])
+var getRecomClassList = async function (recomClass,memID) {
+    var recommendData = [];
+    var checkAuthority;
+    var imgs = [] ;
+    var result = [];
+    // -----------  取得文章清單 --------------
+    await sql('SELECT * FROM "recommendListDataView" WHERE "recomClass" = $1', [recomClass])
         .then((data) => {
-            if(data.rows.length > 0){
-                result.push(data.rows);
-                console.log(result);
-            }else{
-                result.push([]);
-            }
+          if(!data.rows){
+            recommendData = undefined ;
+          }else{
+            recommendData = data.rows ;
+          }
         }, (error) => {
-            result.push([]); 
+            recommendData = undefined ;
         });
 
-    // (2)
-    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['music'])
-        .then((data) => {
-            if(data.rows.length > 0){
-                result.push(data.rows);
-            }else{
-                result.push([]);
-            }
-        }, (error) => {
-            result.push([]); 
-        });
-    // (3)
-    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['book'])
-        .then((data) => {
-            if(data.rows.length > 0){
-                result.push(data.rows);
-            }else{
-                result.push([]);
-            }
-        }, (error) => {
-            result.push([]); 
-        });
-    // (4)
-    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['exhibition'])
-        .then((data) => {
-            if(data.rows.length > 0){
-                result.push(data.rows);
-            }else{
-                result.push([]);
-            }
-        }, (error) => {
-            result.push([]); 
-        });
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
 
-    
+    //----------- 取得照片 ----------- 
+    await sql('SELECT "recomNum" , "imgName" FROM "image"')
+    .then((data) => {
+        if (!data.rows) {
+            imgs = undefined;
+        } else {
+            imgs = data.rows;
+        }
+    }, (error) => {
+        imgs = undefined;
+    });
+
+    result[0] = recommendData;
+    result[1] = [memID];
+    result[2] = checkAuthority;
+    result[3] = imgs ; 
+
     return result;
 }
-
 
 //=========================================
 //---------  addRecommendLike() -----------
