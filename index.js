@@ -92,7 +92,7 @@ bot.on('message',async function (event) {
                 // console.log('data!!!!!!!',data[0][0])
                 recommendData.push(data[0][0]);
                 console.log('recommendData',recommendData)
-                event.reply(recommendData)
+                event.reply({'type':'text', 'text':recommendData});
                 // console.log('recommendData=============>',recommendData)
             }); 
         })
