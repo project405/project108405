@@ -172,7 +172,7 @@ bot.on('message', function(event) {
                         });
                         console.log("msg!!!!!!",msg);
                         //將訊息推給所有使用者
-                        bot.push(
+                        event.reply(
                             {
                             "type": "template",
                             "altText": "這是一個輪播樣板",
