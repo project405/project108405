@@ -1,13 +1,13 @@
 //格式化可編輯的div裡的文字
-document.querySelector('div[contenteditable="true"]').addEventListener("paste", function(e) {
+document.querySelector('div[contenteditable="true"]').addEventListener("paste", function (e) {
     e.preventDefault();
     var text = e.clipboardData.getData("text/plain");
     document.execCommand("insertHTML", false, text);
 });
 
 
-[].forEach.call(document.querySelectorAll('div[contenteditable="true"]'), function(el) {
-    el.addEventListener('paste', function(e) {
+[].forEach.call(document.querySelectorAll('div[contenteditable="true"]'), function (el) {
+    el.addEventListener('paste', function (e) {
         e.preventDefault();
         var text = e.clipboardData.getData("text/plain");
         document.execCommand("insertHTML", false, text);
@@ -16,10 +16,10 @@ document.querySelector('div[contenteditable="true"]').addEventListener("paste", 
 
 
 
-$(function() {
+$(function () {
 
     // 選取到檔案後開始動作
-    $('#file-selector').change(function(event) {
+    $('#file-selector').change(function (event) {
 
         /**
          * 宣告fileList來存取檔案(能夠多個)
@@ -44,9 +44,9 @@ $(function() {
 
             // 解析檔案
             var reader = new FileReader();
-            reader.onload = (function(file) {
+            reader.onload = (function (file) {
 
-                return function(event) {
+                return function (event) {
                     var src = event.target.result // 圖片的編碼 , 格式為base64
 
                     var title = escape(file.name);
@@ -89,7 +89,7 @@ $(function() {
     });
 });
 
-$('div[contenteditable]').keydown(function(e) {
+$('div[contenteditable]').keydown(function (e) {
     // trap the return key being pressed
     if (e.keyCode === 13) {
         // insert 2 br tags (if only one br tag is inserted the cursor won't go to the next line)

@@ -29,6 +29,7 @@ var memberRouter = require('./routes/member/member');
 var memberManageRouter = require('./routes/member/memberManage');
 var articleManageRouter = require('./routes/member/articleManage');
 var articlePostRouter = require('./routes/member/articlePost');
+var replyPostRouter = require('./routes/member/replyPost');
 var logInRouter = require('./routes/member/logIn');
 var logOutRouter = require('./routes/member/logOut');
 var signUpRouter = require('./routes/member/signUp');
@@ -108,6 +109,7 @@ app.use('/article', articleRouter);
 app.use('/articleList', articleListRouter);
 app.use('/articleList/post', postRouter);
 app.use('/article/post', articlePostRouter);
+app.use('/article/reply', replyPostRouter);
 app.use('/addCollection', addCollectionRouter);
 app.use('/delCollection', delCollectionRouter);
 app.use('/likeCount', likeCountRouter);
@@ -167,7 +169,7 @@ app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);
 app.use('/recommendList/book', RecomBookRouter);
 app.use('/recommendList/exhibition', RecomExhibitionRouter);
-app.use('/checkStatus',CheckStatus);
+app.use('/checkStatus', CheckStatus);
 
 
 
