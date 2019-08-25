@@ -304,16 +304,11 @@ var getFourRecomClassList = async function (recomClass,memID) {
     });
     
     
-    
-    
-    
     result[0] = RecommendMovie;
     result[1] = RecommendMusic;
     result[2] = RecommendBook;
     result[3] = RecommendExhibition;
-    // result[1] = RecommendMusic;
     
-
     return result;
     
 

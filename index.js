@@ -73,73 +73,88 @@ bot.on('message', function(event) {
 });
 //--------------------------------
 //------------ 本週推薦 ------------
-bot.on('message',async function (event) {    
+// bot.on('message',async function (event) {    
 
-    //使用者傳來的文字
-    const text = event.message.text;
-    //存放本週推薦類別
-    let msgs = ['電影','音樂','書籍','展覽'];
-    let recommendData = [];
-    // let recommendData = [];
-    //呼叫API取得本週推薦
-    if (text == "本週推薦") {
-        
-        // msgs.map((msg,index) => {
-            
-        //     console.log(msg)
-        //     recommend.getRecomClassList(msg).then(data => { 
-        //         console.log('==========================>')
-        //         // console.log('data!!!!!!!',data[0][0])
-        //         recommendData.push(data[0][0]);
-        //         console.log('recommendData',recommendData)
-        //         event.reply({'type':'text', 'text':recommendData[0]});
-        //         // console.log('recommendData=============>',recommendData)
-        //     }); 
-        // })
-
-        recommend.getFourRecomClassList().then(data =>{
-                console.log("data!!!!!!",data[1][0]);
-                // console.log(msgs[0])
-                event.reply([{'type':'text','text':msgs[0]+"類："+data[0][0].recomHead},
-                            {'type':'text','text':msgs[1]+"類："+data[1][0].recomHead},
-                            {'type':'text','text':msgs[2]+"類："+data[2][0].recomHead},
-                            {'type':'text','text':msgs[3]+"類："+data[3][0].recomHead}
-                ]);
-        });
-
-
-
-
-        // console.log('recommendDataOutside',recommendData)
-        // console.log(data[0][0].recomClass);
-        // console.log(data[0][0].recomHead);
-        // console.log(data[0][0].recomCont);
-        // console.log("1",data[0][0].recomClass)
-        // event.reply([
-            // {'type':'text', 'text':`${recommendData[0].recomClass}${recommendData[0].recomHead}${recommendData[0].recomCont}`},
-            // {'type':'text', 'text':`${recommendData[1].recomClass}${recommendData[1].recomHead}${recommendData[1].recomCont}`},
-            // {'type':'text', 'text':`${recommendData[2].recomClass}${recommendData[2].recomHead}${recommendData[2].recomCont}`},
-            // {'type':'text', 'text':`${recommendData[3].recomClass}${recommendData[3].recomHead}${recommendData[3].recomCont}`}   
-        // ]);
-        // event.reply([
-        //     {'type':'text', 'text':data[0][0].recomClass+data[0][0].recomHead+data[0][0].recomCont}          
-        // ]);   
+//     //使用者傳來的文字
+//     const text = event.message.text;
+//     //存放本週推薦類別
+//     let msgs = ['電影','音樂','書籍','展覽'];
+    
+//     //呼叫API取得本週推薦
+//     if (text == "本週推薦") {
+//         recommend.getFourRecomClassList().then(data =>{
+//                 console.log("data!!!!!!",data[1][0]);
+//                 // console.log(msgs[0])
+//                 event.reply([{'type':'text','text':msgs[0]+"類："+data[0][0].recomHead},
+//                             {'type':'text','text':msgs[1]+"類："+data[1][0].recomHead},
+//                             {'type':'text','text':msgs[2]+"類："+data[2][0].recomHead},
+//                             {'type':'text','text':msgs[3]+"類："+data[3][0].recomHead}
+//                 ]);
+//         });
           
-    }      
-});
+//     }      
+// });
 
-function _pushRecommendData() {
-    for(let i = 0;i<msg.length;i++){
-        console.log('B');
-        recommend.getRecomClassList(msg[i]).then(data => { 
-            console.log('==========================>')
-            // console.log('data!!!!!!!',data[0][0])
-            this.recommendData.push(data[0][0]);
-            console.log('recommendData來瞜~~~',this.recommendData)
-            // console.log('recommendData=============>',recommendData)
-        });     
-    }
-}
+//*******try************* 
+//--------------------------------
+// 機器人接受訊息的處理
+//--------------------------------
+bot.on('message', function(event) {    
+    const text = event.message.text;
+    if (text == "本週推薦") {
+            
+        recommend.getFourRecomClassList().then(data => {  
+            if (data == -1){
+                event.reply('找不到資料');
+            }else if(data == -9){                    
+                event.reply('執行錯誤');
+            }else{
+                let msg = [];
+
+                //準備食物卡片樣式
+                data.forEach(item => {
+                    msg.push({
+                        "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.photo,
+                        "imageBackgroundColor": "#FFFFFF",
+                        "title": item.recomHead,
+                        "text": item.recomCont,
+                        "actions": [
+                            {
+                                "type": "postback",
+                                "label": "1顆星",
+                                "data": item.id + "&1"
+                            },
+                            {
+                                "type": "postback",
+                                "label": "2顆星",
+                                "data": item.id + "&2"
+                            },
+                            {
+                                "type": "postback",
+                                "label": "3顆星",
+                                "data": item.id + "&3"
+                            }
+                        ]
+                    });                        
+                });
+
+                //將訊息推給所有使用者
+                bot.push(
+                    allUsers, {
+                    "type": "template",
+                    "altText": "這是一個輪播樣板",
+                    "template": {
+                        "type": "carousel",
+                        "columns":msg
+                    },
+                    "imageAspectRatio": "rectangle",
+                    "imageSize": "cover"    
+                });  
+            }  
+        })  
+    
+    };
+});
 //--------------------------------
 
 
