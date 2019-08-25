@@ -263,12 +263,25 @@ var getFourRecomClassList = async function (recomClass,memID) {
     }, (error) => {
         RecommendMovie = undefined;
     });
+
+    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['music'])
+    .then((data) => {
+        
+        if (!data.rows) {
+            RecommendMusic = undefined;
+        } else {
+            RecommendMusic = data.rows;
+        }
+    }, (error) => {
+        RecommendMusic = undefined;
+    });
     
     
     
     
     
     result[0] = RecommendMovie;
+    result[1] = RecommendMusic;
     // result[1] = RecommendMusic;
     
 
