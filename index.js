@@ -92,11 +92,12 @@ bot.on('message',async function (event) {
                 // console.log('data!!!!!!!',data[0][0])
                 recommendData.push(data[0][0]);
                 console.log('recommendData',recommendData)
+                event.reply(recommendData)
                 // console.log('recommendData=============>',recommendData)
             }); 
         })
 
-    console.log('recommendDataOutside',this.recommendData)
+    // console.log('recommendDataOutside',this.recommendData)
         // console.log(data[0][0].recomClass);
         // console.log(data[0][0].recomHead);
         // console.log(data[0][0].recomCont);
