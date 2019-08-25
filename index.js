@@ -166,9 +166,9 @@ bot.on('message', function(event) {
                         ]
                     }); 
                     
-                    console.log("msg!!!!!!",msg);
+                    
                 });
-
+                console.log("msg!!!!!!",msg);
                 //將訊息推給所有使用者
                 bot.push(
                     {
