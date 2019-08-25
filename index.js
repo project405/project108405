@@ -131,7 +131,7 @@ bot.on('message', function(event) {
     event.source.profile().then(
         function (profile) {  
             const text = event.message.text;
-            const userId = profile.userId;
+            // const userId = profile.userId;
             if (text == "本週推薦") {
                 recommend.getFourRecomClassList().then(data => {  
                     if (data == -1){
