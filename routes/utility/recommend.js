@@ -240,6 +240,208 @@ var getRecomClassList = async function (recomClass,memID) {
 
     return result;
 }
+//***************************** */
+//==============================
+//---- getFourRecomClassList () ----
+//==============================
+//---------  getFourRecomClassList() -------------
+var getFourRecomClassList = async function (recomClass,memID) {
+    var recommendData = [];
+    var checkAuthority;
+    var imgs = [] ;
+    var result = [];
+    // -----------  取得文章清單 --------------
+    await sql('SELECT * FROM "recommendListDataView" WHERE "recomClass" = $1', [recomClass])
+        .then((data) => {
+          if(!data.rows){
+            recommendData = undefined ;
+          }else{
+            recommendData = data.rows ;
+          }
+        }, (error) => {
+            recommendData = undefined ;
+        });
+
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+
+    //----------- 取得照片 ----------- 
+    await sql('SELECT "recomNum" , "imgName" FROM "image"')
+    .then((data) => {
+        if (!data.rows) {
+            imgs = undefined;
+        } else {
+            imgs = data.rows;
+        }
+    }, (error) => {
+        imgs = undefined;
+    });
+
+    result[0] = recommendData;
+    result[1] = [memID];
+    result[2] = checkAuthority;
+    result[3] = imgs ; 
+
+    return result;
+}
+//=========================================
+//------ get_four_class_recom (start)------
+//=========================================
+
+//---------  getRecomMovie() -------------
+var getRecomMovie = async function (memID) {
+    var RecommendMovie = [];
+    var checkAuthority;
+    var result = [];
+    // -----------  取得文章清單 --------------
+    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['movie'])
+        .then((data) => {
+            for (let i = 0; i < data.rows.length; i++) {
+                if (data.rows[i].recomClass == 'movie') {
+                    data.rows[i].recomClass = '電影';
+                }
+            }
+            // console.log("data=", data.rows);
+            RecommendMovie = data.rows;
+        }, (error) => {
+            RecommendMovie = null;
+        });
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+    result[0] = RecommendMovie;
+    result[1] = [memID];
+    result[2] = checkAuthority;
+
+    return result;
+
+
+}
+
+//---------  getRecomMusic() -------------
+var getRecomMusic = async function (memID) {
+    var RecommendMusic = [];
+    var checkAuthority;
+    var result = [];
+    // -----------  取得文章清單 --------------
+    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['music'])
+        .then((data) => {
+            for (let i = 0; i < data.rows.length; i++) {
+                if (data.rows[i].recomClass == 'music') {
+                    data.rows[i].recomClass = '音樂';
+                }
+            }
+            // console.log("data=", data.rows);
+            RecommendMusic = data.rows;
+        }, (error) => {
+            RecommendMusic = null;
+        });
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+    result[0] = RecommendMusic;
+    result[1] = [memID];
+    result[2] = checkAuthority;
+
+    return result;
+
+}
+//---------  getRecomBook() --------------
+var getRecomBook = async function (memID) {
+    var RecommendBook = [];
+    var checkAuthority;
+    var result = [];
+    // -----------  取得文章清單 --------------
+    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['book'])
+        .then((data) => {
+            for (let i = 0; i < data.rows.length; i++) {
+                if (data.rows[i].recomClass == 'book') {
+                    data.rows[i].recomClass = '書籍';
+                }
+            }
+            // console.log("data=", data.rows);
+            RecommendBook = data.rows;
+        }, (error) => {
+            RecommendBook = null;
+        });
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+    result[0] = RecommendBook;
+    result[1] = [memID];
+    result[2] = checkAuthority;
+
+    return result;
+
+}
+
+//-------  getRecomExhibition() ----------
+var getRecomExhibition = async function (memID) {
+    var RecommendExhibition = [];
+    var checkAuthority;
+    var result = [];
+    // -----------  取得文章清單 --------------
+    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['exhibition'])
+        .then((data) => {
+            for (let i = 0; i < data.rows.length; i++) {
+                if (data.rows[i].recomClass == 'exhibition') {
+                    data.rows[i].recomClass = '展覽';
+                }
+            }
+            // console.log("data=", data.rows);
+            RecommendExhibition = data.rows;
+        }, (error) => {
+            RecommendExhibition = null;
+        });
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+            console.log("Authority=", checkAuthority);
+        } else {
+            checkAuthority = undefined;
+            console.log("Authority=", checkAuthority);
+        }
+    })
+    result[0] = RecommendExhibition;
+    result[1] = [memID];
+    result[2] = checkAuthority;
+
+    return result;
+
+}
+
+
+
 
 //=========================================
 //---------  addRecommendLike() -----------
@@ -274,5 +476,6 @@ var delRecommendLike = async function (memID, recomNum) {
 module.exports = {
     getRecommendList, getOneRecommend,
     getRecomClassList,
-    addRecommendLike, delRecommendLike
+    addRecommendLike, delRecommendLike,
+    getFourRecomClassList
 }
