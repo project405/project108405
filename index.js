@@ -129,6 +129,7 @@ bot.on('postback', function(event) {
 //--------------------------------
 bot.on('message', function(event) {    
     const text = event.message.text;
+    const userId = profile.userId;
     if (text == "本週推薦") {
         recommend.getFourRecomClassList().then(data => {  
             if (data == -1){
@@ -168,7 +169,7 @@ bot.on('message', function(event) {
 
                 //將訊息推給所有使用者
                 bot.push(
-                    {
+                    userId, {
                     "type": "template",
                     "altText": "這是一個輪播樣板",
                     "template": {
