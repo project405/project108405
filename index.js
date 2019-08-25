@@ -99,11 +99,13 @@ bot.on('message',async function (event) {
 
         recommend.getFourRecomClassList().then(data =>{
                 console.log(data);
+                recommendData.push(data);
         });
 
 
 
-    // console.log('recommendDataOutside',this.recommendData)
+
+        console.log('recommendDataOutside',this.recommendData)
         // console.log(data[0][0].recomClass);
         // console.log(data[0][0].recomHead);
         // console.log(data[0][0].recomCont);
