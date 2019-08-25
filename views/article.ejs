@@ -471,6 +471,7 @@
             var img = [];
             var replyCont = [];
             var artiData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
+            alert(artiData)
             // 取得內容
             artiData.forEach(function (element) {
                 replyCont.push(element.innerText);
@@ -480,7 +481,7 @@
             formData.append('replyCont', replyCont);
 
             $.ajax({
-                url: '/article/post',
+                url: '/article/reply',
                 type: 'POST',
                 dataType: 'TEXT',
                 data: formData,

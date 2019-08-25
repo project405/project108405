@@ -102,38 +102,29 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
             }
         }
         if (isRender) {
-            if (artiHead == 'undefined' || artiCont == '') {
-                if (req.body.userImg != 'undefined') {
-                    for (var i = 0; i < imgData.length; i++) {
-                        fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
-                    }
+            if (req.body.userImg == 'undefined') {
+                for (var i = 0; i < imgData.length; i++) {
+                    fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
                 }
-                res.send("標題及內容不可為空，請重新輸入");
-            } else {
-                if (req.body.userImg == 'undefined') {
-                    for (var i = 0; i < imgData.length; i++) {
-                        fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
-                    }
-                }
-                member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData).then(data => {
-                    if (data == 0) {
-                        console.log("發文成功");
-                        res.send("發文成功");
-                    } else {
-                        for (var i = 0; i < imgData.length; i++) {
-                            fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
-                        }
-                        console.log("發文失敗");
-                        res.send("發文失敗");
-                    }
-                })
             }
+            member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData).then(data => {
+                if (data == 0) {
+                    console.log("留言成功");
+                    res.send("留言成功");
+                } else {
+                    for (var i = 0; i < imgData.length; i++) {
+                        fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                    }
+                    console.log("留言失敗");
+                    res.send("留言失敗");
+                }
+            })
         } else {
             for (var i = 0; i < imgData.length; i++) {
                 fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
             }
-            console.log("發文失敗");
-            res.send("發文失敗");
+            console.log("留言失敗");
+            res.send("留言失敗");
         }
     }
 
