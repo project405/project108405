@@ -145,7 +145,7 @@ bot.on('message', function(event) {
                         data.forEach(item => {
                                 
                             msg.push({
-                                "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item[0].picture,
+                                "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg" ,
                                 "imageBackgroundColor": "#FFFFFF",
                                 "title": item[0].recomHead,
                                 "text": item[0].recomCont,
