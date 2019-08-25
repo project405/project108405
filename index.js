@@ -101,7 +101,7 @@ bot.on('message',async function (event) {
                 console.log("data!!!!!!",data[0]);
                 console.log(msgs[0])
                 event.reply({'type':'text','text':msgs[0]+"類："+data[0][0].recomHead},
-                            {'type':'text','text':msgs[1]+"類："+data[0][1].recomHead}
+                            {'type':'text','text':msgs[1]+"類："+data[1][0].recomHead}
                 );
         });
 
