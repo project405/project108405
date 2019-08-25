@@ -250,6 +250,9 @@ var getFourRecomClassList = async function (recomClass,memID) {
     
     var RecommendMovie = [];
     var RecommendMusic = [];
+    var RecommendBook = [];
+    var RecommendExhibition = [];
+
     var result = [];
     // ----------- 取得文章清單 --------------
     await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['movie'])
@@ -275,6 +278,30 @@ var getFourRecomClassList = async function (recomClass,memID) {
     }, (error) => {
         RecommendMusic = undefined;
     });
+
+    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['book'])
+    .then((data) => {
+        
+        if (!data.rows) {
+            RecommendBook = undefined;
+        } else {
+            RecommendBook = data.rows;
+        }
+    }, (error) => {
+        RecommendBook = undefined;
+    });
+
+    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['exhibition'])
+    .then((data) => {
+        
+        if (!data.rows) {
+            RecommendExhibition = undefined;
+        } else {
+            RecommendExhibition = data.rows;
+        }
+    }, (error) => {
+        RecommendExhibition = undefined;
+    });
     
     
     
@@ -282,6 +309,8 @@ var getFourRecomClassList = async function (recomClass,memID) {
     
     result[0] = RecommendMovie;
     result[1] = RecommendMusic;
+    result[2] = RecommendBook;
+    result[3] = RecommendExhibition;
     // result[1] = RecommendMusic;
     
 
