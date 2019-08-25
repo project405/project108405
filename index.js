@@ -84,18 +84,24 @@ bot.on('message',async function (event) {
     //呼叫API取得本週推薦
     if (text == "本週推薦") {
         
-        msgs.map((msg,index) => {
+        // msgs.map((msg,index) => {
             
-            console.log(msg)
-            recommend.getRecomClassList(msg).then(data => { 
-                console.log('==========================>')
-                // console.log('data!!!!!!!',data[0][0])
-                recommendData.push(data[0][0]);
-                console.log('recommendData',recommendData)
-                event.reply({'type':'text', 'text':recommendData[0]});
-                // console.log('recommendData=============>',recommendData)
-            }); 
-        })
+        //     console.log(msg)
+        //     recommend.getRecomClassList(msg).then(data => { 
+        //         console.log('==========================>')
+        //         // console.log('data!!!!!!!',data[0][0])
+        //         recommendData.push(data[0][0]);
+        //         console.log('recommendData',recommendData)
+        //         event.reply({'type':'text', 'text':recommendData[0]});
+        //         // console.log('recommendData=============>',recommendData)
+        //     }); 
+        // })
+
+        recommend.getFourRecomClassList().then(data =>{
+                console.log(data);
+        });
+
+
 
     // console.log('recommendDataOutside',this.recommendData)
         // console.log(data[0][0].recomClass);

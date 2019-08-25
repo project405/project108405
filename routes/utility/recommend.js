@@ -245,53 +245,37 @@ var getRecomClassList = async function (recomClass,memID) {
 //---- getFourRecomClassList () ----
 //==============================
 //---------  getFourRecomClassList() -------------
-// var getFourRecomClassList = async function (recomClass,memID) {
-//     var recommendData = [];
-//     var checkAuthority;
-//     var imgs = [] ;
-//     var result = [];
-//     // -----------  取得文章清單 --------------
-//     await sql('SELECT * FROM "recommendListDataView" WHERE "recomClass" = $1', [recomClass])
-//         .then((data) => {
-//           if(!data.rows){
-//             recommendData = undefined ;
-//           }else{
-//             recommendData = data.rows ;
-//           }
-//         }, (error) => {
-//             recommendData = undefined ;
-//         });
+var getFourRecomClassList = async function (recomClass,memID) {
+    //--------- getRecomMovie() -------------
+    
+    var RecommendMovie = [];
+    var RecommendMusic = [];
+    var result = [];
+    // ----------- 取得文章清單 --------------
+    await sql('SELECT * FROM "recommend" WHERE "recomClass" = $1 ', ['movie'])
+    .then((data) => {
+        
+        if (!data.rows) {
+            RecommendMovie = undefined;
+        } else {
+            RecommendMovie = data.rows;
+        }
+    }, (error) => {
+        RecommendMovie = undefined;
+    });
+    
+    
+    
+    
+    
+    result[0] = RecommendMovie;
+    // result[1] = RecommendMusic;
+    
 
-//     //取得權限
-//     await member.checkAuthority(memID).then(data => {
-//         if (data != undefined) {
-//             checkAuthority = data;
-//             console.log("Authority=", checkAuthority);
-//         } else {
-//             checkAuthority = undefined;
-//             console.log("Authority=", checkAuthority);
-//         }
-//     })
+    return result;
+    
 
-//     //----------- 取得照片 ----------- 
-//     await sql('SELECT "recomNum" , "imgName" FROM "image"')
-//     .then((data) => {
-//         if (!data.rows) {
-//             imgs = undefined;
-//         } else {
-//             imgs = data.rows;
-//         }
-//     }, (error) => {
-//         imgs = undefined;
-//     });
-
-//     result[0] = recommendData;
-//     result[1] = [memID];
-//     result[2] = checkAuthority;
-//     result[3] = imgs ; 
-
-//     return result;
-// }
+}
 
 
 //=========================================
@@ -326,6 +310,6 @@ var delRecommendLike = async function (memID, recomNum) {
 
 module.exports = {
     getRecommendList, getOneRecommend,
-    getRecomClassList,
+    getRecomClassList,getFourRecomClassList,
     addRecommendLike, delRecommendLike
 }
