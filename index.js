@@ -94,10 +94,9 @@ bot.on('message',async function (event) {
                 console.log('recommendData',recommendData)
                 // console.log('recommendData=============>',recommendData)
             }); 
-            console.log('recommendDataOutside',recommendData)
         })
 
-   
+    console.log('recommendDataOutside',this.recommendData)
         // console.log(data[0][0].recomClass);
         // console.log(data[0][0].recomHead);
         // console.log(data[0][0].recomCont);
