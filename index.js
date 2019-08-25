@@ -112,7 +112,7 @@ bot.on('message', function(event) {
 
                 //準備食物卡片樣式
                 data.forEach(item => {
-                        console.log(item)
+                        console.log(item[0])
                 //     msg.push({
                 //         "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.picture,
                 //         "imageBackgroundColor": "#FFFFFF",
