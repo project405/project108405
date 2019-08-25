@@ -100,9 +100,9 @@ bot.on('message',async function (event) {
         recommend.getFourRecomClassList().then(data =>{
                 console.log("data!!!!!!",data[1][0]);
                 // console.log(msgs[0])
-                event.reply({'type':'text','text':msgs[0]+"類："+data[0][0].recomHead},
+                event.reply([{'type':'text','text':msgs[0]+"類："+data[0][0].recomHead},
                             {'type':'text','text':msgs[1]+"類："+data[1][0].recomHead}
-                );
+                ]);
         });
 
 
