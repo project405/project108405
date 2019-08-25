@@ -164,7 +164,9 @@ bot.on('message', function(event) {
                                 "data": item[0].recomNum + "&3"
                             }
                         ]
-                    });                        
+                    }); 
+                    
+                    console.log("msg!!!!!!",msg);
                 });
 
                 //將訊息推給所有使用者
