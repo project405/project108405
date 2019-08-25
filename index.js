@@ -112,29 +112,30 @@ bot.on('message', function(event) {
 
                 //準備食物卡片樣式
                 data.forEach(item => {
-                    msg.push({
-                        "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.picture,
-                        "imageBackgroundColor": "#FFFFFF",
-                        "title": item.recomHead,
-                        "text": item.recomCont,
-                        "actions": [
-                            {
-                                "type": "postback",
-                                "label": "1顆星",
-                                "data": item.recomNum + "&1"
-                            },
-                            {
-                                "type": "postback",
-                                "label": "2顆星",
-                                "data": item.recomNum + "&2"
-                            },
-                            {
-                                "type": "postback",
-                                "label": "3顆星",
-                                "data": item.recomNum + "&3"
-                            }
-                        ]
-                    });                        
+                        console.log(item.recomHead)
+                //     msg.push({
+                //         "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.picture,
+                //         "imageBackgroundColor": "#FFFFFF",
+                //         "title": item.recomHead,
+                //         "text": item.recomCont,
+                //         "actions": [
+                //             {
+                //                 "type": "postback",
+                //                 "label": "1顆星",
+                //                 "data": item.recomNum + "&1"
+                //             },
+                //             {
+                //                 "type": "postback",
+                //                 "label": "2顆星",
+                //                 "data": item.recomNum + "&2"
+                //             },
+                //             {
+                //                 "type": "postback",
+                //                 "label": "3顆星",
+                //                 "data": item.recomNum + "&3"
+                //             }
+                //         ]
+                //     });                        
                 });
 
                 //將訊息推給所有使用者
