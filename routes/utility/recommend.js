@@ -476,6 +476,5 @@ var delRecommendLike = async function (memID, recomNum) {
 module.exports = {
     getRecommendList, getOneRecommend,
     getRecomClassList,
-    addRecommendLike, delRecommendLike,
-    getFourRecomClassList
+    addRecommendLike, delRecommendLike
 }
