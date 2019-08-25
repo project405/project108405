@@ -99,7 +99,7 @@ bot.on('message',async function (event) {
 
         recommend.getFourRecomClassList().then(data =>{
                 console.log("data!!!!!!",data);
-                recommendData.push("movie",data[0]);
+                console.log("movie",data[0]);
         });
 
 
