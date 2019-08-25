@@ -121,17 +121,17 @@ bot.on('message', function(event) {
                             {
                                 "type": "postback",
                                 "label": "1顆星",
-                                "data": item.id + "&1"
+                                "data": item.recomNum + "&1"
                             },
                             {
                                 "type": "postback",
                                 "label": "2顆星",
-                                "data": item.id + "&2"
+                                "data": item.recomNum + "&2"
                             },
                             {
                                 "type": "postback",
                                 "label": "3顆星",
-                                "data": item.id + "&3"
+                                "data": item.recomNum + "&3"
                             }
                         ]
                     });                        
