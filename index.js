@@ -89,9 +89,9 @@ bot.on('message',async function (event) {
             console.log(msg)
             recommend.getRecomClassList(msg).then(data => { 
                 console.log('==========================>')
-                // console.log('data!!!!!!!',data[0][0])
-                recommendData.push(data);
-                console.log('recommendData',recommendData)
+                console.log('data!!!!!!!',data[0][0])
+                // recommendData.push(data);
+                // console.log('recommendData',recommendData)
                 // console.log('recommendData=============>',recommendData)
             }); 
         })
