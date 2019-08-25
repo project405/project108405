@@ -143,7 +143,7 @@ bot.on('message', function(event) {
 
                         //準備食物卡片樣式
                         data.forEach(item => {
-                                console.log(item[0].recomHead)
+                                
                             msg.push({
                                 "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item[0].picture,
                                 "imageBackgroundColor": "#FFFFFF",
@@ -173,7 +173,7 @@ bot.on('message', function(event) {
                         console.log("msg!!!!!!",msg);
                         //將訊息推給所有使用者
                         bot.push(
-                            userId, {
+                            {
                             "type": "template",
                             "altText": "這是一個輪播樣板",
                             "template": {
