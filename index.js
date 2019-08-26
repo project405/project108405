@@ -182,8 +182,7 @@ bot.on('message', function(event) {
                             },
                             "imageAspectRatio": "rectangle",
                             "imageSize": "cover"    
-                            }
-                        );  
+                        });  
                     }  
                 })  
             }
