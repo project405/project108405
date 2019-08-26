@@ -128,8 +128,8 @@ bot.on('postback', function(event) {
 // 機器人接受訊息的處理
 //--------------------------------
 bot.on('message', function(event) {  
-    // event.source.profile().then(
-        // function (profile) {  
+    event.source.profile().then(
+        function (profile) {  
             const text = event.message.text;
             // const userId = profile.userId;
             if (text == "本週推薦") {
@@ -149,23 +149,23 @@ bot.on('message', function(event) {
                                 "imageBackgroundColor": "#FFFFFF",
                                 "title": item[0].recomHead,
                                 "text": item[0].recomCont,
-                                "actions": [
-                                    {
-                                        "type": "postback",
-                                        "label": "1顆星",
-                                        "data": item[0].recomNum + "&1"
-                                    },
-                                    {
-                                        "type": "postback",
-                                        "label": "2顆星",
-                                        "data": item[0].recomNum + "&2"
-                                    },
-                                    {
-                                        "type": "postback",
-                                        "label": "3顆星",
-                                        "data": item[0].recomNum + "&3"
-                                    }
-                                ]
+                                // "actions": [
+                                //     {
+                                //         "type": "postback",
+                                //         "label": "1顆星",
+                                //         "data": item[0].recomNum + "&1"
+                                //     },
+                                //     {
+                                //         "type": "postback",
+                                //         "label": "2顆星",
+                                //         "data": item[0].recomNum + "&2"
+                                //     },
+                                //     {
+                                //         "type": "postback",
+                                //         "label": "3顆星",
+                                //         "data": item[0].recomNum + "&3"
+                                //     }
+                                // ]
                             }); 
                             
                             
@@ -187,8 +187,8 @@ bot.on('message', function(event) {
                     }  
                 })  
             }
-        // }    
-    // );
+        }    
+    );
 });
 //--------------------------------
 
