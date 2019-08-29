@@ -7,7 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 
 var session = require('express-session');
-
+var signUp = require('./routes/utility/signUp');
 //=========================================
 //---------  article router ------------
 //=========================================
@@ -73,9 +73,52 @@ var RecomMovieRouter = require('./routes/recommend/recomMovie');
 var RecomMusicRouter = require('./routes/recommend/recomMusic');
 var RecomBookRouter = require('./routes/recommend/recomBook');
 var RecomExhibitionRouter = require('./routes/recommend/recomExhibition');
+
 var CheckStatus = require('./routes/checkStatus');
+var GoogleLogIn = require('./routes/googleLogIn');
 
 var app = express();
+
+//---------------------------------------------
+// 使用passport-google-oauth2套件進行認證
+//---------------------------------------------
+var passport = require('passport');
+
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
+
+//載入google oauth2
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+//填入自己在google cloud platform建立的憑證
+passport.use(
+    new GoogleStrategy({
+        clientID: '535503110825-vsqohis8p2itidvaqii3akbmha3kluie.apps.googleusercontent.com', 
+        clientSecret: 'vx7elBl3NGlZcnNPFV3QNH7l',
+        callbackURL: "http://localhost:3000/auth/google/callback" 
+    },
+    function(accessToken, refreshToken, profile, done) {
+        if (profile) {
+            return done(null, profile);
+        }else {
+            return done(null, false);
+        }
+    }
+));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -155,9 +198,9 @@ app.use('/collection/article/music', colleArtiMusicRouter);
 app.use('/collection/article/book', colleArtiBookRouter);
 app.use('/collection/article/exhibition', colleArtiExhibitionRouter);
 
-//=========================================
-//---------  recommend use ------------
-//=========================================
+// =========================================
+// ---------  recommend use ------------
+// =========================================
 app.use('/recommendList', recommendListRouter);
 app.use('/oneRecommend', oneRecommendRouter);
 // -------------- four Class ----------------
@@ -167,8 +210,49 @@ app.use('/recommendList/book', RecomBookRouter);
 app.use('/recommendList/exhibition', RecomExhibitionRouter);
 app.use('/checkStatus',CheckStatus);
 
+app.use('/googleLogIn' , GoogleLogIn);
 
 
+//---------------------------------------------
+// 設定登入及登出方法內容
+//---------------------------------------------
+app.get('/user/login',
+    passport.authenticate('google', { scope: ['email', 'profile'] }));   //進行google第三方認證
+
+app.get('/auth/google/callback', 
+    passport.authenticate('google', { failureRedirect: '/login' }),   //導向登入失敗頁面	
+    function(req, res) {
+        // 如果登入成功, 使用者資料已存在session
+        signUp.googleCreateMember(req.session.passport.user.id);
+        console.log(req.session.passport.user.id);
+        console.log(req.session.passport.user.displayName);
+        console.log(req.session.passport.user.emails[0].value);	    
+        
+        res.redirect('/');   //導向登入成功頁面
+    });
+
+app.get('/user/logout', function(req, res){    
+    req.logout();        //將使用者資料從session移除
+    res.redirect('/');   //導向登出頁面
+});    
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  });
+  
+  // error handler
+  app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+  
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+  });
 
 
 
