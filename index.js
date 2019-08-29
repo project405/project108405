@@ -125,7 +125,37 @@ bot.on('postback', function(event) {
     });
 });
 //========================================
+//--------------------------------
+// 機器人接受回覆的處理
+//--------------------------------
+bot.on('postback', function(event) { 
+    const data = event.postback.data;
+    // const sub = data.split('&');
+    const userId = event.source.userId;
 
+    event.source.profile().then(function (profile) {
+        const userName = profile.displayName;    
+        return event.reply([
+            {
+                "type": "text",
+                "text": "使用者編號:" + userId
+            },
+            {
+                "type": "text",
+                "text": "姓名:" + userName
+            },
+            // {
+            //     "type": "text",
+            //     "text": "餐點編號:" + sub[0]
+            // },
+            {
+                "type": "text",
+                "text": data
+
+            }            
+        ]);     
+    });
+});
 
 //========================================
 // 機器人接受訊息的處理
@@ -133,7 +163,7 @@ bot.on('postback', function(event) {
 bot.on('message', function(event) {
 	event.reply({
         "type": "template",
-        "altText": "這是一個輪播樣板",
+        "altText": "您好！！！",
         "template": {
             "type": "carousel",
             "columns": [
@@ -198,6 +228,88 @@ bot.on('message', function(event) {
             "imageSize": "cover"
         }
     });
+});
+
+
+
+//--------------------------------
+// 機器人接受訊息的處理
+//--------------------------------
+bot.on('message', function(event) {    
+    event.source.profile().then(
+        function (profile) {
+            //取得使用者資料
+            const userName = profile.displayName;
+            const userId = profile.userId;
+
+            //存所有成員的id
+            let allUsers = [];
+
+            //呼叫API取得所有成員資料
+            foods.fetchAllMember().then(data => {
+                if (data == -1){
+                    event.reply('找不到資料');
+                }else if(data == -9){                    
+                    event.reply('執行錯誤');
+                }else{
+                    data.forEach(item => {
+                        allUsers.push(item.userid);
+                    });
+                }
+            });            
+
+            //呼叫API取得隨選食物資料
+            foods.randomSelectFoods().then(data => {  
+                if (data == -1){
+                    event.reply('找不到資料');
+                }else if(data == -9){                    
+                    event.reply('執行錯誤');
+                }else{
+                    let msg = [];
+
+                    //準備食物卡片樣式
+                    data.forEach(item => {
+                        msg.push({
+                            "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.photo,
+                            "imageBackgroundColor": "#FFFFFF",
+                            "title": item.title,
+                            "text": item.description,
+                            "actions": [
+                                {
+                                    "type": "postback",
+                                    "label": "1顆星",
+                                    "data": item.id + "&1"
+                                },
+                                {
+                                  "type": "postback",
+                                  "label": "2顆星",
+                                  "data": item.id + "&2"
+                                },
+                                {
+                                  "type": "postback",
+                                  "label": "3顆星",
+                                  "data": item.id + "&3"
+                                }
+                            ]
+                        });                        
+                    });
+
+                    //將訊息推給所有使用者
+                    bot.push(
+                        allUsers, {
+                        "type": "template",
+                        "altText": "這是一個輪播樣板",
+                        "template": {
+                            "type": "carousel",
+                            "columns":msg
+                        },
+                        "imageAspectRatio": "rectangle",
+                        "imageSize": "cover"    
+                    });  
+                }  
+            })  
+        }
+    );
 });
 
 
