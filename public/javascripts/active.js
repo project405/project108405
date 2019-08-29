@@ -18,7 +18,6 @@ $(function() {
     });
     $("input").blur(function() {
         $("div.tag").css("box-shadow", "none");
-        $("div.tag").css("box-shadow", "none");
 
     });
 });

@@ -17,6 +17,8 @@ var storage = multer.diskStorage({
         cb(null, 'public/userImg');
     },
     filename: function (req, file, cb) {
+        console.log('inthere!!!')
+
         imgName = file.originalname.substring(0, file.originalname.lastIndexOf("."));
         imgType = file.originalname.substring(file.originalname.lastIndexOf("."));
         buf = Buffer.from(imgName, 'ascii');
@@ -45,29 +47,26 @@ var upload = multer({
 //post請求
 router.post('/', upload.array('userImg', 3), function (req, res, next) {
     var memID = req.session.memID;
-    var artiHead = req.body.artiHead;
-    var artiCont = req.body.artiCont;
-    var artiClass = req.body.artiClass;
+    var replyCont = req.body.replyCont;
     console.log(req.body);
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
-    var tagData = [];
     var imgData = [];
     // console.log(req.files);
     //將所有換行符號替代成<br> 
-    artiCont = artiCont.replace(/\n/g, "<br>");
+    replyCont = replyCont.replace(/\n/g, "<br>");
 
     for (var i in req.files) {
         imgData.push(req.files[i].filename);
         console.log("files= ", req.files[i]);
-        // if (artiCont.match("\\:imgLocation") != null) {
+        // if (replyCont.match("\\:imgLocation") != null) {
         //     console.log("近來囉");
-        //     // artiCont = artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
-        //     artiCont = artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + req.files[i].filename + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
+        //     // replyCont = replyCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
+        //     replyCont = replyCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + req.files[i].filename + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
         // }
 
     }
 
-    console.log(artiCont);
+    console.log(replyCont);
     // console.log(imgData);
     // tag
     if (req.body.tag != '') {
@@ -107,7 +106,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
                     fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
                 }
             }
-            member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData).then(data => {
+            member.articlePost(memID, artiHead, replyCont, artiClass, postDateTime, imgData, tagData).then(data => {
                 if (data == 0) {
                     console.log("留言成功");
                     res.send("留言成功");
