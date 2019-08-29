@@ -163,12 +163,12 @@ bot.on('postback', function(event) {
 bot.on('message', function(event) {
 	event.reply({
         "type": "template",
-        "altText": "您好！！！",
+        "altText": "您好！！！這是本週新推薦！",
         "template": {
             "type": "carousel",
             "columns": [
                 {
-                  "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg",
+                  "thumbnailImageUrl": "http://weiting.nctu.me/imgs/recommend/movie1.jpg",
                   "imageBackgroundColor": "#FFFFFF",
                   "title": "星夜",
                   "text": "荷蘭後印象派畫家文森特·梵谷於1890年在法國聖雷米的一家精神病院裏創作的一幅著名油畫",
