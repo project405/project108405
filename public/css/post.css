@@ -43,7 +43,7 @@ div.post {
     }
 } */
 
-input.titleInput,
+div.titleInput,
 div.postInput,
 textarea.introInput {
     width: 100%;
@@ -84,7 +84,7 @@ input.titleInput:before {
     opacity: 0.65;
 } */
 
-input.titleInput:focus,
+div.titleInput:focus,
 div.postInput:focus,
 textarea.introInput:focus {
     outline: none;
@@ -185,6 +185,7 @@ span.tag {
     content: "\f057";
     font-weight: 800;
     font-size: 15px;
+    margin-left: 4px;
 }
 
 

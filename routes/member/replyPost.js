@@ -14,7 +14,7 @@ var isRender = true; //判斷頁面是否有回傳過
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'public/userImg');
+        cb(null, 'public/userImg/replyImg');
     },
     filename: function (req, file, cb) {
         console.log('inthere!!!')
@@ -76,7 +76,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
     if (memID == undefined || memID == null) {
         if (req.body.userImg != 'undefined') {
             for (var i = 0; i < imgData.length; i++) {
-                fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                fs.unlinkSync('public/userImg/replyImg' + imgData[i]); //刪除檔案
             }
         }
         res.send("請進行登入");
@@ -87,7 +87,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
             if (req.file.size > maxSize) {
                 isRender = false;
                 for (var i = 0; i < imgData.length; i++) {
-                    fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                    fs.unlinkSync('public/userImg/replyImg' + imgData[i]); //刪除檔案
                 }
                 res.send("圖片過大，僅接受1M以下的圖片");
             }
@@ -95,7 +95,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
             if ((imgType != '.png' && imgType != '.jpg' && imgType != '.jpeg' && imgType != '.jfif') && isRender) {
                 isRender = false;
                 for (var i = 0; i < imgData.length; i++) {
-                    fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                    fs.unlinkSync('public/userImg/replyImg' + imgData[i]); //刪除檔案
                 }
                 res.send("只能上傳.jpg , .png , .jpeg , .jfif 類型的檔案");
             }
@@ -103,7 +103,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
         if (isRender) {
             if (req.body.userImg == 'undefined') {
                 for (var i = 0; i < imgData.length; i++) {
-                    fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                    fs.unlinkSync('public/userImg/replyImg' + imgData[i]); //刪除檔案
                 }
             }
             member.articlePost(memID, artiHead, replyCont, artiClass, postDateTime, imgData, tagData).then(data => {
@@ -112,7 +112,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
                     res.send("留言成功");
                 } else {
                     for (var i = 0; i < imgData.length; i++) {
-                        fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                        fs.unlinkSync('public/userImg/replyImg' + imgData[i]); //刪除檔案
                     }
                     console.log("留言失敗");
                     res.send("留言失敗");
@@ -120,7 +120,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
             })
         } else {
             for (var i = 0; i < imgData.length; i++) {
-                fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                fs.unlinkSync('public/userImg/replyImg' + imgData[i]); //刪除檔案
             }
             console.log("留言失敗");
             res.send("留言失敗");
