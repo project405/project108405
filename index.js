@@ -183,12 +183,13 @@ bot.on('message', function(event) {
                           {
                               "type": "postback",
                               "label": "知道更多",
-                              "data": "recommend/movie1"
+                              "data": "movie1.content"
                           },
                           {
-                              "type": "postback",
+                            //-------!需克服收藏資料寫入資料庫的問題
+                              "type": "text",
                               "label": "新增至我的收藏",
-                              "data": "action=add&itemid=111"
+                              "data": "收藏成功"
                           },
                           {
                               "type": "uri",
