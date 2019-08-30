@@ -109,24 +109,24 @@ bot.on('postback', function(event) {
         console.log(index)
         recommend.getRecomClassList(item).then(d =>{
             console.log(d[0]);
-            const data = event.postback.data;
-            //存放recommend/movie1.content
-            const recommendData = d[0][0].recomCont;
+            // const data = event.postback.data;
+            // //存放recommend/movie1.content
+            // const recommendData = d[0][0].recomCont;
     
-            event.source.profile().then(function (profile) {
-                const userName = profile.displayName;
+            // event.source.profile().then(function (profile) {
+            //     const userName = profile.displayName;
                 
-                return event.reply([
-                    {
-                        "type": "text",
-                        "text": data
-                    },
-                    {
-                        "type": "text",
-                        "text": recommendData
-                    }
-                ]);		
-            });
+            //     return event.reply([
+            //         {
+            //             "type": "text",
+            //             "text": data
+            //         },
+            //         {
+            //             "type": "text",
+            //             "text": recommendData
+            //         }
+            //     ]);		
+            // });
         });
     });
     
