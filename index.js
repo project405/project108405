@@ -128,7 +128,7 @@ bot.on('postback', function(event) {
                     }
                 ]);		
             });
-        // });
+        });
     // });
     
 });
