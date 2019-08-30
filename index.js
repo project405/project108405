@@ -183,7 +183,7 @@ bot.on('message', function(event) {
                           {
                               "type": "postback",
                               "label": "知道更多",
-                              "data": "movie1.content"
+                              "data": "movie1.title"
                           },
                           {
                             //-------!需克服收藏資料寫入資料庫的問題
