@@ -107,27 +107,29 @@ bot.on('postback', function(event) {
     var recom = recom_class.map(function(item,index){
         console.log(item)
         console.log(index)
-    });
-    recommend.getFourRecomClassList().then(d =>{
-        const data = event.postback.data;
-        //存放recommend/movie1.content
-        const recommendData = d[0][0].recomCont;
-
-        event.source.profile().then(function (profile) {
-            const userName = profile.displayName;
-            
-            return event.reply([
-                {
-                    "type": "text",
-                    "text": data
-                },
-                {
-                    "type": "text",
-                    "text": recommendData
-                }
-            ]);		
+        recommend.getRecomClassList(item).then(d =>{
+            console.log(d);
+            const data = event.postback.data;
+            //存放recommend/movie1.content
+            const recommendData = d[0][0].recomCont;
+    
+            event.source.profile().then(function (profile) {
+                const userName = profile.displayName;
+                
+                return event.reply([
+                    {
+                        "type": "text",
+                        "text": data
+                    },
+                    {
+                        "type": "text",
+                        "text": recommendData
+                    }
+                ]);		
+            });
         });
     });
+    
 });
 //========================================
 //--------------------------------
