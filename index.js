@@ -103,7 +103,10 @@ bot.on('message', function(event) {
 //========================================
 bot.on('postback', function(event) { 
     const data = event.postback.data;
-    const userId = event.source.userId;
+    // const userId = event.source.userId;
+
+    //存放recommend/movie1.content
+    const recommendData = event.postback.data;
 
     event.source.profile().then(function (profile) {
         const userName = profile.displayName;
@@ -115,11 +118,7 @@ bot.on('postback', function(event) {
             },
             {
                 "type": "text",
-                "text": userId
-            },
-            {
-                "type": "text",
-                "text": userName
+                "text": recommendData
             }
         ]);		
     });
@@ -174,7 +173,7 @@ bot.on('message', function(event) {
                     {
                       "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/movie1.jpg#",
                       "title": "recommend/movie1",
-                      "text": "recommend/movie1.content",
+                      "text": "movie1推薦介紹",
                       "defaultAction": {
                           "type": "uri",
                           "label": "知道更多",
@@ -201,7 +200,7 @@ bot.on('message', function(event) {
                     {
                       "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/music1.jpg#",
                       "title": "recommend/music1",
-                      "text": "recommend/movie1.content",
+                      "text": "rmovie1推薦介紹",
                       "defaultAction": {
                           "type": "uri",
                           "label": "詳細資料",
@@ -228,7 +227,7 @@ bot.on('message', function(event) {
                     {
                         "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/book1.jpg#",
                         "title": "recommend/book1",
-                        "text": "recommend/book1.content",
+                        "text": "movie1推薦介紹",
                         "defaultAction": {
                             "type": "uri",
                             "label": "詳細資料",
@@ -255,7 +254,7 @@ bot.on('message', function(event) {
                       {
                         "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/exhibition1.jpg#",
                         "title": "recommend/exhibition1",
-                        "text": "recommend/exhibition1.content",
+                        "text": "movie1推薦介紹",
                         "defaultAction": {
                             "type": "uri",
                             "label": "詳細資料",
