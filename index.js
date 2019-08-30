@@ -104,23 +104,24 @@ bot.on('message', function(event) {
 bot.on('postback', function(event) { 
     const data = event.postback.data;
     // const userId = event.source.userId;
+    recommend.getFourRecomClassList().then(data =>{
+        //存放recommend/movie1.content
+        const recommendData = data[0][0].recomCont;
 
-    //存放recommend/movie1.content
-    const recommendData = '推薦內容';
-
-    event.source.profile().then(function (profile) {
-        const userName = profile.displayName;
-		
-        return event.reply([
-            {
-                "type": "text",
-                "text": data
-            },
-            {
-                "type": "text",
-                "text": recommendData
-            }
-        ]);		
+        event.source.profile().then(function (profile) {
+            const userName = profile.displayName;
+            
+            return event.reply([
+                {
+                    "type": "text",
+                    "text": data
+                },
+                {
+                    "type": "text",
+                    "text": recommendData
+                }
+            ]);		
+        });
     });
 });
 //========================================
