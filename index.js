@@ -211,7 +211,7 @@ bot.on('message', function(event) {
                         {
                             "type": "postback",
                             "label": "知道更多",
-                            "data": "movie1.title"
+                            "data": "music1.title"
                         },
                         {
                           //-------!需克服收藏資料寫入資料庫的問題
@@ -239,7 +239,7 @@ bot.on('message', function(event) {
                             {
                                 "type": "postback",
                                 "label": "知道更多",
-                                "data": "movie1.title"
+                                "data": "book1.title"
                             },
                             {
                               //-------!需克服收藏資料寫入資料庫的問題
@@ -267,7 +267,7 @@ bot.on('message', function(event) {
                             {
                                 "type": "postback",
                                 "label": "知道更多",
-                                "data": "movie1.title"
+                                "data": "exhibition1.title"
                             },
                             {
                               //-------!需克服收藏資料寫入資料庫的問題
