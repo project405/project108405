@@ -102,8 +102,10 @@ bot.on('message', function(event) {
 // 機器人接受回覆的處理
 //========================================
 bot.on('postback', function(event) { 
-    
+    let recom_class = ['movie','music','book','exhibition'];
     // const userId = event.source.userId;
+    var recom = recom_class.map(item,index)
+    console.log(recom)
     recommend.getFourRecomClassList().then(d =>{
         const data = event.postback.data;
         //存放recommend/movie1.content
