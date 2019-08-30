@@ -128,34 +128,34 @@ bot.on('postback', function(event) {
 //--------------------------------
 // 機器人接受回覆的處理
 //--------------------------------
-bot.on('postback', function(event) { 
-    const data = event.postback.data;
-    // const sub = data.split('&');
-    const userId = event.source.userId;
+// bot.on('postback', function(event) { 
+//     const data = event.postback.data;
+//     // const sub = data.split('&');
+//     const userId = event.source.userId;
 
-    event.source.profile().then(function (profile) {
-        const userName = profile.displayName;    
-        return event.reply([
-            {
-                "type": "text",
-                "text": "使用者編號:" + userId
-            },
-            {
-                "type": "text",
-                "text": "姓名:" + userName
-            },
-            // {
-            //     "type": "text",
-            //     "text": "餐點編號:" + sub[0]
-            // },
-            {
-                "type": "text",
-                "text": data
+//     event.source.profile().then(function (profile) {
+//         const userName = profile.displayName;    
+//         return event.reply([
+//             {
+//                 "type": "text",
+//                 "text": "使用者編號:" + userId
+//             },
+//             {
+//                 "type": "text",
+//                 "text": "姓名:" + userName
+//             },
+//             // {
+//             //     "type": "text",
+//             //     "text": "餐點編號:" + sub[0]
+//             // },
+//             {
+//                 "type": "text",
+//                 "text": data
 
-            }            
-        ]);     
-    });
-});
+//             }            
+//         ]);     
+//     });
+// });
 
 //========================================
 // 機器人接受訊息的處理
