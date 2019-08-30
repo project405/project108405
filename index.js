@@ -217,7 +217,7 @@ bot.on('message', function(event) {
                             {
                                 "type": "postback",
                                 "label": "知道更多",
-                                "data": "music1.title"
+                                "data": data[1][0].recomHead
                             },
                             {
                               //-------!需克服收藏資料寫入資料庫的問題
@@ -245,7 +245,7 @@ bot.on('message', function(event) {
                                 {
                                     "type": "postback",
                                     "label": "知道更多",
-                                    "data": "book1.title"
+                                    "data": data[2][0].recomHead
                                 },
                                 {
                                   //-------!需克服收藏資料寫入資料庫的問題
@@ -273,7 +273,7 @@ bot.on('message', function(event) {
                                 {
                                     "type": "postback",
                                     "label": "知道更多",
-                                    "data": "exhibition1.title"
+                                    "data": data[3][0].recomHead
                                 },
                                 {
                                   //-------!需克服收藏資料寫入資料庫的問題
