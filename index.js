@@ -189,7 +189,7 @@ bot.on('message', function(event) {
                           },
                           {
                               "type": "postback",
-                              "label": "加入購物車",
+                              "label": "新增至我的收藏",
                               "data": "action=add&itemid=111"
                           },
                           {
