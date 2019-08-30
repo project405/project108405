@@ -104,8 +104,10 @@ bot.on('message', function(event) {
 bot.on('postback', function(event) { 
     let recom_class = ['movie','music','book','exhibition'];
     // const userId = event.source.userId;
-    var recom = recom_class.map(item,index)
-    console.log(recom)
+    var recom = recom_class.map(function(item,index){
+        console.log(item)
+        console.log(index)
+    });
     recommend.getFourRecomClassList().then(d =>{
         const data = event.postback.data;
         //存放recommend/movie1.content
