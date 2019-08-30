@@ -173,7 +173,7 @@ bot.on('message', function(event) {
                     {
                       "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/movie1.jpg#",
                       "title": "recommend/movie1",
-                      "text": "movie1推薦介紹",
+                      "text": "movie1年代、導演、演員",
                       "defaultAction": {
                           "type": "uri",
                           "label": "知道更多",
@@ -201,7 +201,7 @@ bot.on('message', function(event) {
                     {
                       "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/music1.jpg#",
                       "title": "recommend/music1",
-                      "text": "rmovie1推薦介紹",
+                      "text": "movie1專輯、歌手",
                       "defaultAction": {
                           "type": "uri",
                           "label": "詳細資料",
@@ -211,12 +211,13 @@ bot.on('message', function(event) {
                         {
                             "type": "postback",
                             "label": "知道更多",
-                            "data": "action=buy&itemid=111"
+                            "data": "movie1.title"
                         },
                         {
-                            "type": "postback",
+                          //-------!需克服收藏資料寫入資料庫的問題
+                            "type": "message",
                             "label": "新增至我的收藏",
-                            "data": "action=add&itemid=111"
+                            "text": "收藏成功"
                         },
                         {
                             "type": "uri",
@@ -228,56 +229,58 @@ bot.on('message', function(event) {
                     {
                         "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/book1.jpg#",
                         "title": "recommend/book1",
-                        "text": "movie1推薦介紹",
+                        "text": "book1風格、作者、出版社",
                         "defaultAction": {
                             "type": "uri",
                             "label": "詳細資料",
                             "uri": "https://weiting.nctu.me/recommend.html"
                         },
                         "actions": [
-                          {
-                              "type": "postback",
-                              "label": "知道更多",
-                              "data": "action=buy&itemid=111"
-                          },
-                          {
-                              "type": "postback",
-                              "label": "新增至我的收藏",
-                              "data": "action=add&itemid=111"
-                          },
-                          {
-                              "type": "uri",
-                              "label": "至文藝富心官網查看",
-                              "uri": "https://weiting.nctu.me/recommend.html"
-                          }
-                          ]
+                            {
+                                "type": "postback",
+                                "label": "知道更多",
+                                "data": "movie1.title"
+                            },
+                            {
+                              //-------!需克服收藏資料寫入資料庫的問題
+                                "type": "message",
+                                "label": "新增至我的收藏",
+                                "text": "收藏成功"
+                            },
+                            {
+                                "type": "uri",
+                                "label": "至文藝富心官網查看",
+                                "uri": "https://weiting.nctu.me/recommend.html"
+                            }
+                        ]
                       },
                       {
                         "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/exhibition1.jpg#",
                         "title": "recommend/exhibition1",
-                        "text": "movie1推薦介紹",
+                        "text": "exhibition1開始日期、創作者、價錢",
                         "defaultAction": {
                             "type": "uri",
                             "label": "詳細資料",
                             "uri": "https://weiting.nctu.me/recommend.html"
                         },
                         "actions": [
-                          {
-                              "type": "postback",
-                              "label": "知道更多",
-                              "data": "action=buy&itemid=111"
-                          },
-                          {
-                              "type": "postback",
-                              "label": "新增至我的收藏",
-                              "data": "action=add&itemid=111"
-                          },
-                          {
-                              "type": "uri",
-                              "label": "至文藝富心官網查看",
-                              "uri": "https://weiting.nctu.me/recommend.html"
-                          }
-                          ]
+                            {
+                                "type": "postback",
+                                "label": "知道更多",
+                                "data": "movie1.title"
+                            },
+                            {
+                              //-------!需克服收藏資料寫入資料庫的問題
+                                "type": "message",
+                                "label": "新增至我的收藏",
+                                "text": "收藏成功"
+                            },
+                            {
+                                "type": "uri",
+                                "label": "至文藝富心官網查看",
+                                "uri": "https://weiting.nctu.me/recommend.html"
+                            }
+                        ]
                       }
                 ],
                 "imageAspectRatio": "rectangle",
