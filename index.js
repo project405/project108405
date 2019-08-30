@@ -108,7 +108,7 @@ bot.on('postback', function(event) {
         // console.log(item)
         // console.log(index)
         recommend.getRecomClassList(item).then(d =>{
-            console.log(d);
+            console.log(d[0]);
             // const data = event.postback.data;
             // //存放recommend/movie1.content
             // const recommendData = d[0][0].recomCont;
