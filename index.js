@@ -104,9 +104,9 @@ bot.on('message', function(event) {
 bot.on('postback', function(event) { 
     const data = event.postback.data;
     // const userId = event.source.userId;
-    recommend.getFourRecomClassList().then(data =>{
+    recommend.getFourRecomClassList().then(d =>{
         //存放recommend/movie1.content
-        const recommendData = data[0][0].recomCont;
+        const recommendData = d[0][0].recomCont;
 
         event.source.profile().then(function (profile) {
             const userName = profile.displayName;
