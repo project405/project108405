@@ -174,7 +174,7 @@ bot.on('message', function(event) {
                     "columns": [
                         {
                           "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/movie1.jpg#",
-                          "title": "電影類"+data[0][0].recomHead,
+                          "title": "【電影類】"+data[0][0].recomHead,
                           "text": "movie1年代、導演、演員",
                           "defaultAction": {
                               "type": "uri",
