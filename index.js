@@ -163,7 +163,7 @@ bot.on('postback', function(event) {
 bot.on('message', function(event) {
     //使用者傳來的文字
     const text = event.message.text;
-    存放本週推薦類別
+    //存放本週推薦類別
     let msgs = ['電影','音樂','書籍','展覽'];
     
 	if(text == '本週推薦'){
