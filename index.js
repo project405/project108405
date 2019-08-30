@@ -173,7 +173,7 @@ bot.on('message', function(event) {
                 "columns": [
                     {
                       "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/movie1.jpg#",
-                      "imageBackgroundColor": "#FFFFFF",
+                    //   "imageBackgroundColor": "#FFFFFF",
                       "title": "recommend/movie1",
                       "text": "recommend/movie1.content",
                       "defaultAction": {
@@ -195,37 +195,37 @@ bot.on('message', function(event) {
                           {
                               "type": "uri",
                               "label": "至文藝富心官網查看",
-                              "uri": "https://zh.wikipedia.org/wiki/星夜"
+                              "uri": "https://weiting.nctu.me/recommend.html"
                           }
                       ]
                     },
                     {
-                      "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p02.jpg",
-                      "imageBackgroundColor": "#000000",
-                      "title": "向日葵",
+                      "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/music1.jpg#",
+                    //   "imageBackgroundColor": "#000000",
+                      "title": "recommend/music1",
                       "text": "荷蘭畫家梵谷繪畫的一系列靜物油畫。當中有2幅繪有15朵向日葵，與1幅繪有十四朵向日葵，另有兩幅繪有12朵向日葵。",
                       "defaultAction": {
                           "type": "uri",
                           "label": "詳細資料",
-                          "uri": "https://zh.wikipedia.org/wiki/向日葵_(梵高)"
+                          "uri": "https://weiting.nctu.me/recommend.html"
                       },
                       "actions": [
                         {
                             "type": "postback",
-                            "label": "買了",
-                            "data": "action=buy&itemid=222"
+                            "label": "知道更多",
+                            "data": "action=buy&itemid=111"
                         },
                         {
                             "type": "postback",
-                            "label": "加入我的收藏",
-                            "data": "action=add&itemid=222"
+                            "label": "新增至我的收藏",
+                            "data": "action=add&itemid=111"
                         },
-                          {
-                              "type": "uri",
-                              "label": "詳細資料",
-                              "uri": "https://zh.wikipedia.org/wiki/向日葵_(梵高)"
-                          }
-                      ]
+                        {
+                            "type": "uri",
+                            "label": "至文藝富心官網查看",
+                            "uri": "https://weiting.nctu.me/recommend.html"
+                        }
+                        ]
                     }
                 ],
                 "imageAspectRatio": "rectangle",
