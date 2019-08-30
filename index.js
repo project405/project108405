@@ -173,7 +173,6 @@ bot.on('message', function(event) {
                 "columns": [
                     {
                       "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/movie1.jpg#",
-                    //   "imageBackgroundColor": "#FFFFFF",
                       "title": "recommend/movie1",
                       "text": "recommend/movie1.content",
                       "defaultAction": {
@@ -201,9 +200,8 @@ bot.on('message', function(event) {
                     },
                     {
                       "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/music1.jpg#",
-                    //   "imageBackgroundColor": "#000000",
                       "title": "recommend/music1",
-                      "text": "荷蘭畫家梵谷繪畫的一系列靜物油畫。當中有2幅繪有15朵向日葵，與1幅繪有十四朵向日葵，另有兩幅繪有12朵向日葵。",
+                      "text": "recommend/movie1.content",
                       "defaultAction": {
                           "type": "uri",
                           "label": "詳細資料",
@@ -226,7 +224,61 @@ bot.on('message', function(event) {
                             "uri": "https://weiting.nctu.me/recommend.html"
                         }
                         ]
-                    }
+                    },
+                    {
+                        "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/book1.jpg#",
+                        "title": "recommend/book1",
+                        "text": "recommend/book1.content",
+                        "defaultAction": {
+                            "type": "uri",
+                            "label": "詳細資料",
+                            "uri": "https://weiting.nctu.me/recommend.html"
+                        },
+                        "actions": [
+                          {
+                              "type": "postback",
+                              "label": "知道更多",
+                              "data": "action=buy&itemid=111"
+                          },
+                          {
+                              "type": "postback",
+                              "label": "新增至我的收藏",
+                              "data": "action=add&itemid=111"
+                          },
+                          {
+                              "type": "uri",
+                              "label": "至文藝富心官網查看",
+                              "uri": "https://weiting.nctu.me/recommend.html"
+                          }
+                          ]
+                      },
+                      {
+                        "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/exhibition1.jpg#",
+                        "title": "recommend/exhibition1",
+                        "text": "recommend/exhibition1.content",
+                        "defaultAction": {
+                            "type": "uri",
+                            "label": "詳細資料",
+                            "uri": "https://weiting.nctu.me/recommend.html"
+                        },
+                        "actions": [
+                          {
+                              "type": "postback",
+                              "label": "知道更多",
+                              "data": "action=buy&itemid=111"
+                          },
+                          {
+                              "type": "postback",
+                              "label": "新增至我的收藏",
+                              "data": "action=add&itemid=111"
+                          },
+                          {
+                              "type": "uri",
+                              "label": "至文藝富心官網查看",
+                              "uri": "https://weiting.nctu.me/recommend.html"
+                          }
+                          ]
+                      }
                 ],
                 "imageAspectRatio": "rectangle",
                 "imageSize": "cover"
