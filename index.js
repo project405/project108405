@@ -102,9 +102,10 @@ bot.on('message', function(event) {
 // 機器人接受回覆的處理
 //========================================
 bot.on('postback', function(event) { 
-    const data = event.postback.data;
+    
     // const userId = event.source.userId;
     recommend.getFourRecomClassList().then(d =>{
+        const data = event.postback.data;
         //存放recommend/movie1.content
         const recommendData = d[0][0].recomCont;
 
@@ -188,7 +189,7 @@ bot.on('message', function(event) {
                               {
                                   "type": "postback",
                                   "label": "知道更多",
-                                  "data": "movie1.title"
+                                  "data": data[0][0].recomHead
                               },
                               {
                                 //-------!需克服收藏資料寫入資料庫的問題
