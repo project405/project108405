@@ -184,7 +184,7 @@ bot.on('message', function(event) {
                           {
                               "type": "postback",
                               "label": "知道更多",
-                              "data": "action=buy&itemid=111"
+                              "data": "recommend/movie1"
                           },
                           {
                               "type": "postback",
