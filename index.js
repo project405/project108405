@@ -163,6 +163,8 @@ bot.on('postback', function(event) {
 bot.on('message', function(event) {
     //使用者傳來的文字
     const text = event.message.text;
+    存放本週推薦類別
+    let msgs = ['電影','音樂','書籍','展覽'];
     
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
@@ -174,7 +176,7 @@ bot.on('message', function(event) {
                     "columns": [
                         {
                           "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/movie1.jpg#",
-                          "title": "【電影類】"+data[0][0].recomHead,
+                          "title": "【"+msgs[0]+"】"+data[0][0].recomHead,
                           "text": "movie1年代、導演、演員",
                           "defaultAction": {
                               "type": "uri",
