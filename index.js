@@ -189,7 +189,7 @@ bot.on('message', function(event) {
                             //-------!需克服收藏資料寫入資料庫的問題
                               "type": "message",
                               "label": "新增至我的收藏",
-                              "data": "收藏成功"
+                              "text": "收藏成功"
                           },
                           {
                               "type": "uri",
