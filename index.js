@@ -176,7 +176,7 @@ bot.on('message', function(event) {
                     "columns": [
                         {
                           "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/movie1.jpg#",
-                          "title": "【"+msgs[0]+"】"+data[0][0].recomHead,
+                          "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
                           "text": "movie1年代、導演、演員",
                           "defaultAction": {
                               "type": "uri",
