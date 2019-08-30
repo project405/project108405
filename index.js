@@ -106,7 +106,7 @@ bot.on('postback', function(event) {
     // const userId = event.source.userId;
 
     //存放recommend/movie1.content
-    const recommendData = event.postback.data;
+    const recommendData = '推薦內容';
 
     event.source.profile().then(function (profile) {
         const userName = profile.displayName;
