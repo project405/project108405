@@ -194,7 +194,7 @@ bot.on('message', function(event) {
                           },
                           {
                               "type": "uri",
-                              "label": "至文藝富心官網查看"",
+                              "label": "至文藝富心官網查看",
                               "uri": "https://zh.wikipedia.org/wiki/星夜"
                           }
                       ]
