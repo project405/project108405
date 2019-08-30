@@ -174,17 +174,17 @@ bot.on('message', function(event) {
                     {
                       "thumbnailImageUrl": "https://weiting.nctu.me/imgs/recommend/movie1.jpg#",
                       "imageBackgroundColor": "#FFFFFF",
-                      "title": "星夜",
-                      "text": "荷蘭後印象派畫家文森特·梵谷於1890年在法國聖雷米的一家精神病院裏創作的一幅著名油畫",
+                      "title": "recommend/movie1",
+                      "text": "recommend/movie1.content",
                       "defaultAction": {
                           "type": "uri",
-                          "label": "詳細資料",
-                          "uri": "https://zh.wikipedia.org/wiki/星夜"
+                          "label": "知道更多",
+                          "uri": "https://weiting.nctu.me/recommend.html"
                       },
                       "actions": [
                           {
                               "type": "postback",
-                              "label": "買了",
+                              "label": "知道更多",
                               "data": "action=buy&itemid=111"
                           },
                           {
@@ -194,7 +194,7 @@ bot.on('message', function(event) {
                           },
                           {
                               "type": "uri",
-                              "label": "詳細資料",
+                              "label": "至文藝富心官網查看"",
                               "uri": "https://zh.wikipedia.org/wiki/星夜"
                           }
                       ]
@@ -217,7 +217,7 @@ bot.on('message', function(event) {
                         },
                         {
                             "type": "postback",
-                            "label": "加入購物車",
+                            "label": "加入我的收藏",
                             "data": "action=add&itemid=222"
                         },
                           {
