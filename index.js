@@ -107,7 +107,8 @@ bot.on('postback', function(event) {
     // var recom = recom_class.map(function(item,index){
         // console.log(item)
         // console.log(index)
-        // recommend.getRecomClassList(item).then(d =>{
+        //---------------使用map記得傳入item參數
+        recommend.getRecomClassList().then(d =>{
             // console.log(d[index]);
             const data = event.postback.data;
             //存放recommend/movie1.content
