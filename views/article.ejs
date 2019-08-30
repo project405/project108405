@@ -435,7 +435,7 @@
                 </label>
 
                 <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none"
-                    onclick="test()">提交回覆</button>
+                onclick=<%= "test(" + items[0][0].artiNum + ")" %>>提交回覆</button>
 
             </div>
 
@@ -483,7 +483,9 @@
                 }
             }
         });
-        function test() {
+        function test(artiNum) {
+            console.log(artiNum)
+            formData.append('artiNum', artiNum);
             var img = [];
             var replyCont = [];
             var replyData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
@@ -510,13 +512,13 @@
                         location.replace("/logIn");
                     } else if (res == "留言成功") {
                         alert(res);
-                        location.replace("/articleList");
+                        // location.replace("/article");
                     } else {
                         alert(res);
                     }
                 },
                 error: function (res) {
-                    // console.log("失敗", res);
+                    console.log("失敗", res);
                 }
             });
         }
