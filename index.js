@@ -171,12 +171,15 @@ bot.on('postback', function(event) {
 //========================================
 bot.on('message', function(event) {
     event.source.profile().then(
-        function (profile) {            
-            return event.reply({
-                "type": "image",
-                "originalContentUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg",
-                "previewImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg"
-            });	            
+        function (profile) {    
+            recommend.getRecomClassList().then(d =>{  
+                console.log(d);
+                return event.reply({
+                    "type": "image",
+                    "originalContentUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg",
+                    "previewImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg"
+                });	
+            });            
         }
     );
 });
