@@ -4,6 +4,8 @@
 DROP TABLE IF EXISTS "public"."member";
 CREATE TABLE "public"."member" (
   "memID" varchar(100) COLLATE "pg_catalog"."default" NOT NULL,
+"lineID" varchar(100) COLLATE "pg_catalog"."default",
+"googleID" varchar(100) COLLATE "pg_catalog"."default",
   "memPass" varchar(100) COLLATE "pg_catalog"."default" ,
   "memBirth" date	,
 	"memName" VARCHAR(15) COLLATE "pg_catalog"."default" ,
