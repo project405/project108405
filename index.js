@@ -49,28 +49,28 @@ var bot = linebot({
 // });
 
 //------------ 熱門文章 ------------
-// bot.on('message', function(event) {    
+bot.on('message', function(event) {    
     
-//     //使用者傳來的文字
-//     const text = event.message.text;
+    //使用者傳來的文字
+    const text = event.message.text;
     
-//     //呼叫indexAPI取得熱門文章
-//     if (text == "熱門文章"){
-//         index.getIndexData(text).then(data => {  
+    //呼叫indexAPI取得熱門文章
+    if (text == "熱門文章"){
+        index.getIndexData(text).then(data => {  
             
-//             // console.log(data[1][0]);
-//             // console.log(data[1][1]);
-//             // console.log(data[1][2]);
+            // console.log(data[1][0]);
+            // console.log(data[1][1]);
+            // console.log(data[1][2]);
             
-//             event.reply([
-//                 {'type':'text', 'text':data[1][0].artiHead},
-//                 {'type':'text', 'text':data[1][1].artiHead},
-//                 {'type':'text', 'text':data[1][2].artiHead}
-//             ]);   
+            event.reply([
+                {'type':'text', 'text':data[1][0].artiHead},
+                {'type':'text', 'text':data[1][1].artiHead},
+                {'type':'text', 'text':data[1][2].artiHead}
+            ]);   
              
-//         })  
-//     }
-// });
+        })  
+    }
+});
 //--------------------------------
 //------------ 本週推薦(成功)) ------------
 // bot.on('message',async function (event) {    
@@ -191,7 +191,7 @@ bot.on('message', function(event) {
     //存放本週推薦類別
     let msgs = ['電影','音樂','書籍','展覽'];
 
-    if (text == "熱門文章"){
+    if(text == '熱門文章'){
         index.getIndexData(text).then(data => {
             var x;
             for(i=0;i<3;i++){
@@ -204,7 +204,9 @@ bot.on('message', function(event) {
                     {'type':'text', '連結':`https://tomlin-app-1.herokuapp.com/article/${data[1][x].articleNum}`
                     }]  
 
-        );
+                 );
+            }   
+        })
     }
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
