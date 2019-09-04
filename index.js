@@ -110,6 +110,7 @@ bot.on('postback', function(event) {
         //寫一個方法判斷postback回來是電影、音樂等等
         const data = event.postback.data;
         console.log(data)
+        console.log(typeof(data))
         
         
 
@@ -258,7 +259,7 @@ bot.on('message', function(event) {
                               {
                                   "type": "postback",
                                   "label": "知道更多",
-                                  "data": 'movie'
+                                  "data": data[0][0].recomHead+'movie'
                               },
                               {
                                 //-------!需克服收藏資料寫入資料庫的問題
