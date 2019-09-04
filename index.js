@@ -281,7 +281,7 @@ bot.on('message', function(event) {
                               {
                                   "type": "postback",
                                   "label": "知道更多",
-                                  "data": data[0][0].recomHead+'movie'
+                                  "data": 'movie'
                               },
                               {
                                 //-------!需克服收藏資料寫入資料庫的問題
