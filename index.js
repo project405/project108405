@@ -193,7 +193,7 @@ bot.on('message', function(event) {
 
     if(text == '熱門文章'){
         index.getIndexData().then(data => {
-            console.log('data',data[1][1].artiHead)
+            console.log('data',data)
             var x;
             for(i=0;i<3;i++){
                 x=Math.floor(Math.random()*(10-i));
