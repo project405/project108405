@@ -197,7 +197,7 @@ bot.on('message', function(event) {
             for(i=0;i<3;i++){
                 x=Math.floor(Math.random()*(10-i));
                 //測試
-                //console.log('時間:'+data[1][x].artiDateTime,',標題：'+data[1][x].artiHead);}
+                console.log('時間:'+data[1][x].artiDateTime,',標題：'+data[1][x].artiHead);
                 event.reply([
                     {'type':'text', '時間':data[1][x].artiDateTime},
                     {'type':'text', '標題':data[1][x].artiHead},
