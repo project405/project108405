@@ -199,9 +199,9 @@ bot.on('message', function(event) {
                 //測試
                 console.log('時間:'+data[1][x].artiDateTime,',標題：'+data[1][x].artiHead);
                 event.reply([
-                    {'type':'text', '時間':data[1][x].artiDateTime},
-                    {'type':'text', '標題':data[1][x].artiHead},
-                    {'type':'text', '連結':"https://tomlin-app-1.herokuapp.com/article/${data[1][x].articleNum}"}]  
+                    {'type':'text', 'text':'時間:' + data[1][x].artiDateTime},
+                    {'type':'text', 'text':'標題:' + data[1][x].artiHead},
+                    {'type':'text', 'text':'連結:' + "https://tomlin-app-1.herokuapp.com/article/${data[1][x].articleNum}"}]  
                 );
             }   
         })
