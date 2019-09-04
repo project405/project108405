@@ -110,7 +110,7 @@ bot.on('postback', function(event) {
         //寫一個方法判斷postback回來是電影、音樂等等
         const data = event.postback.data;
         console.log(data)
-        console.log(typeof(data))
+        
         
         
 
@@ -125,7 +125,7 @@ bot.on('postback', function(event) {
                 return event.reply([
                     {
                         "type": "text",
-                        "text": data
+                        "text": d[0][0].recomHead
                     },
                     {
                         "type": "text",
@@ -136,14 +136,36 @@ bot.on('postback', function(event) {
                 return event.reply([
                     {
                         "type": "text",
-                        "text": data
+                        "text": d[1][0].recomHead
                     },
                     {
                         "type": "text",
                         "text": d[1][0].recomCont
                     }
                 ]);		
-            } 
+            }else if(data == 'book'){
+                return event.reply([
+                    {
+                        "type": "text",
+                        "text": d[2][0].recomHead
+                    },
+                    {
+                        "type": "text",
+                        "text": d[2][0].recomCont
+                    }
+                ]);		
+            }else if(data == 'exhibition'){
+                return event.reply([
+                    {
+                        "type": "text",
+                        "text": d[3][0].recomHead
+                    },
+                    {
+                        "type": "text",
+                        "text": d[3][0].recomCont
+                    }
+                ]);		
+            }   
     
             event.source.profile().then(function (profile) {
                 const userName = profile.displayName;
@@ -259,7 +281,7 @@ bot.on('message', function(event) {
                               {
                                   "type": "postback",
                                   "label": "知道更多",
-                                  "data": "{data[0][0].recomHead,'movie'}"
+                                  "data": data[0][0].recomHead+'movie'
                               },
                               {
                                 //-------!需克服收藏資料寫入資料庫的問題
@@ -315,7 +337,7 @@ bot.on('message', function(event) {
                                 {
                                     "type": "postback",
                                     "label": "知道更多",
-                                    "data": data[2][0].recomHead
+                                    "data": 'book'
                                 },
                                 {
                                   //-------!需克服收藏資料寫入資料庫的問題
@@ -343,7 +365,7 @@ bot.on('message', function(event) {
                                 {
                                     "type": "postback",
                                     "label": "知道更多",
-                                    "data": data[3][0].recomHead
+                                    "data": 'exhibition'
                                 },
                                 {
                                   //-------!需克服收藏資料寫入資料庫的問題
