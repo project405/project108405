@@ -108,10 +108,17 @@ bot.on('postback', function(event) {
         // console.log(item)
         // console.log(index)
         //寫一個方法判斷postback回來是電影、音樂等等
+        const data = event.postback.data;
+        console.log(data)
+        var getPostDataClass = function(data){
+
+        }
+
+
         //---------------使用map記得傳入item參數getRecomClassList
         recommend.getFourRecomClassList().then(d =>{
             // console.log(d[index]);
-            const data = event.postback.data;
+            
             //存放recommend/movie1.content
             const recommendData = d[0][0].recomCont;
     
@@ -193,7 +200,7 @@ bot.on('message', function(event) {
 
     if(text == '熱門文章'){
         index.getIndexData().then(data => {
-            console.log('data',data)
+            // console.log('data',data)
             var x;
             for(i=0;i<3;i++){
                 x=Math.floor(Math.random()*(10-i));
