@@ -110,17 +110,14 @@ bot.on('postback', function(event) {
         //寫一個方法判斷postback回來是電影、音樂等等
         const data = event.postback.data;
         console.log(data)
-        var getPostDataClass = function(data){
-
-        }
-
+        
 
         //---------------使用map記得傳入item參數getRecomClassList
-        recommend.getFourRecomClassList().then(d =>{
+        recommend.getFourRecomClassList(data).then(d =>{
             // console.log(d[index]);
             
             //存放recommend/movie1.content
-            const recommendData = d[0][0].recomCont;
+            // const recommendData = d[0][0].recomCont;
     
             event.source.profile().then(function (profile) {
                 const userName = profile.displayName;
@@ -132,7 +129,7 @@ bot.on('postback', function(event) {
                     },
                     {
                         "type": "text",
-                        "text": recommendData
+                        "text": d[0][0].recomCont
                     }
                 ]);		
             });
