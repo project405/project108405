@@ -57,7 +57,7 @@ var getIndexData = async function (memID) {
         }
     }
     // -----------  熱門文章 --------------
-    await sql('SELECT * FROM "articleListDataView" ORDER BY "likeCount" DESC , "artiDateTime" DESC LIMIT 9')
+    await sql('SELECT * FROM "articleListDataView" ORDER BY "likeCount" DESC , "artiDateTime" DESC LIMIT 10')
         .then((data) => {
             if (!data.rows) {
                 hotArticle = undefined;
