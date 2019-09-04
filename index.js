@@ -192,7 +192,7 @@ bot.on('message', function(event) {
     let msgs = ['電影','音樂','書籍','展覽'];
 
     if(text == '熱門文章'){
-        index.getIndexData("音樂").then(data => {
+        index.getIndexData().then(data => {
             var x;
             for(i=0;i<3;i++){
                 x=Math.floor(Math.random()*(10-i));
