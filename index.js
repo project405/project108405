@@ -111,13 +111,38 @@ bot.on('postback', function(event) {
         const data = event.postback.data;
         console.log(data)
         
+        
 
         //---------------使用map記得傳入item參數getRecomClassList
-        recommend.getFourRecomClassList(data).then(d =>{
+        recommend.getFourRecomClassList().then(d =>{
             // console.log(d[index]);
             
             //存放recommend/movie1.content
             // const recommendData = d[0][0].recomCont;
+
+            if (data == 'movie'){
+                return event.reply([
+                    {
+                        "type": "text",
+                        "text": data
+                    },
+                    {
+                        "type": "text",
+                        "text": d[0][0].recomCont
+                    }
+                ]);		
+            }else if(data == 'music'){
+                return event.reply([
+                    {
+                        "type": "text",
+                        "text": data
+                    },
+                    {
+                        "type": "text",
+                        "text": d[1][0].recomCont
+                    }
+                ]);		
+            } 
     
             event.source.profile().then(function (profile) {
                 const userName = profile.displayName;
