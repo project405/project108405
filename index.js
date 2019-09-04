@@ -201,10 +201,8 @@ bot.on('message', function(event) {
                 event.reply([
                     {'type':'text', '時間':data[1][x].artiDateTime},
                     {'type':'text', '標題':data[1][x].artiHead},
-                    {'type':'text', '連結':`https://tomlin-app-1.herokuapp.com/article/${data[1][x].articleNum}`
-                    }]  
-
-                 );
+                    {'type':'text', '連結':"https://tomlin-app-1.herokuapp.com/article/${data[1][x].articleNum}"}]  
+                );
             }   
         })
     }
