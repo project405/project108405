@@ -243,22 +243,30 @@ bot.on('message', function(event) {
     //存放本週推薦類別
     let msgs = ['電影','音樂','書籍','展覽'];
 
-    if(text == '熱門文章'){
+    if (text == "熱門文章") {
         index.getIndexData().then(data => {
-            // console.log('data',data)
-            var x;
-            for(i=0;i<3;i++){
-                x=Math.floor(Math.random()*(10-i));
-                //測試
-                console.log('時間:'+data[1][x].artiDateTime,',標題：'+data[1][x].artiHead);
-                event.reply([
-                    {'type':'text', 'text':'時間:' + data[1][x].artiDateTime},
-                    {'type':'text', 'text':'標題:' + data[1][x].artiHead},
-                    {'type':'text', 'text':'連結:' + "https://tomlin-app-1.herokuapp.com/article/${data[1][x].articleNum}"}]  
-                );
-            }   
+
+            let msg = '';
+            var arr = [0, 1, 2, 3, 4,];
+            var result = [];
+            var ranNum = 3;
+            for (var i = 0; i < ranNum; i++) {
+                var ran = Math.floor(Math.random() * (arr.length - i));
+                result.push(arr[ran]);
+                arr[ran] = arr[arr.length - i];
+                arr.splice((arr.length - i),1);
+                
+            };
+            event.reply([
+                { type: 'text', text: '時間：' + data[1][result[0]].artiDateTime  + '\n'+ '標題：' + data[1][result[0]].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][result[0]].articleNum}` },
+                { type: 'text', text: '時間：' + data[1][result[1]].artiDateTime  + '\n'+ '標題：' + data[1][result[1]].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][result[1]].articleNum}` },
+                { type: 'text', text: '時間：' + data[1][result[2]].artiDateTime  + '\n'+ '標題：' + data[1][result[2]].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][result[2]].articleNum}` }
+            ]);
+
+
+
         })
-    }
+    };
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
