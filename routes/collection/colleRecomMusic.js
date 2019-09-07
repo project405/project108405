@@ -6,7 +6,7 @@ const collection = require('../utility/collection');
 router.get('/', function (req, res, next) {
     var memID = req.session.memID;
     if (req.session.memID == null || req.session.memID == undefined) {
-        res.render('logIn');
+        res.render('login');
     } else {
         collection.getCollRecomClassList(memID,'音樂').then(data => {
             if (data == null) {

@@ -9,7 +9,7 @@ const collection = require('../utility/collection');
 router.get('/', function (req, res, next) { 
     //如果未登入  
     if (req.session.memID == null || req.session.memID == undefined) {
-      res.render('logIn');
+      res.render('login');
     } else {
       //取得推薦文章
       collection.getCollRecommend(req.session.memID).then(data => {

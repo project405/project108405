@@ -3,16 +3,16 @@
 
  Source Server         : chintest
  Source Server Type    : PostgreSQL
- Source Server Version : 110004
+ Source Server Version : 110005
  Source Host           : ec2-23-21-186-85.compute-1.amazonaws.com:5432
  Source Catalog        : d96t764r1va6lf
  Source Schema         : public
 
  Target Server Type    : PostgreSQL
- Target Server Version : 110004
+ Target Server Version : 110005
  File Encoding         : 65001
 
- Date: 10/08/2019 15:34:26
+ Date: 07/09/2019 11:50:43
 */
 
 
@@ -629,41 +629,40 @@ COMMENT ON COLUMN "public"."article"."artiClass" IS 'movie , music , book , exhi
 -- ----------------------------
 -- Records of article
 -- ----------------------------
-INSERT INTO "public"."article" VALUES (1, 'abc123', '2019-01-07 09:25:00', '#分享 #有雷【復仇者聯盟4】謝謝鋼鐵人成就蜘蛛人！', '剛好昨天官方說可以開始討論劇情...
+INSERT INTO "public"."article" VALUES (1, 'abc123', '2019-05-07 09:25:00', '#分享 #有雷【復仇者聯盟4】謝謝鋼鐵人成就蜘蛛人！', '剛好昨天官方說可以開始討論劇情...
 就在網路上看到一篇超級讓人淚腺爆發的漫畫😭
 
 不知道發哪個版比較適合...但這邊好多人都在討論復聯4
 所以就分享在這裡，如果不行還請告知><', 'movie', NULL);
-INSERT INTO "public"."article" VALUES (2, 'abc456', '2019-02-07 10:30:00', '海洋奇緣觀後感＃雷', '海洋奇緣是2016年上映的電影，我卻最近才看完，原本是帶著看一部卡通的愉快心情，沒想到劇情那麼感人，讓我大爆哭！也可能是那時候我剛考完準備很久的考試，加上對未來有一種迷茫感吧～
+INSERT INTO "public"."article" VALUES (2, 'abc456', '2019-05-07 10:30:00', '海洋奇緣觀後感＃雷', '海洋奇緣是2016年上映的電影，我卻最近才看完，原本是帶著看一部卡通的愉快心情，沒想到劇情那麼感人，讓我大爆哭！也可能是那時候我剛考完準備很久的考試，加上對未來有一種迷茫感吧～
 
 總之我覺得這部電影很適合不確定自己要幹嘛、沒自信的人看！', 'movie', NULL);
-INSERT INTO "public"."article" VALUES (3, 'abc123', '2019-03-07 19:25:00', '想找一首英文歌', '一開始去是鋼琴 登等登等登*4
+INSERT INTO "public"."article" VALUES (3, 'abc123', '2019-05-07 19:25:00', '想找一首英文歌', '一開始去是鋼琴 登等登等登*4
 然後副歌歌詞聽起來像you are my story
 感覺像一個樂團 男生唱的', 'music', NULL);
-INSERT INTO "public"."article" VALUES (4, 'abc456', '2019-04-08 12:21:00', '#詢問 尋找好聽的日文歌曲', 'true跟茅原實里的是因為看了某部動畫入坑的
+INSERT INTO "public"."article" VALUES (4, 'abc456', '2019-05-08 12:21:00', '#詢問 尋找好聽的日文歌曲', 'true跟茅原實里的是因為看了某部動畫入坑的
 不過聽了一些true的其他歌後
 有點不太喜歡…?', 'music', NULL);
-INSERT INTO "public"."article" VALUES (5, 'abc123', '2018-05-01 11:20:00', '（書單）2019年起截止到5月7日讀到的好書', '基本都是純文學小說，少人文社科綜合和詩集，祝閱讀愉快( ´ ▽ ` )ﾉ
+INSERT INTO "public"."article" VALUES (5, 'abc123', '2018-01-01 11:20:00', '（書單）2019年起截止到5月7日讀到的好書', '基本都是純文學小說，少人文社科綜合和詩集，祝閱讀愉快( ´ ▽ ` )ﾉ
 《大瑟爾》凱魯亞克
 《天才的編輯》A·司各特·伯格
 《崩潰》菲茨傑羅
 《語言與沈默》喬治·斯坦納', 'book', NULL);
-INSERT INTO "public"."article" VALUES (6, 'abc456', '2018-06-04 12:11:00', '求推薦 請問有人看過“變身在漫威世界”嗎？', '如題
+INSERT INTO "public"."article" VALUES (6, 'abc456', '2018-03-04 12:11:00', '求推薦 請問有人看過“變身在漫威世界”嗎？', '如題
 請問有人有看過“變身在漫威世界”嗎？
 本人看了8年小說
 至從看了變身在漫威世界之後
 感覺其他小說怎麼看怎麼不對', 'book', NULL);
-INSERT INTO "public"."article" VALUES (7, 'abc123', '2019-07-04 12:12:00', '後大人時代的我們 免費講座', '從前從前，大人們總是說：「等你長大就懂了。」
+INSERT INTO "public"."article" VALUES (7, 'abc123', '2019-03-04 12:12:00', '後大人時代的我們 免費講座', '從前從前，大人們總是說：「等你長大就懂了。」
 如今我們長大了，那些以後就會懂的事，我們真的都懂了嗎？
 我們現在都活在曾經相信過的價值觀正被拆解重建著的時代。
 女權意識抬頭、同性議題的討論、AI取代人工等等。', 'exhibition', NULL);
-INSERT INTO "public"."article" VALUES (8, 'abc456', '2019-08-01 01:01:00', '學校校慶展覽....', '學校校慶展覽活動到底是要辦給誰看呀？
+INSERT INTO "public"."article" VALUES (8, 'abc456', '2019-01-01 01:01:00', '學校校慶展覽....', '學校校慶展覽活動到底是要辦給誰看呀？
 展覽時間在上課期間😂😂
 展覽結束5:00(剛好下課時間)
 然後園遊會時間晚上5:00開始到7:00
 我真的覺得這個時間點很奇怪
 還是這很正常呢？', 'exhibition', NULL);
-INSERT INTO "public"."article" VALUES (10, 'abc123', '2019-08-09 02:23:39', 'qq', 'qqq<br><br>\:imgLocation<br><br>ddd<br><br>\:imgLocation', 'music', NULL);
 
 -- ----------------------------
 -- Table structure for articleLike
@@ -680,15 +679,14 @@ CREATE TABLE "public"."articleLike" (
 -- ----------------------------
 -- Records of articleLike
 -- ----------------------------
-INSERT INTO "public"."articleLike" VALUES (6, 'abc456', 2, '2019-05-01 03:12:00');
-INSERT INTO "public"."articleLike" VALUES (7, 'abc456', 4, '2019-06-01 03:12:00');
-INSERT INTO "public"."articleLike" VALUES (8, 'abc456', 7, '2019-07-01 03:12:00');
-INSERT INTO "public"."articleLike" VALUES (18, 'abc123', 1, '2019-08-09 09:55:49');
-INSERT INTO "public"."articleLike" VALUES (19, 'abc123', 2, '2019-08-09 09:56:11');
-INSERT INTO "public"."articleLike" VALUES (22, 'abc123', 3, '2019-08-09 10:02:55');
-INSERT INTO "public"."articleLike" VALUES (23, 'abc123', 6, '2019-08-09 10:03:13');
-INSERT INTO "public"."articleLike" VALUES (25, 'abc123', 8, '2019-08-09 10:03:42');
-INSERT INTO "public"."articleLike" VALUES (26, 'abc123', 7, '2019-08-09 10:03:43');
+INSERT INTO "public"."articleLike" VALUES (1, 'abc123', 1, '2019-12-01 03:12:00');
+INSERT INTO "public"."articleLike" VALUES (2, 'abc123', 2, '2019-12-01 03:12:00');
+INSERT INTO "public"."articleLike" VALUES (3, 'abc123', 3, '2019-12-01 03:12:00');
+INSERT INTO "public"."articleLike" VALUES (4, 'abc123', 5, '2019-12-01 03:12:00');
+INSERT INTO "public"."articleLike" VALUES (5, 'abc123', 7, '2019-12-01 03:12:00');
+INSERT INTO "public"."articleLike" VALUES (6, 'abc456', 2, '2019-12-01 03:12:00');
+INSERT INTO "public"."articleLike" VALUES (7, 'abc456', 4, '2019-12-01 03:12:00');
+INSERT INTO "public"."articleLike" VALUES (8, 'abc456', 7, '2019-12-01 03:12:00');
 
 -- ----------------------------
 -- Table structure for articleMessage
@@ -740,12 +738,14 @@ CREATE TABLE "public"."articleMessageLike" (
 -- ----------------------------
 INSERT INTO "public"."articleMessageLike" VALUES (1, 'abc123', 1, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (2, 'abc123', 2, '2019-12-01 03:12:00');
+INSERT INTO "public"."articleMessageLike" VALUES (3, 'abc123', 3, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (4, 'abc123', 4, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (5, 'abc123', 5, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (6, 'abc123', 6, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (7, 'abc123', 7, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (8, 'abc123', 8, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (9, 'abc123', 9, '2019-12-01 03:12:00');
+INSERT INTO "public"."articleMessageLike" VALUES (10, 'abc123', 10, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (11, 'abc123', 11, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (12, 'abc123', 12, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (13, 'abc456', 1, '2019-12-01 03:12:00');
@@ -754,7 +754,6 @@ INSERT INTO "public"."articleMessageLike" VALUES (15, 'abc456', 5, '2019-12-01 0
 INSERT INTO "public"."articleMessageLike" VALUES (16, 'abc456', 7, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (17, 'abc456', 9, '2019-12-01 03:12:00');
 INSERT INTO "public"."articleMessageLike" VALUES (18, 'abc456', 11, '2019-12-01 03:12:00');
-INSERT INTO "public"."articleMessageLike" VALUES (19, 'abc123', 3, '2019-08-07 04:07:55');
 
 -- ----------------------------
 -- Table structure for book
@@ -915,6 +914,7 @@ CREATE TABLE "public"."image" (
   "imgNum" int4 NOT NULL DEFAULT nextval('"image_imgNum_seq"'::regclass),
   "memID" varchar(100) COLLATE "pg_catalog"."default",
   "artiNum" int4,
+  "recomNum" int4,
   "artiMessNum" int4,
   "recomMessNum" int4,
   "imgName" text COLLATE "pg_catalog"."default",
@@ -923,17 +923,13 @@ CREATE TABLE "public"."image" (
 ;
 
 -- ----------------------------
--- Records of image
--- ----------------------------
-INSERT INTO "public"."image" VALUES (1, 'abc123', 10, NULL, NULL, '1565331819352--bWF4cmVzZGVmYXVsdA==.jpg', '2019-08-09 02:23:39');
-INSERT INTO "public"."image" VALUES (2, 'abc123', 10, NULL, NULL, '1565331819355--cTZDVm5aMllsS09lcUtV.jpg', '2019-08-09 02:23:39');
-
--- ----------------------------
 -- Table structure for member
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."member";
 CREATE TABLE "public"."member" (
   "memID" varchar(100) COLLATE "pg_catalog"."default" NOT NULL,
+  "lineID" varchar(100) COLLATE "pg_catalog"."default",
+  "googleID" varchar(100) COLLATE "pg_catalog"."default",
   "memPass" varchar(100) COLLATE "pg_catalog"."default",
   "memBirth" date,
   "memName" varchar(15) COLLATE "pg_catalog"."default",
@@ -950,8 +946,8 @@ COMMENT ON COLUMN "public"."member"."memNoti" IS 'T or F';
 -- ----------------------------
 -- Records of member
 -- ----------------------------
-INSERT INTO "public"."member" VALUES ('abc123', 'abc123', '1997-09-28', 'chin', '10546007@ntub.edu.tw', 'm', 't', '深坑', 'boss');
-INSERT INTO "public"."member" VALUES ('abc456', 'abc456', '1998-08-07', 'wat', '10546004@ntub.edu.tw', 'f', 'f', '三重', NULL);
+INSERT INTO "public"."member" VALUES ('abc123', NULL, NULL, 'abc123', '1997-09-28', 'chin', '10546007@ntub.edu.tw', 'm', 't', '深坑', 'boss');
+INSERT INTO "public"."member" VALUES ('abc456', NULL, NULL, 'abc456', '1998-08-07', 'wat', '10546004@ntub.edu.tw', 'f', 'f', '三重', NULL);
 
 -- ----------------------------
 -- Table structure for memberCollection
@@ -969,12 +965,9 @@ CREATE TABLE "public"."memberCollection" (
 -- ----------------------------
 -- Records of memberCollection
 -- ----------------------------
-INSERT INTO "public"."memberCollection" VALUES (3, 'abc456', NULL, 1, '2019-03-03 12:00:00');
-INSERT INTO "public"."memberCollection" VALUES (4, 'abc456', NULL, 2, '2019-03-03 12:00:00');
-INSERT INTO "public"."memberCollection" VALUES (6, 'abc456', NULL, 3, '2019-03-03 12:00:00');
-INSERT INTO "public"."memberCollection" VALUES (8, 'abc123', NULL, 8, '2019-08-09 03:35:56');
-INSERT INTO "public"."memberCollection" VALUES (9, 'abc123', NULL, 7, '2019-08-09 03:35:57');
-INSERT INTO "public"."memberCollection" VALUES (10, 'abc123', NULL, 10, '2019-08-09 07:05:18');
+INSERT INTO "public"."memberCollection" VALUES (1, 'abc123', 1, NULL, '2019-03-03 12:00:00');
+INSERT INTO "public"."memberCollection" VALUES (2, 'abc123', 2, NULL, '2019-03-03 12:00:00');
+INSERT INTO "public"."memberCollection" VALUES (5, 'abc123', 3, NULL, '2019-03-03 12:00:00');
 
 -- ----------------------------
 -- Table structure for memberMessage
@@ -1382,6 +1375,8 @@ CREATE TABLE "public"."recommendMessageLike" (
 -- ----------------------------
 INSERT INTO "public"."recommendMessageLike" VALUES (1, 'abc123', 1, '2019-03-03 12:00:00');
 INSERT INTO "public"."recommendMessageLike" VALUES (2, 'abc123', 2, '2019-03-03 12:00:00');
+INSERT INTO "public"."recommendMessageLike" VALUES (3, 'abc123', 3, '2019-03-03 12:00:00');
+INSERT INTO "public"."recommendMessageLike" VALUES (4, 'abc123', 4, '2019-03-03 12:00:00');
 INSERT INTO "public"."recommendMessageLike" VALUES (5, 'abc123', 5, '2019-03-03 12:00:00');
 INSERT INTO "public"."recommendMessageLike" VALUES (6, 'abc123', 11, '2019-03-03 12:00:00');
 INSERT INTO "public"."recommendMessageLike" VALUES (7, 'abc123', 12, '2019-03-03 12:00:00');
@@ -1395,8 +1390,6 @@ INSERT INTO "public"."recommendMessageLike" VALUES (14, 'abc456', 9, '2019-03-03
 INSERT INTO "public"."recommendMessageLike" VALUES (15, 'abc456', 10, '2019-03-03 12:00:00');
 INSERT INTO "public"."recommendMessageLike" VALUES (16, 'abc456', 13, '2019-03-03 12:00:00');
 INSERT INTO "public"."recommendMessageLike" VALUES (17, 'abc456', 14, '2019-03-03 12:00:00');
-INSERT INTO "public"."recommendMessageLike" VALUES (18, 'abc123', 3, '2019-08-08 09:54:02');
-INSERT INTO "public"."recommendMessageLike" VALUES (19, 'abc123', 4, '2019-08-08 09:54:02');
 
 -- ----------------------------
 -- Table structure for report
@@ -1444,8 +1437,6 @@ INSERT INTO "public"."tag" VALUES (5, '台北美食');
 INSERT INTO "public"."tag" VALUES (6, '皮卡皮卡');
 INSERT INTO "public"."tag" VALUES (7, '天氣好好喔喔喔');
 INSERT INTO "public"."tag" VALUES (8, '水啦');
-INSERT INTO "public"."tag" VALUES (9, '123');
-INSERT INTO "public"."tag" VALUES (10, '456');
 
 -- ----------------------------
 -- Table structure for tagLinkArticle
@@ -1472,8 +1463,6 @@ INSERT INTO "public"."tagLinkArticle" VALUES (7, 3, 7, NULL);
 INSERT INTO "public"."tagLinkArticle" VALUES (8, 3, 8, NULL);
 INSERT INTO "public"."tagLinkArticle" VALUES (9, 4, 1, NULL);
 INSERT INTO "public"."tagLinkArticle" VALUES (10, 2, 3, NULL);
-INSERT INTO "public"."tagLinkArticle" VALUES (11, 10, 9, NULL);
-INSERT INTO "public"."tagLinkArticle" VALUES (12, 10, 10, NULL);
 
 -- ----------------------------
 -- View structure for articleListDataView
@@ -1515,116 +1504,157 @@ CREATE VIEW "public"."articleTagView" AS  SELECT "artiView"."artiNum",
   ORDER BY "artiView"."artiNum" DESC;
 
 -- ----------------------------
+-- View structure for recommendListDataView
+-- ----------------------------
+DROP VIEW IF EXISTS "public"."recommendListDataView";
+CREATE VIEW "public"."recommendListDataView" AS  SELECT "A"."recomNum",
+    "A"."recomDateTime",
+    "A"."recomHead",
+    "A"."recomCont",
+    "A"."recomClass",
+    "A"."likeCount",
+    count(mess."recomNum") AS "messCount"
+   FROM (( SELECT recom."recomNum",
+            to_char(recom."recomDateTime", 'YYYY-MM-DD'::text) AS "recomDateTime",
+            recom."recomHead",
+            recom."recomCont",
+                CASE
+                    WHEN ((recom."recomClass")::text = 'movie'::text) THEN '電影'::text
+                    WHEN ((recom."recomClass")::text = 'music'::text) THEN '音樂'::text
+                    WHEN ((recom."recomClass")::text = 'book'::text) THEN '書籍'::text
+                    WHEN ((recom."recomClass")::text = 'exhibition'::text) THEN '展覽'::text
+                    ELSE NULL::text
+                END AS "recomClass",
+            count("Like"."recomNum") AS "likeCount"
+           FROM (recommend recom
+             LEFT JOIN "recommendLike" "Like" ON ((recom."recomNum" = "Like"."recomNum")))
+          GROUP BY recom."recomNum", recom."recomDateTime", recom."recomHead", recom."recomCont", recom."recomClass") "A"
+     LEFT JOIN "recommendMessage" mess ON (("A"."recomNum" = mess."recomNum")))
+  GROUP BY "A"."recomNum", "A"."recomDateTime", "A"."recomHead", "A"."recomCont", "A"."recomClass", "A"."likeCount"
+  ORDER BY "A"."recomDateTime" DESC;
+
+-- ----------------------------
+-- View structure for recommendTagView
+-- ----------------------------
+DROP VIEW IF EXISTS "public"."recommendTagView";
+CREATE VIEW "public"."recommendTagView" AS  SELECT "recomView"."recomNum",
+    tag."tagName"
+   FROM (("recommendListDataView" "recomView"
+     JOIN "tagLinkArticle" "tagLink" ON (("recomView"."recomNum" = "tagLink"."recomNum")))
+     JOIN tag ON ((tag."tagNum" = "tagLink"."tagNum")))
+  ORDER BY "recomView"."recomNum" DESC;
+
+-- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
-SELECT setval('"public"."articleLike_artiLikeNum_seq"', 6, false);
+SELECT setval('"public"."articleLike_artiLikeNum_seq"', 7, false);
 ALTER SEQUENCE "public"."articleLike_artiLikeNum_seq1"
 OWNED BY "public"."articleLike"."artiLikeNum";
-SELECT setval('"public"."articleLike_artiLikeNum_seq1"', 27, true);
-SELECT setval('"public"."articleMessageLike_artiMessLikeNum_seq"', 6, false);
+SELECT setval('"public"."articleLike_artiLikeNum_seq1"', 9, true);
+SELECT setval('"public"."articleMessageLike_artiMessLikeNum_seq"', 7, false);
 ALTER SEQUENCE "public"."articleMessageLike_artiMessLikeNum_seq1"
 OWNED BY "public"."articleMessageLike"."artiMessLikeNum";
-SELECT setval('"public"."articleMessageLike_artiMessLikeNum_seq1"', 25, true);
-SELECT setval('"public"."articleMessage_artiMessNum_seq"', 6, false);
+SELECT setval('"public"."articleMessageLike_artiMessLikeNum_seq1"', 19, true);
+SELECT setval('"public"."articleMessage_artiMessNum_seq"', 7, false);
 ALTER SEQUENCE "public"."articleMessage_artiMessNum_seq1"
 OWNED BY "public"."articleMessage"."artiMessNum";
 SELECT setval('"public"."articleMessage_artiMessNum_seq1"', 17, true);
-SELECT setval('"public"."article_artiNum_seq"', 6, false);
+SELECT setval('"public"."article_artiNum_seq"', 7, false);
 ALTER SEQUENCE "public"."article_artiNum_seq1"
 OWNED BY "public"."article"."artiNum";
-SELECT setval('"public"."article_artiNum_seq1"', 11, true);
-SELECT setval('"public"."bookStyleSet_bookStyleSetNum_seq"', 6, false);
+SELECT setval('"public"."article_artiNum_seq1"', 9, true);
+SELECT setval('"public"."bookStyleSet_bookStyleSetNum_seq"', 7, false);
 ALTER SEQUENCE "public"."bookStyleSet_bookStyleSetNum_seq1"
 OWNED BY "public"."bookStyleSet"."bookStyleSetNum";
 SELECT setval('"public"."bookStyleSet_bookStyleSetNum_seq1"', 4, true);
-SELECT setval('"public"."bookStyle_bookStyleNum_seq"', 6, false);
+SELECT setval('"public"."bookStyle_bookStyleNum_seq"', 7, false);
 ALTER SEQUENCE "public"."bookStyle_bookStyleNum_seq1"
 OWNED BY "public"."bookStyle"."bookStyleNum";
 SELECT setval('"public"."bookStyle_bookStyleNum_seq1"', 4, true);
-SELECT setval('"public"."book_bookNum_seq"', 6, false);
+SELECT setval('"public"."book_bookNum_seq"', 7, false);
 ALTER SEQUENCE "public"."book_bookNum_seq1"
 OWNED BY "public"."book"."bookNum";
 SELECT setval('"public"."book_bookNum_seq1"', 4, true);
-SELECT setval('"public"."exhibitionStyleSet_exhStyleSetNum_seq"', 6, false);
+SELECT setval('"public"."exhibitionStyleSet_exhStyleSetNum_seq"', 7, false);
 ALTER SEQUENCE "public"."exhibitionStyleSet_exhStyleSetNum_seq1"
 OWNED BY "public"."exhibitionStyleSet"."exhStyleSetNum";
 SELECT setval('"public"."exhibitionStyleSet_exhStyleSetNum_seq1"', 4, true);
-SELECT setval('"public"."exhibitionStyle_exhStyleNum_seq"', 6, false);
+SELECT setval('"public"."exhibitionStyle_exhStyleNum_seq"', 7, false);
 ALTER SEQUENCE "public"."exhibitionStyle_exhStyleNum_seq1"
 OWNED BY "public"."exhibitionStyle"."exhStyleNum";
 SELECT setval('"public"."exhibitionStyle_exhStyleNum_seq1"', 4, true);
-SELECT setval('"public"."exhibition_exhNum_seq"', 6, false);
+SELECT setval('"public"."exhibition_exhNum_seq"', 7, false);
 ALTER SEQUENCE "public"."exhibition_exhNum_seq1"
 OWNED BY "public"."exhibition"."exhNum";
 SELECT setval('"public"."exhibition_exhNum_seq1"', 4, true);
 ALTER SEQUENCE "public"."image_imgNum_seq"
 OWNED BY "public"."image"."imgNum";
-SELECT setval('"public"."image_imgNum_seq"', 3, true);
-SELECT setval('"public"."memberCollection_collNum_seq"', 6, false);
+SELECT setval('"public"."image_imgNum_seq"', 2, false);
+SELECT setval('"public"."memberCollection_collNum_seq"', 7, false);
 ALTER SEQUENCE "public"."memberCollection_collNum_seq1"
 OWNED BY "public"."memberCollection"."collNum";
-SELECT setval('"public"."memberCollection_collNum_seq1"', 11, true);
+SELECT setval('"public"."memberCollection_collNum_seq1"', 7, true);
 ALTER SEQUENCE "public"."memberMessage_memMessNum_seq"
 OWNED BY "public"."memberMessage"."memMessNum";
 SELECT setval('"public"."memberMessage_memMessNum_seq"', 5, true);
-SELECT setval('"public"."movieStyleSet_movStyleSetNum_seq"', 6, false);
+SELECT setval('"public"."movieStyleSet_movStyleSetNum_seq"', 7, false);
 ALTER SEQUENCE "public"."movieStyleSet_movStyleSetNum_seq1"
 OWNED BY "public"."movieStyleSet"."movStyleSetNum";
 SELECT setval('"public"."movieStyleSet_movStyleSetNum_seq1"', 4, true);
-SELECT setval('"public"."movieStyle_movStyleNum_seq"', 6, false);
+SELECT setval('"public"."movieStyle_movStyleNum_seq"', 7, false);
 ALTER SEQUENCE "public"."movieStyle_movStyleNum_seq1"
 OWNED BY "public"."movieStyle"."movStyleNum";
 SELECT setval('"public"."movieStyle_movStyleNum_seq1"', 6, true);
-SELECT setval('"public"."movie_movNum_seq"', 6, false);
+SELECT setval('"public"."movie_movNum_seq"', 7, false);
 ALTER SEQUENCE "public"."movie_movNum_seq1"
 OWNED BY "public"."movie"."movNum";
 SELECT setval('"public"."movie_movNum_seq1"', 4, true);
-SELECT setval('"public"."musicStyleSet_musStyleSetNum_seq"', 6, false);
+SELECT setval('"public"."musicStyleSet_musStyleSetNum_seq"', 7, false);
 ALTER SEQUENCE "public"."musicStyleSet_musStyleSetNum_seq1"
 OWNED BY "public"."musicStyleSet"."musStyleSetNum";
 SELECT setval('"public"."musicStyleSet_musStyleSetNum_seq1"', 3, true);
-SELECT setval('"public"."musicStyle_musStyleNum_seq"', 6, false);
+SELECT setval('"public"."musicStyle_musStyleNum_seq"', 7, false);
 ALTER SEQUENCE "public"."musicStyle_musStyleNum_seq1"
 OWNED BY "public"."musicStyle"."musStyleNum";
 SELECT setval('"public"."musicStyle_musStyleNum_seq1"', 6, true);
-SELECT setval('"public"."music_musNum_seq"', 6, false);
+SELECT setval('"public"."music_musNum_seq"', 7, false);
 ALTER SEQUENCE "public"."music_musNum_seq1"
 OWNED BY "public"."music"."musNum";
 SELECT setval('"public"."music_musNum_seq1"', 3, true);
-SELECT setval('"public"."orddetails_serno_seq"', 3004, false);
-SELECT setval('"public"."prefer_preferNum_seq"', 6, false);
+SELECT setval('"public"."orddetails_serno_seq"', 3005, false);
+SELECT setval('"public"."prefer_preferNum_seq"', 7, false);
 ALTER SEQUENCE "public"."prefer_preferNum_seq1"
 OWNED BY "public"."prefer"."preferNum";
 SELECT setval('"public"."prefer_preferNum_seq1"', 9, true);
-SELECT setval('"public"."recommendClass_recomClassNum_seq"', 6, false);
-SELECT setval('"public"."recommendLike_recomLikeNum_seq"', 6, false);
+SELECT setval('"public"."recommendClass_recomClassNum_seq"', 7, false);
+SELECT setval('"public"."recommendLike_recomLikeNum_seq"', 7, false);
 ALTER SEQUENCE "public"."recommendLike_recomLikeNum_seq1"
 OWNED BY "public"."recommendLike"."recomLikeNum";
-SELECT setval('"public"."recommendLike_recomLikeNum_seq1"', 10, true);
-SELECT setval('"public"."recommendMessageLike_recomMessLikeNum_seq"', 6, false);
+SELECT setval('"public"."recommendLike_recomLikeNum_seq1"', 8, true);
+SELECT setval('"public"."recommendMessageLike_recomMessLikeNum_seq"', 7, false);
 ALTER SEQUENCE "public"."recommendMessageLike_recomMessLikeNum_seq1"
 OWNED BY "public"."recommendMessageLike"."recomMessLikeNum";
-SELECT setval('"public"."recommendMessageLike_recomMessLikeNum_seq1"', 20, true);
-SELECT setval('"public"."recommendMessage_recomMessNum_seq"', 6, false);
+SELECT setval('"public"."recommendMessageLike_recomMessLikeNum_seq1"', 18, true);
+SELECT setval('"public"."recommendMessage_recomMessNum_seq"', 7, false);
 ALTER SEQUENCE "public"."recommendMessage_recomMessNum_seq1"
 OWNED BY "public"."recommendMessage"."recomMessNum";
 SELECT setval('"public"."recommendMessage_recomMessNum_seq1"', 17, true);
-SELECT setval('"public"."recommend_recomNum_seq"', 6, false);
+SELECT setval('"public"."recommend_recomNum_seq"', 7, false);
 ALTER SEQUENCE "public"."recommend_recomNum_seq1"
 OWNED BY "public"."recommend"."recomNum";
 SELECT setval('"public"."recommend_recomNum_seq1"', 9, true);
-SELECT setval('"public"."report_reportNum_seq"', 6, false);
+SELECT setval('"public"."report_reportNum_seq"', 7, false);
 ALTER SEQUENCE "public"."report_reportNum_seq1"
 OWNED BY "public"."report"."reportNum";
 SELECT setval('"public"."report_reportNum_seq1"', 7, true);
-SELECT setval('"public"."tagLinkArticle_tagLinkArtiNum_seq"', 6, false);
+SELECT setval('"public"."tagLinkArticle_tagLinkArtiNum_seq"', 7, false);
 ALTER SEQUENCE "public"."tagLinkArticle_tagLinkArtiNum_seq1"
 OWNED BY "public"."tagLinkArticle"."tagLinkArtiNum";
-SELECT setval('"public"."tagLinkArticle_tagLinkArtiNum_seq1"', 13, true);
-SELECT setval('"public"."tag_tagNum_seq"', 6, false);
+SELECT setval('"public"."tagLinkArticle_tagLinkArtiNum_seq1"', 11, true);
+SELECT setval('"public"."tag_tagNum_seq"', 7, false);
 ALTER SEQUENCE "public"."tag_tagNum_seq1"
 OWNED BY "public"."tag"."tagNum";
-SELECT setval('"public"."tag_tagNum_seq1"', 11, true);
+SELECT setval('"public"."tag_tagNum_seq1"', 9, true);
 
 -- ----------------------------
 -- Primary Key structure for table article

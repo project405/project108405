@@ -1,8 +1,13 @@
 ﻿-- 刪除 view
+-- article
 DROP VIEW IF EXISTS "public"."articleTagView";
 DROP VIEW IF EXISTS "public"."articleListDataView";
 
+-- recommend 
+DROP VIEW IF EXISTS "public"."recommendTagView";
+DROP VIEW IF EXISTS "public"."recommendListDataView";
 
+----------------------
 ----------------------
 -- articleList View --
 -----------------------
@@ -42,17 +47,74 @@ CREATE VIEW "articleListDataView" AS
 	
 	
 	
-------------------
---   tag View   --
------------------- 
+--------------------------
+--   article tag View   --
+--------------------------
 -- 標籤
 CREATE VIEW "articleTagView" AS
 	SELECT  "artiView"."artiNum"
 		,"tag"."tagName"
 	FROM "articleListDataView" AS "artiView"
-	INNER JOIN "tagLinkArticle" AS "tagLink"
-		ON	"artiView"."artiNum" = "tagLink"."artiNum"
-	INNER JOIN "tag"
-		ON "tag"."tagNum" = "tagLink"."tagNum"
-	ORDER BY "artiView"."artiNum" DESC;
+		INNER JOIN "tagLinkArticle" AS "tagLink"
+			ON	"artiView"."artiNum" = "tagLink"."artiNum"
+		INNER JOIN "tag"
+			ON "tag"."tagNum" = "tagLink"."tagNum"
+	ORDER BY "artiView"."artiNum" DESC	;
+	
+
+-----------------------------
+--   recommendList View   --
+------------------ ---------	
+------ 本週推薦資訊 ------
+CREATE VIEW "recommendListDataView" AS
+	SELECT "A"."recomNum"
+		,"A"."recomDateTime"
+		,"A"."recomHead"
+		,"A"."recomCont"
+		,"A"."recomClass"
+		,"A"."likeCount"
+		,count("mess"."recomNum") AS "messCount"
+	FROM(	
+		SELECT "recom"."recomNum"
+			,to_char("recom"."recomDateTime", 'YYYY-MM-DD') AS "recomDateTime"
+			,"recom"."recomHead"
+			,"recom"."recomCont"
+			, CASE WHEN "recom"."recomClass" = 'movie' THEN '電影' 
+						 WHEN "recom"."recomClass" = 'music' THEN '音樂'
+						 WHEN "recom"."recomClass" = 'book'  THEN '書籍'
+						 WHEN "recom"."recomClass" = 'exhibition' THEN '展覽'
+			END AS "recomClass"
+			,count("Like"."recomNum") AS "likeCount"
+		FROM "recommend" AS "recom"
+			LEFT JOIN "recommendLike" AS "Like"
+				ON "recom"."recomNum" = "Like"."recomNum"
+		GROUP BY "recom"."recomNum" 
+			,"recomDateTime"
+			,"recom"."recomHead"
+			,"recom"."recomCont"
+			,"recomClass" ) AS "A"
+	LEFT JOIN "recommendMessage" AS "mess"
+		ON "A"."recomNum" = "mess"."recomNum"
+	GROUP BY "A"."recomNum"
+		,"A"."recomDateTime"
+		,"A"."recomHead"
+		,"A"."recomCont"
+		,"A"."recomClass"
+		,"A"."likeCount"
+		
+ORDER BY "A"."recomDateTime" DESC;
+
+----------------------------
+--   recommend tag View   --
+----------------------------
+-- 標籤
+CREATE VIEW "recommendTagView" AS
+	SELECT  "recomView"."recomNum"
+		,"tag"."tagName"
+	FROM "recommendListDataView" AS "recomView"
+		INNER JOIN "tagLinkArticle" AS "tagLink"
+			ON	"recomView"."recomNum" = "tagLink"."recomNum"
+		INNER JOIN "tag"
+			ON "tag"."tagNum" = "tagLink"."tagNum"
+	ORDER BY "recomView"."recomNum" DESC	;
 	

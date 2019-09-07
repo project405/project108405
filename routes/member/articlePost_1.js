@@ -45,7 +45,7 @@ router.post('/', function (req, res, next) {
     });
 
     if (memID == undefined || memID == null) {
-        res.render('logIn');
+        res.render('login');
     } else {
         // console.log(req.file,imgType);
         if (typeof (req.file) != 'undefined') {

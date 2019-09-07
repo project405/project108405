@@ -8,7 +8,7 @@ router.get('/:recomNum', async function (req, res, next) {
     var recomNum = req.params.recomNum;   //取出參數
     var memID = req.session.memID;
     if (memID == undefined || memID == null) {
-        res.render('logIn');
+        res.render('login');
     } else {
         collection.getOneColleRecommend(recomNum, memID).then(data => {
             for (var i = 0; i < data[0].length; i++) {

@@ -16,10 +16,13 @@ var getRecommendList = async function (memID) {
     // -----------  取得文章清單 --------------
     await sql('SELECT * FROM "recommendListDataView"')
         .then((data) => {
-            console.log(data.rows);
-            RecommendList = data.rows;
+            if (data.rows != undefined) {
+                RecommendList = data.rows
+            } else {
+                RecommendList = undefined
+            }
         }, (error) => {
-            RecommendList = null;
+            RecommendList = undefined;
         });
 
     //取得權限
@@ -48,6 +51,7 @@ var getRecommendList = async function (memID) {
     result[1] = [memID];
     result[2] = checkAuthority;
     result[3] = imgs ;
+    console.log(result);
     return result;
 }
 

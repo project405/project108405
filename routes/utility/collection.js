@@ -368,6 +368,7 @@ var getCollRecomClassList = async function (memID, recomClass) {
     result[1] = imgs ;
     result[2] = checkAuthority ;
     result[3] = [memID];
+    console.log(result);
 
     return result ;
 

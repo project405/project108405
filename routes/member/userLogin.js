@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 
 //增加引用函式
-const logIn = require('../utility/logIn');
+const login = require('../utility/login');
 const member = require('../utility/member');
 
 //接收POST請求
 router.post('/', function (req, res, next) {
     var memID = req.body.memID;                 //取得帳號
     var memPass = req.body.memPass;     //取得密碼
-    logIn.userLogIn(memID, memPass).then(d => {
+    login.userLogin(memID, memPass).then(d => {
         if (d == null) {
             req.session.memID = null;
             req.session.memPass = null;

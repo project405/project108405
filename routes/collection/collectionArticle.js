@@ -7,7 +7,7 @@ const collection = require('../utility/collection');
 /* GET home page. */
 router.get('/', function (req, res, next) {
   if (req.session.memID == null || req.session.memID == undefined) {
-    res.render('logIn');
+    res.render('login');
   } else {
     collection.getCollArticle(req.session.memID).then(data => {
       console.log(data);

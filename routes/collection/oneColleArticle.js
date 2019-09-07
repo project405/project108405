@@ -8,7 +8,7 @@ router.get('/:artiNum', async function (req, res, next) {
     var artiNum = req.params.artiNum;   //取出參數
     var memID = req.session.memID;
     if (memID == undefined || memID == null) {
-        res.render("logIn");
+        res.render("login");
     } else {
         article.getOneArticle(artiNum, memID).then(data => {
             for (var i = 0; i < data[0].length; i++) {

@@ -6,7 +6,7 @@ const member = require('../utility/member');
 router.post('/', function (req, res, next) {
     var memID = req.session.memID;
     if (memID == undefined || memID == null) {
-        res.render('logIn');
+        res.render('login');
     } else {
         var reportData = {
             "artiNum": req.body.artiNum,

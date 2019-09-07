@@ -4,8 +4,6 @@
 DROP TABLE IF EXISTS "public"."member";
 CREATE TABLE "public"."member" (
   "memID" varchar(100) COLLATE "pg_catalog"."default" NOT NULL,
-"lineID" varchar(100) COLLATE "pg_catalog"."default",
-"googleID" varchar(100) COLLATE "pg_catalog"."default",
   "memPass" varchar(100) COLLATE "pg_catalog"."default" ,
   "memBirth" date	,
 	"memName" VARCHAR(15) COLLATE "pg_catalog"."default" ,
@@ -424,24 +422,3 @@ CREATE TABLE "public"."report" (
 FOREIGN KEY("recomMessNum") REFERENCES "recommendMessage"("recomMessNum")ON DELETE CASCADE  ON UPDATE RESTRICT 	
 );
 	ALTER TABLE "public"."report" ADD CONSTRAINT "report_pkey" PRIMARY KEY ("reportNum");
-
--- ------------------------------
---    Create image table 
--- ------------------------------
-DROP TABLE IF EXISTS "public"."image";
-CREATE TABLE "public"."image" (
-  "imgNum" serial , 
-  "memID" varchar(100)	COLLATE "pg_catalog"."default" ,
-	"artiNum" int4 ,
-"recomNum" int4,
-"artiMessNum" int4 ,
-"recomMessNum" int4 ,
-"imgName" text ,
-"imgDateTime" timestamp	,
-FOREIGN KEY("memID") REFERENCES "member"("memID")ON DELETE CASCADE  ON UPDATE RESTRICT ,
-FOREIGN KEY("artiNum") REFERENCES "article"("artiNum")ON DELETE CASCADE  ON UPDATE RESTRICT ,
-FOREIGN KEY("artiMessNum") REFERENCES "articleMessage"("artiMessNum")ON DELETE CASCADE  ON UPDATE RESTRICT ,
-FOREIGN KEY("recomMessNum") REFERENCES "recommendMessage"("recomMessNum")ON DELETE CASCADE  ON UPDATE RESTRICT 
-);
-	ALTER TABLE "public"."image" ADD CONSTRAINT "image_pkey" PRIMARY KEY ("imgNum");
-

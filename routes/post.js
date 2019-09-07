@@ -6,7 +6,7 @@ const member = require('../routes/utility/member');
 router.get('/', function (req, res, next) {
    var postData = [];
    if (req.session.memID == undefined || req.session.memID == null) {
-      res.render('logIn');
+      res.render('login');
    } else {
       postData.push(req.session.memID);
       member.checkAuthority(req.session.memID).then(data => {

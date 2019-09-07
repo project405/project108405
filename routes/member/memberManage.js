@@ -8,7 +8,7 @@ const signUp = require('../utility/signUp');
 router.get('/', function (req, res, next) {
     var memID = req.session.memID;
     if (memID == null || memID == undefined) {
-        res.render('logIn');
+        res.render('login');
     } else {
         member.checkAuthority(memID).then(data => {
             var mydata = [] ;

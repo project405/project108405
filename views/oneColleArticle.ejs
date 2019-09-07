@@ -53,7 +53,7 @@
                 <!-- info -->
                 <div class="info">
                     <!-- 愛心按鈕 -->
-                    <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/logIn'"> <i
+                    <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/login'"> <i
                             class="fab fa-gratipay"></i><a><%= items[2][0].count %></a></button>
                     <button type="button" id="addLike" class="btn postInfo"
                         onclick=<%= "addLike(" + items[0][0].artiNum + ")" %>> <i class="fab fa-gratipay"></i><a
@@ -96,7 +96,7 @@
                             class="fas fa-comment-dots"></i><a><%= items[3][0].count %></a></button>
 
                     <!-- 收藏按鈕 -->
-                    <button type="button" id="unLogIn" class="btn postInfo" onclick="location.href='/logIn'">
+                    <button type="button" id="unLogIn" class="btn postInfo" onclick="location.href='/login'">
                         <i class="far fa-bookmark"></i></button>
 
                     <button type="button" id="addColle" class="btn postInfo"
@@ -352,7 +352,7 @@
                         <div class="col-sm-3 ml-auto"> </div>
                         <button type="button"
                             id=<%= "MessLikeUnLogIn" + items[0][0].artiNum + items[1][i].artiMessNum %> class="btn like"
-                            onclick="location.href='/logIn'"><i
+                            onclick="location.href='/login'"><i
                                 class="fab fa-gratipay"></i><a><%= items[4][i].count %></a></button>
 
                         <button type="button" id=<%= "MessAddLike"+ items[0][0].artiNum + items[1][i].artiMessNum %>

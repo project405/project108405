@@ -76,7 +76,7 @@
                                 </div>
 
                                 <!-- imgs  -->
-                                <% if(items[4].length != undefined) { %>
+                                <% if(items[4] != undefined) { %>
                                     <% for(var j = 0 ; j<items[4].length ; j++) { %>
                                         <% if (items[0][i].artiNum == items[4][j].artiNum){ %>
                                             <div class="wrapperCard card-img-top col-lg-3"
@@ -92,7 +92,7 @@
                         <div class="info">
                             <!-- 愛心按鈕 -->
                             <button type="button" id=<%= "LikeUnLogIn" + items[0][i].artiNum %> class="btn postInfo" style="display:none"
-                                onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
+                                onclick="location.href='/login'"><i class="fab fa-gratipay"></i>
                                 <a><%= items[0][i].likeCount %></a></button>
                             <button type="button" id=<%="addLike" + items[0][i].artiNum %> class="btn postInfo" style="display:none"
                                 onclick=<%= "addLike(" + items[0][i].artiNum + ")" %>>
@@ -141,7 +141,7 @@
 
                             <!-- 收藏按鈕 -->
                             <button type="button" id=<%= "unLogIn" + items[0][i].artiNum %> class="btn postInfo"
-                                display: none" onclick="location.href='/logIn'">
+                                display: none" onclick="location.href='/login'">
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%=  "addColle" + items[0][i].artiNum %> class="btn postInfo"
                                 display: none" onclick=<%= "addColle(" + items[0][i].artiNum + ")" %>>
