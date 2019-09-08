@@ -246,7 +246,7 @@ bot.on('message', function(event) {
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
 
-            let msg = '';
+            
             var arr = [0, 1, 2, 3, 4,];
             var result = [];
             var ranNum = 3;
