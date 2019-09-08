@@ -108,10 +108,11 @@ bot.on('postback', function(event) {
             const userId = profile.userId;
             const data = event.postback.data;
             console.log(data)
-            
-            if (data == '收藏'){
-                event.reply({'type':'text', 'text':"https://project108405.herokuapp.com/logIn?"+userId});
-            }
+            localStorage.setItem('userId', JSON.stringify(userId));
+            console.log(JSON.parse(localStorage.getItem('userId')));
+            // if (data == '收藏'){
+            //     event.reply({'type':'text', 'text':"https://project108405.herokuapp.com/logIn?"+userId});
+            // }
         
     });
     // let recom_class = ['movie','music','book','exhibition'];
