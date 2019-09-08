@@ -112,7 +112,7 @@ bot.on('postback', function(event) {
         console.log(data)
         
         if (data == '收藏'){
-            console.log('成功')
+            event.reply({'type':'text', 'text':"https://project108405.herokuapp.com/logIn"+userId})
         }
         
 
