@@ -111,77 +111,79 @@ bot.on('postback', function(event) {
         const data = event.postback.data;
         console.log(data)
         
-        
+        if (data == '收藏'){
+            console.log('成功')
+        }
         
 
         //---------------使用map記得傳入item參數getRecomClassList
-        recommend.getFourRecomClassList().then(d =>{
-            // console.log(d[index]);
+        // recommend.getFourRecomClassList().then(d =>{
+        //     // console.log(d[index]);
             
-            //存放recommend/movie1.content
-            // const recommendData = d[0][0].recomCont;
+        //     //存放recommend/movie1.content
+        //     // const recommendData = d[0][0].recomCont;
 
-            if (data == 'movie'){
-                return event.reply([
-                    {
-                        "type": "text",
-                        "text": d[0][0].recomHead
-                    },
-                    {
-                        "type": "text",
-                        "text": d[0][0].recomCont
-                    }
-                ]);		
-            }else if(data == 'music'){
-                return event.reply([
-                    {
-                        "type": "text",
-                        "text": d[1][0].recomHead
-                    },
-                    {
-                        "type": "text",
-                        "text": d[1][0].recomCont
-                    }
-                ]);		
-            }else if(data == 'book'){
-                return event.reply([
-                    {
-                        "type": "text",
-                        "text": d[2][0].recomHead
-                    },
-                    {
-                        "type": "text",
-                        "text": d[2][0].recomCont
-                    }
-                ]);		
-            }else if(data == 'exhibition'){
-                return event.reply([
-                    {
-                        "type": "text",
-                        "text": d[3][0].recomHead
-                    },
-                    {
-                        "type": "text",
-                        "text": d[3][0].recomCont
-                    }
-                ]);		
-            }   
+        //     if (data == 'movie'){
+        //         return event.reply([
+        //             {
+        //                 "type": "text",
+        //                 "text": d[0][0].recomHead
+        //             },
+        //             {
+        //                 "type": "text",
+        //                 "text": d[0][0].recomCont
+        //             }
+        //         ]);		
+        //     }else if(data == 'music'){
+        //         return event.reply([
+        //             {
+        //                 "type": "text",
+        //                 "text": d[1][0].recomHead
+        //             },
+        //             {
+        //                 "type": "text",
+        //                 "text": d[1][0].recomCont
+        //             }
+        //         ]);		
+        //     }else if(data == 'book'){
+        //         return event.reply([
+        //             {
+        //                 "type": "text",
+        //                 "text": d[2][0].recomHead
+        //             },
+        //             {
+        //                 "type": "text",
+        //                 "text": d[2][0].recomCont
+        //             }
+        //         ]);		
+        //     }else if(data == 'exhibition'){
+        //         return event.reply([
+        //             {
+        //                 "type": "text",
+        //                 "text": d[3][0].recomHead
+        //             },
+        //             {
+        //                 "type": "text",
+        //                 "text": d[3][0].recomCont
+        //             }
+        //         ]);		
+        //     }   
     
-            event.source.profile().then(function (profile) {
-                const userName = profile.displayName;
+        //     event.source.profile().then(function (profile) {
+        //         const userName = profile.displayName;
                 
-                return event.reply([
-                    {
-                        "type": "text",
-                        "text": data
-                    },
-                    {
-                        "type": "text",
-                        "text": d[0][0].recomCont
-                    }
-                ]);		
-            });
-        });
+        //         return event.reply([
+        //             {
+        //                 "type": "text",
+        //                 "text": data
+        //             },
+        //             {
+        //                 "type": "text",
+        //                 "text": d[0][0].recomCont
+        //             }
+        //         ]);		
+        //     });
+        // });
     // });
     
 });
@@ -293,9 +295,9 @@ bot.on('message', function(event) {
                               },
                               {
                                 //-------!需克服收藏資料寫入資料庫的問題
-                                  "type": "message",
+                                  "type": "postback",
                                   "label": "新增至我的收藏",
-                                  "text": "收藏成功"
+                                  "data": "收藏"
                               },
                               {
                                   "type": "uri",
