@@ -102,18 +102,25 @@ var bot = linebot({
 // 機器人接受回覆的處理
 //========================================
 bot.on('postback', function(event) { 
+    event.source.profile().then(
+        function (profile) {
+            const userName = profile.displayName;
+            const userId = profile.userId;
+            const data = event.postback.data;
+            console.log(data)
+            
+            if (data == '收藏'){
+                event.reply({'type':'text', 'text':"https://project108405.herokuapp.com/logIn"+userId});
+            }
+        
+    });
     // let recom_class = ['movie','music','book','exhibition'];
     // const userId = event.source.userId;
     // var recom = recom_class.map(function(item,index){
         // console.log(item)
         // console.log(index)
         //寫一個方法判斷postback回來是電影、音樂等等
-        const data = event.postback.data;
-        console.log(data)
-        
-        if (data == '收藏'){
-            event.reply({'type':'text', 'text':"https://project108405.herokuapp.com/logIn"+userId})
-        }
+       
         
 
         //---------------使用map記得傳入item參數getRecomClassList
