@@ -108,8 +108,8 @@ bot.on('postback', function(event) {
             const userId = profile.userId;
             const data = event.postback.data;
             console.log(data)
-            localStorage.setItem('item', userId);
-            console.log(localStorage.getItem('item'));
+            storage.setItem('item', userId);
+            console.log(storage.getItem('item'));
             // if (data == '收藏'){
             //     event.reply({'type':'text', 'text':"https://project108405.herokuapp.com/logIn?"+userId});
             // }
