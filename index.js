@@ -105,16 +105,29 @@ var bot = linebot({
 bot.on('postback', function(event) { 
     event.source.profile().then(
         function (profile) {
-            
+            liff.init(
+                data => {
+                  // Now you can call LIFF API
+                  const userId = data.context.userId;
+                  console.log(userId)
+                },
+                err => {
+                  // LIFF initialization failed
+                }
+              );
             const userName = profile.displayName;
             const userId = profile.userId;
             const data = event.postback.data;
             console.log(data)
             // logIn.userLogIn(userId){
-                
+            
             // }
             if (data == '收藏'){
-                event.reply({'type':'text', 'text':"https://project108405.herokuapp.com/logIn?"+userId});
+                if (!this.isLogin) {
+                    event.reply({'type':'text', 'text':`https://project108405.herokuapp.com/logIn?${userId}`});
+                } else {
+                    alert('success')
+                }
             }else{
                       //---------------使用map記得傳入item參數getRecomClassList
                 recommend.getFourRecomClassList().then(d =>{
@@ -261,25 +274,12 @@ bot.on('message', function(event) {
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
 
-            
-            // var arr = [0, 1, 2, 3, 4,];
-            // var result = [];
-            // var ranNum = 3;
-            // for (var i = 0; i < ranNum; i++) {
-            //     var ran = Math.floor(Math.random() * (arr.length - i));
-            //     result.push(arr[ran]);
-            //     arr[ran] = arr[arr.length - i];
-            //     arr.splice((arr.length - i),1);
-                
-            // };
             console.log(data[1])
             event.reply([
                 { type: 'text', text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][0].articleNum}` },
                 { type: 'text', text: '時間：' + data[1][1].artiDateTime  + '\n'+ '標題：' + data[1][1].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][1].articleNum}` },
                 { type: 'text', text: '時間：' + data[1][2].artiDateTime  + '\n'+ '標題：' + data[1][2].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][2].articleNum}` }
             ]);
-
-
 
         })
     };
