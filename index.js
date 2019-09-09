@@ -113,9 +113,9 @@ bot.on('postback', function(event) {
             // logIn.userLogIn(userId){
 
             // }
-            // if (data == '收藏'){
-            //     event.reply({'type':'text', 'text':"https://project108405.herokuapp.com/logIn?"+userId});
-            // }
+            if (data == '收藏'){
+                event.reply({'type':'text', 'text':"https://project108405.herokuapp.com/logIn?"+userId});
+            }
         
     });
     // let recom_class = ['movie','music','book','exhibition'];
