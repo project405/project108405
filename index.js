@@ -6,6 +6,7 @@ var express = require('express');
 //增加引用函式
 // const collection = require('./utility/collection');
 const index = require('./routes/utility/index');
+const logIn = require('./routes/utility/login');
 const recommend = require('./routes/utility/recommend');
 
 //----------------------------------------
@@ -104,12 +105,14 @@ var bot = linebot({
 bot.on('postback', function(event) { 
     event.source.profile().then(
         function (profile) {
+            
             const userName = profile.displayName;
             const userId = profile.userId;
             const data = event.postback.data;
             console.log(data)
-            storage.setItem('item', userId);
-            console.log(storage.getItem('item'));
+            logIn.userLogIn(userId){
+                
+            }
             // if (data == '收藏'){
             //     event.reply({'type':'text', 'text':"https://project108405.herokuapp.com/logIn?"+userId});
             // }
