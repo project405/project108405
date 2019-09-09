@@ -9,6 +9,12 @@
     <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/validateCode.js"></script>
+    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vconsole@3.2.0/dist/vconsole.min.js"></script>
+    <script>
+        var vConsole = new VConsole();
+    </script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -51,6 +57,7 @@
 
                 <input type="text" id="input" class="inputValidateCode" name="code" placeholder="輸入驗證碼" />
                 <input type="button" id="checkCode" class="code" onclick="createCode()" />
+                <input type="text" id="lineID" name="lineID" style="display:none;">
                 <span class="changeCode " href="#" onclick="createCode()"><i class="fas fa-sync-alt"></i></span><br>
 
                 <button type="button" class="btn btn-dark login" onclick="validateCode()" return false;>登入</button>
@@ -92,7 +99,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="/javascripts/active.js"></script>
-    <script src="/javascripts/validateCode.js"></script>
     <script src="/javascripts/navbar.js"></script>
 </body>
 
