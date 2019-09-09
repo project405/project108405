@@ -57,7 +57,7 @@ var getIndexData = async function (memID) {
         }
     }
     // -----------  熱門文章 --------------
-    await sql('SELECT * FROM "articleListDataView" ORDER BY "likeCount" DESC LIMIT 5')
+    await sql('SELECT * FROM "articleListDataView" ORDER BY "likeCount" DESC , "artiDateTime" DESC LIMIT 5')
         .then((data) => {
             
             if (!data.rows) {
