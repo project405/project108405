@@ -111,10 +111,79 @@ bot.on('postback', function(event) {
             const data = event.postback.data;
             console.log(data)
             // logIn.userLogIn(userId){
-
+                
             // }
             if (data == '收藏'){
                 event.reply({'type':'text', 'text':"https://project108405.herokuapp.com/logIn?"+userId});
+            }else{
+                      //---------------使用map記得傳入item參數getRecomClassList
+                recommend.getFourRecomClassList().then(d =>{
+                    // console.log(d[index]);
+                    
+                    //存放recommend/movie1.content
+                    // const recommendData = d[0][0].recomCont;
+
+                    if (data == 'movie'){
+                        return event.reply([
+                            {
+                                "type": "text",
+                                "text": d[0][0].recomHead
+                            },
+                            {
+                                "type": "text",
+                                "text": d[0][0].recomCont
+                            }
+                        ]);		
+                    }else if(data == 'music'){
+                        return event.reply([
+                            {
+                                "type": "text",
+                                "text": d[1][0].recomHead
+                            },
+                            {
+                                "type": "text",
+                                "text": d[1][0].recomCont
+                            }
+                        ]);		
+                    }else if(data == 'book'){
+                        return event.reply([
+                            {
+                                "type": "text",
+                                "text": d[2][0].recomHead
+                            },
+                            {
+                                "type": "text",
+                                "text": d[2][0].recomCont
+                            }
+                        ]);		
+                    }else if(data == 'exhibition'){
+                        return event.reply([
+                            {
+                                "type": "text",
+                                "text": d[3][0].recomHead
+                            },
+                            {
+                                "type": "text",
+                                "text": d[3][0].recomCont
+                            }
+                        ]);		
+                    }   
+            
+                    event.source.profile().then(function (profile) {
+                        const userName = profile.displayName;
+                        
+                        return event.reply([
+                            {
+                                "type": "text",
+                                "text": data
+                            },
+                            {
+                                "type": "text",
+                                "text": d[0][0].recomCont
+                            }
+                        ]);		
+                    });
+                });
             }
         
     });
@@ -127,74 +196,7 @@ bot.on('postback', function(event) {
        
         
 
-        //---------------使用map記得傳入item參數getRecomClassList
-        // recommend.getFourRecomClassList().then(d =>{
-        //     // console.log(d[index]);
-            
-        //     //存放recommend/movie1.content
-        //     // const recommendData = d[0][0].recomCont;
-
-        //     if (data == 'movie'){
-        //         return event.reply([
-        //             {
-        //                 "type": "text",
-        //                 "text": d[0][0].recomHead
-        //             },
-        //             {
-        //                 "type": "text",
-        //                 "text": d[0][0].recomCont
-        //             }
-        //         ]);		
-        //     }else if(data == 'music'){
-        //         return event.reply([
-        //             {
-        //                 "type": "text",
-        //                 "text": d[1][0].recomHead
-        //             },
-        //             {
-        //                 "type": "text",
-        //                 "text": d[1][0].recomCont
-        //             }
-        //         ]);		
-        //     }else if(data == 'book'){
-        //         return event.reply([
-        //             {
-        //                 "type": "text",
-        //                 "text": d[2][0].recomHead
-        //             },
-        //             {
-        //                 "type": "text",
-        //                 "text": d[2][0].recomCont
-        //             }
-        //         ]);		
-        //     }else if(data == 'exhibition'){
-        //         return event.reply([
-        //             {
-        //                 "type": "text",
-        //                 "text": d[3][0].recomHead
-        //             },
-        //             {
-        //                 "type": "text",
-        //                 "text": d[3][0].recomCont
-        //             }
-        //         ]);		
-        //     }   
-    
-        //     event.source.profile().then(function (profile) {
-        //         const userName = profile.displayName;
-                
-        //         return event.reply([
-        //             {
-        //                 "type": "text",
-        //                 "text": data
-        //             },
-        //             {
-        //                 "type": "text",
-        //                 "text": d[0][0].recomCont
-        //             }
-        //         ]);		
-        //     });
-        // });
+  
     // });
     
 });
