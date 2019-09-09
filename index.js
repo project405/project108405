@@ -262,18 +262,19 @@ bot.on('message', function(event) {
         index.getIndexData().then(data => {
 
             
-            var arr = [0, 1, 2, 3, 4,];
-            var result = [];
-            var ranNum = 3;
-            for (var i = 0; i < ranNum; i++) {
-                var ran = Math.floor(Math.random() * (arr.length - i));
-                result.push(arr[ran]);
-                arr[ran] = arr[arr.length - i];
-                arr.splice((arr.length - i),1);
+            // var arr = [0, 1, 2, 3, 4,];
+            // var result = [];
+            // var ranNum = 3;
+            // for (var i = 0; i < ranNum; i++) {
+            //     var ran = Math.floor(Math.random() * (arr.length - i));
+            //     result.push(arr[ran]);
+            //     arr[ran] = arr[arr.length - i];
+            //     arr.splice((arr.length - i),1);
                 
-            };
+            // };
+            console.log(data)
             event.reply([
-                { type: 'text', text: '時間：' + data[1][result[0]].artiDateTime  + '\n'+ '標題：' + data[1][result[0]].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][result[0]].articleNum}` },
+                { type: 'text', text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][result[0]].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][result[0]].articleNum}` },
                 { type: 'text', text: '時間：' + data[1][result[1]].artiDateTime  + '\n'+ '標題：' + data[1][result[1]].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][result[1]].articleNum}` },
                 { type: 'text', text: '時間：' + data[1][result[2]].artiDateTime  + '\n'+ '標題：' + data[1][result[2]].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][result[2]].articleNum}` }
             ]);
