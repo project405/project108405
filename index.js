@@ -272,7 +272,7 @@ bot.on('message', function(event) {
             //     arr.splice((arr.length - i),1);
                 
             // };
-            console.log(data)
+            console.log(data[1])
             event.reply([
                 { type: 'text', text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][result[0]].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][result[0]].articleNum}` },
                 { type: 'text', text: '時間：' + data[1][result[1]].artiDateTime  + '\n'+ '標題：' + data[1][result[1]].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][result[1]].articleNum}` },
