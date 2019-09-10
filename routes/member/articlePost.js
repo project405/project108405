@@ -44,7 +44,7 @@ var upload = multer({
 
 //post請求
 router.post('/', upload.array('userImg', 3), function (req, res, next) {
-    var memID = req.session.memID;
+    var memID;
     var artiHead = req.body.artiHead;
     var artiCont = req.body.artiCont;
     var artiClass = req.body.artiClass;
@@ -55,6 +55,15 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
     // console.log(req.files);
     //將所有換行符號替代成<br> 
     artiCont = artiCont.replace(/\n/g, "<br>");
+
+    //判斷是使用哪種方式登入
+    if (req.session.memID == undefined && req.session.passport == undefined) {
+        memID = undefined;
+    } else if (req.session.memID != undefined && req.session.passport == undefined) {
+        memID = req.session.memID;
+    } else if (req.session.memID == undefined && req.session.passport != undefined) {
+        memID = req.session.passport.user.id;
+    }
 
     for (var i in req.files) {
         imgData.push(req.files[i].filename);
@@ -74,7 +83,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
         tagData = req.body.tag.split(",");
     }
     // console.log("typeof", typeof req.file);
-    if (memID == undefined || memID == null) {
+    if (memID == undefined) {
         if (req.body.userImg != 'undefined') {
             for (var i = 0; i < imgData.length; i++) {
                 fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案

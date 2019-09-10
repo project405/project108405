@@ -43,11 +43,11 @@ var createMember = async function (newData) {
 }
 
 //---------  googleCreateMember() -------------
-var googleCreateMember = async function (memID) {
+var googleCreateMember = async function (memID, memName, memMail) {
     var result;
     // console.log(newData);
-    await sql('INSERT INTO "member" ("memID") VALUES ($1)',
-        [memID])
+    await sql('INSERT INTO "member" ("memID" , "memName", "memMail") VALUES ($1, $2, $3)',
+        [memID, memName, memMail])
         .then((data) => {
             result = 0;
         }, (error) => {

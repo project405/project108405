@@ -7,7 +7,7 @@ const member = require('../utility/member');
 
 //接收POST請求
 router.post('/', function (req, res, next) {
-    var memID = req.body.memID;                 //取得帳號
+    var memID = req.body.memID;         //取得帳號
     var memPass = req.body.memPass;     //取得密碼
     login.userLogin(memID, memPass).then(d => {
         if (d == null) {

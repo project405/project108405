@@ -6,7 +6,15 @@ const article = require('../utility/article');
 //接收GET請求 
 router.get('/:artiNum', async function (req, res, next) {
     var artiNum = req.params.artiNum;   //取出參數
-    var memID = req.session.memID;
+    var memID ;
+
+    //判斷是使用哪種方式登入
+	if (req.session.memID != undefined && req.session.passport == undefined) {
+		memID = req.session.memID;
+	} else if (req.session.memID == undefined && req.session.passport != undefined) {
+		memID = req.session.passport.user.id;
+    }
+    console.log("測試",memID);
     article.getOneArticle(artiNum, memID).then(data => {
         // 將字串替換成圖片
         for (var i = 0; i < data[0].length; i++) {

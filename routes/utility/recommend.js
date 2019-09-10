@@ -190,6 +190,7 @@ var getOneRecommend = async function (recomNum, memID) {
     result[7] = checkAuthority;
     result[8] = [memID];
     
+    // console.log("QQQQQQQQQQQQQQQQQQQQQQQ",result);
     return result;
 }
 

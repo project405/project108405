@@ -224,7 +224,7 @@ var getOneArticle = async function (artiNum, memID) {
     result[7] = [memID];
     result[8] = checkAuthority;
    
-
+    console.log(result);
     return result;
 }
 

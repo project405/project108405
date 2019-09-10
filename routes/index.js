@@ -5,7 +5,15 @@ const index = require('./utility/index');
 
 //接收GET請求
 router.get('/', function (req, res, next) {
-    var memID = req.session.memID;
+    var memID;
+
+    //判斷是使用哪種方式登入
+    if (req.session.memID != undefined && req.session.passport == undefined) {
+        memID = req.session.memID;
+    } else if (req.session.memID == undefined && req.session.passport != undefined) {
+        memID = req.session.passport.user.id;
+    }
+    
     index.getIndexData(memID).then(data => { 
         // 取代圖片文字為空字串
         for (var i = 0; i < data[1].length; i++) {

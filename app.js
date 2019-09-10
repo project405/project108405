@@ -7,7 +7,9 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 
 var session = require('express-session');
+
 var signUp = require('./routes/utility/signUp');
+
 //=========================================
 //---------  article router ------------
 //=========================================
@@ -75,7 +77,6 @@ var RecomBookRouter = require('./routes/recommend/recomBook');
 var RecomExhibitionRouter = require('./routes/recommend/recomExhibition');
 
 var CheckStatus = require('./routes/checkStatus');
-var GoogleLogIn = require('./routes/googleLogIn');
 
 var app = express();
 
@@ -210,24 +211,33 @@ app.use('/recommendList/book', RecomBookRouter);
 app.use('/recommendList/exhibition', RecomExhibitionRouter);
 app.use('/checkStatus',CheckStatus);
 
-app.use('/googleLogIn' , GoogleLogIn);
 
 
 //---------------------------------------------
 // 設定登入及登出方法內容
 //---------------------------------------------
 app.get('/user/login',
-    passport.authenticate('google', { scope: ['email', 'profile'] }));   //進行google第三方認證
+    passport.authenticate('google', { scope: ['email', 'profile'] })
+    );   //進行google第三方認證
 
 app.get('/auth/google/callback', 
     passport.authenticate('google', { failureRedirect: '/login' }),   //導向登入失敗頁面	
     function(req, res) {
         // 如果登入成功, 使用者資料已存在session
-        signUp.googleCreateMember(req.session.passport.user.id);
-        console.log(req.session.passport.user.id);
-        console.log(req.session.passport.user.displayName);
-        console.log(req.session.passport.user.emails[0].value);	    
-        
+        // console.log(req.session.passport.user.id);
+        // console.log(req.session.passport.user.displayName);
+        // console.log(req.session.passport.user.emails[0].value);	 
+
+        var checkID ;
+        signUp.checkMemID(req.session.passport.user.id).then((data) => {      
+            checkID = data[0];
+        })
+        //如果帳號不存在，新增帳號到資料庫
+        if(!checkID){      
+            signUp.googleCreateMember(req.session.passport.user.id, req.session.passport.user.displayName, req.session.passport.user.emails[0].value);
+            console.log(req.session.passport.user.id);
+        }
+ 
         res.redirect('/');   //導向登入成功頁面
     });
 

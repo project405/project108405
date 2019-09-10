@@ -70,7 +70,7 @@
                     </script>
 
                     <!-- 如果有登入及沒按過愛心 -->
-                    <% }else if(items[4] == undefined && items[7][0] != undefined ) {%>
+                    <% }else if(items[4][0] == undefined && items[7][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("addLike").style.display = "inline";
                         document.getElementById("LikeUnLogIn").style.display = "none";
@@ -117,14 +117,14 @@
                     </script>
 
                     <!-- 如果有登入及沒按過收藏 -->
-                    <% }else if(items[3] == undefined && items[7][0] != undefined ) {%>
+                    <% }else if(items[3][0] == undefined && items[7][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("addColle").style.display = "inline";
                         document.getElementById("unLogIn").style.display = "none";
                         document.getElementById("delColle").style.display = "none";
                     </script>
                     <!-- 如果有登入及按過收藏 -->
-                    <% }else if(items[3] != undefined && items[7][0] != undefined ) {%>
+                    <% }else if(items[3][0] != undefined && items[7][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("delColle").style.display = "inline";
                         document.getElementById("addColle").style.display = "none";

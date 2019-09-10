@@ -5,9 +5,17 @@ const recommend = require('../utility/recommend');
 
 router.get('/:recomNum', async function (req, res, next) {
     var recomNum = req.params.recomNum;   //取出參數
-    var memID = req.session.memID;
-    recommend.getOneRecommend(recomNum, memID).then(data => {
+    var memID;
 
+    //判斷是使用哪種方式登入
+    if (req.session.memID != undefined && req.session.passport == undefined) {
+        memID = req.session.memID;
+    } else if (req.session.memID == undefined && req.session.passport != undefined) {
+        memID = req.session.passport.user.id;
+    }
+
+    recommend.getOneRecommend(recomNum, memID).then(data => {
+        console.log("data=",data);
         // 將圖片字串替代成圖片
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].recomCont.match("\\:imgLocation") != null) {
