@@ -60,5 +60,24 @@ var addLineID = async function(memID, lineID){
     return result;
 }
 
+var userJudgeBind = async function(lineID){   
+    var result;
+
+    //取得員工資料
+    await sql('SELECT * FROM "member" WHERE "lineID" = $1', [lineID])
+        .then((data) => {
+            if(data.rows.length > 0){
+                result = data.rows[0];
+            } else {
+                result = null;
+            } 
+        }, (error) => {
+            result = null;
+        });
+    
+    //回傳物件
+    return result;
+}
+
 //匯出
-module.exports = {userLogIn, userBind, addLineID};
+module.exports = {userLogIn, userBind, addLineID, userJudgeBind};
