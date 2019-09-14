@@ -74,18 +74,19 @@ var userJudgeBind = async function(lineID){
                 LineID = data.rows ;
             }
         }, (error) => {
-            result = null;
+            LineID = undefined ;
         });
-    await sql('SELECT * FROM "member", [lineID])
-    .then((data) => {
-        if(!data.rows){
-            memID = undefined ;
-        }else{
-            memID = data.rows ;
-        }
-    }, (error) => {
-        result = null;
-    });
+
+    await sql('SELECT * FROM "member" WHERE "lineID" = $1',[lineID])
+        .then((data) => {
+            if(!data.rows){
+                memID = undefined ;
+            }else{
+                memID = data.rows ;
+            }
+        }, (error) => {
+            LineID = undefined ;
+        });
 
 
     result[0] = LineID;
