@@ -112,7 +112,7 @@ bot.on('postback', function(event) {
             console.log(data)
             // logIn.userLogIn(userId){
             logIn.userJudgeBind(userId).then(d =>{
-                console.log(d);
+                console.log(d[1]);
             })
 
             
