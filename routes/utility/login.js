@@ -61,4 +61,4 @@ var addLineID = async function(memID, lineID){
 }
 
 //匯出
-module.exports = {userLogin, userBind, addLineID};
+module.exports = {userLogIn, userBind, addLineID};
