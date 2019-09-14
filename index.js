@@ -362,7 +362,7 @@ bot.on('message', function(event) {
                               //-------!需克服收藏資料寫入資料庫的問題
                                 "type": "postback",
                                 "label": "新增至我的收藏",
-                                "text": '1'
+                                "data": '1'
                             },
                             {
                                 "type": "uri",
@@ -390,7 +390,7 @@ bot.on('message', function(event) {
                                   //-------!需克服收藏資料寫入資料庫的問題
                                     "type": "postback",
                                     "label": "新增至我的收藏",
-                                    "text": '1'
+                                    "data": '1'
                                 },
                                 {
                                     "type": "uri",
@@ -418,7 +418,7 @@ bot.on('message', function(event) {
                                   //-------!需克服收藏資料寫入資料庫的問題
                                     "type": "postback",
                                     "label": "新增至我的收藏",
-                                    "text": '1'
+                                    "data": '1'
                                 },
                                 {
                                     "type": "uri",
