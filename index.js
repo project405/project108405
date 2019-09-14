@@ -198,6 +198,7 @@ bot.on('postback', function(event) {
                 });
             }else{
                 logIn.userJudgeBind(userId).then(d =>{
+                    console.log("已綁定line，準備寫入資料庫")
                     console.log(d);
                     if(d == 1){
                         console.log('寫一個收藏進去');
