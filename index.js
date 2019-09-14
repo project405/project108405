@@ -116,24 +116,12 @@ bot.on('postback', function(event) {
                 template: {
                     type: 'buttons',
                     text: '很抱歉您未綁定line',
-                    actions: [{
+                    actions: {
                         type:"uri",
-                        label:"View details",
+                        label:"至文藝富心綁定",
                         uri:"line://app/1594135622-705e8pDP",
                         
-                    }, {
-                        type: 'postback',
-                        label: 'LED關',
-                        data: 'LED關'
-                    },{
-                        type: 'postback',
-                        label: '電燈開',
-                        data: '電燈開'
-                    },{
-                        type: 'postback',
-                        label: '電燈關',
-                        data: '電燈關'
-                    }]
+                    }
                 }
             };
             
