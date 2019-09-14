@@ -113,6 +113,10 @@ bot.on('postback', function(event) {
             // logIn.userLogIn(userId){
             logIn.userJudgeBind(userId).then(d =>{
                 console.log(d);
+                if(d == 1){
+                    console.console.log('寫一個收藏進去');
+                    
+                }
             })
 
             
