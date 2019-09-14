@@ -299,7 +299,8 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
-            
+            var movieNum = data[0][0].recomNum;
+            console.log(movieNum);
             event.reply({
                 "type": "template",
                 "altText": "您好！！！這是本週新推薦！",
@@ -325,7 +326,7 @@ bot.on('message', function(event) {
                                 
                                   "type": "postback",
                                   "label": "新增至我的收藏",
-                                  "data": data[0][0].recomNum
+                                  "data": 1
                               },
                               {
                                   "type": "uri",
@@ -353,7 +354,7 @@ bot.on('message', function(event) {
                               //-------!需克服收藏資料寫入資料庫的問題
                                 "type": "postback",
                                 "label": "新增至我的收藏",
-                                "text": data[1][0].recomNum
+                                "text": 1
                             },
                             {
                                 "type": "uri",
@@ -381,7 +382,7 @@ bot.on('message', function(event) {
                                   //-------!需克服收藏資料寫入資料庫的問題
                                     "type": "postback",
                                     "label": "新增至我的收藏",
-                                    "text": data[2][0].recomNum
+                                    "text": 1
                                 },
                                 {
                                     "type": "uri",
@@ -409,7 +410,7 @@ bot.on('message', function(event) {
                                   //-------!需克服收藏資料寫入資料庫的問題
                                     "type": "postback",
                                     "label": "新增至我的收藏",
-                                    "text": data[3][0].recomNum
+                                    "text": 1
                                 },
                                 {
                                     "type": "uri",
