@@ -334,7 +334,7 @@ bot.on('message', function(event) {
                                 
                                   "type": "postback",
                                   "label": "新增至我的收藏",
-                                  "data": 1
+                                  "data": movieNum
                               },
                               {
                                   "type": "uri",
