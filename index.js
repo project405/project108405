@@ -136,26 +136,14 @@ bot.on('postback', function(event) {
                 //     .setItem('bind', 'ii')
                 //     set
                 
-            async function addCollecRecommend (){
-
-            }
+            // async function addCollecRecommend (){
 
             // }
-            if (data == '收藏'){
-                logIn.userJudgeBind(userId).then(d =>{
-                    console.log(d);
-                    if(d == 1){
-                        console.log('寫一個收藏進去');
-                        collection.addLineColleRecommend(userId).then(d =>{
 
-                        })
-                    }else{
-                        event.reply(myLineTemplate)
-    
-                    }
-                })
-            }else{
-                      //---------------使用map記得傳入item參數getRecomClassList
+            // }
+            ''
+            if (data == 'movie' || 'music' || 'book' || 'exhibition'){
+                //---------------使用map記得傳入item參數getRecomClassList
                 recommend.getFourRecomClassList().then(d =>{
                     // console.log(d[index]);
                     
@@ -206,10 +194,22 @@ bot.on('postback', function(event) {
                                 "text": d[3][0].recomCont
                             }
                         ]);		
-                    }   
-            
-                    
+                    }    
                 });
+            }else{
+                logIn.userJudgeBind(userId).then(d =>{
+                    console.log(d);
+                    if(d == 1){
+                        console.log('寫一個收藏進去');
+                        collection.addLineColleRecommend(userId).then(d =>{
+    
+                        })
+                    }else{
+                        event.reply(myLineTemplate)
+    
+                    }
+                })
+                
             }
         
     });
@@ -322,7 +322,7 @@ bot.on('message', function(event) {
                                   "data": 'movie'
                               },
                               {
-                                //-------!需克服收藏資料寫入資料庫的問題
+                                
                                   "type": "postback",
                                   "label": "新增至我的收藏",
                                   "data": data[0][0].recomNum
