@@ -67,7 +67,7 @@ var userJudgeBind = async function(lineID){
     await sql('SELECT * FROM "member" WHERE "lineID" = $1', [lineID])
         .then((data) => {
             if(data.rows.length > 0){
-                result = data.rows[0][1];
+                result = data.rows[0];
             } else {
                 result = null;
             } 
