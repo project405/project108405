@@ -197,7 +197,7 @@ bot.on('postback', function(event) {
                     }    
                 });
             }else{
-                logIn.userJudgeBind(userId).then(d =>{
+                logIn.userJudgeBind(userId,data).then(d =>{
                     console.log(d);
                     if(d == 1){
                         console.log('寫一個收藏進去');
