@@ -114,12 +114,12 @@ bot.on('postback', function(event) {
                 type: 'template',
                 altText: 'this is a confirm template',
                 template: {
-                    type: 'buttons'
-                    text: '很抱歉'${userName}'您未綁定line',
+                    type: 'buttons',
+                    text: '很抱歉您未綁定line',
                     actions: [{
-                        type: 'postback',
-                        label: 'LED開',
-                        data: 'LED開'
+                        type: 'uri',
+                        linkUri: "line://app/1594135622-705e8pDP",
+                        label: '至文藝富心綁定'
                     }, {
                         type: 'postback',
                         label: 'LED關',
@@ -135,6 +135,8 @@ bot.on('postback', function(event) {
                     }]
                 }
             };
+            "type": "uri",
+  linkUri: "line://app/1594135622-705e8pDP",
             // logIn.userLogIn(userId){
             
 
