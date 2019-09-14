@@ -119,11 +119,11 @@ bot.on('postback', function(event) {
                 template: {
                     type: 'buttons',
                     text: '很抱歉您未綁定line',
-                    actions: {
+                    actions: [{
                         type:"uri",
                         label:"至文藝富心綁定",
                         uri:"line://app/1594135622-705e8pDP"   
-                    }
+                    }]
                 }
             };
             
