@@ -198,26 +198,32 @@ bot.on('postback', function(event) {
                     }    
                 });
             }else{
-                logIn.userJudgeBind(userId).then(d =>{
-                    console.log(d[0].memID)
-                    console.log("已綁定line，準備寫入資料庫")
-                    if(d[0].lineID == userId){
-                        console.log('memID',d[0].memID)
-                        console.log('userId!!!',userId)
-                        console.log('data!!!',data)
-                        
-                        console.log(typeof(parseInt(data)))
-                        console.log('寫一個收藏進去');
-                        collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
-                            console.log(b)
-                        })
-                    }else{
-                        event.reply(myLineTemplate)
-    
-                    }
-                })
+                gotoBind(userId)
+                
                 
             }
+            async function gotoBind(userId){
+                const posts = await logIn.userJudgeBind(userId);
+                console.log(posts);
+            }
+            await logIn.userJudgeBind(userId).then(d =>{
+                console.log(d[0].memID)
+                console.log("已綁定line，準備寫入資料庫")
+                if(d[0].lineID == userId){
+                    console.log('memID',d[0].memID)
+                    console.log('userId!!!',userId)
+                    console.log('data!!!',data)
+                    
+                    console.log(typeof(parseInt(data)))
+                    console.log('寫一個收藏進去');
+                    collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
+                        console.log(b)
+                    })
+                }else{
+                    event.reply(myLineTemplate)
+
+                }
+            })
         
     });
     // let recom_class = ['movie','music','book','exhibition'];
