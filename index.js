@@ -110,6 +110,31 @@ bot.on('postback', function(event) {
             const userId = profile.userId;
             const data = event.postback.data;
             console.log(data)
+            var myLineTemplate={
+                type: 'template',
+                altText: 'this is a confirm template',
+                template: {
+                    type: 'buttons',
+                    text: '按下選單可以控制物聯網裝置！\n輸入?可以再看到這個選單！',
+                    actions: [{
+                        type: 'postback',
+                        label: 'LED開',
+                        data: 'LED開'
+                    }, {
+                        type: 'postback',
+                        label: 'LED關',
+                        data: 'LED關'
+                    },{
+                        type: 'postback',
+                        label: '電燈開',
+                        data: '電燈開'
+                    },{
+                        type: 'postback',
+                        label: '電燈關',
+                        data: '電燈關'
+                    }]
+                }
+            };
             // logIn.userLogIn(userId){
             logIn.userJudgeBind(userId).then(d =>{
                 console.log(d);
@@ -117,28 +142,7 @@ bot.on('postback', function(event) {
                     console.log('寫一個收藏進去');
                     
                 }else{
-                    event.reply({
-                        message = {
-                            "type": "template",
-                            "altText": "在不支援顯示樣板的地方顯示的文字",
-                            "template": {
-                              "type": "confirm",
-                              "text": "標題文字",
-                              "actions": [
-                                {
-                                  "type": "message",
-                                  "label": "第一個按鈕",
-                                  "text": "1"
-                                },
-                                {
-                                  "type": "message",
-                                  "label": "第二個按鈕",
-                                  "text": "2"
-                                }
-                              ]
-                            }
-                          }
-                    })
+                    event.reply(myLineTemplate)
 
                 }
             })
