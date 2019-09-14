@@ -116,6 +116,30 @@ bot.on('postback', function(event) {
                 if(d == 1){
                     console.log('寫一個收藏進去');
                     
+                }else{
+                    event.reply({
+                        message = {
+                            "type": "template",
+                            "altText": "在不支援顯示樣板的地方顯示的文字",
+                            "template": {
+                              "type": "confirm",
+                              "text": "標題文字",
+                              "actions": [
+                                {
+                                  "type": "message",
+                                  "label": "第一個按鈕",
+                                  "text": "1"
+                                },
+                                {
+                                  "type": "message",
+                                  "label": "第二個按鈕",
+                                  "text": "2"
+                                }
+                              ]
+                            }
+                          }
+                    })
+
                 }
             })
 
