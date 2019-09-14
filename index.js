@@ -201,8 +201,8 @@ bot.on('postback', function(event) {
                     console.log(d);
                     if(d == 1){
                         console.log('寫一個收藏進去');
-                        collection.addLineColleRecommend(userId, data).then(data =>{
-                            console.logd(data)
+                        collection.addLineColleRecommend(userId, data).then(b =>{
+                            console.logd(b)
                         })
                     }else{
                         event.reply(myLineTemplate)
