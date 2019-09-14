@@ -206,7 +206,7 @@ bot.on('postback', function(event) {
                         
                         console.log(typeof(parseInt(data)))
                         console.log('寫一個收藏進去');
-                        collection.addLineColleRecommend(abc123, parseInt(data)).then(b =>{
+                        collection.addLineColleRecommend('abc123', parseInt(data)).then(b =>{
                             console.log(b)
                         })
                     // }else{
