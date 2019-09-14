@@ -22,9 +22,9 @@
 </head>
 
 <body>
-   <!-- navbar -->
-   <div id="header"></div>
-   
+    <!-- navbar -->
+    <div id="header"></div>
+
     <!-- 使用者發文 -->
     <div class="container-fluid">
         <div class="row justify-content-center">
@@ -46,7 +46,7 @@
                 <!-- tag -->
                 <div class="tagDiv col-lg-12 ">
                     <% for (var i = 0 ; i< items[2].length ; i++) { %>
-                        <button type="button" class="btn  tag"><%= items[2][i].tagName %></button>
+                    <button type="button" class="btn  tag"><%= items[2][i].tagName %></button>
                     <% } %>
                 </div>
                 <hr class="info">
@@ -350,75 +350,76 @@
                             <a class="dateTime">於<%= items[1][i].artiMessDateTime %>留言</a>
                         </div>
                         <!-- 愛心按鈕 -->
-                        <div class="col-sm-3 ml-auto"> </div>
-                        <button type="button"
-                            id=<%= "MessLikeUnLogIn" + items[0][0].artiNum + items[1][i].artiMessNum %> class="btn like"
-                            onclick="location.href='/login'"><i
-                                class="fab fa-gratipay"></i><a><%= items[1][i].likeCount %></a></button>
-
-                        <button type="button" id=<%= "MessAddLike"+ items[0][0].artiNum + items[1][i].artiMessNum %>
-                            class="btn like"
-                            onclick=<%= "MessAddLike(" + items[0][0].artiNum + "," + items[1][i].artiMessNum + ")" %>>
-                            <i class="fab fa-gratipay"></i>
-                            <a id=<%="MessAddLikeCount" + items[0][0].artiNum + items[1][i].artiMessNum %>>
-                                <%= items[1][i].likeCount %>
-                            </a>
-                        </button>
-
-                        <button type="button" id=<%= "MessDelLike" + items[0][0].artiNum + items[1][i].artiMessNum %>
-                            class="btn like" style="color:#c93737"
-                            onclick=<%= "MessDelLike(" + items[0][0].artiNum + "," + items[1][i].artiMessNum + ")" %>>
-                            <i class="fab fa-gratipay"></i>
-                            <a id=<%= "MessDelLikeCount" + items[0][0].artiNum + items[1][i].artiMessNum %>>
-                                <%= items[1][i].likeCount %>
-                            </a>
-                        </button>
-
-                        <!-- 如果沒登入 -->
-                        <% if(items[7][0] == undefined) {%>
-                        <script type="text/javascript">
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "inline";
-                            document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                            document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                        </script>
-                        <!-- 如果有登入 -->
-                        <% }else if(items[7][0] != undefined ) {%>
-                            <% var isLike = false %>
-                            <% if(items[5] != undefined){ %>
-                                <% for(var j = 0 ; j < items[5].length ; j++) { %>
-                                    <!-- 如果有按愛心 -->
-                                    <% if (items[5][j].artiMessNum == items[1][i].artiMessNum){ %>
-                                        <script type="text/javascript">
-                                            document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "inline";
-                                            document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                                        </script>
-                                        <% isLike = true %>
-                                    <% } %>
-                                <% } %>
-                            <% } %>
-                            <!-- 如果沒有按過愛心 -->
-                            <% if( isLike == false ){ %> 
-                                <script type="text/javascript">
-                                    document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%=  items[1][i].artiMessNum %>").style.display = "inline";
-                                    document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                                    document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                                </script>
-                            <% } %>
-                        <% }else {%>
-                        <script type="text/javascript">
-                            document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                            document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                        </script>
-                        <% } %>
+                        <div class="col-sm-1 ml-auto likeContainer">
+                            <button type="button" class="btn like"
+                                id=<%= "MessLikeUnLogIn" + items[0][0].artiNum + items[1][i].artiMessNum %>
+                                onclick="location.href='/login'"><i
+                                    class="fab fa-gratipay"></i><a><%= items[1][i].likeCount %></a></button>
+                        </div>
                     </div>
                     <hr class="smallMagin">
+
+                    <button type="button" id=<%= "MessAddLike"+ items[0][0].artiNum + items[1][i].artiMessNum %>
+                        class="btn like"
+                        onclick=<%= "MessAddLike(" + items[0][0].artiNum + "," + items[1][i].artiMessNum + ")" %>>
+                        <i class="fab fa-gratipay"></i>
+                        <a id=<%="MessAddLikeCount" + items[0][0].artiNum + items[1][i].artiMessNum %>>
+                            <%= items[1][i].likeCount %>
+                        </a>
+                    </button>
+
+                    <button type="button" id=<%= "MessDelLike" + items[0][0].artiNum + items[1][i].artiMessNum %>
+                        class="btn like" style="color:#c93737"
+                        onclick=<%= "MessDelLike(" + items[0][0].artiNum + "," + items[1][i].artiMessNum + ")" %>>
+                        <i class="fab fa-gratipay"></i>
+                        <a id=<%= "MessDelLikeCount" + items[0][0].artiNum + items[1][i].artiMessNum %>>
+                            <%= items[1][i].likeCount %>
+                        </a>
+                    </button>
+
+                    <!-- 如果沒登入 -->
+                    <% if(items[7][0] == undefined) {%>
+                    <script type="text/javascript">
+                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "inline";
+                        document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                        document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                    </script>
+                    <!-- 如果有登入 -->
+                    <% }else if(items[7][0] != undefined ) {%>
+                    <% var isLike = false %>
+                    <% if(items[5] != undefined){ %>
+                    <% for(var j = 0 ; j < items[5].length ; j++) { %>
+                    <!-- 如果有按愛心 -->
+                    <% if (items[5][j].artiMessNum == items[1][i].artiMessNum){ %>
+                    <script type="text/javascript">
+                        document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "inline";
+                        document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                    </script>
+                    <% isLike = true %>
+                    <% } %>
+                    <% } %>
+                    <% } %>
+                    <!-- 如果沒有按過愛心 -->
+                    <% if( isLike == false ){ %>
+                    <script type="text/javascript">
+                        document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%=  items[1][i].artiMessNum %>").style.display = "inline";
+                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                        document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                    </script>
+                    <% } %>
+                    <% }else {%>
+                    <script type="text/javascript">
+                        document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                        document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                    </script>
+                    <% } %>
                     <!-- info結束 -->
                     <p class="content"> <%= items[1][i].artiMessCont %>
                     </p>
-                    <button type="button" class="btn report">檢舉</button>
                 </div>
+                <button type="button" class="btn report">檢舉</button>
             </div>
             <% } %>
         </div>
@@ -434,7 +435,8 @@
                     <i class="fas fa-images" style="padding-right:5px"></i>加圖片
                 </label>
 
-                <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none" onclick="test()">提交回覆</button>
+                <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none"
+                    onclick="test()">提交回覆</button>
 
             </div>
 
@@ -446,65 +448,65 @@
         </a>
     </div>
 
-    
-            <script>
-                var formData = new FormData(); //用formData來存取要傳送的所有資料
-                //上傳檔案按鈕有變動就執行
-                $("#file-selector").change(function () {
-                    var file = $("#file-selector")[0];  //取得檔案
-                    //如果有檔案就要加入formData
-                    if (file.files.length) {
-                        for (var i = 0; i < file.files.length; i++) {
-                            $("#replyInput").html(document.getElementById("replyInput").innerHTML + "\\:imgLocation");
-                        }
-                        // if (document.getElementById("postInput").innerHTML.match("<img") == null) {
-                        //     file.value = '';
-                        // }
 
-                        for (var i in file.files) {
-                            formData.append('userImg', file.files[i]);
-                        }
+    <script>
+        var formData = new FormData(); //用formData來存取要傳送的所有資料
+        //上傳檔案按鈕有變動就執行
+        $("#file-selector").change(function () {
+            var file = $("#file-selector")[0];  //取得檔案
+            //如果有檔案就要加入formData
+            if (file.files.length) {
+                for (var i = 0; i < file.files.length; i++) {
+                    $("#replyInput").html(document.getElementById("replyInput").innerHTML + "\\:imgLocation");
+                }
+                // if (document.getElementById("postInput").innerHTML.match("<img") == null) {
+                //     file.value = '';
+                // }
 
-                    }
-                });
-                function test() {
-                    var img = [];
-                    var replyCont = [];
-                    var artiData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
-                    // 取得內容
-                    artiData.forEach(function (element) {
-                        replyCont.push(element.innerText);
-                    }, this);
-                    console.log(replyCont);
-
-                    formData.append('replyCont', replyCont);
-
-                    $.ajax({
-                        url: '/article/post',
-                        type: 'POST',
-                        dataType: 'TEXT',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function (res) {
-                            console.log("yes", res);
-                            if (res == "請進行登入") {
-                                alert(res);
-                                location.replace("/login");
-                            } else if (res == "留言成功") {
-                                alert(res);
-                                location.replace("/articleList");
-                            } else {
-                                alert(res);
-                            }
-                        },
-                        error: function (res) {
-                            // console.log("失敗", res);
-                        }
-                    });
+                for (var i in file.files) {
+                    formData.append('userImg', file.files[i]);
                 }
 
-            </script>
+            }
+        });
+        function test() {
+            var img = [];
+            var replyCont = [];
+            var artiData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
+            // 取得內容
+            artiData.forEach(function (element) {
+                replyCont.push(element.innerText);
+            }, this);
+            console.log(replyCont);
+
+            formData.append('replyCont', replyCont);
+
+            $.ajax({
+                url: '/article/post',
+                type: 'POST',
+                dataType: 'TEXT',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    console.log("yes", res);
+                    if (res == "請進行登入") {
+                        alert(res);
+                        location.replace("/login");
+                    } else if (res == "留言成功") {
+                        alert(res);
+                        location.replace("/articleList");
+                    } else {
+                        alert(res);
+                    }
+                },
+                error: function (res) {
+                    // console.log("失敗", res);
+                }
+            });
+        }
+
+    </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
