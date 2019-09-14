@@ -316,7 +316,7 @@ bot.on('message', function(event) {
                     "type": "carousel",
                     "columns": [
                         {
-                          "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/movie1.jpg",
+                          "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/pikachu.jpg",
                           "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
                           "text": "movie1年代、導演、演員",
                           "defaultAction": {
