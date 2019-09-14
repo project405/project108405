@@ -111,7 +111,7 @@ bot.on('postback', function(event) {
             const data = event.postback.data;
             console.log(data)
             // logIn.userLogIn(userId){
-            logIn.userBind().then(d =>{
+            logIn.userBind(userId).then(d =>{
                 console.log(d);
             })
 
