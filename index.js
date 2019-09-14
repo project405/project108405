@@ -7,6 +7,7 @@ var express = require('express');
 // const collection = require('./utility/collection');
 const index = require('./routes/utility/index');
 const logIn = require('./routes/utility/login');
+const collection = require('./routes/utility/collection');
 const recommend = require('./routes/utility/recommend');
 
 //----------------------------------------
@@ -128,7 +129,16 @@ bot.on('postback', function(event) {
             };
             
             // logIn.userLogIn(userId){
-            
+                // async function validateCode () {
+                //     if (!bind) {
+                //     var bind = await as.getItem('bind')
+                //     }
+                //     .setItem('bind', 'ii')
+                //     set
+                
+            async function addCollecRecommend (){
+
+            }
 
             // }
             if (data == '收藏'){
@@ -136,7 +146,9 @@ bot.on('postback', function(event) {
                     console.log(d);
                     if(d == 1){
                         console.log('寫一個收藏進去');
-                        
+                        collection.addLineColleRecommend(userId).then(d =>{
+
+                        })
                     }else{
                         event.reply(myLineTemplate)
     
@@ -300,6 +312,7 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
+            console.log(data)
             event.reply({
                 "type": "template",
                 "altText": "您好！！！這是本週新推薦！",

@@ -1141,6 +1141,19 @@ var addColleRecommend = async function (memID, recomNum) {
         });
     return result;
 }
+//=========================================
+//-------  addLineColleRecommend() --------
+//=========================================
+var addLineColleRecommend = async function (lineID, recomNum) {
+    var result;
+    await sql('INSERT INTO "memberCollection" ("lineID","recomNum") VALUES ($1,$2)', [lineID, recomNum])
+        .then((data) => {
+            result = 1;
+        }, (error) => {
+            result = 0;
+        });
+    return result;
+}
 
 //=========================================
 //---------  delCollention() -----------
@@ -1176,5 +1189,6 @@ module.exports = {
     getRecomMovie, getRecomMusic, getRecomBook, getRecomExhibition,
     getArtiMovie, getArtiMusic, getArtiBook, getArtiExhibition,
     addColleArticle, delColleArticle,
-    addColleRecommend, delColleRecommend
+    addColleRecommend, delColleRecommend,
+    addLineColleRecommend
 };
