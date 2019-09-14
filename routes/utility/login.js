@@ -85,7 +85,7 @@ var userJudgeBind = async function(lineID){
                 memID = data.rows ;
             }
         }, (error) => {
-            LineID = undefined ;
+            memID = undefined ;
         });
 
 
