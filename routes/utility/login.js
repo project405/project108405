@@ -67,12 +67,12 @@ var userJudgeBind = async function(lineID){
     await sql('SELECT * FROM "member" WHERE "lineID" = $1', [lineID])
         .then((data) => {
             
-            result = data[1]
-            // if(data.rows.length > 0){
-            //     result = data.rows[0];
-            // } else {
-            //     result = null;
-            // } 
+            
+            if(data.rows.length > 0){
+                result = data[1];
+            } else {
+                result = null;
+            } 
         }, (error) => {
             result = null;
         });
