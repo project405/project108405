@@ -208,20 +208,7 @@ bot.on('postback', function(event) {
                         ]);		
                     }   
             
-                    event.source.profile().then(function (profile) {
-                        const userName = profile.displayName;
-                        
-                        return event.reply([
-                            {
-                                "type": "text",
-                                "text": data
-                            },
-                            {
-                                "type": "text",
-                                "text": d[0][0].recomCont
-                            }
-                        ]);		
-                    });
+                    
                 });
             }
         
