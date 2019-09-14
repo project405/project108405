@@ -110,7 +110,7 @@ bot.on('postback', function(event) {
             const userName = profile.displayName;
             const userId = profile.userId;
             const data = event.postback.data;
-            console.log(data)
+            console.log("postback 資料",data)
             //------------------------------------------------
             //----------------未綁定Line_id用戶-----------------
             //------------------------------------------------
@@ -199,11 +199,10 @@ bot.on('postback', function(event) {
             }else{
                 logIn.userJudgeBind(userId).then(d =>{
                     console.log("已綁定line，準備寫入資料庫")
-                    console.log(d);
                     if(d == 1){
                         console.log('寫一個收藏進去');
                         collection.addLineColleRecommend(userId, data).then(b =>{
-                            console.logd(b)
+                            console.log(b)
                         })
                     }else{
                         event.reply(myLineTemplate)
