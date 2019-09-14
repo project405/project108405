@@ -69,7 +69,7 @@ var userJudgeBind = async function(lineID){
             
             
             if(data.rows.length > 0){
-                result = data[1];
+                result =  data.rows[1];
             } else {
                 result = null;
             } 
