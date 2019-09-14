@@ -143,6 +143,7 @@ bot.on('postback', function(event) {
             // }
             ''
             if (data == 'movie' || 'music' || 'book' || 'exhibition'){
+                console.log("進到四大推薦")
                 //---------------使用map記得傳入item參數getRecomClassList
                 recommend.getFourRecomClassList().then(d =>{
                     // console.log(d[index]);
