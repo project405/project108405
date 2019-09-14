@@ -202,13 +202,13 @@ bot.on('postback', function(event) {
                     console.log(d[0].memID)
                     console.log("已綁定line，準備寫入資料庫")
                     if(d[0].lineID == userId){
-                        Console.log('memID',d[0].memID)
+                        console.log('memID',d[0].memID)
                         console.log('userId!!!',userId)
                         console.log('data!!!',data)
                         
                         console.log(typeof(parseInt(data)))
                         console.log('寫一個收藏進去');
-                        collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
+                        collection.addLineColleRecommend(d[0].memID, data).then(b =>{
                             console.log(b)
                         })
                     }else{
