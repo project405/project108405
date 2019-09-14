@@ -110,6 +110,9 @@ bot.on('postback', function(event) {
             const userId = profile.userId;
             const data = event.postback.data;
             console.log(data)
+            //------------------------------------------------
+            //----------------未綁定Line_id用戶-----------------
+            //------------------------------------------------
             var myLineTemplate={
                 type: 'template',
                 altText: 'this is a confirm template',
@@ -119,8 +122,7 @@ bot.on('postback', function(event) {
                     actions: {
                         type:"uri",
                         label:"至文藝富心綁定",
-                        uri:"line://app/1594135622-705e8pDP",
-                        
+                        uri:"line://app/1594135622-705e8pDP"   
                     }
                 }
             };
