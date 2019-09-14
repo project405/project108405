@@ -300,7 +300,15 @@ bot.on('message', function(event) {
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
             var movieNum = data[0][0].recomNum;
+            var musicNum = data[1][0].recomNum;
+            var bookNum = data[2][0].recomNum;
+            var exhibitionNum = data[3][0].recomNum;
+
             console.log(movieNum);
+            console.log(musicNum);
+            console.log(bookNum);
+            console.log(exhibitionNum);
+
             event.reply({
                 "type": "template",
                 "altText": "您好！！！這是本週新推薦！",
