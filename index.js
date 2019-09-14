@@ -199,16 +199,17 @@ bot.on('postback', function(event) {
                 });
             }else{
                 logIn.userJudgeBind(userId).then(d =>{
-                    console.log("已綁定line，準備寫入資料庫")
-                    // if(d[0] == 1){
-                        console.log('userId!!!',userId)
-                        console.log('data!!!',data)
+                    console.log(d)
+                    // console.log("已綁定line，準備寫入資料庫")
+                    // // if(d[0] == 1){
+                    //     console.log('userId!!!',userId)
+                    //     console.log('data!!!',data)
                         
-                        console.log(typeof(parseInt(data)))
-                        console.log('寫一個收藏進去');
-                        collection.addLineColleRecommend(abc123, parseInt(data)).then(b =>{
-                            console.log(b)
-                        })
+                    //     console.log(typeof(parseInt(data)))
+                    //     console.log('寫一個收藏進去');
+                    //     collection.addLineColleRecommend(abc123, parseInt(data)).then(b =>{
+                    //         console.log(b)
+                    //     })
                     // }else{
                         // event.reply(myLineTemplate)
     
