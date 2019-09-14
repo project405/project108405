@@ -116,7 +116,7 @@ bot.on('postback', function(event) {
             //------------------------------------------------
             var myLineTemplate={
                 type: 'template',
-                altText: 'this is a confirm template',
+                altText: '很抱歉您未綁定line',
                 template: {
                     type: 'buttons',
                     text: '很抱歉您未綁定line',
@@ -312,7 +312,7 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
-            console.log(data)
+            console.log(data[0][0].recomNum)
             event.reply({
                 "type": "template",
                 "altText": "您好！！！這是本週新推薦！",
