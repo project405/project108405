@@ -1147,7 +1147,7 @@ var addColleRecommend = async function (memID, recomNum) {
 var addLineColleRecommend = async function (lineID, recomNum) {
     var result;
     await sql('INSERT INTO "memberCollection" ("lineID","recomNum") VALUES ($1,$2)', [lineID, recomNum])
-        .then((data) => {
+        .then(data => {
             result = 1;
         }, (error) => {
             result = 0;
