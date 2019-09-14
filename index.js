@@ -6,7 +6,7 @@ var express = require('express');
 //增加引用函式
 // const collection = require('./utility/collection');
 const index = require('./routes/utility/index');
-const logIn = require('./routes/utility/logIn');
+const logIn = require('./routes/utility/login');
 const recommend = require('./routes/utility/recommend');
 
 //----------------------------------------
