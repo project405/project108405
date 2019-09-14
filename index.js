@@ -199,7 +199,7 @@ bot.on('postback', function(event) {
                 });
             }else{
                 logIn.userJudgeBind(userId).then(d =>{
-                    console.log(d)
+                    console.log(d.memID)
                     // console.log("已綁定line，準備寫入資料庫")
                     // // if(d[0] == 1){
                     //     console.log('userId!!!',userId)
