@@ -201,7 +201,7 @@ bot.on('postback', function(event) {
                 test().catch(error => console.log(error.message));
 
                 async function test() {
-                    await logIn.userJudgeBind(userId).then(d =>{
+                    await logIn.userJudgeBind(userId)(d =>{
                         
                         console.log("已綁定line，準備寫入資料庫")
                         if(d[0].lineID == userId){
