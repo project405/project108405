@@ -203,8 +203,8 @@ bot.on('postback', function(event) {
                     if(d == 1){
                         console.log('userId!!!',userId)
                         console.log('data!!!',data)
-                        data = parseInt(data)
-                        console.log(typeof(data))
+                        
+                        console.log(typeof(parseInt(data)))
                         console.log('寫一個收藏進去');
                         collection.addLineColleRecommend(userId, data).then(b =>{
                             console.log(b)
