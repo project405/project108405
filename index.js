@@ -117,12 +117,10 @@ bot.on('postback', function(event) {
                     type: 'buttons',
                     text: '很抱歉您未綁定line',
                     actions: [{
-                        "type":"uri",
-                        "label":"View details",
-                        "uri":"http://example.com/page/222",
-                        "altUri": {
-                            "desktop" : "http://example.com/pc/page/222"
-                        }
+                        type:"uri",
+                        label:"View details",
+                        uri:"http://example.com/page/222",
+                        
                     }, {
                         type: 'postback',
                         label: 'LED關',
