@@ -111,15 +111,21 @@ bot.on('postback', function(event) {
             const data = event.postback.data;
             console.log(data)
             // logIn.userLogIn(userId){
+            logIn.userBind().then(d =>{
+                console.log(d);
+            })
+
             
+
+
             // }
-            // if (data == '收藏'){
-            //     if (!this.isLogin) {
-            //         event.reply({'type':'text', 'text':`https://project108405.herokuapp.com/logIn?${userId}`});
-            //     } else {
-            //         alert('success')
-            //     }
-            // }else{
+            if (data == '收藏'){
+                if (!this.isLogin) {
+                    event.reply({'type':'text', 'text':`https://project108405.herokuapp.com/logIn?${userId}`});
+                } else {
+                    alert('success')
+                }
+            }else{
                       //---------------使用map記得傳入item參數getRecomClassList
                 recommend.getFourRecomClassList().then(d =>{
                     // console.log(d[index]);
@@ -188,7 +194,7 @@ bot.on('postback', function(event) {
                         ]);		
                     });
                 });
-            // }
+            }
         
     });
     // let recom_class = ['movie','music','book','exhibition'];
@@ -265,7 +271,7 @@ bot.on('message', function(event) {
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
 
-            console.log(data[1])
+            // console.log(data[1])
             event.reply([
                 { type: 'text', text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][0].articleNum}` },
                 { type: 'text', text: '時間：' + data[1][1].artiDateTime  + '\n'+ '標題：' + data[1][1].artiHead  + '\n'+ '連結：' + `https://tomlin-app-1.herokuapp.com/article/${data[1][1].articleNum}` },
