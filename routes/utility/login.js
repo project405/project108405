@@ -60,19 +60,24 @@ var addLineID = async function(memID, lineID){
     return result;
 }
 
-var userJudgeBind = async function(lineID){   
-    var result;
+var userJudgeBind = async function(lineID){
+    var memID;   
+    var result = [];
 
     //取得員工資料
     await sql('SELECT * FROM "member" WHERE "lineID" = $1', [lineID])
         .then((data) => {
-            if(data.rows.length > 0){
-                result = 1;
+            if(!data.rows){
+                memID = undefined ;
+            }else{
+                memID = data.rows ;
             }
         }, (error) => {
             result = null;
         });
-    
+    result[0] = memID;
+        
+
     //回傳物件
     return result;
 }
