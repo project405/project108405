@@ -114,8 +114,8 @@ bot.on('postback', function(event) {
                 type: 'template',
                 altText: 'this is a confirm template',
                 template: {
-                    type: 'buttons',
-                    text: '按下選單可以控制物聯網裝置！\n輸入?可以再看到這個選單！',
+                    type: 'buttons'
+                    text: '很抱歉'${userName}'您未綁定line',
                     actions: [{
                         type: 'postback',
                         label: 'LED開',
@@ -137,9 +137,6 @@ bot.on('postback', function(event) {
             };
             // logIn.userLogIn(userId){
             
-
-            
-
 
             // }
             if (data == '收藏'){
