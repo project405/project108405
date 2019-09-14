@@ -66,7 +66,8 @@ var userJudgeBind = async function(lineID){
     //取得員工資料
     await sql('SELECT * FROM "member" WHERE "lineID" = $1', [lineID])
         .then((data) => {
-            Console.log(data)
+            
+            result = data
             // if(data.rows.length > 0){
             //     result = data.rows[0];
             // } else {
