@@ -25,5 +25,40 @@ var userLogIn = async function(id, password){
     return result;
 }
 
+//---------------------------------------------
+// line綁定
+//---------------------------------------------
+var userBind = async function(id, password, lineID){   
+    var result;
+
+    //取得員工資料
+    await sql('SELECT * FROM "member" WHERE "memID"=$1 and "memPass"=$2', [id, password])
+        .then((data) => {
+            if(data.rows.length > 0){
+                result = data.rows[0];
+            } else {
+                result = null;
+            } 
+        }, (error) => {
+            result = null;
+        });
+    
+    //回傳物件
+    return result;
+}
+var addLineID = async function(memID, lineID){  
+    var result;
+    await sql('UPDATE "member" SET "lineID" = $2 WHERE "memID" = $1', [memID, lineID])
+    .then((data) => {
+        console.log(data)
+        result = data.rows[0];
+    }, (error) => {
+        console.error(error)
+        result = null;
+    }) 
+    //回傳物件
+    return result;
+}
+
 //匯出
-module.exports = {userLogIn};
+module.exports = {userLogin, userBind, addLineID};

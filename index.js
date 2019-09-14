@@ -97,7 +97,7 @@ var bot = linebot({
 // });
 
 
-
+  
 
 //========================================
 // 機器人接受回覆的處理
@@ -105,16 +105,7 @@ var bot = linebot({
 bot.on('postback', function(event) { 
     event.source.profile().then(
         function (profile) {
-            liff.init(
-                data => {
-                  // Now you can call LIFF API
-                  const userId = data.context.userId;
-                  console.log(userId)
-                },
-                err => {
-                  // LIFF initialization failed
-                }
-              );
+            
             const userName = profile.displayName;
             const userId = profile.userId;
             const data = event.postback.data;
