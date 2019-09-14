@@ -136,27 +136,23 @@ bot.on('postback', function(event) {
                 }
             };
             // logIn.userLogIn(userId){
-            logIn.userJudgeBind(userId).then(d =>{
-                console.log(d);
-                if(d == 1){
-                    console.log('寫一個收藏進去');
-                    
-                }else{
-                    event.reply(myLineTemplate)
-
-                }
-            })
+            
 
             
 
 
             // }
             if (data == '收藏'){
-                if (!this.isLogin) {
-                    event.reply({'type':'text', 'text':`https://project108405.herokuapp.com/logIn?${userId}`});
-                } else {
-                    alert('success')
-                }
+                logIn.userJudgeBind(userId).then(d =>{
+                    console.log(d);
+                    if(d == 1){
+                        console.log('寫一個收藏進去');
+                        
+                    }else{
+                        event.reply(myLineTemplate)
+    
+                    }
+                })
             }else{
                       //---------------使用map記得傳入item參數getRecomClassList
                 recommend.getFourRecomClassList().then(d =>{
