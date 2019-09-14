@@ -299,10 +299,10 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
-            var movieNum = 3
-            // var musicNum = data[1][0].recomNum;
-            // var bookNum = data[2][0].recomNum;
-            // var exhibitionNum = data[3][0].recomNum;
+            var movieNum = data[0][0].recomNum;
+            var musicNum = data[1][0].recomNum;
+            var bookNum = data[2][0].recomNum;
+            var exhibitionNum = data[3][0].recomNum;
 
             // console.log(movieNum);
             // console.log(musicNum);
@@ -362,7 +362,7 @@ bot.on('message', function(event) {
                               //-------!需克服收藏資料寫入資料庫的問題
                                 "type": "postback",
                                 "label": "新增至我的收藏",
-                                "data": '1'
+                                "data": musicNum
                             },
                             {
                                 "type": "uri",
@@ -390,7 +390,7 @@ bot.on('message', function(event) {
                                   //-------!需克服收藏資料寫入資料庫的問題
                                     "type": "postback",
                                     "label": "新增至我的收藏",
-                                    "data": '1'
+                                    "data": bookNum
                                 },
                                 {
                                     "type": "uri",
@@ -418,7 +418,7 @@ bot.on('message', function(event) {
                                   //-------!需克服收藏資料寫入資料庫的問題
                                     "type": "postback",
                                     "label": "新增至我的收藏",
-                                    "data": '1'
+                                    "data": exhibitionNum
                                 },
                                 {
                                     "type": "uri",
