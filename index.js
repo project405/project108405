@@ -113,13 +113,13 @@ bot.on('postback', function(event) {
             // logIn.userLogIn(userId){
             
             // }
-            if (data == '收藏'){
-                if (!this.isLogin) {
-                    event.reply({'type':'text', 'text':`https://project108405.herokuapp.com/logIn?${userId}`});
-                } else {
-                    alert('success')
-                }
-            }else{
+            // if (data == '收藏'){
+            //     if (!this.isLogin) {
+            //         event.reply({'type':'text', 'text':`https://project108405.herokuapp.com/logIn?${userId}`});
+            //     } else {
+            //         alert('success')
+            //     }
+            // }else{
                       //---------------使用map記得傳入item參數getRecomClassList
                 recommend.getFourRecomClassList().then(d =>{
                     // console.log(d[index]);
@@ -188,7 +188,7 @@ bot.on('postback', function(event) {
                         ]);		
                     });
                 });
-            }
+            // }
         
     });
     // let recom_class = ['movie','music','book','exhibition'];
