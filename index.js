@@ -119,7 +119,7 @@ bot.on('postback', function(event) {
                     actions: [{
                         type:"uri",
                         label:"View details",
-                        uri:"http://example.com/page/222",
+                        uri:"line://app/1594135622-705e8pDP",
                         
                     }, {
                         type: 'postback',
@@ -136,8 +136,7 @@ bot.on('postback', function(event) {
                     }]
                 }
             };
-            "type": "uri",
-  linkUri: "line://app/1594135622-705e8pDP",
+            
             // logIn.userLogIn(userId){
             
 
