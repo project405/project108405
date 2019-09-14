@@ -351,7 +351,7 @@ bot.on('message', function(event) {
                             },
                             {
                               //-------!需克服收藏資料寫入資料庫的問題
-                                "type": "message",
+                                "type": "postback",
                                 "label": "新增至我的收藏",
                                 "text": data[1][0].recomNum
                             },
@@ -379,7 +379,7 @@ bot.on('message', function(event) {
                                 },
                                 {
                                   //-------!需克服收藏資料寫入資料庫的問題
-                                    "type": "message",
+                                    "type": "postback",
                                     "label": "新增至我的收藏",
                                     "text": data[2][0].recomNum
                                 },
@@ -407,7 +407,7 @@ bot.on('message', function(event) {
                                 },
                                 {
                                   //-------!需克服收藏資料寫入資料庫的問題
-                                    "type": "message",
+                                    "type": "postback",
                                     "label": "新增至我的收藏",
                                     "text": data[3][0].recomNum
                                 },
