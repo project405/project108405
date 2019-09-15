@@ -20,8 +20,8 @@ from django.conf.urls import url
 
 
 urlpatterns = [
-    path('sentimentAnaly/', include('sentimentAnaly.urls')),
     path('admin/', admin.site.urls),
+    path('sentimentAnalyze/', include('sentimentAnalyze.urls')),
     # url(r'^$', view.hello),
     #   url(r'^hello/$', view.SentimentAnalysis),
 ]

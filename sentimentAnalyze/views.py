@@ -132,4 +132,7 @@ def index(request):
     # seg_list = jieba.cut("新竹的交通大學在新竹的大學路上", cut_all=True)
     # print("Full Mode: " + "/ ".join(seg_list))  # 全模式
     # print(seg_list)
-    return HttpResponse("Hello, world. You're at the polls index.")
+    s = 'gododdododood'
+    return HttpResponse(s)
+    # article = Article.objects.get(pk=int(pk))
+    # return render(request, "home.html", {'article': article})
