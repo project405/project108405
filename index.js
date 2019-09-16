@@ -119,7 +119,7 @@ bot.on('postback', function(event) {
                 altText: '很抱歉您未綁定line',
                 template: {
                     type: 'buttons',
-                    text: '很抱歉您未綁定line',
+                    text: 'LINE使用用戶請至文藝富心登入/n登入後能用LINE在文藝富心做些什麼？',
                     actions: [{
                         type:"uri",
                         label:"至文藝富心綁定",
