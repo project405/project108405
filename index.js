@@ -141,7 +141,7 @@ bot.on('postback', function(event) {
             // }
 
             // }
-            ''
+            
             if (data == 'movie' ||data == 'music' ||data == 'book' || data =='exhibition'){
                 console.log("進到四大推薦")
                 //---------------使用map記得傳入item參數getRecomClassList
