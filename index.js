@@ -215,6 +215,7 @@ bot.on('postback', function(event) {
                                     console.log(b)
                                 })
                             }
+                            event.reply('收藏成功！請至我的收藏查看')
                         }else{
                             event.reply(myLineTemplate)
         
