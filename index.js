@@ -200,7 +200,8 @@ bot.on('postback', function(event) {
             }else{
                 logIn.userJudgeBind(userId).then(d =>{
                     console.log("已綁定line，準備寫入資料庫")
-                    if(d[0]!= undefined){
+                    if(d[0]){
+                        console.log("近來囉～～")
                         if(d[0].lineID == userId){
                             console.log('memID',d[0].memID)
                             console.log('userId!!!',userId)
