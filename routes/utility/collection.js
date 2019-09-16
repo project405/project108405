@@ -1147,6 +1147,7 @@ var addColleRecommend = async function (memID, recomNum) {
 var addLineColleRecommend = async function (memID, recomNum) {
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
     var result;
+    
     await sql('INSERT INTO "memberCollection" ("memID","recomNum","collDateTime") VALUES ($1,$2,$3)', [memID, recomNum, addTime])
         .then((data) => {
             result = 1;

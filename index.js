@@ -214,8 +214,9 @@ bot.on('postback', function(event) {
                                 collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
                                     console.log(b)
                                 })
+                                event.reply('【收藏成功】\n查看所有收藏\n請至文藝富心官網查看')
                             }
-                            event.reply('收藏成功！\n查看所有收藏\n請至文藝富心官網查看')
+                            
                         }else{
                             event.reply(myLineTemplate)
         
@@ -223,77 +224,14 @@ bot.on('postback', function(event) {
                     
                 })  
             }
-            
-            // async function validateCode () {
-            //     if (!bind) {
-            //     var bind = await as.getItem('bind')
-            //     }
-            //     .setItem('bind', 'ii')
-            //     set
+           
     });
-    // let recom_class = ['movie','music','book','exhibition'];
-    // const userId = event.source.userId;
-    // var recom = recom_class.map(function(item,index){
-        // console.log(item)
-        // console.log(index)
-        //寫一個方法判斷postback回來是電影、音樂等等
-       
-        
-
   
-    // });
     
 });
-//========================================
-//--------------------------------
-// 機器人接受回覆的處理
-//--------------------------------
-// bot.on('postback', function(event) { 
-//     const data = event.postback.data;
-//     // const sub = data.split('&');
-//     const userId = event.source.userId;
 
-//     event.source.profile().then(function (profile) {
-//         const userName = profile.displayName;    
-//         return event.reply([
-//             {
-//                 "type": "text",
-//                 "text": "使用者編號:" + userId
-//             },
-//             {
-//                 "type": "text",
-//                 "text": "姓名:" + userName
-//             },
-//             // {
-//             //     "type": "text",
-//             //     "text": "餐點編號:" + sub[0]
-//             // },
-//             {
-//                 "type": "text",
-//                 "text": data
 
-//             }            
-//         ]);     
-//     });
-// });
 
-//========================================
-// 機器人接受訊息的處理
-//========================================
-// bot.on('message', function(event) {
-//     event.source.profile().then(
-//         function (profile) {    
-//             recommend.getRecomClassList().then(d =>{  
-//                 console.log(d);
-//                 return event.reply({
-//                     "type": "image",
-//                     "originalContentUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg",
-//                     "previewImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg"
-//                 });	
-//             });            
-//         }
-//     );
-// });
 //----------------成功
 //網址需連到heroku、圖片也是
 bot.on('message', function(event) {
