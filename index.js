@@ -198,10 +198,10 @@ bot.on('postback', function(event) {
                     }    
                 });
             }else{
-                test().catch(error => console.log(error.message));
+                await test().catch(error => console.log(error.message));
 
                 async function test() {
-                    await logIn.userJudgeBind(userId)(d =>{
+                    logIn.userJudgeBind(userId).then(d =>{
                         
                         console.log("已綁定line，準備寫入資料庫")
                         if(d[0].lineID == userId){
@@ -313,6 +313,7 @@ bot.on('message', function(event) {
 
         })
     };
+    //動態撈圖片
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
