@@ -122,7 +122,7 @@ bot.on('postback', function(event) {
                     text: 'LINE用戶請至文藝富心登入\n登入後能：\n1.在LINE收藏你喜歡的事物\n2.不定時收到文藝相關資訊',
                     actions: [{
                         type:"uri",
-                        label:"至文藝富心綁定",
+                        label:"至文藝富心官網登入",
                         uri:"line://app/1594135622-705e8pDP"   
                     }]
                 }
