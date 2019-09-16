@@ -215,7 +215,7 @@ bot.on('postback', function(event) {
                                     console.log(b)
                                 })
                             }
-                            event.reply('收藏成功！\n要查看所有收藏請至文藝富心官網查看')
+                            event.reply('收藏成功！\n查看所有收藏\n請至文藝富心官網查看')
                         }else{
                             event.reply(myLineTemplate)
         
