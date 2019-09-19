@@ -27,65 +27,52 @@ var checkAuthority = async function (memID) {
 //-------- articlePost() ---------
 //================================
 var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, imgData, tag) {
-    var artiNum ;
-    var tagNum = [];
+    var artiNum;
+    var tagNum;
     var result;
 
     //新增文章
-    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime") VALUES ($1,$2,$3,$4,$5); '+
-             ' SELECT currval(\'"article_artiNum_seq1"\') AS "artiNum" '
-             , [memID, artiHead, artiCont, artiClass, artiDateTime])
+    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime") ' +
+        ' VALUES ($1,$2,$3,$4,$5)  returning "article"."artiNum" ;'
+        , [memID, artiHead, artiCont, artiClass, artiDateTime])
         .then((data) => {
-            if(!data.rows){
-                artiNum = undefined ;
-                console.log("ARtiBum =" ,artiNum);
-            }else{
-                
-                artiNum = data.rows[0].artiNum ;
-                console.log("ARtiBum =" ,artiNum);
+            if (!data.rows) {
+                artiNum = undefined;
+                console.log("artinum =", artiNum);
+            } else {
+
+                artiNum = data.rows[0].artiNum;
+                console.log("artinum =", artiNum);
             }
         }, (error) => {
-            artiNum = undefined ;
+            artiNum = undefined;
         });
 
-    //查詢新增文章的文章編號
-    await sql('SELECT "artiNum" from "article" where "memID"= $1 and "artiHead" = $2 and "artiCont" = $3 and "artiClass" = $4 and "artiDateTime" = $5 ', [memID, artiHead, artiCont, artiClass, artiDateTime])
-        .then((data) => {
-            console.log("data.rows=", data.rows);
-            // artiNum = data.rows[0].artiNum;
-            // console.log("artiNum=", artiNum);
-        }, (error) => {
-            result = 1;
-        });
     //新增tag 
     for (var i = 0; i < tag.length; i++) {
-        await sql('INSERT into "tag" ("tagName") VALUES ($1)', [tag[i]])
+        console.log("tag[i]=",tag[i]);
+        await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+            .then((data) => {
+                console.log("data=",data);
+                if (!data.rows) {
+                    tagNum = undefined;
+                } else {
+                    tagNum = data.rows[0].tagNum;
+                }
+            }, (error) => {
+                tagNum = undefined;
+            });
+            console.log(tagNum);
+        //新增tagLink
+        await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
             .then((data) => {
                 result = 0;
             }, (error) => {
                 result = 1;
             });
+    }
 
-    }
-    //查詢tagNum
-    for (var i = 0; i < tag.length; i++) {
-        await sql('SELECT "tagNum" from "tag" where "tagName" = $1', [tag[i]])
-            .then((data) => {
-                // console.log("data.rows=", data.rows);
-                tagNum[i] = data.rows[0].tagNum;
-            }, (error) => {
-                result = 1;
-            });
-    }
-    //新增tagLink
-    for (var i = 0; i < tagNum.length; i++) {
-        await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum[i]])
-            .then((data) => {
-                result = 0;
-            }, (error) => {
-                result = 1;
-            });
-    }
+
     //新增img
     for (var i = 0; i < imgData.length; i++) {
         await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
@@ -96,7 +83,7 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
             });
     }
 
-    // console.log(result);
+    console.log("結果:",result);
     return result;
 }
 
@@ -114,81 +101,81 @@ var myArticle = async function (memID) {
     //--------- get myArticle ----------
     await sql('SELECT * FROM "articleListDataView" WHERE "memID" = $1', [memID])
         .then((data) => {
-          if(!data.rows){
-              articleList = undefined ; 
-          }else{
-              articleList = data.rows ; 
-          }
-        }, (error) => {
-            articleList = undefined ; 
-        })
-    
-    // -----------  取得tag --------------
-    await sql('SELECT * FROM "articleTagView" '+
-             ' WHERE "artiNum" '+
-                ' IN (SELECT "artiNum" '+
-                    ' FROM "articleListDataView" '+
-                    ' WHERE "memID" = $1)',[memID])
-        .then((data) => {
             if (!data.rows) {
-                tag = undefined ; 
+                articleList = undefined;
             } else {
-                tag = data.rows ; 
+                articleList = data.rows;
             }
         }, (error) => {
-            tag = undefined ; 
+            articleList = undefined;
+        })
+
+    // -----------  取得tag --------------
+    await sql('SELECT * FROM "articleTagView" ' +
+        ' WHERE "artiNum" ' +
+        ' IN (SELECT "artiNum" ' +
+        ' FROM "articleListDataView" ' +
+        ' WHERE "memID" = $1)', [memID])
+        .then((data) => {
+            if (!data.rows) {
+                tag = undefined;
+            } else {
+                tag = data.rows;
+            }
+        }, (error) => {
+            tag = undefined;
         });
 
     // ----------- 判斷是否被使用者收藏 ----------- 
-    await sql('SELECT "memID" , "artiNum" '+
-             ' FROM "memberCollection" '+
-             ' WHERE "memID" = $1', [memID])
+    await sql('SELECT "memID" , "artiNum" ' +
+        ' FROM "memberCollection" ' +
+        ' WHERE "memID" = $1', [memID])
         .then((data) => {
             if (!data.rows) {
-                isCollection = undefined ;
+                isCollection = undefined;
             } else {
-                isCollection = data.rows ;
+                isCollection = data.rows;
             }
         }, (error) => {
-            isCollection = undefined ;
+            isCollection = undefined;
         });
 
     // ----------- 判斷是否被使用者按愛心 -----------
-    await sql('SELECT "memID","artiNum" '+
-             ' FROM "articleLike"  '+
-             ' WHERE "memID" = $1', [memID])
+    await sql('SELECT "memID","artiNum" ' +
+        ' FROM "articleLike"  ' +
+        ' WHERE "memID" = $1', [memID])
         .then((data) => {
             if (!data.rows) {
-                isLike = undefined ;
+                isLike = undefined;
             } else {
-                isLike = data.rows ; 
+                isLike = data.rows;
             }
         }, (error) => {
-            isLike = undefined ;
+            isLike = undefined;
         });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "artiNum" , "imgName" '+ 
-             ' FROM "image" '+
-             ' WHERE "artiNum" '+ 
-                ' IN(SELECT "artiNum" '+ 
-                   ' FROM "articleListDataView" '+
-                   ' WHERE "memID" = $1)', [memID])
+    await sql('SELECT "artiNum" , "imgName" ' +
+        ' FROM "image" ' +
+        ' WHERE "artiNum" ' +
+        ' IN(SELECT "artiNum" ' +
+        ' FROM "articleListDataView" ' +
+        ' WHERE "memID" = $1)', [memID])
         .then((data) => {
             if (!data.rows) {
-                imgs = undefined ;
-            }else{
-                imgs = data.rows ;
+                imgs = undefined;
+            } else {
+                imgs = data.rows;
             }
         }, (error) => {
-            imgs = undefined ;
+            imgs = undefined;
         });
     result[0] = articleList;
     result[1] = tag;
-    result[2] = imgs; 
+    result[2] = imgs;
     result[3] = isLike;
     result[4] = isCollection;
-    result[5] = [memID] ;
+    result[5] = [memID];
 
     return result;
 }
@@ -227,7 +214,7 @@ var getOriginalMail = async function (memID) {
 //===================================
 //----- getMyArticleClassList() -----
 //===================================
-var getMyArticleClassList = async function (artiClass, memID){
+var getMyArticleClassList = async function (artiClass, memID) {
     var articleList = [];
     var tag = [];
     var isCollection = [];
@@ -237,59 +224,59 @@ var getMyArticleClassList = async function (artiClass, memID){
     var result = [];
 
     // -----------  取得分類文章 --------------
-    await sql('SELECT * '+ 
-             ' FROM "articleListDataView" '+
-             ' WHERE "artiClass" = $1 AND "memID" = $2', [artiClass, memID])
-    .then((data) => {
-        if(!data.rows){
-            articleList = undefined ; 
-        }else{
-            articleList = data.rows ;
-        }
-    }, (error) => {
-        articleList = undefined ; 
-    });
-
-    // -----------  取得tag --------------
-    await sql('SELECT  * '+
-             ' FROM "articleTagView" '+
-             ' WHERE "artiNum" '+
-                ' IN(SELECT "artiNum" '+
-                    ' FROM "articleListDataView" '+
-                    ' WHERE "artiClass" =  $1 AND "memID" = $2)', [artiClass.memID])
+    await sql('SELECT * ' +
+        ' FROM "articleListDataView" ' +
+        ' WHERE "artiClass" = $1 AND "memID" = $2', [artiClass, memID])
         .then((data) => {
-            if(!data.rows){
-                tag = undefined ; 
-            }else{
-                tag = data.rows ;
+            if (!data.rows) {
+                articleList = undefined;
+            } else {
+                articleList = data.rows;
             }
         }, (error) => {
-            tag = undefined ; 
+            articleList = undefined;
+        });
+
+    // -----------  取得tag --------------
+    await sql('SELECT  * ' +
+        ' FROM "articleTagView" ' +
+        ' WHERE "artiNum" ' +
+        ' IN(SELECT "artiNum" ' +
+        ' FROM "articleListDataView" ' +
+        ' WHERE "artiClass" =  $1 AND "memID" = $2)', [artiClass.memID])
+        .then((data) => {
+            if (!data.rows) {
+                tag = undefined;
+            } else {
+                tag = data.rows;
+            }
+        }, (error) => {
+            tag = undefined;
         });
 
     // 判斷是否被使用者收藏
-    await sql('SELECT "memID" , "artiNum" '+
-             ' FROM "memberCollection" '+
-             ' WHERE "memID" = $1', [memID])
+    await sql('SELECT "memID" , "artiNum" ' +
+        ' FROM "memberCollection" ' +
+        ' WHERE "memID" = $1', [memID])
         .then((data) => {
-            if(!data.rows){
-                isCollection = undefined ; 
-            }else{
-                isCollection = data.rows ;
+            if (!data.rows) {
+                isCollection = undefined;
+            } else {
+                isCollection = data.rows;
             }
         }, (error) => {
-            isCollection = undefined ; 
+            isCollection = undefined;
         });
 
     // 判斷是否被使用者按愛心
-    await sql('SELECT "memID","artiNum" '+ 
-             ' FROM "articleLike" '+
-             ' WHERE "memID" = $1', [memID])
+    await sql('SELECT "memID","artiNum" ' +
+        ' FROM "articleLike" ' +
+        ' WHERE "memID" = $1', [memID])
         .then((data) => {
-            if(!data.rows){
-                isLike = undefined ; 
-            }else{
-                isLike = data.rows ;
+            if (!data.rows) {
+                isLike = undefined;
+            } else {
+                isLike = data.rows;
             }
         }, (error) => {
             isLike.push('0');
@@ -307,15 +294,15 @@ var getMyArticleClassList = async function (artiClass, memID){
     })
 
     //取得照片
-    await sql('SELECT "artiNum" , "imgName" FROM "image"' )
+    await sql('SELECT "artiNum" , "imgName" FROM "image"')
         .then((data) => {
-            if(!data.rows){
-                imgs = undefined ; 
-            }else{
-                imgs = data.rows ;
+            if (!data.rows) {
+                imgs = undefined;
+            } else {
+                imgs = data.rows;
             }
         }, (error) => {
-            imgs = undefined ; 
+            imgs = undefined;
         });
 
     result[0] = articleList;
@@ -324,7 +311,7 @@ var getMyArticleClassList = async function (artiClass, memID){
     result[3] = isLike;
     result[4] = isCollection;
     result[5] = [memID];
-   
+
     return result;
 
 }

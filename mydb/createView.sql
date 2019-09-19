@@ -20,7 +20,6 @@ CREATE VIEW "articleListDataView" AS
 			,"A"."artiHead"
 			,"A"."artiCont"
 			,"A"."artiClass"
-			,"A"."picture"
 			,"A"."likeCount"
 			,count("mess"."artiNum") AS "messCount"
 	FROM(
@@ -30,19 +29,18 @@ CREATE VIEW "articleListDataView" AS
 			,"arti"."artiHead"
 			,"arti"."artiCont"
 			,"arti"."artiClass"
-			,"arti"."picture"
 			,count("artiLike"."artiNum") AS "likeCount"
 			
 		FROM article AS "arti"
 			LEFT JOIN "articleLike" AS "artiLike"
 				ON "arti"."artiNum" = "artiLike"."artiNum"
 			GROUP BY "arti"."memID" , "arti"."memID" , "arti"."artiDateTime" 
-							,"arti"."artiHead" , "arti"."artiCont" , "arti"."artiClass" , "arti"."picture" ,"arti"."artiNum") AS "A"
+							,"arti"."artiHead" , "arti"."artiCont" , "arti"."artiClass" ,"arti"."artiNum") AS "A"
 	LEFT JOIN "articleMessage" AS "mess"
 		ON "A"."artiNum" = "mess"."artiNum"
 		
 	GROUP BY "A"."artiNum", "A"."memID" , "A"."artiDateTime" 
-						,"A"."artiHead" , "A"."artiCont" , "A"."artiClass" , "A"."picture" ,"A"."likeCount"
+						,"A"."artiHead" , "A"."artiCont" , "A"."artiClass" ,"A"."likeCount"
 	ORDER BY "A"."artiNum" DESC;
 	
 	

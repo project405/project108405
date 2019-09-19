@@ -37,6 +37,10 @@ $(document).ready(() => {
                                 <a class="nav-link" href="/articleList">\
                                     文章</a>\
                             </li>\
+                            <li class="nav-item">\
+                                <a class="nav-link" href="/articleList/post">\
+                                    發文</a>\
+                            </li>\
                             <li id="dropdown" class="nav-item dropdown">\
                                 <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                                 收藏\
@@ -129,6 +133,10 @@ $(document).ready(() => {
                             <li class="nav-item">\
                                 <a class="nav-link" href="/articleList">\
                                     文章</a>\
+                            </li>\
+                            <li class="nav-item">\
+                                <a class="nav-link" href="/articleList/post">\
+                                    發文</a>\
                             </li>\
                             <li id="dropdown" class="nav-item dropdown">\
                                 <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
@@ -226,6 +234,10 @@ $(document).ready(() => {
                             <a class="nav-link" href="/articleList">\
                                 文章</a>\
                         </li>\
+                        <li class="nav-item">\
+                                <a class="nav-link" href="/articleList/post">\
+                                    發文</a>\
+                            </li>\
                         <li id="dropdown" class="nav-item dropdown">\
                             <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                             收藏\
