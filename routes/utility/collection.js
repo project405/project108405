@@ -1146,14 +1146,29 @@ var addColleRecommend = async function (memID, recomNum) {
 //=========================================
 var addLineColleRecommend = async function (memID, recomNum) {
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
-    var result;
-    
-    await sql('INSERT INTO "memberCollection" ("memID","recomNum","collDateTime") VALUES ($1,$2,$3)', [memID, recomNum, addTime])
-        .then((data) => {
-            result = 1;
-        }, (error) => {
-            result = 0;
-        });
+    var iscoll;
+    var result = 0;
+
+    await sql('SELECT * FROM "memberCollection" WHERE "memID"')
+            .then((data) => {
+                if(!data.rows){
+                    iscoll = undefined ;
+                }else{
+                    iscoll = data.rows ;
+                }
+            }, (error) => {
+                iscoll = undefined ;
+            });
+    //如果為空值就新增
+    if(iscoll ){
+        await sql('INSERT INTO "memberCollection" ("memID","recomNum","collDateTime") VALUES ($1,$2,$3)', [memID, recomNum, addTime])
+            .then((data) => {
+                result = 1;
+            }, (error) => {
+                result = 0;
+            });
+    }
+        
     return result;
 }
 
