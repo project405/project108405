@@ -234,11 +234,6 @@ bot.on('message', function(event) {
                                   "type": "postback",
                                   "label": "新增至我的收藏",
                                   "data": movieNum
-                              },
-                              {
-                                  "type": "uri",
-                                  "label": "至文藝富心官網查看",
-                                  "uri": "https://weiting.nctu.me/recommend.html"
                               }
                           ]
                         },
@@ -252,23 +247,18 @@ bot.on('message', function(event) {
                               "uri": "https://weiting.nctu.me/recommend.html"
                           },
                           "actions": [
-                            {
-                                "type": "postback",
-                                "label": "知道更多",
-                                "data": 'music'
-                            },
-                            {
-                              //-------!需克服收藏資料寫入資料庫的問題
-                                "type": "postback",
-                                "label": "新增至我的收藏",
-                                "data": musicNum
-                            },
-                            {
-                                "type": "uri",
-                                "label": "至文藝富心官網查看",
-                                "uri": "https://weiting.nctu.me/recommend.html"
-                            }
-                            ]
+                                {
+                                    "type": "postback",
+                                    "label": "知道更多",
+                                    "data": 'music'
+                                },
+                                {
+                               
+                                    "type": "postback",
+                                    "label": "新增至我的收藏",
+                                    "data": musicNum
+                                }
+                            ]   
                         },
                         {
                             "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/book1.jpg",
@@ -290,11 +280,6 @@ bot.on('message', function(event) {
                                     "type": "postback",
                                     "label": "新增至我的收藏",
                                     "data": bookNum
-                                },
-                                {
-                                    "type": "uri",
-                                    "label": "至文藝富心官網查看",
-                                    "uri": "https://weiting.nctu.me/recommend.html"
                                 }
                             ]
                           },
@@ -318,11 +303,6 @@ bot.on('message', function(event) {
                                     "type": "postback",
                                     "label": "新增至我的收藏",
                                     "data": exhibitionNum
-                                },
-                                {
-                                    "type": "uri",
-                                    "label": "至文藝富心官網查看",
-                                    "uri": "https://weiting.nctu.me/recommend.html"
                                 }
                             ]
                           }
