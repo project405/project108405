@@ -158,16 +158,28 @@ bot.on('message', function(event) {
                         },
                         {
                             // "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
-                            "text":'時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead,
+                            "text":'時間：' + data[1][1].artiDateTime  + '\n'+ '標題：' + data[1][1].artiHead,
                             "actions": [
                                 
                                 {
                                     "type": "uri",
                                     "label": " 👀 至文藝富心官網觀看",
-                                    "uri": `https://project108405.herokuapp.com/article/${data[1][0].artiNum}`
+                                    "uri": `https://project108405.herokuapp.com/article/${data[1][1].artiNum}`
                                 }
                             ]
-                        }    
+                        },
+                        {
+                            // "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
+                            "text":'時間：' + data[1][2].artiDateTime  + '\n'+ '標題：' + data[1][2].artiHead,
+                            "actions": [
+                                
+                                {
+                                    "type": "uri",
+                                    "label": " 👀 至文藝富心官網觀看",
+                                    "uri": `https://project108405.herokuapp.com/article/${data[1][2].artiNum}`
+                                }
+                            ]
+                        }      
                     ]
                     // ,
                     // "imageAspectRatio": "rectangle",
