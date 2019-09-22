@@ -1148,7 +1148,7 @@ var addLineColleRecommend = async function (memID, recomNum) {
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
     var isCollection = 0;
     var result = 0;
-    console.log("~~~~~~~",isCollection)
+
     //判斷memberCollection資料庫是否有重複的收藏  
     await sql('SELECT * FROM "memberCollection" WHERE "memID" = $1 and "recomNum" = $2', [memID, recomNum])
             .then((data) => {
@@ -1163,9 +1163,7 @@ var addLineColleRecommend = async function (memID, recomNum) {
             }, (error) => {
                 isCollection = undefined ;
             });
-    await console.log('iscollection!!!!!!!!',isCollection)
-    
-  
+   
     //如果為空值就新增
     if(isCollection == 1){
         await sql('INSERT INTO "memberCollection" ("memID","recomNum","collDateTime") VALUES ($1,$2,$3)', [memID, recomNum, addTime])

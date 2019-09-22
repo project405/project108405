@@ -186,20 +186,12 @@ bot.on('postback', function(event) {
                 });
             }else{
                 logIn.userJudgeBind(userId).then(d =>{
-                    console.log("已綁定line，準備寫入資料庫")
-                    console.log('userId!!!',userId)
-                    console.log(d)
-                    console.log(d.memID)
+                   
 
                         if(d[0]){
-                            console.log("近來囉～～")
+                            
                             if(d[0].lineID == userId){
-                                console.log('memID',d[0].memID)
-                                
-                                console.log('data~~~~~',data)
-                                
-                                console.log(typeof(parseInt(data)))
-                                console.log('寫一個收藏進去');
+                              
                                 
                                 collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
                                     console.log(b)
