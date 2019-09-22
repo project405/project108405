@@ -1153,10 +1153,10 @@ var addLineColleRecommend = async function (memID, recomNum) {
     await sql('SELECT * FROM "memberCollection" WHERE "memID" = $1 and "recomNum" = $2', [memID, recomNum])
             .then((data) => {
                 if(data.rows){
-                    isCollection = 1 ;
+                    isCollection = 0 ;
                     
                 }else{
-                    isCollection = 0 ;
+                    isCollection = 1 ;
                     
                 }
             }, (error) => {
