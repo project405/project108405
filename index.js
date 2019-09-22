@@ -211,14 +211,14 @@ bot.on('postback', function(event) {
                                 
                                 console.log(typeof(parseInt(data)))
                                 console.log('寫一個收藏進去');
-                                //呼叫select function
+                                
                                 collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
                                     console.log(b)
-                                    if(b == 0){
-                                        event.reply('【重複收藏】\n查看所有收藏\n請至文藝富心官網查看')
-                                    }else{
-                                        event.reply('【收藏成功】\n查看所有收藏\n請至文藝富心官網查看')
-                                    }
+                                    // if(b == 0){
+                                    //     event.reply('【重複收藏】\n查看所有收藏\n請至文藝富心官網查看')
+                                    // }else{
+                                    //     event.reply('【收藏成功】\n查看所有收藏\n請至文藝富心官網查看')
+                                    // }
                                 })
                                 
                             }
