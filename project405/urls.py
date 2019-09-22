@@ -16,12 +16,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import url
+from project405.view import *
+
 # from . import view
 
 
 urlpatterns = [
+    path('', form),
     path('admin/', admin.site.urls),
     path('sentimentAnalyze/', include('sentimentAnalyze.urls')),
+    path('analyze/', include('analyze.urls')),
+    # path('analyze/', include('analyze.urls', namespace="home")),
+
     # url(r'^$', view.hello),
     #   url(r'^hello/$', view.SentimentAnalysis),
 ]

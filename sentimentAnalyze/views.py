@@ -59,7 +59,6 @@ def index(request):
     evaluation = 0
 
     for k in weights:
-        print(str(k[1]))
         evaluation = evaluation + (float(k[1]) - 5)
 
     print(weights)
