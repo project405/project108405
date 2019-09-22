@@ -1153,9 +1153,10 @@ var addLineColleRecommend = async function (memID, recomNum) {
     await sql('SELECT * FROM "memberCollection" WHERE "memID" = $1 and "recomNum" = $2', [memID, recomNum])
             .then((data) => {
                 if(!data.rows){
-                    iscollection = undefined ;
-                }else{
+                    
                     iscollection = data.rows ;
+                }else{
+                    iscollection = undefined ;
                 }
             }, (error) => {
                 iscollection = undefined ;
