@@ -50,7 +50,7 @@ bot.on('postback', function(event) {
             
             
             if (data == 'movie' ||data == 'music' ||data == 'book' || data =='exhibition'){
-                
+                console.log(d[0][0].recomHead)
                 //---------------進到四大推薦---------------
                 recommend.getFourRecomClassList().then(d =>{
                     if (data == 'movie'){
