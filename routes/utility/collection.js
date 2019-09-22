@@ -1170,6 +1170,7 @@ var addLineColleRecommend = async function (memID, recomNum) {
             .then((data) => {              
                 result = 1;
             }, (error) => {
+                console.log('空空空',result)
                 result = 0;
             });
     }
