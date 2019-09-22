@@ -201,7 +201,7 @@ bot.on('postback', function(event) {
                 logIn.userJudgeBind(userId).then(d =>{
                     console.log("已綁定line，準備寫入資料庫")
                     console.log('userId!!!',userId)
-                    console.log(d[0])
+                    console.log(d)
                         if(d[0]){
                             console.log("近來囉～～")
                             if(d[0].lineID == userId){
