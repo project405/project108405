@@ -237,9 +237,6 @@ bot.on('message', function(event) {
    
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
-            console.log(data[1][0])
-            console.log(data[1][1])
-            console.log(data[1][2])
             
             event.reply([
                 { type: 'text', text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][0].artiNum}` },
