@@ -128,19 +128,6 @@ bot.on('postback', function(event) {
                 }
             };
             
-            // logIn.userLogIn(userId){
-                // async function validateCode () {
-                //     if (!bind) {
-                //     var bind = await as.getItem('bind')
-                //     }
-                //     .setItem('bind', 'ii')
-                //     set
-                
-            // async function addCollecRecommend (){
-
-            // }
-
-            // }
             
             if (data == 'movie' ||data == 'music' ||data == 'book' || data =='exhibition'){
                 console.log("進到四大推薦")
@@ -202,6 +189,8 @@ bot.on('postback', function(event) {
                     console.log("已綁定line，準備寫入資料庫")
                     console.log('userId!!!',userId)
                     console.log(d)
+                    console.log(d.memID)
+
                         if(d[0]){
                             console.log("近來囉～～")
                             if(d[0].lineID == userId){
