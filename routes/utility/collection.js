@@ -1167,7 +1167,7 @@ var addLineColleRecommend = async function (memID, recomNum) {
     await console.log('addTime!!!!!!!!',addTime)
   
     //如果為空值就新增
-    if(!isCollection){
+    if(isCollection = 1){
         await sql('INSERT INTO "memberCollection" ("memID","recomNum","collDateTime") VALUES ($1,$2,$3)', [memID, recomNum, addTime])
             .then((data) => {              
                 result = 1;
