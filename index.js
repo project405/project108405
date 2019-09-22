@@ -160,7 +160,7 @@ bot.on('message', function(event) {
                             ]
                         },
                         {
-                            // "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
+                            "title": "【" + data[1][1].artiHead + "】" ,
                             "text":'時間：' + data[1][1].artiDateTime  + '\n'+ '標題：' + data[1][1].artiHead+'\n' + data[1][1].artiCont,
                             "actions": [
                                 
@@ -172,7 +172,7 @@ bot.on('message', function(event) {
                             ]
                         },
                         {
-                            // "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
+                            "title": "【" + data[1][2].artiHead + "】" ,
                             "text":'時間：' + data[1][2].artiDateTime  + '\n'+ '標題：' + data[1][2].artiHead+'\n' + data[1][2].artiCont,
                             "actions": [
                                 
