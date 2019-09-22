@@ -1159,7 +1159,7 @@ var addLineColleRecommend = async function (memID, recomNum) {
             }, (error) => {
                 iscollection = undefined ;
             });
-    console,log('iscollection!!!!!!!!',iscollection)
+    await console.log('iscollection!!!!!!!!',iscollection)
     //如果為空值就新增
     if(iscollection = undefined){
         await sql('INSERT INTO "memberCollection" ("memID","recomNum","collDateTime") VALUES ($1,$2,$3)', [memID, recomNum, addTime])
