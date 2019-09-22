@@ -21,86 +21,6 @@ var bot = linebot({
 
 
 //========================================
-// 機器人接受訊息的處理
-//========================================
-//------------測試資料------------
-// bot.on('message', function(event) {    
-//     event.source.profile().then(
-//         function (profile) {
-//             //取得使用者資料
-//             const userName = profile.displayName;
-//             const userId = profile.userId;
-	    
-//             //使用者傳來的學號
-//             const memID = event.message.text;
-          
-//             //呼叫API取得學生資料
-//             collection.getCollRecommend(memID).then(data => {  
-//                     console.log(data[0].recomHead);
-//                     event.reply([
-//                         {'type':'text', 'text':data[0].recomHead},
-//                         {'type':'text', 'text':data[0].recomCont},
-//                         {'type':'text', 'text':data[0].recomClass},
-//                         {'type':'text', 'text':userName},
-//                         {'type':'text', 'text':"http://weiting.nctu.me/logIn.html/"+userId}]
-//                     );  
-                  
-//             })  
-//         }
-//     );
-// });
-
-//------------ 熱門文章 ------------
-// bot.on('message', function(event) {    
-    
-//     //使用者傳來的文字
-//     const text = event.message.text;
-    
-//     //呼叫indexAPI取得熱門文章
-//     if (text == "熱門文章"){
-//         index.getIndexData(text).then(data => {  
-            
-//             // console.log(data[1][0]);
-//             // console.log(data[1][1]);
-//             // console.log(data[1][2]);
-            
-//             event.reply([
-//                 {'type':'text', 'text':data[1][0].artiHead},
-//                 {'type':'text', 'text':data[1][1].artiHead},
-//                 {'type':'text', 'text':data[1][2].artiHead}
-//             ]);   
-             
-//         })  
-//     }
-// });
-//--------------------------------
-//------------ 本週推薦(成功)) ------------
-// bot.on('message',async function (event) {    
-
-//     //使用者傳來的文字
-//     const text = event.message.text;
-//     //存放本週推薦類別
-//     let msgs = ['電影','音樂','書籍','展覽'];
-    
-//     //呼叫API取得本週推薦
-//     if (text == "本週推薦") {
-//         recommend.getFourRecomClassList().then(data =>{
-//                 console.log("data!!!!!!",data[1][0]);
-//                 // console.log(msgs[0])
-//                 event.reply([{'type':'text','text':msgs[0]+"類："+data[0][0].recomHead},
-//                             {'type':'text','text':msgs[1]+"類："+data[1][0].recomHead},
-//                             {'type':'text','text':msgs[2]+"類："+data[2][0].recomHead},
-//                             {'type':'text','text':msgs[3]+"類："+data[3][0].recomHead}
-//                 ]);
-//         });
-          
-//     }      
-// });
-
-
-  
-
-//========================================
 // 機器人接受回覆的處理
 //========================================
 bot.on('postback', function(event) { 
@@ -130,14 +50,9 @@ bot.on('postback', function(event) {
             
             
             if (data == 'movie' ||data == 'music' ||data == 'book' || data =='exhibition'){
-                console.log("進到四大推薦")
-                //---------------使用map記得傳入item參數getRecomClassList
+                
+                //---------------進到四大推薦---------------
                 recommend.getFourRecomClassList().then(d =>{
-                    // console.log(d[index]);
-                    
-                    //存放recommend/movie1.content
-                    // const recommendData = d[0][0].recomCont;
-
                     if (data == 'movie'){
                         return event.reply([
                             {
@@ -186,8 +101,7 @@ bot.on('postback', function(event) {
                 });
             }else{
                 logIn.userJudgeBind(userId).then(d =>{
-                        if(d[0]){
-                            
+                        if(d[0]){                         
                             if(d[0].lineID == userId){
                               
                                 collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
@@ -218,15 +132,30 @@ bot.on('message', function(event) {
     const text = event.message.text;
     //存放本週推薦類別
     let msgs = ['電影','音樂','書籍','展覽'];
-   
+   //------------------------------------------------
+   //------------------顯示熱門文章--------------------
+   //------------------------------------------------
+    var hotArticleTemplate ={
+        type: 'template',
+        altText: '🔥 熱門文章',
+        template: {
+            type: 'buttons',
+            text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead,
+            actions: [{
+                type:"uri",
+                label:"至文藝富心官網觀看",
+                uri:`https://project108405.herokuapp.com/article/${data[1][0].artiNum}`   
+            }]
+        }
+    };
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
-            
-            event.reply([
-                { type: 'text', text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][0].artiNum}` },
-                { type: 'text', text: '時間：' + data[1][1].artiDateTime  + '\n'+ '標題：' + data[1][1].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][1].artiNum}` },
-                { type: 'text', text: '時間：' + data[1][2].artiDateTime  + '\n'+ '標題：' + data[1][2].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][2].artiNum}` }
-            ]);
+            event.reply(hotArticleTemplate);
+            // event.reply([
+            //     { type: 'text', text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][0].artiNum}` },
+            //     { type: 'text', text: '時間：' + data[1][1].artiDateTime  + '\n'+ '標題：' + data[1][1].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][1].artiNum}` },
+            //     { type: 'text', text: '時間：' + data[1][2].artiDateTime  + '\n'+ '標題：' + data[1][2].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][2].artiNum}` }
+            // ]);
 
         })
     };
@@ -441,87 +370,6 @@ bot.on('message', function(event) {
     }	
 });
 
-
-
-//--------------------------------
-// 機器人接受訊息的處理
-//--------------------------------
-
-// });bot.on('message', function(event) {    
-//     event.source.profile().then(
-//         function (profile) {
-//             //取得使用者資料
-//             const userName = profile.displayName;
-//             const userId = profile.userId;
-
-//             //存所有成員的id
-//             let allUsers = [];
-//-------!註冊機制
-//             //呼叫API取得所有成員資料
-//             foods.fetchAllMember().then(data => {
-//                 if (data == -1){
-//                     event.reply('找不到資料');
-//                 }else if(data == -9){                    
-//                     event.reply('執行錯誤');
-//                 }else{
-//                     data.forEach(item => {
-//                         allUsers.push(item.userid);
-//                     });
-//                 }
-//             });            
-
-//             //呼叫API取得隨選食物資料
-//             foods.randomSelectFoods().then(data => {  
-//                 if (data == -1){
-//                     event.reply('找不到資料');
-//                 }else if(data == -9){                    
-//                     event.reply('執行錯誤');
-//                 }else{
-//                     let msg = [];
-
-//                     //準備食物卡片樣式
-//                     data.forEach(item => {
-//                         msg.push({
-//                             "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.photo,
-//                             "imageBackgroundColor": "#FFFFFF",
-//                             "title": item.title,
-//                             "text": item.description,
-//                             "actions": [
-//                                 {
-//                                     "type": "postback",
-//                                     "label": "1顆星",
-//                                     "data": item.id + "&1"
-//                                 },
-//                                 {
-//                                   "type": "postback",
-//                                   "label": "2顆星",
-//                                   "data": item.id + "&2"
-//                                 },
-//                                 {
-//                                   "type": "postback",
-//                                   "label": "3顆星",
-//                                   "data": item.id + "&3"
-//                                 }
-//                             ]
-//                         });                        
-//                     });
-
-//                     //將訊息推給所有使用者
-//                     bot.push(
-//                         allUsers, {
-//                         "type": "template",
-//                         "altText": "這是一個輪播樣板",
-//                         "template": {
-//                             "type": "carousel",
-//                             "columns":msg
-//                         },
-//                         "imageAspectRatio": "rectangle",
-//                         "imageSize": "cover"    
-//                     });  
-//                 }  
-//             })  
-//         }
-//     );
 
 
 
