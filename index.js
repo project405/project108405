@@ -135,19 +135,19 @@ bot.on('message', function(event) {
    //------------------------------------------------
    //------------------顯示熱門文章--------------------
    //------------------------------------------------
-    var hotArticleTemplate ={
-        type: 'template',
-        altText: '🔥 熱門文章',
-        template: {
-            type: 'buttons',
-            text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead,
-            actions: [{
-                type:"uri",
-                label:" 👀 至文藝富心官網觀看",
-                uri:`https://project108405.herokuapp.com/article/${data[1][0].artiNum}`   
-            }]
-        }
-    };
+    // var hotArticleTemplate ={
+    //     type: 'template',
+    //     altText: '🔥 熱門文章',
+    //     template: {
+    //         type: 'buttons',
+    //         text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead,
+    //         actions: [{
+    //             type:"uri",
+    //             label:" 👀 至文藝富心官網觀看",
+    //             uri:`https://project108405.herokuapp.com/article/${data[1][0].artiNum}`   
+    //         }]
+    //     }
+    // };
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
             event.reply({
