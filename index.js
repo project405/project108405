@@ -242,9 +242,9 @@ bot.on('message', function(event) {
             console.log(data[1][2])
             
             event.reply([
-                { type: 'text', text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][0].articleNum}` },
-                { type: 'text', text: '時間：' + data[1][1].artiDateTime  + '\n'+ '標題：' + data[1][1].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][1].articleNum}` },
-                { type: 'text', text: '時間：' + data[1][2].artiDateTime  + '\n'+ '標題：' + data[1][2].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][2].articleNum}` }
+                { type: 'text', text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][0].artiNum}` },
+                { type: 'text', text: '時間：' + data[1][1].artiDateTime  + '\n'+ '標題：' + data[1][1].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][1].artiNum}` },
+                { type: 'text', text: '時間：' + data[1][2].artiDateTime  + '\n'+ '標題：' + data[1][2].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][2].artiNum}` }
             ]);
 
         })
