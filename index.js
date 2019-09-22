@@ -193,9 +193,9 @@ bot.on('postback', function(event) {
                                 collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
                                     console.log(b)
                                     if(b == 0){
-                                        event.reply(userName+'❌【重複收藏】\n查看所有收藏\n請至文藝富心官網查看')
+                                        event.reply(userName+' ❌【重複收藏】\n查看所有收藏\n請至文藝富心官網查看')
                                     }else{
-                                        event.reply(userName+'❤️【收藏成功】\n查看所有收藏\n請至文藝富心官網查看')
+                                        event.reply(userName+' ❤️【收藏成功】\n查看所有收藏\n請至文藝富心官網查看')
                                     }
                                 })                            
                             }
