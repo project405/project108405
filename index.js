@@ -149,7 +149,7 @@ bot.on('message', function(event) {
                     "columns": [
                         {
                             "title": "【" + data[1][0].artiHead + "】" ,
-                            "text":'時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead +'\n' + data[1][0].artiCont ,
+                            "text":'時間：' + data[1][0].artiDateTime  + '\n' + data[1][0].artiCont ,
                             "actions": [
                                 
                                 {
@@ -161,7 +161,7 @@ bot.on('message', function(event) {
                         },
                         {
                             "title": "【" + data[1][1].artiHead + "】" ,
-                            "text":'時間：' + data[1][1].artiDateTime  + '\n'+ '標題：' + data[1][1].artiHead+'\n' + data[1][1].artiCont,
+                            "text":'時間：' + data[1][1].artiDateTime  + '\n'+  data[1][1].artiCont,
                             "actions": [
                                 
                                 {
@@ -173,7 +173,7 @@ bot.on('message', function(event) {
                         },
                         {
                             "title": "【" + data[1][2].artiHead + "】" ,
-                            "text":'時間：' + data[1][2].artiDateTime  + '\n'+ '標題：' + data[1][2].artiHead+'\n' + data[1][2].artiCont,
+                            "text":'時間：' + data[1][2].artiDateTime  + '\n'+ data[1][2].artiCont,
                             "actions": [
                                 
                                 {
