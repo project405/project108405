@@ -55,11 +55,8 @@ bot.on('postback', function(event) {
                 recommend.getFourRecomClassList().then(d =>{
                     if (data == 'movie'){
                         return event.reply([
-                            {
-                                "type": "text",
-                                "text": d[0][0].recomHead
-                            },
-                            {
+                            {   
+                                "title":d[0][0].recomHead,
                                 "type": "text",
                                 "text": d[0][0].recomCont
                             }
@@ -189,11 +186,7 @@ bot.on('message', function(event) {
                     // "imageSize": "cover"
                 }
             });
-            // event.reply([
-            //     { type: 'text', text: '時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][0].artiNum}` },
-            //     { type: 'text', text: '時間：' + data[1][1].artiDateTime  + '\n'+ '標題：' + data[1][1].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][1].artiNum}` },
-            //     { type: 'text', text: '時間：' + data[1][2].artiDateTime  + '\n'+ '標題：' + data[1][2].artiHead  + '\n'+ '連結：' + `https://project108405.herokuapp.com/article/${data[1][2].artiNum}` }
-            // ]);
+           
 
         })
     };
