@@ -146,7 +146,7 @@ bot.on('message', function(event) {
                     "columns": [
                         {
                             // "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
-                            "text":'時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead,
+                            "text":'時間：' + data[1][0].artiDateTime  + '\n'+ '標題：' + data[1][0].artiHead +'\n' + data[1][0].artiCont ,
                             "actions": [
                                 
                                 {
