@@ -1152,7 +1152,7 @@ var addLineColleRecommend = async function (memID, recomNum) {
     //判斷memberCollection資料庫是否有重複的收藏  
     await sql('SELECT * FROM "memberCollection" WHERE "memID" = $1 and "recomNum" = $2', [memID, recomNum])
             .then((data) => {
-                console.log('data.rows',data.rows)
+                console.log('data.rows',data.rows.length)
                 if(data.length = 0){
                     isCollection = 1 ;
                     
