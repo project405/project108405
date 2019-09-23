@@ -237,11 +237,11 @@ bot.on('message', function(event) {
                         {
                           "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/music1.jpg",
                           "title":"【" + msgs[1] + "】" + data[1][0].recomHead,
-                          "text": "music1專輯、歌手",
+                          "text": "movie1專輯、歌手",
                           "defaultAction": {
                               "type": "uri",
                               "label": "詳細資料",
-                              "uri": `https://project108405.herokuapp.com/oneRecommend/${data[1][0].artiNum}`
+                              "uri": `https://project108405.herokuapp.com/oneRecommend/${data[1][0].recomNum}`
                           },
                           "actions": [
                                 {
@@ -264,7 +264,7 @@ bot.on('message', function(event) {
                             "defaultAction": {
                                 "type": "uri",
                                 "label": "詳細資料",
-                                "uri": `https://project108405.herokuapp.com/oneRecommend/${data[2][0].artiNum}`
+                                "uri": `https://project108405.herokuapp.com/oneRecommend/${data[2][0].recomNum}`
                             },
                             "actions": [
                                 {
@@ -287,7 +287,7 @@ bot.on('message', function(event) {
                             "defaultAction": {
                                 "type": "uri",
                                 "label": "詳細資料",
-                                "uri": `https://project108405.herokuapp.com/oneRecommend/${data[3][0].artiNum}`
+                                "uri": `https://project108405.herokuapp.com/oneRecommend/${data[3][0].recomNum}`
                             },
                             "actions": [
                                 {
