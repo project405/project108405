@@ -250,7 +250,7 @@ bot.on('message', function(event) {
                         {
                           "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/movie1.jpg",
                           "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
-                          "text": "movie1年代、導演、演員",
+                        //   "text": "movie1年代、導演、演員",
                           "defaultAction": {
                               "type": "uri",
                               "label": "知道更多",
@@ -273,7 +273,7 @@ bot.on('message', function(event) {
                         {
                           "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/music1.jpg",
                           "title":"【" + msgs[1] + "】" + data[1][0].recomHead,
-                          "text": "movie1專輯、歌手",
+                        //   "text": "movie1專輯、歌手",
                           "defaultAction": {
                               "type": "uri",
                               "label": "詳細資料",
@@ -296,7 +296,7 @@ bot.on('message', function(event) {
                         {
                             "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/book1.jpg",
                             "title":"【" + msgs[2] + "】" + data[2][0].recomHead,
-                            "text": "book1風格、作者、出版社",
+                            // "text": "book1風格、作者、出版社",
                             "defaultAction": {
                                 "type": "uri",
                                 "label": "詳細資料",
@@ -319,7 +319,7 @@ bot.on('message', function(event) {
                           {
                             "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/exhibition1.jpg",
                             "title":"【" + msgs[3] + "】" + data[3][0].recomHead,
-                            "text": "exhibition1開始日期、創作者、價錢",
+                            // "text": "exhibition1開始日期、創作者、價錢",
                             "defaultAction": {
                                 "type": "uri",
                                 "label": "詳細資料",
