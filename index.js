@@ -61,12 +61,13 @@ bot.on('postback', function(event) {
                                 "altText": "在不支援顯示樣板的地方顯示的文字",
                                 "template": {
                                   "type": "buttons",
-                                  "text": "標題文字",
+                                  "title":d[1][0].recomHead,
+                                  "text": d[0][0].recomCont,
                                   "actions": [
                                     {
-                                      "type": "message",
-                                      "label": "第一個按鈕",
-                                      "text": "1"
+                                        "type": "uri",
+                                        "label": " 👀 至文藝富心官網觀看",
+                                        "uri": `https://project108405.herokuapp.com/article/${data[1][0].artiNum}`
                                     }
                                   ]
                                 }
