@@ -257,16 +257,19 @@ bot.on('message', function(event) {
         })
     };
     
+    async function DateTimeFormat (time){
+        var dt = new Date(time);
+        dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        var date = dt.toISOString().slice(0, -5).replace(/[T]/g, ' ');
+        return date;
+    }
+
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
-            var dt = new Date(data[0][0].recomDateTime);
-            dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
-            var date = dt.toISOString().slice(0, -5).replace(/[T]/g, ' ');
+            
             console.log(date);
-            // new Date(data[0][0].recomDateTime).Format("yyyy/MM/dd")
-            // console.log(dt.toString())
-            // new Date(new Date(data[0][0].recomDateTime).toString().split('GMT')[0]+' UTC').toISOString().split('.')[0]
+           
             console.log('@@@@@@@@@@@@',typeof(data[0][0].recomDateTime))
             console.log('@@@@@@@@@@@@',data[0][0].recomDateTime)
 
@@ -289,7 +292,7 @@ bot.on('message', function(event) {
                         {
                           "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/movie1.jpg",
                           "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
-                          "text": data[0][0].recomDateTime,
+                          "text": DateTimeFormat(data[0][0].recomDateTime),
                           "defaultAction": {
                               "type": "uri",
                               "label": "知道更多",
