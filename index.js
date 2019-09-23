@@ -80,7 +80,7 @@ bot.on('postback', function(event) {
                         return event.reply([
                             {
                                 "type": "template",
-                                "altText": "精選電影",
+                                "altText": "精選音樂",
                                 "template": {
                                   "type": "buttons",
                                   "text": d[1][0].recomCont,
@@ -98,7 +98,7 @@ bot.on('postback', function(event) {
                         return event.reply([
                             {
                                 "type": "template",
-                                "altText": "精選電影",
+                                "altText": "精選書籍",
                                 "template": {
                                   "type": "buttons",
                                   "text": d[2][0].recomCont,
@@ -116,7 +116,7 @@ bot.on('postback', function(event) {
                         return event.reply([
                             {
                                 "type": "template",
-                                "altText": "精選電影",
+                                "altText": "精選展覽",
                                 "template": {
                                   "type": "buttons",
                                   "text": d[3][0].recomCont,
@@ -302,7 +302,7 @@ bot.on('message', function(event) {
                         {
                           "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/music1.jpg",
                           "title":"【" + msgs[1] + "】" + data[1][0].recomHead,
-                          "text": "movie1專輯、歌手",
+                          "text": " ",
                           "defaultAction": {
                               "type": "uri",
                               "label": "詳細資料",
@@ -325,7 +325,7 @@ bot.on('message', function(event) {
                         {
                             "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/book1.jpg",
                             "title":"【" + msgs[2] + "】" + data[2][0].recomHead,
-                            "text": "book1風格、作者、出版社",
+                            "text": " ",
                             "defaultAction": {
                                 "type": "uri",
                                 "label": "詳細資料",
@@ -348,7 +348,7 @@ bot.on('message', function(event) {
                           {
                             "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/exhibition1.jpg",
                             "title":"【" + msgs[3] + "】" + data[3][0].recomHead,
-                            "text": "exhibition1開始日期、創作者、價錢",
+                            "text": " ",
                             "defaultAction": {
                                 "type": "uri",
                                 "label": "詳細資料",
