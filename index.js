@@ -269,7 +269,7 @@ bot.on('message', function(event) {
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
             
-            console.log(date);
+            
            
             console.log('@@@@@@@@@@@@',typeof(data[0][0].recomDateTime))
             console.log('@@@@@@@@@@@@',data[0][0].recomDateTime)
