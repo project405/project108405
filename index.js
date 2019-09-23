@@ -257,8 +257,8 @@ bot.on('message', function(event) {
         })
     };
     
-    async function DateTimeFormat (time){
-        var date;
+    function DateTimeFormat (time){
+        
         var dt = new Date(time);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
         var date = dt.toISOString().slice(0, -5).replace(/[T]/g, ' ');
