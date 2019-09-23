@@ -53,6 +53,7 @@ bot.on('postback', function(event) {
                
                 //---------------進到四大推薦---------------
                 recommend.getFourRecomClassList().then(d =>{
+                    // data[1][0].artiCont = data[1][0].artiCont.length>25 ? `${data[1][0].artiCont.substr(0,20)}...` : data[1][0].artiCont
                     console.log(d[0][0].recomHead)
                     if (data == 'movie'){
                         return event.reply([
@@ -61,12 +62,12 @@ bot.on('postback', function(event) {
                                 "altText": "精選電影",
                                 "template": {
                                   "type": "buttons",
-                                  "text": '123456',
+                                  "text": d[0][0].recomCont,
                                   "actions": [
                                     {
                                       "type": "uri",
                                       "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/recommend/${data[0][0].recomNum}`
+                                      "uri": `https://project108405.herokuapp.com/recommend/${d[0][0].recomNum}`
                                     }
                                   ]
                                 }
@@ -233,7 +234,7 @@ bot.on('message', function(event) {
                           "actions": [
                               {
                                   "type": "postback",
-                                  "label": "知道更多",
+                                  "label": "劇情概要",
                                   "data": 'movie'
                               },
                               {
@@ -256,7 +257,7 @@ bot.on('message', function(event) {
                           "actions": [
                                 {
                                     "type": "postback",
-                                    "label": "知道更多",
+                                    "label": "音樂資訊",
                                     "data": 'music'
                                 },
                                 {
@@ -279,7 +280,7 @@ bot.on('message', function(event) {
                             "actions": [
                                 {
                                     "type": "postback",
-                                    "label": "知道更多",
+                                    "label": "書籍資訊",
                                     "data": 'book'
                                 },
                                 {
@@ -302,7 +303,7 @@ bot.on('message', function(event) {
                             "actions": [
                                 {
                                     "type": "postback",
-                                    "label": "知道更多",
+                                    "label": "展覽內容",
                                     "data": 'exhibition'
                                 },
                                 {
