@@ -54,6 +54,9 @@ bot.on('postback', function(event) {
                 //---------------進到四大推薦---------------
                 recommend.getFourRecomClassList().then(d =>{
                     d[0][0].recomCont = d[0][0].recomCont.length>75 ? `${d[0][0].recomCont.substr(0,75)}...` : d[0][0].recomCont
+                    d[1][0].recomCont = d[1][0].recomCont.length>75 ? `${d[1][0].recomCont.substr(0,75)}...` : d[1][0].recomCont
+                    d[2][0].recomCont = d[2][0].recomCont.length>75 ? `${d[2][0].recomCont.substr(0,75)}...` : d[2][0].recomCont
+                    d[3][0].recomCont = d[3][0].recomCont.length>75 ? `${d[3][0].recomCont.substr(0,75)}...` : d[3][0].recomCont
                     console.log(d[0][0].recomHead)
                     if (data == 'movie'){
                         return event.reply([
@@ -76,34 +79,55 @@ bot.on('postback', function(event) {
                     }else if(data == 'music'){
                         return event.reply([
                             {
-                                "type": "text",
-                                "text": d[1][0].recomHead
-                            },
-                            {
-                                "type": "text",
-                                "text": d[1][0].recomCont
+                                "type": "template",
+                                "altText": "精選電影",
+                                "template": {
+                                  "type": "buttons",
+                                  "text": d[1][0].recomCont,
+                                  "actions": [
+                                    {
+                                      "type": "uri",
+                                      "label": " 👀 至文藝富心官網觀看",
+                                      "uri": `https://project108405.herokuapp.com/recommend/${d[1][0].recomNum}`
+                                    }
+                                  ]
+                                }
                             }
                         ]);		
                     }else if(data == 'book'){
                         return event.reply([
                             {
-                                "type": "text",
-                                "text": d[2][0].recomHead
-                            },
-                            {
-                                "type": "text",
-                                "text": d[2][0].recomCont
+                                "type": "template",
+                                "altText": "精選電影",
+                                "template": {
+                                  "type": "buttons",
+                                  "text": d[2][0].recomCont,
+                                  "actions": [
+                                    {
+                                      "type": "uri",
+                                      "label": " 👀 至文藝富心官網觀看",
+                                      "uri": `https://project108405.herokuapp.com/recommend/${d[2][0].recomNum}`
+                                    }
+                                  ]
+                                }
                             }
                         ]);		
                     }else if(data == 'exhibition'){
                         return event.reply([
                             {
-                                "type": "text",
-                                "text": d[3][0].recomHead
-                            },
-                            {
-                                "type": "text",
-                                "text": d[3][0].recomCont
+                                "type": "template",
+                                "altText": "精選電影",
+                                "template": {
+                                  "type": "buttons",
+                                  "text": d[3][0].recomCont,
+                                  "actions": [
+                                    {
+                                      "type": "uri",
+                                      "label": " 👀 至文藝富心官網觀看",
+                                      "uri": `https://project108405.herokuapp.com/recommend/${d[3][0].recomNum}`
+                                    }
+                                  ]
+                                }
                             }
                         ]);		
                     }    
