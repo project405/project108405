@@ -70,7 +70,7 @@ bot.on('postback', function(event) {
                                     {
                                       "type": "uri",
                                       "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${data[0][0].recomNum}`
+                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
                                     }
                                   ]
                                 }
@@ -88,7 +88,7 @@ bot.on('postback', function(event) {
                                     {
                                       "type": "uri",
                                       "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${data[1][0].recomNum}`
+                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${d[1][0].recomNum}`
                                     }
                                   ]
                                 }
@@ -106,7 +106,7 @@ bot.on('postback', function(event) {
                                     {
                                       "type": "uri",
                                       "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${data[2][0].recomNum}`
+                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${d[2][0].recomNum}`
                                     }
                                   ]
                                 }
@@ -124,7 +124,7 @@ bot.on('postback', function(event) {
                                     {
                                       "type": "uri",
                                       "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${data[3][0].recomNum}`
+                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${d[3][0].recomNum}`
                                     }
                                   ]
                                 }
