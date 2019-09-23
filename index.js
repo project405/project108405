@@ -140,14 +140,28 @@ bot.on('postback', function(event) {
                                 collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
                                     console.log(b)
                                     if(b == 0){
-                                        event.reply(userName+' ❌【重複收藏】\n查看所有收藏\n請至文藝富心官網查看')
+                                        event.reply({
+                                            "type": "template",
+                                            "altText": "精選電影",
+                                            "template": {
+                                              "type": "buttons",
+                                              "text": userName+' 【重複收藏】❌ ',
+                                              "actions": [
+                                                {
+                                                  "type": "uri",
+                                                  "label": " 👀 查看所有收藏",
+                                                  "uri": `https://project108405.herokuapp.com/collection/recommend`
+                                                }
+                                              ]
+                                            }
+                                        })
                                     }else{
                                         event.reply({
                                             "type": "template",
                                             "altText": "精選電影",
                                             "template": {
                                               "type": "buttons",
-                                              "text": userName+' 😍【收藏成功】',
+                                              "text": userName+'【收藏成功】😍 ',
                                               "actions": [
                                                 {
                                                   "type": "uri",
