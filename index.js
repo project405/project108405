@@ -218,7 +218,7 @@ bot.on('message', function(event) {
                           "defaultAction": {
                               "type": "uri",
                               "label": "知道更多",
-                              "uri": `https://project108405.herokuapp.com/oneRecommend/${data[0][0].artiNum}`
+                              "uri": `https://project108405.herokuapp.com/oneRecommend/${data[0][0].recomNum}`
                           },
                           "actions": [
                               {
