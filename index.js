@@ -260,7 +260,11 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
-            new Date(data[0][0].recomDateTime).Format("yyyy/MM/dd")
+            var dt = new Date(data[0][0].recomDateTime);
+            dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+            var date = dt.toISOString().slice(0, -5).replace(/[T]/g, ' ');
+            console.log(date);
+            // new Date(data[0][0].recomDateTime).Format("yyyy/MM/dd")
             // console.log(dt.toString())
             // new Date(new Date(data[0][0].recomDateTime).toString().split('GMT')[0]+' UTC').toISOString().split('.')[0]
             console.log('@@@@@@@@@@@@',typeof(data[0][0].recomDateTime))
