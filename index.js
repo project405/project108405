@@ -261,7 +261,7 @@ bot.on('message', function(event) {
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
            
-            console.log(dt.toString())
+            // console.log(dt.toString())
             new Date(new Date(data[0][0].recomDateTime).toString().split('GMT')[0]+' UTC').toISOString().split('.')[0]
             console.log('@@@@@@@@@@@@',typeof(data[0][0].recomDateTime))
             console.log('@@@@@@@@@@@@',data[0][0].recomDateTime)
