@@ -142,7 +142,22 @@ bot.on('postback', function(event) {
                                     if(b == 0){
                                         event.reply(userName+' ❌【重複收藏】\n查看所有收藏\n請至文藝富心官網查看')
                                     }else{
-                                        event.reply(userName+' 😍【收藏成功】\n查看所有收藏\n請至文藝富心官網查看')
+                                        event.reply({
+                                            "type": "template",
+                                            "altText": "精選電影",
+                                            "template": {
+                                              "type": "buttons",
+                                              "text": userName+' 😍【收藏成功】',
+                                              "actions": [
+                                                {
+                                                  "type": "uri",
+                                                  "label": " 👀 查看所有收藏",
+                                                  "uri": `https://project108405.herokuapp.com/collection/recommend`
+                                                }
+                                              ]
+                                            }
+                                        })
+                                        
                                     }
                                 })                            
                             }
