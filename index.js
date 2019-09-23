@@ -145,7 +145,7 @@ bot.on('postback', function(event) {
                                             "altText": "精選電影",
                                             "template": {
                                               "type": "buttons",
-                                              "text": userName+' 【重複收藏】❌ ',
+                                              "text": userName+' 已重複收藏 ❌ ',
                                               "actions": [
                                                 {
                                                   "type": "uri",
