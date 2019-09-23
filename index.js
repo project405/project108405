@@ -53,7 +53,7 @@ bot.on('postback', function(event) {
                
                 //---------------進到四大推薦---------------
                 recommend.getFourRecomClassList().then(d =>{
-                    // data[1][0].artiCont = data[1][0].artiCont.length>25 ? `${data[1][0].artiCont.substr(0,20)}...` : data[1][0].artiCont
+                    d[0][0].recomCont = d[0][0].recomCont.length>25 ? `${d[0][0].recomCont.substr(0,20)}...` : d[0][0].recomCont
                     console.log(d[0][0].recomHead)
                     if (data == 'movie'){
                         return event.reply([
