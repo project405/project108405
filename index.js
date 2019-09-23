@@ -256,11 +256,13 @@ bot.on('message', function(event) {
 
         })
     };
-    //動態撈圖片
+    
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
-            console.log('@@@@@@@@@@@@',typeof(data[0][0].recomDateTime))
+            
+            
+            console.log('@@@@@@@@@@@@',new Date(data[0][0].recomDateTime))
             var movieNum = data[0][0].recomNum;
             var musicNum = data[1][0].recomNum;
             var bookNum = data[2][0].recomNum;
