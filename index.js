@@ -58,10 +58,10 @@ bot.on('postback', function(event) {
                         return event.reply([
                             {
                                 "type": "template",
-                                "altText": "在不支援顯示樣板的地方顯示的文字",
+                                "altText": "精選電影",
                                 "template": {
                                   "type": "buttons",
-                                  "text": d[0][0].recomCont,
+                                  "text": '123456',
                                   "actions": [
                                     {
                                       "type": "uri",
