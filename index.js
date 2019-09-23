@@ -56,10 +56,20 @@ bot.on('postback', function(event) {
                     console.log(d[0][0].recomHead)
                     if (data == 'movie'){
                         return event.reply([
-                            {   
-                                "title":d[0][0].recomHead,
-                                "type": "text",
-                                "text": d[0][0].recomCont
+                            {
+                                "type": "template",
+                                "altText": "在不支援顯示樣板的地方顯示的文字",
+                                "template": {
+                                  "type": "buttons",
+                                  "text": "標題文字",
+                                  "actions": [
+                                    {
+                                      "type": "message",
+                                      "label": "第一個按鈕",
+                                      "text": "1"
+                                    }
+                                  ]
+                                }
                             }
                         ]);		
                     }else if(data == 'music'){
@@ -207,7 +217,7 @@ bot.on('message', function(event) {
 
             event.reply({
                 "type": "template",
-                "altText": "您好！！！這是本週新推薦！",
+                "altText": " 👋 本週新推薦",
                 "template": {
                     "type": "carousel",
                     "columns": [
