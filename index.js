@@ -59,15 +59,14 @@ bot.on('postback', function(event) {
                             {
                                 "type": "template",
                                 "altText": "在不支援顯示樣板的地方顯示的文字",
-                                "type": "buttons",
                                 "template": {
-                                  "title":d[0][0].recomHead,
+                                  "type": "buttons",
                                   "text": d[0][0].recomCont,
                                   "actions": [
                                     {
-                                        "type": "uri",
-                                        "label": " 👀 至文藝富心官網觀看",
-                                        "uri": `https://project108405.herokuapp.com/article/${data[0][0].recomNum}`
+                                      "type": "uri",
+                                      "label": " 👀 至文藝富心官網觀看",
+                                      "uri": `https://project108405.herokuapp.com/article/${data[0][0].recomNum}`
                                     }
                                   ]
                                 }
