@@ -416,7 +416,7 @@ bot.on('message', function(event) {
             }
         });
     }	
-    console.log(text);
+    console.log('使用者傳來的文字',text);
 });
 
 
