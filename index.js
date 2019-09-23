@@ -42,7 +42,7 @@ bot.on('postback', function(event) {
                     text: 'LINE用戶請至文藝富心登入\n登入後能：\n1.在LINE收藏你喜歡的事物\n2.不定時收到文藝相關資訊',
                     actions: [{
                         type:"uri",
-                        label:"至文藝富心官網登入",
+                        label:" 👣 至文藝富心官網登入",
                         uri:"line://app/1594135622-705e8pDP"   
                     }]
                 }
@@ -250,7 +250,7 @@ bot.on('message', function(event) {
                         {
                           "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/movie1.jpg",
                           "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
-                        //   "text": "movie1年代、導演、演員",
+                          "text": "movie1年代、導演、演員",
                           "defaultAction": {
                               "type": "uri",
                               "label": "知道更多",
@@ -273,7 +273,7 @@ bot.on('message', function(event) {
                         {
                           "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/music1.jpg",
                           "title":"【" + msgs[1] + "】" + data[1][0].recomHead,
-                        //   "text": "movie1專輯、歌手",
+                          "text": "movie1專輯、歌手",
                           "defaultAction": {
                               "type": "uri",
                               "label": "詳細資料",
@@ -296,7 +296,7 @@ bot.on('message', function(event) {
                         {
                             "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/book1.jpg",
                             "title":"【" + msgs[2] + "】" + data[2][0].recomHead,
-                            // "text": "book1風格、作者、出版社",
+                            "text": "book1風格、作者、出版社",
                             "defaultAction": {
                                 "type": "uri",
                                 "label": "詳細資料",
@@ -309,7 +309,7 @@ bot.on('message', function(event) {
                                     "data": 'book'
                                 },
                                 {
-                                  //-------!需克服收藏資料寫入資料庫的問題
+                                  
                                     "type": "postback",
                                     "label": "新增至我的收藏",
                                     "data": bookNum
@@ -319,7 +319,7 @@ bot.on('message', function(event) {
                           {
                             "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/exhibition1.jpg",
                             "title":"【" + msgs[3] + "】" + data[3][0].recomHead,
-                            // "text": "exhibition1開始日期、創作者、價錢",
+                            "text": "exhibition1開始日期、創作者、價錢",
                             "defaultAction": {
                                 "type": "uri",
                                 "label": "詳細資料",
@@ -332,7 +332,7 @@ bot.on('message', function(event) {
                                     "data": 'exhibition'
                                 },
                                 {
-                                  //-------!需克服收藏資料寫入資料庫的問題
+                                 
                                     "type": "postback",
                                     "label": "新增至我的收藏",
                                     "data": exhibitionNum
