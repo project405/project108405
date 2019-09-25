@@ -23,123 +23,8 @@
 </head>
 
 <body>
-    <!-- ============================================= -->
-    <!-- --------------- navbar ---------------------- -->
-    <!-- ============================================= -->
-    <div class="header">
-        <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">
-            <a class="nav-link" href="/">
-                <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8"
-                    alt="">
-                <a href="/" class="navTitle">文藝富心</a>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <!-- 如果帳號不是管理員則不顯示 -->
-                    <% if(recom[2] == undefined){ %>
-                    <li class="nav-item" style="display: none">
-                        <a class="nav-link" href="recommendPost.html">
-                            新增推薦</a>
-                    </li>
-                    <!-- 如果帳號是一般會員 -->
-                    <% }else {%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="recommendPost.html">
-                            新增推薦</a>
-                    </li>
-                    <% } %>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/">首頁 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/notify">
-                            <i class="fas fa-bell" style="color:white;"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/recommendlist">
-                            推薦</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/articleList">
-                            文章</a>
-                    </li>
-                    <li id="dropdown" class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="collectionArticle.html" id="navbarDropdownMenuLink"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            收藏
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>
-                            <a class="dropdown-item" href="/collection/article">文章收藏</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>
-                    </li>
-                    <!-- 已經登入的話 login 隱藏 -->
-                    <% if(recom[1][0] != undefined){ %>
-                    <li class="nav-item" style="display: none">
-                        <a class="nav-link" href="/login">登入</a>
-                    </li>
-                    <!-- 如果還沒登入 login 顯示 -->
-                    <% }else {%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">登入</a>
-                    </li>
-                    <% } %>
-                    <!-- 已經登入的話"會員"下拉式清單 顯示 -->
-                    <% if(recom[1][0] != undefined){ %>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            會員
-                        </a>
-                        <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/member/memberManage">會員資料</a>
-                            <a class="dropdown-item" href="/member/articleManage">文章管理</a>
-                            <a class="dropdown-item" href="/logOut">登出</a>
-                        </div>
-                    </li>
-                    <!-- 如果還沒登入則隱藏"會員"清單 -->
-                    <% }else {%>
-                    <li class="nav-item dropdown" style="display: none">
-                        <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            會員
-                        </a>
-                        <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/member/memberManage">會員資料</a>
-                            <a class="dropdown-item" href="/member/articleManage">文章管理</a>
-                            <a class="dropdown-item" href="/logOut">登出</a>
-                        </div>
-                    </li>
-                    <% } %>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div class="container position-fixed col-lg-8 report" id="report">
-        <div id="x"><i class="far fa-times-circle"></i>
-        </div>
-        <div class="form">
-            <form class="report" action="/report" method="POST" data-aos="zoom-out-right">
-                <div class="input-icon-wrap">
-                    <span class="input-icon"><span class="fas fa-hands-helping"></span></span>
-                    <textarea class="input-with-icon report" name="reportReason" placeholder="輸入舉報原因"></textarea>
-                </div>
-                <button type="submit" class="btn btn-danger report">送出</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- ============================================= -->
-    <!-- ------------- navbar end -------------------- -->
-    <!-- ============================================= -->
+    <!-- navbar -->
+    <div id="header"></div>
 
     <center>
         <h3>推薦列表</h3>
@@ -161,10 +46,26 @@
 
     <!-- Portfolio Section -->
     <section id="portfolio">
+
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
             <!-- 推薦開始 -->
             <% for(var i = 0 ; i<recom[0].length ; i++){ %>
-            <div class="wrapper col-12  col-lg-2" style="background-image: url('/imgs/recommend/movie1.jpg');">
+                <% isImg = false %>
+                <!-- 如果有抓到圖片 -->
+                <% if(recom[3] != undefined) { %>
+                    <% for(var j = 0 ; j<recom[3].length ; j++ ) { %>
+                        <% if(recom[0][i].recomNum == recom[3][j].recomNum){ %>
+                            <div class="wrapper col-12  col-lg-2"
+                            style="background-image:url('/imgs/recommend/<%= recom[3][j].imgName %>');">
+                            <% isImg = true %>
+                        <% } %>
+                    <% } %>
+                <% } %>
+            <!-- 如果沒抓到半張圖片 -->
+            <% if(isImg == false) { %>
+                <div class="wrapper col-12  col-lg-2">
+            <% } %>
+
                 <a class="portfolio-box" href="/oneRecommend/<%= recom[0][i].recomNum %>">
                     <div class="portfolio-box-caption">
                         <div class="project-category text-white-50">
@@ -172,7 +73,7 @@
                         </div>
                         <div class="project-name">
                             <p class="title"><%= recom[0][i].recomHead %></p>
-                            <p class="content"><%= recom[0][i].recomCont %></p>
+                            <p class="content wrapText"><%= recom[0][i].recomCont %></p>
                         </div>
                     </div>
                 </a>
@@ -203,6 +104,7 @@
         crossorigin="anonymous"></script>
 
     <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/navbar.js"></script>
 </body>
 
 </html>

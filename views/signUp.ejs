@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!--  js   -->
-    <script src="/javascripts/jquery.min.js"></script>>
+    <script src="/javascripts/jquery.min.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -26,77 +26,8 @@
 </head>
 
 <body>
-    <!-- ============================================= -->
-    <!-- --------------- navbar ---------------------- -->
-    <!-- ============================================= -->
-    <div class="header">
-        <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">
-            <a class="nav-link" href="/">
-                <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8"
-                    alt="">
-                <a href="/" class="navTitle">文藝富心</a>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link " href="/">首頁 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/notify">
-                            <i class="fas fa-bell" style="color:white;"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/recommendlist">
-                            推薦</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/articleList">
-                            文章</a>
-                    </li>
-                    <li id="dropdown" class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="collectionArticle.html" id="navbarDropdownMenuLink"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            收藏
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>
-                            <a class="dropdown-item" href="/collection/article">文章收藏</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">登入</a>
-                    </li>
-
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div class="container position-fixed col-lg-8 report" id="report">
-        <div id="x"><i class="far fa-times-circle"></i>
-        </div>
-        <div class="form">
-            <form class="report" action="/report" method="POST" data-aos="zoom-out-right">
-                <div class="input-icon-wrap">
-                    <span class="input-icon"><span class="fas fa-hands-helping"></span></span>
-                    <textarea class="input-with-icon report" name="reportReason" placeholder="輸入舉報原因"></textarea>
-                </div>
-                <button type="submit" class="btn btn-danger report">送出</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- ============================================= -->
-    <!-- ------------- navbar end -------------------- -->
-    <!-- ============================================= -->
+    <!-- navbar -->
+    <div id="header"></div>
 
     <center>
         <h3>註冊</h3>
@@ -146,13 +77,13 @@
                 <p id="birthdayAlarm"></p>
 
                 <div class="input-icon-wrap radio">
-                    <span class="input-icon align-middle"><span class="fas fa-venus-mars"></span></span>
+                    <span class="input-icon align-middle"  style="line-height: 3;"><span class="fas fa-venus-mars"></span></span>
                     <div>
                         <input id="radio-1" class="radio-custom" name="memGender" value="m" type="radio" required>
                         <label for="radio-1" class="radio-custom-label">男生</label>
                     </div>
                     <div>
-                        <input id="radio-2" class="radio-custom" name="memGender" value="f" required>
+                        <input id="radio-2" class="radio-custom" name="memGender" value="f" type="radio"  required>
                         <label for="radio-2" class="radio-custom-label">女生</label>
                     </div>
 
@@ -180,6 +111,7 @@
 
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/validate.js"></script>
+    <script src="/javascripts/navbar.js"></script>
 
 </body>
 

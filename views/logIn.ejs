@@ -27,77 +27,8 @@
 </head>
 
 <body>
-    <!-- ============================================= -->
-    <!-- --------------- navbar ---------------------- -->
-    <!-- ============================================= -->
-    <div class="header">
-        <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">
-            <a class="nav-link" href="/">
-                <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8"
-                    alt="">
-                <a href="/" class="navTitle">文藝富心</a>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link " href="/">首頁 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/notify">
-                            <i class="fas fa-bell" style="color:white;"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/recommendlist">
-                            推薦</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/articleList">
-                            文章</a>
-                    </li>
-                    <li id="dropdown" class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="collectionArticle.html" id="navbarDropdownMenuLink"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            收藏
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>
-                            <a class="dropdown-item" href="/collection/article">文章收藏</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">登入</a>
-                    </li>
-
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div class="container position-fixed col-lg-8 report" id="report">
-        <div id="x"><i class="far fa-times-circle"></i>
-        </div>
-        <div class="form">
-            <form class="report" action="/report" method="POST" data-aos="zoom-out-right">
-                <div class="input-icon-wrap">
-                    <span class="input-icon"><span class="fas fa-hands-helping"></span></span>
-                    <textarea class="input-with-icon report" name="reportReason" placeholder="輸入舉報原因"></textarea>
-                </div>
-                <button type="submit" class="btn btn-danger report">送出</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- ============================================= -->
-    <!-- ------------- navbar end -------------------- -->
-    <!-- ============================================= -->
+    <!-- navbar -->
+    <div id="header"></div>
 
     <section id="logIn">
         <div class="container-fluid row flex justify-content-center logIn no-gutters">
@@ -108,7 +39,7 @@
                 </center>
 
             </div>
-            <form class="logIn col-lg-3 shadow" id="login" action="/userLogIn" method="post">
+            <form class="logIn col-lg-3 shadow" id="login" action="/userLogin" method="post">
                 <div class="input-icon-wrap ">
                     <span class="input-icon "><span class="fa fa-user"></span></span>
                     <input type="text" class="input-with-icon" id="ID" name="memID" placeholder="帳號" maxlength="20">
@@ -135,10 +66,10 @@
                     <center>
                         <h4>或</h4>
                         <hr class="highlight">
-                        <button type="button" class="btn third gmail col-sm-12">Gmail登入或註冊</button>
+                        <button type="button" class="btn third gmail col-sm-12"
+                            onclick="location.href='/user/login'">Gmail登入或註冊</button>
                         <button type="button" class="btn third fb  col-sm-12">Facebook登入或註冊</button>
                     </center>
-
                 </div>
             </div>
 
@@ -161,7 +92,7 @@
         crossorigin="anonymous"></script>
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/validateCode.js"></script>
-
+    <script src="/javascripts/navbar.js"></script>
 </body>
 
 </html>

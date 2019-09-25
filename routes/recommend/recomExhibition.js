@@ -4,8 +4,16 @@ var router = express.Router();
 const recommend = require('../utility/recommend');
 //接收GET請求
 router.get('/', function (req, res, next) {
-    var memID = req.session.memID ; 
-    recommend.getRecomExhibition(memID).then(data => {
+    var memID;
+
+    //判斷是使用哪種方式登入
+    if (req.session.memID != undefined && req.session.passport == undefined) {
+        memID = req.session.memID;
+    } else if (req.session.memID == undefined && req.session.passport != undefined) {
+        memID = req.session.passport.user.id;
+    }
+    
+    recommend.getRecomClassList('展覽', memID).then(data => {
         console.log(data) ;
         if (data == null) {
             res.render('error');  //導向錯誤頁面

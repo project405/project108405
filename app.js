@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 
 var session = require('express-session');
 
+var signUp = require('./routes/utility/signUp');
+
 //=========================================
 //---------  article router ------------
 //=========================================
@@ -29,16 +31,18 @@ var memberRouter = require('./routes/member/member');
 var memberManageRouter = require('./routes/member/memberManage');
 var articleManageRouter = require('./routes/member/articleManage');
 var articlePostRouter = require('./routes/member/articlePost');
-var logInRouter = require('./routes/member/logIn');
+var loginRouter = require('./routes/member/login');
 var logOutRouter = require('./routes/member/logOut');
 var signUpRouter = require('./routes/member/signUp');
 var signUpAddRouter = require('./routes/member/signUp_add');
-var userLogInRouter = require('./routes/member/userLogIn');
+var userLoginRouter = require('./routes/member/userLogin');
 var notifyRouter = require('./routes/notify');
 var postRouter = require('./routes/post');
 var addLikeRouter = require('./routes/member/addLike');
 var delLikeRouter = require('./routes/member/delLike');
 var reportRouter = require('./routes/member/report');
+var replyPostRouter = require('./routes/member/replyPost');
+
 // ---------------  four Class -------------------
 var myMovieArticleRouter = require('./routes/member/myMovieArticle');
 var myMusicArticleRouter = require('./routes/member/myMusicArticle');
@@ -68,13 +72,59 @@ var colleArtiExhibitionRouter = require('./routes/collection/colleArtiExhibition
 //=========================================
 var recommendListRouter = require('./routes/recommend/recommendList');
 var oneRecommendRouter = require('./routes/recommend/oneRecoomend');
+var recommendPostPageRouter = require('./routes/recommend/recomPostPage');
+var recommendPostRouter = require('./routes/recommend/post');
 // ---------------  four recommend Class -------------------
 var RecomMovieRouter = require('./routes/recommend/recomMovie');
 var RecomMusicRouter = require('./routes/recommend/recomMusic');
 var RecomBookRouter = require('./routes/recommend/recomBook');
 var RecomExhibitionRouter = require('./routes/recommend/recomExhibition');
 
+var CheckStatus = require('./routes/checkStatus');
+var searchRouter = require('./routes/search');
+
 var app = express();
+
+//---------------------------------------------
+// 使用passport-google-oauth2套件進行認證
+//---------------------------------------------
+var passport = require('passport');
+
+app.use(require('express-session')({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+    done(null, user);
+});
+
+//載入google oauth2
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+//填入自己在google cloud platform建立的憑證
+passport.use(
+    new GoogleStrategy({
+        clientID: '535503110825-vsqohis8p2itidvaqii3akbmha3kluie.apps.googleusercontent.com', 
+        clientSecret: 'vx7elBl3NGlZcnNPFV3QNH7l',
+        callbackURL: "http://localhost:3000/auth/google/callback" 
+    },
+    function(accessToken, refreshToken, profile, done) {
+        if (profile) {
+            return done(null, profile);
+        }else {
+            return done(null, false);
+        }
+    }
+));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -106,6 +156,7 @@ app.use('/article', articleRouter);
 app.use('/articleList', articleListRouter);
 app.use('/articleList/post', postRouter);
 app.use('/article/post', articlePostRouter);
+app.use('/article/reply', replyPostRouter);
 app.use('/addCollection', addCollectionRouter);
 app.use('/delCollection', delCollectionRouter);
 app.use('/likeCount', likeCountRouter);
@@ -122,15 +173,16 @@ app.use('/articleList/articleExhibition', articleExhibitionRouter);
 app.use('/member', memberRouter);
 app.use('/member/articleManage', articleManageRouter);
 app.use('/member/memberManage', memberManageRouter);
-app.use('/logIn', logInRouter);
+app.use('/login', loginRouter);
 app.use('/logOut', logOutRouter);
 app.use('/signUp', signUpRouter);
 app.use('/signUp/add', signUpAddRouter);
-app.use('/userLogIn', userLogInRouter);
+app.use('/userLogin', userLoginRouter);
 app.use('/notify', notifyRouter);
 app.use('/addLike', addLikeRouter);
 app.use('/delLike', delLikeRouter);
 app.use('/report', reportRouter);
+
 // -------------- four Class use----------------
 app.use('/articleManage/movie', myMovieArticleRouter);
 app.use('/articleManage/music', myMusicArticleRouter);
@@ -154,19 +206,74 @@ app.use('/collection/article/music', colleArtiMusicRouter);
 app.use('/collection/article/book', colleArtiBookRouter);
 app.use('/collection/article/exhibition', colleArtiExhibitionRouter);
 
-//=========================================
-//---------  recommend use ------------
-//=========================================
+// =========================================
+// ---------  recommend use ------------
+// =========================================
 app.use('/recommendList', recommendListRouter);
 app.use('/oneRecommend', oneRecommendRouter);
+app.use('/recommend/post/page', recommendPostPageRouter);
+app.use('/recommend/post',recommendPostRouter);
 // -------------- four Class ----------------
 app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);
 app.use('/recommendList/book', RecomBookRouter);
 app.use('/recommendList/exhibition', RecomExhibitionRouter);
+app.use('/checkStatus', CheckStatus);
+
+app.use('/search',searchRouter);
 
 
 
+//---------------------------------------------
+// 設定登入及登出方法內容
+//---------------------------------------------
+app.get('/user/login',
+    passport.authenticate('google', { scope: ['email', 'profile'] })
+    );   //進行google第三方認證
+
+app.get('/auth/google/callback', 
+    passport.authenticate('google', { failureRedirect: '/login' }),   //導向登入失敗頁面	
+    function(req, res) {
+        // 如果登入成功, 使用者資料已存在session
+        // console.log(req.session.passport.user.id);
+        // console.log(req.session.passport.user.displayName);
+        // console.log(req.session.passport.user.emails[0].value);	 
+
+        var checkID ;
+        signUp.checkMemID(req.session.passport.user.id).then((data) => {      
+            checkID = data[0];
+        })
+        //如果帳號不存在，新增帳號到資料庫
+        if(!checkID){      
+            signUp.googleCreateMember(req.session.passport.user.id, req.session.passport.user.displayName, req.session.passport.user.emails[0].value);
+            console.log(req.session.passport.user.id);
+        }
+ 
+        res.redirect('/');   //導向登入成功頁面
+    });
+
+app.get('/user/logout', function(req, res){    
+    req.logout();        //將使用者資料從session移除
+    res.redirect('/');   //導向登出頁面
+});    
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  });
+  
+  // error handler
+  app.use(function(err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+  
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+  });
 
 
 

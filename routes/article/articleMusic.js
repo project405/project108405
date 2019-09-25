@@ -5,7 +5,15 @@ const article = require('../utility/article');
 
 //接收GET請求
 router.get('/', function (req, res, next) {
-    var memID = req.session.memID;
+    var memID ;
+
+    //判斷是使用哪種方式登入
+	if (req.session.memID != undefined && req.session.passport == undefined) {
+		memID = req.session.memID;
+	} else if (req.session.memID == undefined && req.session.passport != undefined) {
+		memID = req.session.passport.user.id;
+    }
+    
     article.getArticleClassList('music', memID).then(data => {
         // 將圖片字串取代成空字串
         for (var i = 0; i < data[0].length; i++) {

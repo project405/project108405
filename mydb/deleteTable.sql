@@ -1,8 +1,7 @@
 -- -------------------------------
---           delete image
+--           delete report
 -- -------------------------------
 DROP TABLE IF EXISTS "public"."image" ;
-
 -- -------------------------------
 --           delete report
 -- -------------------------------
@@ -65,6 +64,4 @@ DROP TABLE IF EXISTS "public"."exhibition" ;
 -- ---------- member -------------- -- 
 DROP TABLE IF EXISTS "public"."memberMessage" ;
 DROP TABLE IF EXISTS "public"."member" ;
-
-
 

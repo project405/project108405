@@ -23,124 +23,8 @@
 </head>
 
 <body>
-    <!-- ============================================= -->
-    <!-- --------------- navbar ---------------------- -->
-    <!-- ============================================= -->
-    <div class="header">
-        <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">
-            <a class="nav-link" href="/">
-                <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8"
-                    alt="">
-                <a href="/" class="navTitle">文藝富心</a>
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <!-- 如果帳號不是管理員則不顯示 -->
-                    <% if(myArtiClass[7] == undefined){ %>
-                    <li class="nav-item" style="display: none">
-                        <a class="nav-link" href="recommendPost.html">
-                            新增推薦</a>
-                    </li>
-                    <!-- 如果帳號是一般會員 -->
-                    <% }else {%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="recommendPost.html">
-                            新增推薦</a>
-                    </li>
-                    <% } %>
-                    <li class="nav-item">
-                        <a class="nav-link " href="/">首頁 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/notify">
-                            <i class="fas fa-bell" style="color:white;"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/recommendlist">
-                            推薦</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/articleList">
-                            文章</a>
-                    </li>
-                    <li id="dropdown" class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="collectionArticle.html" id="navbarDropdownMenuLink"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            收藏
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>
-                            <a class="dropdown-item" href="/collection/article">文章收藏</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="navReport" style="cursor:pointer;">申報</a>
-                    </li>
-                    <!-- 已經登入的話 login 隱藏 -->
-                    <% if(myArtiClass[6][0] != undefined){ %>
-                    <li class="nav-item" style="display: none">
-                        <a class="nav-link" href="/login">登入</a>
-                    </li>
-                    <!-- 如果還沒登入 login 顯示 -->
-                    <% }else {%>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">登入</a>
-                    </li>
-                    <% } %>
-                    <!-- 已經登入的話"會員"下拉式清單 顯示 -->
-                    <% if(myArtiClass[6][0] != undefined){ %>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            會員
-                        </a>
-                        <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/member/memberManage">會員資料</a>
-                            <a class="dropdown-item" href="/member/articleManage">文章管理</a>
-                            <a class="dropdown-item" href="/logOut">登出</a>
-                        </div>
-                    </li>
-                    <!-- 如果還沒登入則隱藏"會員"清單 -->
-                    <% }else {%>
-                    <li class="nav-item dropdown" style="display: none">
-                        <a class="nav-link dropdown-toggle" href="memberManage.html" id="navbarDropdownMenuLink"
-                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            會員
-                        </a>
-                        <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/member/memberManage">會員資料</a>
-                            <a class="dropdown-item" href="/member/articleManage">文章管理</a>
-                            <a class="dropdown-item" href="/logOut">登出</a>
-                        </div>
-                    </li>
-                    <% } %>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div class="container position-fixed col-lg-8 report" id="report">
-        <div id="x"><i class="far fa-times-circle"></i>
-        </div>
-        <div class="form">
-            <form class="report" action="/report" method="POST" data-aos="zoom-out-right">
-                <div class="input-icon-wrap">
-                    <span class="input-icon"><span class="fas fa-hands-helping"></span></span>
-                    <textarea class="input-with-icon report" name="reportReason" placeholder="輸入舉報原因"></textarea>
-                </div>
-                <button type="submit" class="btn btn-danger report">送出</button>
-            </form>
-        </div>
-    </div>
-
-    <!-- ============================================= -->
-    <!-- ------------- navbar end -------------------- -->
-    <!-- ============================================= -->
-
+    <!-- navbar -->
+    <div id="header"></div>
 
     <!-- 文章列表區塊 -->
     <section id="articleList">
@@ -169,7 +53,7 @@
                     <!-- list -->
                     <% for(var i = 0; i < myArtiClass[0].length ; i++) { %>
                     <div class="card shadow list " style="cursor:pointer; ">
-                        <div class="card-body " onclick="location.href='article.html'">
+                        <div class="card-body " onclick="location.href='/article/<%= myArtiClass[0][i].artiNum %>'">
                             <div class="poster">
                                 <div class="name">
                                     <p><%= myArtiClass[0][i].memID %> 於 <%= myArtiClass[0][i].artiDateTime %>發表</p>
@@ -178,23 +62,32 @@
                             </div>
                             <div class="row seperate">
                                 <div class="col-sm-9 articleContent">
-                                    <h3 class="card-title "><%- myArtiClass[0][i].artiHead %>
+                                    <h3 class="card-title "><%= myArtiClass[0][i].artiHead %>
                                     </h3>
                                     <p class="card-text "><%- myArtiClass[0][i].artiCont %>
                                     </p>
 
-                                    <div class="tagDiv col-lg-12 ">
-                                        <% for(var j = 0; j < myArtiClass[3][i].length ; j++) { %>
-                                        <button type="button" class="btn  tag"><%= myArtiClass[3][i][j] %></button>
-                                        <% } %>
+                                    <!-- tag -->
+                                    <div class=" tagDiv col-lg-12 ">
+                                            <% if(myArtiClass[1] != undefined) { %>
+                                                <% for(var j=0; j<myArtiClass[1].length; j++) {%>
+                                                    <% if(myArtiClass[0][i].artiNum == myArtiClass[1][j].artiNum){ %>     
+                                                        <button type=" button" class="btn  tag"><%= myArtiClass[1][j].tagName %></button>                            
+                                                    <% } %>
+                                                <% } %>
+                                            <% } %>
                                     </div>
                                 </div>
-                                <!-- imgs -->
-                                <% if(myArtiClass[8][myArtiClass[0][i].artiNum]){%>
-                                <div class="wrapperCard card-img-top col-lg-3"
-                                    style="background-image: url( '/userImg/<%= myArtiClass[8][myArtiClass[0][i].artiNum] %>'); ">
-                                </div>
+                               <!-- imgs -->
+                               <% if(myArtiClass[2] != undefined) { %>
+                                <% for(var j = 0 ; j<myArtiClass[2].length ; j++) { %>
+                                    <% if (myArtiClass[0][i].artiNum == myArtiClass[2][j].artiNum){ %>
+                                        <div class="wrapperCard card-img-top col-lg-3"
+                                            style="background-image: url( '/userImg/<%= myArtiClass[2][j].imgName %>'); ">
+                                            <% break %> <!-- 取得一張照片就結束 -->
+                                    <% } %>
                                 <% } %>
+                            <% } %>
                             </div>
                         </div>
 
@@ -202,90 +95,77 @@
                         <div class="info">
                             <!-- 愛心按鈕 -->
                             <button type="button" id=<%= "LikeUnLogIn" + myArtiClass[0][i].artiNum %>
-                                class="btn postInfo" onclick="location.href='/logIn'"><i class="fab fa-gratipay"></i>
-                                <a><%= myArtiClass[1][i].count %></a></button>
+                               style ="display:none" class="btn postInfo" onclick="location.href='/login'"><i class="fab fa-gratipay"></i>
+                                <a><%= myArtiClass[0][i].likeCount %></a></button>
                             <button type="button" id=<%="addLike" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                onclick=<%= "addLike(" + myArtiClass[0][i].artiNum + ")" %>>
+                                style ="display:none" onclick=<%= "addLike(" + myArtiClass[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + myArtiClass[0][i].artiNum %>>
-                                    <%= myArtiClass[1][i].count %> </a> </button>
+                                    <%= myArtiClass[0][i].likeCount %> </a> </button>
                             <button type="button" id=<%= "delLike" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                style="color:#c93737" onclick=<%= "delLike(" + myArtiClass[0][i].artiNum + ")" %>>
+                                style="color:#c93737; display:none" onclick=<%= "delLike(" + myArtiClass[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + myArtiClass[0][i].artiNum %>>
-                                    <%= myArtiClass[1][i].count %></a></button>
-                            <!-- 如果沒登入 -->
-                            <% if(myArtiClass[6][0] == undefined) {%>
-                            <script type="text/javascript">
-                                document.getElementById("LikeUnLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("addLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("delLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                            </script>
-                            <!-- 如果有登入及沒按過愛心       -->
-                            <% }else if(myArtiClass[5][i] == 1 && myArtiClass[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("addLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("LikeUnLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("delLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                            </script>
-                            <!-- 如果有登入及按過愛心 -->
-                            <% }else if(myArtiClass[5][i] == 0 && myArtiClass[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("delLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("addLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("LikeUnLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                            </script>
-                            <% }else {%>
-                            <script type="text/javascript">
-                                document.getElementById("delLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("addLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("LikeUnLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                            </script>
-                            <% } %>
+                                    <%= myArtiClass[0][i].likeCount %></a></button>
+
+                           <!-- 判斷是否有按過愛心 -->
+                           <% var isLike = false %>
+                           <%  for (var j = 0; j < myArtiClass[3].length ; j++) { %>
+                               <!-- 如果有按過愛心 -->
+                               <% if(myArtiClass[0][i].artiNum == myArtiClass[3][j].artiNum ) { %>
+                                   <script type="text/javascript">                                  
+                                       document.getElementById("delLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "inline";
+                                       document.getElementById("addLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
+                                       document.getElementById("LikeUnLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
+                                   </script>
+                                   <% isLike = true %>
+                               <% } %>
+                           <% } %>
+                           <!-- 如果沒按過愛心 -->
+                           <% if(isLike == false ){ %>
+                               <script type="text/javascript">
+                                   document.getElementById("addLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "inline";
+                                   document.getElementById("LikeUnLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
+                                   document.getElementById("delLike" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
+                               </script>
+                           <% } %>
 
                             <!-- 留言數量按鈕 -->
                             <button type="button" class="btn postInfo"><i
-                                    class="fas fa-comment-dots"></i><a><%= myArtiClass[2][i].count %></a></button>
+                                    class="fas fa-comment-dots"></i><a><%= myArtiClass[0][i].messCount %></a></button>
 
                             <!-- 收藏按鈕 -->
                             <button type="button" id=<%= "unLogIn" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                onclick="location.href='/logIn'">
+                                style ="display:none" onclick="location.href='/login'">
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%=  "addColle" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                onclick=<%= "addColle(" + myArtiClass[0][i].artiNum + ")" %>>
+                                style ="display:none" onclick=<%= "addColle(" + myArtiClass[0][i].artiNum + ")" %>>
                                 <i class="far fa-bookmark"></i></button>
                             <button type="button" id=<%= "delColle" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                onclick=<%= "delColle(" + myArtiClass[0][i].artiNum + ")" %>>
+                                style ="display:none" onclick=<%= "delColle(" + myArtiClass[0][i].artiNum + ")" %>>
                                 <i class=" fas fa-bookmark"></i></button>
 
                             <!--  收藏按鈕控制 -->
-                            <% if(myArtiClass[6][0] == undefined) {%>
-                            <script type="text/javascript">
-                                document.getElementById("unLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("addColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("delColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                console.log("1");
-                            </script>
-                            <% }else if(myArtiClass[4][i] == 1 && myArtiClass[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("addColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("unLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("delColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                console.log("2");
-                            </script>
-                            <% }else if(myArtiClass[4][i] == 0 && myArtiClass[6][0] != undefined ) {%>
-                            <script type="text/javascript">
-                                document.getElementById("delColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "inline";
-                                document.getElementById("addColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("unLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                console.log("3");
-                            </script>
-                            <% }else {%>
-                            <script type="text/javascript">
-                                document.getElementById("delColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("addColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                document.getElementById("unLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
-                                console.log("3");
-                            </script>
-                            <% } %>
+                            <% var isCollection = false %>
+                                <% if(myArtiClass[4] != undefined){ %>
+                                    <% for(var j = 0 ; j < myArtiClass[4].length ; j++) { %>
+                                        <!-- 如果有收藏 -->
+                                        <% if (myArtiClass[4][j].artiNum == myArtiClass[0][i].artiNum){ %>
+                                            <script type="text/javascript">
+                                                document.getElementById("delColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "inline";
+                                                document.getElementById("addColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
+                                                document.getElementById("unLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
+                                            </script>
+                                            <% isCollection = true %>
+                                        <% } %>
+                                    <% } %>
+                                <% } %>
+                                <!-- 如果沒收藏 -->
+                                <% if( isCollection == false ){ %>
+                                    <script type="text/javascript">
+                                        document.getElementById("addColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "inline";
+                                        document.getElementById("unLogIn" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
+                                        document.getElementById("delColle" + "<%= myArtiClass[0][i].artiNum %>").style.display = "none";
+                                    </script>
+                                <% } %>          
 
                             <!-- 收藏 ajax script -->
                             <script>
@@ -296,7 +176,7 @@
                                         url: '/addCollection',
                                         type: 'POST',
                                         dataType: 'text',
-                                        data: { "collectionType": "article", "artiNum": artiNum },
+                                        data: { "likeType": "article", "artiNum": artiNum },
                                         success: function (res) {
                                             console.log("yes", JSON.stringify(res));
                                         },
@@ -313,7 +193,7 @@
                                         url: '/delCollection',
                                         type: 'POST',
                                         dataType: 'text',
-                                        data: { "collectionType": "article", "artiNum": artiNum },
+                                        data: { "likeType": "article", "artiNum": artiNum },
                                         success: function (res) {
                                             console.log("yes", JSON.stringify(res));
                                         },
@@ -438,6 +318,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/navbar.js"></script>
 </body>
 
 </html>

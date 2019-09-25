@@ -6,18 +6,24 @@ const signUp = require('../utility/signUp');
 
 //接收GET請求
 router.get('/', function (req, res, next) {
-    var memID = req.session.memID;
-    if (memID == null || memID == undefined) {
-        res.render('logIn');
-    } else {
-        member.checkAuthority(memID).then(data => {
-            var mydata = [] ;
-            mydata[0] = data ; 
-            mydata[1] = memID ; 
-            console.log(mydata);
-            res.render('memberManage',{items:mydata});
-        })
+    var memID;
+
+    //判斷是使用哪種方式登入
+    if (req.session.memID == undefined && req.session.passport == undefined) {
+        res.render('login');
+    } else if (req.session.memID != undefined && req.session.passport == undefined) {
+        memID = req.session.memID;
+    } else if (req.session.memID == undefined && req.session.passport != undefined) {
+        memID = req.session.passport.user.id;
     }
+    
+    member.checkAuthority(memID).then(data => {
+        var mydata = [];
+        mydata[0] = data;
+        mydata[1] = memID;
+        console.log(mydata);
+        res.render('memberManage', { items: mydata });
+    })
 
 });
 

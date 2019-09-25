@@ -42,5 +42,20 @@ var createMember = async function (newData) {
     return result;
 }
 
+//---------  googleCreateMember() -------------
+var googleCreateMember = async function (memID, memName, memMail) {
+    var result;
+    // console.log(newData);
+    await sql('INSERT INTO "member" ("memID" , "memName", "memMail") VALUES ($1, $2, $3)',
+        [memID, memName, memMail])
+        .then((data) => {
+            result = 0;
+        }, (error) => {
+            result = -1;
+        });
+
+    return result;
+}
+
 //匯出
-module.exports = { createMember, checkMemID ,checkMail};
+module.exports = { createMember, checkMemID ,checkMail, googleCreateMember};

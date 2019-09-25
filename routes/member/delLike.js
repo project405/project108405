@@ -5,7 +5,17 @@ const member = require('../utility/member');
 const recommend = require('../utility/recommend');
 
 router.post('/', function (req, res, next) {
-    var memID = req.session.memID;
+    var memID;
+
+    //判斷是使用哪種方式登入
+    if (req.session.memID == undefined && req.session.passport == undefined) {
+        res.redirect("/login");
+    } else if (req.session.memID != undefined && req.session.passport == undefined) {
+        memID = req.session.memID;
+    } else if (req.session.memID == undefined && req.session.passport != undefined) {
+        memID = req.session.passport.user.id;
+    }
+    
     if (req.body.likeType == "recommend") {
         recommend.delRecommendLike(memID, req.body.recomNum).then(data => {
             if (data == 1) {

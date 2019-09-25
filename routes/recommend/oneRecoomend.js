@@ -5,16 +5,22 @@ const recommend = require('../utility/recommend');
 
 router.get('/:recomNum', async function (req, res, next) {
     var recomNum = req.params.recomNum;   //取出參數
-    var memID = req.session.memID;
+    var memID;
+
+    //判斷是使用哪種方式登入
+    if (req.session.memID != undefined && req.session.passport == undefined) {
+        memID = req.session.memID;
+    } else if (req.session.memID == undefined && req.session.passport != undefined) {
+        memID = req.session.passport.user.id;
+    }
+
     recommend.getOneRecommend(recomNum, memID).then(data => {
-        // 測試data
+        console.log("data=",data);
+        // 將圖片字串替代成圖片
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].recomCont.match("\\:imgLocation") != null) {
-                console.log("近來囉");
-                for (var j = 0; j < data[11][0].length; j++) {
-                    // artiCont = artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
-                    data[0][i].recomCont = data[0][i].recomCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + data[11][0][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
-                    // console.log("data[", 11, "][", j, "]=", data[11][0][j]);
+                for (var j = 0; j < data[3].length; j++) {
+                    data[0][i].recomCont = data[0][i].recomCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + data[3][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
                 }
             }
         }

@@ -44,7 +44,8 @@ div.post {
 } */
 
 div.titleInput,
-div.postInput {
+div.postInput,
+textarea.introInput {
     width: 100%;
     min-height: 50px;
     height: auto;
@@ -57,6 +58,7 @@ div.postInput {
     caret-color: #2D4F41;
     cursor: text;
     text-align: justify;
+    border:none;
 }
 
 div.title {
@@ -67,11 +69,12 @@ div.postInput {
     min-height: 250px;
 }
 
-#postInto {
+
+#postIntro {
     min-height: 150px;
 }
-
-div.titleInput:before {
+/* 
+input.titleInput:before {
     font-family: 'Font Awesome 5 Free';
     display: inline-block;
     padding-right: 6px;
@@ -79,15 +82,17 @@ div.titleInput:before {
     content: "\f1dc";
     font-weight: 800;
     opacity: 0.65;
-}
+} */
 
 div.titleInput:focus,
-div.postInput:focus {
+div.postInput:focus,
+textarea.introInput:focus {
     outline: none;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
     transition: 0.3s ease-in-out;
     cursor: text;
-    display: block;
+    border:none;
+
 }
 
 .input:empty::before {
@@ -105,7 +110,7 @@ div.replyInput:focus:before {
 [contentEditable=true]:empty:not(:focus):before {
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
     content: attr(data-text);
-    color: black;
+    color: #747474;
 }
 
 input[type="file"] {
@@ -180,6 +185,7 @@ span.tag {
     content: "\f057";
     font-weight: 800;
     font-size: 15px;
+    margin-left: 4px;
 }
 
 
