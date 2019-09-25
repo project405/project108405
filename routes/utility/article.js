@@ -103,6 +103,7 @@ var getOneArticle = async function (artiNum, memID) {
     var isMessLike = []; //判斷留言愛心是否被按過
     var checkAuthority;
     var imgs = [];
+    var replyImgs = [];
     var result = [];
 
     // -----------  取得單一文章 --------------
@@ -134,6 +135,7 @@ var getOneArticle = async function (artiNum, memID) {
         .then((data) => {
             // console.log("單一文章留言",data.rows);
             oneArtiMessage = data.rows;
+            console.log('oneArtiMessage',oneArtiMessage)
         }, (error) => {
             oneArtiMessage = null;
         });
@@ -213,6 +215,17 @@ var getOneArticle = async function (artiNum, memID) {
         }, (error) => {
             imgs = undefined;
         });
+    
+    await sql('SELECT "artiMessNum" , "imgName" FROM "image" WHERE "artiMessNum" = $1',[oneArtiMessage])
+        .then((data) => {
+            if (!data.rows) {
+                replyImgs = undefined;
+            } else {
+                replyImgs = data.rows;
+            }
+        }, (error) => {
+            replyImgs = undefined;
+        });
         
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
@@ -223,6 +236,7 @@ var getOneArticle = async function (artiNum, memID) {
     result[6] = imgs;
     result[7] = [memID];
     result[8] = checkAuthority;
+    result[9] = [replyImgs];
    
 
     return result;

@@ -109,32 +109,43 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
     var result;
     console.log(memID)
     console.log(typeof(memID))
-
+    console.log('imgData~~~~~~~~~~~~~~~~~~',imgData)
+    console.log()
     //新增留言
     await sql('INSERT into "articleMessage" ("artiNum","memID","artiMessDateTime","artiMessCont") VALUES ($1,$2,$3,$4);'
              ,[artiNum, memID, postDateTime, replyCont])
         .then((data) => {
-            if(!data.rows){
-                artiMessNum = undefined ;
-                console.log("artiMessNum =" ,artiMessNum);
-            }else{
-                console.log(data)
-                artiMessNum = data.rows[0].artiMessNum ;
-                console.log("artiMessNum =" ,artiMessNum);
-            }
+            console.log('find this~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',data)
+            // if(!data.rows){
+            //     artiMessNum = undefined ;
+            //     console.log("artiMessNum =" ,artiMessNum);
+            // }else{
+            //     console.log(data)
+            //     artiMessNum = data.rows[0].artiMessNum;
+            //     console.log("artiMessNum =" ,artiMessNum);
+            // }
         }, (error) => {
             console.error(error)
             artiMessNum = undefined ;
         });
-    if (imgData) {
-        for (var i = 0; i < imgData.length; i++) {
-            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], postDateTime])
-                .then((data) => {
-                    result = 0;
-                }, (error) => {
-                    result = 1;
-            });
-        }
+    //查詢新增留言的留言編號
+    await sql('SELECT "artiMessNum" from "articleMessage" where "memID"= $1 and "artiMessDateTime" = $2 and "artiMessCont" = $3', [memID, postDateTime, replyCont])
+    .then((data) => {
+        console.log("data.rows=", data.rows);
+        artiMessNum =  data.rows;
+        // console.log("artiNum=", artiNum);
+    }, (error) => {
+        result = 1;
+    });
+
+    for (var i = 0; i < imgData.length; i++) {
+        console.log('i',imgData.length)
+        await sql('INSERT into "image" ("artiNum", "memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [artiNum, memID, artiMessNum, imgData[i], postDateTime])
+            .then((data) => {
+                result = 0;
+            }, (error) => {
+                result = 1;
+        });
     }
     return result;
 }

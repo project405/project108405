@@ -463,21 +463,18 @@
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/post.js"></script>
     <script src="/javascripts/navbar.js"></script>
-
+    <script>var formData = new FormData(); //用formData來存取要傳送的所有資料
+    </script>
     <script>
-        var formData = new FormData(); //用formData來存取要傳送的所有資料
         //上傳檔案按鈕有變動就執行
         $("#file-selector").change(function () {
             var file = $("#file-selector")[0];  //取得檔案
+            console.log(file)
             //如果有檔案就要加入formData
             if (file.files.length) {
                 for (var i = 0; i < file.files.length; i++) {
                     $("#replyInput").html(document.getElementById("replyInput").innerHTML + "\\:imgLocation");
                 }
-                // if (document.getElementById("postInput").innerHTML.match("<img") == null) {
-                //     file.value = '';
-                // }
-
                 for (var i in file.files) {
                     formData.append('userImg', file.files[i]);
                 }
@@ -512,9 +509,8 @@
                         location.replace("/logIn");
                     } else if (res == "留言成功") {
                         alert(res);
-                        // location.replace("/article");
                     } else {
-                        alert(res);
+                        alert('哎呀，出現錯誤')
                     }
                 },
                 error: function (res) {
