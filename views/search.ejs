@@ -13,9 +13,12 @@
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <!--  js   -->
+    <script src="/javascripts/jquery.min.js"></script>
 
     <link href="/css/header.css" rel="stylesheet" type="text/css" />
-    <link href="/css/articleList.css" rel="stylesheet" type="text/css" />
+    <link href="/css/search.css" rel="stylesheet" type="text/css" />
+
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
 
@@ -23,73 +26,61 @@
 </head>
 
 <body>
-   <!-- navbar -->
-   <div id="header"></div>
+    <!-- navbar -->
+    <div id="header"></div>
 
     <!-- 文章列表區塊 -->
     <section id="articleList">
         <div class="container-fluid article">
-            <center>
-                <h3>文章列表</h3>
-                <hr class="highlight">
-            </center>
-
-            <div class="d-flex justify-content-center" style="margin-bottom: 1.5em">
-                <button type="button" class="btn btn-secondary footer"
-                    onclick="location.href='/articleList/articleMovie'">電影類</button>
-                <button type="button" class="btn btn-secondary footer"
-                    onclick="location.href='/articleList/articleMusic'">音樂類</button>
-                <button type="button" class="btn btn-secondary footer"
-                    onclick="location.href='/articleList/articleBook'">書籍類</button>
-                <button type="button" class="btn btn-secondary footer"
-                    onclick="location.href='/articleList/articleExhibition'">展覽類</button>
-                <button type="button" class="btn btn-secondary footer"
-                    onclick="location.href='/articleList'">全部</button>
-            </div>
 
             <div class="row d-flex justify-content-center no-gutters">
+
                 <div class="col-12 mb-3 col-lg-8 ">
+                    <center style="margin:1em;">
+                        <h3>文章搜尋</h3>
+                        <hr class="highlight">
+                    </center>
+
                     <!-- list -->
                     <% for(var i=0; i<items[0].length; i++) {%>
-                    <div class="card shadow list " style="cursor:pointer; ">
+                    <div class="card shadow list ">
+
                         <div class="card-body " onclick=" location.href='/article/<%= items[0][i].artiNum %>'">
                             <div class="poster">
                                 <div class="name">
-                                    <p><%= items[0][i].memID %> 於 <%= items[0][i].artiDateTime %>發表</p>
+                                    <p><%= items[0][i].memID %> 於 <%= items[0][i].artiDateTime %> 發表</p>
                                 </div>
                                 <hr>
                             </div>
-                            <div class="row seperate">
-                                <div class="col-sm-9 articleContent">
-                                    <h3 class="card-title "><%= items[0][i].artiHead %>
-                                    </h3>
-                                    <p class="card-text limitLine"><%- items[0][i].artiCont %>
-                                    </p>
-                                    
-                                    <!-- tag -->
-                                    <div class=" tagDiv col-lg-12 ">
-                                        <% if(items[1] != undefined) { %>
-                                            <% for(var j=0; j<items[1].length; j++) {%>
-                                                <% if(items[0][i].artiNum == items[1][j].artiNum){ %>     
-                                                    <button type=" button" class="btn  tag"><%= items[1][j].tagName %></button>                            
-                                                <% } %>
-                                            <% } %>
-                                        <% } %>
-                                    </div>
-                                </div>
-                                <!-- imgs  -->
-                                <% if(items[3] != undefined) { %>
-                                    <% for(var j = 0 ; j<items[3].length ; j++) { %>
-                                        <% if (items[0][i].artiNum == items[3][j].artiNum){ %>
-                                            <div class="wrapperCard card-img-top col-lg-3"
-                                                style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
-                                            </div>
-                                            <% break %> <!-- 取得一張照片就結束 -->
+                            <h3 class="card-title "><%= items[0][i].artiHead %>
+                            </h3>
+                            <p class="card-text "><%- items[0][i].artiCont %>
+                            </p>
+
+                            <!-- tag -->
+                            <div class=" tagDiv col-lg-12 ">
+                            <% if(items[1] != undefined) { %>
+                                <% for(var j=0; j<items[1].length; j++) {%>
+                                    <% if(items[0][i].artiNum == items[1][j].artiNum){ %> 
+                                        <button type=" button" class="btn  tag"><%= items[1][j].tagName %></button>                            
                                         <% } %>
                                     <% } %>
                                 <% } %>
                             </div>
                         </div>
+
+                        <!-- imgs  -->
+                        <% if(items[3] != undefined) { %>
+                            <% for(var j = 0 ; j<items[3].length ; j++) { %>
+                                <% if (items[0][i].artiNum == items[3][j].artiNum){ %>
+                                    <div class="wrapperCard card-img-top col-lg-3"
+                                        style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
+                                    </div>
+                                    <% break %> <!-- 取得一張照片就結束 -->
+                                <% } %>
+                            <% } %>
+                        <% } %>
+
                         <!-- info -->
                         <div class="info">
                             <!-- 愛心按鈕 -->
@@ -314,15 +305,81 @@
                             </script>
                         </div>
                         <!-- info結束 -->
+
                     </div>
                     <div class="w-100"></div>
                     <% } %>
                     <!-- listEnd -->
+
                 </div>
             </div>
+
+        </div>
+
+        </div>
+
+
+        </div>
+    </section>
+    <!-- 文章列表區塊結束 -->
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <center style="margin:1em;">
+            <h3>推薦搜尋</h3>
+            <hr class="highlight">
+
+        </center>
+        <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
+            <!-- 推薦開始 -->
+            <% for(var i = 0 ; i<items[6].length ; i++){ %>
+                <% isImg = false %>
+                <!-- 如果有抓到圖片 -->
+                <% if(items[7] != undefined) { %>
+                    <% for(var j = 0 ; j<items[7].length ; j++ ) { %>
+                        <% if(items[6][i].recomNum == items[7][j].recomNum){ %>
+                            <div class="wrapper col-12  col-lg-2"
+                            style="background-image:url('/imgs/recommend/<%= items[7][j].imgName %>');">
+                            <% isImg = true %>
+                        <% } %>
+                    <% } %>
+                <% } %>
+            <!-- 如果沒抓到半張圖片 -->
+            <% if(isImg == false) { %>
+                <div class="wrapper col-12  col-lg-2">
+            <% } %>
+
+                <a class="portfolio-box" href="/oneRecommend/<%= items[6][i].recomNum %>">
+                    <div class="portfolio-box-caption">
+                        <div class="project-category text-white-50">
+                            <p><%= items[6][i].recomClass %> </p>
+                        </div>
+                        <div class="project-name">
+                            <p class="title"><%= items[6][i].recomHead %></p>
+                            <p class="content wrapText"><%= items[6][i].recomCont %></p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <% if( (i+1) % 4 == 0){ %>
+            <div class="w-100"></div>
+            <% } %>
+            <% } %>
+            <!-- 推薦結束 -->
+        </div>
     </section>
 
-    <!-- 文章列表區塊結束 -->
+    <div class="fixed-bottom  d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary footer">電影類</button>
+        <button type="button" class="btn btn-secondary footer">音樂類</button>
+        <button type="button" class="btn btn-secondary footer">書籍類</button>
+        <button type="button" class="btn btn-secondary footer">展覽類</button>
+        <button type="button" class="btn btn-secondary footer">全部</button>
+
+        <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
+            <i class="fas fa-edit"></i>發文</button>
+    </div>
+
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
@@ -341,9 +398,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
-    
 </body>
 
 </html>

@@ -9,20 +9,20 @@ var moment = require('moment');
 //---------  getRecommendList() -----------
 //=========================================
 var getRecommendList = async function (memID) {
-    var RecommendList = [];
+    var recommendList = [];
     var checkAuthority;
     var imgs = [] ; 
     var result = [];
-    // -----------  取得文章清單 --------------
+    // -----------  取得推薦清單 --------------
     await sql('SELECT * FROM "recommendListDataView"')
         .then((data) => {
             if (data.rows != undefined) {
-                RecommendList = data.rows
+                recommendList = data.rows
             } else {
-                RecommendList = undefined
+                recommendList = undefined
             }
         }, (error) => {
-            RecommendList = undefined;
+            recommendList = undefined;
         });
 
     //取得權限
@@ -47,7 +47,7 @@ var getRecommendList = async function (memID) {
     }, (error) => {
         imgs = undefined;
     });
-    result[0] = RecommendList;
+    result[0] = recommendList;
     result[1] = [memID];
     result[2] = checkAuthority;
     result[3] = imgs ;

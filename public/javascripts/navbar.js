@@ -3,10 +3,10 @@ $(document).ready(() => {
         type: "GET",
         url: '/checkStatus',
         success: function (data) {
-          //data[0] = memID , data[1] = Authority
-          //如果沒登入
-          if(!data[0]){
-            document.getElementById('header').innerHTML = '\
+            //data[0] = memID , data[1] = Authority
+            //如果沒登入
+            if (!data[0]) {
+                document.getElementById('header').innerHTML = '\
                 <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">\
                     <a class="nav-link" href="/">\
                         <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8" alt="">\
@@ -18,8 +18,8 @@ $(document).ready(() => {
                     <div class="collapse navbar-collapse" id="navbarNav">\
                         <ul class="navbar-nav ml-auto">\
                             <div class="searchSection">\
-                                <input type="text" class="navSearch" />\
-                                <button class="btn navSearch"><i class="fas fa-search"></i></button>\
+                                <input type="text" class="navSearch" id="input_search" />\
+                                <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
                             <li class="nav-item">\
                                 <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
@@ -38,8 +38,8 @@ $(document).ready(() => {
                                     文章</a>\
                             </li>\
                             <li class="nav-item">\
-                                <a class="nav-link" href="/articleList/post">\
-                                    發文</a>\
+                            <a class="nav-link" href="/articleList/post">\
+                            <i class="fas fa-pen"></i>&nbsp;發文</a>\
                             </li>\
                             <li id="dropdown" class="nav-item dropdown">\
                                 <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
@@ -97,9 +97,9 @@ $(document).ready(() => {
                     </div>\
                 </div>\
             </div>\ '
-          //如果有登入也有新增推薦權限
-          }else if (data[0] && data[1]){
-            document.getElementById('header').innerHTML = '\
+                //如果有登入也有新增推薦權限
+            } else if (data[0] && data[1]) {
+                document.getElementById('header').innerHTML = '\
                 <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">\
                     <a class="nav-link" href="/">\
                         <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8" alt="">\
@@ -115,7 +115,7 @@ $(document).ready(() => {
                                 <button class="btn navSearch"><i class="fas fa-search"></i></button>\
                             </div>\
                             <li class="nav-item">\
-                                <a class="nav-link" href="/recommendPost">\
+                                <a class="nav-link" href="/recommend/post/page">\
                                 新增推薦</a>\
                             </li>\
                             <li class="nav-item">\
@@ -135,8 +135,8 @@ $(document).ready(() => {
                                     文章</a>\
                             </li>\
                             <li class="nav-item">\
-                                <a class="nav-link" href="/articleList/post">\
-                                    發文</a>\
+                            <a class="nav-link" href="/articleList/post">\
+                            <i class="fas fa-pen"></i>&nbsp;發文</a>\
                             </li>\
                             <li id="dropdown" class="nav-item dropdown">\
                                 <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
@@ -201,9 +201,9 @@ $(document).ready(() => {
                     </div>\
                 </div>\
             </div>\ '
-          //如果有登入可是沒推薦權限
-          }else if (data[0] && !data[1] ){
-            document.getElementById('header').innerHTML = '\
+                //如果有登入可是沒推薦權限
+            } else if (data[0] && !data[1]) {
+                document.getElementById('header').innerHTML = '\
             <nav id="nav" class="navbar navbar-expand-lg navbar-light fixed-top ">\
                 <a class="nav-link" href="/">\
                     <img class="nav-item" href="/" src="/imgs/logo.png" width="30px" height="30px " style="opacity:0.8" alt="">\
@@ -235,9 +235,9 @@ $(document).ready(() => {
                                 文章</a>\
                         </li>\
                         <li class="nav-item">\
-                                <a class="nav-link" href="/articleList/post">\
-                                    發文</a>\
-                            </li>\
+                        <a class="nav-link" href="/articleList/post">\
+                        <i class="fas fa-pen"></i>&nbsp;發文</a>\
+                        </li>\
                         <li id="dropdown" class="nav-item dropdown">\
                             <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                             收藏\
@@ -301,7 +301,12 @@ $(document).ready(() => {
                 </div>\
             </div>\
         </div>\ '
-          }
+            }
         }
     });
 });
+
+function byParamSearch(){
+    var params = $("#input_search").val() ;  
+    location.href='/search/' + params ;
+}

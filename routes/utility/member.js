@@ -88,6 +88,109 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
 }
 
 
+
+//================================
+//-------- recommendPost() ---------
+//================================
+var recommendPost = async function (memID, recomHead, recomCont, recomClass, recomDateTime, imgData, tag) {
+    var recomNum;
+    var tagNum;
+    var result;
+
+    //新增文章
+    await sql('INSERT into "recommend" ("recomHead","recomCont","recomClass","recomDateTime")' +
+        ' VALUES ($1,$2,$3,$4)  returning "recommend"."recomNum" ;'
+        , [recomHead, recomCont, recomClass, recomDateTime])
+        .then((data) => {
+            if (!data.rows) {
+                recomNum = undefined;
+                console.log("recomnum =", recomNum);
+            } else {
+                recomNum = data.rows[0].recomNum;
+                console.log("recomnum =", recomNum);
+            }
+        }, (error) => {
+            recomNum = undefined;
+        });
+
+    //新增tag 
+    for (var i = 0; i < tag.length; i++) {
+        console.log("tag[i]=",tag[i]);
+        await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+            .then((data) => {
+                console.log("data=",data);
+                if (!data.rows) {
+                    tagNum = undefined;
+                } else {
+                    tagNum = data.rows[0].tagNum;
+                }
+            }, (error) => {
+                tagNum = undefined;
+            });
+            console.log(tagNum);
+        //新增tagLink
+        await sql('INSERT into "tagLinkArticle" ("recomNum","tagNum") VALUES ($1,$2)', [recomNum, tagNum])
+            .then((data) => {
+                result = 0;
+            }, (error) => {
+                result = 1;
+            });
+    }
+
+
+    //新增img
+    for (var i = 0; i < imgData.length; i++) {
+        await sql('INSERT into "image" ("memID", "recomNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, recomNum, imgData[i], recomDateTime])
+            .then((data) => {
+                result = 0;
+            }, (error) => {
+                result = 1;
+            });
+    }
+
+    console.log("結果:",result);
+    return result;
+}
+
+//================================
+//-------- replyPost() ---------
+//================================
+var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData) {
+
+    var artiMessNum ;
+    var result;
+    console.log(memID)
+    console.log(typeof(memID))
+
+    //新增留言
+    await sql('INSERT into "articleMessage" ("artiNum","memID","artiMessDateTime","artiMessCont") VALUES ($1,$2,$3,$4);'
+             ,[artiNum, memID, postDateTime, replyCont])
+        .then((data) => {
+            if(!data.rows){
+                artiMessNum = undefined ;
+                console.log("artiMessNum =" ,artiMessNum);
+            }else{
+                console.log(data)
+                artiMessNum = data.rows[0].artiMessNum ;
+                console.log("artiMessNum =" ,artiMessNum);
+            }
+        }, (error) => {
+            console.error(error)
+            artiMessNum = undefined ;
+        });
+    if (imgData) {
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], postDateTime])
+                .then((data) => {
+                    result = 0;
+                }, (error) => {
+                    result = 1;
+            });
+        }
+    }
+    return result;
+}
+
 //================================
 //--------- myArticle() ----------
 //================================
@@ -446,7 +549,7 @@ var report = async function (memID, artiNum, artiMessNum, recomMessNum, reportRe
 
 //匯出
 module.exports = {
-    articlePost, myArticle, modifyMember, getOriginalMail,
+    articlePost, recommendPost, replyPost, myArticle, modifyMember, getOriginalMail,
     getMyArticleClassList,
     addArticleLike, delArticleLike,
     addArticleMessLike, delArticleMessLike,

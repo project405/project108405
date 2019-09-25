@@ -41,6 +41,8 @@ var postRouter = require('./routes/post');
 var addLikeRouter = require('./routes/member/addLike');
 var delLikeRouter = require('./routes/member/delLike');
 var reportRouter = require('./routes/member/report');
+var replyPostRouter = require('./routes/member/replyPost');
+
 // ---------------  four Class -------------------
 var myMovieArticleRouter = require('./routes/member/myMovieArticle');
 var myMusicArticleRouter = require('./routes/member/myMusicArticle');
@@ -70,6 +72,8 @@ var colleArtiExhibitionRouter = require('./routes/collection/colleArtiExhibition
 //=========================================
 var recommendListRouter = require('./routes/recommend/recommendList');
 var oneRecommendRouter = require('./routes/recommend/oneRecoomend');
+var recommendPostPageRouter = require('./routes/recommend/recomPostPage');
+var recommendPostRouter = require('./routes/recommend/post');
 // ---------------  four recommend Class -------------------
 var RecomMovieRouter = require('./routes/recommend/recomMovie');
 var RecomMusicRouter = require('./routes/recommend/recomMusic');
@@ -77,6 +81,7 @@ var RecomBookRouter = require('./routes/recommend/recomBook');
 var RecomExhibitionRouter = require('./routes/recommend/recomExhibition');
 
 var CheckStatus = require('./routes/checkStatus');
+var searchRouter = require('./routes/search');
 
 var app = express();
 
@@ -151,6 +156,7 @@ app.use('/article', articleRouter);
 app.use('/articleList', articleListRouter);
 app.use('/articleList/post', postRouter);
 app.use('/article/post', articlePostRouter);
+app.use('/article/reply', replyPostRouter);
 app.use('/addCollection', addCollectionRouter);
 app.use('/delCollection', delCollectionRouter);
 app.use('/likeCount', likeCountRouter);
@@ -176,6 +182,7 @@ app.use('/notify', notifyRouter);
 app.use('/addLike', addLikeRouter);
 app.use('/delLike', delLikeRouter);
 app.use('/report', reportRouter);
+
 // -------------- four Class use----------------
 app.use('/articleManage/movie', myMovieArticleRouter);
 app.use('/articleManage/music', myMusicArticleRouter);
@@ -204,12 +211,16 @@ app.use('/collection/article/exhibition', colleArtiExhibitionRouter);
 // =========================================
 app.use('/recommendList', recommendListRouter);
 app.use('/oneRecommend', oneRecommendRouter);
+app.use('/recommend/post/page', recommendPostPageRouter);
+app.use('/recommend/post',recommendPostRouter);
 // -------------- four Class ----------------
 app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);
 app.use('/recommendList/book', RecomBookRouter);
 app.use('/recommendList/exhibition', RecomExhibitionRouter);
-app.use('/checkStatus',CheckStatus);
+app.use('/checkStatus', CheckStatus);
+
+app.use('/search',searchRouter);
 
 
 

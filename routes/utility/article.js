@@ -182,12 +182,13 @@ var getOneArticle = async function (artiNum, memID) {
                     ' ON "Mess"."artiMessNum" = "MessLike"."artiMessNum" '+
             ' WHERE "Mess"."artiNum" = $1 AND "MessLike"."memID" = $2 ', [artiNum, memID])
         .then((data) => {
-            console.log("留言是否被按過愛心", data.rows);
+            // console.log("留言是否被按過愛心", data.rows);
             if (!data.rows) {
                 isMessLike = undefined ; 
             } else {
                 isMessLike = data.rows ; 
             }
+            console.log("isMessLike = ", data.rows);
         }, (error) => {
             isMessLike = undefined ; 
         });

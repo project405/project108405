@@ -113,4 +113,134 @@ var getIndexData = async function (memID) {
     
     return result;
 }
-module.exports = { getIndexData };
+
+
+//=========================================
+//---------  getWebSearch() -----------
+//=========================================
+var getWebSearch = async function (searchParams, memID) {
+    var articleList = [];
+    var tag ;
+    var isCollection  ;
+    var isLike ;
+    var artiImgs ;
+
+    var recommendList = [];
+    var recomImgs ; 
+
+    var result = [];
+
+    //======================================
+    //------------- 搜尋文章 ---------------
+    //======================================
+
+    // -----------  取得文章清單 -------------
+    await sql('SELECT * '+
+              ' FROM "articleListDataView" '+
+              ' WHERE "artiHead" LIKE $1 or "artiCont" LIKE $1  or "artiClass" LIKE $1 ',['%' + searchParams + '%'])
+        .then((data) => {
+            articleList = data.rows;
+        }, (error) => {
+            articleList = undefined;
+        });
+
+    // ----------- 取得tag -----------
+    await sql('SELECT * '+
+              ' FROM "articleTagView" '+
+              ' WHERE "artiNum" '+
+                ' IN(SELECT "artiNum" '+
+                    ' FROM "articleListDataView" '+
+                    ' WHERE "artiHead" LIKE $1 or "artiCont" LIKE $1 or "artiClass" LIKE $1) ' 
+            ,['%' + searchParams + '%'])
+        .then((data) => {
+           tag = data.rows;
+        }, (error) => {
+            tag = undefined;
+        });
+
+    // ----------- 判斷是否被使用者按愛心 -----------
+    await sql('SELECT "memID","artiNum" FROM "articleLike" WHERE "memID" = $1 ',[memID])
+    .then((data) => {
+        if (data.rows == null || data.rows == '') {
+            isLike = undefined;
+        } else {
+            isLike = data.rows;
+        }
+    }, (error) => {
+        isLike = undefined;
+    });
+
+    // ----------- 判斷是否被使用者收藏 -----------
+    await sql('SELECT "memID" , "artiNum" FROM "memberCollection" WHERE "memID" = $1', [memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isCollection = undefined; 
+            } else {
+                isCollection = data.rows ;
+            }
+        }, (error) => {
+            isCollection = undefined ; 
+        });
+
+    //取得第一張照片
+    await sql('SELECT "artiNum" , "imgName" FROM "image"')
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                artiImgs = undefined;
+            } else {
+                artiImgs = data.rows;
+            }
+        }, (error) => {
+            artiImgs = undefined;
+        });
+
+    //======================================
+    //------------- 搜尋推薦 ---------------
+    //======================================
+
+    // -----------  取得推薦清單 --------------
+    await sql('SELECT * '+
+             ' FROM "recommendListDataView" '+
+             ' WHERE "recomHead" LIKE $1 or "recomCont" LIKE $1 or "recomClass" LIKE $1 '
+             ,['%' + searchParams + '%'])
+        .then((data) => {
+            if (data.rows != undefined) {
+                recommendList = data.rows
+            } else {
+                recommendList = undefined
+            }
+        }, (error) => {
+            recommendList = undefined;
+        });
+
+    //----------- 取得照片 ----------- 
+    await sql('SELECT "recomNum" , "imgName" FROM "image"')
+    .then((data) => {
+        if (!data.rows) {
+            recomImgs = undefined;
+        } else {
+            recomImgs = data.rows;
+        }
+    }, (error) => {
+        recomImgs = undefined;
+    });
+
+    result[0] = articleList;  //存入文章清單
+    result[1] = tag;
+    result[2] = isLike ; 
+    result[3] = artiImgs ;
+    result[4] = isCollection;
+    result[5] = [memID];
+
+    result[6] = recommendList ; 
+    result[7] = recomImgs ; 
+    // console.log(result);
+
+    return result;
+    
+
+
+
+}
+
+module.exports = { getIndexData, getWebSearch };
