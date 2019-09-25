@@ -111,8 +111,8 @@ $(document).ready(() => {
                     <div class="collapse navbar-collapse" id="navbarNav">\
                         <ul class="navbar-nav ml-auto">\
                             <div class="searchSection">\
-                                <input type="text" class="navSearch" />\
-                                <button class="btn navSearch"><i class="fas fa-search"></i></button>\
+                                <input type="text" class="navSearch" id="input_search" />\
+                                <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/recommend/post/page">\
@@ -215,8 +215,8 @@ $(document).ready(() => {
                 <div class="collapse navbar-collapse" id="navbarNav">\
                     <ul class="navbar-nav ml-auto">\
                         <div class="searchSection">\
-                            <input type="text" class="navSearch" />\
-                            <button class="btn navSearch"><i class="fas fa-search"></i></button>\
+                            <input type="text" class="navSearch" id="input_search" />\
+                            <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                         </div>\
                         <li class="nav-item">\
                             <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
