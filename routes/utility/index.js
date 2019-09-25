@@ -15,7 +15,6 @@ var getIndexData = async function (memID) {
     var music = true;
     var exhibition = true;
     var hotArticle = [];  //存放前三名熱門文章
-    var checkAuthority;
     var imgs = [];
     var tag = [] ;
     var result = [];
@@ -79,18 +78,6 @@ var getIndexData = async function (memID) {
         }, (error) => {
             tag = undefined;
         });
-
-
-    //取得權限
-    // await member.checkAuthority(memID).then(data => {
-    //     if (data != undefined) {
-    //         checkAuthority = data;
-    //         console.log("Authority=", checkAuthority);
-    //     } else {
-    //         checkAuthority = undefined;
-    //         console.log("Authority=", checkAuthority);
-    //     }
-    // })
 
     //----------- 取得照片 ----------- 
     await sql('SELECT "recomNum" , "imgName" FROM "image"')
@@ -225,21 +212,19 @@ var getWebSearch = async function (searchParams, memID) {
         recomImgs = undefined;
     });
 
-    result[0] = articleList;  //存入文章清單
+    //文章
+    result[0] = articleList;
     result[1] = tag;
     result[2] = isLike ; 
     result[3] = artiImgs ;
     result[4] = isCollection;
     result[5] = [memID];
 
+    //推薦
     result[6] = recommendList ; 
     result[7] = recomImgs ; 
-    // console.log(result);
 
     return result;
-    
-
-
 
 }
 

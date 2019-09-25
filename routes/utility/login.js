@@ -3,9 +3,9 @@
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
 
-//---------------------------------------------
-// 使用者登入
-//---------------------------------------------
+//===================================
+// --------- 使用者登入 --------------
+//===================================
 var userLogin = async function(id, password){   
     var result;
 
@@ -15,10 +15,10 @@ var userLogin = async function(id, password){
             if(data.rows.length > 0){
                 result = data.rows[0];
             }else{
-                result = null;
+                result = undefined;
             } 
         }, (error) => {
-            result = null;
+            result = undefined;
         });
     
     //回傳物件

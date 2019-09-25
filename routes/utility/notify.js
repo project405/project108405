@@ -2,7 +2,6 @@
 
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
-const member = require('./member');
 var moment = require('moment');
 
 //---------  getNotifyList() -------------
@@ -19,19 +18,7 @@ var getNotifyList = async function (memID) {
             result = null;
         });
 
-    //取得權限
-    await member.checkAuthority(memID).then(data => {
-        if (data != undefined) {
-            checkAuthority = data;
-            console.log("Authority=", checkAuthority);
-        } else {
-            checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
-        }
-    })
     result.push([memID]);
-    result.push(checkAuthority);
-    console.log(result);
 
     return result;
 }

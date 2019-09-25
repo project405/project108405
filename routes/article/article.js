@@ -14,7 +14,7 @@ router.get('/:artiNum', async function (req, res, next) {
 	} else if (req.session.memID == undefined && req.session.passport != undefined) {
 		memID = req.session.passport.user.id;
     }
-    console.log("測試",memID);
+
     article.getOneArticle(artiNum, memID).then(data => {
         // 將字串替換成圖片
         for (var i = 0; i < data[0].length; i++) {
