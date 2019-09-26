@@ -48,6 +48,9 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
     var artiHead = req.body.artiHead;
     var artiCont = req.body.artiCont;
     var artiClass = req.body.artiClass;
+    var analyzeScore = req.body.analyzeScore;
+    var positiveWords = req.body.positiveWords;
+    var negativeWords = req.body.negativeWords;
     console.log(req.body);
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
     var tagData = [];
@@ -115,7 +118,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
                         fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
                     }
                 }
-                member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData).then(data => {
+                member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords).then(data => {
                     if (data == 0) {
                         console.log("發文成功");
                         res.send("發文成功");

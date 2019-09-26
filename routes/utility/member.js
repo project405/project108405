@@ -116,6 +116,7 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
              ,[artiNum, memID, postDateTime, replyCont])
         .then((data) => {
             console.log('find this~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',data)
+            console.log('find~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~',data.rows)
             // if(!data.rows){
             //     artiMessNum = undefined ;
             //     console.log("artiMessNum =" ,artiMessNum);
@@ -132,10 +133,14 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
     await sql('SELECT "artiMessNum" from "articleMessage" where "memID"= $1 and "artiMessDateTime" = $2 and "artiMessCont" = $3', [memID, postDateTime, replyCont])
     .then((data) => {
         console.log("data.rows=", data.rows);
-        artiMessNum =  data.rows;
+        artiMessNum =  data.rows.artiMessNum;
+        console.log(artiMessNum)
+        console.log(typeof(artiMessNum))
         // console.log("artiNum=", artiNum);
     }, (error) => {
         result = 1;
+        console.error(error)
+
     });
 
     for (var i = 0; i < imgData.length; i++) {
@@ -145,6 +150,7 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
                 result = 0;
             }, (error) => {
                 result = 1;
+                console.error(error)
         });
     }
     return result;
