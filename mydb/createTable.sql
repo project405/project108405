@@ -44,6 +44,9 @@ CREATE TABLE "public"."article" (
 	"artiHead" varchar(100),
 	"artiCont" text ,
 	"artiClass" varchar(20) COLLATE "pg_catalog"."default" ,
+	"analyzeScore" float4,
+	"positiveWords" int4,
+	"negativeWords" int4,
 	FOREIGN KEY("memID") REFERENCES member("memID")ON DELETE RESTRICT  ON UPDATE RESTRICT 
 );
 
@@ -78,7 +81,9 @@ CREATE TABLE "public"."articleMessage" (
   "memID" varchar(100) COLLATE "pg_catalog"."default" ,
 	"artiMessDateTime" TIMESTAMP ,
 	"artiMessCont" text ,
-	
+	"analyzeScore" float4,
+	"positiveWords" int4,
+	"negativeWords" int4,
 	FOREIGN KEY("memID") REFERENCES "member"("memID")ON DELETE RESTRICT  ON UPDATE RESTRICT ,
 	FOREIGN KEY("artiNum") REFERENCES "article"("artiNum")ON DELETE CASCADE  ON UPDATE RESTRICT 
 );
@@ -111,7 +116,10 @@ CREATE TABLE "public"."recommend" (
 	"recomHead" varchar(100) COLLATE "pg_catalog"."default" ,
 	"recomCont" text , 
 	"recomClass" varchar(10),
-	"subNum" int4
+	"subNum" int4,
+	"analyzeScore" float4,
+	"positiveWords" int4,
+	"negativeWords" int4
 );
 	ALTER TABLE "public"."recommend" ADD CONSTRAINT "recommend_pkey" PRIMARY KEY ("recomNum");
 
@@ -142,7 +150,9 @@ CREATE TABLE "public"."recommendMessage" (
 	"memID" varchar(100) COLLATE "pg_catalog"."default" , 
 	"recomMessDateTime" TIMESTAMP ,
 	"recomMessCont" text ,
-	
+	"analyzeScore" float4,
+	"positiveWords" int4,
+	"negativeWords" int4,
 	FOREIGN KEY("memID") REFERENCES "member"("memID")ON DELETE RESTRICT  ON UPDATE RESTRICT ,
 	FOREIGN KEY("recomNum") REFERENCES "recommend"("recomNum")ON DELETE CASCADE  ON UPDATE RESTRICT 
 	
