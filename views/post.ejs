@@ -105,55 +105,55 @@
                         tag.push(element.innerText);
                     }, this);
                     formData.append('tag', tag);
-                    $.ajax({ 
-                    url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
-                    type: 'POST',
-                    dataType : 'TEXT',
-                    data: { 'artiCont': `${artiCont}` }, 
-                    success: function (res) {
-                        console.log('i get !',res)
-                        var analyzeRes = JSON.parse(res)
-                        var analyzeScore = analyzeRes.analyze[0]
-                        var positiveWords = analyzeRes.analyze[1]
-                        var negativeWords = analyzeRes.analyze[2]
-                        var wearWords = analyzeRes.analyze[3]
-                        formData.append('analyzeScore', analyzeScore);
-                        formData.append('positiveWords', positiveWords);
-                        formData.append('negativeWords', negativeWords);
-
-                        console.log(analyzeScore,positiveWords,negativeWords,wearWords)
-                        
-                        if (wearWords > 5) {
-                            return false;
-                        }
-                        $.ajax({
-                        url: '/article/post',
+                    $.ajax({
+                        url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                         type: 'POST',
                         dataType: 'TEXT',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
+                        data: { 'artiCont': `${artiCont}` },
                         success: function (res) {
-                            console.log("yes", res);
-                            if (res == "請進行登入") {
-                                alert(res);
-                                location.replace("/login");
-                            } else if (res == "發文成功") {
-                                alert(res);
-                                location.replace("/articleList");
-                            } else {
-                                alert(res);
+                            console.log('i get !', res)
+                            var analyzeRes = JSON.parse(res)
+                            var analyzeScore = analyzeRes.analyze[0]
+                            var positiveWords = analyzeRes.analyze[1]
+                            var negativeWords = analyzeRes.analyze[2]
+                            var wearWords = analyzeRes.analyze[3]
+                            formData.append('analyzeScore', analyzeScore);
+                            formData.append('positiveWords', positiveWords);
+                            formData.append('negativeWords', negativeWords);
+
+                            console.log(analyzeScore, positiveWords, negativeWords, wearWords)
+
+                            if (wearWords > 5) {
+                                return false;
                             }
+                            $.ajax({
+                                url: '/article/post',
+                                type: 'POST',
+                                dataType: 'TEXT',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (res) {
+                                    console.log("yes", res);
+                                    if (res == "請進行登入") {
+                                        alert(res);
+                                        location.replace("/login");
+                                    } else if (res == "發文成功") {
+                                        alert(res);
+                                        location.replace("/articleList");
+                                    } else {
+                                        alert(res);
+                                    }
+                                },
+                                error: function (res) {
+                                    // console.log("失敗", res);
+                                }
+                            });
                         },
                         error: function (res) {
-                            // console.log("失敗", res);
+                            console.error(res)
+                            console.log("8886", res);
                         }
-                    });
-                    },
-                    error: function (res) {
-                        console.error(res)
-                        console.log("8886", res);
-                    }
                     });
 
                 }

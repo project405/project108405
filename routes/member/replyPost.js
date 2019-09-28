@@ -49,8 +49,8 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
     var memID = req.session.memID;
     var replyCont = req.body.replyCont;
     var artiNum = req.body.artiNum
-    console.log('memID',memID)
-    console.log('artiNum',artiNum)
+    console.log('memID', memID)
+    console.log('artiNum', artiNum)
     console.log(req.body);
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
     var imgData = [];
