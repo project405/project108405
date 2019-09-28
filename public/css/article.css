@@ -59,10 +59,26 @@ h1 {
 
 div.content {
     padding: 1em 1em 1em 1em;
-    background-color: #eee;
+    /* background-color: #eee; */
+    background-color: #F7F7F6;
     opacity: 0.95;
     margin-bottom: 2em;
     border-radius: 12px;
+}
+
+div.preferLi {
+    text-align: center;
+    margin: 2em !important;
+}
+ul.liContainer {
+    display: inline-block;
+    margin: 0;
+}
+ul.liContainer> li {
+    cursor: pointer;
+}
+ul.liContainer> li:hover {
+    color: rgb(93, 93, 93);
 }
 
 button.like{
@@ -164,6 +180,9 @@ a.dateTime {
     padding-top: 0.13em;
 }
 
+.fa-gratipay:hover {
+    
+}
 
 /* tag */
 
@@ -244,7 +263,7 @@ div.replyInput:focus:before {
 
 [contentEditable=true]:empty:not(:focus):before {
     content: attr(data-text);
-    color: black;
+    color: rgb(114, 114, 114);
 }
 
 div.replyInput:focus {
