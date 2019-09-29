@@ -25,6 +25,7 @@ router.get('/:artiNum', async function (req, res, next) {
                 while (item.artiMessCont.match("\\:imgLocation")) {
                     console.log('data[9][sumDisplayImg].imgName', data[9][sumDisplayImg].imgName)
                     item.artiMessCont = item.artiMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/replyImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
+                    // data[0][i].artiCont = data[0][i].artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
                     sumDisplayImg = sumDisplayImg + 1
                     console.log('sumDisplayImg', sumDisplayImg)
                 }
