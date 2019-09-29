@@ -261,6 +261,7 @@ bot.on('message', function(event) {
         
         var dt = new Date(time);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
+        console.log('dt!!!!!!!!!!!!!!!!!!!!!!!!!!!!',dt)
         var date = dt.toISOString().slice(0, -5).replace(/[T]/g, ' ');
         return date;
     }
