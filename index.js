@@ -261,11 +261,9 @@ bot.on('message', function(event) {
         
         var dt = new Date(time);
         dt.setMinutes(dt.getMinutes() - dt.getTimezoneOffset());
-        console.log('dt!!!!!!!!!!!!!!!!!!!!!!!!!!!!',dt)
         var date = dt.toISOString().slice(0, -5).replace(/[T]/g, ' ');
         var formatData = date.split(' ')[0]
-        console.log(formatData)
-        return date;
+        return formatData;
     }
 
     //-----------本週推薦-----------
