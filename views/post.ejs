@@ -116,16 +116,14 @@
                             var analyzeScore = analyzeRes.analyze[0]
                             var positiveWords = analyzeRes.analyze[1]
                             var negativeWords = analyzeRes.analyze[2]
-                            var wearWords = analyzeRes.analyze[3]
+                            var swearWords = analyzeRes.analyze[3]
                             formData.append('analyzeScore', analyzeScore);
                             formData.append('positiveWords', positiveWords);
                             formData.append('negativeWords', negativeWords);
+                            formData.append('swearWords', swearWords);
 
-                            console.log(analyzeScore, positiveWords, negativeWords, wearWords)
+                            console.log(analyzeScore, positiveWords, negativeWords, swearWords)
 
-                            if (wearWords > 5) {
-                                return false;
-                            }
                             $.ajax({
                                 url: '/article/post',
                                 type: 'POST',

@@ -49,9 +49,13 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
     var memID = req.session.memID;
     var replyCont = req.body.replyCont;
     var artiNum = req.body.artiNum
+    var analyzeScore = req.body.analyzeScore;
+    var positiveWords = req.body.positiveWords;
+    var negativeWords = req.body.negativeWords;
+    var swearWords = req.body.swearWords;
     console.log('memID', memID)
     console.log('artiNum', artiNum)
-    console.log(req.body);
+    console.log('req.body', req.body);
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
     var imgData = [];
     // console.log(req.files);
@@ -105,7 +109,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
                     fs.unlinkSync('public/userImg/replyImg/' + imgData[i]); //刪除檔案
                 }
             }
-            member.replyPost(artiNum, memID, replyCont, postDateTime, imgData).then(data => {
+            member.replyPost(artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
                 if (data == 0) {
                     console.log("留言成功");
                     res.send("留言成功");
