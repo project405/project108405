@@ -147,9 +147,9 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
     var result;
     console.log(memID)
     console.log(typeof(memID))
-
     //新增留言
-    await sql('INSERT into "articleMessage" ("artiNum","memID","artiMessDateTime","artiMessCont") VALUES ($1,$2,$3,$4);'
+    await sql('INSERT into "articleMessage" ("artiNum","memID","artiMessDateTime","artiMessCont") '+
+              'VALUES ($1,$2,$3,$4) returning "articleMessage"."artiMessNum"'
              ,[artiNum, memID, postDateTime, replyCont])
         .then((data) => {
             if(!data.rows){
@@ -158,15 +158,15 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
             }else{
                 console.log(data)
                 artiMessNum = data.rows[0].artiMessNum ;
+                result = 0 ;
                 console.log("artiMessNum =" ,artiMessNum);
             }
         }, (error) => {
-            console.error(error)
             artiMessNum = undefined ;
         });
     if (imgData) {
         for (var i = 0; i < imgData.length; i++) {
-            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], postDateTime])
+            await sql('INSERT into "image" ("memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiMessNum, imgData[i], postDateTime])
                 .then((data) => {
                     result = 0;
                 }, (error) => {

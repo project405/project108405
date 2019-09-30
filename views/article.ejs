@@ -6,6 +6,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!--  js   -->
+    <script src="/javascripts/jquery.min.js"></script>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -131,7 +134,9 @@
                         document.getElementById("unLogIn").style.display = "none";
                     </script>
                     <% } %>
-                    <button type="button" class="btn report" id="postReport">檢舉</button>
+
+                    
+                    <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiReportPost">檢舉</button>
                 </div>
                 <!-- 收藏 ajax script  -->
                 <script>
@@ -413,12 +418,12 @@
                         </script>
                         <% } %>
                     </div>
-                    <hr class="smallMagin">ㄎㄩ    
+                    <hr class="smallMagin">   
                     <!-- info結束 -->
                     <p class="content"> <%= items[1][i].artiMessCont %>
                     </p>
                 </div>
-                <button type="button" class="btn report">檢舉</button>
+                <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiMessReportPost" onclick=<%= "ftn_messReport(" + items[1][i].artiMessNum + ")" %>>檢舉</button>
             </div>
             <% } %>
         </div>
@@ -445,6 +450,89 @@
         <a href="#" id="gotop">
             <i class="fa fa-angle-up"></i>
         </a>
+
+        <!-- 文章檢舉區塊 -->
+        <div class="modal fade" id="artiReportPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">檢舉</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                    </div>
+                    <form>
+                        <div class="modal-body" style="padding:1em;">
+                            <textarea class="report" name="reportReason" id="reportReason" placeholder="輸入檢舉原因"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="artiReport" class="btn btn-danger">提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文章留言檢舉區塊 -->
+        <div class="modal fade" id="artiMessReportPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">檢舉</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                        </div>
+                        <form>
+                            <div class="modal-body" style="padding:1em;">
+                                <textarea class="report" name="reportReason" id="messReportReason" placeholder="輸入檢舉原因"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="messReport"  class="btn btn-danger">提交</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        
+       <script>
+            //文章檢舉ajax
+            $("#artiReport").click(function() {
+              $.ajax({
+                 url: "/report",
+                 type: 'POST',
+                 dataType: 'TEXT',
+                 data: { "artiNum" : "<%= items[0][0].artiNum %>" , "reportReason" : $("#reportReason").val()},
+                 success: function (res) {
+                     alert(res);
+                     location.reload();
+                 },
+                 error: function (res) {
+                     console.log("失敗", res);
+                 }
+              }); 
+            })
+
+            //文章留言檢舉ajax
+            function ftn_messReport(a){
+                console.log(a);
+                $.ajax({
+                    url: "/report",
+                    type: 'POST',
+                    dataType: 'TEXT',
+                    data: { "artiMessNum" : a , "reportReason" : $("#messReportReason").val()},
+                    success: function (res) {
+                        alert(res);
+                        // location.reload();
+                    },
+                    error: function (res) {
+                        console.log("失敗", res);
+                    }
+                }); 
+
+            }
+         
+        </script>
     </div>
 
     <!-- Optional JavaScript -->
@@ -511,7 +599,7 @@
                         location.replace("/login");
                     } else if (res == "留言成功") {
                         alert(res);
-                        // location.replace("/article");
+                        location.reload();
                     } else {
                         alert(res);
                     }
