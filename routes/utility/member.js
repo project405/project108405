@@ -95,43 +95,22 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
     
     var artiMessNum;
     var result;
-    console.log(memID)
-    console.log(typeof (memID))
-    console.log('imgData~~~~~~~~~~~~~~~~~~', imgData)
-    console.log()
+
     //新增留言
     await sql('INSERT into "articleMessage" ("artiNum","memID","artiMessDateTime","artiMessCont", "analyzeScore", "positiveWords", "negativeWords", "swearWords") '+
     'VALUES ($1,$2,$3,$4,$5,$6,$7,$8) returning "articleMessage"."artiMessNum" ;'
         , [artiNum, memID, postDateTime, replyCont, analyzeScore, positiveWords, negativeWords, swearWords])
         .then((data) => {
-            console.log('find this~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', data)
-            console.log('find~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', data.rows)
             if(!data.rows){
                 artiMessNum = undefined ;
             }else{
-                console.log(data)
                 artiMessNum = data.rows[0].artiMessNum;
             }
         }, (error) => {
             console.error(error)
             artiMessNum = undefined;
         });
-    // //查詢新增留言的留言編號
-    // await sql('SELECT "artiMessNum" from "articleMessage" where "memID"= $1 and "artiMessDateTime" = $2 and "artiMessCont" = $3', [memID, postDateTime, replyCont])
-    //     .then((data) => {
-    //         console.log("data.rows=", data.rows);
-    //         artiMessNum = data.rows[0].artiMessNum;
-    //         console.log('artiMessNum', data.rows[0].artiMessNum)
-    //         console.log(typeof (data.rows[0].artiMessNum))
-    //         // console.log("artiNum=", artiNum);
-    //     }, (error) => {
-    //         result = 1;
-    //         console.error(error)
-
-    //     });
-
     for (var i = 0; i < imgData.length; i++) {
-        console.log('i', imgData.length)
         await sql('INSERT into "image" ("artiNum", "memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [artiNum, memID, artiMessNum, imgData[i], postDateTime])
             .then((data) => {
                 result = 0;

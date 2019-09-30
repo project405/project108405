@@ -498,7 +498,6 @@
                 dataType: 'TEXT',
                 data: { 'artiCont': `${replyCont}` },
                 success: function (res) {
-                    console.log('i get !', res)
                     var analyzeRes = JSON.parse(res)
                     var analyzeScore = analyzeRes.analyze[0]
                     var positiveWords = analyzeRes.analyze[1]
@@ -508,7 +507,6 @@
                     formData.append('positiveWords', positiveWords);
                     formData.append('negativeWords', negativeWords);
                     formData.append('swearWords', swearWords);
-                    // console.log(analyzeScore, positiveWords, negativeWords, swearWords)
                     $.ajax({
                         url: '/article/reply',
                         type: 'POST',
@@ -523,6 +521,7 @@
                                 location.replace("/logIn");
                             } else if (res == "留言成功") {
                                 alert(res);
+                                location.reload();
                             } else {
                                 alert('哎呀，出現錯誤')
                             }
@@ -534,7 +533,6 @@
                 },
                 error: function (res) {
                     console.error(res)
-                    console.log("8886", res);
                 }
             });
         }
