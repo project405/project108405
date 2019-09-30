@@ -59,11 +59,47 @@ h1 {
 
 div.content {
     padding: 1em 1em 1em 1em;
-    background-color: #eee;
+    /* background-color: #eee; */
+    background-color: #F7F7F6;
     opacity: 0.95;
     margin-bottom: 2em;
     border-radius: 12px;
 }
+
+div.preferLi {
+    text-align: center;
+    margin: 2em !important;
+}
+ul.liContainer {
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+}
+ul.liContainer> li {
+    cursor: pointer;
+}
+
+ul.liContainer > li::before {
+  /* content: "\2022";  */
+  display: inline-block; 
+  /* font-size: 1em;  
+  width: 1em !important;
+
+  margin-left: -1em */
+
+  content: " "; 
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.25em;
+  background: #993a3a;
+}
+
+ul.liContainer > li:hover {
+    color: rgb(93, 93, 93);
+}
+
+
 
 button.like{
     outline: none !important;
@@ -164,6 +200,9 @@ a.dateTime {
     padding-top: 0.13em;
 }
 
+.fa-gratipay:hover {
+    
+}
 
 /* tag */
 
@@ -244,7 +283,7 @@ div.replyInput:focus:before {
 
 [contentEditable=true]:empty:not(:focus):before {
     content: attr(data-text);
-    color: black;
+    color: rgb(114, 114, 114);
 }
 
 div.replyInput:focus {
