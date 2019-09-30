@@ -21,7 +21,22 @@ $(document).ready(function() {
 
         }
     });
+        $('#positiveButton').click(() => {
+        if ($('#negativeSection').has('display')) {
+            $('#negativeSection').css('display', 'none')
+        }
+            $('#positiveSection').css('display', 'block')
+        }
+    )
+    $('#negativeButton').click(() => {
+        if ($('#positiveSection').has('display')) {
+            $('#positiveSection').css('display', 'none')
+        }
+            $('#negativeSection').css('display', 'block')
+        }
+    )
 });
+
 
 
 //  animation

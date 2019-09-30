@@ -5,6 +5,23 @@ $(document).ready(function () {
     // $('.navbar-collapse').click(function(event) {
     //     event.stopPropagation();
     // });
+    var c, currentScrollTop = 0,
+    navbar = $('#header');
+
+    $(window).scroll(function () {
+    var a = $(window).scrollTop();
+    var b = navbar.height();
+    currentScrollTop = a;
+    
+    if (c < currentScrollTop && a > b + b) {
+        navbar.addClass("scrollDown");
+    } else if (c > currentScrollTop && !(a <= b)) {
+        navbar.removeClass("scrollDown");
+    }
+    c = currentScrollTop;
+    });
+
+    
 
     $("#tagInput").focus(function () {
         $("div.tag").css("box-shadow", "0 5px 15px rgba(0, 0, 0, 0.3)");
