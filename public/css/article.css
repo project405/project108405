@@ -73,6 +73,7 @@ ul.liContainer {
     list-style: none;
     display: inline-block;
     margin: 0;
+    padding: 0;
 }
 /* ul.liContainer> li {
     cursor: pointer;
@@ -101,9 +102,6 @@ ul.liContainer > li::before {
   margin-right: 0.5em;
   background: #993a3a;
 }
-
-
-
 
 button.like{
     outline: none !important;
@@ -181,6 +179,9 @@ div.info {
     a.next::before {
         white-space: pre;
         content: '\A';
+    }
+    ul.liContainer {
+        text-align: center !important;
     }
 }
 
