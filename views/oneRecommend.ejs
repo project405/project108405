@@ -130,7 +130,6 @@
                         document.getElementById("unLogIn").style.display = "none";
                     </script>
                     <% } %>
-                    <button type="button" class="btn report" id="postReport">檢舉</button>
                 </div>
 
                 <!-- 收藏 ajax script  -->
@@ -407,14 +406,57 @@
                 </div>
                 <hr class="smallMagin">
                 <!-- info結束 -->
-                <!-- info結束 -->
+
                 <p class="content"> <%= items[1][i].recomMessCont %>
-                    <button type="button" class="btn report">檢舉</button>
+                    <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#recomMessReportPost" >檢舉</button>
+            </div>
+        </div>
+
+        <!-- 推薦留言檢舉區塊 -->
+        <div class="modal fade" id="recomMessReportPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">檢舉</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form>
+                        <div class="modal-body" style="padding:1em;">
+                            <textarea class="report" name="reportReason" id="messReportReason" placeholder="輸入檢舉原因"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="messReport"  class="btn btn-danger" onclick=<%= "ftn_messReport(" + items[1][i].recomMessNum + ")" %>>提交</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
         <% } %>
-    </div>
-    <!-- 文章留言結束 -->
+        </div>
+        <!-- 推薦留言結束 -->
+        
+        <script>
+        //推薦留言檢舉ajax
+        function ftn_messReport(a){
+            $.ajax({
+                url: "/report",
+                type: 'POST',
+                dataType: 'TEXT',
+                data: { "recomMessNum" : a , "reportReason" : $("#messReportReason").val()},
+                success: function (res) {
+                    alert(res);
+                },
+                error: function (res) {
+                    console.log("失敗", res);
+                }
+            }); 
+
+        }
+        </script>
+
+
 
     <!-- replying -->
     <div class="row replying justify-content-center" id="reply" spellcheck="false">

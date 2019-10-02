@@ -339,16 +339,14 @@
                 <h5 style="color: rgb(83, 83, 83);text-align: left !important;">你可能會喜歡的文章</h5>
                 <hr class="smallMagin">
                 <ul class="liContainer" style="text-align: left !important;">
-                    <li><a href="https://google.com">過聖誕早鳥優惠：9/3 中午12:00 - 9/23 早鳥85折優惠</a>
-                    </li>
-                    <li><a href="https://google.com">東京都物業管理機構住戶專屬88折優惠。</a>
-                    </li>
-                    <li><a href="https://google.com">輪椅席為提供輪椅之觀眾購買，請洽果陀劇場購買。</a>
-                    </li>
+                    <% for(var j = 0 ; j<items[8].length ; j++) { %>
+                        <li><a href="/article/<%= items[8][j].artiNum %>"><%= items[8][j].artiHead %></a>
+                        </li>
+                    <% } %>
                 </ul>
             </div>
         </div>
-
+        
         <center>
             <h1>文章留言</h1>
             <hr class="separate">
@@ -437,7 +435,29 @@
                     <p class="content"> <%= items[1][i].artiMessCont %>
                     </p>
                 </div>
-                <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiMessReportPost" onclick=<%= "ftn_messReport(" + items[1][i].artiMessNum + ")" %>>檢舉</button>
+                <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiMessReportPost" >檢舉</button>
+            </div>
+
+            <!-- 文章留言檢舉區塊 -->
+            <div class="modal fade" id="artiMessReportPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">檢舉</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form>
+                            <div class="modal-body" style="padding:1em;">
+                                <textarea class="report" name="reportReason" id="messReportReason" placeholder="輸入檢舉原因"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="messReport"  class="btn btn-danger" onclick=<%= "ftn_messReport(" + items[1][i].artiMessNum + ")" %>>提交</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <% } %>
         </div>
@@ -486,29 +506,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- 文章留言檢舉區塊 -->
-        <div class="modal fade" id="artiMessReportPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">檢舉</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                        </div>
-                        <form>
-                            <div class="modal-body" style="padding:1em;">
-                                <textarea class="report" name="reportReason" id="messReportReason" placeholder="輸入檢舉原因"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" id="messReport"  class="btn btn-danger">提交</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        
+  
        <script>
             //文章檢舉ajax
             $("#artiReport").click(function() {
@@ -519,7 +517,6 @@
                  data: { "artiNum" : "<%= items[0][0].artiNum %>" , "reportReason" : $("#reportReason").val()},
                  success: function (res) {
                      alert(res);
-                     location.reload();
                  },
                  error: function (res) {
                      console.log("失敗", res);
@@ -529,7 +526,6 @@
 
             //文章留言檢舉ajax
             function ftn_messReport(a){
-                console.log(a);
                 $.ajax({
                     url: "/report",
                     type: 'POST',
@@ -537,7 +533,6 @@
                     data: { "artiMessNum" : a , "reportReason" : $("#messReportReason").val()},
                     success: function (res) {
                         alert(res);
-                        // location.reload();
                     },
                     error: function (res) {
                         console.log("失敗", res);

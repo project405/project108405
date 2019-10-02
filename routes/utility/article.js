@@ -89,6 +89,7 @@ var getOneArticle = async function (artiNum, memID) {
     var isMessLike = []; //判斷留言愛心是否被按過
     var imgs = [];
     var result = [];
+    var guessArticle = undefined ; //取得猜測使用者可能喜歡的文章
 
     // -----------  取得單一文章 --------------
     await sql('SELECT * FROM "articleListDataView" WHERE "artiNum" = $1', [artiNum])
@@ -184,7 +185,45 @@ var getOneArticle = async function (artiNum, memID) {
         }, (error) => {
             imgs = undefined;
         });
+
+    // ----------- 根據該文章的tag去猜測使用者可能喜歡的文章 -----------
+    await sql('SELECT * '+
+                ' FROM "article" '+
+                ' WHERE "artiNum" '+
+                    ' IN(SELECT "A"."artiNum" '+
+                    ' FROM (SELECT "artiNum" ,count(*) '+
+                            ' FROM "tagLinkArticle" '+
+                            ' WHERE "tagNum" '+
+                                ' IN (SELECT "tagNum" '+
+                                    ' FROM "tagLinkArticle" '+
+                                    ' WHERE "artiNum" = $1) AND "artiNum" != $1 '+
+                            ' GROUP BY "artiNum" '+
+                            ' ORDER BY "count" DESC , "artiNum" DESC '+
+                            ' LIMIT 3) AS "A")', [artiNum])
+        .then((data) => {
+            if (data.rowCount <= 0) {
+                guessArticle = undefined ;
+            } else {
+                guessArticle = data.rows;
+            }   
+        });
         
+    // ----------- 如果tag沒任何關聯 則隨機取三篇文章 -----------
+    if(guessArticle == undefined){
+        await sql('SELECT * '+
+            ' FROM "article" '+
+            ' ORDER BY random() '+
+            ' LIMIT 3') 
+        .then((data) => {
+                if (!data.rows) {
+                    guessArticle = undefined ;
+                } else {
+                    
+                    guessArticle = data.rows;
+                }   
+        });
+    }
+
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
     result[2] = tag;
@@ -193,6 +232,7 @@ var getOneArticle = async function (artiNum, memID) {
     result[5] = isMessLike;
     result[6] = imgs;
     result[7] = [memID];
+    result[8] = guessArticle;
 
     return result;
 }
@@ -355,7 +395,7 @@ var getArtiMessLikeCount = async function (artiMessNum) {
 }
 
 //=========================================
-//---------  getRecomMessLikeCount() -------------
+//---------  getRecomMessLikeCount() ------
 //=========================================
 var getRecomMessLikeCount = async function (recomMessNum) {
     var recomMessNumCount = []; //存放推薦留言愛心總數
@@ -377,10 +417,37 @@ var getRecomMessLikeCount = async function (recomMessNum) {
 
     return result;
 }
+
+//====================================
+//---------  guessUserPrefer() ------
+//====================================
+var guessUserPrefer = async function (memID, artiNum) {
+    var getArtiNum ;
+    var result ; 
+    await sql('SELECT "artiNum" ,count(*) '+
+             ' FROM "tagLinkArticle" '+
+             ' WHERE "tagNum" '+
+                 ' IN (SELECT "tagNum" '+
+                        ' FROM "tagLinkArticle" '+
+                        ' WHERE "artiNum" = $1) AND "artiNum" != $1 '+
+             ' GROUP BY "artiNum" '+
+             ' ORDER BY "count" DESC , "artiNum" DESC '+
+             ' LIMIT 3', [artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                getArtiNum = undefined ;
+            } else {
+                getArtiNum = data.rows;
+            }
+    
+        })
+    console.log(getArtiNum);
+}
+
 //匯出
 module.exports = {
     getArticleList, getOneArticle,
     getArticleClassList,
     getArtiLikeCount, getRecomLikeCount,
-    getArtiMessLikeCount, getRecomMessLikeCount
+    getArtiMessLikeCount, getRecomMessLikeCount, guessUserPrefer
 };

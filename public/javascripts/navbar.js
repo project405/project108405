@@ -157,7 +157,7 @@ $(document).ready(() => {
                                 <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
                                     <a class="dropdown-item" href="/member/memberManage">會員資料</a>\
                                     <a class="dropdown-item" href="/member/articleManage">文章管理</a>\
-                                    <a class="dropdown-item" href="/logOut">登出</a>\
+                                    <a class="dropdown-item" href="/user/logout">登出</a>\
                                 </div>\
                             </li>\
                             <li class="nav-item">\
@@ -257,7 +257,7 @@ $(document).ready(() => {
                             <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
                                 <a class="dropdown-item" href="/member/memberManage">會員資料</a>\
                                 <a class="dropdown-item" href="/member/articleManage">文章管理</a>\
-                                <a class="dropdown-item" href="/logOut">登出</a>\
+                                <a class="dropdown-item" href="/user/logout">登出</a>\
                             </div>\
                         </li>\
                         <li class="nav-item">\

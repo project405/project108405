@@ -115,7 +115,7 @@ passport.use(
     new GoogleStrategy({
         clientID: '535503110825-vsqohis8p2itidvaqii3akbmha3kluie.apps.googleusercontent.com', 
         clientSecret: 'vx7elBl3NGlZcnNPFV3QNH7l',
-        callbackURL: "http://localhost:3000/auth/google/callback" 
+        callbackURL: "https://project108405.herokuapp.com/auth/google/callback" 
     },
     function(accessToken, refreshToken, profile, done) {
         if (profile) {
@@ -254,8 +254,10 @@ app.get('/auth/google/callback',
 
 app.get('/user/logout', function(req, res){    
     req.logout();        //將使用者資料從session移除
+    req.session.memID = "" ;
     res.redirect('/');   //導向登出頁面
 });    
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -97,14 +97,14 @@
                         <div class="info">
                             <!-- 愛心按鈕 -->
                             <button type="button" id=<%= "LikeUnLogIn" + items[0][i].artiNum %> class="btn postInfo"
-                                onclick="location.href='/login'"><i class="fab fa-gratipay"></i>
+                                style="display:none" onclick="location.href='/login'"><i class="fab fa-gratipay"></i>
                                 <a><%= items[0][i].likeCount %></a></button>
                             <button type="button" id=<%="addLike" + items[0][i].artiNum %> class="btn postInfo"
-                                onclick=<%= "addLike(" + items[0][i].artiNum + ")" %>>
+                                style="display:none" onclick=<%= "addLike(" + items[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + items[0][i].artiNum %>>
                                     <%= items[0][i].likeCount %> </a> </button>
                             <button type="button" id=<%= "delLike" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:#c93737" onclick=<%= "delLike(" + items[0][i].artiNum + ")" %>>
+                                style="color:#c93737; display:none" onclick=<%= "delLike(" + items[0][i].artiNum + ")" %>>
                                 <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + items[0][i].artiNum %>>
                                     <%= items[0][i].likeCount %></a></button>
                             <!-- 如果沒登入 -->
@@ -118,10 +118,10 @@
                             <% } else if(items[5][0] != undefined ) { %>
                                 <!-- 判斷是否有按過愛心 -->
                                 <% var isLike = false %>
-                                <% if(items[3] != undefined ) { %>
-                                    <%  for (var j = 0; j < items[3].length ; j++) { %>
+                                <% if(items[2] != undefined ) { %>
+                                    <%  for (var j = 0; j < items[2].length ; j++) { %>
                                         <!-- 如果有按過愛心 -->
-                                        <% if(items[0][i].artiNum == items[3][j].artiNum ) { %>
+                                        <% if(items[0][i].artiNum == items[2][j].artiNum ) { %>
                                             <script type="text/javascript">                                  
                                                 document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "inline";
                                                 document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "none";
@@ -199,6 +199,7 @@
                                 document.getElementById("unLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
                             </script>
                             <% } %>
+
                             <!-- 收藏 ajax script -->
                             <script>
                                 //新增收藏
