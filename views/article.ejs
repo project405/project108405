@@ -569,7 +569,6 @@
             //如果有檔案就要加入formData
             if (file.files.length) {
                 Object.keys(file.files).map((img, index) => {
-                    console.log(typeof(file.files[img]))
                     file.files[img].timeStamp = `${timeStamp}${index}`
                     imgs.push(file.files[img])
                     // 解析檔案
@@ -581,7 +580,6 @@
                             var title = escape(file.name);
                             var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
                             $('#replyInput').append('<div id="replyInput">' + img + '</div>');
-                            $('#postInput').append('<div id="postInput">' + img + '</div>');
                         };
                     })(file);
                     reader.readAsDataURL(item);
@@ -589,21 +587,17 @@
             }
         });
         function test(artiNum) {
-            $('.submitReply').click(() => {
-                var imgKey = []
-                Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
-                    imgKey.push(img.getAttribute('key'))
-                })
-                imgs.map((img) => {
-                    if (imgKey.indexOf(img.timeStamp) >= 0) {
-                        formData.append('userImg', img);
-                    }
-                })
-                var get = formData.getAll('userImg')
-                console.log(get)
-                Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
-                    $(img).before("\\:imgLocation")
-                })
+            var imgKey = []
+            Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
+                imgKey.push(img.getAttribute('key'))
+            })
+            imgs.map((img) => {
+                if (imgKey.indexOf(img.timeStamp) >= 0) {
+                    formData.append('userImg', img);
+                }
+            })
+            Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
+                $(img).before("\\:imgLocation")
             })
             formData.append('artiNum', artiNum);
             var replyCont = [];
