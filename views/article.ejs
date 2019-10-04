@@ -557,32 +557,55 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
         crossorigin="anonymous "></script>
     <script src="/javascripts/active.js "></script>
-    <script src="/javascripts/post.js"></script>
     <script src="/javascripts/navbar.js"></script>
 
     <script>
+        var imgs = [];
         var formData = new FormData(); //用formData來存取要傳送的所有資料
-        //上傳檔案按鈕有變動就執行
-        $("#file-selector").change(function () {
+        // 選取到檔案後開始動作
+        $('#file-selector').change(function(event) {
+            let timeStamp = new Date().getTime()
             var file = $("#file-selector")[0];  //取得檔案
             //如果有檔案就要加入formData
             if (file.files.length) {
-                for (var i = 0; i < file.files.length; i++) {
-                    $("#replyInput").html(document.getElementById("replyInput").innerHTML + "\\:imgLocation");
-                }
-                // if (document.getElementById("postInput").innerHTML.match("<img") == null) {
-                //     file.value = '';
-                // }
-
-                for (var i in file.files) {
-                    formData.append('userImg', file.files[i]);
-                }
+                Object.keys(file.files).map((img, index) => {
+                    console.log(typeof(file.files[img]))
+                    file.files[img].timeStamp = `${timeStamp}${index}`
+                    imgs.push(file.files[img])
+                    // 解析檔案
+                    var item = file.files[img]
+                    var reader = new FileReader();
+                    reader.onload = (function(item) {
+                        return function(event) {
+                            var src = event.target.result // 圖片的編碼 , 格式為base64
+                            var title = escape(file.name);
+                            var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
+                            $('#replyInput').append('<div id="replyInput">' + img + '</div>');
+                            $('#postInput').append('<div id="postInput">' + img + '</div>');
+                        };
+                    })(file);
+                    reader.readAsDataURL(item);
+                })
             }
         });
         function test(artiNum) {
-            console.log(artiNum)
+            $('.submitReply').click(() => {
+                var imgKey = []
+                Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
+                    imgKey.push(img.getAttribute('key'))
+                })
+                imgs.map((img) => {
+                    if (imgKey.indexOf(img.timeStamp) >= 0) {
+                        formData.append('userImg', img);
+                    }
+                })
+                var get = formData.getAll('userImg')
+                console.log(get)
+                Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
+                    $(img).before("\\:imgLocation")
+                })
+            })
             formData.append('artiNum', artiNum);
-            var img = [];
             var replyCont = [];
             var replyData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
             alert(replyData)
@@ -620,6 +643,8 @@
         }
 
     </script>
+    <script src="/javascripts/post.js"></script>
+
 </body>
 
 </html>
