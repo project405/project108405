@@ -89,17 +89,19 @@
                 });
                 function test() {
                     var imgKey = []
-                    Array.from($("#postInput").find("#postInput > img")).map((img) => {
-                        imgKey.push(img.getAttribute('key'))
-                    })
-                    imgs.map((img) => {
-                        if (imgKey.indexOf(img.timeStamp) >= 0) {
-                            formData.append('userImg', img);
-                        }
-                    })
-                    Array.from($("#postInput").find("#postInput > img")).forEach((img) => {
-                        $(img).before("\\:imgLocation")
-                    })
+                    if ($("#postInput").find("#postInput > img")) {
+                        Array.from($("#postInput").find("#postInput > img")).map((img) => {
+                            imgKey.push(img.getAttribute('key'))
+                        })
+                        imgs.map((img) => {
+                            if (imgKey.indexOf(img.timeStamp) >= 0) {
+                                formData.append('userImg', img);
+                            }
+                        })
+                        Array.from($("#postInput").find("#postInput > img")).forEach((img) => {
+                            $(img).before("\\:imgLocation")
+                        })
+                    }
                     var artiHead = document.getElementById("artiHead").innerHTML;
                     var artiCont = [];
                     var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
