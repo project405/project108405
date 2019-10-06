@@ -447,6 +447,7 @@
                 data: { "recomMessNum" : a , "reportReason" : $("#messReportReason").val()},
                 success: function (res) {
                     alert(res);
+                    location.reload();
                 },
                 error: function (res) {
                     console.log("失敗", res);
