@@ -57,6 +57,15 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
     //將所有換行符號替代成<br> 
     replyCont = replyCont.replace(/\n/g, "<br>");
 
+    //判斷是用google登入還是文藝復興帳號登入
+    if (req.session.memID == undefined && req.session.passport == undefined) {
+        memID = undefined;
+    } else if (req.session.memID != undefined && req.session.passport == undefined) {
+        memID = req.session.memID;
+    } else if (req.session.memID == undefined && req.session.passport != undefined) {
+        memID = req.session.passport.user.id;
+    }
+    
     for (var i in req.files) {
         imgData.push(req.files[i].filename);
         console.log("files= ", req.files[i]);
@@ -71,7 +80,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
     // console.log(imgData);
     // tag
     // console.log("typeof", typeof req.file);
-    if (memID == undefined || memID == null) {
+    if (memID == undefined) {
         if (req.body.userImg != 'undefined') {
             for (var i = 0; i < imgData.length; i++) {
                 fs.unlinkSync('public/userImg/replyImg' + imgData[i]); //刪除檔案
