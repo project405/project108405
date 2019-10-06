@@ -1,27 +1,28 @@
 <!doctype html>
 <html>
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!--  js   -->
-    <script src="/javascripts/jquery.min.js"></script>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <!--  js   -->
+        <script src="/javascripts/jquery.min.js"></script>
+        <script src="/javascripts/validate.js"></script>
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-    <link href="/css/header.css" rel="stylesheet" type="text/css" />
-    <link href="/css/logIn.css" rel="stylesheet" type="text/css" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        
+        <link href="/css/header.css" rel="stylesheet" type="text/css" />
+        <link href="/css/logIn.css" rel="stylesheet" type="text/css" />
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
+        
     <title>文藝富心</title>
 </head>
 
@@ -35,7 +36,7 @@
     </center>
     <section id="signUp">
         <div class="container-fluid row flex justify-content-center signUp no-gutters">
-            <form class="signUp col-lg-4" action="/signUp/add" method="post" onchange="checkValue()">
+            <form class="signUp col-lg-4" action="/signUp/add" id="signupform" method="post">
                 <div class="input-icon-wrap">
                     <span class="input-icon"><span class="fa fa-user"></span></span>
                     <input type="text" class="input-with-icon" id="ID" name="memID" placeholder="帳號" required
@@ -88,7 +89,7 @@
                     </div>
 
                 </div>
-                <button type="submit" id="submit" class="btn btn-danger" disabled>註冊</button>
+                <button type="button" class="btn btn-danger" onclick="checkValue()" return false;>註冊</button>
             </form>
 
         </div>
@@ -110,7 +111,6 @@
         crossorigin="anonymous"></script>
 
     <script src="/javascripts/active.js"></script>
-    <script src="/javascripts/validate.js"></script>
     <script src="/javascripts/navbar.js"></script>
 
 </body>

@@ -30,6 +30,10 @@ function validateCode() {
         return false;
 
     } else { //輸入正確時   
-        document.getElementById("login").submit();
+        if (checkStep == 5 ) {
+            document.getElementById("login").submit();
+        } else {
+            alert('您的資料不完整！')
+        }
     }
 }

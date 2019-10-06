@@ -44,7 +44,7 @@ var upload = multer({
 
 
 //post請求
-router.post('/', upload.array('userImg', 3), function (req, res, next) {
+router.post('/', upload.array('userImg', 10), function (req, res, next) {
     console.log(req.session.memID)
     var memID = req.session.memID;
     var replyCont = req.body.replyCont;

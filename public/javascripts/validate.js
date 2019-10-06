@@ -92,17 +92,20 @@ function birthdayValidateForm() {
 
 function checkValue() {
     var checkStep = 0;
+    idValidateForm();
+    closeIdValidateForm();
+    passcheck();
+    birthdayValidateForm();
+
     for (i = 0; i < check.length; i++) {
         if (check[i] == true) {
             checkStep = checkStep + 1;
         } else {
-            document.getElementById("submit").disabled = true;
+            alert('你的資料不完整')
             break;
         }
     };
-
     if (checkStep == 5) {
-        document.getElementById("submit").disabled = false;
-
+        document.getElementById("signupform").submit();
     }
 }
