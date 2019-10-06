@@ -367,97 +367,73 @@
                             <a class="dateTime">於<%= items[1][i].artiMessDateTime %>留言</a>
                         </div>
                         <!-- 愛心按鈕 -->
-                        <div class="col-sm-3 ml-auto"> </div>
-                        <button type="button"
-                            id=<%= "MessLikeUnLogIn" + items[0][0].artiNum + items[1][i].artiMessNum %> class="btn like"
-                            onclick="location.href='/login'"><i
-                                class="fab fa-gratipay"></i><a><%= items[1][i].likeCount %></a></button>
-
-                        <button type="button" id=<%= "MessAddLike"+ items[0][0].artiNum + items[1][i].artiMessNum %>
-                            class="btn like"
-                            onclick=<%= "MessAddLike(" + items[0][0].artiNum + "," + items[1][i].artiMessNum + ")" %>>
-                            <i class="fab fa-gratipay"></i>
-                            <a id=<%="MessAddLikeCount" + items[0][0].artiNum + items[1][i].artiMessNum %>>
-                                <%= items[1][i].likeCount %>
-                            </a>
-                        </button>
-
-                        <button type="button" id=<%= "MessDelLike" + items[0][0].artiNum + items[1][i].artiMessNum %>
-                            class="btn like" style="color:#c93737"
-                            onclick=<%= "MessDelLike(" + items[0][0].artiNum + "," + items[1][i].artiMessNum + ")" %>>
-                            <i class="fab fa-gratipay"></i>
-                            <a id=<%= "MessDelLikeCount" + items[0][0].artiNum + items[1][i].artiMessNum %>>
-                                <%= items[1][i].likeCount %>
-                            </a>
-                        </button>
-
-                        <!-- 如果沒登入 -->
-                        <% if(items[7][0] == undefined) {%>
-                        <script type="text/javascript">
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "inline";
-                            document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                            document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                        </script>
-                        <!-- 如果有登入 -->
-                        <% }else if(items[7][0] != undefined ) {%>
-                        <% var isLike = false %>
-                        <% if(items[5] != undefined){ %>
-                        <% for(var j = 0 ; j < items[5].length ; j++) { %>
-                        <!-- 如果有按愛心 -->
-                        <% if (items[5][j].artiMessNum == items[1][i].artiMessNum){ %>
-                        <script type="text/javascript">
-                            document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "inline";
-                            document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                        </script>
-                        <% isLike = true %>
-                        <% } %>
-                        <% } %>
-                        <% } %>
-                        <!-- 如果沒有按過愛心 -->
-                        <% if( isLike == false ){ %>
-                        <script type="text/javascript">
-                            document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%=  items[1][i].artiMessNum %>").style.display = "inline";
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                            document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                        </script>
-                        <% } %>
-                        <% }else {%>
-                        <script type="text/javascript">
-                            document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                            document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                            document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
-                        </script>
-                        <% } %>
+                        <div class="col-sm-1 ml-auto likeContainer">
+                            <button type="button" class="btn like"
+                                id=<%= "MessLikeUnLogIn" + items[0][0].artiNum + items[1][i].artiMessNum %>
+                                onclick="location.href='/login'"><i
+                                    class="fab fa-gratipay"></i><a><%= items[1][i].likeCount %></a></button>
+                        </div>
                     </div>
-                    <hr class="smallMagin">   
+                    <hr class="smallMagin">
+                    <button type="button" id=<%= "MessAddLike"+ items[0][0].artiNum + items[1][i].artiMessNum %>
+                        class="btn like"
+                        onclick=<%= "MessAddLike(" + items[0][0].artiNum + "," + items[1][i].artiMessNum + ")" %>>
+                        <i class="fab fa-gratipay"></i>
+                        <a id=<%="MessAddLikeCount" + items[0][0].artiNum + items[1][i].artiMessNum %>>
+                            <%= items[1][i].likeCount %>
+                        </a>
+                    </button>
+                    <button type="button" id=<%= "MessDelLike" + items[0][0].artiNum + items[1][i].artiMessNum %>
+                        class="btn like" style="color:#c93737"
+                        onclick=<%= "MessDelLike(" + items[0][0].artiNum + "," + items[1][i].artiMessNum + ")" %>>
+                        <i class="fab fa-gratipay"></i>
+                        <a id=<%= "MessDelLikeCount" + items[0][0].artiNum + items[1][i].artiMessNum %>>
+                            <%= items[1][i].likeCount %>
+                        </a>
+                    </button>
+                    <!-- 如果沒登入 -->
+                    <% if(items[7][0] == undefined) {%>
+                    <script type="text/javascript">
+                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "inline";
+                        document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                        document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                    </script>
+                    <!-- 如果有登入 -->
+                    <% }else if(items[7][0] != undefined ) {%>
+                    <% var isLike = false %>
+                    <% if(items[5] != undefined){ %>
+                    <% for(var j = 0 ; j < items[5].length ; j++) { %>
+                    <!-- 如果有按愛心 -->
+                    <% if (items[5][j].artiMessNum == items[1][i].artiMessNum){ %>
+                    <script type="text/javascript">
+                        document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "inline";
+                        document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                    </script>
+                    <% isLike = true %>
+                    <% } %>
+                    <% } %>
+                    <% } %>
+                    <!-- 如果沒有按過愛心 -->
+                    <% if( isLike == false ){ %>
+                    <script type="text/javascript">
+                        document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%=  items[1][i].artiMessNum %>").style.display = "inline";
+                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                        document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                    </script>
+                    <% } %>
+                    <% }else {%>
+                    <script type="text/javascript">
+                        document.getElementById("MessDelLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                        document.getElementById("MessAddLike" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                        document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].artiNum %>" + "<%= items[1][i].artiMessNum %>").style.display = "none";
+                    </script>
+                    <% } %>
                     <!-- info結束 -->
                     <p class="content"> <%- items[1][i].artiMessCont %>
                     </p>
                 </div>
-                <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiMessReportPost" >檢舉</button>
-            </div>
-
-            <!-- 文章留言檢舉區塊 -->
-            <div class="modal fade" id="artiMessReportPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">檢舉</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <form>
-                            <div class="modal-body" style="padding:1em;">
-                                <textarea class="report" name="reportReason" id="messReportReason" placeholder="輸入檢舉原因"></textarea>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" id="messReport"  class="btn btn-danger" onclick=<%= "ftn_messReport(" + items[1][i].artiMessNum + ")" %>>提交</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <button type="button" class="btn report">檢舉</button>
             </div>
             <% } %>
         </div>
