@@ -608,7 +608,6 @@
             replyData.forEach(function (element) {
                 replyCont.push(element.innerText);
             }, this);
-            console.log(replyCont);
             formData.append('replyCont', replyCont);
 
             $.ajax({
@@ -634,7 +633,6 @@
                         processData: false,
                         contentType: false,
                         success: function (res) {
-                            console.log("yes", res);
                             if (res == "請進行登入") {
                                 alert(res);
                                 location.replace("/logIn");
@@ -646,7 +644,7 @@
                             }
                         },
                         error: function (res) {
-                            console.log("失敗", res);
+                            console.log("哎呀，出現錯誤", res);
                         }
                     });
                 },

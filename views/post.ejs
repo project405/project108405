@@ -122,9 +122,6 @@
                     formData.append('artiHead', artiHead);
                     formData.append('artiCont', artiCont);
                     formData.append('artiClass', artiClass);
-                    // console.log(file.files[1]);
-                    // console.log(file.files[0]);
-
                     //取得tag 
                     tagInput.forEach(function (element) {
                         tag.push(element.innerText);
@@ -138,7 +135,6 @@
                         dataType: 'TEXT',
                         data: { 'artiCont': `${artiCont}` },
                         success: function (res) {
-                            console.log('i get !', res)
                             var analyzeRes = JSON.parse(res)
                             var analyzeScore = analyzeRes.analyze[0]
                             var positiveWords = analyzeRes.analyze[1]
@@ -148,7 +144,6 @@
                             formData.append('positiveWords', positiveWords);
                             formData.append('negativeWords', negativeWords);
                             formData.append('swearWords', swearWords);
-                            console.log(analyzeScore, positiveWords, negativeWords, swearWords)
                             $.ajax({
                                 url: '/article/post',
                                 type: 'POST',
@@ -157,7 +152,6 @@
                                 processData: false,
                                 contentType: false,
                                 success: function (res) {
-                                    console.log("yes", res);
                                     if (res == "請進行登入") {
                                         alert(res);
                                         location.replace("/login");
@@ -169,13 +163,12 @@
                                     }
                                 },
                                 error: function (res) {
-                                    // console.log("失敗", res);
                                 }
                             });
                         },
                         error: function (res) {
                             console.error(res)
-                            console.log("8886", res);
+                            console.log(res);
                         }
                     });
                 }
