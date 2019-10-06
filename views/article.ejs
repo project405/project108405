@@ -555,29 +555,50 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
         crossorigin="anonymous "></script>
     <script src="/javascripts/active.js "></script>
-    <script src="/javascripts/post.js"></script>
     <script src="/javascripts/navbar.js"></script>
     <script>var formData = new FormData(); //用formData來存取要傳送的所有資料
     </script>
-    <script>
-        //上傳檔案按鈕有變動就執行
-        $("#file-selector").change(function () {
+      <script>
+        var imgs = [];
+        var formData = new FormData(); //用formData來存取要傳送的所有資料
+        // 選取到檔案後開始動作
+        $('#file-selector').change(function(event) {
+            let timeStamp = new Date().getTime()
             var file = $("#file-selector")[0];  //取得檔案
-            console.log(file)
             //如果有檔案就要加入formData
             if (file.files.length) {
-                for (var i = 0; i < file.files.length; i++) {
-                    $("#replyInput").html(document.getElementById("replyInput").innerHTML + "\\:imgLocation");
-                }
-                for (var i in file.files) {
-                    formData.append('userImg', file.files[i]);
-                }
+                Object.keys(file.files).map((img, index) => {
+                    file.files[img].timeStamp = `${timeStamp}${index}`
+                    imgs.push(file.files[img])
+                    // 解析檔案
+                    var item = file.files[img]
+                    var reader = new FileReader();
+                    reader.onload = (function(item) {
+                        return function(event) {
+                            var src = event.target.result // 圖片的編碼 , 格式為base64
+                            var title = escape(file.name);
+                            var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
+                            $('#replyInput').append('<div id="replyInput">' + img + '</div>');
+                        };
+                    })(file);
+                    reader.readAsDataURL(item);
+                })
             }
         });
         function test(artiNum) {
-            console.log(artiNum)
+            var imgKey = []
+            Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
+                imgKey.push(img.getAttribute('key'))
+            })
+            imgs.map((img) => {
+                if (imgKey.indexOf(img.timeStamp) >= 0) {
+                    formData.append('userImg', img);
+                }
+            })
+            Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
+                $(img).before("\\:imgLocation")
+            })
             formData.append('artiNum', artiNum);
-            var img = [];
             var replyCont = [];
             var replyData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
             alert(replyData)
@@ -587,53 +608,33 @@
             }, this);
             console.log(replyCont);
             formData.append('replyCont', replyCont);
-
             $.ajax({
-                url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
+                url: '/article/reply',
                 type: 'POST',
                 dataType: 'TEXT',
-                data: { 'artiCont': `${replyCont}` },
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function (res) {
-                    var analyzeRes = JSON.parse(res)
-                    var analyzeScore = analyzeRes.analyze[0]
-                    var positiveWords = analyzeRes.analyze[1]
-                    var negativeWords = analyzeRes.analyze[2]
-                    var swearWords = analyzeRes.analyze[3]
-                    formData.append('analyzeScore', analyzeScore);
-                    formData.append('positiveWords', positiveWords);
-                    formData.append('negativeWords', negativeWords);
-                    formData.append('swearWords', swearWords);
-                    $.ajax({
-                        url: '/article/reply',
-                        type: 'POST',
-                        dataType: 'TEXT',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function (res) {
-                            console.log("yes", res);
-                            if (res == "請進行登入") {
-                                alert(res);
-                                location.replace("/logIn");
-                            } else if (res == "留言成功") {
-                                alert(res);
-                                location.reload();
-                            } else {
-                                alert('哎呀，出現錯誤')
-                            }
-                        },
-                        error: function (res) {
-                            console.log("失敗", res);
-                        }
-                    });
+                    console.log("yes", res);
+                    if (res == "請進行登入") {
+                        alert(res);
+                        location.replace("/login");
+                    } else if (res == "留言成功") {
+                        alert(res);
+                        location.reload();
+                    } else {
+                        alert(res);
+                    }
                 },
                 error: function (res) {
-                    console.error(res)
+                    console.log("失敗", res);
                 }
             });
         }
-
     </script>
+    <script src="/javascripts/post.js"></script>
+
 </body>
 
 </html>
