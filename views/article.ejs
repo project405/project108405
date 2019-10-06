@@ -587,21 +587,22 @@
         });
         function test(artiNum) {
             var imgKey = []
-            Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
-                imgKey.push(img.getAttribute('key'))
-            })
-            imgs.map((img) => {
-                if (imgKey.indexOf(img.timeStamp) >= 0) {
-                    formData.append('userImg', img);
-                }
-            })
-            Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
-                $(img).before("\\:imgLocation")
-            })
+            if ($("#replyInput").find("#replyInput > img")) {
+                Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
+                    imgKey.push(img.getAttribute('key'))
+                })
+                imgs.map((img) => {
+                    if (imgKey.indexOf(img.timeStamp) >= 0) {
+                        formData.append('userImg', img);
+                    }
+                })
+                Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
+                    $(img).before("\\:imgLocation")
+                })
+            }
             formData.append('artiNum', artiNum);
             var replyCont = [];
             var replyData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
-            alert(replyData)
             // 取得內容
             replyData.forEach(function (element) {
                 replyCont.push(element.innerText);
