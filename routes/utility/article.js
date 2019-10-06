@@ -26,33 +26,33 @@ var getArticleList = async function (memID) {
     // ----------- 取得tag -----------
     await sql('SELECT * FROM "articleTagView"')
         .then((data) => {
-           tag = data.rows;
+            tag = data.rows;
         }, (error) => {
             tag = undefined;
         });
 
     // ----------- 判斷是否被使用者按愛心 -----------
-    await sql('SELECT "memID","artiNum" FROM "articleLike" WHERE "memID" = $1 ',[memID])
-    .then((data) => {
-        if (data.rows == null || data.rows == '') {
+    await sql('SELECT "memID","artiNum" FROM "articleLike" WHERE "memID" = $1 ', [memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isLike = undefined;
+            } else {
+                isLike = data.rows;
+            }
+        }, (error) => {
             isLike = undefined;
-        } else {
-            isLike = data.rows;
-        }
-    }, (error) => {
-        isLike = undefined;
-    });
+        });
 
     // ----------- 判斷是否被使用者收藏 -----------
     await sql('SELECT "memID" , "artiNum" FROM "memberCollection" WHERE "memID" = $1', [memID])
         .then((data) => {
             if (data.rows == null || data.rows == '') {
-                isCollection = undefined; 
+                isCollection = undefined;
             } else {
-                isCollection = data.rows ;
+                isCollection = data.rows;
             }
         }, (error) => {
-            isCollection = undefined ; 
+            isCollection = undefined;
         });
 
     //取得照片
@@ -69,8 +69,8 @@ var getArticleList = async function (memID) {
 
     result[0] = articleList; 
     result[1] = tag;
-    result[2] = isLike ; 
-    result[3] = imgs ;
+    result[2] = isLike;
+    result[3] = imgs;
     result[4] = isCollection;
     result[5] = [memID];
 
@@ -88,6 +88,7 @@ var getOneArticle = async function (artiNum, memID) {
     var isLike = [];
     var isMessLike = []; //判斷留言愛心是否被按過
     var imgs = [];
+    var replyImgs = [];
     var result = [];
     var guessArticle = undefined ; //取得猜測使用者可能喜歡的文章
 
@@ -118,6 +119,7 @@ var getOneArticle = async function (artiNum, memID) {
                     ' ,"Mess"."artiMessCont"', [artiNum])
         .then((data) => {
             oneArtiMessage = data.rows;
+            console.log('oneArtiMessage', oneArtiMessage)
         }, (error) => {
             oneArtiMessage = null;
         });
@@ -126,18 +128,18 @@ var getOneArticle = async function (artiNum, memID) {
     await sql('SELECT "tagName" FROM "articleTagView" WHERE "artiNum" = $1', [artiNum])
         .then((data) => {
             if (!data.rows) {
-                tag = undefined ;
+                tag = undefined;
             } else {
-                tag = data.rows ;
+                tag = data.rows;
             }
         }, (error) => {
-            tag  = undefined ;
+            tag = undefined;
         });
 
     // ----------- 判斷是否被使用者收藏 -----------
     await sql('SELECT "memID" , "artiNum" FROM "memberCollection" WHERE "memID" = $1 AND "artiNum" = $2', [memID, artiNum])
-        .then((data) => {  
-            if (!data.rows) {   
+        .then((data) => {
+            if (!data.rows) {
                 isCollection = undefined;
             } else {
                 isCollection = data.rows;
@@ -166,12 +168,12 @@ var getOneArticle = async function (artiNum, memID) {
             ' WHERE "Mess"."artiNum" = $1 AND "MessLike"."memID" = $2 ', [artiNum, memID])
         .then((data) => {
             if (!data.rows) {
-                isMessLike = undefined ; 
+                isMessLike = undefined;
             } else {
-                isMessLike = data.rows ; 
+                isMessLike = data.rows;
             }
         }, (error) => {
-            isMessLike = undefined ; 
+            isMessLike = undefined;
         });
 
     // ----------- 取得照片 -----------
@@ -223,6 +225,18 @@ var getOneArticle = async function (artiNum, memID) {
                 }   
         });
     }
+    //取得照片
+    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiNum" = $1 and  "artiMessNum" IS NOT NULL', [artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                replyImgs = undefined;
+            } else {
+                replyImgs = data.rows;
+            }
+        }, (error) => {
+            replyImgs = undefined;
+            console.error(error)
+        });
 
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
@@ -233,6 +247,8 @@ var getOneArticle = async function (artiNum, memID) {
     result[6] = imgs;
     result[7] = [memID];
     result[8] = guessArticle;
+    result[9] = replyImgs;
+
 
     return result;
 }
@@ -241,10 +257,10 @@ var getOneArticle = async function (artiNum, memID) {
 //=========================================
 //---------  getArticleClassList() --------
 //=========================================
-var getArticleClassList = async function (articleClass , memID){
-    var articleList = [] ; 
-    var tag = [] ;
-    var isCollection = [] ;
+var getArticleClassList = async function (articleClass, memID) {
+    var articleList = [];
+    var tag = [];
+    var isCollection = [];
     var isLike = [];
     var imgs = [] ; 
     var result = [] ; 
@@ -281,16 +297,16 @@ var getArticleClassList = async function (articleClass , memID){
     await sql('SELECT "memID" , "artiNum" FROM "memberCollection" WHERE "memID" = $1', [memID])
         .then((data) => {
             if (data.rows == null || data.rows == '') {
-                isCollection = undefined; 
+                isCollection = undefined;
             } else {
-                isCollection = data.rows ;
+                isCollection = data.rows;
             }
         }, (error) => {
-            isCollection = undefined ; 
+            isCollection = undefined;
         });
 
     // ----------- 判斷是否被使用者按愛心 -----------
-    await sql('SELECT "memID","artiNum" FROM "articleLike" WHERE "memID" = $1 ',[memID])
+    await sql('SELECT "memID","artiNum" FROM "articleLike" WHERE "memID" = $1 ', [memID])
         .then((data) => {
             if (data.rows == null || data.rows == '') {
                 isLike = undefined;
@@ -299,19 +315,19 @@ var getArticleClassList = async function (articleClass , memID){
             }
         }, (error) => {
             isLike = undefined;
-        });  
+        });
 
     // ----------- 取得照片 ----------- 
     await sql('SELECT "artiNum" , "imgName" FROM "image"')
-    .then((data) => {
-        if (data.rows == null || data.rows == '') {
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                imgs = undefined;
+            } else {
+                imgs = data.rows;
+            }
+        }, (error) => {
             imgs = undefined;
-        } else {
-            imgs = data.rows;
-        }
-    }, (error) => {
-        imgs = undefined;
-    });      
+        });
 
     result[0] = articleList ;
     result[1] = tag ; 
@@ -418,36 +434,11 @@ var getRecomMessLikeCount = async function (recomMessNum) {
     return result;
 }
 
-//====================================
-//---------  guessUserPrefer() ------
-//====================================
-var guessUserPrefer = async function (memID, artiNum) {
-    var getArtiNum ;
-    var result ; 
-    await sql('SELECT "artiNum" ,count(*) '+
-             ' FROM "tagLinkArticle" '+
-             ' WHERE "tagNum" '+
-                 ' IN (SELECT "tagNum" '+
-                        ' FROM "tagLinkArticle" '+
-                        ' WHERE "artiNum" = $1) AND "artiNum" != $1 '+
-             ' GROUP BY "artiNum" '+
-             ' ORDER BY "count" DESC , "artiNum" DESC '+
-             ' LIMIT 3', [artiNum])
-        .then((data) => {
-            if (!data.rows) {
-                getArtiNum = undefined ;
-            } else {
-                getArtiNum = data.rows;
-            }
-    
-        })
-    console.log(getArtiNum);
-}
 
 //匯出
 module.exports = {
     getArticleList, getOneArticle,
     getArticleClassList,
     getArtiLikeCount, getRecomLikeCount,
-    getArtiMessLikeCount, getRecomMessLikeCount, guessUserPrefer
+    getArtiMessLikeCount, getRecomMessLikeCount
 };

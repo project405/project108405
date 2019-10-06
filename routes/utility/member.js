@@ -26,26 +26,26 @@ var checkAuthority = async function (memID) {
 //================================
 //-------- articlePost() ---------
 //================================
-var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, imgData, tag) {
+var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords) {
     var artiNum;
-    var tagNum;
+    var tagNum = [];
     var result;
 
-    // --------- 新增文章 ---------
-    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime") ' +
-        ' VALUES ($1,$2,$3,$4,$5)  returning "article"."artiNum" ;'
-        , [memID, artiHead, artiCont, artiClass, artiDateTime])
-        .then((data) => {
-            if (!data.rows) {
-                artiNum = undefined;
-            } else {
-                artiNum = data.rows[0].artiNum;
-            }
-        }, (error) => {
+    //新增文章
+    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime", "analyzeScore", "positiveWords", "negativeWords", "swearWords") ' +
+    ' VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)  returning "article"."artiNum" ;'
+    , [memID, artiHead, artiCont, artiClass, artiDateTime, analyzeScore, positiveWords, negativeWords, swearWords])
+    .then((data) => {
+        if (!data.rows) {
             artiNum = undefined;
-        });
+        } else {
+            artiNum = data.rows[0].artiNum;
+        }
+    }, (error) => {
+        artiNum = undefined;
+    });
 
-    // --------- 新增tag --------- 
+    //新增tag 
     for (var i = 0; i < tag.length; i++) {
         await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
             .then((data) => {
@@ -141,38 +141,33 @@ var recommendPost = async function (memID, recomHead, recomCont, recomClass, rec
 //================================
 //-------- replyPost() ---------
 //================================
-var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData) {
-
-    var artiMessNum ;
+var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords) {
+    
+    var artiMessNum;
     var result;
-    console.log(memID)
-    console.log(typeof(memID))
+
     //新增留言
-    await sql('INSERT into "articleMessage" ("artiNum","memID","artiMessDateTime","artiMessCont") '+
-              'VALUES ($1,$2,$3,$4) returning "articleMessage"."artiMessNum"'
-             ,[artiNum, memID, postDateTime, replyCont])
+    await sql('INSERT into "articleMessage" ("artiNum","memID","artiMessDateTime","artiMessCont", "analyzeScore", "positiveWords", "negativeWords", "swearWords") '+
+    'VALUES ($1,$2,$3,$4,$5,$6,$7,$8) returning "articleMessage"."artiMessNum" ;'
+        , [artiNum, memID, postDateTime, replyCont, analyzeScore, positiveWords, negativeWords, swearWords])
         .then((data) => {
             if(!data.rows){
                 artiMessNum = undefined ;
-                console.log("artiMessNum =" ,artiMessNum);
             }else{
-                console.log(data)
-                artiMessNum = data.rows[0].artiMessNum ;
-                result = 0 ;
-                console.log("artiMessNum =" ,artiMessNum);
+                artiMessNum = data.rows[0].artiMessNum;
             }
         }, (error) => {
-            artiMessNum = undefined ;
+            console.error(error)
+            artiMessNum = undefined;
         });
-    if (imgData) {
-        for (var i = 0; i < imgData.length; i++) {
-            await sql('INSERT into "image" ("memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiMessNum, imgData[i], postDateTime])
-                .then((data) => {
-                    result = 0;
-                }, (error) => {
-                    result = 1;
+    for (var i = 0; i < imgData.length; i++) {
+        await sql('INSERT into "image" ("artiNum", "memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [artiNum, memID, artiMessNum, imgData[i], postDateTime])
+            .then((data) => {
+                result = 0;
+            }, (error) => {
+                result = 1;
+                console.error(error)
             });
-        }
     }
     return result;
 }

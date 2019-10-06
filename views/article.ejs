@@ -432,7 +432,7 @@
                     </div>
                     <hr class="smallMagin">   
                     <!-- info結束 -->
-                    <p class="content"> <%= items[1][i].artiMessCont %>
+                    <p class="content"> <%- items[1][i].artiMessCont %>
                     </p>
                 </div>
                 <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiMessReportPost" >檢舉</button>
@@ -474,10 +474,8 @@
                 </label>
 
                 <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none"
-                    onclick=<%= "test(" + items[0][0].artiNum + ")" %>>提交回覆</button>
-
+                onclick=<%= "test(" + items[0][0].artiNum + ")" %>>提交回覆</button>
             </div>
-
         </div>
         <!-- replying end -->
 
@@ -559,21 +557,18 @@
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/post.js"></script>
     <script src="/javascripts/navbar.js"></script>
-
+    <script>var formData = new FormData(); //用formData來存取要傳送的所有資料
+    </script>
     <script>
-        var formData = new FormData(); //用formData來存取要傳送的所有資料
         //上傳檔案按鈕有變動就執行
         $("#file-selector").change(function () {
             var file = $("#file-selector")[0];  //取得檔案
+            console.log(file)
             //如果有檔案就要加入formData
             if (file.files.length) {
                 for (var i = 0; i < file.files.length; i++) {
                     $("#replyInput").html(document.getElementById("replyInput").innerHTML + "\\:imgLocation");
                 }
-                // if (document.getElementById("postInput").innerHTML.match("<img") == null) {
-                //     file.value = '';
-                // }
-
                 for (var i in file.files) {
                     formData.append('userImg', file.files[i]);
                 }
@@ -591,30 +586,49 @@
                 replyCont.push(element.innerText);
             }, this);
             console.log(replyCont);
-
             formData.append('replyCont', replyCont);
 
             $.ajax({
-                url: '/article/reply',
+                url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                 type: 'POST',
                 dataType: 'TEXT',
-                data: formData,
-                processData: false,
-                contentType: false,
+                data: { 'artiCont': `${replyCont}` },
                 success: function (res) {
-                    console.log("yes", res);
-                    if (res == "請進行登入") {
-                        alert(res);
-                        location.replace("/login");
-                    } else if (res == "留言成功") {
-                        alert(res);
-                        location.reload();
-                    } else {
-                        alert(res);
-                    }
+                    var analyzeRes = JSON.parse(res)
+                    var analyzeScore = analyzeRes.analyze[0]
+                    var positiveWords = analyzeRes.analyze[1]
+                    var negativeWords = analyzeRes.analyze[2]
+                    var swearWords = analyzeRes.analyze[3]
+                    formData.append('analyzeScore', analyzeScore);
+                    formData.append('positiveWords', positiveWords);
+                    formData.append('negativeWords', negativeWords);
+                    formData.append('swearWords', swearWords);
+                    $.ajax({
+                        url: '/article/reply',
+                        type: 'POST',
+                        dataType: 'TEXT',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            console.log("yes", res);
+                            if (res == "請進行登入") {
+                                alert(res);
+                                location.replace("/logIn");
+                            } else if (res == "留言成功") {
+                                alert(res);
+                                location.reload();
+                            } else {
+                                alert('哎呀，出現錯誤')
+                            }
+                        },
+                        error: function (res) {
+                            console.log("失敗", res);
+                        }
+                    });
                 },
                 error: function (res) {
-                    console.log("失敗", res);
+                    console.error(res)
                 }
             });
         }
