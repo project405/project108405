@@ -112,11 +112,12 @@ var getOneArticle = async function (artiNum, memID) {
               ' FROM "articleMessage" AS "Mess" '+
                     ' LEFT JOIN "articleMessageLike" AS "MessLike" '+
                         ' ON "Mess"."artiMessNum" = "MessLike"."artiMessNum" '+
-                ' WHERE "Mess"."artiNum" = $1 '+
-                ' GROUP BY "Mess"."artiMessNum" '+
+              ' WHERE "Mess"."artiNum" = $1 '+
+              ' GROUP BY "Mess"."artiMessNum" '+
                     ' ,"Mess"."memID" '+
                     ' ,"Mess"."artiMessDateTime" '+
-                    ' ,"Mess"."artiMessCont"', [artiNum])
+                    ' ,"Mess"."artiMessCont" '+
+             ' ORDER BY "artiMessDateTime" ', [artiNum])
         .then((data) => {
             oneArtiMessage = data.rows;
             console.log('oneArtiMessage', oneArtiMessage)

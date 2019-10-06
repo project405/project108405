@@ -60,6 +60,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
     // console.log(req.files);
     //將所有換行符號替代成<br> 
     artiCont = artiCont.replace(/\n/g, "<br>");
+    console.log(artiCont,"::::cont");
 
     //判斷是使用哪種方式登入
     if (req.session.memID == undefined && req.session.passport == undefined) {

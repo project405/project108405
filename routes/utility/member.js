@@ -29,7 +29,7 @@ var checkAuthority = async function (memID) {
 var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords) {
     var artiNum;
     var tagNum = [];
-    var result;
+    var result = 0;
 
     //新增文章
     await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime", "analyzeScore", "positiveWords", "negativeWords", "swearWords") ' +
@@ -144,7 +144,7 @@ var recommendPost = async function (memID, recomHead, recomCont, recomClass, rec
 var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords) {
     
     var artiMessNum;
-    var result;
+    var result = 0;
 
     //新增留言
     await sql('INSERT into "articleMessage" ("artiNum","memID","artiMessDateTime","artiMessCont", "analyzeScore", "positiveWords", "negativeWords", "swearWords") '+
@@ -160,6 +160,7 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
             console.error(error)
             artiMessNum = undefined;
         });
+
     for (var i = 0; i < imgData.length; i++) {
         await sql('INSERT into "image" ("artiNum", "memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [artiNum, memID, artiMessNum, imgData[i], postDateTime])
             .then((data) => {

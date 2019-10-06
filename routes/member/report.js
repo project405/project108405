@@ -36,7 +36,7 @@ router.post('/', function (req, res, next) {
             if (data == 1) {
                 // res.write('<head><meta charset="utf-8"/></head>');
                 res.send("舉報成功");
-                // res.send('<script> alert("舉報成功！"); history.back();</script>');
+                res.send('<script> alert("舉報成功！"); history.back();</script>');
             } else {
                 res.render('error');
             }
