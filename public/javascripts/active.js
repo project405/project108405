@@ -66,10 +66,8 @@ $(document).ready(function () {
     $(window).scroll(function() {
         if ($(this).scrollTop() > 400) {
             $('#gotop').fadeIn();
-            $('#sentimentSection').fadeIn();
         } else {
             $('#gotop').fadeOut();
-            $('#sentimentSection').fadeOut();
         };
     });
 

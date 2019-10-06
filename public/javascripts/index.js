@@ -1,6 +1,12 @@
 // navbar
 $(document).ready(function() {
+
     $(window).on("scroll", function() {
+        if ($(this).scrollTop() > 150) {
+            $('#sentimentSection').fadeIn();
+        } else {
+            $('#sentimentSection').fadeOut();
+        };
 
         var wn = $(window).scrollTop();
         if (wn > 120) {
