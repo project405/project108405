@@ -146,6 +146,11 @@ button.report {
     float: right !important;
 }
 
+button.report:hover {
+    background-color:  rgb(153, 58, 58);
+    border-radius: 8px; 
+    color: white;
+}
 
 div.likeContainer{
     margin-right:1em;
@@ -204,9 +209,6 @@ a.dateTime {
     padding-top: 0.13em;
 }
 
-.fa-gratipay:hover {
-    
-}
 
 /* tag */
 

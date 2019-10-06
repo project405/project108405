@@ -505,3 +505,10 @@ button.postInfo:focus {
     outline: 0;
     box-shadow: none !important;
 }
+
+i.fa-gratipay:hover {
+    color:rgb(201, 55, 55);
+}
+i.fa-comment-dots:hover {
+    color:rgb(60, 123, 246);
+}
