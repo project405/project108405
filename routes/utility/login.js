@@ -76,7 +76,7 @@ var userJudgeBind = async function(lineID){
             result = undefined ;
         });
 
-
+    console.log('result',result)
     //回傳物件
     return result;
 }
