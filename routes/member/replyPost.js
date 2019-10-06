@@ -45,21 +45,20 @@ var upload = multer({
 
 
 //post請求
-router.post('/', upload.array('userImg', 3), function (req, res, next) {
+router.post('/', upload.array('userImg', 10), function (req, res, next) {
     var memID = req.session.memID;
+    if (!memID) {
+        res.send("請進行登入");
+    }
     var replyCont = req.body.replyCont;
     var artiNum = req.body.artiNum
-    console.log('artiNum',artiNum)
-    console.log(req.body);
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
     var imgData = [];
-    // console.log(req.files);
     //將所有換行符號替代成<br> 
     replyCont = replyCont.replace(/\n/g, "<br>");
 
     for (var i in req.files) {
         imgData.push(req.files[i].filename);
-        console.log("files= ", req.files[i]);
         // if (replyCont.match("\\:imgLocation") != null) {
         //     console.log("近來囉");
         //     // replyCont = replyCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
@@ -67,11 +66,10 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
         // }
 
     }
-    console.log(replyCont);
     // console.log(imgData);
     // tag
     // console.log("typeof", typeof req.file);
-    if (memID == undefined || memID == null) {
+    if (!memID) {
         if (req.body.userImg != 'undefined') {
             for (var i = 0; i < imgData.length; i++) {
                 fs.unlinkSync('public/userImg/replyImg' + imgData[i]); //刪除檔案
@@ -106,13 +104,11 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
             }
             member.replyPost(artiNum, memID, replyCont, postDateTime, imgData).then(data => {
                 if (data == 0) {
-                    console.log("留言成功");
                     res.send("留言成功");
                 } else {
                     for (var i = 0; i < imgData.length; i++) {
                         fs.unlinkSync('public/userImg/replyImg' + imgData[i]); //刪除檔案
                     }
-                    console.log("留言失敗");
                     res.send("留言失敗");
                 }
             })
@@ -120,7 +116,6 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
             for (var i = 0; i < imgData.length; i++) {
                 fs.unlinkSync('public/userImg/replyImg' + imgData[i]); //刪除檔案
             }
-            console.log("留言失敗");
             res.send("留言失敗");
         }
     }
