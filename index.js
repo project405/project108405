@@ -59,7 +59,6 @@ bot.on('postback', function(event) {
                     d[1][0].recomCont = d[1][0].recomCont.length>75 ? `${d[1][0].recomCont.substr(0,75)}...` : d[1][0].recomCont
                     d[2][0].recomCont = d[2][0].recomCont.length>75 ? `${d[2][0].recomCont.substr(0,75)}...` : d[2][0].recomCont
                     d[3][0].recomCont = d[3][0].recomCont.length>75 ? `${d[3][0].recomCont.substr(0,75)}...` : d[3][0].recomCont
-                    console.log(d[0][0].recomHead)
                     if (data == 'movie'){
                         return event.reply([
                             {
@@ -135,7 +134,7 @@ bot.on('postback', function(event) {
                     }    
                 });
             }else{
-                logIn.userJudgeBind(userId).then(d =>{
+                login.userJudgeBind(userId).then(d =>{
                         if(d[0]){                         
                             if(d[0].lineID == userId){
                               
