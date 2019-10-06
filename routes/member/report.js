@@ -29,14 +29,17 @@ router.post('/', function (req, res, next) {
 
     //檢舉內容
     reportData["reportReason"] = req.body.reportReason;
-  
+
     member.report(memID, reportData.artiNum, reportData.artiMessNum, reportData.recomMessNum, reportData.reportReason)
         .then(data => {
             console.log("data= ,",data);
             if (data == 1) {
-                // res.write('<head><meta charset="utf-8"/></head>');
-                res.send("舉報成功");
-                res.send('<script> alert("舉報成功！"); history.back();</script>');
+                if(req.body.artiNum != undefined || req.body.artiMessNum != undefined || req.body.recomMessNum != undefined){
+                    res.send("舉報成功");
+                }else{
+                    // res.write('<head><meta charset="utf-8"/></head>');
+                    res.send('<head><meta charset="utf-8"/> </head> <script> alert("舉報成功！");  window.history.back();</script>');
+                }
             } else {
                 res.render('error');
             }
