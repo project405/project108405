@@ -505,3 +505,9 @@ button.postInfo:focus {
     outline: 0;
     box-shadow: none !important;
 }
+
+.scrollDown {
+    transition: 0.1s ease-out;
+    opacity: 0;
+    height: 0;
+}
