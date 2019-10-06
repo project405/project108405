@@ -334,7 +334,7 @@ img.sentimentImg {
 }
 div.sentimentContent {
     margin-top: 1em;
-    white-space: wrap;
+    text-align: left;
 }
 
 a.chooseSection {
