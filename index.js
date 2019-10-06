@@ -134,6 +134,7 @@ bot.on('postback', function(event) {
                     }    
                 });
             }else{
+                console.log('近來囉')
                 login.userJudgeBind(userId).then(d =>{
                         if(d[0]){                         
                             if(d[0].lineID == userId){
