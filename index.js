@@ -134,12 +134,11 @@ bot.on('postback', function(event) {
                     }    
                 });
             }else{
-                
                 login.userJudgeBind(userId).then(d =>{
+                    console.log('userId',userId)
                     console.log('d',d)
                         if(d[0]){                         
                             if(d[0].lineID == userId){
-                              
                                 collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
                                     console.log(b)
                                     if(b == 0){
@@ -181,7 +180,6 @@ bot.on('postback', function(event) {
                             
                         }else{
                             event.reply(myLineTemplate)
-        
                         }
                 })  
             }         
