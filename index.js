@@ -136,7 +136,7 @@ bot.on('postback', function(event) {
             }else{
                 
                 login.userJudgeBind(userId).then(d =>{
-                    console.log('近來囉')
+                    console.log('d',d)
                         if(d[0]){                         
                             if(d[0].lineID == userId){
                               
