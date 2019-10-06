@@ -609,30 +609,49 @@
                 replyCont.push(element.innerText);
             }, this);
             console.log(replyCont);
-
             formData.append('replyCont', replyCont);
 
             $.ajax({
-                url: '/article/reply',
+                url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                 type: 'POST',
                 dataType: 'TEXT',
-                data: formData,
-                processData: false,
-                contentType: false,
+                data: { 'artiCont': `${replyCont}` },
                 success: function (res) {
-                    console.log("yes", res);
-                    if (res == "請進行登入") {
-                        alert(res);
-                        location.replace("/login");
-                    } else if (res == "留言成功") {
-                        alert(res);
-                        location.reload();
-                    } else {
-                        alert(res);
-                    }
+                    var analyzeRes = JSON.parse(res)
+                    var analyzeScore = analyzeRes.analyze[0]
+                    var positiveWords = analyzeRes.analyze[1]
+                    var negativeWords = analyzeRes.analyze[2]
+                    var swearWords = analyzeRes.analyze[3]
+                    formData.append('analyzeScore', analyzeScore);
+                    formData.append('positiveWords', positiveWords);
+                    formData.append('negativeWords', negativeWords);
+                    formData.append('swearWords', swearWords);
+                    $.ajax({
+                        url: '/article/reply',
+                        type: 'POST',
+                        dataType: 'TEXT',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            console.log("yes", res);
+                            if (res == "請進行登入") {
+                                alert(res);
+                                location.replace("/logIn");
+                            } else if (res == "留言成功") {
+                                alert(res);
+                                location.reload();
+                            } else {
+                                alert('哎呀，出現錯誤')
+                            }
+                        },
+                        error: function (res) {
+                            console.log("失敗", res);
+                        }
+                    });
                 },
                 error: function (res) {
-                    console.log("失敗", res);
+                    console.error(res)
                 }
             });
         }
