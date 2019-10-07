@@ -532,7 +532,7 @@
                 data: { "artiMessNum" : a , "reportReason" : $("#messReportReason").val()},
                 success: function (res) {
                     alert(res);
-                    location.reload();
+                    window.location.reload();
                 },
                 error: function (res) {
                     console.log("失敗", res);
