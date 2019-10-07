@@ -35,7 +35,7 @@ $(document).ready(() => {
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/articleList">\
-                                    文章</a>\
+                                    討論區</a>\
                             </li>\
                             <li class="nav-item">\
                             <a class="nav-link" href="/articleList/post">\
@@ -132,7 +132,7 @@ $(document).ready(() => {
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/articleList">\
-                                    文章</a>\
+                                    討論區</a>\
                             </li>\
                             <li class="nav-item">\
                             <a class="nav-link" href="/articleList/post">\
@@ -147,9 +147,6 @@ $(document).ready(() => {
                                     <a class="dropdown-item" href="/collection/article">文章收藏</a>\
                                 </div>\
                             </li>\
-                            <li class="nav-item">\
-                                <a class="nav-link" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
-                            </li>\
                             <li class="nav-item dropdown">\
                                 <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                                     會員\
@@ -161,8 +158,6 @@ $(document).ready(() => {
                                 </div>\
                             </li>\
                             <li class="nav-item">\
-                            <a class="helper" id="aboutUsButton" data-toggle="modal" data-target="#aboutUsDiv" style="cursor: pointer;">\
-                            小幫手</a>\
                         </li>\
                         </ul>\
                     </div>\
@@ -232,7 +227,7 @@ $(document).ready(() => {
                         </li>\
                         <li class="nav-item">\
                             <a class="nav-link" href="/articleList">\
-                                文章</a>\
+                                討論區</a>\
                         </li>\
                         <li class="nav-item">\
                         <a class="nav-link" href="/articleList/post">\
