@@ -58,7 +58,11 @@
                 <i class="fas fa-images" style="padding-right:5px"></i>加圖片
             </label>
             <!-- </div> -->
-            <button type="submit" class="btn btn-danger col-lg-2 float-right" onclick="test()">提交</button>
+            <button type="submit" class="btn btn-danger col-lg-2 float-right postButton" onclick="test()">提交</button>
+
+            <div class="spinner-border text-secondary" role="status" style="position: absolute; top: 25%; right: 50%; display:none;">
+                    <span class="sr-only">Loading...</span>
+            </div>
 
             <script>
                 var imgs = [];
@@ -88,6 +92,9 @@
                     }
                 });
                 function test() {
+                    $('.postButton').addClass('disabled')
+                    $('.postButton').attr('disabled', true)
+                    $('.spinner-border').css('display', 'block')
                     var imgKey = []
                     if ($("#postInput").find("#postInput > img")) {
                         Array.from($("#postInput").find("#postInput > img")).map((img) => {

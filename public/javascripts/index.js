@@ -28,7 +28,7 @@ $(document).ready(function() {
             $('#negativeSection').css('display', 'none')
             $('#positiveButton').css('color','#ea5645')
             $('#negativeButton').css('color','#212529')
-            // $('#positiveButton').css('font-weight','bold')
+            $('#positiveButton').css('font-weight','bold')
             $('#negativeButton').css('font-weight','normal')
 
         }
@@ -40,7 +40,7 @@ $(document).ready(function() {
             $('#positiveSection').css('display', 'none')
             $('#negativeButton').css('color','#ea5645')
             $('#positiveButton').css('color','#212529')
-            // $('#negativeButton').css('font-weight','bold')
+            $('#negativeButton').css('font-weight','bold')
             $('#positiveButton').css('font-weight','normal')
 
         }
@@ -68,6 +68,13 @@ $(document).ready(function() {
         $('#sentimentSection > img').css('-o-transform','rotate(360deg)')
         $('#sentimentSectionHover').css('visibility','hidden')
         $('#sentimentSectionHover').css('transition','visibility 0.2s, opacity 0.5s linear')
+    })
+
+    $('.supriseSection > img').hover(() => {
+        $('.supriseHoverText').css('visibility','visible')
+    })
+    $('.supriseSection > img').mouseleave(() => {
+        $('.supriseHoverText').css('visibility','hidden')
     })
 });
 

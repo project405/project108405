@@ -68,16 +68,17 @@ h3.card-title {
 
 /* tag */
 
-a.floorTag {
-    text-align: right;
-    color: #fff !important;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    border: 2px solid #993a3a;
-    border-radius: 8px;
-    background-color: #993a3a;
-    text-decoration: none;
-    word-break: break-all;
-    font-size: 0.75em;
+a.dateTime {
+    font-size: 0.9em !important;
+    color: rgb(104, 102, 102) !important;
+    margin: 0;
+}
+
+@media (max-width: 450px) {
+    a.next::before {
+        white-space: pre;
+        content: '\A';
+    }
 }
 
 /* card */

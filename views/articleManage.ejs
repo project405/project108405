@@ -51,14 +51,22 @@
             <div class="row d-flex justify-content-center no-gutters">
                 <div class="col-12 mb-3 col-lg-8 ">
                     <!-- list -->
-                    <% for(var i = 0; i < myArticle[0].length ; i++) { %>
+                    <% for(var i = 0; i <myArticle[0].length; i++) {%>
                     <div class="card shadow list " style="cursor:pointer; ">
                         <div class="card-body " onclick="location.href='/article/<%= myArticle[0][i].artiNum %>'">
                             <div class="poster">
-                                <div class="name">
-                                    <p><%= myArticle[0][i].memID %> 於 <%= myArticle[0][i].artiDateTime %>發表</p>
+                                <div class="name d-flex justify-content-between">
+                                    <div style="word-break:break-all">
+                                            <a class="name"> <%= myArticle[0][i].memID %></a>
+                                            <a class="next"></a>
+                                            <a class="dateTime"> 於 <%= myArticle[0][i].artiDateTime %>發表</a>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-light" style="margin-bottom:0;">編輯</button>
+                                        <button class="btn btn-light" style="margin-bottom:0;">刪除</button>
+                                    </div>
                                 </div>
-                                <hr>
+                                <hr style="margin-top: 0.5em">
                             </div>
                             <div class="row seperate">
                                 <div class="col-sm-9 articleContent">
@@ -84,7 +92,8 @@
                                         <% if (myArticle[0][i].artiNum == myArticle[2][j].artiNum){ %>
                                             <div class="wrapperCard card-img-top col-lg-3"
                                                 style="background-image: url( '/userImg/<%= myArticle[2][j].imgName %>'); ">
-                                                <% break %> <!-- 取得一張照片就結束 -->
+                                            </div>
+                                            <% break %> <!-- 取得一張照片就結束 -->
                                         <% } %>
                                     <% } %>
                                 <% } %>
@@ -165,7 +174,8 @@
                                         document.getElementById("unLogIn" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
                                         document.getElementById("delColle" + "<%= myArticle[0][i].artiNum %>").style.display = "none";
                                     </script>
-                                <% } %>          
+                                <% } %>    
+                                      
                                 
                             <!-- 收藏 ajax script -->
                             <script>
@@ -290,13 +300,11 @@
                             </script>
                         </div>
                         <!-- info結束 -->
-
                     </div>
                     <div class="w-100"></div>
                     <% } %>
                     <!-- listEnd -->
                 </div>
-            </div>
         </div>
     </section>
     <!-- 文章列表區塊結束 -->

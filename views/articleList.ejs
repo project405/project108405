@@ -57,10 +57,18 @@
                     <div class="card shadow list " style="cursor:pointer; ">
                         <div class="card-body " onclick=" location.href='/article/<%= items[0][i].artiNum %>'">
                             <div class="poster">
-                                <div class="name">
-                                    <p><%= items[0][i].memID %> 於 <%= items[0][i].artiDateTime %>發表</p>
+                                <div class="name d-flex justify-content-between">
+                                    <div style="word-break:break-all">
+                                        <a class="floorTag"><%= items[0][i].memID %></a>
+                                        <a class="next"></a>
+                                        <a class="dateTime">於 <%= items[0][i].artiDateTime %>發表</a>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-light" style="margin-bottom:0;">編輯</button>
+                                        <button class="btn btn-light" style="margin-bottom:0;">刪除</button>
+                                    </div>
                                 </div>
-                                <hr>
+                                <hr style="margin-top: 0.5em">
                             </div>
                             <div class="row seperate">
                                 <div class="col-sm-9 articleContent">

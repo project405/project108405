@@ -365,6 +365,16 @@ div.footer {
     }
 }
 
+@-webkit-keyframes shakeV2 {
+    from {
+       -webkit-transform: rotate(10deg);
+    }
+    to {
+      -webkit-transform-origin:center center;
+      -webkit-transform: rotate(-10deg);
+    }
+}
+
 .fa-chevron-circle-down {
     text-align: center;
     position: absolute;

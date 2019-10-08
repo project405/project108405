@@ -283,6 +283,43 @@ a.navTitle {
     border: dotted 3px  rgb(241, 148, 8);
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);  
 }
+
+div.surpriseSection {
+    position: fixed;
+    z-index: 95;
+    bottom: 160px;
+    right: -45px;
+    /* animation: shake 4s;
+    animation-iteration-count: infinite; */
+    -webkit-animation: shakeV2 1.5s ease-in-out 1.5s infinite alternate;
+
+}
+
+div.surpriseSection > img {
+    height: 90px;
+    width: 90px;
+    cursor: pointer;
+}
+
+a.supriseHoverText {
+    background-color: rgba(233, 93, 68);
+    font-size: 0.75em;
+    padding: 0.5em;
+    border-radius: 6px; 
+    color: white !important;    
+    margin-right: 0;
+}
+
+a.supriseHoverText::after {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12px 0 12px 12px;
+    border-color: transparent transparent transparent rgba(233, 93, 68);
+    position: absolute;
+    bottom: 2.8em;
+    content: "";
+}
 @media (max-width: 575px) {
     #gotop {
         position: fixed;
@@ -321,7 +358,7 @@ a.navTitle {
     /* font-weight: 900; */
     /* text-shadow: 1px 0.5px 0.5px rgba(214, 158, 148, 0.877); */
     background-color: rgba(233, 93, 68, 0.89);
-    font-size: 1.25em;
+    font-size: 1em;
     padding: 0.3em 0.1em;
     border-radius: 8px; 
     color: rgba(255, 255, 255, 0.877);
@@ -329,9 +366,10 @@ a.navTitle {
 }
 img.sentimentImg {
     width: 100%;
-    float:center;
     border-radius: 8px; 
     margin: 1em 0;
+    padding: 0;
+    vertical-align: 0 !important;
 }
 div.sentimentContent {
     margin-top: 1em;

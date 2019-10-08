@@ -1,3 +1,19 @@
+$(document).ready(function() {
+    liff.init(
+        data => {
+            // Now you can call LIFF API
+            const userId = data.context.userId;
+            const accessToken = liff.getAccessToken();
+            console.log('getThis',$(this).find('#lineID').val(userId))
+            console.log('whatisit',$(this).find('#lineID').val())
+        },
+        err => {
+            // LIFF initialization failed
+            console.error(err)
+        }
+        );
+})
+
 var code; //在全局定義驗證碼
 //產生驗證碼
 window.onload = function() {    

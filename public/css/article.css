@@ -73,6 +73,7 @@ ul.liContainer {
     list-style: none;
     display: inline-block;
     margin: 0;
+    padding: 0;
 }
 /* ul.liContainer> li {
     cursor: pointer;

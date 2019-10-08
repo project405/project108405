@@ -1,4 +1,4 @@
-<!doctype html>
+-<!doctype html>
 <html>
 
 <head>
@@ -55,10 +55,18 @@
                     <div class="card shadow list " style="cursor:pointer; ">
                         <div class="card-body " onclick="location.href='/article/<%= myArtiClass[0][i].artiNum %>'">
                             <div class="poster">
-                                <div class="name">
-                                    <p><%= myArtiClass[0][i].memID %> 於 <%= myArtiClass[0][i].artiDateTime %>發表</p>
+                                <div class="name d-flex justify-content-between">
+                                    <div>
+                                        <a class="name"><%= myArtiClass[0][i].memID %></a>
+                                        <a class="next"></a>
+                                        <a class="dateTime"> 於 <%= myArtiClass[0][i].artiDateTime %>發表</a>             
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-light" style="margin-bottom:0;">編輯</button>
+                                        <button class="btn btn-light" style="margin-bottom:0;">刪除</button>
+                                    </div>
                                 </div>
-                                <hr>
+                                <hr style="margin-top: 0.5em">
                             </div>
                             <div class="row seperate">
                                 <div class="col-sm-9 articleContent">
@@ -84,13 +92,13 @@
                                     <% if (myArtiClass[0][i].artiNum == myArtiClass[2][j].artiNum){ %>
                                         <div class="wrapperCard card-img-top col-lg-3"
                                             style="background-image: url( '/userImg/<%= myArtiClass[2][j].imgName %>'); ">
-                                            <% break %> <!-- 取得一張照片就結束 -->
+                                        </div>
+                                        <% break %> <!-- 取得一張照片就結束 -->
                                     <% } %>
                                 <% } %>
                             <% } %>
-                            </div>
                         </div>
-
+                        </div>
                         <!-- info -->
                         <div class="info">
                             <!-- 愛心按鈕 -->
@@ -290,12 +298,10 @@
                             </script>
                         </div>
                         <!-- info結束 -->
-
                     </div>
                     <div class="w-100"></div>
                     <% } %>
                     <!-- listEnd -->
-                </div>
             </div>
         </div>
     </section>
