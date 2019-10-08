@@ -68,6 +68,8 @@ div.content {
 
 div.preferLi {
     text-align: center;
+    background-color: #F7F7F6;
+
 }
 ul.liContainer {
     list-style: none;
@@ -103,8 +105,26 @@ ul.liContainer > li::before {
   background: #993a3a;
 }
 
+.dotMenu {
+    background-color: white !important;
+    text-align: center;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}
+.dropdown-item:hover {
+    background-color: rgb(208, 208, 208) !important;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    text-align: center;
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}
 
-
+button.report {
+    float: right !important;
+}
 
 button.like{
     outline: none !important;
@@ -141,10 +161,6 @@ div.nameTime {
 
 p.content {
     color: rgb(73, 73, 73);
-}
-
-button.report {
-    float: right !important;
 }
 
 

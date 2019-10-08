@@ -39,10 +39,15 @@
                             <a class="next"></a>
                             <a class="dateTime">於<%= items[0][0].artiDateTime %>發佈</a>
                         </div>
-                        <div>
-                            <button class="btn btn-light" style="margin-bottom:0;">編輯</button>
-                            <button class="btn btn-light" style="margin-bottom:0;">刪除</button>
-                        </div>
+                    </div>
+                    <div class="dropdown ml-auto p-2">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0; padding: 0;">
+                                <i class="fas fa-ellipsis-h"></i>     
+                           </button>
+                            <div class="dropdown-menu dotMenu" aria-labelledby="dropdownMenuButton">
+                              <a class="dropdown-item" href="#">編輯</a>
+                              <a class="dropdown-item" href="#">刪除</a>
+                            </div>
                     </div>
                 </div>
                 <hr />
@@ -143,6 +148,9 @@
 
                     
                     <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiReportPost">檢舉</button>
+                    <!-- 如果文章是他自己的就不顯示檢舉 顯示下面這兩個 -->
+
+
                 </div>
                 <!-- 收藏 ajax script  -->
                 <script>
@@ -440,6 +448,9 @@
                     </p>
                 </div>
                 <button type="button" class="btn report" data-toggle="modal" data-target="#artiMessReportPost">檢舉</button>
+                 <!-- 如果留言是他自己的就不顯示檢舉 顯示下面這兩個 -->
+                 <button type="button" class="btn btn-light">編輯</button>
+                 <button type="button" class="btn btn-light">刪除</button>
             </div>
 
             <!-- 文章留言檢舉區塊 -->
@@ -568,6 +579,9 @@
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
     <script>
+        Array.from($('.liContainer').find('li')).map((item) => {
+            item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
+        })
         var imgs = [];
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
