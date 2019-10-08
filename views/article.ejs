@@ -34,9 +34,15 @@
             <div class="col-lg-8 content shadow">
                 <div class="info d-flex">
                     <div><a class="floorTag">樓主</a></div>
-                    <div><a><%= items[0][0].memID %></a>
-                        <a class="next"></a>
-                        <a class="dateTime">於<%= items[0][0].artiDateTime %>發佈</a>
+                    <div class=" d-flex justify-content-between">
+                        <div><a><%= items[0][0].memID %></a>
+                            <a class="next"></a>
+                            <a class="dateTime">於<%= items[0][0].artiDateTime %>發佈</a>
+                        </div>
+                        <div>
+                            <button class="btn btn-light" style="margin-bottom:0;">編輯</button>
+                            <button class="btn btn-light" style="margin-bottom:0;">刪除</button>
+                        </div>
                     </div>
                 </div>
                 <hr />
@@ -506,9 +512,9 @@
             </div>
         </div>
   
-        <!-- <div class="spinner-border text-secondary" role="status" style="position: absolute; top: 25%; right: 50%; display:none;">
+        <div class="spinner-border text-secondary" role="status" style="position: absolute; top: 25%; right: 50%; display:none;">
                 <span class="sr-only">Loading...</span>
-        </div> -->
+        </div>
 
        <script>
             //文章檢舉ajax
