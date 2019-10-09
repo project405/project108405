@@ -40,8 +40,8 @@
                             <a class="dateTime">於<%= items[0][0].artiDateTime %>發佈</a>
                         </div>
                     </div>
-                    <div class="dropdown ml-auto p-2">
-                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin: 0; padding: 0;">
+                    <div class="dropdown ml-auto">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-h"></i>     
                            </button>
                             <div class="dropdown-menu dotMenu" aria-labelledby="dropdownMenuButton">
@@ -50,7 +50,7 @@
                             </div>
                     </div>
                 </div>
-                <hr />
+                <hr  style="margin-top: 0.5em"/>
 
                 <h5><%= items[0][0].artiHead %></h5>
                 <hr />
@@ -370,7 +370,7 @@
 
         <div class="row justify-content-center">
             <% for(var i = 0 ; i < items[1].length ; i ++){ %>
-            <div class="col-lg-8 content shadow">
+            <div class="col-lg-8 content shadow" style="overflow: auto">
                 <!-- 文章留言 -->
                 <div class="message">
                     <!-- info -->
@@ -449,8 +449,15 @@
                 </div>
                 <button type="button" class="btn report" data-toggle="modal" data-target="#artiMessReportPost">檢舉</button>
                  <!-- 如果留言是他自己的就不顯示檢舉 顯示下面這兩個 -->
-                 <button type="button" class="btn btn-light">編輯</button>
-                 <button type="button" class="btn btn-light">刪除</button>
+                <div class="dropdown ml-auto">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-h"></i>     
+                    </button>
+                    <div class="dropdown-menu dotMenu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#">編輯</a>
+                        <a class="dropdown-item" href="#">刪除</a>
+                    </div>
+                </div>
             </div>
 
             <!-- 文章留言檢舉區塊 -->
@@ -579,7 +586,7 @@
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
     <script>
-        Array.from($('.liContainer').find('li')).map((item) => {
+        Array.from($('.liContainer').find('li > a')).map((item) => {
             item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
         })
         var imgs = [];

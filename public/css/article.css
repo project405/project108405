@@ -113,7 +113,7 @@ ul.liContainer > li::before {
     padding: 0.25 !important;
     margin: 0.25 !important;
 }
-.dropdown-item:hover {
+.dotMenu > .dropdown-item:hover {
     background-color: rgb(208, 208, 208) !important;
     color: rgb(83, 83, 83) !important;
     font-size:1em !important; 

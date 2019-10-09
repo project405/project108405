@@ -81,6 +81,23 @@ a.dateTime {
     }
 }
 
+.dotMenu {
+    background-color: white !important;
+    text-align: center;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}
+.dotMenu > .dropdown-item:hover {
+    background-color: rgb(208, 208, 208) !important;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    text-align: center;
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}
+
 /* card */
 
 div.card-body {
