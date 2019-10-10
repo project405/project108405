@@ -56,10 +56,23 @@
                             <div class="card-body "
                                 onclick="location.href='/collection/article/one/<%= collData[0][i].artiNum %>'">
                                 <div class="poster">
-                                    <div class="name">
-                                        <p><%= collData[0][i].memID %> 於 <%= collData[0][i].artiDateTime %>發表</p>
+                                    <div class="name d-flex justify-content-between">
+                                        <div style="word-break:break-all">
+                                            <a class="name"> <%= collData[0][i].memID %> </a>
+                                            <a class="next"></a>
+                                            <a class="dateTime"> 於 <%= collData[0][i].artiDateTime %>發表</a>
+                                        </div>
+                                        <div class="dropdown ml-auto">
+                                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-h"></i>     
+                                               </button>
+                                                <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
+                                                  <a class="dropdown-item" href="#">編輯</a>
+                                                  <a class="dropdown-item" href="#">刪除</a>
+                                                </div>
+                                        </div>
                                     </div>
-                                    <hr>
+                                    <hr style="margin-top: 0.5em">
                                 </div>
                                 <div class="row seperate">
                                     <div class="col-sm-9 articleContent">
@@ -99,16 +112,19 @@
                             <div class="info">
                                 <!-- 愛心按鈕 -->
                                 <button type="button" id=<%= "LikeUnLogIn" + collData[0][i].artiNum %> class="btn postInfo"
-                                    onclick="location.href='/login'"><i class="fab fa-gratipay"></i>
-                                    <a><%= collData[0][i].likeCount %></a></button>
+                                    style="display:none" onclick="location.href='/login'"><i class="fab fa-gratipay"></i>
+                                    <a><%= collData[0][i].likeCount %></a>
+                                </button>
                                 <button type="button" id=<%="addLike" + collData[0][i].artiNum %> class="btn postInfo"
-                                    onclick=<%= "addLike(" + collData[0][i].artiNum + ")" %>>
+                                    style="display:none" onclick=<%= "addLike(" + collData[0][i].artiNum + ")" %>>
                                     <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + collData[0][i].artiNum %>>
-                                        <%= collData[0][i].likeCount %></a> </button>
+                                        <%= collData[0][i].likeCount %></a> 
+                                </button>
                                 <button type="button" id=<%= "delLike" + collData[0][i].artiNum %> class="btn postInfo"
-                                    style="color:#c93737" onclick=<%= "delLike(" + collData[0][i].artiNum + ")" %>>
-                                    <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + collData[0][i].artiNum %>>
-                                        <%= collData[0][i].likeCount %></a></button>
+                                    style="display:none" onclick=<%= "delLike(" + collData[0][i].artiNum + ")" %>>
+                                    <i class="fab fa-gratipay" style="color:#c93737"></i><a id=<%= "delLikeCount" + collData[0][i].artiNum %>>
+                                        <%= collData[0][i].likeCount %></a>
+                                </button>
                                 <!-- 如果沒登入 -->
                                 <% if(collData[4] == undefined) {%>
                                 <script type="text/javascript">

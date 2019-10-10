@@ -114,7 +114,7 @@ ul.liContainer > li::before {
     margin: 0.25 !important;
 }
 .dotMenu > .dropdown-item:hover {
-    background-color: rgb(208, 208, 208) !important;
+    background-color: #b4d7ddb2 !important;
     color: rgb(83, 83, 83) !important;
     font-size:1em !important; 
     text-align: center;
@@ -124,6 +124,7 @@ ul.liContainer > li::before {
 
 button.report {
     float: right !important;
+    margin-right: 0.75em;
 }
 
 button.like{

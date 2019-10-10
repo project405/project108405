@@ -110,8 +110,8 @@
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + myArtiClass[0][i].artiNum %>>
                                     <%= myArtiClass[0][i].likeCount %> </a> </button>
                             <button type="button" id=<%= "delLike" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                style="color:#c93737; display:none" onclick=<%= "delLike(" + myArtiClass[0][i].artiNum + ")" %>>
-                                <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + myArtiClass[0][i].artiNum %>>
+                                style="display:none" onclick=<%= "delLike(" + myArtiClass[0][i].artiNum + ")" %>>
+                                <i class="fab fa-gratipay" style="color:#c93737;"></i><a id=<%= "delLikeCount" + myArtiClass[0][i].artiNum %>>
                                     <%= myArtiClass[0][i].likeCount %></a></button>
 
                            <!-- 判斷是否有按過愛心 -->

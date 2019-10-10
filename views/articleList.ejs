@@ -67,7 +67,7 @@
                                             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 <i class="fas fa-ellipsis-h"></i>     
                                            </button>
-                                            <div class="dropdown-menu dotMenu" aria-labelledby="dropdownMenuButton">
+                                            <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
                                               <a class="dropdown-item" href="#">編輯</a>
                                               <a class="dropdown-item" href="#">刪除</a>
                                             </div>
@@ -117,8 +117,8 @@
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + items[0][i].artiNum %>>
                                     <%= items[0][i].likeCount %> </a> </button>
                             <button type="button" id=<%= "delLike" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:#c93737; display:none" onclick=<%= "delLike(" + items[0][i].artiNum + ")" %>>
-                                <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + items[0][i].artiNum %>>
+                                style="display:none" onclick=<%= "delLike(" + items[0][i].artiNum + ")" %>>
+                                <i class="fab fa-gratipay" style="color:#c93737;"></i><a id=<%= "delLikeCount" + items[0][i].artiNum %>>
                                     <%= items[0][i].likeCount %></a></button>
                             <!-- 如果沒登入 -->
                             <% if(items[5][0] == undefined) {%>
