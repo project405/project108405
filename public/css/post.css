@@ -160,6 +160,8 @@ div .bootstrap-tagsinput {
 div.tag input {
     border: none !important;
     overflow: hidden;
+    background-color: #eee !important;
+
 }
 
 span.tag {
@@ -179,12 +181,15 @@ span.tag {
     cursor: pointer;
 }
 
-.bootstrap-tagsinput .tag [data-role="remove"]:after {
+.tag [data-role="remove"]:after {
     font-family: 'Font Awesome 5 Free';
     content: "\f057";
     font-weight: 800;
     font-size: 15px;
     margin-left: 4px;
+}
+input#tagInput {
+    background-color:#eee !important;
 }
 
 

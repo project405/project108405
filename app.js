@@ -15,8 +15,10 @@ var signUp = require('./routes/utility/signUp');
 //=========================================
 var articleListRouter = require('./routes/article/articleList');
 var articleRouter = require('./routes/article/article');
+var editArticleRouter = require('./routes/article/editArticle');
 var addCollectionRouter = require('./routes/collection/addCollection');
 var delCollectionRouter = require('./routes/collection/delCollection');
+var likeCountRouter = require('./routes/likeCount');
 var likeCountRouter = require('./routes/likeCount');
 // ---------------  four Class -------------------
 var articleMovieRouter = require('./routes/article/articleMovie');
@@ -153,6 +155,7 @@ app.use('/', indexRouter);
 //---------  article use ------------
 //=========================================
 app.use('/article', articleRouter);
+app.use('/editArticle', editArticleRouter);
 app.use('/articleList', articleListRouter);
 app.use('/articleList/post', postRouter);
 app.use('/article/post', articlePostRouter);
