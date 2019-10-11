@@ -63,7 +63,7 @@
                 <i class="fas fa-images" style="padding-right:5px"></i>加圖片
             </label>
             <!-- </div> -->
-            <button type="submit" class="btn btn-danger col-lg-2 float-right postButton" onclick="test()">提交</button>
+            <button type="submit" class="btn btn-danger col-lg-2 float-right postButton" onclick="submitModifyArticle()">提交</button>
 
             <div class="spinner-border text-secondary" role="status" style="position: absolute; top: 25%; right: 50%; display:none;">
                     <span class="sr-only">Loading...</span>
@@ -96,7 +96,9 @@
                         })
                     }
                 });
-                function test() {
+                function submitModifyArticle() {
+                    artiNum = '<%= items[0][0].artiNum %>'
+                    console.log(artiNum)
                     $('.postButton').addClass('disabled')
                     $('.postButton').attr('disabled', true)
                     $('.spinner-border').css('display', 'block')
@@ -115,6 +117,10 @@
                         })
                     }
                     var artiHead = document.getElementById("artiHead").innerHTML;
+                    while (artiHead.match('/n')) {
+                        artiHead = artiHead.replace('/n')
+                    }
+                    artiHead = artiHead.trim()
                     var artiCont = [];
                     var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
                     // 取得內容
@@ -128,6 +134,7 @@
                         artiHead = undefined;
                         // artiCont = undefined;
                     }
+                    formData.append('artiNum', artiNum);
                     formData.append('artiHead', artiHead);
                     formData.append('artiCont', artiCont);
                     formData.append('artiClass', artiClass);
@@ -162,8 +169,7 @@
                                     if (res == "請進行登入") {
                                         alert(res);
                                         location.replace("/login");
-                                    } else if (res == "發文成功") {
-                                        alert(res);
+                                    } else if (res == "編輯成功！") {
                                         location.replace("/articleList");
                                     } else {
                                         alert(res);

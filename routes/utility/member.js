@@ -81,6 +81,75 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
 }
 
 //================================
+//-------- editArticle() ---------
+//================================
+var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime) {
+    var tagNum = [];
+    var result = 0;
+    console.log('artiHead',artiHead)
+
+    //修改文章
+    await sql('UPDATE "article" SET "artiHead" = $1, "artiCont" =$2, "artiClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6, "swearWords"= $7 ' +
+    ' WHERE "artiNum" = $8'
+    , [artiHead, artiCont, artiClass, analyzeScore, positiveWords, negativeWords, swearWords, artiNum])
+    .then((data) => {
+        console.log(data)
+    }, (error) => {
+        console.error(error)
+    });
+
+    // 刪除舊tag連結
+    await sql ('DELETE FROM "tagLinkArticle" WHERE "artiNum" = $1',[artiNum])
+    .then((data)=> {
+        console.log(data)
+    },(e) => {
+        console.error(e)
+    }) 
+
+    //新增tag 
+    for (var i = 0; i < tag.length; i++) {
+        await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+            .then((data) => {
+                if (!data.rows) {
+                    tagNum = undefined;
+                } else {
+                    tagNum = data.rows[0].tagNum;
+                }
+            }, (error) => {
+                tagNum = undefined;
+                console.error(error)
+            });
+
+        // --------- 新增tagLink ---------
+        await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
+            .then((data) => {
+                result = 0;
+            }, (error) => {
+                result = 1;
+            });
+    }
+    await sql ('DELETE FROM "image" WHERE "artiNum" = $1 and  "artiMessNum" IS NULL',[artiNum])
+    .then((data)=> {
+        console.log(data)
+    },(e) => {
+        console.error(e)
+    }) 
+
+    // --------- 新增img ---------
+    for (var i = 0; i < imgData.length; i++) {
+        await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
+            .then((data) => {
+                result = 0;
+            }, (error) => {
+                result = 1;
+            });
+    }
+
+    return result;
+}
+
+
+//================================
 //-------- recommendPost() ---------
 //================================
 var recommendPost = async function (memID, recomHead, recomCont, recomClass, recomDateTime, imgData, tag) {
@@ -548,5 +617,5 @@ module.exports = {
     addArticleLike, delArticleLike,
     addArticleMessLike, delArticleMessLike,
     addRecommendMessLike, delRecommendMessLike,
-    report, checkAuthority
+    report, checkAuthority, editArticle
 };

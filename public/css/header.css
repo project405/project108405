@@ -335,6 +335,7 @@ button.tag {
     border-radius: 8px;
     padding: 0.45em;
     text-align: left;
+    margin-bottom: 0.25em; 
     background-color: #5580AA;
     border: none;
     color: white;

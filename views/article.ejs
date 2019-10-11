@@ -43,7 +43,7 @@
                                 <i class="fas fa-ellipsis-h"></i>     
                            </button>
                             <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
-                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#editArticle" onclick="">編輯</a>
+                              <a class="dropdown-item" href="/editArticle/<%= items[0][0].artiNum %>" >編輯</a>
                               <a class="dropdown-item" href="#">刪除</a>
                             </div>
                     </div>
@@ -568,28 +568,6 @@
         </script>
     </div>
 
-    <!-- 修改文章  -->
-    <!-- Button trigger modal -->
-      <!-- Modal -->
-      <div class="modal fade" id="editArticle" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              ...
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
@@ -627,6 +605,7 @@
                             var src = event.target.result // 圖片的編碼 , 格式為base64
                             var title = escape(file.name);
                             var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
+                            console.log($(this))
                             $('#replyInput').append('<div id="replyInput">' + img + '</div>');
                         };
                     })(file);

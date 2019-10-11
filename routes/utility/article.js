@@ -178,7 +178,7 @@ var getOneArticle = async function (artiNum, memID) {
         });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiNum" = $1',[artiNum])
+    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiNum" = $1 and "artiMessNum" IS NULL',[artiNum])
         .then((data) => {
             if (!data.rows) {
                 imgs = undefined;

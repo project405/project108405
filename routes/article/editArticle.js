@@ -16,6 +16,8 @@ router.get('/:artiNum', async function (req, res, next) {
     }
 
     article.getOneArticle(artiNum, memID).then(data => {
+        // if (memID != data[0])
+        console.log(data[0].memID)
         console.log(data)
         // 將字串替換成圖片
         for (var i = 0; i < data[0].length; i++) {
