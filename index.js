@@ -137,7 +137,7 @@ bot.on('postback', function(event) {
                 login.userJudgeBind(userId).then(d =>{
                     console.log('userId',userId)
                     console.log('d',d)
-                        if(!d[0]){   
+                        if(![d]){   
                             event.reply(myLineTemplate)                      
                         }else{
                             if(d[0].lineID == userId){
