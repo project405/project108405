@@ -21,6 +21,23 @@ var checkAuthority = async function (memID) {
         });
     return result;
 }
+//==============================
+//------ memberInformation() ------
+//==============================
+var memberInformation = async function (memID) {
+    var result;
+    await sql('SELECT * FROM "member" where "memID" = $1 ', [memID])
+        .then((data) => {
+            if (!data.rows[0]) {
+                result = undefined;
+            } else {
+                result = data.rows[0];
+            }
+        }, (error) => {
+            result = undefined;
+        });
+    return result;
+}
 
 
 //================================
@@ -733,5 +750,5 @@ module.exports = {
     addArticleLike, delArticleLike,
     addArticleMessLike, delArticleMessLike,
     addRecommendMessLike, delRecommendMessLike,
-    report, checkAuthority, editArticle, deleteArticle, editReply, deleteReply
+    report, checkAuthority, editArticle, deleteArticle, editReply, deleteReply, memberInformation
 };

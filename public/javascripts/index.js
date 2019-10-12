@@ -70,11 +70,11 @@ $(document).ready(function() {
         $('#sentimentSectionHover').css('transition','visibility 0.2s, opacity 0.5s linear')
     })
 
-    $('.supriseSection > img').hover(() => {
-        $('.supriseHoverText').css('visibility','visible')
+    $('.surpriseSection').hover(() => {
+        $('.surpriseHoverText').css('display','block')
     })
-    $('.supriseSection > img').mouseleave(() => {
-        $('.supriseHoverText').css('visibility','hidden')
+    $('.surpriseSection').mouseleave(() => {
+        $('.surpriseHoverText').css('display','none')
     })
 });
 

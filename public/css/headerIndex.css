@@ -296,21 +296,21 @@ div.surpriseSection {
 }
 
 div.surpriseSection > img {
-    height: 90px;
-    width: 90px;
+    height: 100px;
+    width: 100px;
     cursor: pointer;
 }
 
-a.supriseHoverText {
+a.surpriseHoverText {
     background-color: rgba(233, 93, 68);
     font-size: 0.75em;
     padding: 0.5em;
     border-radius: 6px; 
     color: white !important;    
-    margin-right: 0;
+    margin-right: 4.5em;
 }
 
-a.supriseHoverText::after {
+a.surpriseHoverText::after {
     width: 0;
     height: 0;
     border-style: solid;
@@ -357,10 +357,10 @@ a.supriseHoverText::after {
     bottom: 90px;
     /* font-weight: 900; */
     /* text-shadow: 1px 0.5px 0.5px rgba(214, 158, 148, 0.877); */
-    background-color: rgba(233, 93, 68, 0.89);
+    background-color: rgba(233, 93, 68);
     font-size: 1em;
     padding: 0.3em 0.1em;
-    border-radius: 8px; 
+    border-radius: 6px; 
     color: rgba(255, 255, 255, 0.877);
     writing-mode: vertical-lr;
 }
