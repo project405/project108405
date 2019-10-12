@@ -137,7 +137,7 @@ bot.on('postback', function(event) {
                 login.userJudgeBind(userId).then(d =>{
                     console.log('userId',userId)
                     console.log('d',d)
-                        if(d[0] && d[0]==null){                         
+                        if(d[0]){                         
                             if(d[0].lineID == userId){
                                 collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
                                     console.log(b)
