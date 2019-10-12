@@ -134,7 +134,7 @@ bot.on('postback', function(event) {
                     }    
                 });
             }else{
-                login.userJudgeBind(userId).then(d =>{
+                login.userJudgeBind(userId.trim()).then(d =>{
                     console.log('userId',userId)
                     console.log('d',d)
                         if(d[0]){                         
