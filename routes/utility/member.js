@@ -149,8 +149,7 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
         imgs.map( async(original) => {
             console.log(original)
             console.log('original', original)
-            if (remainImg.indexOf(original.imgName) >= 0) {
-            } else {
+            if (remainImg.indexOf(original.imgName) < 0) {
                 await sql ('DELETE FROM "image" WHERE "imgName" = $1 and "artiMessNum" IS NULL',[original.imgName])
                 .then((data)=> {
                     console.log(data)
@@ -335,8 +334,7 @@ var editReply = async function (artiNum, memID, replyCont, postDateTime, imgData
         imgs.map( async(original) => {
             console.log(original)
             console.log('original', original)
-            if (remainImg.indexOf(original.imgName) >= 0) {
-            } else {
+            if (remainImg.indexOf(original.imgName) < 0) {
                 await sql ('DELETE FROM "image" WHERE "imgName" = $1 ',[original.imgName])
                 .then((data)=> {
                     console.log(data)
