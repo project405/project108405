@@ -62,7 +62,7 @@ var addLineID = async function(memID, lineID){
 
 var userJudgeBind = async function(lineID){
     
-    var result ;
+    var result = 5;
 
     
     await sql('SELECT * FROM "member" WHERE "lineID" = $1', [lineID])

@@ -137,9 +137,7 @@ bot.on('postback', function(event) {
                 login.userJudgeBind(userId).then(d =>{
                     console.log('userId',userId)
                     console.log('d',d)
-                        if(![d]){   
-                            event.reply(myLineTemplate)                      
-                        }else{
+                        if(d[0]){                         
                             if(d[0].lineID == userId){
                                 collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
                                     console.log(b)
@@ -179,6 +177,9 @@ bot.on('postback', function(event) {
                                     }
                                 })                            
                             }
+                            
+                        }else{
+                            event.reply(myLineTemplate)
                         }
                 })  
             }         
