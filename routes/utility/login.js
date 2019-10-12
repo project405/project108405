@@ -72,7 +72,7 @@ var userJudgeBind = async function(lineID){
 
             }else{
                 result = data.rows ;
-                console.log('我是data喔喔喔喔',data)
+                // console.log('我是data喔喔喔喔',data)
             }
         }, (error) => {
             result = undefined ;
