@@ -13,17 +13,26 @@ router.get('/:artiNum', async function (req, res, next) {
 		memID = req.session.memID;
 	} else if (req.session.memID == undefined && req.session.passport != undefined) {
 		memID = req.session.passport.user.id;
+    } else {
+        res.write('<head><meta charset="utf-8"/></head>');
+            res.end('<script> alert("您沒有編輯該文章的權限"); history.back();</script>');
+        return;           
     }
 
     article.getOneArticle(artiNum, memID).then(data => {
         // if (memID != data[0])
-        console.log(data[0].memID)
+        console.log('data[0].memID)', data[0][0].memID)
         console.log(data)
+        if (data[0][0].memID != memID) {
+            res.write('<head><meta charset="utf-8"/></head>');
+            res.end('<script> alert("您沒有編輯該文章的權限"); history.back();</script>');
+            return;           
+        }
         // 將字串替換成圖片
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].artiCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[6].length; j++) {
-                    data[0][i].artiCont = data[0][i].artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + data[6][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
+                    data[0][i].artiCont = data[0][i].artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top original'><img src='/userImg/" + data[6][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 }
             }
         }
@@ -35,7 +44,7 @@ router.get('/:artiNum', async function (req, res, next) {
                 console.log('data.artiMessCont', item.artiMessCont)
                 while (item.artiMessCont.match("\\:imgLocation")) {
                     console.log('data[9][sumDisplayImg].imgName', data[9][sumDisplayImg].imgName)
-                    item.artiMessCont = item.artiMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/replyImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
+                    item.artiMessCont = item.artiMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/replyImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                     sumDisplayImg = sumDisplayImg + 1
                     console.log('sumDisplayImg', sumDisplayImg)
                 }

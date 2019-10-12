@@ -65,9 +65,9 @@
             <!-- </div> -->
             <button type="submit" class="btn btn-danger col-lg-2 float-right postButton" onclick="submitModifyArticle()">提交</button>
 
-            <div class="spinner-border text-secondary" role="status" style="position: absolute; top: 25%; right: 50%; display:none;">
+            <div class="spinner-border" role="status" style="position: fixed; top: 45%; right: 47%; display: none;">
                     <span class="sr-only">Loading...</span>
-            </div>
+             </div>
 
             <script>
                 var imgs = [];
@@ -97,11 +97,20 @@
                     }
                 });
                 function submitModifyArticle() {
+                    var remainImg = []
                     artiNum = '<%= items[0][0].artiNum %>'
                     console.log(artiNum)
                     $('.postButton').addClass('disabled')
                     $('.postButton').attr('disabled', true)
                     $('.spinner-border').css('display', 'block')
+                    if ($("#postInput > .original")) {
+                        Array.from($("#postInput").find('.original > img')).map((img) => {
+                            $(img).before("\\:imgLocation")
+                            remainImg.push(img.getAttribute('src').replace('/userImg/',''))
+                        })
+                    }
+                    console.log(remainImg)
+
                     var imgKey = []
                     if ($("#postInput").find("#postInput > img")) {
                         Array.from($("#postInput").find("#postInput > img")).map((img) => {
@@ -158,6 +167,8 @@
                             formData.append('positiveWords', positiveWords);
                             formData.append('negativeWords', negativeWords);
                             formData.append('swearWords', swearWords);
+                            formData.append('remainImg', remainImg);
+
                             $.ajax({
                                 url: '/article/post',
                                 type: 'POST',
@@ -169,7 +180,7 @@
                                     if (res == "請進行登入") {
                                         alert(res);
                                         location.replace("/login");
-                                    } else if (res == "編輯成功！") {
+                                    } else if (res == "編輯成功") {
                                         location.replace("/articleList");
                                     } else {
                                         alert(res);

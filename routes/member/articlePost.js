@@ -52,7 +52,7 @@ router.post('/', upload.array('userImg', 10), function (req, res, next) {
     var positiveWords = req.body.positiveWords;
     var negativeWords = req.body.negativeWords;
     var swearWords = req.body.swearWords;
-    var artiNum = req.body.artiNum || 'none';
+    var artiNum = req.body.artiNum;
     console.log('artiHead', artiHead)
 
     console.log(req.body);
@@ -134,8 +134,8 @@ router.post('/', upload.array('userImg', 10), function (req, res, next) {
                     }
                 }
                 if (artiNum) {
-                    member.editArticle(memID, artiHead, artiCont, artiClass, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime).then(data => {
-                        if (data == 0) {
+                    member.editArticle(memID, artiHead, artiCont, artiClass, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.remainImg).then(data => {
+                        if (data == 1) {
                             console.log("編輯成功");
                             res.send("編輯成功");
                         } else {

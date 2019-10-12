@@ -83,19 +83,20 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
 //================================
 //-------- editArticle() ---------
 //================================
-var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime) {
+var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime, remainImg) {
     var tagNum = [];
     var result = 0;
-    console.log('artiHead',artiHead)
-
+    var imgs = []
     //修改文章
     await sql('UPDATE "article" SET "artiHead" = $1, "artiCont" =$2, "artiClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6, "swearWords"= $7 ' +
     ' WHERE "artiNum" = $8'
     , [artiHead, artiCont, artiClass, analyzeScore, positiveWords, negativeWords, swearWords, artiNum])
     .then((data) => {
         console.log(data)
+        result = 1;
     }, (error) => {
         console.error(error)
+        result = 0;
     });
 
     // 刪除舊tag連結
@@ -123,28 +124,85 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
         // --------- 新增tagLink ---------
         await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
             .then((data) => {
-                result = 0;
+                result = 1
+                console.log(data)
             }, (error) => {
-                result = 1;
+                console.log(error)
+                result = 0;
             });
     }
-    await sql ('DELETE FROM "image" WHERE "artiNum" = $1 and  "artiMessNum" IS NULL',[artiNum])
-    .then((data)=> {
-        console.log(data)
-    },(e) => {
-        console.error(e)
-    }) 
+
+    await sql('SELECT * FROM "image" WHERE "artiNum" = $1 and "artiMessNum" IS NULL', [artiNum])
+    .then((data) => {
+        if (!data.rows) {
+            imgs = undefined;
+            console.log('noimg')
+        } else {
+            imgs = data.rows;
+        }
+    }, (error) => {
+        imgs = undefined;
+        console.log(error)
+    })
+
+    if (imgs) {
+        imgs.map( async(original) => {
+            console.log(original)
+            console.log('original', original)
+            if (remainImg.indexOf(original.imgName) >= 0) {
+            } else {
+                await sql ('DELETE FROM "image" WHERE "imgName" = $1 and "artiMessNum" IS NULL',[original.imgName])
+                .then((data)=> {
+                    console.log(data)
+                },(e) => {
+                    console.error(e)
+                }) 
+            }
+        })
+    }
 
     // --------- 新增img ---------
     for (var i = 0; i < imgData.length; i++) {
         await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
             .then((data) => {
-                result = 0;
-            }, (error) => {
                 result = 1;
+            }, (error) => {
+                result = 0;
             });
     }
 
+    return result;
+}
+//================================
+//-------- deleteArticle() -------
+//================================
+var deleteArticle = async function (artiNum) {
+    var result = 0;
+
+    await sql ('DELETE FROM "article" WHERE "artiNum" = $1',[artiNum])
+        .then((data)=> {
+            result = 1
+            console.log(data)
+        },(e) => {
+            console.error(e)
+            result = 0
+        }) 
+    return result;
+}
+//================================
+//-------- deleteReply() -------
+//================================
+var deleteReply = async function (artiMessNum) {
+    var result = 0;
+
+    await sql ('DELETE FROM "articleMessage" WHERE "artiMessNum" = $1',[artiMessNum])
+        .then((data)=> {
+            result = 1
+            console.log(data)
+        },(e) => {
+            console.error(e)
+            result = 0
+        }) 
     return result;
 }
 
@@ -239,6 +297,66 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
                 console.error(error)
             });
     }
+    return result;
+}
+//================================
+//-------- editReply() ---------
+//================================
+var editReply = async function (artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, artiMessNum, remainImg) {
+    var result = 0;
+    var imgs = []
+    console.log('remainImg', remainImg, remainImg, remainImg, remainImg, remainImg, remainImg)
+    //新增留言
+    await sql('UPDATE "articleMessage" SET "artiMessCont"= $1, "analyzeScore" =$2, "positiveWords"= $3, "negativeWords"= $4, "swearWords"= $5 '+
+    'WHERE "artiMessNum" = $6'
+        , [replyCont, analyzeScore, positiveWords, negativeWords, swearWords, artiMessNum])
+        .then((data) => {
+            console.log(data)
+            result = 1;
+        }, (error) => {
+            console.error(error)
+            result = 0;
+        });
+        
+    await sql('SELECT * FROM "image" WHERE "artiMessNum" = $1', [artiMessNum])
+    .then((data) => {
+        if (!data.rows) {
+            imgs = undefined;
+            console.log('noimg')
+        } else {
+            imgs = data.rows;
+        }
+    }, (error) => {
+        imgs = undefined;
+        console.log(error)
+    })
+
+    if (imgs) {
+        imgs.map( async(original) => {
+            console.log(original)
+            console.log('original', original)
+            if (remainImg.indexOf(original.imgName) >= 0) {
+            } else {
+                await sql ('DELETE FROM "image" WHERE "imgName" = $1 ',[original.imgName])
+                .then((data)=> {
+                    console.log(data)
+                },(e) => {
+                    console.error(e)
+                }) 
+            }
+        })
+    }
+
+    for (var i = 0; i < imgData.length; i++) {
+        await sql('INSERT into "image" ("artiNum", "memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [artiNum, memID, artiMessNum, imgData[i], postDateTime])
+            .then((data) => {
+                result = 1;
+            }, (error) => {
+                result = 0;
+                console.error(error)
+            });
+    }
+
     return result;
 }
 
@@ -617,5 +735,5 @@ module.exports = {
     addArticleLike, delArticleLike,
     addArticleMessLike, delArticleMessLike,
     addRecommendMessLike, delRecommendMessLike,
-    report, checkAuthority, editArticle
+    report, checkAuthority, editArticle, deleteArticle, editReply, deleteReply
 };

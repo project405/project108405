@@ -16,6 +16,32 @@ router.post('/', function (req, res, next) {
         memID = req.session.passport.user.id;
     }
 
+
+    if (req.body.deleteReply) {
+        if (memID == req.body.memID) {
+            console.log('compare completed')
+            member.deleteReply(req.body.artiMessNum).then((data) => {
+                if (data == 1) {
+                    console.log('second刪除成功')
+                    res.send('刪除成功')
+                } else {
+                    console.log('second刪除失敗')
+                    res.send('刪除失敗')
+                }
+            })
+        }
+    }
+    if (req.body.delArticle) {
+        if (memID == req.body.memID) {
+            member.deleteArticle(req.body.artiNum).then((data) => {
+                if (data == 1) {
+                    res.send('刪除成功')
+                } else {
+                    res.send('刪除失敗')
+                }
+            })
+        }
+    }
     //推薦愛心
     if (req.body.likeType == "recommend") {
         recommend.addRecommendLike(memID, req.body.recomNum).then(data => {

@@ -128,13 +128,13 @@ button.sameWidth {
 }
 
 input.code {
-    width: 5em;
+    width: 5.5em;
     border-radius: 10px;
     background-color: #ddd;
 }
 
 input.inputValidateCode {
-    width: 8em;
+    width: 6em;
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 10px;

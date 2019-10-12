@@ -256,6 +256,48 @@ var getOneArticle = async function (artiNum, memID) {
 
 
 //=========================================
+//---------  getOneReply() -------------
+//=========================================
+var getOneReply = async function (artiMessNum, memID) {
+    console.log(artiMessNum, memID)
+    var oneReply = []; //存放文章留言內容
+    var replyImgs = [];
+    var result = [];
+
+    //取得單篇留言
+    await sql('SELECT * FROM "articleMessage" WHERE "artiMessNum"= $1 ' , [artiMessNum])
+    .then((data) => {
+        if (!data.rows) {
+            oneReply = undefined;
+        } else {
+            oneReply = data.rows;
+        }
+    }, (error) => {
+        oneReply = undefined;
+        console.log(error)
+    });
+
+    // ----------- 取得照片 -----------
+    await sql('SELECT "artiMessNum" , "imgName" FROM "image" WHERE "artiMessNum" = $1',[artiMessNum])
+        .then((data) => {
+            if (!data.rows) {
+                replyImgs = undefined;
+            } else {
+                replyImgs = data.rows;
+            }
+        }, (error) => {
+            replyImgs = undefined;
+            console.log(error)
+        });
+
+    result[0] = oneReply;
+    result[1] = replyImgs;
+    result[2] = [memID];
+    return result;
+}
+
+
+//=========================================
 //---------  getArticleClassList() --------
 //=========================================
 var getArticleClassList = async function (articleClass, memID) {
@@ -441,5 +483,5 @@ module.exports = {
     getArticleList, getOneArticle,
     getArticleClassList,
     getArtiLikeCount, getRecomLikeCount,
-    getArtiMessLikeCount, getRecomMessLikeCount
+    getArtiMessLikeCount, getRecomMessLikeCount, getOneReply
 };
