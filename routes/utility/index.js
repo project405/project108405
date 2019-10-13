@@ -17,6 +17,10 @@ var getIndexData = async function (memID) {
     var hotArticle = [];  //存放前三名熱門文章
     var imgs = [];
     var tag = [] ;
+    var positiveArticle = [] ; //正向文章
+    var negativeArticle = [] ; //負向文章
+    var positiveImg = [] ; //正向照片
+    var negativeImg = [] ; //負向照片
     var result = [];
     // -----------  每週推薦 --------------
     await sql('SELECT * FROM "recommend"')
@@ -91,13 +95,85 @@ var getIndexData = async function (memID) {
             imgs = undefined;
         });
 
+    //----------- 正向文章 ----------- 
+    await sql('SELECT * '+
+             ' FROM( '+
+                ' SELECT * '+
+                ' FROM "article" '+
+                ' WHERE "analyzeScore" > 0 '+
+                ' ORDER BY "positiveWords" DESC, "analyzeScore" DESC '+
+                ' LIMIT 5) AS "A" '+
+             ' ORDER BY random() '+
+             ' LIMIT 1 ')
+    .then((data) => {
+        if (!data.rows) {
+            positiveArticle = undefined;
+        } else {
+            positiveArticle = data.rows;
+        }
+    }, (error) => {
+        positiveArticle = undefined;
+    });
+
+    //----------- 負向文章 ----------- 
+    await sql('SELECT * '+
+             ' FROM( '+
+                 ' SELECT * '+
+                 ' FROM "article" '+
+                 ' WHERE "analyzeScore" < 0 '+
+                 ' ORDER BY "negativeWords" DESC, "analyzeScore" DESC '+
+                 ' LIMIT 5) AS "A" '+
+             ' ORDER BY random() '+
+             ' LIMIT 1 ')
+    .then((data) => {
+        if (!data.rows) {
+            negativeArticle = undefined;
+        } else {
+            negativeArticle = data.rows;
+        }
+    }, (error) => {
+        negativeArticle = undefined;
+    });
+
+    //----------- 正向照片 ----------- 
+    await sql('SELECT "imgName" '+
+             ' FROM "image" '+
+             ' WHERE "artiNum" = $1',[positiveArticle[0].artiNum])
+    .then((data) => {
+        if (!data.rows) {
+            positiveImg = undefined;
+        } else {
+            positiveImg = data.rows;
+        }
+    }, (error) => {
+        positiveImg = undefined;
+    });
+
+    //----------- 負向照片 ----------- 
+    await sql('SELECT "imgName" '+
+        ' FROM "image" '+
+        ' WHERE "artiNum" = $1',[negativeArticle[0].artiNum])
+    .then((data) => {
+        if (!data.rows) {
+            negativeImg = undefined;
+        } else {
+            negativeImg = data.rows;
+        }
+    }, (error) => {
+        negativeImg = undefined;
+    });
+
     result[0] = fourRecommend;
     result[1] = hotArticle;
     result[2] = [memID];
     // result[3] = checkAuthority;
     result[4] = imgs;
     result[5] = tag ; 
-    
+    result[6] = positiveArticle ; 
+    result[7] = negativeArticle ; 
+    result[8] = positiveImg ;
+    result[9] = negativeImg ;
+
     return result;
 }
 
