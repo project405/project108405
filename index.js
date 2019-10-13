@@ -121,7 +121,7 @@ bot.on('message', function(event) {
                     event.reply('執行錯誤');
                 }else{
                     let msg = [];
-                    console.log('我是data!!!!!!!!!!!!!',data);
+                    console.log('我是data!!!!!!!!!!!!!',data[0]);
                     //準備食物卡片樣式
                     data.forEach(item => {
                         msg.push({
