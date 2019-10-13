@@ -157,13 +157,13 @@ app.post('/',cors(corsOptions), function (req, res, next) {
         console.log('req.body.msg!!!!!!!!!!!!!!!!!!!!!!' , req.body.msg);
         console.log('req.body.replyToken!!!!!!!!!!!!!!!!!!!!!!' , req.body.replyToken);
 
-        // let reply_token = req.body.events[0].replyToken
-        // let msg = req.body.events[0].message.text
+        let reply_token = req.body.replyToken
+        let msg = req.body.msg
         // console.log('reply_token = @@@@@@' + reply_token);
         // console.log('msgObj = @@@@@@' , req.body.events[0]);
         // console.log('req.body' , req.body);
 
-        reply(reply_token, msg)
+        reply(reply_token, msg);
 
         res.sendStatus(200)
         next();
