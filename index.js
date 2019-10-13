@@ -165,7 +165,7 @@ var server = app.listen(process.env.PORT || 3000, function() {
 
 // });
     
-app.post('/', function (req, res) {
+app.post('/webhook', function (req, res) {
     request.post({
     headers: {
         'content-type' : 'application/json',
