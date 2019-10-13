@@ -159,9 +159,7 @@ app.post('/',cors(corsOptions), function (req, res, next) {
 
         let reply_token = req.body.replyToken
         let msg = req.body.msg
-        // console.log('reply_token = @@@@@@' + reply_token);
-        // console.log('msgObj = @@@@@@' , req.body.events[0]);
-        // console.log('req.body' , req.body);
+    
 
         reply(reply_token, msg);
 
@@ -178,7 +176,7 @@ function reply(reply_token, msg) {
     'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
     }
     let body = JSON.stringify({
-    replyToken: "U2251202deb66b8a73da26e53c8399a13",
+    reply_token: "U2251202deb66b8a73da26e53c8399a13",
         messages: [{
             type: 'text',
             text: msg
@@ -189,6 +187,10 @@ function reply(reply_token, msg) {
     headers: headers,
     body: body
     }, (err, res, body) => {
+    console.log('url',res.url)
+    console.log('headers',res.headers)
+    console.log('body',res.body)
+    
     console.log('status = ' + res.statusCode);
     });
 }
