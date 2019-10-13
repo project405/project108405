@@ -4,6 +4,7 @@
 
 var linebot = require('linebot');
 var express = require('express');
+const request = require('request');
 const app = express();
 var cors = require('cors')
 var corsOptions = {
@@ -169,23 +170,23 @@ app.post('/',cors(corsOptions), function (req, res, next) {
     
 
 
-// function reply(reply_token, msg) {
-//     let headers = {
-//     'Content-Type': 'application/json',
-//     'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
-//     }
-//     let body = JSON.stringify({
-//     replyToken: reply_token,
-//         messages: [{
-//             type: 'text',
-//             text: msg
-//         }]
-//     })
-//     request.post({
-//     url: 'https://api.line.me/v2/bot/message/push',
-//     headers: headers,
-//     body: body
-//     }, (err, res, body) => {
-//     console.log('status = ' + res.statusCode);
-//     });
-// }
+function reply(reply_token, msg) {
+    let headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
+    }
+    let body = JSON.stringify({
+    replyToken: reply_token,
+        messages: [{
+            type: 'text',
+            text: msg
+        }]
+    })
+    request.post({
+    url: 'https://api.line.me/v2/bot/message/push',
+    headers: headers,
+    body: body
+    }, (err, res, body) => {
+    console.log('status = ' + res.statusCode);
+    });
+}
