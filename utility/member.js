@@ -5,8 +5,9 @@ const sql = require('./asyncDB');
 const moment = require('moment');
 
 //==============================
-//------ checkAuthority() ------
+//------ lineBotPush() ------
 //==============================
+
 var AllMember = async function () {
     var result;
     console.log(result);
@@ -22,6 +23,11 @@ var AllMember = async function () {
         });
     return result;
 }
+
+//==============================
+//------ checkAuthority() ------
+//==============================
+
 
 var checkAuthority = async function (memID) {
     var result;
