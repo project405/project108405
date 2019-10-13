@@ -185,7 +185,7 @@ app.post('/', function (req, res) {
     }, function(error, response, body){
     console.log(body);
     res.end(body);
-    response = client.reply_message(event['replyToken'], message)
+    // response = client.reply_message(event['replyToken'], message)
 
     });
 });
