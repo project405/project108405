@@ -45,8 +45,9 @@ CREATE TABLE "public"."article" (
 	"artiCont" text ,
 	"artiClass" varchar(20) COLLATE "pg_catalog"."default" ,
 	"analyzeScore" float4,
-	"positiveWords" int4,
-	"negativeWords" int4,
+	"positiveWords" float4,
+	"negativeWords" float4,
+	"swearWords" int4,
 	FOREIGN KEY("memID") REFERENCES member("memID")ON DELETE RESTRICT  ON UPDATE RESTRICT 
 );
 
@@ -82,8 +83,9 @@ CREATE TABLE "public"."articleMessage" (
 	"artiMessDateTime" TIMESTAMP ,
 	"artiMessCont" text ,
 	"analyzeScore" float4,
-	"positiveWords" int4,
-	"negativeWords" int4,
+	"positiveWords" float4,
+	"negativeWords" float4,
+	"swearWords" int4,
 	FOREIGN KEY("memID") REFERENCES "member"("memID")ON DELETE RESTRICT  ON UPDATE RESTRICT ,
 	FOREIGN KEY("artiNum") REFERENCES "article"("artiNum")ON DELETE CASCADE  ON UPDATE RESTRICT 
 );
@@ -151,8 +153,9 @@ CREATE TABLE "public"."recommendMessage" (
 	"recomMessDateTime" TIMESTAMP ,
 	"recomMessCont" text ,
 	"analyzeScore" float4,
-	"positiveWords" int4,
-	"negativeWords" int4,
+	"positiveWords" float4,
+	"negativeWords" float4,
+	"swearWords" int4,
 	FOREIGN KEY("memID") REFERENCES "member"("memID")ON DELETE RESTRICT  ON UPDATE RESTRICT ,
 	FOREIGN KEY("recomNum") REFERENCES "recommend"("recomNum")ON DELETE CASCADE  ON UPDATE RESTRICT 
 	
