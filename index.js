@@ -1,10 +1,10 @@
 //----------------------------------------
 // 載入必要的模組
 //----------------------------------------
-const app = express();
 
 var linebot = require('linebot');
 var express = require('express');
+const app = express();
 var cors = require('cors')
 
 app.use(cors())
