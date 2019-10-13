@@ -157,11 +157,33 @@ app.post('/',cors(corsOptions), function (req, res, next) {
         console.log('req.body.msg!!!!!!!!!!!!!!!!!!!!!!' , req.body.msg);
         console.log('req.body.replyToken!!!!!!!!!!!!!!!!!!!!!!' , req.body.replyToken);
 
-        let reply_token = req.body.replyToken
-        let msg = req.body.msg
-    
+        // let reply_token = req.body.replyToken
+        // let msg = req.body.msg
+        // reply(reply_token, msg);
+        let headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
+            }
+            let body = JSON.stringify({
+            reply_token: "U2251202deb66b8a73da26e53c8399a13",
+                'messages': [{
+                    'type': 'text',
+                    'text': req.body.msg
+                }]
+            })
+            request.post({
+            url: 'https://api.line.me/v2/bot/message/push',
+            headers: headers,
+            body: body
+            }, (err, res, body) => {
+            console.log('url'+res.url)
+            console.log('headers'+res.headers)
+            console.log('body'+res.body)
+            
+            console.log('status = ' + res.statusCode);
+        });
 
-        reply(reply_token, msg);
+
 
         res.sendStatus(200)
         next();
