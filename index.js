@@ -133,17 +133,17 @@ bot.on('message', function(event) {
                                 {
                                     "type": "postback",
                                     "label": "1顆星",
-                                    "data": item.artiNum + "&1"
+                                    "data": "&1"
                                 },
                                 {
                                   "type": "postback",
                                   "label": "2顆星",
-                                  "data": item.artiNum + "&2"
+                                  "data": "&2"
                                 },
                                 {
                                   "type": "postback",
                                   "label": "3顆星",
-                                  "data": item.artiNumd + "&3"
+                                  "data": "&3"
                                 }
                             ]
                         });                        
