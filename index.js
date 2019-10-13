@@ -120,34 +120,34 @@ bot.on('message', function(event) {
                 }else if(data == -9){                    
                     event.reply('執行錯誤');
                 }else{
-                    let msg = ['我是推播'];
+                    let msg = [];
 
                     //準備食物卡片樣式
-                    // data.forEach(item => {
-                    //     msg.push({
-                    //         "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.photo,
-                    //         "imageBackgroundColor": "#FFFFFF",
-                    //         "title": item.title,
-                    //         "text": item.description,
-                    //         "actions": [
-                    //             {
-                    //                 "type": "postback",
-                    //                 "label": "1顆星",
-                    //                 "data": item.id + "&1"
-                    //             },
-                    //             {
-                    //               "type": "postback",
-                    //               "label": "2顆星",
-                    //               "data": item.id + "&2"
-                    //             },
-                    //             {
-                    //               "type": "postback",
-                    //               "label": "3顆星",
-                    //               "data": item.id + "&3"
-                    //             }
-                    //         ]
-                    //     });                        
-                    // });
+                    data.forEach(item => {
+                        msg.push({
+                            "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.artiNum,
+                            "imageBackgroundColor": "#FFFFFF",
+                            "title": item.artiHead,
+                            "text": item.artiCont,
+                            "actions": [
+                                {
+                                    "type": "postback",
+                                    "label": "1顆星",
+                                    "data": item.artiNum + "&1"
+                                },
+                                {
+                                  "type": "postback",
+                                  "label": "2顆星",
+                                  "data": item.artiNum + "&2"
+                                },
+                                {
+                                  "type": "postback",
+                                  "label": "3顆星",
+                                  "data": item.iartiNumd + "&3"
+                                }
+                            ]
+                        });                        
+                    });
 
                     //將訊息推給所有使用者
                     bot.push(
