@@ -158,7 +158,7 @@ app.post('/',cors(corsOptions), function (req, res, next) {
         console.log('req.body.replyToken!!!!!!!!!!!!!!!!!!!!!!' , req.body.replyToken);
 
         // let reply_token = req.body.replyToken
-        // let msg = req.body.msg
+        let msg = req.body.msg
         // reply(reply_token, msg);
             let headers = {
             'Content-Type': 'application/json',
@@ -168,7 +168,7 @@ app.post('/',cors(corsOptions), function (req, res, next) {
             reply_token: "U2251202deb66b8a73da26e53c8399a13",
                 messages: [{
                     type: text,
-                    text: req.body.msg
+                    text: msg
                 }]
             })
         request.post({
