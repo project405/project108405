@@ -33,7 +33,7 @@ var checkAuthority = async function (memID) {
     var result;
     await sql('SELECT "memAuthority" FROM "member" where "memID" = $1 ', [memID])
         .then((data) => {
-            if (data.rows[0] == undefined || data.rows[0] == null) {
+            if (!data.rows) {
                 result = undefined;
             } else {
                 result = data.rows[0].memAuthority;
