@@ -38,7 +38,7 @@ var bot = linebot({
 });
 userId = 'U58ef73e7aac9254abd484af3ff964c4b'   ;   
 member.AllMember(userId).then(data => {  
-    console.log(data)
+    console.log('data@@@@@@@@@@',data)
     // if (data == -9){
     //     event.reply('執行錯誤');
     // }else{                   
