@@ -123,7 +123,7 @@ bot.on('message', function(event) {
 // 如果連接根目錄, 交給機器人處理
 //----------------------------------------
 const linebotParser = bot.parser();
-// app.post('/', linebotParser);
+app.post('/', linebotParser);
 
 //----------------------------------------
 // 可直接取用檔案的資料夾
