@@ -120,7 +120,7 @@ bot.on('message', function(event) {
                 }else if(data == -9){                    
                     event.reply('執行錯誤');
                 }else{
-                    let msg = [];
+                    let msg = ['我是推播'];
 
                     //準備食物卡片樣式
                     // data.forEach(item => {
@@ -150,17 +150,18 @@ bot.on('message', function(event) {
                     // });
 
                     //將訊息推給所有使用者
-                    bot.push("我是推播"
-                    //     allUsers, {
-                    //     "type": "template",
-                    //     "altText": "這是一個輪播樣板",
-                    //     "template": {
-                    //         "type": "carousel",
-                    //         "columns":msg
-                    //     },
-                    //     "imageAspectRatio": "rectangle",
-                    //     "imageSize": "cover"    
-                    // }
+                    bot.push(
+                    // allUsers, 
+                        {
+                        "type": "template",
+                        "altText": "這是一個輪播樣板",
+                        "template": {
+                            "type": "carousel",
+                            "columns":msg
+                        },
+                        "imageAspectRatio": "rectangle",
+                        "imageSize": "cover"    
+                        }
                     );  
                 }  
             })  
