@@ -36,8 +36,8 @@ var bot = linebot({
     channelSecret: 'f582b751649f1b57f33910c0238113eb',
     channelAccessToken: 'QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
 });
-      
-member.AllMember(U58ef73e7aac9254abd484af3ff964c4b).then(data => {  
+userId = 'U58ef73e7aac9254abd484af3ff964c4b'   ;   
+member.AllMember(userId).then(data => {  
     console.log(data)
     // if (data == -9){
     //     event.reply('執行錯誤');
