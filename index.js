@@ -1,6 +1,8 @@
 //----------------------------------------
 // 載入必要的模組
 //----------------------------------------
+const app = express();
+
 var linebot = require('linebot');
 var express = require('express');
 var cors = require('cors')
@@ -206,7 +208,6 @@ bot.on('message', function(event) {
 // 建立一個網站應用程式app
 // 如果連接根目錄, 交給機器人處理
 //----------------------------------------
-const app = express();
 const linebotParser = bot.parser();
 // app.post('/', linebotParser);
 
