@@ -226,15 +226,15 @@ var deleteReply = async function (artiMessNum) {
 //================================
 //-------- recommendPost() ---------
 //================================
-var recommendPost = async function (memID, recomHead, recomCont, recomClass, recomDateTime, imgData, tag) {
+var recommendPost = async function (memID, recomHead, recomCont, recomClass, recomDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords) {
     var recomNum;
     var tagNum;
     var result;
 
     // --------- 新增文章 ---------
-    await sql('INSERT into "recommend" ("recomHead","recomCont","recomClass","recomDateTime")' +
-        ' VALUES ($1,$2,$3,$4)  returning "recommend"."recomNum" ;'
-        , [recomHead, recomCont, recomClass, recomDateTime])
+    await sql('INSERT into "recommend" ("recomHead","recomCont","recomClass","recomDateTime", "analyzeScore", "positiveWords", "negativeWords", "swearWords")' +
+        ' VALUES ($1,$2,$3,$4,$5,$6,$7,$8)  returning "recommend"."recomNum" ;'
+        , [recomHead, recomCont, recomClass, recomDateTime, analyzeScore, positiveWords, negativeWords, swearWords])
         .then((data) => {
             if (!data.rows) {
                 recomNum = undefined;

@@ -38,6 +38,17 @@
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[0][0].artiDateTime %>發佈</a>
                     </div>
+                    <% if(items[7][0] == items[0][0].memID) {%>
+                        <div class="dropdown ml-auto">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-h"></i>     
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/editArticle/<%= items[0][0].artiNum %>" >編輯</a>
+                                <a class="dropdown-item" href="#/" onclick=<%= "delArticle(" + items[0][0].artiNum + ")" %>>刪除</a>
+                            </div>
+                        </div>
+                    <% } %>
                 </div>
                 <hr />
 
@@ -423,17 +434,20 @@
                     <p class="content"> <%= items[1][i].artiMessCont %>
                     </p>
                 </div>
-                <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiMessReportPost" >檢舉</button>
-                <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
-                <div class="dropdown ml-auto float-right dropup">
-                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-h"></i>     
-                    </button>
-                    <div class="dropdown-menu dotMenu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">編輯</a>
-                        <a class="dropdown-item" href="#">刪除</a>
+                <% if(items[7][0] != items[1][i].memID) {%>
+                    <button type="button" class="btn report" data-toggle="modal" data-target="#artiMessReportPost">檢舉</button>
+                     <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
+                <%} else { %>
+                    <div class="dropdown ml-auto float-right dropup">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <div class="dropdown-menu dotMenu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/editReply/<%= items[1][i].artiMessNum %>" class="editReply">編輯</a>
+                            <a class="dropdown-item" href="#/" onclick="deleteReply('<%- items[1][i].artiMessNum %>', '<%- items[1][i].memID %>')">刪除</a>
+                        </div>
                     </div>
-                </div>
+                <% } %>
             </div>
 
             <!-- 文章留言檢舉區塊 -->
