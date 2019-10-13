@@ -107,105 +107,11 @@ bot.on('message', function(event) {
             const userName = profile.displayName;
             const userId = profile.userId;
 
-            //存所有成員的id
-            let allUsers = [];
+            event.reply("哈囉",userName)         
 
-            //呼叫API取得所有成員資料
-            // LinePush.fetchAllMember().then(data => {
-            //     if (data == -1){
-            //         event.reply('找不到資料');
-            //     }else if(data == -9){                    
-            //         event.reply('執行錯誤');
-            //     }else{
-            //         data.forEach(item => {
-            //             allUsers.push(item.userid);
-            //         });
-            //     }
-            // });            
-
-            //呼叫API取得隨選食物資料
-            article.getArticleList().then(data => {  
-                if (data == -1){
-                    event.reply('找不到資料');
-                }else if(data == -9){                    
-                    event.reply('執行錯誤');
-                }else{
-                    let msg = [{
-                        "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + data[0][0].artiNum,
-                        "imageBackgroundColor": "#FFFFFF",
-                        "title": data[0][0].artiHead,
-                        "text": data[0][0].artiCont,
-                        "actions": [
-                            {
-                                "type": "postback",
-                                "label": "1顆星",
-                                "data": "&1"
-                            },
-                            {
-                              "type": "postback",
-                              "label": "2顆星",
-                              "data": "&2"
-                            },
-                            {
-                              "type": "postback",
-                              "label": "3顆星",
-                              "data": "&3"
-                            }
-                        ]
-                    }];
-                    push();
-                    console.log('我是data!!!!!!!!!!!!!',data[0][0].artiNum);
-                    //準備食物卡片樣式
-                    // data.forEach(item => {
-                    //     console.log('我是item!!!!!!!!!!!!!',item);
-
-                        // msg.push({
-                        //     "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.artiNum,
-                        //     "imageBackgroundColor": "#FFFFFF",
-                        //     "title": item.artiHead,
-                        //     "text": item.artiCont,
-                        //     "actions": [
-                        //         {
-                        //             "type": "postback",
-                        //             "label": "1顆星",
-                        //             "data": "&1"
-                        //         },
-                        //         {
-                        //           "type": "postback",
-                        //           "label": "2顆星",
-                        //           "data": "&2"
-                        //         },
-                        //         {
-                        //           "type": "postback",
-                        //           "label": "3顆星",
-                        //           "data": "&3"
-                        //         }
-                        //     ]
-                        // });                        
-                    // });
-
-                    //將訊息推給所有使用者
-                    function push(){
-                        bot.push(
-                            // allUsers, 
-                            ['U2251202deb66b8a73da26e53c8399a13'],{
-                                "type": "template",
-                                "altText": "這是一個輪播樣板",
-                                "template": {
-                                    "type": "carousel",
-                                    "columns":msg
-                                },
-                                "imageAspectRatio": "rectangle",
-                                "imageSize": "cover"    
-                                }
-                        );  
-                    }
-                        
-                }  
-            })  
-        }
-    );
+        })  
 });
+
 
 //----------------------------------------
 // 建立一個網站應用程式app
