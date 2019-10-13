@@ -77,7 +77,7 @@ app.post('/webhook', function (req, res) {
                 messages: [
                     {
                     type: 'text',
-                    text: "Hello,Ting~這是Line Bot API測試訊息"
+                    text: "Hello,"+profile.userName+"~這是Line Bot API測試訊息"
                     }
                 ]
             })
