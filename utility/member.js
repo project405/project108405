@@ -22,6 +22,7 @@ var AllMember = async function () {
         // }, (error) => {
         //     result = undefined;
         // });
+        })
     return result;
 }
 
