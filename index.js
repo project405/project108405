@@ -156,7 +156,7 @@ app.post('/',cors(corsOptions), function (req, res, next) {
         console.log('msgObj = ' , req.body.events[0]);
     
         reply(reply_token, msg)
-        
+
         res.sendStatus(200)
         next();
 
@@ -167,7 +167,7 @@ app.post('/',cors(corsOptions), function (req, res, next) {
 function reply(reply_token, msg) {
     let headers = {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer {xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU=}'
+    'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
     }
     let body = JSON.stringify({
     replyToken: reply_token,
