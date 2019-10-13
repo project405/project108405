@@ -176,7 +176,7 @@ function reply(reply_token, msg) {
     'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
     }
     let body = JSON.stringify({
-    replyToken: reply_token,
+    replyToken: "U2251202deb66b8a73da26e53c8399a13",
         messages: [{
             type: 'text',
             text: msg
