@@ -187,9 +187,9 @@ function reply(reply_token, msg) {
     headers: headers,
     body: body
     }, (err, res, body) => {
-    console.log('url',res.url)
-    console.log('headers',res.headers)
-    console.log('body',res.body)
+    console.log('url'+res.url)
+    console.log('headers'+res.headers)
+    console.log('body'+res.body)
     
     console.log('status = ' + res.statusCode);
     });
