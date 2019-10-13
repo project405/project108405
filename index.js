@@ -173,7 +173,7 @@ app.post('/', function (req, res) {
     },
     url: 'https://api.line.me/v2/bot/message/reply',
     body: JSON.stringify({
-        replyToken: reply_token,
+        replyToken: 'U2251202deb66b8a73da26e53c8399a13',
             messages: [{
                 type: 'text',
                 text: msg
