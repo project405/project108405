@@ -143,7 +143,7 @@ bot.on('message', function(event) {
                                 {
                                   "type": "postback",
                                   "label": "3顆星",
-                                  "data": item.iartiNumd + "&3"
+                                  "data": item.artiNumd + "&3"
                                 }
                             ]
                         });                        
