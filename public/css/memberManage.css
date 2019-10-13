@@ -103,6 +103,8 @@ div.member button {
     flex: 1;
     overflow: hidden;
     border-radius: 10px;
+    background-color: white !important;
+
 }
 
 .input-icon,

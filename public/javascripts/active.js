@@ -5,6 +5,23 @@ $(document).ready(function () {
     // $('.navbar-collapse').click(function(event) {
     //     event.stopPropagation();
     // });
+    var c, currentScrollTop = 0,
+    navbar = $('#header');
+
+    $(window).scroll(function () {
+    var a = $(window).scrollTop();
+    var b = navbar.height();
+    currentScrollTop = a;
+    
+    if (c < currentScrollTop && a > b + b) {
+        navbar.addClass("scrollDown");
+    } else if (c > currentScrollTop && !(a <= b)) {
+        navbar.removeClass("scrollDown");
+    }
+    c = currentScrollTop;
+    });
+
+    
 
     $("#tagInput").focus(function () {
         $("div.tag").css("box-shadow", "0 5px 15px rgba(0, 0, 0, 0.3)");
@@ -46,7 +63,7 @@ $(document).ready(function () {
         return false;
     });
     /* 偵測卷軸滑動時，往下滑超過400px就讓GoTop按鈕出現 */
-    $(window).scroll(function () {
+    $(window).scroll(function() {
         if ($(this).scrollTop() > 400) {
             $('#gotop').fadeIn();
         } else {

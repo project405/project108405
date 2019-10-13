@@ -15,6 +15,8 @@ var signUp = require('./routes/utility/signUp');
 //=========================================
 var articleListRouter = require('./routes/article/articleList');
 var articleRouter = require('./routes/article/article');
+var editArticleRouter = require('./routes/article/editArticle');
+var editReplyRouter = require('./routes/article/editReply');
 var addCollectionRouter = require('./routes/collection/addCollection');
 var delCollectionRouter = require('./routes/collection/delCollection');
 var likeCountRouter = require('./routes/likeCount');
@@ -115,7 +117,7 @@ passport.use(
     new GoogleStrategy({
         clientID: '535503110825-vsqohis8p2itidvaqii3akbmha3kluie.apps.googleusercontent.com', 
         clientSecret: 'vx7elBl3NGlZcnNPFV3QNH7l',
-        callbackURL: "http://localhost:3000/auth/google/callback" 
+        callbackURL: "https://project108405.herokuapp.com/auth/google/callback" 
     },
     function(accessToken, refreshToken, profile, done) {
         if (profile) {
@@ -153,6 +155,8 @@ app.use('/', indexRouter);
 //---------  article use ------------
 //=========================================
 app.use('/article', articleRouter);
+app.use('/editArticle', editArticleRouter);
+app.use('/editReply', editReplyRouter);
 app.use('/articleList', articleListRouter);
 app.use('/articleList/post', postRouter);
 app.use('/article/post', articlePostRouter);
@@ -254,27 +258,10 @@ app.get('/auth/google/callback',
 
 app.get('/user/logout', function(req, res){    
     req.logout();        //將使用者資料從session移除
+    req.session.memID = undefined ;
+    console.log(req.session.memID);
     res.redirect('/');   //導向登出頁面
 });    
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-  });
-  
-  // error handler
-  app.use(function(err, req, res, next) {
-    // set locals, only providing error in development
-    res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
-  
-    // render the error page
-    res.status(err.status || 500);
-    res.render('error');
-  });
-
 
 
 // catch 404 and forward to error handler

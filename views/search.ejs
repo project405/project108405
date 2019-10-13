@@ -92,8 +92,8 @@
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + items[0][i].artiNum %>>
                                     <%= items[0][i].likeCount %> </a> </button>
                             <button type="button" id=<%= "delLike" + items[0][i].artiNum %> class="btn postInfo"
-                                style="color:#c93737" onclick=<%= "delLike(" + items[0][i].artiNum + ")" %>>
-                                <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + items[0][i].artiNum %>>
+                                 onclick=<%= "delLike(" + items[0][i].artiNum + ")" %>>
+                                <i class="fab fa-gratipay" style="color:#c93737"></i><a id=<%= "delLikeCount" + items[0][i].artiNum %>>
                                     <%= items[0][i].likeCount %></a></button>
                             <!-- 如果沒登入 -->
                             <% if(items[5][0] == undefined) {%>              

@@ -5,28 +5,41 @@ const member = require('../utility/member');
 
 router.post('/', function (req, res, next) {
     var memID;
+    var reportData =[] ; 
 
     //判斷是使用哪種方式登入
-    if (req.session.memID == undefined && req.session.passport == undefined) {
-        res.render('login');
-    } else if (req.session.memID != undefined && req.session.passport == undefined) {
+    // if (req.session.memID == undefined && req.session.passport == undefined) {
+    //     res.render('login');
+    // } else 
+    if (req.session.memID != undefined && req.session.passport == undefined) {
         memID = req.session.memID;
     } else if (req.session.memID == undefined && req.session.passport != undefined) {
         memID = req.session.passport.user.id;
     }
-    
-    var reportData = {
-        "artiNum": req.body.artiNum,
-        "artiMessNum": req.body.artiMessNum,
-        "recomMessNum": req.body.recomMessNum,
-        "reportReason": req.body.reportReason
-    };
+
+    console.log(req.body.artiMessNum);
+    //判斷是哪一個檢舉
+    if(req.body.artiNum != undefined){
+        reportData["artiNum"] = req.body.artiNum;
+    }else if (req.body.artiMessNum != undefined){
+        reportData["artiMessNum"] = req.body.artiMessNum;
+    }else if (req.body.recomMessNum != undefined){
+        reportData["recomMessNum"] = req.body.recomMessNum;
+    }
+
+    //檢舉內容
+    reportData["reportReason"] = req.body.reportReason;
 
     member.report(memID, reportData.artiNum, reportData.artiMessNum, reportData.recomMessNum, reportData.reportReason)
         .then(data => {
+            console.log("data= ,",data);
             if (data == 1) {
-                res.write('<head><meta charset="utf-8"/></head>');
-                res.end('<script> alert("舉報成功！"); history.back();</script>');
+                if(req.body.artiNum != undefined || req.body.artiMessNum != undefined || req.body.recomMessNum != undefined){
+                    res.send("舉報成功");
+                }else{
+                    // res.write('<head><meta charset="utf-8"/></head>');
+                    res.send('<head><meta charset="utf-8"/> </head> <script> alert("舉報成功！");  window.history.back();</script>');
+                }
             } else {
                 res.render('error');
             }

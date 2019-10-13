@@ -58,87 +58,124 @@
                 <i class="fas fa-images" style="padding-right:5px"></i>加圖片
             </label>
             <!-- </div> -->
-            <button type="submit" class="btn btn-danger col-lg-2 float-right" onclick="test()">提交</button>
+            <button type="submit" class="btn btn-danger col-lg-2 float-right postButton" onclick="submitPost()">提交</button>
+
+            <div class="spinner-border" role="status" style="position: fixed; top: 45%; right: 47%; display: none;">
+                    <span class="sr-only">Loading...</span>
+             </div>
 
             <script>
+                var imgs = [];
                 var formData = new FormData(); //用formData來存取要傳送的所有資料
-                //上傳檔案按鈕有變動就執行
-                $("#file-selector").change(function () {
+                // 選取到檔案後開始動作
+                $('#file-selector').change(function(event) {
+                    let timeStamp = new Date().getTime()
                     var file = $("#file-selector")[0];  //取得檔案
                     //如果有檔案就要加入formData
                     if (file.files.length) {
-                        for (var i = 0; i < file.files.length; i++) {
-                            $("#postInput").html(document.getElementById("postInput").innerHTML + "\\:imgLocation");
-                        }
-                        // if (document.getElementById("postInput").innerHTML.match("<img") == null) {
-                        //     file.value = '';
-                        // }
-
-                        for (var i in file.files) {
-                            formData.append('userImg', file.files[i]);
-                        }
-
+                        Object.keys(file.files).map((img, index) => {
+                            file.files[img].timeStamp = `${timeStamp}${index}`
+                            imgs.push(file.files[img])
+                            // 解析檔案
+                            var item = file.files[img]
+                            var reader = new FileReader();
+                            reader.onload = (function(item) {
+                                return function(event) {
+                                    var src = event.target.result // 圖片的編碼 , 格式為base64
+                                    var title = escape(file.name);
+                                    var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
+                                    $('#postInput').append('<div id="postInput">' + img + '</div>');
+                                };
+                            })(file);
+                            reader.readAsDataURL(item);
+                        })
                     }
                 });
-                function test() {
+                function submitPost() {
+                    $('.postButton').addClass('disabled')
+                    $('.postButton').attr('disabled', true)
+                    $('.spinner-border').css('display', 'block')
+                    var imgKey = []
+                    if ($("#postInput").find("#postInput > img")) {
+                        Array.from($("#postInput").find("#postInput > img")).map((img) => {
+                            imgKey.push(img.getAttribute('key'))
+                        })
+                        imgs.map((img) => {
+                            if (imgKey.indexOf(img.timeStamp) >= 0) {
+                                formData.append('userImg', img);
+                            }
+                        })
+                        Array.from($("#postInput").find("#postInput > img")).forEach((img) => {
+                            $(img).before("\\:imgLocation")
+                        })
+                    }
                     var artiHead = document.getElementById("artiHead").innerHTML;
-                    var img = [];
                     var artiCont = [];
                     var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
                     // 取得內容
                     artiData.forEach(function (element) {
                         artiCont.push(element.innerText);
                     }, this);
-                    console.log(artiCont);
-
                     var tagInput = document.querySelectorAll("span.tag"); //取得所有<span class="tag"> 的內容
                     var tag = []; //以陣列形式存放
                     var artiClass = document.getElementById("inputState").value;
-
                     if (artiHead.trim() == "") {
                         artiHead = undefined;
                         // artiCont = undefined;
                     }
-
                     formData.append('artiHead', artiHead);
                     formData.append('artiCont', artiCont);
                     formData.append('artiClass', artiClass);
-                    // console.log(file.files[1]);
-                    // console.log(file.files[0]);
-
                     //取得tag 
                     tagInput.forEach(function (element) {
                         tag.push(element.innerText);
                     }, this);
-
                     formData.append('tag', tag);
-
                     $.ajax({
-                        url: '/article/post',
+                        url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                         type: 'POST',
                         dataType: 'TEXT',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
+                        data: { 'artiCont': `${artiCont}` },
                         success: function (res) {
-                            console.log("yes", res);
-                            if (res == "請進行登入") {
-                                alert(res);
-                                location.replace("/login");
-                            } else if (res == "發文成功") {
-                                alert(res);
-                                location.replace("/articleList");
-                            } else {
-                                alert(res);
-                            }
+                            var analyzeRes = JSON.parse(res)
+                            var analyzeScore = analyzeRes.analyze[0]
+                            var positiveWords = analyzeRes.analyze[1]
+                            var negativeWords = analyzeRes.analyze[2]
+                            var swearWords = analyzeRes.analyze[3]
+                            formData.append('analyzeScore', analyzeScore);
+                            formData.append('positiveWords', positiveWords);
+                            formData.append('negativeWords', negativeWords);
+                            formData.append('swearWords', swearWords);
+                            $.ajax({
+                                url: '/article/post',
+                                type: 'POST',
+                                dataType: 'TEXT',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (res) {
+                                    if (res == "請進行登入") {
+                                        alert(res);
+                                        location.replace("/login");
+                                    } else if (res == "發文成功") {
+                                        alert(res);
+                                        location.replace("/articleList");
+                                    } else {
+                                        alert(res);
+                                    }
+                                },
+                                error: function (res) {
+                                }
+                            });
                         },
                         error: function (res) {
-                            // console.log("失敗", res);
+                            console.error(res)
+                            console.log(res);
                         }
                     });
                 }
-
             </script>
+
 
         </div>
     </div>

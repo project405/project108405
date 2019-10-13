@@ -57,7 +57,6 @@ textarea.introInput {
     border-radius: 8px;
     caret-color: #2D4F41;
     cursor: text;
-    text-align: justify;
     border:none;
 }
 
@@ -96,9 +95,24 @@ textarea.introInput:focus {
 }
 
 .input:empty::before {
-    color: lightgrey;
+    color: rgb(172, 158, 158);
     content: attr(placeholder);
 }
+
+#editReply div.replyInput {
+    width: 100%;
+    min-height: 150px;
+    height: auto;
+    padding: 1em;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    opacity: 0.89;
+    margin-bottom: 1em;
+    border-radius: 8px;
+    caret-color: #2D4F41;
+    cursor: text;
+}
+
 
 
 /*focus時内容為空*/
@@ -125,7 +139,7 @@ img.upload-img {
     max-width: 70%;
     cursor: pointer;
     border-radius: 12px;
-    padding: 0.35em;
+    padding: 0.1em;
 }
 
 
@@ -161,6 +175,8 @@ div .bootstrap-tagsinput {
 div.tag input {
     border: none !important;
     overflow: hidden;
+    background-color: #eee !important;
+
 }
 
 span.tag {
@@ -180,12 +196,15 @@ span.tag {
     cursor: pointer;
 }
 
-.bootstrap-tagsinput .tag [data-role="remove"]:after {
+.tag [data-role="remove"]:after {
     font-family: 'Font Awesome 5 Free';
     content: "\f057";
     font-weight: 800;
     font-size: 15px;
     margin-left: 4px;
+}
+input#tagInput {
+    background-color:#eee !important;
 }
 
 

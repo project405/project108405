@@ -31,7 +31,8 @@
             <div class="col-lg-8 content shadow">
                 <div class="info d-flex">
                     <div><a class="floorTag">樓主</a></div>
-                    <div><a class="name"><%= items[0][0].memID %></a>
+                    <div>
+                        <a><%= items[0][0].memID %></a>
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[0][0].recomDateTime %>發佈</a>
                     </div>
@@ -63,8 +64,8 @@
                     <button type="button" id="addLike" class="btn postInfo" style="display:none" 
                         onclick=<%= "addLike(" + items[0][0].recomNum + ")" %>> <i class="fab fa-gratipay"></i><a
                             id="addLikeCount"> <%= items[0][0].likeCount %> </a></button>
-                    <button type="button" id="delLike" class="btn postInfo" style="color:#c93737; display: none"
-                        onclick=<%= "delLike(" + items[0][0].recomNum + ")" %>><i class="fab fa-gratipay"></i><a
+                    <button type="button" id="delLike" class="btn postInfo" style="display: none"
+                        onclick=<%= "delLike(" + items[0][0].recomNum + ")" %>><i class="fab fa-gratipay" style="color:#c93737;"></i><a
                             id="delLikeCount"><%= items[0][0].likeCount %></a></button>
                     <!-- 如果沒登入 -->
                     <% if(items[8][0] == undefined) {%>
@@ -130,7 +131,6 @@
                         document.getElementById("unLogIn").style.display = "none";
                     </script>
                     <% } %>
-                    <button type="button" class="btn report" id="postReport">檢舉</button>
                 </div>
 
                 <!-- 收藏 ajax script  -->
@@ -327,7 +327,6 @@
             </div>
             <!-- info結束 -->
         </div>
-    </div>
     <!-- 使用者發文結束' -->
 
     <center>
@@ -343,34 +342,39 @@
             <!-- 文章留言 -->
             <div class="message">
                 <!-- info -->
-                <div class="info d-flex">
+                <div class="info d-flex justify-content-between">
                     <div><a class="floorTag"><%= i+1 %> 樓</a></div>
                     <div><a class="name"><%= items[1][i].memID %></a>
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[1][i].recomMessDateTime %>留言</a>
                     </div>
                     <!-- 愛心按鈕 -->
-                    <div class="col-sm-3 ml-auto"> </div>
-                    <button type="button" id=<%= "MessLikeUnLogIn" + items[0][0].recomNum + items[1][i].recomMessNum %>
-                        class="btn like" style="display:none" onclick="location.href='/login'"><i
-                            class="fab fa-gratipay"></i><a><%= items[1][i].likeCount %></a></button>
+                    <div class="col-sm-1 ml-auto likeContainer"> 
+                        <button type="button" id=<%= "MessLikeUnLogIn" + items[0][0].recomNum + items[1][i].recomMessNum %>
+                                class="btn like" style="display:none" onclick="location.href='/login'"><i
+                        class="fab fa-gratipay"></i><a><%= items[1][i].likeCount %></a>
+                        </button>
+                        <button type="button" id=<%= "MessAddLike"+ items[0][0].recomNum + items[1][i].recomMessNum %>
+                            class="btn like" style="display:none"
+                            onclick=<%= "MessAddLike(" + items[0][0].recomNum + "," + items[1][i].recomMessNum + ")" %>>
+                            <i class="fab fa-gratipay"></i>
+                            <a id=<%="MessAddLikeCount" + items[0][0].recomNum + items[1][i].recomMessNum %>>
+                                <%= items[1][i].likeCount %>
+                            </a>
+                        </button>
+    
+                        <button type="button" id=<%= "MessDelLike" + items[0][0].recomNum + items[1][i].recomMessNum %>
+                            class="btn like"  style="display:none"
+                            onclick=<%= "MessDelLike(" + items[0][0].recomNum + "," + items[1][i].recomMessNum + ")" %>>
+                            <i class="fab fa-gratipay" style="color:#c93737"></i>
+                            <a id=<%= "MessDelLikeCount" + items[0][0].recomNum + items[1][i].recomMessNum %>>
+                                <%= items[1][i].likeCount %></a>
+                        </button>
+                    </div>
+                </div>
+                <hr class="smallMagin">
 
-                    <button type="button" id=<%= "MessAddLike"+ items[0][0].recomNum + items[1][i].recomMessNum %>
-                        class="btn like" style="display:none"
-                        onclick=<%= "MessAddLike(" + items[0][0].recomNum + "," + items[1][i].recomMessNum + ")" %>>
-                        <i class="fab fa-gratipay"></i>
-                        <a id=<%="MessAddLikeCount" + items[0][0].recomNum + items[1][i].recomMessNum %>>
-                            <%= items[1][i].likeCount %>
-                        </a>
-                    </button>
 
-                    <button type="button" id=<%= "MessDelLike" + items[0][0].recomNum + items[1][i].recomMessNum %>
-                        class="btn like" style="color:#c93737; display:none"
-                        onclick=<%= "MessDelLike(" + items[0][0].recomNum + "," + items[1][i].recomMessNum + ")" %>>
-                        <i class="fab fa-gratipay"></i>
-                        <a id=<%= "MessDelLikeCount" + items[0][0].recomNum + items[1][i].recomMessNum %>>
-                            <%= items[1][i].likeCount %></a>
-                    </button>
 
                     <!-- 如果沒登入 -->
                     <% if(items[8][0] == undefined) {%>
@@ -404,17 +408,70 @@
                             </script>
                         <% } %>
                     <% } %>
+                <!-- info結束 -->
+
+                <p class="content"> <%= items[1][i].recomMessCont %> </p>
+                <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#recomMessReportPost" >檢舉</button>
+             </div>
+
+                <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
+                <div class="dropdown ml-auto float-right dropup">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>     
+                        </button>
+                        <div class="dropdown-menu dotMenu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">編輯</a>
+                            <a class="dropdown-item" href="#">刪除</a>
+                        </div>
+                    </div>
+        </div>
+
+        <!-- 推薦留言檢舉區塊 -->
+        <div class="modal fade" id="recomMessReportPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">檢舉</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form>
+                        <div class="modal-body" style="padding:1em;">
+                            <textarea class="report" name="reportReason" id="messReportReason" placeholder="輸入檢舉原因"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="messReport"  class="btn btn-danger" onclick=<%= "ftn_messReport(" + items[1][i].recomMessNum + ")" %>>提交</button>
+                        </div>
+                    </form>
                 </div>
-                <hr class="smallMagin">
-                <!-- info結束 -->
-                <!-- info結束 -->
-                <p class="content"> <%= items[1][i].recomMessCont %>
-                    <button type="button" class="btn report">檢舉</button>
             </div>
         </div>
         <% } %>
-    </div>
-    <!-- 文章留言結束 -->
+        </div>
+        <!-- 推薦留言結束 -->
+        
+        <script>
+        //推薦留言檢舉ajax
+        function ftn_messReport(a){
+            $.ajax({
+                url: "/report",
+                type: 'POST',
+                dataType: 'TEXT',
+                data: { "recomMessNum" : a , "reportReason" : $("#messReportReason").val()},
+                success: function (res) {
+                    alert(res);
+                    location.reload();
+                },
+                error: function (res) {
+                    console.log("失敗", res);
+                }
+            }); 
+
+        }
+        </script>
+
+
 
     <!-- replying -->
     <div class="row replying justify-content-center" id="reply" spellcheck="false">
@@ -432,6 +489,7 @@
         </div>
     </div>
     <!-- replying end -->
+</div>
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>

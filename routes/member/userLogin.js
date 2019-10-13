@@ -19,13 +19,13 @@ router.post('/', function (req, res, next) {
         } else {
             req.session.memID = d.memID;
             req.session.memPass = d.memPass;
-            member.checkAuthority(memID).then(data => {
-                var mydata = [];
-                mydata[0] = data;
-                mydata[1] = memID;
-                console.log(mydata);
-                res.render('memberManage', { items: mydata });
-            })
+            // member.checkAuthority(memID).then(data => {
+            //     var mydata = [];
+            //     mydata[0] = data;
+            //     mydata[1] = memID;
+            //     console.log(mydata);
+            res.redirect('/');
+            // })
             // res.render('memberManage', { name: d.memID });   //導向使用者管理頁面
         }
     })

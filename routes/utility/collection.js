@@ -10,10 +10,10 @@ var moment = require('moment');
 //=========================================
 var getCollRecommend = async function (memID) {
     var recommendList = [];
-    var checkAuthority;
     var imgs = [] ; 
     var result = [];
-    //---------  取得會員收藏所有的推薦文章內容 -------------
+
+    //---------  取得收藏推薦內容 -------------
     await sql('SELECT "recomNum" '+
                     ' ,to_char("recomDateTime",\'YYYY-MM-DD\') AS "recomDateTime" '+
                     ' ,"recomHead" '+
@@ -24,37 +24,27 @@ var getCollRecommend = async function (memID) {
                     ' WHEN "recomClass" = \'exhibition\' THEN \'展覽\' '+
                     ' END AS "recomClass" '+
               ' FROM "recommend" '+
-              ' WHERE "recomNum" IN (SELECT "recomNum" '+
-              ' FROM "memberCollection"  '+
-              ' WHERE "memID" = $1 )', [memID])
+              ' WHERE "recomNum" '+
+                ' IN (SELECT "recomNum" '+
+                    ' FROM "memberCollection"  '+
+                    ' WHERE "memID" = $1 )', [memID])
         .then((data) => {
             if (!data.rows){
                 recommendList = undefined ;
             }else{
                 recommendList = data.rows;
-            }
-           
+            }   
         }, (error) => {
             recommendList = undefined ;
         });
-  
-    //---------  取得權限 --------- 
-    await member.checkAuthority(memID).then(data => {
-        if (data != undefined) {
-            checkAuthority = data;
-            console.log("Authority=", checkAuthority);
-        } else {
-            checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
-        }
-    })
 
     // --------- 取得照片 --------- 
     await sql('SELECT "recomNum","imgName" '+
               ' FROM "image" '+
-              ' where "recomNum" IN (SELECT "recomNum" '+
-                                    ' FROM "memberCollection" '+
-                                    ' WHERE "memID" = $1 )', [memID])
+              ' WHERE "recomNum" '+
+                    ' IN (SELECT "recomNum" '+
+                        ' FROM "memberCollection" '+
+                        ' WHERE "memID" = $1 )', [memID])
         .then((data) => {
             if (!data.rows){
                 imgs = undefined ;
@@ -68,7 +58,7 @@ var getCollRecommend = async function (memID) {
 
     result[0] = recommendList ; 
     result[1] = [memID] ;
-    result[2] = checkAuthority ;
+    // result[2] = checkAuthority ;
     result[3] = imgs;
 
     return result;
@@ -84,7 +74,6 @@ var getOneColleRecommend = async function (recomNum, memID) {
     var tag = [];
     var isLike = []; //是否有過愛心
     var isMessLike = []; //判斷留言愛心是否被按過
-    var checkAuthority;
     var imgs = [] ;
     var result = [];
 
@@ -137,7 +126,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
             tag = undefined ; 
         });
    
-    // 判斷是否被使用者收藏
+    // ----------- 判斷是否被使用者收藏 -----------
     await sql('SELECT "memID" , "recomNum" FROM "memberCollection" WHERE "recomNum" = $1 AND "memID" = $2', [recomNum, memID])
         .then((data) => {
             if (!data.rows) {
@@ -149,7 +138,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
             isCollection = undefined ; 
         });
 
-    // 判斷是否被使用者案愛心
+    // ----------- 判斷是否被使用者案愛心 -----------
     await sql('SELECT "recomNum" FROM "recommendLike" WHERE "recomNum" = $1 AND "memID" = $2 ', [recomNum, memID])
         .then((data) => {
             if (!data.rows) {
@@ -161,7 +150,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
             isLike = undefined ;
         });
 
-    // 判斷留言是否被按過愛心
+    // ----------- 判斷留言是否被按過愛心 -----------
     await sql('SELECT "Mess"."recomMessNum" '+
             ' FROM "recommendMessage" AS "Mess" '+
                 ' INNER JOIN "recommendMessageLike" AS "MessLike" '+
@@ -189,16 +178,6 @@ var getOneColleRecommend = async function (recomNum, memID) {
             imgs = undefined;
         });   
 
-    //取得權限
-    await member.checkAuthority(memID).then(data => {
-        if (data != undefined) {
-            checkAuthority = data;
-            console.log("Authority=", checkAuthority);
-        } else {
-            checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
-        }
-    })
     result[0] = oneRecommend ;
     result[1] = oneRecomMessage ;
     result[2] = tag ;
@@ -206,7 +185,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     result[4] = isLike;
     result[5] = isCollection;
     result[6] = isMessLike;
-    result[7] = checkAuthority;
+    // result[7] = checkAuthority;
     result[8] = [memID];
 
     return result;
@@ -218,13 +197,14 @@ var getCollArticle = async function (memID) {
     var colleArticle = [];
     var tag = [];
     var isLike = [];
-    var checkAuthority;
     var imgs = [];
     var result = [];
+
     //---------  取得每個會員收藏的文章內容 -------------
     await sql('SELECT * '+
              ' FROM "articleListDataView" AS "artiView" '+
-             ' WHERE "artiView"."artiNum" IN (SELECT "artiNum" '+
+             ' WHERE "artiView"."artiNum" '+
+                ' IN (SELECT "artiNum" '+
                     ' FROM "memberCollection"  '+
                     ' WHERE "memID" = $1 )',  [memID])
         .then((data) => {
@@ -237,12 +217,13 @@ var getCollArticle = async function (memID) {
             colleArticle = undefined ;
         });
 
-    // -----------  取得每篇收藏文章的tag--------------
+    // -----------  取得每篇收藏文章的tag --------------
     await sql('SELECT "tagName" '+
              ' FROM "articleTagView" '+
-             ' WHERE "artiNum" IN(SELECT "artiNum" '+
-                    ' FROM "memberCollection"  '+
-                    ' WHERE "memID" = $1)', [memID])
+             ' WHERE "artiNum" '+
+                ' IN(SELECT "artiNum" '+
+                   ' FROM "memberCollection"  '+
+                   ' WHERE "memID" = $1)', [memID])
         .then((data) => {
             if (!data.rows) {
                 tag = undefined ;
@@ -253,12 +234,13 @@ var getCollArticle = async function (memID) {
             tag = undefined ;
         });
 
-    // 判斷是否被使用者按愛心
+    // ----------- 判斷是否被使用者按愛心 -----------
     await sql('SELECT "artiNum" '+
              ' FROM "articleLike" '+ 
-             ' WHERE "artiNum" IN(SELECT "artiNum" '+
-                    ' FROM "memberCollection" '+
-                    ' WHERE "memID" = $1) AND "memID" = $1', [memID])
+             ' WHERE "artiNum" '+
+                ' IN(SELECT "artiNum" '+
+                   ' FROM "memberCollection" '+
+                   ' WHERE "memID" = $1) AND "memID" = $1', [memID])
         .then((data) => {
             if (!data.rows) {
                 isLike = undefined ; 
@@ -269,23 +251,13 @@ var getCollArticle = async function (memID) {
             isLike = undefined ; 
         });
 
-    //取得權限
-    await member.checkAuthority(memID).then(data => {
-        if (data != undefined) {
-            checkAuthority = data;
-            console.log("Authority=", checkAuthority);
-        } else {
-            checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
-        }
-    })
-
-    //取得照片
+    // ----------- 取得照片 -----------
     await sql('SELECT "artiNum" , "imgName" '+ 
              ' FROM "image" '+
-             ' WHERE "artiNum" IN(SELECT "artiNum" '+
-                    ' FROM "memberCollection" '+
-                    ' WHERE "memID" = $1) AND "memID" = $1', [memID])
+             ' WHERE "artiNum" '+
+                ' IN(SELECT "artiNum" '+
+                   ' FROM "memberCollection" '+
+                   ' WHERE "memID" = $1)', [memID])
         .then((data) => {
             if (!data.rows) {
                 imgs = undefined ; 
@@ -301,7 +273,6 @@ var getCollArticle = async function (memID) {
     result[2] = isLike;
     result[3] = imgs;
     result[4] = [memID];
-    result[5] = checkAuthority;
 
     return result;
 }
@@ -311,7 +282,6 @@ var getCollArticle = async function (memID) {
 //===============================
 var getCollRecomClassList = async function (memID, recomClass) {
     var recommendList = [];
-    var checkAuthority;
     var imgs = [] ;
     var result = [];
 
@@ -335,17 +305,6 @@ var getCollRecomClassList = async function (memID, recomClass) {
             recommendList = undefined ; 
         });
       
-    //---------  取得權限 --------- 
-    await member.checkAuthority(memID).then(data => {
-        if (data != undefined) {
-            checkAuthority = data;
-            console.log("Authority=", checkAuthority);
-        } else {
-            checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
-        }
-    })
-
     // --------- 取得照片 --------- 
     await sql('SELECT "recomNum" , "imgName" '+
              ' FROM "image"  '+
@@ -366,9 +325,8 @@ var getCollRecomClassList = async function (memID, recomClass) {
 
     result[0] = recommendList ; 
     result[1] = imgs ;
-    result[2] = checkAuthority ;
+    // result[2] = checkAuthority ;
     result[3] = [memID];
-    console.log(result);
 
     return result ;
 
@@ -381,7 +339,6 @@ var getCollArtiClassList = async function (memID, artiClass) {
     var articleList = [];
     var tag = [] ;
     var isLike = [] ;
-    var checkAuthority;
     var imgs = [] ;
     var result = [];
 
@@ -392,7 +349,7 @@ var getCollArtiClassList = async function (memID, artiClass) {
                 ' IN (SELECT "artiNum" '+
                     ' FROM "memberCollection" '+
                     ' WHERE "memID" = $1 ) '+
-                    ' AND "artiClass" = $2 ', [memID, artiClass])
+              ' AND "artiClass" = $2 ', [memID, artiClass])
         .then((data) => {
             if(!data.rows){
                 articleList = undefined ; 
@@ -403,12 +360,13 @@ var getCollArtiClassList = async function (memID, artiClass) {
             articleList = undefined ; 
         });
 
-    // -----------  取得每篇收藏文章的tag--------------
+    // -----------  取得每篇收藏文章的tag --------------
     await sql('SELECT "tagName" '+
               ' FROM "articleTagView" '+
-              ' WHERE "artiNum" IN(SELECT "artiNum" '+
-                    ' FROM "memberCollection"  '+
-                    ' WHERE "memID" = $1)', [memID])
+              ' WHERE "artiNum" '+
+                ' IN(SELECT "artiNum" '+
+                   ' FROM "memberCollection"  '+
+                   ' WHERE "memID" = $1)', [memID])
         .then((data) => {
             if (!data.rows) {
                 tag = undefined ;
@@ -423,9 +381,9 @@ var getCollArtiClassList = async function (memID, artiClass) {
     await sql('SELECT "artiNum" , "imgName" '+
                 ' FROM "image"  '+
                 ' WHERE "artiNum" '+
-                'IN(SELECT "artiNum" '+
-                    ' FROM "memberCollection" '+
-                    ' WHERE "memID" = $1)', [memID])
+                    'IN(SELECT "artiNum" '+
+                      ' FROM "memberCollection" '+
+                      ' WHERE "memID" = $1)', [memID])
         .then((data) => {
         if (!data.rows){
             imgs = undefined ;
@@ -437,12 +395,13 @@ var getCollArtiClassList = async function (memID, artiClass) {
             imgs = undefined ;
         });
 
-    // 判斷是否被使用者按愛心
+    // --------- 判斷是否被使用者按愛心 ---------
     await sql('SELECT "artiNum" '+
         ' FROM "articleLike" '+ 
-        ' WHERE "artiNum" IN(SELECT "artiNum" '+
+        ' WHERE "artiNum" '+
+            ' IN(SELECT "artiNum" '+
                 ' FROM "memberCollection" '+
-                ' WHERE "memID" = $1) AND "memID" = $1', [memID])
+                ' WHERE "memID" = $1)', [memID])
         .then((data) => {
             if (!data.rows) {
                 isLike = undefined ; 
@@ -452,57 +411,49 @@ var getCollArtiClassList = async function (memID, artiClass) {
         }, (error) => {
             isLike = undefined ; 
         });    
-        
-    //---------  取得權限 --------- 
-    await member.checkAuthority(memID).then(data => {
-        if (data != undefined) {
-            checkAuthority = data;
-            console.log("Authority=", checkAuthority);
-        } else {
-            checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
-        }
-    })
 
     result[0] = articleList ; 
     result[1] = tag ; 
     result[2] = imgs ;
     result[3] = isLike ; 
-    result[4] = checkAuthority ;
+    // result[4] = checkAuthority ;
     result[5] = [memID];
 
     return result ;
 
 }
 
-
 //=========================================
-//---------  addCollention() -----------
+//---------  addCollention() --------------
 //=========================================
 var addColleArticle = async function (memID, artiNum) {
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
     var result;
+
     await sql('INSERT INTO "memberCollection" ("memID","artiNum","collDateTime") VALUES ($1,$2,$3)', [memID, artiNum, addTime])
         .then((data) => {
             result = 1;
         }, (error) => {
             result = 0;
         });
+
     return result;
 }
 
 //=========================================
-//---------  addColleRecommend() -----------
+//---------  addColleRecommend() ----------
 //=========================================
 var addColleRecommend = async function (memID, recomNum) {
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
     var result;
+
     await sql('INSERT INTO "memberCollection" ("memID","recomNum","collDateTime") VALUES ($1,$2,$3)', [memID, recomNum,addTime])
         .then((data) => {
             result = 1;
         }, (error) => {
             result = 0;
         });
+
     return result;
 }
 
@@ -511,13 +462,14 @@ var addColleRecommend = async function (memID, recomNum) {
 //=========================================
 var delColleArticle = async function (memID, artiNum) {
     var result;
+
     await sql('DELETE FROM "memberCollection" WHERE "memID" = $1 and "artiNum"= $2', [memID, artiNum])
         .then((data) => {
-            console.log("刪除囉~~~~");
             result = 1;
         }, (error) => {
             result = 0;
         });
+
     return result;
 }
 
@@ -526,13 +478,14 @@ var delColleArticle = async function (memID, artiNum) {
 //=========================================
 var delColleRecommend = async function (memID, recomNum) {
     var result;
+
     await sql('DELETE FROM "memberCollection" WHERE "memID" = $1 and "recomNum"= $2', [memID, recomNum])
         .then((data) => {
-            console.log("刪除囉~~~~");
             result = 1;
         }, (error) => {
             result = 0;
         });
+        
     return result;
 }
 module.exports = {

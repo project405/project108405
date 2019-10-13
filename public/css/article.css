@@ -59,10 +59,72 @@ h1 {
 
 div.content {
     padding: 1em 1em 1em 1em;
-    background-color: #eee;
+    /* background-color: #eee; */
+    background-color: #F7F7F6;
     opacity: 0.95;
     margin-bottom: 2em;
     border-radius: 12px;
+}
+
+div.preferLi {
+    text-align: center;
+    background-color: #F7F7F6;
+
+}
+ul.liContainer {
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+/* ul.liContainer> li {
+    cursor: pointer;
+} */
+ul.liContainer > li > a {
+    text-decoration:none;
+    color: rgb(73, 73, 73);
+    font: bold;
+}
+
+ul.liContainer > li a:hover {
+    color: rgb(148, 148, 148);
+}
+ul.liContainer > li::before {
+  /* content: "\2022";  */
+  display: inline-block; 
+  /* font-size: 1em;  
+  width: 1em !important;
+
+  margin-left: -1em */
+
+  content: " "; 
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  background: #993a3a;
+}
+
+.dotMenu {
+    background-color: white !important;
+    text-align: center;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}
+.dotMenu > .dropdown-item:hover {
+    background-color: #b4d7ddb2 !important;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    text-align: center;
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}
+
+button.report {
+    float: right !important;
+    margin-right: 0.75em;
 }
 
 button.like{
@@ -100,10 +162,6 @@ div.nameTime {
 
 p.content {
     color: rgb(73, 73, 73);
-}
-
-button.report {
-    float: right !important;
 }
 
 
@@ -164,6 +222,9 @@ a.dateTime {
     padding-top: 0.13em;
 }
 
+.fa-gratipay:hover {
+    
+}
 
 /* tag */
 
@@ -172,11 +233,6 @@ div.tagDiv {
     margin: 0em;
 }
 
-button.tag {
-    font-size: 0.75em;
-    border-radius: 8px;
-    padding: 0.45em;
-}
 
 
 /* hr */
@@ -244,7 +300,7 @@ div.replyInput:focus:before {
 
 [contentEditable=true]:empty:not(:focus):before {
     content: attr(data-text);
-    color: black;
+    color: rgb(114, 114, 114);
 }
 
 div.replyInput:focus {
@@ -279,3 +335,4 @@ img.upload-img {
     border-radius: 12px;
     padding: 0.35em;
 }
+

@@ -6,6 +6,10 @@ WHERE "artiClass" = 'music'
 -------- 取得 tag -----------
 SELECT *
 FROM "articleTagView"
+WHERE "atirNum" 
+	IN (SELECT "artiNum"
+			FROM "articleListDataView"
+			WHERE "artiClass" = 'music')
 
 ----------- 判斷是否被使用者收藏 -----------
 SELECT "memID" , "artiNum" 

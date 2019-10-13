@@ -261,7 +261,65 @@ a.navTitle {
     text-align: center;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
+#sentimentSection {
+    padding: 5px;
+    position: fixed;
+    z-index: 90;
+    right: 30px;
+    bottom: 100px;
+    width: 50px;
+    height: 50px;
+    font-size: 2em;
+    display: inline-block;
+    vertical-align: top;
+    color: rgb(141, 30, 30);
+    background: rgb(248, 235, 121);
+    display: none;
+    opacity: 0.75;
+    line-height: 25px;
+    border-radius: 50%;
+    transition: all 0.5s;
+    text-align: center;
+    border: dotted 3px  rgb(241, 148, 8);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);  
+}
 
+div.surpriseSection {
+    position: fixed;
+    z-index: 95;
+    bottom: 160px;
+    right: -45px;
+    /* animation: shake 4s;
+    animation-iteration-count: infinite; */
+    -webkit-animation: shakeV2 1.5s ease-in-out 1.5s infinite alternate;
+
+}
+
+div.surpriseSection > img {
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+}
+
+a.surpriseHoverText {
+    background-color: rgba(233, 93, 68);
+    font-size: 0.75em;
+    padding: 0.5em;
+    border-radius: 6px; 
+    color: white !important;    
+    margin-right: 4.5em;
+}
+
+a.surpriseHoverText::after {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 12px 0 12px 12px;
+    border-color: transparent transparent transparent rgba(233, 93, 68);
+    position: absolute;
+    bottom: 2.8em;
+    content: "";
+}
 @media (max-width: 575px) {
     #gotop {
         position: fixed;
@@ -275,6 +333,61 @@ a.navTitle {
         color: #fff;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     }
+    #sentimentSection {
+        position: fixed;
+        bottom: 80px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        line-height: 10px;
+        background: rgb(248, 235, 121);
+        text-align: center;
+        color: #fff;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    }
+    #sentimentSectionHover {
+        display: none;
+    }
+}
+
+#sentimentSectionHover {
+    position: fixed;
+    z-index: 95;
+    right: 110px;
+    bottom: 90px;
+    /* font-weight: 900; */
+    /* text-shadow: 1px 0.5px 0.5px rgba(214, 158, 148, 0.877); */
+    background-color: rgba(233, 93, 68);
+    font-size: 1em;
+    padding: 0.3em 0.1em;
+    border-radius: 6px; 
+    color: rgba(255, 255, 255, 0.877);
+    writing-mode: vertical-lr;
+}
+img.sentimentImg {
+    width: 100%;
+    border-radius: 8px; 
+    margin: 1em 0;
+    padding: 0;
+    vertical-align: 0 !important;
+}
+div.sentimentContent {
+    margin-top: 1em;
+    text-align: left;
+}
+
+a.chooseSection {
+    color: #212529;
+    padding: 0 1em;
+}
+
+a.chooseSection:hover {
+    color: #ea5645;
+    text-decoration: none;
+}
+
+#positiveButton {
+    border-right: 2px solid #2125298a;
 }
 
 
@@ -341,6 +454,7 @@ button.tag {
     font-size: 0.75em;
     border-radius: 8px;
     padding: 0.45em;
+    margin-bottom: 0.25em; 
     text-align: left;
     background-color: #5580AA;
     border: none;
