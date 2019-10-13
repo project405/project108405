@@ -150,8 +150,8 @@ app.post('/',cors(corsOptions), function (req, res, next) {
     // Pass to next layer of middleware
     console.log('reqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreq', req)
 
-        let reply_token = req.body.events[0].replyToken
-        let msg = req.body.events[0].message.text
+        let reply_token = req.body.replyToken
+        let msg = req.body.message.text
         console.log('reply_token = ' + reply_token);
         console.log('msgObj = ' , req.body.events[0]);
     
