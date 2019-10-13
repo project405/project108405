@@ -7,9 +7,9 @@ const moment = require('moment');
 //==============================
 //------ checkAuthority() ------
 //==============================
-var AllMember = async function (memID) {
+var AllMember = async function () {
     var result;
-    await sql('SELECT "memAuthority" FROM "member" where "memID" = $1 ', [memID])
+    await sql('SELECT * FROM "member" where "lineID" is not null')
         .then((data) => {
             if (data.rows[0] == undefined || data.rows[0] == null) {
                 result = undefined;
