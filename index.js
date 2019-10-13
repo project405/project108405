@@ -229,7 +229,21 @@ var server = app.listen(process.env.PORT || 3000, function() {
 });
 
 app.post('/',cors(corsOptions), function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
+    // Pass to next layer of middleware
     console.log('reqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreq', req)
+
         // let reply_token = req.body.events[0].replyToken
         // let msg = req.body.events[0].message.text
         // console.log('reply_token = ' + reply_token);
@@ -237,7 +251,8 @@ app.post('/',cors(corsOptions), function (req, res, next) {
     
         // reply(reply_token, msg)
         res.sendStatus(200)
-    
+        next();
+
 });
     
 
