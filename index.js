@@ -3,6 +3,12 @@
 //----------------------------------------
 var linebot = require('linebot');
 var express = require('express');
+var cors = require('cors')
+var app = express()
+
+app.use(cors())
+
+
 
 //增加引用函式
 const LinePush = require('./utility/LinePush');
@@ -219,7 +225,7 @@ var server = app.listen(process.env.PORT || 3000, function() {
     console.log("正在監聽埠號:", port);
 });
 
-app.post('/', function (req, res, next) {
+app.post('/',cors(corsOptions), function (req, res, next) {
     console.log('reqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreq', req)
         // let reply_token = req.body.events[0].replyToken
         // let msg = req.body.events[0].message.text
@@ -227,10 +233,11 @@ app.post('/', function (req, res, next) {
         // console.log('msgObj = ' , req.body.events[0]);
     
         // reply(reply_token, msg)
-        // res.sendStatus(200)
+        res.sendStatus(200)
     
 });
     
+
 // app.post('/', function (req, res, next) {
 //     let reply_token = req.body.events[0].replyToken
 //     let msg = req.body.events[0].message.text
