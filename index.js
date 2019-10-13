@@ -52,7 +52,7 @@ bot.on('message', function(event) {
 
             event.reply("哈囉",userName)         
             member.AllMember(userId).then(data => {  
-                console.log(data)
+                console.log(tostring(data))
                 // if (data == -9){
                 //     event.reply('執行錯誤');
                 // }else{                   
