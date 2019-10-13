@@ -143,6 +143,7 @@ bot.on('message', function(event) {
                             }
                         ]
                     }];
+                    push();
                     console.log('我是data!!!!!!!!!!!!!',data[0][0].artiNum);
                     //準備食物卡片樣式
                     // data.forEach(item => {
@@ -174,19 +175,22 @@ bot.on('message', function(event) {
                     // });
 
                     //將訊息推給所有使用者
-                    bot.push(
-                    // allUsers, 
-                    [{U2251202deb66b8a73da26e53c8399a13}],{
-                        "type": "template",
-                        "altText": "這是一個輪播樣板",
-                        "template": {
-                            "type": "carousel",
-                            "columns":msg
-                        },
-                        "imageAspectRatio": "rectangle",
-                        "imageSize": "cover"    
-                        }
-                    );  
+                    function push(){
+                        bot.push(
+                            // allUsers, 
+                            [{U2251202deb66b8a73da26e53c8399a13}],{
+                                "type": "template",
+                                "altText": "這是一個輪播樣板",
+                                "template": {
+                                    "type": "carousel",
+                                    "columns":msg
+                                },
+                                "imageAspectRatio": "rectangle",
+                                "imageSize": "cover"    
+                                }
+                            );  
+                    }
+                        
                 }  
             })  
         }
