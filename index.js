@@ -120,36 +120,58 @@ bot.on('message', function(event) {
                 }else if(data == -9){                    
                     event.reply('執行錯誤');
                 }else{
-                    let msg = [];
+                    let msg = [{
+                        "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + data[0][0].artiNum,
+                        "imageBackgroundColor": "#FFFFFF",
+                        "title": data[0][0].artiHead,
+                        "text": data[0][0].artiCont,
+                        "actions": [
+                            {
+                                "type": "postback",
+                                "label": "1顆星",
+                                "data": "&1"
+                            },
+                            {
+                              "type": "postback",
+                              "label": "2顆星",
+                              "data": "&2"
+                            },
+                            {
+                              "type": "postback",
+                              "label": "3顆星",
+                              "data": "&3"
+                            }
+                        ]
+                    }];
                     console.log('我是data!!!!!!!!!!!!!',data[0][0].artiNum);
                     //準備食物卡片樣式
-                    data.forEach(item => {
-                        console.log('我是item!!!!!!!!!!!!!',item);
+                    // data.forEach(item => {
+                    //     console.log('我是item!!!!!!!!!!!!!',item);
 
-                        msg.push({
-                            "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.artiNum,
-                            "imageBackgroundColor": "#FFFFFF",
-                            "title": item.artiHead,
-                            "text": item.artiCont,
-                            "actions": [
-                                {
-                                    "type": "postback",
-                                    "label": "1顆星",
-                                    "data": "&1"
-                                },
-                                {
-                                  "type": "postback",
-                                  "label": "2顆星",
-                                  "data": "&2"
-                                },
-                                {
-                                  "type": "postback",
-                                  "label": "3顆星",
-                                  "data": "&3"
-                                }
-                            ]
-                        });                        
-                    });
+                        // msg.push({
+                        //     "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.artiNum,
+                        //     "imageBackgroundColor": "#FFFFFF",
+                        //     "title": item.artiHead,
+                        //     "text": item.artiCont,
+                        //     "actions": [
+                        //         {
+                        //             "type": "postback",
+                        //             "label": "1顆星",
+                        //             "data": "&1"
+                        //         },
+                        //         {
+                        //           "type": "postback",
+                        //           "label": "2顆星",
+                        //           "data": "&2"
+                        //         },
+                        //         {
+                        //           "type": "postback",
+                        //           "label": "3顆星",
+                        //           "data": "&3"
+                        //         }
+                        //     ]
+                        // });                        
+                    // });
 
                     //將訊息推給所有使用者
                     bot.push(
