@@ -134,7 +134,7 @@ var server = app.listen(process.env.PORT || 3000, function() {
     console.log("正在監聽埠號:", port);
 });
 
-app.post('/',cors(corsOptions), function (req, res, next) {
+app.post('/webhook',cors(corsOptions), function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
     // Request methods you wish to allow
