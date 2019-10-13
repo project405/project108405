@@ -20,8 +20,12 @@ app.use(cors())
 
 
 //增加引用函式
-const LinePush = require('./utility/LinePush');
+// const LinePush = require('./utility/LinePush');
+// const article = require('./utility/article');
 const article = require('./utility/article');
+const member = require('./utility/member');
+
+
 
 //----------------------------------------
 // 填入自己在Line Developers的channel值
@@ -32,75 +36,8 @@ var bot = linebot({
     channelAccessToken: 'QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
 });
 
-//--------------------------------
-// 使用者加入群組或解除封鎖
-//--------------------------------
-// bot.on('follow', function (event){
-//     event.source.profile().then(
-//         function (profile) {
-//             //取得使用者資料
-//             const userName = profile.displayName;
-//             const userId = profile.userId;    
-           
-//             //呼叫API, 將使用者資料寫入資料庫
-//             LinePush.addMember(userId, userName).then(data => {  
-//                 if (data == -9){
-//                     event.reply('執行錯誤');
-//                 }else{                   
-//                     event.reply('已加入會員');
-//                 }
-//             })  
-//         }
-//     );
-// });
 
-//--------------------------------
-// 使用者封鎖群組
-//--------------------------------
-// bot.on('unfollow', function (event) {
-//     //取得使用者資料
-//     const userId = event.source.userId;
 
-//     //呼叫API, 將使用者資料刪除
-//     LinePush.deleteMember(userId).then(data => {  
-//         if (data == -9){
-//             event.reply('執行錯誤');    //會員已封鎖群組, 本訊息無法送達
-//         }else{                   
-//             event.reply('已退出會員');  //會員已封鎖群組, 本訊息無法送達
-//         }
-//     });  
-// });
-
-//--------------------------------
-// 機器人接受回覆的處理
-//--------------------------------
-// bot.on('postback', function(event) { 
-//     const data = event.postback.data;
-//     const sub = data.split('&');
-//     const userId = event.source.userId;
-
-//     event.source.profile().then(function (profile) {
-//         const userName = profile.displayName;    
-//         return event.reply([
-//             {
-//                 "type": "text",
-//                 "text": "使用者編號:" + userId
-//             },
-//             {
-//                 "type": "text",
-//                 "text": "姓名:" + userName
-//             },
-//             {
-//                 "type": "text",
-//                 "text": "餐點編號:" + sub[0]
-//             },
-//             {
-//                 "type": "text",
-//                 "text": "星:" + sub[1]
-//             }            
-//         ]);     
-//     });
-// });
 
 //--------------------------------
 // 機器人接受訊息的處理
@@ -169,16 +106,13 @@ app.post('/webhook', function (req, res) {
     request.post({
     headers: {
         'content-type' : 'application/json',
+        //Authorization為Channel access token 
         'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
     },
     url: 'https://api.line.me/v2/bot/message/push',
     body: JSON.stringify({
-        // replyToken: 'xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU=',
+        //to給資料庫有的使用者
         to: "U58ef73e7aac9254abd484af3ff964c4b",
-            // source: {
-            //     "type": "user",
-            //     "userId": "U2251202deb66b8a73da26e53c8399a13"
-            // },
             messages: [
                 {
                 type: 'text',
@@ -193,24 +127,3 @@ app.post('/webhook', function (req, res) {
    
     });
 });
-
-// function reply(reply_token, msg) {
-//     let headers = {
-//     'Content-Type': 'application/json',
-//     'Authorization': 'Bearer {xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU=}'
-//     }
-//     let body = JSON.stringify({
-//     replyToken: reply_token,
-//         messages: [{
-//             type: 'text',
-//             text: msg
-//         }]
-//     })
-//     request.post({
-//     url: 'https://api.line.me/v2/bot/message/reply',
-//     headers: headers,
-//     body: body
-//     }, (err, res, body) => {
-//     console.log( 'status =' + res.statusCode);
-//     });
-// }

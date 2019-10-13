@@ -7,6 +7,21 @@ const moment = require('moment');
 //==============================
 //------ checkAuthority() ------
 //==============================
+var AllMember = async function (memID) {
+    var result;
+    await sql('SELECT "memAuthority" FROM "member" where "memID" = $1 ', [memID])
+        .then((data) => {
+            if (data.rows[0] == undefined || data.rows[0] == null) {
+                result = undefined;
+            } else {
+                result = data.rows[0].memAuthority;
+            }
+        }, (error) => {
+            result = undefined;
+        });
+    return result;
+}
+
 var checkAuthority = async function (memID) {
     var result;
     await sql('SELECT "memAuthority" FROM "member" where "memID" = $1 ', [memID])
@@ -549,6 +564,7 @@ var report = async function (memID, artiNum, artiMessNum, recomMessNum, reportRe
 
 //匯出
 module.exports = {
+    AllMember,
     articlePost, recommendPost, replyPost, myArticle, modifyMember, getOriginalMail,
     getMyArticleClassList,
     addArticleLike, delArticleLike,
