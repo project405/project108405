@@ -114,29 +114,29 @@ app.post('/webhook', function (req, res) {
         
         console.log('allUser@@@@@@@@@@',allUser[0]);
         console.log('allUser@@@@@@@@@@',allUser[1]);
-
+    request.post({
+        headers: {
+            'content-type' : 'application/json',
+            //Authorization為Channel access token 
+            'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
+        },
+        url: 'https://api.line.me/v2/bot/message/push',
+        body: JSON.stringify({
+            //to給資料庫有的使用者
+            to: allUser,
+                messages: [
+                    {
+                    type: 'text',
+                    text: "Hello,Ting~這是Line Bot API測試訊息"
+                    }
+                ]
+            })
+        }, function(error, response, body){
+    
+        res.end(body);
+    
+        });
     })   
 
-    request.post({
-    headers: {
-        'content-type' : 'application/json',
-        //Authorization為Channel access token 
-        'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
-    },
-    url: 'https://api.line.me/v2/bot/message/push',
-    body: JSON.stringify({
-        //to給資料庫有的使用者
-        to: 'U2251202deb66b8a73da26e53c8399a13',
-            messages: [
-                {
-                type: 'text',
-                text: "Hello,Ting~這是Line Bot API測試訊息"
-                }
-            ]
-        })
-    }, function(error, response, body){
-   
-    res.end(body);
-   
-    });
+    
 });
