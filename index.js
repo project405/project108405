@@ -52,7 +52,7 @@ bot.on('message', function(event) {
 
             event.reply("哈囉",userName)         
             member.AllMember(userId).then(data => {  
-                console.log(tostring(data))
+                console.log(data)
                 // if (data == -9){
                 //     event.reply('執行錯誤');
                 // }else{                   
@@ -69,7 +69,7 @@ bot.on('message', function(event) {
 // 如果連接根目錄, 交給機器人處理
 //----------------------------------------
 const linebotParser = bot.parser();
-app.post('/', linebotParser);
+app.post('/linebot', linebotParser);
 
 //----------------------------------------
 // 可直接取用檔案的資料夾
