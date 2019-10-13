@@ -49,8 +49,10 @@
 
                 <!-- tag -->
                 <div class="tagDiv col-lg-12 ">
-                    <% for (var i = 0 ; i< items[2].length ; i++) { %>
-                        <button type="button" class="btn  tag"><%= items[2][i].tagName %></button>
+                    <% if(items[2] != undefined ) { %>
+                        <% for (var i = 0 ; i< items[2].length ; i++) { %>
+                            <button type="button" class="btn  tag"><%= items[2][i].tagName %></button>
+                        <% } %>
                     <% } %>
                 </div>
                 <hr class="info">
