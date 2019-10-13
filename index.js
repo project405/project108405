@@ -188,7 +188,7 @@ bot.on('message', function(event) {
                                 "imageAspectRatio": "rectangle",
                                 "imageSize": "cover"    
                                 }
-                            );  
+                        );  
                     }
                         
                 }  
@@ -203,7 +203,7 @@ bot.on('message', function(event) {
 //----------------------------------------
 const app = express();
 const linebotParser = bot.parser();
-app.post('/', linebotParser);
+// app.post('/', linebotParser);
 
 //----------------------------------------
 // 可直接取用檔案的資料夾
@@ -218,3 +218,47 @@ var server = app.listen(process.env.PORT || 3000, function() {
     const port = server.address().port;
     console.log("正在監聽埠號:", port);
 });
+
+app.post('/', function (req, res, next) {
+    console.log('reqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreq', req)
+        // let reply_token = req.body.events[0].replyToken
+        // let msg = req.body.events[0].message.text
+        // console.log('reply_token = ' + reply_token);
+        // console.log('msgObj = ' , req.body.events[0]);
+    
+        // reply(reply_token, msg)
+        // res.sendStatus(200)
+    
+});
+    
+// app.post('/', function (req, res, next) {
+//     let reply_token = req.body.events[0].replyToken
+//     let msg = req.body.events[0].message.text
+//     console.log('reply_token = ' + reply_token);
+//     console.log('msgObj = ' , req.body.events[0]);
+
+//     reply(reply_token, msg)
+//     res.sendStatus(200)
+
+// });
+
+// function reply(reply_token, msg) {
+//     let headers = {
+//     'Content-Type': 'application/json',
+//     'Authorization': 'Bearer {}'
+//     }
+//     let body = JSON.stringify({
+//     replyToken: reply_token,
+//     messages: [{
+//     type: 'text',
+//     text: msg
+//     }]
+//     })
+//     request.post({
+//     url: 'https://api.line.me/v2/bot/message/reply',
+//     headers: headers,
+//     body: body
+//     }, (err, res, body) => {
+//     console.log('status = ' + res.statusCode);
+//     });
+//     }
