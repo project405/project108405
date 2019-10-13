@@ -50,9 +50,13 @@ var bot = linebot({
 //             console.log(profile);
 //             const userName = profile.displayName;
             // const userId = profile.userId;
+            
             userId = 'U58ef73e7aac9254abd484af3ff964c4b'   ;   
             member.AllMember(userId).then(data => {  
+                let allUser = [];
                 console.log('data@@@@@@@@@@',data)
+                allUser = data;
+                console.log('allUser@@@@@@@@@@',allUser)
                 // if (data == -9){
                 //     event.reply('執行錯誤');
                 // }else{                   
