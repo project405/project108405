@@ -43,12 +43,12 @@ var bot = linebot({
 //--------------------------------
 // 機器人接受訊息的處理
 //--------------------------------
-bot.on('message', function(event) {    
-    event.source.profile().then(
-        function (profile) {
-            //取得使用者資料
-            console.log(profile);
-            const userName = profile.displayName;
+// bot.on('message', function(event) {    
+//     event.source.profile().then(
+//         function (profile) {
+//             //取得使用者資料
+//             console.log(profile);
+//             const userName = profile.displayName;
             // const userId = profile.userId;
             userId = 'U58ef73e7aac9254abd484af3ff964c4b'   ;   
             member.AllMember(userId).then(data => {  
@@ -61,8 +61,8 @@ bot.on('message', function(event) {
             }) 
             
                
-        })  
-});
+//         })  
+// });
 
 
 //----------------------------------------
