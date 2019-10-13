@@ -13,7 +13,7 @@ var AllMember = async function () {
     
     await sql('SELECT * FROM "member" where "lineID" is not null')
         .then((data) => {
-            console.log(data.rows[0])
+            console.log(data.rows)
         //     if (data.rows[0] == undefined || data.rows[0] == null) {
         //         result = undefined;
         //     } else {
