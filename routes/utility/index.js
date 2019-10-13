@@ -170,7 +170,7 @@ var getWebSearch = async function (searchParams, memID) {
         });
 
     //取得第一張照片
-    await sql('SELECT "artiNum" , "imgName" FROM "image"')
+    await sql('SELECT "artiNum" , "imgName" FROM "image"  WHERE "artiMessNum" IS NULL')
         .then((data) => {
             if (data.rows == null || data.rows == '') {
                 artiImgs = undefined;
@@ -201,7 +201,7 @@ var getWebSearch = async function (searchParams, memID) {
         });
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image"')
+    await sql('SELECT "recomNum" , "imgName" FROM "image" ')
     .then((data) => {
         if (!data.rows) {
             recomImgs = undefined;
