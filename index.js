@@ -177,9 +177,9 @@ function reply(reply_token, msg) {
     }
     let body = JSON.stringify({
     reply_token: "U2251202deb66b8a73da26e53c8399a13",
-        messages: [{
-            type: 'text',
-            text: msg
+        'messages': [{
+            'type': 'text',
+            'text': 'msg'
         }]
     })
     request.post({
