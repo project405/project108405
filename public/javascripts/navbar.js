@@ -25,30 +25,16 @@ $(document).ready(() => {
                                 <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
                             </li>\
                             <li class="nav-item">\
-                                <a class="nav-link" href="/notify">\
-                                    <i class="fas fa-bell" style="color:white;"></i>\
-                                </a>\
-                            </li>\
-                            <li class="nav-item">\
                                 <a class="nav-link" href="/recommendlist">\
                                 推薦</a>\
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/articleList">\
-                                    文章</a>\
+                                    討論區</a>\
                             </li>\
                             <li class="nav-item">\
                             <a class="nav-link" href="/articleList/post">\
                             <i class="fas fa-pen"></i>&nbsp;發文</a>\
-                            </li>\
-                            <li id="dropdown" class="nav-item dropdown">\
-                                <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                                收藏\
-                                </a>\
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">\
-                                    <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>\
-                                    <a class="dropdown-item" href="/collection/article">文章收藏</a>\
-                                </div>\
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
@@ -122,47 +108,31 @@ $(document).ready(() => {
                                 <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
                             </li>\
                             <li class="nav-item">\
-                                <a class="nav-link" href="/notify">\
-                                    <i class="fas fa-bell" style="color:white;"></i>\
-                                </a>\
-                            </li>\
-                            <li class="nav-item">\
                                 <a class="nav-link" href="/recommendlist">\
                                 推薦</a>\
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/articleList">\
-                                    文章</a>\
+                                    討論區</a>\
                             </li>\
                             <li class="nav-item">\
                             <a class="nav-link" href="/articleList/post">\
                             <i class="fas fa-pen"></i>&nbsp;發文</a>\
-                            </li>\
-                            <li id="dropdown" class="nav-item dropdown">\
-                                <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                                收藏\
-                                </a>\
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">\
-                                    <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>\
-                                    <a class="dropdown-item" href="/collection/article">文章收藏</a>\
-                                </div>\
-                            </li>\
-                            <li class="nav-item">\
-                                <a class="nav-link" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
                             </li>\
                             <li class="nav-item dropdown">\
                                 <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                                     會員\
                                 </a>\
                                 <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
-                                    <a class="dropdown-item" href="/member/memberManage">會員資料修改</a>\
+                                    <a class="dropdown-item" href="/notify"><i class="fas fa-bell" style="color:white;"></i></a>\
+                                    <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>\
+                                    <a class="dropdown-item" href="/collection/article">文章收藏</a>\
                                     <a class="dropdown-item" href="/member/articleManage">文章管理</a>\
+                                    <a class="dropdown-item" href="/member/memberManage">會員資料修改</a>\
                                     <a class="dropdown-item" href="/user/logout">登出</a>\
                                 </div>\
                             </li>\
                             <li class="nav-item">\
-                            <a class="helper" id="aboutUsButton" data-toggle="modal" data-target="#aboutUsDiv" style="cursor: pointer;">\
-                            小幫手</a>\
                         </li>\
                         </ul>\
                     </div>\
@@ -222,30 +192,16 @@ $(document).ready(() => {
                             <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
                         </li>\
                         <li class="nav-item">\
-                            <a class="nav-link" href="/notify">\
-                                <i class="fas fa-bell" style="color:white;"></i>\
-                            </a>\
-                        </li>\
-                        <li class="nav-item">\
                             <a class="nav-link" href="/recommendlist">\
                             推薦</a>\
                         </li>\
                         <li class="nav-item">\
                             <a class="nav-link" href="/articleList">\
-                                文章</a>\
+                                討論區</a>\
                         </li>\
                         <li class="nav-item">\
                         <a class="nav-link" href="/articleList/post">\
                         <i class="fas fa-pen"></i>&nbsp;發文</a>\
-                        </li>\
-                        <li id="dropdown" class="nav-item dropdown">\
-                            <a class="nav-link dropdown-toggle" href="/collectionArticle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                            收藏\
-                            </a>\
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">\
-                                <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>\
-                                <a class="dropdown-item" href="/collection/article">文章收藏</a>\
-                            </div>\
                         </li>\
                         <li class="nav-item">\
                             <a class="nav-link" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
@@ -255,8 +211,11 @@ $(document).ready(() => {
                                 會員\
                             </a>\
                             <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
-                                <a class="dropdown-item" href="/member/memberManage">會員資料修改</a>\
+                                <a class="nav-link" href="/notify"><i class="fas fa-bell" style="color:white;"></i></a>\
+                                <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>\
+                                <a class="dropdown-item" href="/collection/article">文章收藏</a>\
                                 <a class="dropdown-item" href="/member/articleManage">文章管理</a>\
+                                <a class="dropdown-item" href="/member/memberManage">會員資料修改</a>\
                                 <a class="dropdown-item" href="/user/logout">登出</a>\
                             </div>\
                         </li>\

@@ -69,6 +69,13 @@ $(document).ready(function() {
         $('#sentimentSectionHover').css('visibility','hidden')
         $('#sentimentSectionHover').css('transition','visibility 0.2s, opacity 0.5s linear')
     })
+
+    $('.surpriseSection').hover(() => {
+        $('.surpriseHoverText').css('display','block')
+    })
+    $('.surpriseSection').mouseleave(() => {
+        $('.surpriseHoverText').css('display','none')
+    })
 });
 
 

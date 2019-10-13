@@ -1,4 +1,4 @@
-<!doctype html>
+-<!doctype html>
 <html>
 
 <head>
@@ -55,10 +55,23 @@
                     <div class="card shadow list " style="cursor:pointer; ">
                         <div class="card-body " onclick="location.href='/article/<%= myArtiClass[0][i].artiNum %>'">
                             <div class="poster">
-                                <div class="name">
-                                    <p><%= myArtiClass[0][i].memID %> 於 <%= myArtiClass[0][i].artiDateTime %>發表</p>
+                                <div class="name d-flex justify-content-between">
+                                    <div>
+                                        <a class="name"><%= myArtiClass[0][i].memID %></a>
+                                        <a class="next"></a>
+                                        <a class="dateTime"> 於 <%= myArtiClass[0][i].artiDateTime %>發表</a>             
+                                    </div>
+                                    <!-- <div class="dropdown ml-auto">
+                                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-h"></i>     
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#">編輯</a>
+                                                <a class="dropdown-item" href="#">刪除</a>
+                                            </div>
+                                    </div> -->
                                 </div>
-                                <hr>
+                                <hr style="margin-top: 0.5em">
                             </div>
                             <div class="row seperate">
                                 <div class="col-sm-9 articleContent">
@@ -84,13 +97,13 @@
                                     <% if (myArtiClass[0][i].artiNum == myArtiClass[2][j].artiNum){ %>
                                         <div class="wrapperCard card-img-top col-lg-3"
                                             style="background-image: url( '/userImg/<%= myArtiClass[2][j].imgName %>'); ">
-                                            <% break %> <!-- 取得一張照片就結束 -->
+                                        </div>
+                                        <% break %> <!-- 取得一張照片就結束 -->
                                     <% } %>
                                 <% } %>
                             <% } %>
-                            </div>
                         </div>
-
+                        </div>
                         <!-- info -->
                         <div class="info">
                             <!-- 愛心按鈕 -->
@@ -102,8 +115,8 @@
                                 <i class="fab fa-gratipay"></i><a id=<%= "addLikeCount" + myArtiClass[0][i].artiNum %>>
                                     <%= myArtiClass[0][i].likeCount %> </a> </button>
                             <button type="button" id=<%= "delLike" + myArtiClass[0][i].artiNum %> class="btn postInfo"
-                                style="color:#c93737; display:none" onclick=<%= "delLike(" + myArtiClass[0][i].artiNum + ")" %>>
-                                <i class="fab fa-gratipay"></i><a id=<%= "delLikeCount" + myArtiClass[0][i].artiNum %>>
+                                style="display:none" onclick=<%= "delLike(" + myArtiClass[0][i].artiNum + ")" %>>
+                                <i class="fab fa-gratipay" style="color:#c93737;"></i><a id=<%= "delLikeCount" + myArtiClass[0][i].artiNum %>>
                                     <%= myArtiClass[0][i].likeCount %></a></button>
 
                            <!-- 判斷是否有按過愛心 -->
@@ -290,12 +303,10 @@
                             </script>
                         </div>
                         <!-- info結束 -->
-
                     </div>
                     <div class="w-100"></div>
                     <% } %>
                     <!-- listEnd -->
-                </div>
             </div>
         </div>
     </section>

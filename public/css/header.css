@@ -335,6 +335,7 @@ button.tag {
     border-radius: 8px;
     padding: 0.45em;
     text-align: left;
+    margin-bottom: 0.25em; 
     background-color: #5580AA;
     border: none;
     color: white;
@@ -511,3 +512,17 @@ button.postInfo:focus {
     opacity: 0;
     height: 0;
 }
+
+button.report:hover {
+    background-color:  hsla(0, 45%, 41%, 0.803);
+    border-radius: 6px; 
+    color: white;
+
+}
+
+i.fa-gratipay:hover {
+    color:rgb(201, 55, 55);
+}
+i.fa-comment-dots:hover {
+    color:rgb(60, 123, 246);
+} 

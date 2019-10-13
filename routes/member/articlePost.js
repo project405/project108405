@@ -43,7 +43,7 @@ var upload = multer({
 
 
 //post請求
-router.post('/', upload.array('userImg', 3), function (req, res, next) {
+router.post('/', upload.array('userImg', 10), function (req, res, next) {
     var memID;
     var artiHead = req.body.artiHead;
     var artiCont = req.body.artiCont;
@@ -52,6 +52,9 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
     var positiveWords = req.body.positiveWords;
     var negativeWords = req.body.negativeWords;
     var swearWords = req.body.swearWords;
+    var artiNum = req.body.artiNum;
+    console.log('artiHead', artiHead)
+
     console.log(req.body);
 
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
@@ -130,18 +133,33 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
                         fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
                     }
                 }
-                member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
-                    if (data == 0) {
-                        console.log("發文成功");
-                        res.send("發文成功");
-                    } else {
-                        for (var i = 0; i < imgData.length; i++) {
-                            fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                if (artiNum) {
+                    member.editArticle(memID, artiHead, artiCont, artiClass, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.remainImg).then(data => {
+                        if (data == 1) {
+                            console.log("編輯成功");
+                            res.send("編輯成功");
+                        } else {
+                            for (var i = 0; i < imgData.length; i++) {
+                                fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                            }
+                            console.log("編輯失敗");
+                            res.send("編輯失敗");
                         }
-                        console.log("發文失敗");
-                        res.send("發文失敗");
-                    }
-                })
+                    })
+                } else {
+                    member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
+                        if (data == 0) {
+                            console.log("發文成功");
+                            res.send("發文成功");
+                        } else {
+                            for (var i = 0; i < imgData.length; i++) {
+                                fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
+                            }
+                            console.log("發文失敗");
+                            res.send("發文失敗");
+                        }
+                    })
+                }
             }
         } else {
             for (var i = 0; i < imgData.length; i++) {

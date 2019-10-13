@@ -41,12 +41,20 @@ div.article {
     width: 100%;
     overflow: hidden;
     background-size: cover;
-    /* background-position: center center; */
+    background-position: center center;
     border-radius: 8px;
     border: 3px solid #fff;
     /* text-align: left !important; */
 }
 
+@media (max-width: 991px) {
+    div.wrapperCard {
+        width: 100% !important;
+        display: block;
+        height: 6em !important;
+        background-position: center center;
+    }
+}
 p.poster {
     text-align: right;
     font-size: 1em;
@@ -61,23 +69,42 @@ p.poster {
 }
 
 h3.card-title {
-    font-size: 1.3em !important;
+    font-size: 1.1em !important;
     text-align: left;
     font-weight: bolder;
+
 }
 
 /* tag */
 
-a.floorTag {
-    text-align: right;
-    color: #fff !important;
-    padding: 0.2em 0.4em 0.2em 0.4em;
-    border: 2px solid #993a3a;
-    border-radius: 8px;
-    background-color: #993a3a;
-    text-decoration: none;
-    word-break: break-all;
-    font-size: 0.75em;
+a.dateTime {
+    font-size: 0.9em !important;
+    color: rgb(104, 102, 102) !important;
+    margin: 0;
+}
+
+@media (max-width: 450px) {
+    a.next::before {
+        white-space: pre;
+        content: '\A';
+    }
+}
+
+.dotMenu {
+    background-color: white !important;
+    text-align: center;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}
+.dotMenu > .dropdown-item:hover {
+    background-color: #b4d7ddb2 !important;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    text-align: center;
+    padding: 0.25 !important;
+    margin: 0.25 !important;
 }
 
 /* card */

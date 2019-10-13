@@ -44,7 +44,7 @@ var upload = multer({
 
 
 //post請求
-router.post('/', upload.array('userImg', 10), function (req, res, next) {
+router.post('/', upload.array('userImg', 20), function (req, res, next) {
     console.log(req.session.memID)
     var memID = req.session.memID;
     var replyCont = req.body.replyCont;
@@ -53,9 +53,8 @@ router.post('/', upload.array('userImg', 10), function (req, res, next) {
     var positiveWords = req.body.positiveWords;
     var negativeWords = req.body.negativeWords;
     var swearWords = req.body.swearWords;
-    console.log('memID', memID)
-    console.log('artiNum', artiNum)
-    console.log('req.body', req.body);
+    var editReply = req.body.editReply;
+    
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
     var imgData = [];
     // console.log(req.files);
@@ -109,18 +108,33 @@ router.post('/', upload.array('userImg', 10), function (req, res, next) {
                     fs.unlinkSync('public/userImg/replyImg/' + imgData[i]); //刪除檔案
                 }
             }
-            member.replyPost(artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
-                if (data == 0) {
-                    console.log("留言成功");
-                    res.send("留言成功");
-                } else {
-                    for (var i = 0; i < imgData.length; i++) {
-                        fs.unlinkSync('public/userImg/replyImg/' + imgData[i]); //刪除檔案
+            if (editReply) {
+                member.editReply(artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.remainImg).then(data => {
+                    if (data == 1) {
+                        console.log("編輯留言成功");
+                        res.send("編輯留言成功");
+                    } else {
+                        for (var i = 0; i < imgData.length; i++) {
+                            fs.unlinkSync('public/userImg/replyImg/' + imgData[i]); //刪除檔案
+                        }
+                        console.log("編輯留言失敗");
+                        res.send("編輯留言失敗");
                     }
-                    console.log("留言失敗1");
-                    res.send("留言失敗1");
-                }
-            })
+                })
+            } else {
+                member.replyPost(artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
+                    if (data == 0) {
+                        console.log("留言成功");
+                        res.send("留言成功");
+                    } else {
+                        for (var i = 0; i < imgData.length; i++) {
+                            fs.unlinkSync('public/userImg/replyImg/' + imgData[i]); //刪除檔案
+                        }
+                        console.log("留言失敗");
+                        res.send("留言失敗");
+                    }
+                })
+            }
         } else {
             for (var i = 0; i < imgData.length; i++) {
                 fs.unlinkSync('public/userImg/replyImg/' + imgData[i]); //刪除檔案

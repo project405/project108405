@@ -15,6 +15,8 @@ var signUp = require('./routes/utility/signUp');
 //=========================================
 var articleListRouter = require('./routes/article/articleList');
 var articleRouter = require('./routes/article/article');
+var editArticleRouter = require('./routes/article/editArticle');
+var editReplyRouter = require('./routes/article/editReply');
 var addCollectionRouter = require('./routes/collection/addCollection');
 var delCollectionRouter = require('./routes/collection/delCollection');
 var likeCountRouter = require('./routes/likeCount');
@@ -153,6 +155,8 @@ app.use('/', indexRouter);
 //---------  article use ------------
 //=========================================
 app.use('/article', articleRouter);
+app.use('/editArticle', editArticleRouter);
+app.use('/editReply', editReplyRouter);
 app.use('/articleList', articleListRouter);
 app.use('/articleList/post', postRouter);
 app.use('/article/post', articlePostRouter);

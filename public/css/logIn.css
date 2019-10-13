@@ -124,17 +124,17 @@ button.sameWidth {
     border: 0;
     letter-spacing: 3px;
     color: #2D4F41;
-    margin-left: 0.5em;
+    margin-left: 0em;
 }
 
 input.code {
-    width: 6em;
+    width: 5.5em;
     border-radius: 10px;
     background-color: #ddd;
 }
 
 input.inputValidateCode {
-    width: 8em;
+    width: 6em;
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 10px;
@@ -209,6 +209,7 @@ i.fa-sync-alt {
     flex: 1;
     overflow: hidden;
     border-radius: 10px; 
+    background-color: white !important;
 }
 
 .input-icon,
