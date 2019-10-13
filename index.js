@@ -244,46 +244,36 @@ app.post('/',cors(corsOptions), function (req, res, next) {
     // Pass to next layer of middleware
     console.log('reqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreq', req)
 
-        // let reply_token = req.body.events[0].replyToken
-        // let msg = req.body.events[0].message.text
-        // console.log('reply_token = ' + reply_token);
-        // console.log('msgObj = ' , req.body.events[0]);
+        let reply_token = req.body.events[0].replyToken
+        let msg = req.body.events[0].message.text
+        console.log('reply_token = ' + reply_token);
+        console.log('msgObj = ' , req.body.events[0]);
     
-        // reply(reply_token, msg)
+        reply(reply_token, msg)
         res.sendStatus(200)
         next();
 
 });
     
 
-// app.post('/', function (req, res, next) {
-//     let reply_token = req.body.events[0].replyToken
-//     let msg = req.body.events[0].message.text
-//     console.log('reply_token = ' + reply_token);
-//     console.log('msgObj = ' , req.body.events[0]);
 
-//     reply(reply_token, msg)
-//     res.sendStatus(200)
-
-// });
-
-// function reply(reply_token, msg) {
-//     let headers = {
-//     'Content-Type': 'application/json',
-//     'Authorization': 'Bearer {}'
-//     }
-//     let body = JSON.stringify({
-//     replyToken: reply_token,
-//     messages: [{
-//     type: 'text',
-//     text: msg
-//     }]
-//     })
-//     request.post({
-//     url: 'https://api.line.me/v2/bot/message/reply',
-//     headers: headers,
-//     body: body
-//     }, (err, res, body) => {
-//     console.log('status = ' + res.statusCode);
-//     });
-//     }
+function reply(reply_token, msg) {
+    let headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU=}'
+    }
+    let body = JSON.stringify({
+    replyToken: reply_token,
+        messages: [{
+            type: 'text',
+            text: msg
+        }]
+    })
+    request.post({
+    url: 'https://api.line.me/v2/bot/message/push',
+    headers: headers,
+    body: body
+    }, (err, res, body) => {
+    console.log('status = ' + res.statusCode);
+    });
+}
