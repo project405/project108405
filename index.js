@@ -124,7 +124,7 @@ bot.on('message', function(event) {
                     console.log('我是data!!!!!!!!!!!!!',data[0][0].artiNum);
                     //準備食物卡片樣式
                     data.forEach(item => {
-                        console.log('我是item!!!!!!!!!!!!!',item[0][0].artiNum);
+                        console.log('我是item!!!!!!!!!!!!!',item);
 
                         msg.push({
                             "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.artiNum,
