@@ -5,7 +5,8 @@ var linebot = require('linebot');
 var express = require('express');
 
 //增加引用函式
-const foods = require('./utility/foods');
+const LinePush = require('./utility/LinePush');
+const article = require('./utility/article');
 
 //----------------------------------------
 // 填入自己在Line Developers的channel值
@@ -27,7 +28,7 @@ bot.on('follow', function (event){
             const userId = profile.userId;    
            
             //呼叫API, 將使用者資料寫入資料庫
-            foods.addMember(userId, userName).then(data => {  
+            LinePush.addMember(userId, userName).then(data => {  
                 if (data == -9){
                     event.reply('執行錯誤');
                 }else{                   
@@ -46,7 +47,7 @@ bot.on('unfollow', function (event) {
     const userId = event.source.userId;
 
     //呼叫API, 將使用者資料刪除
-    foods.deleteMember(userId).then(data => {  
+    LinePush.deleteMember(userId).then(data => {  
         if (data == -9){
             event.reply('執行錯誤');    //會員已封鎖群組, 本訊息無法送達
         }else{                   
@@ -58,33 +59,33 @@ bot.on('unfollow', function (event) {
 //--------------------------------
 // 機器人接受回覆的處理
 //--------------------------------
-bot.on('postback', function(event) { 
-    const data = event.postback.data;
-    const sub = data.split('&');
-    const userId = event.source.userId;
+// bot.on('postback', function(event) { 
+//     const data = event.postback.data;
+//     const sub = data.split('&');
+//     const userId = event.source.userId;
 
-    event.source.profile().then(function (profile) {
-        const userName = profile.displayName;    
-        return event.reply([
-            {
-                "type": "text",
-                "text": "使用者編號:" + userId
-            },
-            {
-                "type": "text",
-                "text": "姓名:" + userName
-            },
-            {
-                "type": "text",
-                "text": "餐點編號:" + sub[0]
-            },
-            {
-                "type": "text",
-                "text": "星:" + sub[1]
-            }            
-        ]);     
-    });
-});
+//     event.source.profile().then(function (profile) {
+//         const userName = profile.displayName;    
+//         return event.reply([
+//             {
+//                 "type": "text",
+//                 "text": "使用者編號:" + userId
+//             },
+//             {
+//                 "type": "text",
+//                 "text": "姓名:" + userName
+//             },
+//             {
+//                 "type": "text",
+//                 "text": "餐點編號:" + sub[0]
+//             },
+//             {
+//                 "type": "text",
+//                 "text": "星:" + sub[1]
+//             }            
+//         ]);     
+//     });
+// });
 
 //--------------------------------
 // 機器人接受訊息的處理
@@ -100,20 +101,20 @@ bot.on('message', function(event) {
             let allUsers = [];
 
             //呼叫API取得所有成員資料
-            foods.fetchAllMember().then(data => {
-                if (data == -1){
-                    event.reply('找不到資料');
-                }else if(data == -9){                    
-                    event.reply('執行錯誤');
-                }else{
-                    data.forEach(item => {
-                        allUsers.push(item.userid);
-                    });
-                }
-            });            
+            // LinePush.fetchAllMember().then(data => {
+            //     if (data == -1){
+            //         event.reply('找不到資料');
+            //     }else if(data == -9){                    
+            //         event.reply('執行錯誤');
+            //     }else{
+            //         data.forEach(item => {
+            //             allUsers.push(item.userid);
+            //         });
+            //     }
+            // });            
 
             //呼叫API取得隨選食物資料
-            foods.randomSelectFoods().then(data => {  
+            article.getArticleList().then(data => {  
                 if (data == -1){
                     event.reply('找不到資料');
                 }else if(data == -9){                    
@@ -122,44 +123,45 @@ bot.on('message', function(event) {
                     let msg = [];
 
                     //準備食物卡片樣式
-                    data.forEach(item => {
-                        msg.push({
-                            "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.photo,
-                            "imageBackgroundColor": "#FFFFFF",
-                            "title": item.title,
-                            "text": item.description,
-                            "actions": [
-                                {
-                                    "type": "postback",
-                                    "label": "1顆星",
-                                    "data": item.id + "&1"
-                                },
-                                {
-                                  "type": "postback",
-                                  "label": "2顆星",
-                                  "data": item.id + "&2"
-                                },
-                                {
-                                  "type": "postback",
-                                  "label": "3顆星",
-                                  "data": item.id + "&3"
-                                }
-                            ]
-                        });                        
-                    });
+                    // data.forEach(item => {
+                    //     msg.push({
+                    //         "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/" + item.photo,
+                    //         "imageBackgroundColor": "#FFFFFF",
+                    //         "title": item.title,
+                    //         "text": item.description,
+                    //         "actions": [
+                    //             {
+                    //                 "type": "postback",
+                    //                 "label": "1顆星",
+                    //                 "data": item.id + "&1"
+                    //             },
+                    //             {
+                    //               "type": "postback",
+                    //               "label": "2顆星",
+                    //               "data": item.id + "&2"
+                    //             },
+                    //             {
+                    //               "type": "postback",
+                    //               "label": "3顆星",
+                    //               "data": item.id + "&3"
+                    //             }
+                    //         ]
+                    //     });                        
+                    // });
 
                     //將訊息推給所有使用者
-                    bot.push(
-                        allUsers, {
-                        "type": "template",
-                        "altText": "這是一個輪播樣板",
-                        "template": {
-                            "type": "carousel",
-                            "columns":msg
-                        },
-                        "imageAspectRatio": "rectangle",
-                        "imageSize": "cover"    
-                    });  
+                    bot.push("我是推播"
+                    //     allUsers, {
+                    //     "type": "template",
+                    //     "altText": "這是一個輪播樣板",
+                    //     "template": {
+                    //         "type": "carousel",
+                    //         "columns":msg
+                    //     },
+                    //     "imageAspectRatio": "rectangle",
+                    //     "imageSize": "cover"    
+                    // }
+                    );  
                 }  
             })  
         }
