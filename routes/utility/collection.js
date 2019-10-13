@@ -257,7 +257,7 @@ var getCollArticle = async function (memID) {
              ' WHERE "artiNum" '+
                 ' IN(SELECT "artiNum" '+
                    ' FROM "memberCollection" '+
-                   ' WHERE "memID" = $1) AND "memID" = $1', [memID])
+                   ' WHERE "memID" = $1)', [memID])
         .then((data) => {
             if (!data.rows) {
                 imgs = undefined ; 
@@ -401,7 +401,7 @@ var getCollArtiClassList = async function (memID, artiClass) {
         ' WHERE "artiNum" '+
             ' IN(SELECT "artiNum" '+
                 ' FROM "memberCollection" '+
-                ' WHERE "memID" = $1) AND "memID" = $1', [memID])
+                ' WHERE "memID" = $1)', [memID])
         .then((data) => {
             if (!data.rows) {
                 isLike = undefined ; 

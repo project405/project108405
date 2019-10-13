@@ -3,6 +3,7 @@ var router = express.Router();
 
 const member = require('../utility/member');
 const signUp = require('../utility/signUp');
+const moment = require('moment');
 
 //接收GET請求
 router.get('/', function (req, res, next) {
@@ -16,13 +17,10 @@ router.get('/', function (req, res, next) {
     } else if (req.session.memID == undefined && req.session.passport != undefined) {
         memID = req.session.passport.user.id;
     }
-    
-    member.checkAuthority(memID).then(data => {
-        var mydata = [];
-        mydata[0] = data;
-        mydata[1] = memID;
-        console.log(mydata);
-        res.render('memberManage', { items: mydata });
+
+    member.getMemberInfor(memID).then(data => {
+        data[0].memBirth = moment(data[0].memBirth).format("YYYY-MM-DD");
+        res.render('memberManage', { items: data });
     })
 
 });

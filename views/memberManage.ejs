@@ -50,30 +50,38 @@
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-envelope-open-text"></span></span>
                 <input type="email" class="input-with-icon" id="email" name="memMail"
-                    placeholder="10546004@ntub.edu.tw">
+                    value=<%= items[0].memMail %> >
             </div>
 
-
+            <!-- <%= items[0].memBirth %> -->
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-birthday-cake"></span></span>
                 <input type="date" class="input-with-icon" id="birthday" name="memBirth" placeholder="生日"
-                    onchange="birthdayValidateForm()">
+                    onchange="birthdayValidateForm()" value="1997-09-28">
             </div>
             <p id="birthdayAlarm"></p>
 
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-home"></span></span>
-                <input type="text" class="input-with-icon" id="address" name="memAddr" placeholder="地址">
+                <input type="text" class="input-with-icon" id="address" name="memAddr" value="<%= items[0].memAddr %>">
             </div>
 
             <div class="input-icon-wrap radio">
                 <span class="input-icon align-middle" style="line-height: 3;"><span class="fas fa-venus-mars"></span></span>
                 <div>
-                    <input id="radio-1" class="radio-custom" name="memGender" value="m" type="radio">
+                    <% if(items[0].memGender == 'm'){ %>
+                        <input id="radio-1" class="radio-custom" name="memGender" value="m" type="radio" checked="checked">
+                    <% } else { %>
+                        <input id="radio-1" class="radio-custom" name="memGender" value="m" type="radio">
+                    <% } %>
                     <label for="radio-1" class="radio-custom-label">男生</label>
                 </div>
                 <div>
-                    <input id="radio-2" class="radio-custom" name="memGender" value="f" type="radio">
+                    <% if(items[0].memGender == 'f'){ %>
+                        <input id="radio-2" class="radio-custom" name="memGender" value="f" type="radio" checked="checked">
+                    <% } else { %>
+                        <input id="radio-2" class="radio-custom" name="memGender" value="f" type="radio">
+                    <% } %>
                     <label for="radio-2" class="radio-custom-label">女生</label>
                 </div>
 
