@@ -54,8 +54,6 @@
             <div class="titleInput input-with-icon title" name="recomHead" id="recomHead" contenteditable="true"
                 role="textbox" data-text="請輸入您的標題"></div>
 
-            <div id="postInto" class="postInputArea" contenteditable="true" role="textbox" data-text="簡介內容"></div>
-
             <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容"></div>
 
             <div class="tag content col-lg-12">
@@ -149,7 +147,7 @@
                         $(img).before("\\:imgLocation")
                     })
                 }
-                var artiHead = document.getElementById("artiHead").innerHTML;
+                var artiHead = document.getElementById("recomHead").innerHTML;
                 var artiCont = [];
                 var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
                 // 取得內容
@@ -163,9 +161,9 @@
                     artiHead = undefined;
                     // artiCont = undefined;
                 }
-                formData.append('artiHead', artiHead);
-                formData.append('artiCont', artiCont);
-                formData.append('artiClass', artiClass);
+                formData.append('recomHead', artiHead);
+                formData.append('recomCont', artiCont);
+                formData.append('recomClass', artiClass);
                 //取得tag 
                 tagInput.forEach(function (element) {
                     tag.push(element.innerText);
@@ -181,13 +179,11 @@
                         var analyzeScore = analyzeRes.analyze[0]
                         var positiveWords = analyzeRes.analyze[1]
                         var negativeWords = analyzeRes.analyze[2]
-                        var swearWords = analyzeRes.analyze[3]
                         formData.append('analyzeScore', analyzeScore);
                         formData.append('positiveWords', positiveWords);
                         formData.append('negativeWords', negativeWords);
-                        formData.append('swearWords', swearWords);
                         $.ajax({
-                            url: '/article/post',
+                            url: '/recommend/post',
                             type: 'POST',
                             dataType: 'TEXT',
                             data: formData,
@@ -197,11 +193,9 @@
                                 if (res == "請進行登入") {
                                     alert(res);
                                     location.replace("/login");
-                                } else if (res == "發文成功") {
-                                    alert(res);
-                                    location.replace("/articleList");
                                 } else {
-                                    alert(res);
+                                    alert('發文成功！');
+                                    location.replace("/recommendList");
                                 }
                             },
                             error: function (res) {

@@ -15,7 +15,7 @@ var isRender = true; //判斷頁面是否有回傳過
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'public/imgs/recommend/');
+        cb(null, 'public/imgs/recommend');
     },
     filename: function (req, file, cb) {
         imgName = file.originalname.substring(0, file.originalname.lastIndexOf("."));
@@ -51,8 +51,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
   var analyzeScore = req.body.analyzeScore;
   var positiveWords = req.body.positiveWords;
   var negativeWords = req.body.negativeWords;
-  var swearWords = req.body.swearWords;
-  
+
   console.log("qqqqqq",req.body);
   var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
   var tagData = [];
@@ -129,7 +128,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
                       fs.unlinkSync('public/imgs/recommend/' + imgData[i]); //刪除檔案
                   }
               }
-              member.recommendPost(memID, recomHead, recomCont, recomClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
+              member.recommendPost(memID, recomHead, recomCont, recomClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords).then(data => {
                   if (data == 0) {
                       console.log("發文成功");
                       res.send("發文成功");

@@ -68,6 +68,7 @@ var getOneRecommend = async function (recomNum, memID) {
     var imgs = [] ;
     var checkAuthority;
     var result = [];
+    var replyImgs = []
 
     // -----------  取得單一推薦文章 --------------
     await sql('SELECT * FROM "recommendListDataView" WHERE "recomNum" = $1', [recomNum])
@@ -158,7 +159,7 @@ var getOneRecommend = async function (recomNum, memID) {
         });
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image"')
+    await sql('SELECT "recomNum" , "imgName" FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NULL',[recomNum])
     .then((data) => {
         if (!data.rows) {
             imgs = undefined;
@@ -167,6 +168,19 @@ var getOneRecommend = async function (recomNum, memID) {
         }
     }, (error) => {
         imgs = undefined;
+    });
+
+    // ----------- 取得照片 -----------
+    await sql('SELECT "recomNum" , "imgName" FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NOT NULL',[recomNum])
+    .then((data) => {
+        if (!data.rows) {
+            replyImgs = undefined;
+        } else {
+            replyImgs = data.rows;
+        }
+    }, (error) => {
+        replyImgs = undefined;
+        console.log(error)
     });
 
     //取得權限
@@ -189,6 +203,7 @@ var getOneRecommend = async function (recomNum, memID) {
     result[6] = isMessLike;
     result[7] = checkAuthority;
     result[8] = [memID];
+    result[9] = replyImgs;
     
     // console.log("QQQQQQQQQQQQQQQQQQQQQQQ",result);
     return result;

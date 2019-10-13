@@ -226,15 +226,16 @@ var deleteReply = async function (artiMessNum) {
 //================================
 //-------- recommendPost() ---------
 //================================
-var recommendPost = async function (memID, recomHead, recomCont, recomClass, recomDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords) {
+var recommendPost = async function (memID, recomHead, recomCont, recomClass, recomDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords) {
     var recomNum;
     var tagNum;
     var result;
+    console.log(memID, recomHead, recomCont, recomClass, recomDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords)
 
     // --------- 新增文章 ---------
-    await sql('INSERT into "recommend" ("recomHead","recomCont","recomClass","recomDateTime", "analyzeScore", "positiveWords", "negativeWords", "swearWords")' +
-        ' VALUES ($1,$2,$3,$4,$5,$6,$7,$8)  returning "recommend"."recomNum" ;'
-        , [recomHead, recomCont, recomClass, recomDateTime, analyzeScore, positiveWords, negativeWords, swearWords])
+    await sql('INSERT into "recommend" ("recomHead","recomCont","recomClass","recomDateTime", "analyzeScore", "positiveWords", "negativeWords")' +
+        ' VALUES ($1,$2,$3,$4,$5,$6,$7)  returning "recommend"."recomNum" ;'
+        , [recomHead, recomCont, recomClass, recomDateTime, analyzeScore, positiveWords, negativeWords])
         .then((data) => {
             if (!data.rows) {
                 recomNum = undefined;
@@ -243,6 +244,7 @@ var recommendPost = async function (memID, recomHead, recomCont, recomClass, rec
             }
         }, (error) => {
             recomNum = undefined;
+            console.log(error)
         });
 
     // --------- 新增tag ---------
@@ -256,6 +258,8 @@ var recommendPost = async function (memID, recomHead, recomCont, recomClass, rec
                 }
             }, (error) => {
                 tagNum = undefined;
+                console.log(error)
+
             });
 
         // --------- 新增tagLink ---------
@@ -275,6 +279,8 @@ var recommendPost = async function (memID, recomHead, recomCont, recomClass, rec
                 result = 0;
             }, (error) => {
                 result = 1;
+                console.log(error)
+
             });
     }
 
@@ -310,6 +316,41 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
                 result = 0;
             }, (error) => {
                 result = 1;
+                console.error(error)
+            });
+    }
+    return result;
+}
+//================================
+//-------- recommendReplyPost() --
+//================================
+var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMessDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords) {
+    
+    var recomMessNum;
+    var result = 0;
+
+    //新增留言
+    await sql('INSERT into "recommendMessage" ("recomNum","memID","recomMessDateTime","recomMessCont", "analyzeScore", "positiveWords", "negativeWords", "swearWords") '+
+    'VALUES ($1,$2,$3,$4,$5,$6,$7,$8) returning "recommendMessage"."recomMessNum" ;'
+        , [recomNum, memID, recomMessDateTime, recomMessCont, analyzeScore, positiveWords, negativeWords, swearWords])
+        .then((data) => {
+            result = 1;
+            if(!data.rows){
+                recomMessNum = undefined ;
+            }else{
+                recomMessNum = data.rows[0].recomMessNum;
+            }
+        }, (error) => {
+            console.error(error)
+            recomMessNum = undefined;
+        });
+
+    for (var i = 0; i < imgData.length; i++) {
+        await sql('INSERT into "image" ("recomNum", "memID", "recomMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [recomNum, memID, recomMessNum, imgData[i], recomMessDateTime])
+            .then((data) => {
+                result = 1;
+            }, (error) => {
+                result = 0;
                 console.error(error)
             });
     }
@@ -750,5 +791,5 @@ module.exports = {
     addArticleLike, delArticleLike,
     addArticleMessLike, delArticleMessLike,
     addRecommendMessLike, delRecommendMessLike,
-    report, checkAuthority, editArticle, deleteArticle, editReply, deleteReply, memberInformation
+    report, checkAuthority, editArticle, deleteArticle, editReply, deleteReply, memberInformation, recommendReplyPost
 };

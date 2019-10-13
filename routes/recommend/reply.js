@@ -6,7 +6,6 @@ const moment = require('moment');
 const multer = require('multer');
 const member = require('../utility/member');
 
-//post
 var maxSize = 1024 * 1024; //設定最大上傳容量
 var imgName; //紀錄檔案名稱(不含副檔名)
 var imgType; //記錄檔案副檔名
@@ -18,6 +17,7 @@ var storage = multer.diskStorage({
         cb(null, 'public/imgs/recommend/replyImg');
     },
     filename: function (req, file, cb) {
+        console.log('inthere!!!')
         imgName = file.originalname.substring(0, file.originalname.lastIndexOf("."));
         imgType = file.originalname.substring(file.originalname.lastIndexOf("."));
         buf = Buffer.from(imgName, 'ascii');
@@ -42,115 +42,111 @@ var upload = multer({
     storage: storage
 })
 
+
 //post請求
 router.post('/', upload.array('userImg', 20), function (req, res, next) {
-  var memID;
-  var recomHead = req.body.recomHead;
-  var recomCont = req.body.recomCont;
-  var recomClass = req.body.recomClass;
-  var analyzeScore = req.body.analyzeScore;
-  var positiveWords = req.body.positiveWords;
-  var negativeWords = req.body.negativeWords;
-  var swearWords = req.body.swearWords;
-  var editReply = req.body.editReply;
+    console.log(req.session.memID)
+    var memID = req.session.memID;
+    if (!memID) {
+        res.send("請進行登入");
+        return;
+    }
+    var recomMessCont = req.body.replyCont;
+    var recomNum = req.body.artiNum
+    var analyzeScore = req.body.analyzeScore;
+    var positiveWords = req.body.positiveWords;
+    var negativeWords = req.body.negativeWords;
+    var swearWords = req.body.swearWords;
+    var editReply = req.body.editReply;
+    
+    var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
+    var imgData = [];
+    // console.log(req.files);
+    //將所有換行符號替代成<br> 
+    recomMessCont = recomMessCont.replace(/\n/g, "<br>");
 
-  console.log("qqqqqq",req.body);
-  var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
-  var tagData = [];
-  var imgData = [];
-  // console.log(req.files);
-  //將所有換行符號替代成<br> 
-  recomCont = recomCont.replace(/\n/g, "<br>");
+    for (var i in req.files) {
+        imgData.push(req.files[i].filename);
+        console.log("files= ~~~~~", req.files[i]);
+        // if (replyCont.match("\\:imgLocation") != null) {
+        //     console.log("近來囉");
+        //     // replyCont = replyCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
+        //     replyCont = replyCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + req.files[i].filename + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
+        // }
 
-  //判斷是使用哪種方式登入
-  if (req.session.memID == undefined && req.session.passport == undefined) {
-      memID = undefined;
-  } else if (req.session.memID != undefined && req.session.passport == undefined) {
-      memID = req.session.memID;
-  } else if (req.session.memID == undefined && req.session.passport != undefined) {
-      memID = req.session.passport.user.id;
-  }
-
-  for (var i in req.files) {
-      imgData.push(req.files[i].filename);
-      console.log("files= ", req.files[i]);
-      // if (recomCont.match("\\:imgLocation") != null) {
-      //     console.log("近來囉");
-      //     // recomCont = recomCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
-      //     recomCont = recomCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + req.files[i].filename + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
-      // }
-
-  }
-
-  console.log(recomCont);
-  // console.log(imgData);
-  // tag
-  if (req.body.tag != '') {
-      tagData = req.body.tag.split(",");
-  }
-  // console.log("typeof", typeof req.file);
-  if (memID == undefined) {
-      if (req.body.userImg != 'undefined') {
-          for (var i = 0; i < imgData.length; i++) {
-              fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
-          }
-      }
-      res.send("請進行登入");
-  } else {
-      // console.log(req.file,imgType);
-      if (typeof (req.file) != 'undefined') {
-          //如果檔案超過限制大小
-          if (req.file.size > maxSize) {
-              isRender = false;
-              for (var i = 0; i < imgData.length; i++) {
-                  fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
-              }
-              res.send("圖片過大，僅接受1M以下的圖片");
-          }
-          //如果檔案類型不符合規定
-          if ((imgType != '.png' && imgType != '.jpg' && imgType != '.jpeg' && imgType != '.jfif') && isRender) {
-              isRender = false;
-              for (var i = 0; i < imgData.length; i++) {
-                  fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
-              }
-              res.send("只能上傳.jpg , .png , .jpeg , .jfif 類型的檔案");
-          }
-      }
-      if (isRender) {
-          if (recomHead == 'undefined' || recomCont == '') {
-              if (req.body.userImg != 'undefined') {
-                  for (var i = 0; i < imgData.length; i++) {
-                      fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
-                  }
-              }
-              res.send("標題及內容不可為空，請重新輸入");
-          } else {
-              if (req.body.userImg == 'undefined') {
-                  for (var i = 0; i < imgData.length; i++) {
-                      fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
-                  }
-              }
-              member.recommendPost(memID, recomHead, recomCont, recomClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
-                  if (data == 0) {
-                      console.log("發文成功");
-                      res.send("發文成功");
-                  } else {
-                      for (var i = 0; i < imgData.length; i++) {
-                          fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
-                      }
-                      console.log("發文失敗");
-                      res.send("發文失敗");
-                  }
-              })
-          }
-      } else {
-          for (var i = 0; i < imgData.length; i++) {
-              fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
-          }
-          console.log("發文失敗");
-          res.send("發文失敗");
-      }
-  }
+    }
+    // console.log(imgData);
+    // tag
+    // console.log("typeof", typeof req.file);
+    if (memID == undefined || memID == null) {
+        if (req.body.userImg != 'undefined') {
+            for (var i = 0; i < imgData.length; i++) {
+                fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
+            }
+        }
+        res.send("請進行登入");
+    } else {
+        // console.log(req.file,imgType);
+        if (typeof (req.file) != 'undefined') {
+            //如果檔案超過限制大小
+            if (req.file.size > maxSize) {
+                isRender = false;
+                for (var i = 0; i < imgData.length; i++) {
+                    fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
+                }
+                res.send("圖片過大，僅接受1M以下的圖片");
+            }
+            //如果檔案類型不符合規定
+            if ((imgType != '.png' && imgType != '.jpg' && imgType != '.jpeg' && imgType != '.jfif') && isRender) {
+                isRender = false;
+                for (var i = 0; i < imgData.length; i++) {
+                    fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
+                }
+                res.send("只能上傳.jpg , .png , .jpeg , .jfif 類型的檔案");
+            }
+        }
+        if (isRender) {
+            if (req.body.userImg == 'undefined') {
+                for (var i = 0; i < imgData.length; i++) {
+                    fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
+                }
+            }
+            if (editReply) {
+                // member.editReply(artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.remainImg).then(data => {
+                //     if (data == 1) {
+                //         console.log("編輯留言成功");
+                //         res.send("編輯留言成功");
+                //     } else {
+                //         for (var i = 0; i < imgData.length; i++) {
+                //             fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
+                //         }
+                //         console.log("編輯留言失敗");
+                //         res.send("編輯留言失敗");
+                //     }
+                // })
+            } else {
+                console.log('!!!!', recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords)
+                member.recommendReplyPost(recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
+                    if (data == 1) {
+                        console.log("留言成功");
+                        res.send("留言成功");
+                    } else {
+                        for (var i = 0; i < imgData.length; i++) {
+                            fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
+                        }
+                        console.log("留言失敗");
+                        res.send("留言失敗");
+                    }
+                })
+            }
+        } else {
+            for (var i = 0; i < imgData.length; i++) {
+                fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
+            }
+            console.log("留言失敗2");
+            res.send("留言失敗2");
+        }
+    }
 
 });
 

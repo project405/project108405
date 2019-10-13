@@ -47,6 +47,10 @@ var upload = multer({
 router.post('/', upload.array('userImg', 20), function (req, res, next) {
     console.log(req.session.memID)
     var memID = req.session.memID;
+    if (!memID) {
+        res.send("請進行登入");
+        return;
+    }
     var replyCont = req.body.replyCont;
     var artiNum = req.body.artiNum
     var analyzeScore = req.body.analyzeScore;
