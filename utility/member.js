@@ -11,7 +11,7 @@ const moment = require('moment');
 var AllMember = async function () {
     var result;
     
-    await sql('SELECT * FROM "member" where "lineID" is not null')
+    await sql('SELECT "lineID" FROM "member" where "lineID" is not null')
         .then((data) => {
             
             if (!data.rows) {
