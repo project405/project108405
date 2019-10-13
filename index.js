@@ -184,6 +184,7 @@ app.post('/', function (req, res) {
         })
     }, function(error, response, body){
     console.log(body);
+    console.log(response);
     res.end(body);
    
     });
