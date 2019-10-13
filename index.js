@@ -176,7 +176,7 @@ bot.on('message', function(event) {
                     //將訊息推給所有使用者
                     bot.push(
                     // allUsers, 
-                    {U2251202deb66b8a73da26e53c8399a13},{
+                    [{U2251202deb66b8a73da26e53c8399a13}],{
                         "type": "template",
                         "altText": "這是一個輪播樣板",
                         "template": {
