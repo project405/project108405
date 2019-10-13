@@ -106,24 +106,3 @@ var randomSelectFoods = async function(){
 //匯出
 module.exports = randomSelectFoods;
 
-//----------------------------------------
-// 建立一個網站應用程式app
-// 如果連接根目錄, 交給機器人處理
-//----------------------------------------
-const app = express();
-const linebotParser = bot.parser();
-app.post('/', linebotParser);
-
-//----------------------------------------
-// 可直接取用檔案的資料夾
-//----------------------------------------
-app.use(express.static('public'));
-
-//----------------------------------------
-// 監聽3000埠號, 
-// 或是監聽Heroku設定的埠號
-//----------------------------------------
-var server = app.listen(process.env.PORT || 3000, function() {
-    const port = server.address().port;
-    console.log("正在監聽埠號:", port);
-});
