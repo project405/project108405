@@ -47,6 +47,7 @@ bot.on('message', function(event) {
     event.source.profile().then(
         function (profile) {
             //取得使用者資料
+            console.log(profile);
             const userName = profile.displayName;
             const userId = profile.userId;
 
