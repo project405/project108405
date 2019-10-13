@@ -17,11 +17,6 @@ app.use(bodyParser.json());
 
 app.use(cors())
 
-
-
-//增加引用函式
-// const LinePush = require('./utility/LinePush');
-// const article = require('./utility/article');
 const article = require('./utility/article');
 const member = require('./utility/member');
 
@@ -36,26 +31,6 @@ var bot = linebot({
     channelSecret: 'f582b751649f1b57f33910c0238113eb',
     channelAccessToken: 'QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
 });
-
-
-
-
-//--------------------------------
-// 機器人接受訊息的處理
-//--------------------------------
-// bot.on('message', function(event) {    
-//     event.source.profile().then(
-//         function (profile) {
-//             //取得使用者資料
-//             console.log(profile);
-//             const userName = profile.displayName;
-            // const userId = profile.userId;
-            
-            
-            
-               
-//         })  
-// });
 
 
 //----------------------------------------
@@ -79,31 +54,6 @@ var server = app.listen(process.env.PORT || 3000, function() {
     console.log("正在監聽埠號:", port);
 });
 
-// app.post('/webhook',cors(corsOptions), function (req, res, next) {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-
-//     // Request methods you wish to allow
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-//     // Request headers you wish to allow
-//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-//     // Set to true if you need the website to include cookies in the requests sent
-//     // to the API (e.g. in case you use sessions)
-//     res.setHeader('Access-Control-Allow-Credentials', true);
-
-//     // Pass to next layer of middleware
-//     console.log('reqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreq', req)
-       
-
-//         let reply_token = req.body.replyToken
-//         let msg = req.body.messages
-//         reply(reply_token, msg)
-
-//         res.sendStatus(200)
-//         next();
-
-// });
 
 app.post('/webhook', function (req, res) {
     let allUser = [];
