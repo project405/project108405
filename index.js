@@ -106,12 +106,13 @@ var server = app.listen(process.env.PORT || 3000, function() {
 // });
 
 app.post('/webhook', function (req, res) {
+    let allUser = [];
     member.AllMember().then(data => {  
-        let allUser = [];
+        
         allUser = data;
         console.log('allUser@@@@@@@@@@',allUser);
     })   
-    
+
     request.post({
     headers: {
         'content-type' : 'application/json',
