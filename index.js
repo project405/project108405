@@ -126,7 +126,7 @@ app.post('/webhook', function (req, res) {
     url: 'https://api.line.me/v2/bot/message/push',
     body: JSON.stringify({
         //to給資料庫有的使用者
-        to: allUser[1],
+        to: 'U2251202deb66b8a73da26e53c8399a13',
             messages: [
                 {
                 type: 'text',
