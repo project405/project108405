@@ -112,7 +112,9 @@ app.post('/webhook', function (req, res) {
             allUser.push(item.lineID);
         });
         
-        console.log('allUser@@@@@@@@@@',allUser);
+        console.log('allUser@@@@@@@@@@',allUser[0]);
+        console.log('allUser@@@@@@@@@@',allUser[1]);
+
     })   
 
     request.post({
