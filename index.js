@@ -157,7 +157,7 @@ app.post('/',cors(corsOptions), function (req, res, next) {
        
 
         let reply_token = req.body.replyToken
-        let msg = req.body.messages.text
+        let msg = req.body.messages
         reply(reply_token, msg)
 
         res.sendStatus(200)
