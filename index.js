@@ -153,12 +153,13 @@ app.post('/',cors(corsOptions), function (req, res, next) {
 
     // Pass to next layer of middleware
     console.log('reqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreq', req)
-
-        let reply_token = req.body.replyToken
-        let msg = req.body.message.text
+        console.log('req.body!!!!!!!!!!!!!!!!!!!!!!' , req.body);
+        let reply_token = req.body.events[0].replyToken
+        let msg = req.body.events[0].message.text
         console.log('reply_token = ' + reply_token);
         console.log('msgObj = ' , req.body.events[0]);
-    
+        // console.log('req.body' , req.body);
+
         reply(reply_token, msg)
 
         res.sendStatus(200)
