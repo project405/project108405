@@ -139,31 +139,31 @@ var server = app.listen(process.env.PORT || 3000, function() {
     console.log("正在監聽埠號:", port);
 });
 
-app.post('/webhook',cors(corsOptions), function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
+// app.post('/webhook',cors(corsOptions), function (req, res, next) {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+//     // Request methods you wish to allow
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+//     // Request headers you wish to allow
+//     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+//     // Set to true if you need the website to include cookies in the requests sent
+//     // to the API (e.g. in case you use sessions)
+//     res.setHeader('Access-Control-Allow-Credentials', true);
 
-    // Pass to next layer of middleware
-    console.log('reqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreq', req)
+//     // Pass to next layer of middleware
+//     console.log('reqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreqreq', req)
        
 
-        let reply_token = req.body.replyToken
-        let msg = req.body.messages
-        reply(reply_token, msg)
+//         let reply_token = req.body.replyToken
+//         let msg = req.body.messages
+//         reply(reply_token, msg)
 
-        res.sendStatus(200)
-        next();
+//         res.sendStatus(200)
+//         next();
 
-});
+// });
     
 app.post('/', function (req, res) {
     request.post({
