@@ -13,14 +13,15 @@ var AllMember = async function () {
     
     await sql('SELECT * FROM "member" where "lineID" is not null')
         .then((data) => {
-            if (data.rows[0] == undefined || data.rows[0] == null) {
-                result = undefined;
-            } else {
-                result = data.rows[0].memAuthority;
-            }
-        }, (error) => {
-            result = undefined;
-        });
+            console.log(data)
+        //     if (data.rows[0] == undefined || data.rows[0] == null) {
+        //         result = undefined;
+        //     } else {
+        //         result = data.rows[0].memAuthority;
+        //     }
+        // }, (error) => {
+        //     result = undefined;
+        // });
     return result;
 }
 
