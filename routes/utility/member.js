@@ -22,7 +22,7 @@ var checkAuthority = async function (memID) {
     return result;
 }
 //==============================
-//------ memberInformation() ------
+//------ memberInformation() ---
 //==============================
 var memberInformation = async function (memID) {
     var result;
@@ -743,6 +743,27 @@ var report = async function (memID, artiNum, artiMessNum, recomMessNum, reportRe
     return result;
 }
 
+//=========================================
+//--------------  getMemberInfor() ----------------
+//=========================================
+var getMemberInfor = async function (memID) {
+    var result;
+
+    await sql('SELECT * FROM "member" WHERE "memID" = $1',[memID])
+        .then((data) => {
+            if (!data.rows) {
+                result = undefined;
+            } else {
+                result = data.rows;
+            }
+        }, (error) => {
+            result = undefined;
+        });
+
+    return result;
+}
+
+
 //匯出
 module.exports = {
     articlePost, recommendPost, replyPost, myArticle, modifyMember, getOriginalMail,
@@ -750,5 +771,5 @@ module.exports = {
     addArticleLike, delArticleLike,
     addArticleMessLike, delArticleMessLike,
     addRecommendMessLike, delRecommendMessLike,
-    report, checkAuthority, editArticle, deleteArticle, editReply, deleteReply, memberInformation
+    report, checkAuthority, editArticle, deleteArticle, editReply, deleteReply, memberInformation, getMemberInfor
 };
