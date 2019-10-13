@@ -109,7 +109,7 @@ app.post('/webhook', function (req, res) {
     let allUser = [];
     member.AllMember().then(data => {  
         data.forEach(item => {
-            allUsers.push(item.lineID);
+            allUser.push(item.lineID);
         });
         
         console.log('allUser@@@@@@@@@@',allUser);
