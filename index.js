@@ -51,16 +51,7 @@ var bot = linebot({
 //             const userName = profile.displayName;
             // const userId = profile.userId;
             
-            member.AllMember().then(data => {  
-                let allUser = [];
-                allUser = data;
-                console.log('allUser@@@@@@@@@@',allUser)
-                // if (data == -9){
-                //     event.reply('執行錯誤');
-                // }else{                   
-                //     event.reply('已加入會員');
-                // }
-            }) 
+            
             
                
 //         })  
@@ -113,7 +104,11 @@ var server = app.listen(process.env.PORT || 3000, function() {
 //         next();
 
 // });
-    
+member.AllMember().then(data => {  
+    let allUser = [];
+    allUser = data;
+    console.log('allUser@@@@@@@@@@',allUser);
+})   
 app.post('/webhook', function (req, res) {
     request.post({
     headers: {
@@ -124,7 +119,7 @@ app.post('/webhook', function (req, res) {
     url: 'https://api.line.me/v2/bot/message/push',
     body: JSON.stringify({
         //to給資料庫有的使用者
-        to: "U2251202deb66b8a73da26e53c8399a13",
+        to: allUser,
             messages: [
                 {
                 type: 'text',
