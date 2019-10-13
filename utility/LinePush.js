@@ -77,7 +77,7 @@ var randomSelectFoods = async function(){
 
 //     //回傳執行結果
 //     return result;  
-// }
+}
 
 // //------------------------------------------
 // // 取出所有成員
@@ -104,7 +104,7 @@ var randomSelectFoods = async function(){
 // //------------------------------------------
 
 //匯出
-module.exports = {randomSelectFoods};
+module.exports = randomSelectFoods;
 
 //----------------------------------------
 // 建立一個網站應用程式app
