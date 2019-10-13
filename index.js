@@ -176,7 +176,7 @@ app.post('/', function (req, res) {
         replyToken: 'U2251202deb66b8a73da26e53c8399a13',
             messages: [{
                 type: 'text',
-                text: msg
+                text: "Hello,Ting~這是Line Bot API測試訊息"
             }]
         })
     }, function(error, response, body){
