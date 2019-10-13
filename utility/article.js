@@ -61,10 +61,10 @@ var getArticleList = async function (memID) {
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
             checkAuthority = data;
-            console.log("權限=", checkAuthority);
+            // console.log("權限=", checkAuthority);
         } else {
             checkAuthority = undefined;
-            console.log("權限=", checkAuthority);
+            // console.log("權限=", checkAuthority);
         }
     })
 
@@ -87,7 +87,7 @@ var getArticleList = async function (memID) {
     result[4] = isCollection;
     result[5] = [memID];
     result[6] = checkAuthority;
-    console.log(result);
+    // console.log(result);
     return result;
 }
 
@@ -188,7 +188,7 @@ var getOneArticle = async function (artiNum, memID) {
             } else {
                 isMessLike = data.rows ; 
             }
-            console.log("isMessLike = ", data.rows);
+            // console.log("isMessLike = ", data.rows);
         }, (error) => {
             isMessLike = undefined ; 
         });
@@ -196,10 +196,10 @@ var getOneArticle = async function (artiNum, memID) {
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
             checkAuthority = data;
-            console.log("Authority=", checkAuthority);
+            // console.log("Authority=", checkAuthority);
         } else {
             checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
+            // console.log("Authority=", checkAuthority);
         }
     })
 
@@ -225,7 +225,7 @@ var getOneArticle = async function (artiNum, memID) {
     result[7] = [memID];
     result[8] = checkAuthority;
    
-    console.log(result);
+    // console.log(result);
     return result;
 }
 
