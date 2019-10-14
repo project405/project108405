@@ -62,7 +62,7 @@ app.post('/webhook', function (req, res) {
             allUser.push(item.lineID);
             console.log(allUser)
         });
-        
+    console.log('req@@@@@@@@@@@@@@@@@@@@@@@@@',req)  
     request.post({
         headers: {
             'content-type' : 'application/json',
@@ -83,7 +83,6 @@ app.post('/webhook', function (req, res) {
         }, function(error, response, body){
     
         res.end(body);
-        console.log("response!!!!!!!!!!!!!!!!",response)
     
         });
     })   
