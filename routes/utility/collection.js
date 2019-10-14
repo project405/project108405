@@ -76,6 +76,8 @@ var getOneColleRecommend = async function (recomNum, memID) {
     var isMessLike = []; //判斷留言愛心是否被按過
     var imgs = [] ;
     var result = [];
+    var replyImgs = []
+    
 
     // -----------  取得單一文章 --------------
     await sql('SELECT * FROM "recommendListDataView" WHERE "recomNum" = $1', [recomNum])
@@ -167,16 +169,28 @@ var getOneColleRecommend = async function (recomNum, memID) {
         });
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image"')
-        .then((data) => {
-            if (!data.rows) {
-                imgs = undefined;
-            } else {
-                imgs = data.rows;
-            }
-        }, (error) => {
+    await sql('SELECT "recomNum" , "imgName" FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NULL',[recomNum])
+    .then((data) => {
+        if (!data.rows) {
             imgs = undefined;
-        });   
+        } else {
+            imgs = data.rows;
+        }
+    }, (error) => {
+        imgs = undefined;
+    });
+    // ----------- 取得照片 -----------
+    await sql('SELECT "recomNum" , "imgName" FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NOT NULL',[recomNum])
+    .then((data) => {
+        if (!data.rows) {
+            replyImgs = undefined;
+        } else {
+            replyImgs = data.rows;
+        }
+    }, (error) => {
+        replyImgs = undefined;
+        console.log(error)
+    });
 
     result[0] = oneRecommend ;
     result[1] = oneRecomMessage ;
@@ -187,6 +201,8 @@ var getOneColleRecommend = async function (recomNum, memID) {
     result[6] = isMessLike;
     // result[7] = checkAuthority;
     result[8] = [memID];
+    result[9] = replyImgs;
+
 
     return result;
 }

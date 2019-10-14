@@ -137,198 +137,6 @@
                     </script>
                     <% } %>
                 </div>
-                <!-- 收藏 ajax script  -->
-                <script>
-                    //新增收藏
-                    function addColle(recomNum) {
-                        collection();
-                        $.ajax({
-                            url: '/addCollection',
-                            type: 'POST',
-                            dataType: 'JSON',
-                            data: { "likeType": "recommend", "recomNum": recomNum },
-                            success: function (res) {
-                                console.log("yes", JSON.stringify(res));
-                            },
-                            error: function (res) {
-                                console.log("失敗", JSON.stringify(res));
-                            }
-                        });
-                    };
-                    //刪除收藏
-                    function delColle(recomNum) {
-                        // console.log("前端刪除訊息");
-                        cancelCollection();
-                        $.ajax({
-                            url: '/delCollection',
-                            type: 'POST',
-                            dataType: 'JSON',
-                            data: { "likeType": "recommend", "recomNum": recomNum },
-                            success: function (res) {
-                                console.log("yes", JSON.stringify(res));
-
-                            },
-                            error: function (res) {
-                                console.log("失敗", JSON.stringify(res));
-                            }
-                        });
-                    };
-                    //點收藏後改變屬性
-                    function collection() {
-                        document.getElementById("delColle").style.display = "inline";
-                        document.getElementById("unLogIn").style.display = "none";
-                        document.getElementById("addColle").style.display = "none";
-                    }
-                    //取消收藏後改變屬性
-                    function cancelCollection() {
-                        document.getElementById("addColle").style.display = "inline";
-                        document.getElementById("unLogIn").style.display = "none";
-                        document.getElementById("delColle").style.display = "none";
-                    }
-                </script>
-
-                <!-- 愛心 ajax script -->
-                <script>
-                    //新增愛心
-                    function addLike(recomNum) {
-                        $.ajax({
-                            url: '/addLike',
-                            type: 'POST',
-                            dataType: 'text',
-                            data: { "likeType": "recommend", "recomNum": recomNum },
-                            success: function (res) {
-                                console.log("yes", JSON.stringify(res));
-                                likeCount(recomNum);
-                                like();
-                            },
-                            error: function (res) {
-                                console.log("失敗", res);
-
-                            }
-                        });
-
-                    };
-                    //刪除愛心
-                    function delLike(recomNum) {
-                        // console.log("前端刪除訊息");     
-                        $.ajax({
-                            url: '/delLike',
-                            type: 'POST',
-                            dataType: 'text',
-                            data: { "likeType": "recommend", "recomNum": recomNum },
-                            success: function (res) {
-                                console.log("yes", JSON.stringify(res));
-                                likeCount(recomNum);
-                                cancelLike();
-                            },
-                            error: function (res) {
-                                console.log("刪除失敗", JSON.stringify(res));
-                            }
-                        });
-
-                    };
-                    //點愛心後改變屬性
-                    function like() {
-                        document.getElementById("delLike").style.display = "inline";
-                        document.getElementById("LikeUnLogIn").style.display = "none";
-                        document.getElementById("addLike").style.display = "none";
-                    }
-                    //取消愛心後改變屬性
-                    function cancelLike() {
-                        document.getElementById("addLike").style.display = "inline";
-                        document.getElementById("LikeUnLogIn").style.display = "none";
-                        document.getElementById("delLike").style.display = "none";
-                    }
-                    function likeCount(recomNum) {
-                        $.ajax({
-                            url: '/likeCount',
-                            type: 'POST',
-                            dataType: 'JSON',
-                            data: { "likeType": "recommend", "recomNum": recomNum },
-                            success: function (res) {
-                                // console.log("yes", reponse.responseText);
-                                console.log("yes", JSON.stringify(res));
-                                document.getElementById("addLikeCount").innerHTML = JSON.stringify(res);
-                                document.getElementById("delLikeCount").innerHTML = JSON.stringify(res);
-                            },
-                            error: function (res) {
-                                console.log("no", JSON.stringify(res));
-                            }
-
-                        });
-                    }
-                    // =========================
-                    // ------ 留言新增愛心 ------
-                    // =========================
-                    //增加留言愛心
-                    function MessAddLike(recomNum, recomMessNum) {
-                        $.ajax({
-                            url: '/addLike',
-                            type: 'POST',
-                            dataType: 'JSON',
-                            data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
-                            success: function (res) {
-                                console.log("yes", JSON.stringify(res));
-                                MessLikeCount(res.recomNum, res.recomMessNum);
-                                MessLike(res.recomNum, res.recomMessNum);
-                            },
-                            error: function (res) {
-                                console.log("失敗", res);
-
-                            }
-                        });
-
-                    };
-                    //刪除留言愛心
-                    function MessDelLike(recomNum, recomMessNum) {
-                        // console.log("前端刪除訊息");     
-                        $.ajax({
-                            url: '/delLike',
-                            type: 'POST',
-                            dataType: 'JSON',
-                            data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
-                            success: function (res) {
-                                console.log("yes", JSON.stringify(res));
-                                MessLikeCount(res.recomNum, res.recomMessNum);
-                                cancelMessLike(res.recomNum, res.recomMessNum);
-                            },
-                            error: function (res) {
-                                console.log("刪除失敗", JSON.stringify(res));
-                            }
-                        });
-
-                    };
-                    //點留言愛心後改變屬性
-                    function MessLike(recomNum, recomMessNum) {
-                        document.getElementById("MessDelLike" + recomNum + recomMessNum).style.display = "inline";
-                        document.getElementById("MessLikeUnLogIn" + recomNum + recomMessNum).style.display = "none";
-                        document.getElementById("MessAddLike" + recomNum + recomMessNum).style.display = "none";
-                    }
-                    //取消留言愛心後改變屬性
-                    function cancelMessLike(recomNum, recomMessNum) {
-                        document.getElementById("MessAddLike" + recomNum + recomMessNum).style.display = "inline";
-                        document.getElementById("MessLikeUnLogIn" + recomNum + recomMessNum).style.display = "none";
-                        document.getElementById("MessDelLike" + recomNum + recomMessNum).style.display = "none";
-                    }
-                    //取得留言愛心數
-                    function MessLikeCount(recomNum, recomMessNum) {
-                        $.ajax({
-                            url: '/likeCount',
-                            type: 'POST',
-                            dataType: 'JSON',
-                            data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
-                            success: function (res) {
-                                // console.log("yes", reponse.responseText);
-                                console.log("yes", JSON.stringify(res));
-                                document.getElementById("MessAddLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
-                                document.getElementById("MessDelLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
-                            },
-                            error: function (res) {
-                                console.log("no", JSON.stringify(res));
-                            }
-                        });
-                    }
-                </script>
                 <!-- info結束 -->
             </div>
         </div>
@@ -418,7 +226,7 @@
                     </div>
                     <hr class="smallMagin">
                     <!-- info結束 -->
-                    <p class="content"> <%= items[1][i].recomMessCont %>
+                    <p class="content"> <%- items[1][i].recomMessCont %>
                         <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#recomMessReportPost" >檢舉</button>
                 </div>
             </div>
@@ -447,7 +255,9 @@
             <% } %>
         </div>
         <!-- 推薦留言結束 -->
-
+        <div class="spinner-border" role="status" style="position: fixed; top: 45%; right: 47%; display: none;">
+                <span class="sr-only">Loading...</span>
+         </div>
         <script>
             //推薦留言檢舉ajax
             function ftn_messReport(a){
@@ -477,8 +287,8 @@
                     <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
                     <i class="fas fa-images" style="padding-right:5px"></i>加圖片
                 </label>
-
-                <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none">提交回覆</button>
+                <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none"
+                onclick=<%= "submitReply(" + items[0][0].recomNum + ")" %>>提交回覆</button>
 
             </div>
 
@@ -503,7 +313,301 @@
         crossorigin="anonymous "></script>
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
+    <!-- 收藏 ajax script  -->
+    <script>
+            //新增收藏
+            function addColle(recomNum) {
+                collection();
+                $.ajax({
+                    url: '/addCollection',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "recommend", "recomNum": recomNum },
+                    success: function (res) {
+                        console.log("yes", JSON.stringify(res));
+                    },
+                    error: function (res) {
+                        console.log("失敗", JSON.stringify(res));
+                    }
+                });
+            };
+            //刪除收藏
+            function delColle(recomNum) {
+                // console.log("前端刪除訊息");
+                cancelCollection();
+                $.ajax({
+                    url: '/delCollection',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "recommend", "recomNum": recomNum },
+                    success: function (res) {
+                        console.log("yes", JSON.stringify(res));
 
+                    },
+                    error: function (res) {
+                        console.log("失敗", JSON.stringify(res));
+                    }
+                });
+            };
+            //點收藏後改變屬性
+            function collection() {
+                document.getElementById("delColle").style.display = "inline";
+                document.getElementById("unLogIn").style.display = "none";
+                document.getElementById("addColle").style.display = "none";
+            }
+            //取消收藏後改變屬性
+            function cancelCollection() {
+                document.getElementById("addColle").style.display = "inline";
+                document.getElementById("unLogIn").style.display = "none";
+                document.getElementById("delColle").style.display = "none";
+            }
+        </script>
+
+        <!-- 愛心 ajax script -->
+        <script>
+            //新增愛心
+            function addLike(recomNum) {
+                $.ajax({
+                    url: '/addLike',
+                    type: 'POST',
+                    dataType: 'text',
+                    data: { "likeType": "recommend", "recomNum": recomNum },
+                    success: function (res) {
+                        console.log("yes", JSON.stringify(res));
+                        likeCount(recomNum);
+                        like();
+                    },
+                    error: function (res) {
+                        console.log("失敗", res);
+
+                    }
+                });
+
+            };
+            //刪除愛心
+            function delLike(recomNum) {
+                // console.log("前端刪除訊息");     
+                $.ajax({
+                    url: '/delLike',
+                    type: 'POST',
+                    dataType: 'text',
+                    data: { "likeType": "recommend", "recomNum": recomNum },
+                    success: function (res) {
+                        console.log("yes", JSON.stringify(res));
+                        likeCount(recomNum);
+                        cancelLike();
+                    },
+                    error: function (res) {
+                        console.log("刪除失敗", JSON.stringify(res));
+                    }
+                });
+
+            };
+            //點愛心後改變屬性
+            function like() {
+                document.getElementById("delLike").style.display = "inline";
+                document.getElementById("LikeUnLogIn").style.display = "none";
+                document.getElementById("addLike").style.display = "none";
+            }
+            //取消愛心後改變屬性
+            function cancelLike() {
+                document.getElementById("addLike").style.display = "inline";
+                document.getElementById("LikeUnLogIn").style.display = "none";
+                document.getElementById("delLike").style.display = "none";
+            }
+            function likeCount(recomNum) {
+                $.ajax({
+                    url: '/likeCount',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "recommend", "recomNum": recomNum },
+                    success: function (res) {
+                        // console.log("yes", reponse.responseText);
+                        console.log("yes", JSON.stringify(res));
+                        document.getElementById("addLikeCount").innerHTML = JSON.stringify(res);
+                        document.getElementById("delLikeCount").innerHTML = JSON.stringify(res);
+                    },
+                    error: function (res) {
+                        console.log("no", JSON.stringify(res));
+                    }
+
+                });
+            }
+            // =========================
+            // ------ 留言新增愛心 ------
+            // =========================
+            //增加留言愛心
+            function MessAddLike(recomNum, recomMessNum) {
+                $.ajax({
+                    url: '/addLike',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
+                    success: function (res) {
+                        console.log("yes", JSON.stringify(res));
+                        MessLikeCount(res.recomNum, res.recomMessNum);
+                        MessLike(res.recomNum, res.recomMessNum);
+                    },
+                    error: function (res) {
+                        console.log("失敗", res);
+
+                    }
+                });
+
+            };
+            //刪除留言愛心
+            function MessDelLike(recomNum, recomMessNum) {
+                // console.log("前端刪除訊息");     
+                $.ajax({
+                    url: '/delLike',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
+                    success: function (res) {
+                        console.log("yes", JSON.stringify(res));
+                        MessLikeCount(res.recomNum, res.recomMessNum);
+                        cancelMessLike(res.recomNum, res.recomMessNum);
+                    },
+                    error: function (res) {
+                        console.log("刪除失敗", JSON.stringify(res));
+                    }
+                });
+
+            };
+            //點留言愛心後改變屬性
+            function MessLike(recomNum, recomMessNum) {
+                document.getElementById("MessDelLike" + recomNum + recomMessNum).style.display = "inline";
+                document.getElementById("MessLikeUnLogIn" + recomNum + recomMessNum).style.display = "none";
+                document.getElementById("MessAddLike" + recomNum + recomMessNum).style.display = "none";
+            }
+            //取消留言愛心後改變屬性
+            function cancelMessLike(recomNum, recomMessNum) {
+                document.getElementById("MessAddLike" + recomNum + recomMessNum).style.display = "inline";
+                document.getElementById("MessLikeUnLogIn" + recomNum + recomMessNum).style.display = "none";
+                document.getElementById("MessDelLike" + recomNum + recomMessNum).style.display = "none";
+            }
+            //取得留言愛心數
+            function MessLikeCount(recomNum, recomMessNum) {
+                $.ajax({
+                    url: '/likeCount',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
+                    success: function (res) {
+                        // console.log("yes", reponse.responseText);
+                        console.log("yes", JSON.stringify(res));
+                        document.getElementById("MessAddLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
+                        document.getElementById("MessDelLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
+                    },
+                    error: function (res) {
+                        console.log("no", JSON.stringify(res));
+                    }
+                });
+            }
+        </script>
+        <script>
+                Array.from($('.liContainer').find('li > a')).map((item) => {
+                    item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
+                })
+                var imgs = [];
+                var formData = new FormData(); //用formData來存取要傳送的所有資料
+                // 選取到檔案後開始動作
+                $('#file-selector').change(function(event) {
+                    let timeStamp = new Date().getTime()
+                    var file = $("#file-selector")[0];  //取得檔案
+                    //如果有檔案就要加入formData
+                    if (file.files.length) {
+                        Object.keys(file.files).map((img, index) => {
+                            file.files[img].timeStamp = `${timeStamp}${index}`
+                            imgs.push(file.files[img])
+                            // 解析檔案
+                            var item = file.files[img]
+                            var reader = new FileReader();
+                            reader.onload = (function(item) {
+                                return function(event) {
+                                    var src = event.target.result // 圖片的編碼 , 格式為base64
+                                    var title = escape(file.name);
+                                    var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
+                                    console.log($(this))
+                                    $('#replyInput').append('<div id="replyInput">' + img + '</div>');
+                                };
+                            })(file);
+                            reader.readAsDataURL(item);
+                        })
+                    }
+                });
+                function submitReply(artiNum) {
+                    $('.submitReplyButton').addClass('disabled')
+                    $('.submitReplyButton').attr('disabled', true)
+                    $('.spinner-border').css('display', 'block')
+        
+                    var imgKey = []
+                    if ($("#replyInput").find("#replyInput > img")) {
+                        Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
+                            imgKey.push(img.getAttribute('key'))
+                        })
+                        imgs.map((img) => {
+                            if (imgKey.indexOf(img.timeStamp) >= 0) {
+                                formData.append('userImg', img);
+                            }
+                        })
+                        Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
+                            $(img).before("\\:imgLocation")
+                        })
+                    }
+                    formData.append('artiNum', artiNum);
+                    var replyCont = [];
+                    var replyData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
+                    // 取得內容
+                    replyData.forEach(function (element) {
+                        replyCont.push(element.innerText);
+                    }, this);
+                    formData.append('replyCont', replyCont);
+                    $.ajax({
+                        url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
+                        type: 'POST',
+                        dataType: 'TEXT',
+                        data: { 'artiCont': `${replyCont}` },
+                        success: function (res) {
+                            var analyzeRes = JSON.parse(res)
+                            var analyzeScore = analyzeRes.analyze[0]
+                            var positiveWords = analyzeRes.analyze[1]
+                            var negativeWords = analyzeRes.analyze[2]
+                            var swearWords = analyzeRes.analyze[3]
+                            console.log(analyzeScore, positiveWords, negativeWords, swearWords)
+                            formData.append('analyzeScore', analyzeScore);
+                            formData.append('positiveWords', positiveWords);
+                            formData.append('negativeWords', negativeWords);
+                            formData.append('swearWords', swearWords);
+                            $.ajax({
+                                url: '/recommend/reply',
+                                type: 'POST',
+                                dataType: 'TEXT',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function (res) {
+                                    if (res == "請進行登入") {
+                                        alert(res);
+                                        location.replace("/logIn");
+                                    } else if (res == "留言成功") {
+                                        alert(res);
+                                        location.reload();
+                                    } else {
+                                        alert('哎呀，出現錯誤')
+                                    }
+                                },
+                                error: function (res) {
+                                    console.log("哎呀，出現錯誤", res);
+                                }
+                            });
+                        },
+                        error: function (res) {
+                            console.error(res)
+                        }
+                    });
+                }
+            </script>
 
 </body>
 
