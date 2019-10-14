@@ -18,7 +18,9 @@ app.use(bodyParser.json());
 app.use(cors())
 
 const article = require('./utility/article');
-const member = require('./utility/member');
+// const member = require('./utility/member');
+const member = require('./utility/LinePush');
+
 
 
 
