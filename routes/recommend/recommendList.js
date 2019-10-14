@@ -15,6 +15,7 @@ router.get('/', function (req, res, next) {
     }
     
     recommendList.getRecommendList(memID).then(data => {
+        console.log(data[3]);
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else {

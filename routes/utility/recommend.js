@@ -37,7 +37,7 @@ var getRecommendList = async function (memID) {
     })
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image"')
+    await sql('SELECT "recomNum" , "imgName" FROM "image" WHERE "recomMessNum" IS NULL ')
     .then((data) => {
         if (!data.rows) {
             imgs = undefined;

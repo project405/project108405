@@ -18,6 +18,7 @@ router.post('/', function (req, res, next) {
     }
 
     console.log(req.body.artiMessNum);
+    
     //判斷是哪一個檢舉
     if(req.body.artiNum != undefined){
         reportData["artiNum"] = req.body.artiNum;
