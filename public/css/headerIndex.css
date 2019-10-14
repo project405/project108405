@@ -320,6 +320,22 @@ a.surpriseHoverText::after {
     bottom: 2.8em;
     content: "";
 }
+
+div.surpriseSectionContainer {
+    border-radius: 6px;
+    height: 20em;
+    width: 20em;
+    position: fixed;
+    right: -30em;
+    bottom: 220px;
+    z-index: 1001;
+}
+div.surpriseHeader {
+    position: sticky;
+    top: 0px; 
+    z-index: 1000; 
+    background-color: white;
+}
 @media (max-width: 575px) {
     #gotop {
         position: fixed;

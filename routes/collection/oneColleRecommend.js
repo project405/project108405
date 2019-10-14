@@ -28,6 +28,21 @@ router.get('/:recomNum', async function (req, res, next) {
                 }
             }
         }
+        let sumDisplayImg = 0
+        if (data[9]) {
+            console.log(data[9])
+            data[1].forEach((item, index) => {
+                console.log('item', item)
+                console.log('data.recomMessCont', item.recomMessCont)
+                while (item.recomMessCont.match("\\:imgLocation")) {
+                    console.log('data[9][sumDisplayImg].imgName', data[9][sumDisplayImg].imgName)
+                    item.recomMessCont = item.recomMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/imgs/recommend/replyImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    sumDisplayImg = sumDisplayImg + 1
+                    console.log('sumDisplayImg', sumDisplayImg)
+                }
+            })
+        }
+        
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data == -1) {

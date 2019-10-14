@@ -308,12 +308,38 @@
         </div>
       </div>
       
-      <div href="#" class="surpriseSection"  data-toggle="modal" data-target="#surpriseSectionContainer" style="cursor: pointer;">
+      <div href="#" class="surpriseSection" style="cursor: pointer;">
           <a class="surpriseHoverText" style="display:none">看看有沒有你喜歡的</a>
           <img src="imgs/icon/leaf45.png" alt="">
       </div>
+      <div class="surpriseSectionContainer" style="overflow:auto !important;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-header surpriseHeader">
+                        <h5 class="modal-title" id="exampleModalLongTitle">你可能會想看</h5>
+                        <button type="button" class="close surpriseClose" style="z-index: 50000 !important">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-content">
+                    <div class="modal-body" style="overflow:auto !important;">
+                            「情緒，其實是一種能量，也是一種指引，<br/>
+                            當它向浪潮一般撲襲而來，你能做的就是任它流淌而過，<br/>
+                            只有感受過，你才得以在人生大海中繼續航行。」 ---- 留佩萱《療癒，從感受情緒開始》<br/>
+                            文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，<br/>
+                            我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。                    
+                            「情緒，其實是一種能量，也是一種指引，<br/>
+                            當它向浪潮一般撲襲而來，你能做的就是任它流淌而過，<br/>
+                            只有感受過，你才得以在人生大海中繼續航行。」 ---- 留佩萱《療癒，從感受情緒開始》<br/>
+                            文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，<br/>
+                            我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。                    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     <!-- Modal -->
-    <div class="modal fade" id="surpriseSectionContainer" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <!-- <div class="modal fade" id="surpriseSectionContainer" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -339,7 +365,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -358,7 +384,25 @@
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/index.js"></script>
     <script src="/javascripts/navbar.js"></script>
-
+    <script>
+        $('.surpriseSection').click(() => {
+            if ($(document).width() < 375) {
+                $( ".surpriseSectionContainer" ).animate({
+                    right:5,
+                }, 200);
+            } else {
+                $( ".surpriseSectionContainer" ).animate({
+                    right:50,
+                }, 200);
+            }
+        })
+        $('.surpriseClose').click(() => {
+            console.log('eee')
+            $( ".surpriseSectionContainer" ).animate({
+                right: -500,
+            }, 1500 );
+        })
+    </script>
 
 </body>
 
