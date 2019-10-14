@@ -861,7 +861,7 @@ var report = async function (memID, artiNum, artiMessNum, recomMessNum, reportRe
 }
 
 //=========================================
-//--------------  getMemberInfor() ----------------
+//--------------  getMemberInfor() --------
 //=========================================
 var getMemberInfor = async function (memID) {
     var result;
