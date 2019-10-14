@@ -4,8 +4,9 @@
 const sql = require('./asyncDB');
 const moment = require('moment');
 
+
 //==============================
-//------ lineBotPush() ------
+//----- 抓取有綁定line的會員 -----
 //==============================
 
 var AllMember = async function () {
