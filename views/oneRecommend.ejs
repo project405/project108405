@@ -217,19 +217,22 @@
                 <!-- info結束 -->
 
                 <p class="content"> <%- items[1][i].recomMessCont %> </p>
-                <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#recomMessReportPost" >檢舉</button>
+                <% if(items[8][0] != items[1][i].memID) {%>
+                    <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#recomMessReportPost" >檢舉</button>
+                <% } else { %>
+                  <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->   
+                <div class="dropdown ml-auto float-right dropup">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>     
+                        </button>
+                        <div class="dropdown-menu dotMenu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/editRecommendReply/<%= items[1][i].recomMessNum %>">編輯</a>
+                            <a class="dropdown-item" href="#/" onclick="deleteReply('<%- items[1][i].recomMessNum %>', '<%- items[1][i].memID %>')">刪除</a>
+                        </div>
+                    </div>
+                <% } %>
              </div>
 
-            <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
-            <div class="dropdown ml-auto float-right dropup">
-                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-h"></i>     
-                    </button>
-                    <div class="dropdown-menu dotMenu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">編輯</a>
-                        <a class="dropdown-item" href="#">刪除</a>
-                    </div>
-                </div>
         </div>
 
         <!-- 推薦留言檢舉區塊 -->
@@ -596,6 +599,23 @@
                 }
             });
         }
+         // delReply
+         function deleteReply(artiMessNum, memID) {
+                console.log(artiMessNum, memID)
+                $('.spinner-border').css('display', 'block')
+                $.ajax({
+                url: '/addLike',
+                type: 'POST',
+                data: { "RecomMessNum": artiMessNum, "memID": memID, "deleteRecommendReply": true },
+                success: function (res) {
+                    // console.log("yes", reponse.responseText);
+                    location.reload();
+                },
+                error: function (res) {
+                    console.log('刪除失敗');
+                }
+            });
+            }
     </script>
     <script>
             //推薦留言檢舉ajax

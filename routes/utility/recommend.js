@@ -208,6 +208,46 @@ var getOneRecommend = async function (recomNum, memID) {
     // console.log("QQQQQQQQQQQQQQQQQQQQQQQ",result);
     return result;
 }
+//=========================================
+//---------  getOneRecommendReply() -------
+//=========================================
+var getOneRecommendReply = async function (recomMessNum, memID) {
+    console.log(recomMessNum, memID)
+    var oneReply = []; //存放文章留言內容
+    var replyImgs = [];
+    var result = [];
+
+    //取得單篇留言
+    await sql('SELECT * FROM "recommendMessage" WHERE "recomMessNum"= $1 ' , [recomMessNum])
+    .then((data) => {
+        if (!data.rows) {
+            oneReply = undefined;
+        } else {
+            oneReply = data.rows;
+        }
+    }, (error) => {
+        oneReply = undefined;
+        console.log(error)
+    });
+
+    // ----------- 取得照片 -----------
+    await sql('SELECT "recomMessNum" , "imgName" FROM "image" WHERE "recomMessNum" = $1 ',[recomMessNum])
+        .then((data) => {
+            if (!data.rows) {
+                replyImgs = undefined;
+            } else {
+                replyImgs = data.rows;
+            }
+        }, (error) => {
+            replyImgs = undefined;
+            console.log(error)
+        });
+
+    result[0] = oneReply;
+    result[1] = replyImgs;
+    result[2] = [memID];
+    return result;
+}
 
 //==============================
 //---- getRecomClassList () ----
@@ -294,5 +334,5 @@ var delRecommendLike = async function (memID, recomNum) {
 module.exports = {
     getRecommendList, getOneRecommend,
     getRecomClassList,
-    addRecommendLike, delRecommendLike
+    addRecommendLike, delRecommendLike, getOneRecommendReply
 }

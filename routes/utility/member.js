@@ -190,6 +190,66 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
     return result;
 }
 //================================
+//---- editRecommendReply() ------
+//================================
+var editRecommendReply = async function (recomNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum, remainImg) {
+    var result = 0;
+    var imgs = []
+    console.log('remainImg', remainImg, remainImg, remainImg, remainImg, remainImg, remainImg)
+    //編輯留言
+    await sql('UPDATE "recommendMessage" SET "recomMessCont"= $1, "analyzeScore" =$2, "positiveWords"= $3, "negativeWords"= $4, "swearWords"= $5 '+
+    'WHERE "recomMessNum" = $6'
+        , [replyCont, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum])
+        .then((data) => {
+            console.log(data)
+            result = 1;
+        }, (error) => {
+            console.error(error)
+            result = 0;
+        });
+        
+    await sql('SELECT * FROM "image" WHERE "recomMessNum" = $1', [recomMessNum])
+    .then((data) => {
+        if (!data.rows) {
+            imgs = undefined;
+            console.log('noimg')
+        } else {
+            imgs = data.rows;
+        }
+    }, (error) => {
+        imgs = undefined;
+        console.log(error)
+    })
+
+    if (imgs) {
+        imgs.map( async(original) => {
+            console.log(original)
+            console.log('original', original)
+            if (remainImg.indexOf(original.imgName) < 0) {
+                await sql ('DELETE FROM "image" WHERE "imgName" = $1 ',[original.imgName])
+                .then((data)=> {
+                    console.log(data)
+                },(e) => {
+                    console.error(e)
+                }) 
+            }
+        })
+    }
+
+    for (var i = 0; i < imgData.length; i++) {
+        await sql('INSERT into "image" ("recomNum", "memID", "recomMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [recomNum, memID, recomMessNum, imgData[i], postDateTime])
+            .then((data) => {
+                result = 1;
+            }, (error) => {
+                result = 0;
+                console.error(error)
+            });
+    }
+
+    return result;
+}
+
+//================================
 //-------- deleteArticle() -------
 //================================
 var deleteArticle = async function (artiNum) {
@@ -212,6 +272,22 @@ var deleteReply = async function (artiMessNum) {
     var result = 0;
 
     await sql ('DELETE FROM "articleMessage" WHERE "artiMessNum" = $1',[artiMessNum])
+        .then((data)=> {
+            result = 1
+            console.log(data)
+        },(e) => {
+            console.error(e)
+            result = 0
+        }) 
+    return result;
+}
+//================================
+//--- deleteRecommendReply() -----
+//================================
+var deleteRecommendReply = async function (recomMessNum) {
+    var result = 0;
+
+    await sql ('DELETE FROM "recommendMessage" WHERE "recomMessNum" = $1',[recomMessNum])
         .then((data)=> {
             result = 1
             console.log(data)
@@ -812,5 +888,7 @@ module.exports = {
     addArticleLike, delArticleLike,
     addArticleMessLike, delArticleMessLike,
     addRecommendMessLike, delRecommendMessLike,
-    report, checkAuthority, editArticle, deleteArticle, editReply, deleteReply, memberInformation, getMemberInfor, recommendReplyPost
+    report, checkAuthority, editArticle, deleteArticle, editReply, deleteReply, 
+    memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply, editRecommendReply
+
 };

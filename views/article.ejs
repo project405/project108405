@@ -368,7 +368,7 @@
                 data: { "artiMessNum" : a , "reportReason" : $("#messReportReason").val()},
                 success: function (res) {
                     alert(res);
-                    window.location.reload();
+                    location.reload();
                 },
                 error: function (res) {
                     console.log("失敗", res);
@@ -708,7 +708,7 @@
                     }
                 });
             }
-            // delArticle
+            // delReply
             function deleteReply(artiMessNum, memID) {
                     console.log(artiMessNum, memID)
                     $('.spinner-border').css('display', 'block')
