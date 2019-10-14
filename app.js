@@ -77,6 +77,7 @@ var oneRecommendRouter = require('./routes/recommend/oneRecoomend');
 var recommendPostPageRouter = require('./routes/recommend/recomPostPage');
 var recommendPostRouter = require('./routes/recommend/post');
 var recommendReplyRouter = require('./routes/recommend/reply');
+var recommendEditReplyRouter = require('./routes/recommend/editRecommendReply');
 // ---------------  four recommend Class -------------------
 var RecomMovieRouter = require('./routes/recommend/recomMovie');
 var RecomMusicRouter = require('./routes/recommend/recomMusic');
@@ -219,6 +220,7 @@ app.use('/oneRecommend', oneRecommendRouter);
 app.use('/recommend/post/page', recommendPostPageRouter);
 app.use('/recommend/post',recommendPostRouter);
 app.use('/recommend/reply',recommendReplyRouter);
+app.use('/editRecommendReply',recommendEditReplyRouter);
 // -------------- four Class ----------------
 app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);

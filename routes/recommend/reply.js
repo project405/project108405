@@ -64,6 +64,7 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
     // console.log(req.files);
     //將所有換行符號替代成<br> 
     recomMessCont = recomMessCont.replace(/\n/g, "<br>");
+    console.log(recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.remainImg)
 
     for (var i in req.files) {
         imgData.push(req.files[i].filename);
@@ -112,18 +113,19 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
                 }
             }
             if (editReply) {
-                // member.editReply(artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.remainImg).then(data => {
-                //     if (data == 1) {
-                //         console.log("編輯留言成功");
-                //         res.send("編輯留言成功");
-                //     } else {
-                //         for (var i = 0; i < imgData.length; i++) {
-                //             fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
-                //         }
-                //         console.log("編輯留言失敗");
-                //         res.send("編輯留言失敗");
-                //     }
-                // })
+                console.log(recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.remainImg)
+                member.editRecommendReply(recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.remainImg).then(data => {
+                    if (data == 1) {
+                        console.log("編輯留言成功");
+                        res.send("編輯留言成功");
+                    } else {
+                        for (var i = 0; i < imgData.length; i++) {
+                            fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
+                        }
+                        console.log("編輯留言失敗");
+                        res.send("編輯留言失敗");
+                    }
+                })
             } else {
                 console.log('!!!!', recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords)
                 member.recommendReplyPost(recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {

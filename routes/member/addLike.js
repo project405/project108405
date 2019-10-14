@@ -17,6 +17,20 @@ router.post('/', function (req, res, next) {
     }
 
 
+    if (req.body.deleteRecommendReply) {
+        if (memID == req.body.memID) {
+            console.log('compare completed')
+            member.deleteRecommendReply(req.body.recomMessNum).then((data) => {
+                if (data == 1) {
+                    console.log('second刪除成功')
+                    res.send('刪除成功')
+                } else {
+                    console.log('second刪除失敗')
+                    res.send('刪除失敗')
+                }
+            })
+        }
+    }
     if (req.body.deleteReply) {
         if (memID == req.body.memID) {
             console.log('compare completed')
