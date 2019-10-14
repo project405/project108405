@@ -44,7 +44,7 @@ bot.on('postback', function(event) {
                         type:"uri",
                         label:" 👣 至文藝富心官網登入",
                         // uri:"line://app/1594135622-705e8pDP"   
-                        uri: "line://app/1594135622-705e8pDP"
+                        uri: "line：// app / 1594135622-82v9mEZq"
 
                     }]
                 }
@@ -136,7 +136,6 @@ bot.on('postback', function(event) {
             }else{
                 login.userJudgeBind(userId).then(d =>{
                     
-                    console.log('d',d.length)
                         if(d.length !== 0){                         
                             if(d[0].lineID == userId){
                                 collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{

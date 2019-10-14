@@ -1,85 +1,42 @@
 'use strict';
+//----------------------------------------
+// 載入必要的模組
+//----------------------------------------
+var linebot = require('linebot');
 
+//增加引用函式
+// const collection = require('./utility/collection');
+
+//----------------------------------------
+// 填入自己在Line Developers的channel值
+//----------------------------------------
+var bot = linebot({
+    channelId: '1594135622',
+    channelSecret: 'c503bd8ed4d7b8e183333309ddd135fd',
+    channelAccessToken: 'xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
+});
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
 
 //---------------------------------------------
-// 使用者登入
+// 推播功能
 //---------------------------------------------
-var userLogIn = async function(id, password){   
+
+var linebotPush = async function(memID, lineID){  
     var result;
-
-    //取得員工資料
-    await sql('SELECT * FROM "member" WHERE "memID"=$1 and "memPass"=$2', [id, password])
-        .then((data) => {
-            if(data.rows.length > 0){
-                result = data.rows[0];
-            }else{
-                result = null;
-            } 
-        }, (error) => {
-            result = null;
-        });
-    
+    // await sql('UPDATE "member" SET "lineID" = $2 WHERE "memID" = $1', [memID, lineID])
+    // .then((data) => {
+    //     console.log(data)
+    //     result = data.rows[0];
+    // }, (error) => {
+    //     console.error(error)
+    //     result = null;
+    // }) 
     //回傳物件
     return result;
 }
 
-//---------------------------------------------
-// line綁定
-//---------------------------------------------
-var userBind = async function(id, password, lineID){   
-    var result;
 
-    //取得員工資料
-    await sql('SELECT * FROM "member" WHERE "memID"=$1 and "memPass"=$2', [id, password])
-        .then((data) => {
-            if(data.rows.length > 0){
-                result = data.rows[0];
-            } else {
-                result = null;
-            } 
-        }, (error) => {
-            result = null;
-        });
-    
-    //回傳物件
-    return result;
-}
-var addLineID = async function(memID, lineID){  
-    var result;
-    await sql('UPDATE "member" SET "lineID" = $2 WHERE "memID" = $1', [memID, lineID])
-    .then((data) => {
-        console.log(data)
-        result = data.rows[0];
-    }, (error) => {
-        console.error(error)
-        result = null;
-    }) 
-    //回傳物件
-    return result;
-}
-
-var userJudgeBind = async function(lineID){
-    
-    var result ;
-
-    
-    await sql('SELECT * FROM "member" WHERE "lineID" = $1', [lineID])
-        .then((data) => {
-            if(!data.rows){
-                result = undefined ;
-            }else{
-                result = data.rows ;
-            }
-        }, (error) => {
-            result = undefined ;
-        });
-
-    // console.log('result',result)
-    //回傳物件
-    return result;
-}
 
 //匯出
-module.exports = {userLogIn, userBind, addLineID, userJudgeBind};
+module.exports = {linebotPush};
