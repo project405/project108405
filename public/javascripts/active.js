@@ -37,11 +37,13 @@ $(document).ready(function () {
         //取得內容
         var str = $(this).html();
 
+        while (str.match("\\:imgLocation")) {
+            str = str.replace("\\:imgLocation",'')
+        }
         //截取内容75字
-        var subStr = str.substring(0, 100);
-
+        var subStr = str.substring(0, 75);
         //如果長度大於75就添加省略號否則就填空
-        var data = subStr + (str.length > 100 ? '...' : '');
+        var data = subStr + (str.length > 75 ? '...' : '');
         $(this).html(data);
     });
     $(".wrapBigHotSectionText").each(function () {
@@ -49,9 +51,11 @@ $(document).ready(function () {
         //取得內容
         var str = $(this).html();
 
+        while (str.match("\\:imgLocation")) {
+            str = str.replace("\\:imgLocation",'')
+        }
         //截取内容75字
         var subStr = str.substring(0, 200);
-
         //如果長度大於75就添加省略號否則就填空
         var data = subStr + (str.length > 200 ? '...' : '');
         $(this).html(data);

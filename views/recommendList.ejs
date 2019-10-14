@@ -107,15 +107,13 @@
 
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/navbar.js"></script>
-    <!-- <script>
-        Array.from($('.title')).map((item) => {
-            item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
+    <script>
+        Array.from($('.content')).map((item) => {
+            while (item.innerText.match("\\:imgLocation")) {
+                item.innerText = item.innerText.replace("\\:imgLocation",'')
+            }
         })
-        Array.from($('.wrapText')).map((item) => {
-            item.innerText = item.innerText.length > 75 ? `${item.innerText.substring(0,75)}...` : item.innerText
-        })
-    //    $('.title').innerText =  $('.title').innerText.length > 18 ? `${$('.title').innerText.substring(0,18)}...` : $('.title').innerText
-    </script> -->
+    </script>
 </body>
 
 </html>

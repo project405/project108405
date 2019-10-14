@@ -296,8 +296,8 @@ div.surpriseSection {
 }
 
 div.surpriseSection > img {
-    height: 100px;
-    width: 100px;
+    height: 90px;
+    width: 90px;
     cursor: pointer;
 }
 
@@ -363,6 +363,20 @@ div.surpriseHeader {
     }
     #sentimentSectionHover {
         display: none;
+    }
+    div.surpriseSection {
+        z-index: 95;
+        bottom: 120px;
+        right: -30px;
+        /* animation: shake 4s;
+        animation-iteration-count: infinite; */
+        -webkit-animation: shakeV2 1.5s ease-in-out 1.5s infinite alternate;
+    
+    }
+    
+    div.surpriseSection > img {
+        height: 70px;
+        width: 70px;
     }
 }
 

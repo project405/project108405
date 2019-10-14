@@ -53,8 +53,8 @@ input:focus {
 /* --------------------- */
 
 #logIn button.login {
-    margin: 1em 0 !important;
-    width: 80%;
+    margin-bottom: 0.25em !important;
+    width: 95%;
 }
 
 button.sameWidth {

@@ -217,6 +217,7 @@
                 <!-- info結束 -->
 
                 <p class="content"> <%- items[1][i].recomMessCont %> </p>
+                <hr>
                 <% if(items[8][0] != items[1][i].memID) {%>
                     <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#recomMessReportPost" >檢舉</button>
                 <% } else { %>
@@ -307,6 +308,14 @@
     <script src="/javascripts/post.js "></script>
     <script src="/javascripts/navbar.js"></script>
     <script>
+        var member = '<%=items[8][0]%>'
+            $('#replyInput').focus(() => {
+                if (!member) {
+                    alert('請進行登入再留言！')
+                    location.replace("/logIn");
+
+                }
+            })
             Array.from($('.liContainer').find('li > a')).map((item) => {
                 item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
             })

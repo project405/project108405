@@ -256,6 +256,7 @@
                     <p class="content"> <%- items[1][i].artiMessCont %>
                     </p>
                 </div>
+                <hr>
                 <% if(items[7][0] != items[1][i].memID) {%>
                 <button type="button" class="btn report" data-toggle="modal" data-target="#artiMessReportPost">檢舉</button>
                  <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
@@ -398,6 +399,13 @@
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
     <script>
+        $('#replyInput').focus(() => {
+            if (!member) {
+                alert('請進行登入再留言！')
+                location.replace("/logIn");
+
+            }
+        })
         Array.from($('.liContainer').find('li > a')).map((item) => {
             item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
         })
