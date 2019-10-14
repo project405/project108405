@@ -380,7 +380,7 @@
         </script>
             
     </div>
-    <div class="spinner-border" role="status" style="position: fixed; top: 45%; right: 47%; display: none;">
+    <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
             <span class="sr-only">Loading...</span>
      </div>
 
@@ -399,6 +399,7 @@
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
     <script>
+        var member = '<%=items[7][0]%>'
         $('#replyInput').focus(() => {
             if (!member) {
                 alert('請進行登入再留言！')
@@ -434,6 +435,7 @@
                     })(file);
                     reader.readAsDataURL(item);
                 })
+                $('#file-selector').val('')
             }
         });
         function submitReply(artiNum) {

@@ -379,7 +379,8 @@ div.footer {
     text-align: center;
     position: absolute;
     bottom: 5%;
-    left: 46.5%;
+    left: 50%;
+    margin-left:-20px;
     font-size: 3em;
     opacity: 0.65;
     text-decoration: none;
