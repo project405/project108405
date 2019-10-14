@@ -60,6 +60,7 @@ app.post('/webhook', function (req, res) {
     member.AllMember().then(data => {  
         data.forEach(item => {
             allUser.push(item.lineID);
+            console.log(allUser)
         });
         
     request.post({
@@ -68,7 +69,7 @@ app.post('/webhook', function (req, res) {
             //Authorization為Channel access token 
             'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
         },
-        url: 'https://api.line.me/v2/bot/message/push',
+        url: 'https://api.line.me/v2/bot/message/multicast',
         body: JSON.stringify({
             //to給資料庫有的使用者
             to: allUser,
