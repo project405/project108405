@@ -47,44 +47,45 @@
     <!-- Portfolio Section -->
     <section id="portfolio">
 
-        <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
-            <!-- 推薦開始 -->
-            <% for(var i = 0 ; i<recom[0].length ; i++){ %>
+            <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
+                <!-- 推薦開始 -->
+                <% for(var i = 0 ; i<recom[0].length ; i++){ %>
+
                 <% isImg = false %>
                 <!-- 如果有抓到圖片 -->
                 <% if(recom[3] != undefined) { %>
                     <% for(var j = 0 ; j<recom[3].length ; j++ ) { %>
                         <% if(recom[0][i].recomNum == recom[3][j].recomNum){ %>
-                            <div class="wrapper col-12  col-lg-2"
-                            style="background-image:url('/imgs/recommend/<%= recom[3][j].imgName %>');">
+                            <div class="wrapper col-12  col-lg-2" 
+                            style="background-image: url('/imgs/recommend/<%= recom[3][j].imgName %>');">
                             <% isImg = true %>
                         <% } %>
                     <% } %>
                 <% } %>
-            <!-- 如果沒抓到半張圖片 -->
-            <% if(isImg == false) { %>
-                <div class="wrapper col-12  col-lg-2">
-            <% } %>
-
-                <a class="portfolio-box" href="/oneRecommend/<%= recom[0][i].recomNum %>">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                            <p><%= recom[0][i].recomClass %> </p>
+                <!-- 如果沒抓到半張圖片 -->
+                <% if(isImg == false) { %>
+                    <div class="wrapper col-12  col-lg-2">
+                <% } %>
+                    <a class="portfolio-box" href="/oneRecommend/<%= recom[0][i].recomNum %>">
+                        <div class="portfolio-box-caption">
+                            <div class="project-category text-white-50">
+                                <p><%= recom[0][i].recomClass %> </p>
+                            </div>
+                            <div class="project-name">
+                                <p class="title"><%= recom[0][i].recomHead %> </p>
+                                <p class="content wrapText"><%- recom[0][i].recomCont %>
+                                </p>
+                            </div>
                         </div>
-                        <div class="project-name">
-                            <p class="title"><%= recom[0][i].recomHead %></p>
-                            <p class="content wrapText"><%= recom[0][i].recomCont %></p>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
+                <% if( (i+1) % 4 == 0){ %>
+                <div class="w-100"></div>
+                <% } %>
+                <% } %>
+                <!-- 推薦結束 -->
             </div>
-            <% if( (i+1) % 4 == 0){ %>
-            <div class="w-100"></div>
-            <% } %>
-            <% } %>
-            <!-- 推薦結束 -->
-        </div>
-    </section>
+        </section>
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
@@ -105,7 +106,7 @@
 
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/navbar.js"></script>
-    <script>
+    <!-- <script>
         Array.from($('.title')).map((item) => {
             item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
         })
@@ -113,7 +114,7 @@
             item.innerText = item.innerText.length > 75 ? `${item.innerText.substring(0,75)}...` : item.innerText
         })
     //    $('.title').innerText =  $('.title').innerText.length > 18 ? `${$('.title').innerText.substring(0,18)}...` : $('.title').innerText
-    </script>
+    </script> -->
 </body>
 
 </html>
