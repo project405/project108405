@@ -62,8 +62,6 @@ app.post('/webhook', function (req, res) {
             allUser.push(item.lineID);
         });
         
-        console.log('allUser@@@@@@@@@@',allUser[0]);
-        console.log('allUser@@@@@@@@@@',allUser[1]);
     request.post({
         headers: {
             'content-type' : 'application/json',
@@ -77,7 +75,7 @@ app.post('/webhook', function (req, res) {
                 messages: [
                     {
                     type: 'text',
-                    text: "Hello,"+profile.userName+"~這是Line Bot API測試訊息"
+                    text: "Hello,Ting~這是Line Bot API測試訊息"
                     }
                 ]
             })
