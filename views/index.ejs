@@ -308,15 +308,15 @@
         </div>
       </div>
       
-      <div href="#" class="surpriseSection" style="cursor: pointer;">
+      <div href="#" class="surpriseSection" style="cursor: pointer;"  data-toggle="modal" data-target="#surpriseSectionContainer">
           <a class="surpriseHoverText" style="display:none">看看有沒有你喜歡的</a>
           <img src="imgs/icon/leaf45.png" alt="">
       </div>
-      <div class="surpriseSectionContainer" style="overflow:auto !important;">
+      <!-- <div class="surpriseSectionContainer" style="overflow:auto !important;">
             <div class="modal-dialog" role="document">
                 <div class="modal-header surpriseHeader">
                         <h5 class="modal-title" id="exampleModalLongTitle">你可能會想看</h5>
-                        <button type="button" class="close surpriseClose" style="z-index: 50000 !important">
+                        <button type="button" class="close surpriseClose" style=" z-index: 50000 !important">
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
@@ -335,11 +335,11 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
     <!-- Modal -->
-    <!-- <div class="modal fade" id="surpriseSectionContainer" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal fade" id="surpriseSectionContainer" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -365,7 +365,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div> 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -384,7 +384,7 @@
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/index.js"></script>
     <script src="/javascripts/navbar.js"></script>
-    <script>
+    <!-- <script>
         $('.surpriseSection').click(() => {
             if ($(document).width() < 375) {
                 $( ".surpriseSectionContainer" ).animate({
@@ -402,7 +402,7 @@
                 right: -500,
             }, 1500 );
         })
-    </script>
+    </script> -->
 
 </body>
 
