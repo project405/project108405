@@ -81,8 +81,6 @@ var getIndexData = async function (memID) {
             hotArticle = undefined;
         });
 
-    console.log("hotArticle=",hotArticle);
-
     // ----------- 取得 tag -----------
     await sql('SELECT * FROM "articleTagView"')
         .then((data) => {
@@ -94,7 +92,6 @@ var getIndexData = async function (memID) {
         }, (error) => {
             tag = undefined;
         });
-    console.log("tag=",tag);
 
     //----------- 取得文章照片 ----------- 
     await sql('SELECT "artiNum" , "imgName" FROM "image"')
