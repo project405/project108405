@@ -132,6 +132,14 @@
                 }
             });
             function submitModifyArticle() {
+                var artiHead = document.getElementById("recomHead").value;
+                if (artiHead == '') {
+                    alert('請輸入標題')
+                    return;
+                } else if (document.querySelectorAll("div.postInput") == '') {
+                    alert('請輸入內文')
+                    return;
+                }
                 var remainImg = []
                 artiNum = '<%= items[0][0].recomNum %>'
                 $('.postButton').addClass('disabled')
@@ -158,7 +166,6 @@
                         $(img).before("\\:imgLocation")
                     })
                 }
-                var artiHead = document.getElementById("recomHead").value;
                 while (artiHead.match('/n')) {
                     artiHead = artiHead.replace('/n')
                 }
@@ -213,13 +220,13 @@
                                 if (res == "請進行登入") {
                                     alert(res);
                                     location.replace("/login");
-                                } else if (res == "編輯成功") {
-                                    location.replace("/oneRecommend/'<%= items[0][0].recomNum%>'");
                                 } else {
-                                    alert(res);
+                                    alert('編輯成功！')
+                                    location.replace("/oneRecommend/<%= items[0][0].recomNum%>");
                                 }
                             },
                             error: function (res) {
+                                console.log(res)
                             }
                         });
                     },
