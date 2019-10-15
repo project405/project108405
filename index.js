@@ -107,7 +107,7 @@ app.post('/webhook', function (req, res) {
                         altText: "相信你會喜歡😎",
                         template: {
                             type: "confirm",
-                            text: "【文藝富心】推薦 🎉\n內容(max:240)\n標題：xxx\n內容：",
+                            text: "【文藝富心】推薦 🎉\n內容(max:240)\n標題：xxx\n內容："+byClassData.getIndexData('abc123'),
                             actions: [
                                 {
                                     "type": "message",
