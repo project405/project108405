@@ -73,7 +73,7 @@ app.post('/webhook', function (req, res) {
             allUser.push(item.lineID);
             console.log(allUser)
         });
-    console.log('req@@@@@@@@@@@@@@@@@@@@@@@@@',req)  
+    // console.log('req@@@@@@@@@@@@@@@@@@@@@@@@@',req)  
     request.post({
         headers: {
             'content-type' : 'application/json',
