@@ -17,11 +17,20 @@ var getIndexData = async function (memID) {
     var hotArticle = [];  //存放前三名熱門文章
     var imgs = [];
     var tag = [] ;
+
+    //(燈泡區塊) 分析文章
     var positiveArticle = [] ; //正向文章
     var negativeArticle = [] ; //負向文章
     var positiveImg = [] ; //正向照片
     var negativeImg = [] ; //負向照片
+
+    //(葉子區塊) 針對會員 對文章/推薦 分類按愛心次數
+    var byClassData = [] ;
+    var artiClassCount = [] ; 
+    var recomClassCount = [] ;
+    var classCount = [0,0,0,0] ;  //arti + recom
     var result = [];
+
     // -----------  每週推薦 --------------
     await sql('SELECT * FROM "recommend"')
         .then((data) => {
@@ -162,6 +171,55 @@ var getIndexData = async function (memID) {
         negativeImg = undefined;
     });
 
+    // ----------- 計算文章class的數量-----------
+    await sql('SELECT "artiClass" AS "class" , count("artiClass") '+
+             ' FROM "article" '+
+             ' WHERE "artiNum" '+
+                 ' IN( SELECT "artiNum" '+
+                        ' FROM "articleLike" '+
+                        ' WHERE "memID" = $1) '+
+             ' GROUP BY "artiClass"', [memID])
+    .then((data) => {
+        if (!data.rows) {
+            artiClassCount = undefined; 
+        } else {
+            artiClassCount = data.rows ;
+        }
+    }, (error) => {
+        artiClassCount = undefined ; 
+    });
+
+    // ----------- 計算推薦class的數量-----------
+    await sql('SELECT "recomClass" AS "class" , count("recomClass") '+
+             ' FROM "recommend" '+
+             ' WHERE "recomNum" '+
+                 ' IN( SELECT "recomNum" '+
+                        ' FROM "recommendLike" '+
+                        ' WHERE "memID" = $1) '+
+             ' GROUP BY "recomClass"', [memID])
+    .then((data) => {
+        if (!data.rows) {
+            recomClassCount = undefined; 
+        } else {
+            recomClassCount = data.rows ;
+        }
+    }, (error) => {
+        recomClassCount = undefined ; 
+    });
+
+    //加總class按讚次數
+    await sumClass(classCount, artiClassCount) ;
+    await sumClass(classCount, recomClassCount) ;
+    
+    //排序
+    classCount = await sortObject(classCount);
+
+    //class次數最多的 以亂數的方式去判斷說要取文章 還是 推薦
+    byClassData = await byClassGetData(classCount[0][0],Math.floor(Math.random() * 10) + 1) ; 
+  
+
+    console.log("byClassData",byClassData);
+
     result[0] = fourRecommend;
     result[1] = hotArticle;
     result[2] = [memID];
@@ -172,14 +230,103 @@ var getIndexData = async function (memID) {
     result[7] = negativeArticle ; 
     result[8] = positiveImg ;
     result[9] = negativeImg ;
+    result[10] = byClassData; 
 
     return result;
 }
 
+//計算使用者分別對article/recommend Class 按愛心的次數
+async function sumClass(array, data){
+    for(var i = 0 ; i < data.length ; i++){
+        if(data[i].class == 'movie'){
+            array[0] += parseInt(data[i].count,10) ; 
+        }else if(data[i].class == 'music'){
+            array[1] += parseInt(data[i].count,10) ;
+        }else if(data[i].class == 'book'){
+            array[2] += parseInt(data[i].count,10) ;
+        }else if(data[i].class == 'exhibition'){
+            array[3] += parseInt(data[i].count,10) ;
+        }
+    }
+} 
 
-//=========================================
+//排序
+async function sortObject(array){
+    console.log("外面的ARRAY",array);
+    var sortable = [] ;
+    for (var item in array) {
+        console.log("裡面的的ARRAY",array);
+        console.log("item=",item);
+        sortable.push([item, array[item]]);
+    }
+
+    sortable.sort(function(a, b) {
+        return b[1] - a[1];
+    });
+console.log("排序:",sortable);
+    return sortable ; 
+}
+
+//針對class 取文章或推薦(亂數)
+async function byClassGetData(index, r){
+    var className = "" ; 
+    var result = [] ;    
+    
+    //判斷class是什麼
+    if(index == "0"){
+        className = "movie";
+    }else if(index == "1"){
+        className = "music";
+    }else if(index == "2"){
+        className = "book";
+    }else if(index == "3"){
+        className = "exhibition";
+    }
+
+    //取文章
+    if( r <= 5 ){
+        await sql('SELECT * '+
+                 ' FROM "articleListDataView" '+
+                 ' WHERE "artiClass" = $1 '+
+                 ' ORDER BY random() '+
+                 ' LIMIT 1', [className])
+        .then((data) => {
+            if (!data.rows) {
+                result = undefined; 
+            } else {
+                result = data.rows ;
+            }
+        }, (error) => {
+            result = undefined ; 
+        });
+    }else{ 
+        //取推薦
+        await sql('SELECT * '+
+            ' FROM "recommendListDataView" '+
+            ' WHERE "racomClass" = $1 '+
+            ' ORDER BY random() '+
+            ' LIMIT 1', [className])
+        .then((data) => {
+            if (!data.rows) {
+                result = undefined; 
+            } else {
+                result = data.rows ;
+            }
+        }, (error) => {
+            result = undefined ; 
+        });
+
+    }
+
+    return result ; 
+}
+
+
+
+
+//=====================================
 //---------  getWebSearch() -----------
-//=========================================
+//=====================================
 var getWebSearch = async function (searchParams, memID) {
     var articleList = [];
     var tag ;
@@ -300,7 +447,6 @@ var getWebSearch = async function (searchParams, memID) {
     result[7] = recomImgs ; 
 
     return result;
-
 }
 
 module.exports = { getIndexData, getWebSearch };
