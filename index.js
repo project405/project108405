@@ -24,12 +24,12 @@ const byClassData = require('./utility/index');
 
 var pushContent = []
 
-byClassData.getIndexData('abc123').then(data =>{
+byClassData.getIndexData().then(data =>{
     // console.log('data[10]@@@@@@@@@@@@',data[10].recomHead)
     // console.log('data[10]@@@@@@@@@@@@',data[10].recomCont)
     // console.log('data@@@@@@@@@@@@',data)
-    console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomHead)
-    console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomCont)
+    // console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomHead)
+    // console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomCont)
     pushContent.push(data[10][0].recomHead)
     pushContent.push(data[10][0].recomCont)
     console.log('裡面',pushContent)
@@ -41,7 +41,7 @@ byClassData.getIndexData('abc123').then(data =>{
   
 })
     
-console.log('外面',pushContent)
+console.log(byClassData.getIndexData('abc123'))
 
 
 
