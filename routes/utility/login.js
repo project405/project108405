@@ -50,7 +50,6 @@ var addLineID = async function(memID, lineID){
     var result;
     await sql('UPDATE "member" SET "lineID" = $2 WHERE "memID" = $1', [memID, lineID])
     .then((data) => {
-        console.log(data)
         result = data.rows[0];
     }, (error) => {
         console.error(error)

@@ -29,10 +29,8 @@ var getRecommendList = async function (memID) {
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
             checkAuthority = data;
-            console.log("Authority=", checkAuthority);
         } else {
             checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
         }
     })
 
@@ -51,7 +49,6 @@ var getRecommendList = async function (memID) {
     result[1] = [memID];
     result[2] = checkAuthority;
     result[3] = imgs ;
-    console.log(result);
     return result;
 }
 
@@ -228,10 +225,8 @@ var getOneRecommend = async function (recomNum, memID) {
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
             checkAuthority = data;
-            console.log("Authority=", checkAuthority);
         } else {
             checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
         }
     })
 
@@ -247,14 +242,12 @@ var getOneRecommend = async function (recomNum, memID) {
     result[9] = replyImgs;
     result[10] = guessRecommend;
     
-    // console.log("QQQQQQQQQQQQQQQQQQQQQQQ",result);
     return result;
 }
 //=========================================
 //---------  getOneRecommendReply() -------
 //=========================================
 var getOneRecommendReply = async function (recomMessNum, memID) {
-    console.log(recomMessNum, memID)
     var oneReply = []; //存放文章留言內容
     var replyImgs = [];
     var result = [];
@@ -316,10 +309,8 @@ var getRecomClassList = async function (recomClass,memID) {
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
             checkAuthority = data;
-            console.log("Authority=", checkAuthority);
         } else {
             checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
         }
     })
 
@@ -365,7 +356,6 @@ var delRecommendLike = async function (memID, recomNum) {
     var result;
     await sql('DELETE FROM "recommendLike" WHERE "memID" = $1 and "recomNum"= $2', [memID, recomNum])
         .then((data) => {
-            console.log("刪除囉~~~~");
             result = 1;
         }, (error) => {
             result = 0;

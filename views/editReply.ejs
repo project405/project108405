@@ -73,7 +73,6 @@
                                     var src = event.target.result // 圖片的編碼 , 格式為base64
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
-                                    console.log($(this))
                                     $('#replyInput').append('<div id="replyInput">' + img + '</div>');
                                 };
                             })(file);
@@ -84,7 +83,6 @@
                 });
         function submitEditReply(artiNum) {
             var artiMessNum ='<%= items[0][0].artiMessNum%>'
-            console.log(artiMessNum)
             var remainImg = []
             $('.submitReplyButton').addClass('disabled')
             $('.submitReplyButton').attr('disabled', true)
@@ -96,7 +94,6 @@
                     remainImg.push(img.getAttribute('src').replace('/userImg/replyImg/',''))
                 })
             }
-            console.log(remainImg)
 
             var imgKey = []
             if ($("#replyInput").find("#replyInput > img")) {
@@ -181,8 +178,6 @@
         var tagArray = []
         var classSelected = '<%= items[0][0].artiClass%>'
         $('.deleteTag').click(function() {
-            console.log($(this))
-            console.log($(this).parent('#tag'))
             $(this).parent('#tag').remove()
         })
     </script>

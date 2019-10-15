@@ -18,10 +18,8 @@ router.get('/', function (req, res, next) {
 	}
 	
 	collection.getCollArticle(memID).then(data => {
-		console.log(data);
 		for (var i = 0; i < data[0].length; i++) {
 			if (data[0][i].artiCont.match("\\:imgLocation") != null) {
-				console.log("近來囉");
 				data[0][i].artiCont = data[0][i].artiCont.replace(/\\:imgLocation/g, "");
 			}
 		}
@@ -30,7 +28,6 @@ router.get('/', function (req, res, next) {
 		} else if (data == -1) {
 			res.render('notFound');  //導向找不到頁面                
 		} else {
-			// console.log(data);
 			res.render('collectionArticle', { collData: data });
 		}
 	})

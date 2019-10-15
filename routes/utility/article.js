@@ -120,7 +120,6 @@ var getOneArticle = async function (artiNum, memID) {
              ' ORDER BY "artiMessDateTime" ', [artiNum])
         .then((data) => {
             oneArtiMessage = data.rows;
-            console.log('oneArtiMessage', oneArtiMessage)
         }, (error) => {
             oneArtiMessage = null;
         });
@@ -259,7 +258,6 @@ var getOneArticle = async function (artiNum, memID) {
 //---------  getOneReply() -------------
 //=========================================
 var getOneReply = async function (artiMessNum, memID) {
-    console.log(artiMessNum, memID)
     var oneReply = []; //存放文章留言內容
     var replyImgs = [];
     var result = [];

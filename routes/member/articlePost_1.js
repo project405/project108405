@@ -22,9 +22,6 @@ router.post('/', function (req, res, next) {
     var artiHead = req.body.artiHead;
     var artiCont = req.body.artiCont;
     var artiClass = req.body.artiClass;
-    // console.log(req.body);
-    console.log(req.body);
-    // console.log(artiClass) ; 
     var postDateTime = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
     var picture = req.body.file;
     var imgName = picture.substring(0, picture.lastIndexOf("."));
@@ -45,19 +42,15 @@ router.post('/', function (req, res, next) {
     buf += imgType;
     imgName = postDateTime + "--" + buf;
 
-    console.log(imgName);
-    console.log(req.body.url);
     fs.writeFile('./public/userImg/' + imgName , imgName, function (err) {
         if (err) {
             console.error(err);
         }
-        console.log('file ' + imgName + ' saved.')
     });
 
     if (memID == undefined || memID == null) {
         res.render('login');
     } else {
-        // console.log(req.file,imgType);
         if (typeof (req.file) != 'undefined') {
             //如果檔案超過限制大小
             if (req.file.size > maxSize) {
@@ -79,7 +72,6 @@ router.post('/', function (req, res, next) {
         if (isRender) {
             member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, picture).then(data => {
                 if (data == 0) {
-                    console.log("發文成功");
                     res.redirect('/articleList');
                 } else {
                     res.render('error');  //導向錯誤頁面

@@ -24,7 +24,6 @@ $(window).load(function() {
 // }
 
 function styleselect() {
-console.log('123');
     if (document.getElementById('inputState').value == "movie") {
         $("#infoForm").html('名稱：<input type="text" placeholder="電影名稱"><br>上映日期：<input type="date"><br>導演：<input type="text" placeholder="導演"><br>演員：<input type="text" placeholder="演員"><br>分級：<select col-sm-3"><option value="1">普遍級</option><option value="2">保護級</option><option value="3">輔導級</option><option value="4">限制級</option></select><br>發布日期：<input type="date">');
     }

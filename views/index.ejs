@@ -243,7 +243,7 @@
             <p>我們身處在一個資料越來越多、意義越來越少的世代，源源不絕的資訊不僅讓人失去學習的熱忱，也錯過了許多生命中原有的樂趣。文藝富心彙整藝文相關資訊與提供討論的空間，讓使用者能在幾分鐘之內得到完善的資訊，也提供一個安靜的角落給使用者喘息休憩。
             </p>
             <h6>聯絡我們：</h6>
-            <p>10546004@ntub.edu.tw</p>
+            <p>LiteraryArts@gmail.com</p>
 
         </div>
 
@@ -275,7 +275,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalScrollableTitle">心情專區</h5>
+              <h4 class="modal-title" id="exampleModalScrollableTitle">心情專區</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -289,18 +289,24 @@
                         我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。</h6>
                     <hr>
                     <div style="text-align: center">
-                        <a href="#" id="positiveButton" class="chooseSection">燦爛、溫暖</a>
-                        <a href="#" id="negativeButton" class="chooseSection">惆悵、漣漪</a>
+                        <a href="#/" id="positiveButton" class="chooseSection">燦爛、溫暖</a>
+                        <a href="#/" id="negativeButton" class="chooseSection">惆悵、漣漪</a>
                     </div>
                 </div>
                <!-- 正向文章 -->
                <div class="sentimentContent">
                   <div id="positiveSection" style="display: none; word-wrap:break-word; overflow: hidden;">
-                       <%- items[6][0].artiCont %>
-                  </div>
-                <!-- 負向文章 -->
-                <div id="negativeSection" style="display: none">
+                        <h5> <%- items[6][0].artiHead %></h5>
+                        <%- items[6][0].artiCont %> 
+                        <hr>
+                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[6][0].artiNum %>'">進入文章查看更多</button>
+                    </div>
+                    <!-- 負向文章 -->
+                    <div id="negativeSection" style="display: none">
+                        <h5> <%- items[7][0].artiHead %></h5>
                         <%- items[7][0].artiCont %>
+                        <hr>
+                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[7][0].artiNum %>'">進入文章查看更多</button>
                   </div>
                </div>
             </div>
@@ -312,31 +318,6 @@
           <a class="surpriseHoverText" style="display:none">看看有沒有你喜歡的</a>
           <img src="imgs/icon/leaf45.png" alt="">
       </div>
-      <!-- <div class="surpriseSectionContainer" style="overflow:auto !important;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-header surpriseHeader">
-                        <h5 class="modal-title" id="exampleModalLongTitle">你可能會想看</h5>
-                        <button type="button" class="close surpriseClose" style=" z-index: 50000 !important">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                </div>
-                <div class="modal-content">
-                    <div class="modal-body" style="overflow:auto !important;">
-                            「情緒，其實是一種能量，也是一種指引，<br/>
-                            當它向浪潮一般撲襲而來，你能做的就是任它流淌而過，<br/>
-                            只有感受過，你才得以在人生大海中繼續航行。」 ---- 留佩萱《療癒，從感受情緒開始》<br/>
-                            文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，<br/>
-                            我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。                    
-                            「情緒，其實是一種能量，也是一種指引，<br/>
-                            當它向浪潮一般撲襲而來，你能做的就是任它流淌而過，<br/>
-                            只有感受過，你才得以在人生大海中繼續航行。」 ---- 留佩萱《療癒，從感受情緒開始》<br/>
-                            文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，<br/>
-                            我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。                    
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
 
     <!-- Modal -->
     <div class="modal fade" id="surpriseSectionContainer" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
@@ -384,26 +365,6 @@
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/index.js"></script>
     <script src="/javascripts/navbar.js"></script>
-    <!-- <script>
-        $('.surpriseSection').click(() => {
-            if ($(document).width() < 375) {
-                $( ".surpriseSectionContainer" ).animate({
-                    right:5,
-                }, 200);
-            } else {
-                $( ".surpriseSectionContainer" ).animate({
-                    right:50,
-                }, 200);
-            }
-        })
-        $('.surpriseClose').click(() => {
-            console.log('eee')
-            $( ".surpriseSectionContainer" ).animate({
-                right: -500,
-            }, 1500 );
-        })
-    </script> -->
-
 </body>
 
 </html>

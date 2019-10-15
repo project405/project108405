@@ -27,7 +27,6 @@ var getIndexData = async function (memID) {
         .then((data) => {
             // 將每周推薦的類別改為中文
             for (let i = 0; i < data.rows.length; i++) {
-                // console.log(data.rows[i].recomClass);
                 if (data.rows[i].recomClass == 'movie') {
                     data.rows[i].recomClass = '電影';
                 } else if (data.rows[i].recomClass == 'music') {

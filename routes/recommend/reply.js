@@ -17,7 +17,6 @@ var storage = multer.diskStorage({
         cb(null, 'public/imgs/recommend/replyImg');
     },
     filename: function (req, file, cb) {
-        console.log('inthere!!!')
         imgName = file.originalname.substring(0, file.originalname.lastIndexOf("."));
         imgType = file.originalname.substring(file.originalname.lastIndexOf("."));
         buf = Buffer.from(imgName, 'ascii');
@@ -45,7 +44,6 @@ var upload = multer({
 
 //post請求
 router.post('/', upload.array('userImg', 20), function (req, res, next) {
-    console.log(req.session.memID)
     var memID = req.session.memID;
     if (!memID) {
         res.send("請進行登入");
@@ -61,24 +59,13 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
     
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
     var imgData = [];
-    // console.log(req.files);
     //將所有換行符號替代成<br> 
     recomMessCont = recomMessCont.replace(/\n/g, "<br>");
-    console.log(recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.remainImg)
 
     for (var i in req.files) {
         imgData.push(req.files[i].filename);
-        console.log("files= ~~~~~", req.files[i]);
-        // if (replyCont.match("\\:imgLocation") != null) {
-        //     console.log("近來囉");
-        //     // replyCont = replyCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
-        //     replyCont = replyCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + req.files[i].filename + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
-        // }
-
     }
-    // console.log(imgData);
     // tag
-    // console.log("typeof", typeof req.file);
     if (memID == undefined || memID == null) {
         if (req.body.userImg != 'undefined') {
             for (var i = 0; i < imgData.length; i++) {
@@ -87,7 +74,6 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
         }
         res.send("請進行登入");
     } else {
-        // console.log(req.file,imgType);
         if (typeof (req.file) != 'undefined') {
             //如果檔案超過限制大小
             if (req.file.size > maxSize) {
@@ -113,30 +99,24 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
                 }
             }
             if (editReply) {
-                console.log(recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.remainImg)
                 member.editRecommendReply(recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.remainImg).then(data => {
                     if (data == 1) {
-                        console.log("編輯留言成功");
                         res.send("編輯留言成功");
                     } else {
                         for (var i = 0; i < imgData.length; i++) {
                             fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
                         }
-                        console.log("編輯留言失敗");
                         res.send("編輯留言失敗");
                     }
                 })
             } else {
-                console.log('!!!!', recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords)
                 member.recommendReplyPost(recomNum, memID, recomMessCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
                     if (data == 1) {
-                        console.log("留言成功");
                         res.send("留言成功");
                     } else {
                         for (var i = 0; i < imgData.length; i++) {
                             fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
                         }
-                        console.log("留言失敗");
                         res.send("留言失敗");
                     }
                 })
@@ -145,8 +125,7 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
             for (var i = 0; i < imgData.length; i++) {
                 fs.unlinkSync('public/imgs/recommend/replyImg/' + imgData[i]); //刪除檔案
             }
-            console.log("留言失敗2");
-            res.send("留言失敗2");
+            res.send("留言失敗");
         }
     }
 

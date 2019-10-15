@@ -48,7 +48,6 @@ router.post('/', function (req, res, next) {
                 memMail: memMail,
                 memGender: memGender
             }
-            // console.log(newData);
             
             signUp.createMember(newData).then(d => {
                 if (d == 0) {

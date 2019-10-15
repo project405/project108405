@@ -162,7 +162,6 @@
                             dataType: 'JSON',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
                             },
                             error: function (res) {
                                 console.log("失敗", JSON.stringify(res));
@@ -171,7 +170,6 @@
                     };
                     //刪除收藏
                     function delColle(artiNum) {
-                        // console.log("前端刪除訊息");
                         cancelCollection();
                         $.ajax({
                             url: '/delCollection',
@@ -179,8 +177,6 @@
                             dataType: 'JSON',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
-
                             },
                             error: function (res) {
                                 console.log("失敗", JSON.stringify(res));
@@ -211,7 +207,6 @@
                             dataType: 'text',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
                                 likeCount(artiNum);
                                 like();
                             },
@@ -224,14 +219,12 @@
                     };
                     //刪除愛心
                     function delLike(artiNum) {
-                        // console.log("前端刪除訊息");     
                         $.ajax({
                             url: '/delLike',
                             type: 'POST',
                             dataType: 'text',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
                                 likeCount(artiNum);
                                 cancelLike();
                             },
@@ -260,13 +253,11 @@
                             dataType: 'JSON',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                // console.log("yes", reponse.responseText);
-                                console.log("yes", JSON.stringify(res));
                                 document.getElementById("addLikeCount").innerHTML = JSON.stringify(res);
                                 document.getElementById("delLikeCount").innerHTML = JSON.stringify(res);
                             },
                             error: function (res) {
-                                console.log("no", JSON.stringify(res));
+                                console.log("失敗", JSON.stringify(res));
                             }
 
                         });
@@ -282,7 +273,6 @@
                             dataType: 'JSON',
                             data: { "likeType": "articleMess", "artiMessNum": artiMessNum, "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
                                 MessLikeCount(res.artiNum, res.artiMessNum);
                                 MessLike(res.artiNum, res.artiMessNum);
                             },
@@ -295,14 +285,12 @@
                     };
                     //刪除留言愛心
                     function MessDelLike(artiNum, artiMessNum) {
-                        // console.log("前端刪除訊息");     
                         $.ajax({
                             url: '/delLike',
                             type: 'POST',
                             dataType: 'JSON',
                             data: { "likeType": "articleMess", "artiMessNum": artiMessNum, "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
                                 MessLikeCount(res.artiNum, res.artiMessNum);
                                 cancelMessLike(res.artiNum, res.artiMessNum);
                             },
@@ -332,13 +320,11 @@
                             dataType: 'JSON',
                             data: { "likeType": "articleMess", "artiMessNum": artiMessNum, "artiNum": artiNum },
                             success: function (res) {
-                                // console.log("yes", reponse.responseText);
-                                console.log("yes", JSON.stringify(res));
                                 document.getElementById("MessAddLikeCount" + res.artiNum + res.artiMessNum).innerHTML = res.data;
                                 document.getElementById("MessDelLikeCount" + res.artiNum + res.artiMessNum).innerHTML = res.data;
                             },
                             error: function (res) {
-                                console.log("no", JSON.stringify(res));
+                                console.log("失敗", JSON.stringify(res));
                             }
                         });
                     }
@@ -599,7 +585,6 @@
                                 var src = event.target.result // 圖片的編碼 , 格式為base64
                                 var title = escape(file.name);
                                 var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
-                                console.log($(this))
                                 $('#replyInput').append('<div id="replyInput">' + img + '</div>');
                             };
                         })(file);

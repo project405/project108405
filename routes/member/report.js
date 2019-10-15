@@ -17,7 +17,6 @@ router.post('/', function (req, res, next) {
         memID = req.session.passport.user.id;
     }
 
-    console.log(req.body.artiMessNum);
     
     //判斷是哪一個檢舉
     if(req.body.artiNum != undefined){
@@ -33,7 +32,6 @@ router.post('/', function (req, res, next) {
 
     member.report(memID, reportData.artiNum, reportData.artiMessNum, reportData.recomMessNum, reportData.reportReason)
         .then(data => {
-            console.log("data= ,",data);
             if (data == 1) {
                 if(req.body.artiNum != undefined || req.body.artiMessNum != undefined || req.body.recomMessNum != undefined){
                     res.send("舉報成功");
