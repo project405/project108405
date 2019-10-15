@@ -553,7 +553,6 @@ var report = async function (memID, artiNum, artiMessNum, recomMessNum, reportRe
 
 //匯出
 module.exports = {
-    AllMember,
     articlePost, recommendPost, replyPost, myArticle, modifyMember, getOriginalMail,
     getMyArticleClassList,
     addArticleLike, delArticleLike,
