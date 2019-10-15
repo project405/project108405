@@ -23,8 +23,8 @@ const member = require('./utility/LinePush');
 const byClassData = require('./utility/index');
 
 byClassData.getIndexData('abc123').then(data =>{
-    console.log('data[10]@@@@@@@@@@@@',data[10])
-    console.log('data[10]@@@@@@@@@@@@',data[10])
+    console.log('data[10]@@@@@@@@@@@@',data[10][2])
+    console.log('data[10]@@@@@@@@@@@@',data[10][3])
     console.log('data[10]@@@@@@@@@@@@',data[10])
 
 
