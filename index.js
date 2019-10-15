@@ -24,6 +24,8 @@ const byClassData = require('./utility/index');
 
 byClassData.getIndexData().then(data =>{
     console.log(data[10])
+    console.log(data[10])
+    console.log(data[10])
 })
     
 
