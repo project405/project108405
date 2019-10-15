@@ -29,10 +29,8 @@ var getRecommendList = async function (memID) {
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
             checkAuthority = data;
-            console.log("Authority=", checkAuthority);
         } else {
             checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
         }
     })
 
@@ -51,7 +49,6 @@ var getRecommendList = async function (memID) {
     result[1] = [memID];
     result[2] = checkAuthority;
     result[3] = imgs ;
-    console.log(result);
     return result;
 }
 
@@ -69,6 +66,8 @@ var getOneRecommend = async function (recomNum, memID) {
     var checkAuthority;
     var result = [];
     var replyImgs = []
+    var guessRecommend = undefined ; //取得猜測使用者可能喜歡的文章
+
 
     // -----------  取得單一推薦文章 --------------
     await sql('SELECT * FROM "recommendListDataView" WHERE "recomNum" = $1', [recomNum])
@@ -183,14 +182,51 @@ var getOneRecommend = async function (recomNum, memID) {
         console.log(error)
     });
 
+    // ----------- 根據該文章的tag去猜測使用者可能喜歡的文章 -----------
+    await sql('SELECT * '+
+                ' FROM "recommend" '+
+                ' WHERE "recomNum" '+
+                    ' IN(SELECT "A"."recomNum" '+
+                    ' FROM (SELECT "recomNum" ,count(*) '+
+                            ' FROM "tagLinkArticle" '+
+                            ' WHERE "tagNum" '+
+                                ' IN (SELECT "tagNum" '+
+                                    ' FROM "tagLinkArticle" '+
+                                    ' WHERE "recomNum" = $1) AND "recomNum" != $1 '+
+                            ' GROUP BY "recomNum" '+
+                            ' ORDER BY "count" DESC , "recomNum" DESC '+
+                            ' LIMIT 3) AS "A")', [recomNum])
+        .then((data) => {
+            if (data.rowCount <= 0) {
+                guessRecommend = undefined ;
+            } else {
+                guessRecommend = data.rows;
+            }   
+        });
+        
+    // ----------- 如果tag沒任何關聯 則隨機取三篇文章 -----------
+    if(guessRecommend == undefined){
+        await sql('SELECT * '+
+            ' FROM "recommend" '+
+            ' ORDER BY random() '+
+            ' LIMIT 3') 
+        .then((data) => {
+                if (!data.rows) {
+                    guessRecommend = undefined ;
+                } else {
+                    
+                    guessRecommend = data.rows;
+                }   
+        });
+    }
+
+
     //取得權限
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
             checkAuthority = data;
-            console.log("Authority=", checkAuthority);
         } else {
             checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
         }
     })
 
@@ -204,15 +240,14 @@ var getOneRecommend = async function (recomNum, memID) {
     result[7] = checkAuthority;
     result[8] = [memID];
     result[9] = replyImgs;
+    result[10] = guessRecommend;
     
-    // console.log("QQQQQQQQQQQQQQQQQQQQQQQ",result);
     return result;
 }
 //=========================================
 //---------  getOneRecommendReply() -------
 //=========================================
 var getOneRecommendReply = async function (recomMessNum, memID) {
-    console.log(recomMessNum, memID)
     var oneReply = []; //存放文章留言內容
     var replyImgs = [];
     var result = [];
@@ -274,10 +309,8 @@ var getRecomClassList = async function (recomClass,memID) {
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
             checkAuthority = data;
-            console.log("Authority=", checkAuthority);
         } else {
             checkAuthority = undefined;
-            console.log("Authority=", checkAuthority);
         }
     })
 
@@ -323,7 +356,6 @@ var delRecommendLike = async function (memID, recomNum) {
     var result;
     await sql('DELETE FROM "recommendLike" WHERE "memID" = $1 and "recomNum"= $2', [memID, recomNum])
         .then((data) => {
-            console.log("刪除囉~~~~");
             result = 1;
         }, (error) => {
             result = 0;

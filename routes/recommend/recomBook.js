@@ -14,13 +14,11 @@ router.get('/', function (req, res, next) {
     }
 
     recommend.getRecomClassList('書籍', memID).then(data => {
-        console.log(data);
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data == -1) {
             res.render('notFound');  //導向找不到頁面                
         } else {
-            console.log(data)
             res.render('recomClass', { recom: data });  //將資料傳給顯示頁面
         }
     })

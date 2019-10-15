@@ -20,9 +20,6 @@ router.get('/:artiNum', async function (req, res, next) {
     }
 
     article.getOneArticle(artiNum, memID).then(data => {
-        // if (memID != data[0])
-        console.log('data[0].memID)', data[0][0].memID)
-        console.log(data)
         if (data[0][0].memID != memID) {
             res.write('<head><meta charset="utf-8"/></head>');
             res.end('<script> alert("您沒有編輯該文章的權限"); history.back();</script>');
@@ -35,20 +32,6 @@ router.get('/:artiNum', async function (req, res, next) {
                     data[0][i].artiCont = data[0][i].artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top original'><img src='/userImg/" + data[6][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 }
             }
-        }
-
-        let sumDisplayImg = 0
-        console.log(data[9])
-        if (data[9]) {
-            data[1].forEach((item, index) => {
-                console.log('data.artiMessCont', item.artiMessCont)
-                while (item.artiMessCont.match("\\:imgLocation")) {
-                    console.log('data[9][sumDisplayImg].imgName', data[9][sumDisplayImg].imgName)
-                    item.artiMessCont = item.artiMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/replyImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
-                    sumDisplayImg = sumDisplayImg + 1
-                    console.log('sumDisplayImg', sumDisplayImg)
-                }
-            })
         }
 
         if (data == null) {

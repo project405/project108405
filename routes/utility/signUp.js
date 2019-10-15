@@ -30,7 +30,6 @@ var checkMail = async function (memMail) {
 //---------  createMember() -------------
 var createMember = async function (newData) {
     var result;
-    // console.log(newData);
     await sql('INSERT INTO "member" ("memID", "memPass", "memBirth","memName", "memMail", "memGender") VALUES ($1,$2,$3,$4,$5,$6)',
         [newData.memID, newData.memPass, newData.memBirth,newData.memName ,newData.memMail, newData.memGender])
         .then((data) => {
@@ -45,7 +44,6 @@ var createMember = async function (newData) {
 //---------  googleCreateMember() -------------
 var googleCreateMember = async function (memID, memName, memMail) {
     var result;
-    // console.log(newData);
     await sql('INSERT INTO "member" ("memID" , "memName", "memMail") VALUES ($1, $2, $3)',
         [memID, memName, memMail])
         .then((data) => {

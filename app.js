@@ -76,6 +76,7 @@ var recommendListRouter = require('./routes/recommend/recommendList');
 var oneRecommendRouter = require('./routes/recommend/oneRecoomend');
 var recommendPostPageRouter = require('./routes/recommend/recomPostPage');
 var recommendPostRouter = require('./routes/recommend/post');
+var recommendEditRouter = require('./routes/recommend/editRecommend');
 var recommendReplyRouter = require('./routes/recommend/reply');
 var recommendEditReplyRouter = require('./routes/recommend/editRecommendReply');
 // ---------------  four recommend Class -------------------
@@ -219,6 +220,7 @@ app.use('/recommendList', recommendListRouter);
 app.use('/oneRecommend', oneRecommendRouter);
 app.use('/recommend/post/page', recommendPostPageRouter);
 app.use('/recommend/post',recommendPostRouter);
+app.use('/editRecommend',recommendEditRouter);
 app.use('/recommend/reply',recommendReplyRouter);
 app.use('/editRecommendReply',recommendEditReplyRouter);
 // -------------- four Class ----------------
@@ -243,10 +245,6 @@ app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),   //導向登入失敗頁面	
     function(req, res) {
         // 如果登入成功, 使用者資料已存在session
-        // console.log(req.session.passport.user.id);
-        // console.log(req.session.passport.user.displayName);
-        // console.log(req.session.passport.user.emails[0].value);	 
-
         var checkID ;
         signUp.checkMemID(req.session.passport.user.id).then((data) => {      
             checkID = data[0];
@@ -254,7 +252,6 @@ app.get('/auth/google/callback',
         //如果帳號不存在，新增帳號到資料庫
         if(!checkID){      
             signUp.googleCreateMember(req.session.passport.user.id, req.session.passport.user.displayName, req.session.passport.user.emails[0].value);
-            console.log(req.session.passport.user.id);
         }
  
         res.redirect('/');   //導向登入成功頁面
@@ -263,7 +260,6 @@ app.get('/auth/google/callback',
 app.get('/user/logout', function(req, res){    
     req.logout();        //將使用者資料從session移除
     req.session.memID = undefined ;
-    console.log(req.session.memID);
     res.redirect('/');   //導向登出頁面
 });    
 

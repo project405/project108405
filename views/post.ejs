@@ -40,10 +40,8 @@
                 <option value="exhibition">展覽類</option>
                 <option value="book">書籍類</option>
             </select>
+            <input type="text" class="titleInput input-with-icon title" name="artiHead" id="artiHead" placeholder="請輸入您的標題">
 
-            <div class="titleInput input-with-icon title" name="artiHead" id="artiHead" contenteditable="true"
-                role="textbox" data-text="請輸入您的標題">
-            </div>
             <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容"></div>
 
 
@@ -70,7 +68,7 @@
     </a>
 
 
-    <div class="spinner-border" role="status" style="position: fixed; top: 45%; right: 47%; display: none;">
+    <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
             <span class="sr-only">Loading...</span>
      </div>
 
@@ -119,6 +117,7 @@
                     })(file);
                     reader.readAsDataURL(item);
                 })
+                $('#file-selector').val('')
             }
         });
         function submitPost() {
@@ -139,7 +138,7 @@
                     $(img).before("\\:imgLocation")
                 })
             }
-            var artiHead = document.getElementById("artiHead").innerHTML;
+            var artiHead = document.getElementById("artiHead").value;
             var artiCont = [];
             var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
             // 取得內容
@@ -200,7 +199,6 @@
                 },
                 error: function (res) {
                     console.error(res)
-                    console.log(res);
                 }
             });
         }

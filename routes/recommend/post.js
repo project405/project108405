@@ -43,7 +43,7 @@ var upload = multer({
 })
 
 //post請求
-router.post('/', upload.array('userImg', 3), function (req, res, next) {
+router.post('/', upload.array('userImg', 20), function (req, res, next) {
   var memID;
   var recomHead = req.body.recomHead;
   var recomCont = req.body.recomCont;
@@ -51,12 +51,11 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
   var analyzeScore = req.body.analyzeScore;
   var positiveWords = req.body.positiveWords;
   var negativeWords = req.body.negativeWords;
+  var recomNum = req.body.recomNum
 
-  console.log("qqqqqq",req.body);
   var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
   var tagData = [];
   var imgData = [];
-  // console.log(req.files);
   //將所有換行符號替代成<br> 
   recomCont = recomCont.replace(/\n/g, "<br>");
 
@@ -71,22 +70,12 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
 
   for (var i in req.files) {
       imgData.push(req.files[i].filename);
-      console.log("files= ", req.files[i]);
-      // if (recomCont.match("\\:imgLocation") != null) {
-      //     console.log("近來囉");
-      //     // recomCont = recomCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
-      //     recomCont = recomCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + req.files[i].filename + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
-      // }
-
   }
 
-  console.log(recomCont);
-  // console.log(imgData);
   // tag
   if (req.body.tag != '') {
       tagData = req.body.tag.split(",");
   }
-  // console.log("typeof", typeof req.file);
   if (memID == undefined) {
       if (req.body.userImg != 'undefined') {
           for (var i = 0; i < imgData.length; i++) {
@@ -95,7 +84,6 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
       }
       res.send("請進行登入");
   } else {
-      // console.log(req.file,imgType);
       if (typeof (req.file) != 'undefined') {
           //如果檔案超過限制大小
           if (req.file.size > maxSize) {
@@ -128,24 +116,34 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
                       fs.unlinkSync('public/imgs/recommend/' + imgData[i]); //刪除檔案
                   }
               }
-              member.recommendPost(memID, recomHead, recomCont, recomClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords).then(data => {
-                  if (data == 0) {
-                      console.log("發文成功");
-                      res.send("發文成功");
-                  } else {
-                      for (var i = 0; i < imgData.length; i++) {
-                          fs.unlinkSync('public/imgs/recommend/' + imgData[i]); //刪除檔案
+              if (recomNum) {
+                member.editRecommend(memID, recomHead, recomCont, recomClass, imgData, tagData, analyzeScore, positiveWords, negativeWords, recomNum, postDateTime, req.body.remainImg).then(data => {
+                    if (data == 1) {
+                        res.send("編輯成功");
+                    } else {
+                        for (var i = 0; i < imgData.length; i++) {
+                            fs.unlinkSync('public/imgs/recommend/' + imgData[i]); //刪除檔案
+                        }
+                        res.send("編輯失敗");
+                    }
+                })
+              } else {
+                  member.recommendPost(memID, recomHead, recomCont, recomClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords).then(data => {
+                      if (data == 0) {
+                          res.send("發文成功");
+                      } else {
+                          for (var i = 0; i < imgData.length; i++) {
+                              fs.unlinkSync('public/imgs/recommend/' + imgData[i]); //刪除檔案
+                          }
+                          res.send("發文失敗");
                       }
-                      console.log("發文失敗");
-                      res.send("發文失敗");
-                  }
-              })
+                  })
+              }
           }
       } else {
           for (var i = 0; i < imgData.length; i++) {
               fs.unlinkSync('public/imgs/recommend/' + imgData[i]); //刪除檔案
           }
-          console.log("發文失敗");
           res.send("發文失敗");
       }
   }

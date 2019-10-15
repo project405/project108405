@@ -162,7 +162,6 @@
                             dataType: 'JSON',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
                             },
                             error: function (res) {
                                 console.log("失敗", JSON.stringify(res));
@@ -171,7 +170,6 @@
                     };
                     //刪除收藏
                     function delColle(artiNum) {
-                        // console.log("前端刪除訊息");
                         cancelCollection();
                         $.ajax({
                             url: '/delCollection',
@@ -179,8 +177,6 @@
                             dataType: 'JSON',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
-
                             },
                             error: function (res) {
                                 console.log("失敗", JSON.stringify(res));
@@ -211,7 +207,6 @@
                             dataType: 'text',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
                                 likeCount(artiNum);
                                 like();
                             },
@@ -224,14 +219,12 @@
                     };
                     //刪除愛心
                     function delLike(artiNum) {
-                        // console.log("前端刪除訊息");     
                         $.ajax({
                             url: '/delLike',
                             type: 'POST',
                             dataType: 'text',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
                                 likeCount(artiNum);
                                 cancelLike();
                             },
@@ -260,13 +253,11 @@
                             dataType: 'JSON',
                             data: { "likeType": "article", "artiNum": artiNum },
                             success: function (res) {
-                                // console.log("yes", reponse.responseText);
-                                console.log("yes", JSON.stringify(res));
                                 document.getElementById("addLikeCount").innerHTML = JSON.stringify(res);
                                 document.getElementById("delLikeCount").innerHTML = JSON.stringify(res);
                             },
                             error: function (res) {
-                                console.log("no", JSON.stringify(res));
+                                console.log("失敗", JSON.stringify(res));
                             }
 
                         });
@@ -282,7 +273,6 @@
                             dataType: 'JSON',
                             data: { "likeType": "articleMess", "artiMessNum": artiMessNum, "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
                                 MessLikeCount(res.artiNum, res.artiMessNum);
                                 MessLike(res.artiNum, res.artiMessNum);
                             },
@@ -295,14 +285,12 @@
                     };
                     //刪除留言愛心
                     function MessDelLike(artiNum, artiMessNum) {
-                        // console.log("前端刪除訊息");     
                         $.ajax({
                             url: '/delLike',
                             type: 'POST',
                             dataType: 'JSON',
                             data: { "likeType": "articleMess", "artiMessNum": artiMessNum, "artiNum": artiNum },
                             success: function (res) {
-                                console.log("yes", JSON.stringify(res));
                                 MessLikeCount(res.artiNum, res.artiMessNum);
                                 cancelMessLike(res.artiNum, res.artiMessNum);
                             },
@@ -332,13 +320,11 @@
                             dataType: 'JSON',
                             data: { "likeType": "articleMess", "artiMessNum": artiMessNum, "artiNum": artiNum },
                             success: function (res) {
-                                // console.log("yes", reponse.responseText);
-                                console.log("yes", JSON.stringify(res));
                                 document.getElementById("MessAddLikeCount" + res.artiNum + res.artiMessNum).innerHTML = res.data;
                                 document.getElementById("MessDelLikeCount" + res.artiNum + res.artiMessNum).innerHTML = res.data;
                             },
                             error: function (res) {
-                                console.log("no", JSON.stringify(res));
+                                console.log("失敗", JSON.stringify(res));
                             }
                         });
                     }
@@ -433,9 +419,10 @@
                     </div>
                     <hr class="smallMagin">   
                     <!-- info結束 -->
-                    <p class="content"> <%= items[1][i].artiMessCont %>
+                    <p class="content"> <%- items[1][i].artiMessCont %>
                     </p>
                 </div>
+                <hr>
                 <% if(items[7][0] != items[1][i].memID) {%>
                     <button type="button" class="btn report" data-toggle="modal" data-target="#artiMessReportPost">檢舉</button>
                      <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
@@ -487,7 +474,8 @@
                     <i class="fas fa-images" style="padding-right:5px"></i>加圖片
                 </label>
 
-                <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none">提交回覆</button>
+                <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none"
+                    onclick=<%= "submitReply(" + items[0][0].artiNum + ")" %>>提交回覆</button>
 
             </div>
 
@@ -556,6 +544,9 @@
         <a href="#" id="gotop">
             <i class="fa fa-angle-up"></i>
         </a>
+        <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
+                <span class="sr-only">Loading...</span>
+         </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -571,7 +562,108 @@
         crossorigin="anonymous "></script>
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
-
+    <script>
+            Array.from($('.liContainer').find('li > a')).map((item) => {
+                item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
+            })
+            var imgs = [];
+            var formData = new FormData(); //用formData來存取要傳送的所有資料
+            // 選取到檔案後開始動作
+            $('#file-selector').change(function(event) {
+                let timeStamp = new Date().getTime()
+                var file = $("#file-selector")[0];  //取得檔案
+                //如果有檔案就要加入formData
+                if (file.files.length) {
+                    Object.keys(file.files).map((img, index) => {
+                        file.files[img].timeStamp = `${timeStamp}${index}`
+                        imgs.push(file.files[img])
+                        // 解析檔案
+                        var item = file.files[img]
+                        var reader = new FileReader();
+                        reader.onload = (function(item) {
+                            return function(event) {
+                                var src = event.target.result // 圖片的編碼 , 格式為base64
+                                var title = escape(file.name);
+                                var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
+                                $('#replyInput').append('<div id="replyInput">' + img + '</div>');
+                            };
+                        })(file);
+                        reader.readAsDataURL(item);
+                    })
+                    $('#file-selector').val('')
+                }
+            });
+            function submitReply(artiNum) {
+                $('.submitReplyButton').addClass('disabled')
+                $('.submitReplyButton').attr('disabled', true)
+                $('.spinner-border').css('display', 'block')
+    
+                var imgKey = []
+                if ($("#replyInput").find("#replyInput > img")) {
+                    Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
+                        imgKey.push(img.getAttribute('key'))
+                    })
+                    imgs.map((img) => {
+                        if (imgKey.indexOf(img.timeStamp) >= 0) {
+                            formData.append('userImg', img);
+                        }
+                    })
+                    Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
+                        $(img).before("\\:imgLocation")
+                    })
+                }
+                formData.append('artiNum', artiNum);
+                var replyCont = [];
+                var replyData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
+                // 取得內容
+                replyData.forEach(function (element) {
+                    replyCont.push(element.innerText);
+                }, this);
+                formData.append('replyCont', replyCont);
+                $.ajax({
+                    url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
+                    type: 'POST',
+                    dataType: 'TEXT',
+                    data: { 'artiCont': `${replyCont}` },
+                    success: function (res) {
+                        var analyzeRes = JSON.parse(res)
+                        var analyzeScore = analyzeRes.analyze[0]
+                        var positiveWords = analyzeRes.analyze[1]
+                        var negativeWords = analyzeRes.analyze[2]
+                        var swearWords = analyzeRes.analyze[3]
+                        formData.append('analyzeScore', analyzeScore);
+                        formData.append('positiveWords', positiveWords);
+                        formData.append('negativeWords', negativeWords);
+                        formData.append('swearWords', swearWords);
+                        $.ajax({
+                            url: '/article/reply',
+                            type: 'POST',
+                            dataType: 'TEXT',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (res) {
+                                if (res == "請進行登入") {
+                                    alert(res);
+                                    location.replace("/logIn");
+                                } else if (res == "留言成功") {
+                                    alert(res);
+                                    location.reload();
+                                } else {
+                                    alert('哎呀，出現錯誤')
+                                }
+                            },
+                            error: function (res) {
+                                console.log("哎呀，出現錯誤", res);
+                            }
+                        });
+                    },
+                    error: function (res) {
+                        console.error(res)
+                    }
+                });
+            }
+        </script>
 
 </body>
 

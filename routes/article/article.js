@@ -17,10 +17,6 @@ router.get('/:artiNum', async function (req, res, next) {
         this.memID = memID
     }
     article.getOneArticle(artiNum, memID).then(data => {
-        console.log('req.session.memID', req.session.memID)
-        console.log('data[7]', data[7][0])
-        console.log('data', data)
-
         // 將字串替換成圖片
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].artiCont.match("\\:imgLocation") != null) {
@@ -31,15 +27,11 @@ router.get('/:artiNum', async function (req, res, next) {
         }
 
         let sumDisplayImg = 0
-        console.log(data[9])
         if (data[9]) {
             data[1].forEach((item, index) => {
-                console.log('data.artiMessCont', item.artiMessCont)
                 while (item.artiMessCont.match("\\:imgLocation")) {
-                    console.log('data[9][sumDisplayImg].imgName', data[9][sumDisplayImg].imgName)
                     item.artiMessCont = item.artiMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/replyImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                     sumDisplayImg = sumDisplayImg + 1
-                    console.log('sumDisplayImg', sumDisplayImg)
                 }
             })
         }

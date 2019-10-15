@@ -4,8 +4,6 @@ $(document).ready(function() {
             // Now you can call LIFF API
             const userId = data.context.userId;
             const accessToken = liff.getAccessToken();
-            console.log('getThis',$(this).find('#lineID').val(userId))
-            console.log('whatisit',$(this).find('#lineID').val())
         },
         err => {
             // LIFF initialization failed

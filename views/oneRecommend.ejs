@@ -36,6 +36,17 @@
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[0][0].recomDateTime %>發佈</a>
                     </div>
+                    <% if(items[7] && items[7] == 'boss') {%>
+                        <div class="dropdown ml-auto">
+                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-h"></i>     
+                            </button>
+                                <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/editRecommend/<%= items[0][0].recomNum %>" >編輯</a>
+                                <a class="dropdown-item" href="#/" onclick=<%= "delRecommend(" + items[0][0].recomNum + ")" %>>刪除</a>
+                                </div>
+                        </div>
+                    <% } %>
                 </div>
                 <hr  style="margin-top: 0.5em"/>
 
@@ -136,6 +147,18 @@
             <!-- info結束 -->
         </div>
     <!-- 使用者發文結束' -->
+    <div class="row justify-content-center">
+            <div class="preferLi content shadow col-lg-8 justify-content-center">
+                <h5 style="color: rgb(83, 83, 83);text-align: left !important;">你可能會喜歡的文章</h5>
+                <hr class="smallMagin">
+                <ul class="liContainer" style="text-align: left !important;">
+                    <% for(var j = 0 ; j<items[10].length ; j++) { %>
+                        <li><a href="/oneRecommend/<%= items[10][j].recomNum %>"><%= items[10][j].recomHead %></a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
 
     <center>
         <h1>文章留言</h1>
@@ -217,6 +240,7 @@
                 <!-- info結束 -->
 
                 <p class="content"> <%- items[1][i].recomMessCont %> </p>
+                <hr>
                 <% if(items[8][0] != items[1][i].memID) {%>
                     <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#recomMessReportPost" >檢舉</button>
                 <% } else { %>
@@ -260,9 +284,6 @@
         </div>
         <!-- 推薦留言結束 -->
         
-
-
-
     <!-- replying -->
     <div class="row replying justify-content-center" id="reply" spellcheck="false">
         <div class="col-lg-8 content shadow">
@@ -285,7 +306,7 @@
         <i class="fa fa-angle-up"></i>
     </a>
 
-    <div class="spinner-border" role="status" style="position: fixed; top: 45%; right: 47%; display: none;">
+    <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
             <span class="sr-only">Loading...</span>
      </div>
 
@@ -307,6 +328,14 @@
     <script src="/javascripts/post.js "></script>
     <script src="/javascripts/navbar.js"></script>
     <script>
+        var member = '<%=items[8][0]%>'
+            $('#replyInput').focus(() => {
+                if (!member) {
+                    alert('請進行登入再留言！')
+                    location.replace("/logIn");
+
+                }
+            })
             Array.from($('.liContainer').find('li > a')).map((item) => {
                 item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
             })
@@ -329,12 +358,12 @@
                                 var src = event.target.result // 圖片的編碼 , 格式為base64
                                 var title = escape(file.name);
                                 var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
-                                console.log($(this))
                                 $('#replyInput').append('<div id="replyInput">' + img + '</div>');
                             };
                         })(file);
                         reader.readAsDataURL(item);
                     })
+                    $('#file-selector').val('')
                 }
             });
             function submitReply(artiNum) {
@@ -375,7 +404,6 @@
                         var positiveWords = analyzeRes.analyze[1]
                         var negativeWords = analyzeRes.analyze[2]
                         var swearWords = analyzeRes.analyze[3]
-                        console.log(analyzeScore, positiveWords, negativeWords, swearWords)
                         formData.append('analyzeScore', analyzeScore);
                         formData.append('positiveWords', positiveWords);
                         formData.append('negativeWords', negativeWords);
@@ -420,7 +448,6 @@
                         dataType: 'JSON',
                         data: { "likeType": "recommend", "recomNum": recomNum },
                         success: function (res) {
-                            console.log("yes", JSON.stringify(res));
                         },
                         error: function (res) {
                             console.log("失敗", JSON.stringify(res));
@@ -436,8 +463,6 @@
                         dataType: 'JSON',
                         data: { "likeType": "recommend", "recomNum": recomNum },
                         success: function (res) {
-                            console.log("yes", JSON.stringify(res));
-
                         },
                         error: function (res) {
                             console.log("失敗", JSON.stringify(res));
@@ -468,7 +493,6 @@
                 dataType: 'text',
                 data: { "likeType": "recommend", "recomNum": recomNum },
                 success: function (res) {
-                    console.log("yes", JSON.stringify(res));
                     likeCount(recomNum);
                     like();
                 },
@@ -481,14 +505,12 @@
         };
         //刪除愛心
         function delLike(recomNum) {
-            // console.log("前端刪除訊息");     
             $.ajax({
                 url: '/delLike',
                 type: 'POST',
                 dataType: 'text',
                 data: { "likeType": "recommend", "recomNum": recomNum },
                 success: function (res) {
-                    console.log("yes", JSON.stringify(res));
                     likeCount(recomNum);
                     cancelLike();
                 },
@@ -517,13 +539,11 @@
                 dataType: 'JSON',
                 data: { "likeType": "recommend", "recomNum": recomNum },
                 success: function (res) {
-                    // console.log("yes", reponse.responseText);
-                    console.log("yes", JSON.stringify(res));
                     document.getElementById("addLikeCount").innerHTML = JSON.stringify(res);
                     document.getElementById("delLikeCount").innerHTML = JSON.stringify(res);
                 },
                 error: function (res) {
-                    console.log("no", JSON.stringify(res));
+                    console.log("失敗", JSON.stringify(res));
                 }
 
             });
@@ -539,7 +559,6 @@
                 dataType: 'JSON',
                 data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
                 success: function (res) {
-                    console.log("yes", JSON.stringify(res));
                     MessLikeCount(res.recomNum, res.recomMessNum);
                     MessLike(res.recomNum, res.recomMessNum);
                 },
@@ -552,14 +571,12 @@
         };
         //刪除留言愛心
         function MessDelLike(recomNum, recomMessNum) {
-            // console.log("前端刪除訊息");     
             $.ajax({
                 url: '/delLike',
                 type: 'POST',
                 dataType: 'JSON',
                 data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
                 success: function (res) {
-                    console.log("yes", JSON.stringify(res));
                     MessLikeCount(res.recomNum, res.recomMessNum);
                     cancelMessLike(res.recomNum, res.recomMessNum);
                 },
@@ -589,26 +606,22 @@
                 dataType: 'JSON',
                 data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
                 success: function (res) {
-                    // console.log("yes", reponse.responseText);
-                    console.log("yes", JSON.stringify(res));
                     document.getElementById("MessAddLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
                     document.getElementById("MessDelLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
                 },
                 error: function (res) {
-                    console.log("no", JSON.stringify(res));
+                    console.log("失敗", JSON.stringify(res));
                 }
             });
         }
          // delReply
          function deleteReply(artiMessNum, memID) {
-                console.log(artiMessNum, memID)
                 $('.spinner-border').css('display', 'block')
                 $.ajax({
                 url: '/addLike',
                 type: 'POST',
                 data: { "RecomMessNum": artiMessNum, "memID": memID, "deleteRecommendReply": true },
                 success: function (res) {
-                    // console.log("yes", reponse.responseText);
                     location.reload();
                 },
                 error: function (res) {
@@ -618,24 +631,23 @@
             }
     </script>
     <script>
-            //推薦留言檢舉ajax
-            function ftn_messReport(a){
-                $.ajax({
-                    url: "/report",
-                    type: 'POST',
-                    dataType: 'TEXT',
-                    data: { "recomMessNum" : a , "reportReason" : $("#messReportReason").val()},
-                    success: function (res) {
-                        alert(res);
-                        location.reload();
-                    },
-                    error: function (res) {
-                        console.log("失敗", res);
-                    }
-                }); 
-
-            }
-            </script>
+        //推薦留言檢舉ajax
+        function ftn_messReport(a){
+            $.ajax({
+                url: "/report",
+                type: 'POST',
+                dataType: 'TEXT',
+                data: { "recomMessNum" : a , "reportReason" : $("#messReportReason").val()},
+                success: function (res) {
+                    alert(res);
+                    location.reload();
+                },
+                error: function (res) {
+                    console.log("失敗", res);
+                }
+            }); 
+        }
+        </script>
         
 
 </body>

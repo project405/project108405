@@ -21,9 +21,6 @@ router.get('/:artiMessNum', async function (req, res, next) {
     }
 
     article.getOneReply(artiMessNum, memID).then(data => {
-        console.log('getOneReply', data)
-        console.log(data[2][0], data[0][0].memID)
-
         if (data[2][0] != data[0][0].memID) {
             res.write('<head><meta charset="utf-8"/></head>');
             res.end('<script> alert("您沒有編輯該留言的權限"); history.back();</script>');
@@ -33,10 +30,8 @@ router.get('/:artiMessNum', async function (req, res, next) {
         let sumDisplayImg = 0
         if (data[1]) {
             while (data[0][0].artiMessCont.match("\\:imgLocation")) {
-                console.log('data[2][sumDisplayImg].imgName', data[1][sumDisplayImg].imgName)
                 data[0][0].artiMessCont = data[0][0].artiMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top original'><img src='/userImg/replyImg/" + data[1][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 sumDisplayImg = sumDisplayImg + 1
-                console.log('sumDisplayImg', sumDisplayImg)
             }
         }
 

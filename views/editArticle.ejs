@@ -41,10 +41,9 @@
                 <option value="book">書籍類</option>
             </select>
 
-            <div class="titleInput input-with-icon title" name="artiHead" id="artiHead" contenteditable="true"
-                role="textbox" data-text="請輸入您的標題">
-                <%= items[0][0].artiHead%>
-            </div>
+
+            <input type="text" class="titleInput input-with-icon title" name="artiHead" id="artiHead" placeholder="請輸入您的標題" value="<%= items[0][0].artiHead%>">
+
             <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容">
                 <%- items[0][0].artiCont%>
             </div>
@@ -65,138 +64,11 @@
             <!-- </div> -->
             <button type="submit" class="btn btn-danger col-lg-2 float-right postButton" onclick="submitModifyArticle()">提交</button>
 
-            <div class="spinner-border" role="status" style="position: fixed; top: 45%; right: 47%; display: none;">
+            <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
                     <span class="sr-only">Loading...</span>
              </div>
 
-            <script>
-                var imgs = [];
-                var formData = new FormData(); //用formData來存取要傳送的所有資料
-                // 選取到檔案後開始動作
-                $('#file-selector').change(function(event) {
-                    let timeStamp = new Date().getTime()
-                    var file = $("#file-selector")[0];  //取得檔案
-                    //如果有檔案就要加入formData
-                    if (file.files.length) {
-                        Object.keys(file.files).map((img, index) => {
-                            file.files[img].timeStamp = `${timeStamp}${index}`
-                            imgs.push(file.files[img])
-                            // 解析檔案
-                            var item = file.files[img]
-                            var reader = new FileReader();
-                            reader.onload = (function(item) {
-                                return function(event) {
-                                    var src = event.target.result // 圖片的編碼 , 格式為base64
-                                    var title = escape(file.name);
-                                    var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
-                                    $('#postInput').append('<div id="postInput">' + img + '</div>');
-                                };
-                            })(file);
-                            reader.readAsDataURL(item);
-                        })
-                    }
-                });
-                function submitModifyArticle() {
-                    var remainImg = []
-                    artiNum = '<%= items[0][0].artiNum %>'
-                    console.log(artiNum)
-                    $('.postButton').addClass('disabled')
-                    $('.postButton').attr('disabled', true)
-                    $('.spinner-border').css('display', 'block')
-                    if ($("#postInput > .original")) {
-                        Array.from($("#postInput").find('.original > img')).map((img) => {
-                            $(img).before("\\:imgLocation")
-                            remainImg.push(img.getAttribute('src').replace('/userImg/',''))
-                        })
-                    }
-                    console.log(remainImg)
-
-                    var imgKey = []
-                    if ($("#postInput").find("#postInput > img")) {
-                        Array.from($("#postInput").find("#postInput > img")).map((img) => {
-                            imgKey.push(img.getAttribute('key'))
-                        })
-                        imgs.map((img) => {
-                            if (imgKey.indexOf(img.timeStamp) >= 0) {
-                                formData.append('userImg', img);
-                            }
-                        })
-                        Array.from($("#postInput").find("#postInput > img")).forEach((img) => {
-                            $(img).before("\\:imgLocation")
-                        })
-                    }
-                    var artiHead = document.getElementById("artiHead").innerHTML;
-                    while (artiHead.match('/n')) {
-                        artiHead = artiHead.replace('/n')
-                    }
-                    artiHead = artiHead.trim()
-                    var artiCont = [];
-                    var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
-                    // 取得內容
-                    artiData.forEach(function (element) {
-                        artiCont.push(element.innerText);
-                    }, this);
-                    var tagInput = document.querySelectorAll("span.tag"); //取得所有<span class="tag"> 的內容
-                    var tag = []; //以陣列形式存放
-                    var artiClass = document.getElementById("inputState").value;
-                    if (artiHead.trim() == "") {
-                        artiHead = undefined;
-                        // artiCont = undefined;
-                    }
-                    formData.append('artiNum', artiNum);
-                    formData.append('artiHead', artiHead);
-                    formData.append('artiCont', artiCont);
-                    formData.append('artiClass', artiClass);
-                    //取得tag 
-                    tagInput.forEach(function (element) {
-                        tag.push(element.innerText);
-                    }, this);
-                    formData.append('tag', tag);
-                    $.ajax({
-                        url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
-                        type: 'POST',
-                        dataType: 'TEXT',
-                        data: { 'artiCont': `${artiCont}` },
-                        success: function (res) {
-                            var analyzeRes = JSON.parse(res)
-                            var analyzeScore = analyzeRes.analyze[0]
-                            var positiveWords = analyzeRes.analyze[1]
-                            var negativeWords = analyzeRes.analyze[2]
-                            var swearWords = analyzeRes.analyze[3]
-                            formData.append('analyzeScore', analyzeScore);
-                            formData.append('positiveWords', positiveWords);
-                            formData.append('negativeWords', negativeWords);
-                            formData.append('swearWords', swearWords);
-                            formData.append('remainImg', remainImg);
-
-                            $.ajax({
-                                url: '/article/post',
-                                type: 'POST',
-                                dataType: 'TEXT',
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                success: function (res) {
-                                    if (res == "請進行登入") {
-                                        alert(res);
-                                        location.replace("/login");
-                                    } else if (res == "編輯成功") {
-                                        location.replace("/articleList");
-                                    } else {
-                                        alert(res);
-                                    }
-                                },
-                                error: function (res) {
-                                }
-                            });
-                        },
-                        error: function (res) {
-                            console.error(res)
-                            console.log(res);
-                        }
-                    });
-                }
-            </script>
+            
 
 
         </div>
@@ -209,15 +81,7 @@
     </a>
 
 
-    <script>
-        var tagArray = []
-        var classSelected = '<%= items[0][0].artiClass%>'
-        $('.deleteTag').click(function() {
-            console.log($(this))
-            console.log($(this).parent('#tag'))
-            $(this).parent('#tag').remove()
-        })
-    </script>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -239,7 +103,139 @@
     <script src="/javascripts/tag.js"></script>
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/navbar.js"></script>
+    <script>
+            var imgs = [];
+            var formData = new FormData(); //用formData來存取要傳送的所有資料
+            // 選取到檔案後開始動作
+            $('#file-selector').change(function(event) {
+                let timeStamp = new Date().getTime()
+                var file = $("#file-selector")[0];  //取得檔案
+                //如果有檔案就要加入formData
+                if (file.files.length) {
+                    Object.keys(file.files).map((img, index) => {
+                        file.files[img].timeStamp = `${timeStamp}${index}`
+                        imgs.push(file.files[img])
+                        // 解析檔案
+                        var item = file.files[img]
+                        var reader = new FileReader();
+                        reader.onload = (function(item) {
+                            return function(event) {
+                                var src = event.target.result // 圖片的編碼 , 格式為base64
+                                var title = escape(file.name);
+                                var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
+                                $('#postInput').append('<div id="postInput">' + img + '</div>');
+                            };
+                        })(file);
+                        reader.readAsDataURL(item);
+                    })
+                    $('#file-selector').val('')
+                }
+            });
+            function submitModifyArticle() {
+                var remainImg = []
+                artiNum = '<%= items[0][0].artiNum %>'
+                $('.postButton').addClass('disabled')
+                $('.postButton').attr('disabled', true)
+                $('.spinner-border').css('display', 'block')
+                if ($("#postInput > .original")) {
+                    Array.from($("#postInput").find('.original > img')).map((img) => {
+                        $(img).before("\\:imgLocation")
+                        remainImg.push(img.getAttribute('src').replace('/userImg/',''))
+                    })
+                }
 
+                var imgKey = []
+                if ($("#postInput").find("#postInput > img")) {
+                    Array.from($("#postInput").find("#postInput > img")).map((img) => {
+                        imgKey.push(img.getAttribute('key'))
+                    })
+                    imgs.map((img) => {
+                        if (imgKey.indexOf(img.timeStamp) >= 0) {
+                            formData.append('userImg', img);
+                        }
+                    })
+                    Array.from($("#postInput").find("#postInput > img")).forEach((img) => {
+                        $(img).before("\\:imgLocation")
+                    })
+                }
+                var artiHead = document.getElementById("artiHead").value;
+                while (artiHead.match('/n')) {
+                    artiHead = artiHead.replace('/n')
+                }
+                artiHead = artiHead.trim()
+                var artiCont = [];
+                var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
+                // 取得內容
+                artiData.forEach(function (element) {
+                    artiCont.push(element.innerText);
+                }, this);
+                var tagInput = document.querySelectorAll("span.tag"); //取得所有<span class="tag"> 的內容
+                var tag = []; //以陣列形式存放
+                var artiClass = document.getElementById("inputState").value;
+                if (artiHead.trim() == "") {
+                    artiHead = undefined;
+                    // artiCont = undefined;
+                }
+                formData.append('artiNum', artiNum);
+                formData.append('artiHead', artiHead);
+                formData.append('artiCont', artiCont);
+                formData.append('artiClass', artiClass);
+                //取得tag 
+                tagInput.forEach(function (element) {
+                    tag.push(element.innerText);
+                }, this);
+                formData.append('tag', tag);
+                $.ajax({
+                    url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
+                    type: 'POST',
+                    dataType: 'TEXT',
+                    data: { 'artiCont': `${artiCont}` },
+                    success: function (res) {
+                        var analyzeRes = JSON.parse(res)
+                        var analyzeScore = analyzeRes.analyze[0]
+                        var positiveWords = analyzeRes.analyze[1]
+                        var negativeWords = analyzeRes.analyze[2]
+                        var swearWords = analyzeRes.analyze[3]
+                        formData.append('analyzeScore', analyzeScore);
+                        formData.append('positiveWords', positiveWords);
+                        formData.append('negativeWords', negativeWords);
+                        formData.append('swearWords', swearWords);
+                        formData.append('remainImg', remainImg);
+
+                        $.ajax({
+                            url: '/article/post',
+                            type: 'POST',
+                            dataType: 'TEXT',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (res) {
+                                if (res == "請進行登入") {
+                                    alert(res);
+                                    location.replace("/login");
+                                } else if (res == "編輯成功") {
+                                    location.replace("/articleList");
+                                } else {
+                                    alert(res);
+                                }
+                            },
+                            error: function (res) {
+                            }
+                        });
+                    },
+                    error: function (res) {
+                        console.error(res)
+                    }
+                });
+            }
+        </script>
+          <script>
+            var tagArray = []
+            var classSelected = '<%= items[0][0].artiClass%>'
+            $('.deleteTag').click(function() {
+                $(this).parent('#tag').remove()
+            })
+        </script>
 </body>
 
 </html>

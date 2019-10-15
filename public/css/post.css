@@ -43,7 +43,7 @@ div.post {
     }
 } */
 
-div.titleInput,
+input.titleInput,
 div.postInput,
 textarea.introInput {
     width: 100%;
@@ -83,7 +83,7 @@ input.titleInput:before {
     opacity: 0.65;
 } */
 
-div.titleInput:focus,
+input.titleInput:focus,
 div.postInput:focus,
 textarea.introInput:focus {
     outline: none;

@@ -15,7 +15,6 @@ router.get('/:recomNum', async function (req, res, next) {
     }
 
     recommend.getOneRecommend(recomNum, memID).then(data => {
-        console.log("data=",data);
         // 將圖片字串替代成圖片
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].recomCont.match("\\:imgLocation") != null) {
@@ -26,15 +25,10 @@ router.get('/:recomNum', async function (req, res, next) {
         }
         let sumDisplayImg = 0
         if (data[9]) {
-            console.log(data[9])
             data[1].forEach((item, index) => {
-                console.log('item', item)
-                console.log('data.recomMessCont', item.recomMessCont)
                 while (item.recomMessCont.match("\\:imgLocation")) {
-                    console.log('data[9][sumDisplayImg].imgName', data[9][sumDisplayImg].imgName)
                     item.recomMessCont = item.recomMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/imgs/recommend/replyImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                     sumDisplayImg = sumDisplayImg + 1
-                    console.log('sumDisplayImg', sumDisplayImg)
                 }
             })
         }

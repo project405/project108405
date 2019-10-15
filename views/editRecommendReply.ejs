@@ -50,7 +50,7 @@
             <button type="submit" class="btn btn-danger col-lg-2 float-right submitReplyButton" onclick=<%= "submitEditReply(" + items[0][0].recomNum + ")" %>>提交</button>
 
             
-            <div class="spinner-border" role="status" style="position: fixed; top: 45%; right: 47%; display: none;">
+            <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
                     <span class="sr-only">Loading...</span>
              </div>
 
@@ -74,17 +74,16 @@
                                     var src = event.target.result // 圖片的編碼 , 格式為base64
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
-                                    console.log($(this))
                                     $('#replyInput').append('<div id="replyInput">' + img + '</div>');
                                 };
                             })(file);
                             reader.readAsDataURL(item);
                         })
+                        $('#file-selector').val('')
                     }
                 });
         function submitEditReply(artiNum) {
             var artiMessNum ='<%= items[0][0].recomMessNum%>'
-            console.log(artiMessNum)
             var remainImg = []
             $('.submitReplyButton').addClass('disabled')
             $('.submitReplyButton').attr('disabled', true)
@@ -96,7 +95,6 @@
                     remainImg.push(img.getAttribute('src').replace('/userImg/replyImg/',''))
                 })
             }
-            console.log(remainImg)
 
             var imgKey = []
             if ($("#replyInput").find("#replyInput > img")) {
@@ -181,8 +179,6 @@
         var tagArray = []
         var classSelected = '<%= items[0][0].artiClass%>'
         $('.deleteTag').click(function() {
-            console.log($(this))
-            console.log($(this).parent('#tag'))
             $(this).parent('#tag').remove()
         })
     </script>

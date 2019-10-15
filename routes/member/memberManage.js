@@ -42,15 +42,11 @@ router.post('/', function (req, res, next) {
     };
     signUp.checkMail(memberData.memMail).then(data => {
         checkMail = data[0];
-        // console.log("checkMail=", checkMail);
     })
     member.getOriginalMail(memID).then(data => {
         originalMail = data[0].memMail;
-        // console.log("origin=",originalMail);
-
     })
 
-    console.log(memberData);
     setTimeout(function () {
         if (memberData.memPass == "" || memberData.memCheckPass == "" || memberData.memMail == "" || memberData.memBirth == "" || memberData.memGender == "") {
             res.end('<script> alert("輸入的資料不可為空"); history.back();</script>');
@@ -63,7 +59,6 @@ router.post('/', function (req, res, next) {
         } else {
             member.modifyMember(memberData.memPass, memberData.memBirth, memberData.memMail, memberData.memGender, memberData.memAddr, memberData.memID).
                 then(data => {
-                    console.log(data);
                     if (data == 1) {
                         res.end('<script> alert("修改成功！");location.replace("/");</script>');
                     } else {

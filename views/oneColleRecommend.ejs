@@ -223,11 +223,25 @@
                             document.getElementById("MessLikeUnLogIn" + "<%= items[0][0].recomNum %>" + "<%= items[1][i].recomMessNum %>").style.display = "none";
                         </script>
                         <% } %>
+                        <hr class="smallMagin">
+                        <!-- info結束 -->
+                        <p class="content"> <%- items[1][i].recomMessCont %> </p>
                     </div>
-                    <hr class="smallMagin">
-                    <!-- info結束 -->
-                    <p class="content"> <%- items[1][i].recomMessCont %>
+                    <hr/>
+                    <% if(items[8][0] != items[1][i].memID) {%>
                         <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#recomMessReportPost" >檢舉</button>
+                    <% } else { %>
+                      <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->   
+                    <div class="dropdown ml-auto float-right dropup">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-h"></i>     
+                            </button>
+                            <div class="dropdown-menu dotMenu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/editRecommendReply/<%= items[1][i].recomMessNum %>">編輯</a>
+                                <a class="dropdown-item" href="#/" onclick="deleteReply('<%- items[1][i].recomMessNum %>', '<%- items[1][i].memID %>')">刪除</a>
+                            </div>
+                        </div>
+                    <% } %>
                 </div>
             </div>
             
@@ -254,8 +268,7 @@
             </div>
             <% } %>
         </div>
-        <!-- 推薦留言結束 -->
-        <div class="spinner-border" role="status" style="position: fixed; top: 45%; right: 47%; display: none;">
+        <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
                 <span class="sr-only">Loading...</span>
          </div>
         <script>
@@ -271,7 +284,7 @@
                         location.reload();
                     },
                     error: function (res) {
-                        console.log("失敗", res);
+                        console.log(res);
                     }
                 }); 
         
@@ -324,7 +337,6 @@
                     dataType: 'JSON',
                     data: { "likeType": "recommend", "recomNum": recomNum },
                     success: function (res) {
-                        console.log("yes", JSON.stringify(res));
                     },
                     error: function (res) {
                         console.log("失敗", JSON.stringify(res));
@@ -333,7 +345,6 @@
             };
             //刪除收藏
             function delColle(recomNum) {
-                // console.log("前端刪除訊息");
                 cancelCollection();
                 $.ajax({
                     url: '/delCollection',
@@ -341,8 +352,6 @@
                     dataType: 'JSON',
                     data: { "likeType": "recommend", "recomNum": recomNum },
                     success: function (res) {
-                        console.log("yes", JSON.stringify(res));
-
                     },
                     error: function (res) {
                         console.log("失敗", JSON.stringify(res));
@@ -373,7 +382,6 @@
                     dataType: 'text',
                     data: { "likeType": "recommend", "recomNum": recomNum },
                     success: function (res) {
-                        console.log("yes", JSON.stringify(res));
                         likeCount(recomNum);
                         like();
                     },
@@ -386,14 +394,12 @@
             };
             //刪除愛心
             function delLike(recomNum) {
-                // console.log("前端刪除訊息");     
                 $.ajax({
                     url: '/delLike',
                     type: 'POST',
                     dataType: 'text',
                     data: { "likeType": "recommend", "recomNum": recomNum },
                     success: function (res) {
-                        console.log("yes", JSON.stringify(res));
                         likeCount(recomNum);
                         cancelLike();
                     },
@@ -422,13 +428,11 @@
                     dataType: 'JSON',
                     data: { "likeType": "recommend", "recomNum": recomNum },
                     success: function (res) {
-                        // console.log("yes", reponse.responseText);
-                        console.log("yes", JSON.stringify(res));
                         document.getElementById("addLikeCount").innerHTML = JSON.stringify(res);
                         document.getElementById("delLikeCount").innerHTML = JSON.stringify(res);
                     },
                     error: function (res) {
-                        console.log("no", JSON.stringify(res));
+                        console.log("失敗", JSON.stringify(res));
                     }
 
                 });
@@ -444,7 +448,6 @@
                     dataType: 'JSON',
                     data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
                     success: function (res) {
-                        console.log("yes", JSON.stringify(res));
                         MessLikeCount(res.recomNum, res.recomMessNum);
                         MessLike(res.recomNum, res.recomMessNum);
                     },
@@ -457,14 +460,12 @@
             };
             //刪除留言愛心
             function MessDelLike(recomNum, recomMessNum) {
-                // console.log("前端刪除訊息");     
                 $.ajax({
                     url: '/delLike',
                     type: 'POST',
                     dataType: 'JSON',
                     data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
                     success: function (res) {
-                        console.log("yes", JSON.stringify(res));
                         MessLikeCount(res.recomNum, res.recomMessNum);
                         cancelMessLike(res.recomNum, res.recomMessNum);
                     },
@@ -494,13 +495,11 @@
                     dataType: 'JSON',
                     data: { "likeType": "recommendMess", "recomMessNum": recomMessNum, "recomNum": recomNum },
                     success: function (res) {
-                        // console.log("yes", reponse.responseText);
-                        console.log("yes", JSON.stringify(res));
                         document.getElementById("MessAddLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
                         document.getElementById("MessDelLikeCount" + res.recomNum + res.recomMessNum).innerHTML = res.data;
                     },
                     error: function (res) {
-                        console.log("no", JSON.stringify(res));
+                        console.log("失敗", JSON.stringify(res));
                     }
                 });
             }
@@ -528,12 +527,12 @@
                                     var src = event.target.result // 圖片的編碼 , 格式為base64
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
-                                    console.log($(this))
                                     $('#replyInput').append('<div id="replyInput">' + img + '</div>');
                                 };
                             })(file);
                             reader.readAsDataURL(item);
                         })
+                        $('#file-selector').val('')
                     }
                 });
                 function submitReply(artiNum) {
@@ -574,7 +573,6 @@
                             var positiveWords = analyzeRes.analyze[1]
                             var negativeWords = analyzeRes.analyze[2]
                             var swearWords = analyzeRes.analyze[3]
-                            console.log(analyzeScore, positiveWords, negativeWords, swearWords)
                             formData.append('analyzeScore', analyzeScore);
                             formData.append('positiveWords', positiveWords);
                             formData.append('negativeWords', negativeWords);

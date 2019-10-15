@@ -190,7 +190,6 @@
                                             dataType: 'JSON',
                                             data: { "likeType": "article", "artiNum": artiNum },
                                             success: function (res) {
-                                                console.log("yes", JSON.stringify(res));
                                             },
                                             error: function (res) {
                                                 console.log("失敗", JSON.stringify(res));
@@ -199,7 +198,6 @@
                                     };
                                     //刪除收藏
                                     function delColle(artiNum) {
-                                        // console.log("前端刪除訊息");
                                         cancelCollection(artiNum);
                                         $.ajax({
                                             url: '/delCollection',
@@ -207,7 +205,6 @@
                                             dataType: 'JSON',
                                             data: { "likeType": "article", "artiNum": artiNum },
                                             success: function (res) {
-                                                console.log("yes", JSON.stringify(res));
                                             },
                                             error: function (res) {
                                                 console.log("失敗", JSON.stringify(res));
@@ -238,7 +235,6 @@
                                             dataType: 'text',
                                             data: { "likeType": "article", "artiNum": artiNum },
                                             success: function (res) {
-                                                console.log("yes", JSON.stringify(res));
                                                 likeCount(artiNum);
                                                 like(artiNum);
                                             },
@@ -251,14 +247,12 @@
                                     };
                                     //刪除愛心
                                     function delLike(artiNum) {
-                                        // console.log("前端刪除訊息");     
                                         $.ajax({
                                             url: '/delLike',
                                             type: 'POST',
                                             dataType: 'text',
                                             data: { "likeType": "article", "artiNum": artiNum },
                                             success: function (res) {
-                                                console.log("yes", JSON.stringify(res));
                                                 likeCount(artiNum);
                                                 cancelLike(artiNum);
                                             },
@@ -270,7 +264,6 @@
                                     };
                                     //點愛心後改變屬性
                                     function like(artiNum) {
-                                        console.log("like", artiNum);
                                         document.getElementById("delLike" + artiNum).style.display = "inline";
                                         document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
                                         document.getElementById("addLike" + artiNum).style.display = "none";
@@ -288,13 +281,11 @@
                                             dataType: 'JSON',
                                             data: { "likeType": "article", "artiNum": artiNum },
                                             success: function (res) {
-                                                // console.log("yes", reponse.responseText);
-                                                console.log("yes", JSON.stringify(res));
                                                 document.getElementById("addLikeCount" + artiNum).innerHTML = JSON.stringify(res);
                                                 document.getElementById("delLikeCount" + artiNum).innerHTML = JSON.stringify(res);
                                             },
                                             error: function (res) {
-                                                console.log("no", JSON.stringify(res));
+                                                console.log("失敗", JSON.stringify(res));
                                             }
 
                                         });
