@@ -32,8 +32,8 @@ byClassData.getIndexData().then(data =>{
     // console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomCont)
     pushContent.push(data[10][0].recomHead)
     pushContent.push(data[10][0].recomCont)
-    console.log('裡面',pushContent)
-    
+    // console.log('裡面',pushContent)
+    return pushContent
 
 
 
