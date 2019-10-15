@@ -23,7 +23,7 @@ const member = require('./utility/LinePush');
 const byClassData = require('./utility/index');
 
 byClassData.getIndexData().then(data =>{
-    console.log(data)
+    console.log(data[10])
 })
     
 
