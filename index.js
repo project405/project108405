@@ -7,10 +7,10 @@ var express = require('express');
 const request = require('request');
 const app = express();
 var cors = require('cors')
-var corsOptions = {
-    origin: 'http://localhost:3000/',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
+// var corsOptions = {
+//     origin: 'http://localhost:3000/',
+//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+// }
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -23,9 +23,9 @@ const member = require('./utility/LinePush');
 const byClassData = require('./utility/index');
 
 byClassData.getIndexData('abc123').then(data =>{
-    console.log('data@@@@@@@@@@@@',data)
+    console.log('data[10]@@@@@@@@@@@@',data[10])
 
-    console.log('data[10].byClassData@@@@@@@@@@@@',data[10].byClassData)
+    // console.log('data[10].byClassData@@@@@@@@@@@@',data[10].byClassData)
   
 })
     
