@@ -136,6 +136,18 @@
             <!-- info結束 -->
         </div>
     <!-- 使用者發文結束' -->
+    <div class="row justify-content-center">
+            <div class="preferLi content shadow col-lg-8 justify-content-center">
+                <h5 style="color: rgb(83, 83, 83);text-align: left !important;">你可能會喜歡的文章</h5>
+                <hr class="smallMagin">
+                <ul class="liContainer" style="text-align: left !important;">
+                    <% for(var j = 0 ; j<items[10].length ; j++) { %>
+                        <li><a href="/oneRecommend/<%= items[10][j].recomNum %>"><%= items[10][j].recomNum %></a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
 
     <center>
         <h1>文章留言</h1>
@@ -344,6 +356,7 @@
                         })(file);
                         reader.readAsDataURL(item);
                     })
+                    $('#file-selector').val('')
                 }
             });
             function submitReply(artiNum) {
