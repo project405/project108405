@@ -348,6 +348,8 @@
                         <script>
                             console.log(1);
                         </script>
+                         <hr>
+                         <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[10][0].artiNum %>'">進入文章查看更多</button>
                     <% } else if(items[10][0].recomCont != undefined) { %>
                         <h5><%- items[10][0].recomHead %></h5>
                         <hr>
@@ -355,6 +357,8 @@
                         <script>
                                 console.log(2);
                             </script>
+                        <hr>
+                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/oneRecommend/<%- items[10][0].recomNum %>'">進入文章查看更多</button>
                     <% } %>
                     
                </div>
