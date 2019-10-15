@@ -29,6 +29,7 @@ var getIndexData = async function (memID) {
     var artiClassCount = [] ; 
     var recomClassCount = [] ;
     var classCount = [0,0,0,0] ;  //arti + recom
+    var r ; //radom
     var result = [];
 
     // -----------  每週推薦 --------------
@@ -181,12 +182,12 @@ var getIndexData = async function (memID) {
              ' GROUP BY "artiClass"', [memID])
     .then((data) => {
         if (!data.rows) {
-            artiClassCount = undefined; 
+            artiClassCount = {"class":"" , "count":0 }; 
         } else {
             artiClassCount = data.rows ;
         }
     }, (error) => {
-        artiClassCount = undefined ; 
+        artiClassCount = {"class":"" , "count":0 }; 
     });
 
     // ----------- 計算推薦class的數量-----------
@@ -199,23 +200,38 @@ var getIndexData = async function (memID) {
              ' GROUP BY "recomClass"', [memID])
     .then((data) => {
         if (!data.rows) {
-            recomClassCount = undefined; 
+            recomClassCount = {"class":"" , "count":0 }; 
         } else {
             recomClassCount = data.rows ;
         }
     }, (error) => {
-        recomClassCount = undefined ; 
+        recomClassCount ={"class":"" , "count":0 }; 
     });
 
-    //加總class按讚次數
-    await sumClass(classCount, artiClassCount) ;
-    await sumClass(classCount, recomClassCount) ;
-    
-    //排序
-    classCount = await sortObject(classCount);
+    //依照亂數取文章或推薦
+    r = Math.floor(Math.random() * 10) + 1
 
-    //class次數最多的 以亂數的方式去判斷說要取文章 還是 推薦
-    byClassData = await byClassGetData(classCount[0][0],Math.floor(Math.random() * 10) + 1) ; 
+    //如果都沒對文章或推薦按過愛心
+    if(artiClassCount.length == 0 && recomClassCount.length == 0){
+        var classRandom = Math.floor(Math.random() * 3) ;
+        console.log("classRandom=",classRandom);
+        byClassData = await byClassGetData(classRandom,r ) ; 
+
+    }else{
+        //加總class按讚次數
+        await sumClass(classCount, artiClassCount) ;
+        await sumClass(classCount, recomClassCount) ;
+
+        //排序
+        classCount = await sortObject(classCount);
+
+        console.log("r=",r);
+        console.log("classCount[0][0]=",classCount[0][0]);
+
+        //class次數最多的 以亂數的方式去判斷說要取文章 還是 推薦
+        byClassData = await byClassGetData(classCount[0][0],r ) ; 
+    }
+    
   
 
     console.log("byClassData",byClassData);
@@ -252,18 +268,15 @@ async function sumClass(array, data){
 
 //排序
 async function sortObject(array){
-    console.log("外面的ARRAY",array);
     var sortable = [] ;
     for (var item in array) {
-        console.log("裡面的的ARRAY",array);
-        console.log("item=",item);
         sortable.push([item, array[item]]);
     }
 
     sortable.sort(function(a, b) {
         return b[1] - a[1];
     });
-console.log("排序:",sortable);
+    console.log("排序:",sortable);
     return sortable ; 
 }
 
@@ -282,7 +295,7 @@ async function byClassGetData(index, r){
     }else if(index == "3"){
         className = "exhibition";
     }
-
+console.log("className=",className);
     //取文章
     if( r <= 5 ){
         await sql('SELECT * '+
@@ -302,8 +315,8 @@ async function byClassGetData(index, r){
     }else{ 
         //取推薦
         await sql('SELECT * '+
-            ' FROM "recommendListDataView" '+
-            ' WHERE "racomClass" = $1 '+
+            ' FROM "recommend" '+
+            ' WHERE "recomClass" = $1 '+
             ' ORDER BY random() '+
             ' LIMIT 1', [className])
         .then((data) => {
