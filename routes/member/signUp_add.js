@@ -24,7 +24,6 @@ router.post('/', function (req, res, next) {
     }) 
     signUp.checkMail(memMail).then(data =>{
         checkMail = data[0];
-        console.log(checkMail);
     })
 
     setTimeout(function () {

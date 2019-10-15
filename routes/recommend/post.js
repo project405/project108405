@@ -43,7 +43,7 @@ var upload = multer({
 })
 
 //post請求
-router.post('/', upload.array('userImg', 3), function (req, res, next) {
+router.post('/', upload.array('userImg', 20), function (req, res, next) {
   var memID;
   var recomHead = req.body.recomHead;
   var recomCont = req.body.recomCont;
@@ -51,6 +51,7 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
   var analyzeScore = req.body.analyzeScore;
   var positiveWords = req.body.positiveWords;
   var negativeWords = req.body.negativeWords;
+  var recomNum = req.body.recomNum
 
   var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
   var tagData = [];
@@ -115,16 +116,29 @@ router.post('/', upload.array('userImg', 3), function (req, res, next) {
                       fs.unlinkSync('public/imgs/recommend/' + imgData[i]); //刪除檔案
                   }
               }
-              member.recommendPost(memID, recomHead, recomCont, recomClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords).then(data => {
-                  if (data == 0) {
-                      res.send("發文成功");
-                  } else {
-                      for (var i = 0; i < imgData.length; i++) {
-                          fs.unlinkSync('public/imgs/recommend/' + imgData[i]); //刪除檔案
+              if (recomNum) {
+                member.editRecommend(memID, recomHead, recomCont, recomClass, imgData, tagData, analyzeScore, positiveWords, negativeWords, recomNum, postDateTime, req.body.remainImg).then(data => {
+                    if (data == 1) {
+                        res.send("編輯成功");
+                    } else {
+                        for (var i = 0; i < imgData.length; i++) {
+                            fs.unlinkSync('public/imgs/recommend/' + imgData[i]); //刪除檔案
+                        }
+                        res.send("編輯失敗");
+                    }
+                })
+              } else {
+                  member.recommendPost(memID, recomHead, recomCont, recomClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords).then(data => {
+                      if (data == 0) {
+                          res.send("發文成功");
+                      } else {
+                          for (var i = 0; i < imgData.length; i++) {
+                              fs.unlinkSync('public/imgs/recommend/' + imgData[i]); //刪除檔案
+                          }
+                          res.send("發文失敗");
                       }
-                      res.send("發文失敗");
-                  }
-              })
+                  })
+              }
           }
       } else {
           for (var i = 0; i < imgData.length; i++) {

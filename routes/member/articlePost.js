@@ -43,7 +43,7 @@ var upload = multer({
 
 
 //post請求
-router.post('/', upload.array('userImg', 10), function (req, res, next) {
+router.post('/', upload.array('userImg', 20), function (req, res, next) {
     var memID;
     var artiHead = req.body.artiHead;
     var artiCont = req.body.artiCont;

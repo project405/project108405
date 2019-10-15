@@ -34,16 +34,6 @@ router.get('/:artiNum', async function (req, res, next) {
             }
         }
 
-        let sumDisplayImg = 0
-        if (data[9]) {
-            data[1].forEach((item, index) => {
-                while (item.artiMessCont.match("\\:imgLocation")) {
-                    item.artiMessCont = item.artiMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/replyImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
-                    sumDisplayImg = sumDisplayImg + 1
-                }
-            })
-        }
-
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data == -1) {

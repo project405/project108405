@@ -36,6 +36,17 @@
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[0][0].recomDateTime %>發佈</a>
                     </div>
+                    <% if(items[7] && items[7] == 'boss') {%>
+                        <div class="dropdown ml-auto">
+                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-ellipsis-h"></i>     
+                            </button>
+                                <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/editRecommend/<%= items[0][0].recomNum %>" >編輯</a>
+                                <a class="dropdown-item" href="#/" onclick=<%= "delRecommend(" + items[0][0].recomNum + ")" %>>刪除</a>
+                                </div>
+                        </div>
+                    <% } %>
                 </div>
                 <hr  style="margin-top: 0.5em"/>
 
@@ -142,7 +153,7 @@
                 <hr class="smallMagin">
                 <ul class="liContainer" style="text-align: left !important;">
                     <% for(var j = 0 ; j<items[10].length ; j++) { %>
-                        <li><a href="/oneRecommend/<%= items[10][j].recomNum %>"><%= items[10][j].recomNum %></a>
+                        <li><a href="/oneRecommend/<%= items[10][j].recomNum %>"><%= items[10][j].recomHead %></a>
                         </li>
                     <% } %>
                 </ul>
@@ -620,24 +631,23 @@
             }
     </script>
     <script>
-            //推薦留言檢舉ajax
-            function ftn_messReport(a){
-                $.ajax({
-                    url: "/report",
-                    type: 'POST',
-                    dataType: 'TEXT',
-                    data: { "recomMessNum" : a , "reportReason" : $("#messReportReason").val()},
-                    success: function (res) {
-                        alert(res);
-                        location.reload();
-                    },
-                    error: function (res) {
-                        console.log("失敗", res);
-                    }
-                }); 
-
-            }
-            </script>
+        //推薦留言檢舉ajax
+        function ftn_messReport(a){
+            $.ajax({
+                url: "/report",
+                type: 'POST',
+                dataType: 'TEXT',
+                data: { "recomMessNum" : a , "reportReason" : $("#messReportReason").val()},
+                success: function (res) {
+                    alert(res);
+                    location.reload();
+                },
+                error: function (res) {
+                    console.log("失敗", res);
+                }
+            }); 
+        }
+        </script>
         
 
 </body>

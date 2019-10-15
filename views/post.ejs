@@ -139,7 +139,6 @@
                 })
             }
             var artiHead = document.getElementById("artiHead").value;
-            console.log('artiHead', artiHead)
             var artiCont = [];
             var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
             // 取得內容
@@ -200,7 +199,6 @@
                 },
                 error: function (res) {
                     console.error(res)
-                    console.log(res);
                 }
             });
         }

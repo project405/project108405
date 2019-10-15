@@ -182,6 +182,98 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
 
     return result;
 }
+
+//================================
+//-------- editRecommend()--------
+//================================
+var editRecommend = async function (memID, recomHead, recomCont, recomClass, imgData, tag, analyzeScore, positiveWords, negativeWords, recomNum, artiDateTime, remainImg) {
+    var tagNum = [];
+    var result = 0;
+    var imgs = []
+    //修改文章
+    await sql('UPDATE "recommend" SET "recomHead" = $1, "recomCont" =$2, "recomClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6' +
+    ' WHERE "recomNum" = $7'
+    , [recomHead, recomCont, recomClass, analyzeScore, positiveWords, negativeWords, recomNum])
+    .then((data) => {
+        result = 1;
+    }, (error) => {
+        console.error(error)
+        result = 0;
+    });
+
+    // 刪除舊tag連結
+    await sql ('DELETE FROM "tagLinkArticle" WHERE "recomNum" = $1',[recomNum])
+    .then((data)=> {
+        result = 1;
+        console.log(data)
+    },(e) => {
+        console.error(e)
+    }) 
+
+    //新增tag 
+    for (var i = 0; i < tag.length; i++) {
+        await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+            .then((data) => {
+                result = 1;
+                if (!data.rows) {
+                    tagNum = undefined;
+                } else {
+                    tagNum = data.rows[0].tagNum;
+                }
+            }, (error) => {
+                tagNum = undefined;
+                console.error(error)
+            });
+
+        // --------- 新增tagLink ---------
+        await sql('INSERT into "tagLinkArticle" ("recomNum","tagNum") VALUES ($1,$2)', [recomNum, tagNum])
+            .then((data) => {
+                result = 1
+            }, (error) => {
+                console.log(error)
+                result = 0;
+            });
+    }
+
+    await sql('SELECT * FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NULL', [recomNum])
+    .then((data) => {
+        result = 1;
+        if (!data.rows) {
+            imgs = undefined;
+        } else {
+            imgs = data.rows;
+        }
+    }, (error) => {
+        imgs = undefined;
+        console.log(error)
+    })
+
+    if (imgs) {
+        imgs.map( async(original) => {
+            if (remainImg.indexOf(original.imgName) < 0) {
+                await sql ('DELETE FROM "image" WHERE "imgName" = $1 and "recomMessNum" IS NULL',[original.imgName])
+                .then((data)=> {
+                    result = 1;
+                },(e) => {
+                    console.error(e)
+                }) 
+            }
+        })
+    }
+
+    // --------- 新增img ---------
+    for (var i = 0; i < imgData.length; i++) {
+        await sql('INSERT into "image" ("memID", "recomNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, recomNum, imgData[i], artiDateTime])
+            .then((data) => {
+                result = 1;
+            }, (error) => {
+                result = 0;
+                console.log(error)
+            });
+    }
+
+    return result;
+}
 //================================
 //---- editRecommendReply() ------
 //================================
@@ -866,6 +958,7 @@ module.exports = {
     addArticleMessLike, delArticleMessLike,
     addRecommendMessLike, delRecommendMessLike,
     report, checkAuthority, editArticle, deleteArticle, editReply, deleteReply, 
-    memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply, editRecommendReply
+    memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
+    editRecommendReply, editRecommend
 
 };
