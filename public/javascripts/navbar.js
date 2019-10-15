@@ -101,15 +101,15 @@ $(document).ready(() => {
                                 <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
                             <li class="nav-item">\
+                                <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
+                            </li>\
+                            <li class="nav-item">\
                             <a class="nav-link" href="#/" onclick="reply()">\
                             Line推播</a>\
                           </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/recommend/post/page">\
                                 新增推薦</a>\
-                            </li>\
-                            <li class="nav-item">\
-                                <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/recommendlist">\
