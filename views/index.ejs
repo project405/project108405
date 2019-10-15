@@ -358,10 +358,18 @@
                     </div>
                 </div>
                <div class="memberPrefer">
-
-                    黎明的承諾 背負著父母望子成龍，羅曼加里（皮耶尼內 飾）的人生可說是精彩非凡，在波蘭度過的貧困童年、法國尼斯陽光下的青少年時期，乃至於二次世界大戰時擔任飛行員，在非洲立下的彪炳戰功。
-                    他
-                    黎明的承諾 背負著父母望子成龍
+                    <% if(items[10][0].artiCont != undefined) { %>
+                        <%- items[10][0].artiCont %>
+                        <script>
+                            console.log(1);
+                        </script>
+                    <% } else if(items[10][0].recomCont != undefined) { %>
+                        <%- items[10][0].recomCont %>
+                        <script>
+                                console.log(2);
+                            </script>
+                    <% } %>
+                    
                </div>
             </div>
           </div>
