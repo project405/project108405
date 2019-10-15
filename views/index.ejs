@@ -101,13 +101,14 @@
                 <div class="col-lg-7">
                     <div class="card  shadow" onclick="location.href='/article/<%= items[1][0].artiNum %>'"
                         style="cursor:pointer;">
-
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][0].artiHead %>
                             </h3>
-                            <p class="card-text wrapBigHotSectionText">
-                                <%- items[1][0].artiCont %>
-                            </p>
+                            <div class="card-text wrapBigHotSectionText">
+                                <p class="card-text">
+                                    <%- items[1][0].artiCont %>
+                                </p>
+                            </div>
 
                             <p class="poster">
                                 <%= items[1][0].memID %> 於 <%= items[1][0].artiDateTime %>發佈
@@ -146,8 +147,10 @@
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][1].artiHead %>
                             </h3>
-                            <p class="card-text wrapText"><%- items[1][1].artiCont %>
-                            </p>
+                            <div>
+                                <p class="card-text wrapText"><%- items[1][1].artiCont %>
+                                </p>
+                            </div>
                             <p class="poster">
                                 <%= items[1][1].memID %> 於 <%= items[1][1].artiDateTime %> 發佈
                             </p>
@@ -168,7 +171,7 @@
                         <% if(items[3] != undefined ){ %>
                             <% for(var j = 0 ; j < items[3].length ; j++) { %>
                                 <% if (items[1][1].artiNum == items[3][j].artiNum){ %>
-                                    <div class="wrapperCardbig card-img-bottom"
+                                    <div class="wrapperCardSmall card-img-bottom"
                                         style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
                                     </div>
                                 <% } %>
@@ -184,12 +187,15 @@
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][2].artiHead %>
                             </h3>
-                            <p class="card-text wrapText">
-                                <%- items[1][2].artiCont %>
-                            </p>
-                            <p class="poster">
+                            <div class="wrapText">
+                                <p class="card-text">
+                                    <%- items[1][2].artiCont %>
+                                </p>
+                            </div>
+
+                            <a class="poster">
                                 <%= items[1][2].memID %> 於 <%= items[1][2].artiDateTime %> 發佈
-                            </p>
+                            </a>
 
                             <!-- tag -->
                             <div class="tagDiv">
@@ -207,7 +213,7 @@
                          <% if(items[3] != undefined ) { %>
                             <% for(var j = 0 ; j < items[3].length ; j++) { %>
                                 <% if (items[1][2].artiNum == items[3][j].artiNum){ %>
-                                    <div class="wrapperCardbig card-img-bottom"
+                                    <div class="wrapperCardSmall card-img-bottom"
                                         style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
                                     </div>
                                     <% break %>
@@ -326,26 +332,28 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalScrollableTitle">你可能會想看</h5>
+              <h4 class="modal-title" id="exampleModalScrollableTitle">你可能會想看</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
                 <div style="text-align: left">
-                    
-                    <div style="text-align: center">
-                        <a href="#/" id="positiveButton" class="chooseSection">惆悵、漣漪</a>
-                        <a href="#/" id="negativeButton" class="chooseSection">燦爛、溫暖</a>
-                    </div>
                 </div>
                <div class="memberPrefer">
                     <!-- 文章 -->
                     <% if(items[10][0].artiCont != undefined) { %>
+                        <h5><%- items[10][0].artiHead %></h5>
+                        <hr>
                         <%- items[10][0].artiCont %>
-                    <!-- 推薦 -->
+                        <hr>
+                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[10][0].artiNum %>'">進入文章查看更多</button>
                     <% } else if(items[10][0].recomCont != undefined) { %>
+                        <h5><%- items[10][0].recomHead %></h5>
+                        <hr>
                         <%- items[10][0].recomCont %>
+                        <hr>
+                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/oneRecommend/<%- items[10][0].recomNum %>'">進入文章查看更多</button>
                     <% } %>
                     
                </div>
