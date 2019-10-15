@@ -25,6 +25,7 @@ const byClassData = require('./utility/index');
 byClassData.getIndexData('abc123').then(data =>{
     // console.log('data[10]@@@@@@@@@@@@',data[10].recomHead)
     // console.log('data[10]@@@@@@@@@@@@',data[10].recomCont)
+    console.log('data@@@@@@@@@@@@',data)
     console.log('data[10]@@@@@@@@@@@@',data[10])
     console.log('data[10][0]@@@@@@@@@@@@',data[10][0])
 
