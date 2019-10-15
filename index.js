@@ -27,7 +27,7 @@ byClassData.getIndexData('abc123').then(data =>{
     // console.log('data[10]@@@@@@@@@@@@',data[10].recomCont)
     // console.log('data@@@@@@@@@@@@',data)
     console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomHead)
-    console.log('data[10][0]@@@@@@@@@@@@',data[10][0][0])
+    console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomCont)
 
 
 
