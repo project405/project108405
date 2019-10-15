@@ -471,4 +471,4 @@ var getWebSearch = async function (searchParams, memID) {
     return result;
 }
 
-module.exports = { getIndexData, getWebSearch };
+module.exports = { getIndexData, getWebSearch };ㄒ
