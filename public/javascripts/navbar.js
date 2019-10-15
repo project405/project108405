@@ -176,7 +176,14 @@ $(document).ready(() => {
                 </div>\
             </div>\ '
             reply = () => {
-                $.post('https://project-108405-test.herokuapp.com/webhook') 
+                $.post('https://project-108405-test.herokuapp.com/webhook', () => {
+                }) 
+                .done (() => {
+                    alert('推播成功！');
+                })
+                .fail(() => {
+                    alert('推播失敗！');
+                })
             };
                 //如果有登入可是沒推薦權限
             } else if (data[0] && !data[1]) {
