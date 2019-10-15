@@ -180,7 +180,17 @@ div.hotArticle {
     text-align: left !important;
     margin: 0;
 }
-
+/* .wrapBigHotSectionText {
+    max-height: 32px !important;      
+    -webkit-line-clamp: 2 !important; 
+    overflow: hidden !important;
+    -webkit-box-orient: vertical !important;
+} */
+.wrapText {
+    max-height: 80px !important;    
+    -webkit-line-clamp: 7 !important; 
+    overflow: hidden !important;
+}
 .wrapperCardbig {
     width: 100%;
     height: 310pt;
