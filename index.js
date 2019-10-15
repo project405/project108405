@@ -67,8 +67,7 @@ byClassData.getIndexData().then(data =>{
     pushContent.push(data[10][0].recomHead)
     pushContent.push(data[10][0].recomCont)
     // console.log('裡面',pushContent)
-    return pushContent
-
+   
     
 
 app.post('/webhook', function (req, res) {
@@ -102,25 +101,25 @@ app.post('/webhook', function (req, res) {
                     to: allUser,
                         messages: [
                                 {
-                                type: "template",
-                                title: "123",
-                                altText: "相信你會喜歡😎",
-                                template: {
-                                    type: "confirm",
-                                    text: `【文藝富心】推薦 🎉\n內容(max:240)\n標題：${pushContent[0]}\n內容：${pushContent[1]}`,
-                                    actions: [
-                                        {
-                                            "type": "message",
-                                            "label": "我喜歡",
-                                            "text": "我敲擊喜歡的唷"
-                                        },
-                                        {
-                                            "type": "message",
-                                            "label": "我不喜歡",
-                                            "text": "我敲擊討厭的唷"
-                                        }
-                                    ]
-                                }
+                                    type: "template",
+                                    title: "123",
+                                    altText: "相信你會喜歡😎",
+                                    template: {
+                                        type: "confirm",
+                                        text: `【文藝富心】推薦 🎉\n內容(max:240)\n標題：${pushContent[0]}\n內容：${pushContent[1]}`,
+                                        actions: [
+                                            {
+                                                "type": "message",
+                                                "label": "我喜歡",
+                                                "text": "我敲擊喜歡的唷"
+                                            },
+                                            {
+                                                "type": "message",
+                                                "label": "我不喜歡",
+                                                "text": "我敲擊討厭的唷"
+                                            }
+                                        ]
+                                    }
                                 }               
                         ]
                     })
