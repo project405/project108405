@@ -96,7 +96,7 @@ app.post('/webhook', function (req, res) {
                                 altText: "相信你會喜歡😎",
                                 template: {
                                     type: "confirm",
-                                    text: `【文藝富心】推薦 🎉\n內容(max:240)\n標題：${pushContent[0]}\n內容：${pushContent[1]}`,
+                                    text: `【文藝富心】推薦 🎉\n標題：${pushContent[0]}\n內容：${pushContent[1]}`,
                                     actions: [
                                         {
                                             "type": "message",
