@@ -22,7 +22,7 @@ const article = require('./utility/article');
 const member = require('./utility/LinePush');
 const byClassData = require('./utility/index');
 
-byClassData.getIndexData().then(data =>{
+byClassData.getIndexData('abc123').then(data =>{
     console.log(data[10])
   
 })
