@@ -24,12 +24,6 @@ const byClassData = require('./utility/index');
 
 
 
-
-
-
-
-
-
 //----------------------------------------
 // 填入自己在Line Developers的channel值
 //----------------------------------------
@@ -60,13 +54,9 @@ var server = app.listen(process.env.PORT || 3000, function() {
     const port = server.address().port;
     console.log("正在監聽埠號:", port);
 });
-byClassData.getIndexData().then(data =>{
-    var pushContent = []
-    
-    // console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomCont)
-    pushContent.push(data[10][0].recomHead)
-    pushContent.push(data[10][0].recomCont)
-    // console.log('裡面',pushContent)
+
+
+
    
     
 
@@ -100,27 +90,27 @@ app.post('/webhook', function (req, res) {
                     //to給資料庫有的使用者
                     to: allUser,
                         messages: [
-                                {
-                                    type: "template",
-                                    title: "123",
-                                    altText: "相信你會喜歡😎",
-                                    template: {
-                                        type: "confirm",
-                                        text: `【文藝富心】推薦 🎉\n內容(max:240)\n標題：${pushContent[0]}\n內容：${pushContent[1]}`,
-                                        actions: [
-                                            {
-                                                "type": "message",
-                                                "label": "我喜歡",
-                                                "text": "我敲擊喜歡的唷"
-                                            },
-                                            {
-                                                "type": "message",
-                                                "label": "我不喜歡",
-                                                "text": "我敲擊討厭的唷"
-                                            }
-                                        ]
-                                    }
-                                }               
+                            {
+                                type: "template",
+                                title: "123",
+                                altText: "相信你會喜歡😎",
+                                template: {
+                                    type: "confirm",
+                                    text: `【文藝富心】推薦 🎉\n內容(max:240)\n標題：${pushContent[0]}\n內容：${pushContent[1]}`,
+                                    actions: [
+                                        {
+                                            "type": "message",
+                                            "label": "我喜歡",
+                                            "text": "我敲擊喜歡的唷"
+                                        },
+                                        {
+                                            "type": "message",
+                                            "label": "我不喜歡",
+                                            "text": "我敲擊討厭的唷"
+                                        }
+                                    ]
+                                }
+                            }               
                         ]
                     })
             }, function(error, response, body){
@@ -128,9 +118,6 @@ app.post('/webhook', function (req, res) {
                 res.end(body);
             
             });
-        
         })    
-    })   
-
-    
+    })      
 });
