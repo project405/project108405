@@ -22,26 +22,9 @@ const article = require('./utility/article');
 const member = require('./utility/LinePush');
 const byClassData = require('./utility/index');
 
-var pushContent = []
-
-byClassData.getIndexData().then(data =>{
-    // console.log('data[10]@@@@@@@@@@@@',data[10].recomHead)
-    // console.log('data[10]@@@@@@@@@@@@',data[10].recomCont)
-    // console.log('data@@@@@@@@@@@@',data)
-    // console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomHead)
-    // console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomCont)
-    pushContent.push(data[10][0].recomHead)
-    pushContent.push(data[10][0].recomCont)
-    // console.log('裡面',pushContent)
-    return pushContent
 
 
 
-    // console.log('data[10].byClassData@@@@@@@@@@@@',data[10].byClassData)
-  
-})
-    
-console.log(byClassData.getIndexData('abc123'))
 
 
 
@@ -77,7 +60,16 @@ var server = app.listen(process.env.PORT || 3000, function() {
     const port = server.address().port;
     console.log("正在監聽埠號:", port);
 });
+byClassData.getIndexData().then(data =>{
+    var pushContent = []
+    
+    // console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomCont)
+    pushContent.push(data[10][0].recomHead)
+    pushContent.push(data[10][0].recomCont)
+    // console.log('裡面',pushContent)
+    return pushContent
 
+    
 
 app.post('/webhook', function (req, res) {
     let allUser = [];
@@ -86,49 +78,59 @@ app.post('/webhook', function (req, res) {
             allUser.push(item.lineID);
             console.log(allUser)
         });
-    // console.log('req@@@@@@@@@@@@@@@@@@@@@@@@@',req)  
-    request.post({
-        headers: {
-            'content-type' : 'application/json',
-            //Authorization為Channel access token 
-            // ----------測試line
-            'Authorization': 'Bearer QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
-            // ----------正式line
-            // 'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
-        },
-        url: 'https://api.line.me/v2/bot/message/multicast',
-        body: JSON.stringify({
-            //to給資料庫有的使用者
-            to: allUser,
-                messages: [
-                        {
-                        type: "template",
-                        title: "123",
-                        altText: "相信你會喜歡😎",
-                        template: {
-                            type: "confirm",
-                            text: "【文藝富心】推薦 🎉\n內容(max:240)\n標題：xxx\n內容："+byClassData.getIndexData('abc123'),
-                            actions: [
+        byClassData.getIndexData().then(data =>{
+            var pushContent = []
+            
+            // console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomCont)
+            pushContent.push(data[10][0].recomHead)
+            pushContent.push(data[10][0].recomCont)
+            // console.log('裡面',pushContent)
+
+            // console.log('req@@@@@@@@@@@@@@@@@@@@@@@@@',req)  
+            request.post({
+                headers: {
+                    'content-type' : 'application/json',
+                    //Authorization為Channel access token 
+                    // ----------測試line
+                    'Authorization': 'Bearer QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
+                    // ----------正式line
+                    // 'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
+                },
+                url: 'https://api.line.me/v2/bot/message/multicast',
+                body: JSON.stringify({
+                    //to給資料庫有的使用者
+                    to: allUser,
+                        messages: [
                                 {
-                                    "type": "message",
-                                    "label": "我喜歡",
-                                    "text": "我敲擊喜歡的唷"
-                                },
-                                {
-                                    "type": "message",
-                                    "label": "我不喜歡",
-                                    "text": "我敲擊討厭的唷"
+                                type: "template",
+                                title: "123",
+                                altText: "相信你會喜歡😎",
+                                template: {
+                                    type: "confirm",
+                                    text: `【文藝富心】推薦 🎉\n內容(max:240)\n標題：${pushContent[0]}\n內容：${pushContent[1]}`,
+                                    actions: [
+                                        {
+                                            "type": "message",
+                                            "label": "我喜歡",
+                                            "text": "我敲擊喜歡的唷"
+                                        },
+                                        {
+                                            "type": "message",
+                                            "label": "我不喜歡",
+                                            "text": "我敲擊討厭的唷"
+                                        }
+                                    ]
                                 }
-                            ]
-                        }
-                        }               
-                ]
-            })
-        }, function(error, response, body){
-    
-        res.end(body);
-    
-        });
+                                }               
+                        ]
+                    })
+            }, function(error, response, body){
+            
+                res.end(body);
+            
+            });
+        
+        })    
     })   
 
     
