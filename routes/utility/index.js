@@ -15,7 +15,8 @@ var getIndexData = async function (memID) {
     var music = true;
     var exhibition = true;
     var hotArticle = [];  //存放前三名熱門文章
-    var imgs = [];
+    var articleImgs = [] ;
+    var recommendImgs = [];
     var tag = [] ;
 
     //(燈泡區塊) 分析文章
@@ -80,6 +81,8 @@ var getIndexData = async function (memID) {
             hotArticle = undefined;
         });
 
+    console.log("hotArticle=",hotArticle);
+
     // ----------- 取得 tag -----------
     await sql('SELECT * FROM "articleTagView"')
         .then((data) => {
@@ -91,17 +94,30 @@ var getIndexData = async function (memID) {
         }, (error) => {
             tag = undefined;
         });
+    console.log("tag=",tag);
 
-    //----------- 取得照片 ----------- 
+    //----------- 取得文章照片 ----------- 
+    await sql('SELECT "artiNum" , "imgName" FROM "image"')
+        .then((data) => {
+            if (!data.rows) {
+                articleImgs = undefined;
+            } else {
+                articleImgs = data.rows;
+            }
+        }, (error) => {
+            articleImgs = undefined;
+        });
+    
+    //----------- 取得推薦照片 ----------- 
     await sql('SELECT "recomNum" , "imgName" FROM "image"')
         .then((data) => {
             if (!data.rows) {
-                imgs = undefined;
+                recommendImgs = undefined;
             } else {
-                imgs = data.rows;
+                recommendImgs = data.rows;
             }
         }, (error) => {
-            imgs = undefined;
+            recommendImgs = undefined;
         });
 
     //----------- 正向文章 ----------- 
@@ -214,7 +230,6 @@ var getIndexData = async function (memID) {
     //如果都沒對文章或推薦按過愛心
     if(artiClassCount.length == 0 && recomClassCount.length == 0){
         var classRandom = Math.floor(Math.random() * 3) ;
-        console.log("classRandom=",classRandom);
         byClassData = await byClassGetData(classRandom,r ) ; 
 
     }else{
@@ -224,9 +239,6 @@ var getIndexData = async function (memID) {
 
         //排序
         classCount = await sortObject(classCount);
-
-        console.log("r=",r);
-        console.log("classCount[0][0]=",classCount[0][0]);
 
         //class次數最多的 以亂數的方式去判斷說要取文章 還是 推薦
         byClassData = await byClassGetData(classCount[0][0],r ) ; 
@@ -239,8 +251,8 @@ var getIndexData = async function (memID) {
     result[0] = fourRecommend;
     result[1] = hotArticle;
     result[2] = [memID];
-    // result[3] = checkAuthority;
-    result[4] = imgs;
+    result[3] = articleImgs;
+    result[4] = recommendImgs;
     result[5] = tag ; 
     result[6] = positiveArticle ; 
     result[7] = negativeArticle ; 
@@ -276,7 +288,7 @@ async function sortObject(array){
     sortable.sort(function(a, b) {
         return b[1] - a[1];
     });
-    console.log("排序:",sortable);
+
     return sortable ; 
 }
 
@@ -295,7 +307,7 @@ async function byClassGetData(index, r){
     }else if(index == "3"){
         className = "exhibition";
     }
-console.log("className=",className);
+
     //取文章
     if( r <= 5 ){
         await sql('SELECT * '+
@@ -333,9 +345,6 @@ console.log("className=",className);
 
     return result ; 
 }
-
-
-
 
 //=====================================
 //---------  getWebSearch() -----------

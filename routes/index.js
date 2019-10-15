@@ -15,6 +15,16 @@ router.get('/', function (req, res, next) {
     }
     
     index.getIndexData(memID).then(data => { 
+
+        //熱門文章 圖片標籤取代為空字串
+        if (data[0] != undefined) {
+            for (var i = 0; i < data[1].length; i++) {
+                if (data[1][i].artiCont.match("\\:imgLocation") != null) {
+                    data[1][i].artiCont = data[1][i].artiCont.replace(/\\:imgLocation/g, "");
+                }
+            }
+        }
+
         // 將正向文章字串替換成圖片
         for (var i = 0; i < data[6].length; i++) {
             if (data[6][i].artiCont.match("\\:imgLocation") != null) {
