@@ -400,7 +400,7 @@
     <script src="/javascripts/navbar.js"></script>
     <script>
         var member = '<%=items[7][0]%>'
-        $('#replyInput').focus(() => {
+        $('#replyInput').click(() => {
             if (!member) {
                 alert('請進行登入再留言！')
                 location.replace("/logIn");

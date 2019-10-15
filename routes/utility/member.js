@@ -204,7 +204,6 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
     // 刪除舊tag連結
     await sql ('DELETE FROM "tagLinkArticle" WHERE "recomNum" = $1',[recomNum])
     .then((data)=> {
-        result = 1;
         console.log(data)
     },(e) => {
         console.error(e)

@@ -134,6 +134,14 @@
                 }
             });
             function submitPost() {
+                var artiHead = document.getElementById("recomHead").value;
+                if (artiHead == '') {
+                    alert('請輸入標題')
+                    return;
+                } else if (document.querySelectorAll("div.postInput") == '') {
+                    alert('請輸入內文')
+                    return;
+                }
                 $('.postButton').addClass('disabled')
                 $('.postButton').attr('disabled', true)
                 $('.spinner-border').css('display', 'block')

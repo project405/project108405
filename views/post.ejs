@@ -121,6 +121,14 @@
             }
         });
         function submitPost() {
+            var artiHead = document.getElementById("artiHead").value;
+            if (artiHead == '') {
+                alert('請輸入標題')
+                return;
+            } else if (document.querySelectorAll("div.postInput") == '') {
+                alert('請輸入內文')
+                return;
+            }
             $('.postButton').addClass('disabled')
             $('.postButton').attr('disabled', true)
             $('.spinner-border').css('display', 'block')
@@ -138,7 +146,6 @@
                     $(img).before("\\:imgLocation")
                 })
             }
-            var artiHead = document.getElementById("artiHead").value;
             var artiCont = [];
             var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
             // 取得內容
@@ -186,11 +193,9 @@
                             if (res == "請進行登入") {
                                 alert(res);
                                 location.replace("/login");
-                            } else if (res == "發文成功") {
-                                alert(res);
-                                location.replace("/articleList");
                             } else {
-                                alert(res);
+                                alert("發文成功");
+                                location.replace("/articleList");
                             }
                         },
                         error: function (res) {
