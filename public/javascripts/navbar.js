@@ -101,7 +101,7 @@ $(document).ready(() => {
                                 <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
                             <li class="nav-item">\
-                            <a class="nav-link" href="/recommend/post/page">\
+                            <a class="nav-link" href="#/" onclick="reply()">\
                             Line推播</a>\
                           </li>\
                             <li class="nav-item">\
@@ -175,7 +175,9 @@ $(document).ready(() => {
                     </div>\
                 </div>\
             </div>\ '
-
+            reply = () => {
+                $.post('https://project-108405-test.herokuapp.com/webhook') 
+            };
                 //如果有登入可是沒推薦權限
             } else if (data[0] && !data[1]) {
                 document.getElementById('header').innerHTML = '\
