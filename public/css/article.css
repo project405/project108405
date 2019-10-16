@@ -139,7 +139,11 @@ button.like{
 
 
 /* ------------------- */
-
+.card-body {
+    max-height: 120px !important;    
+    -webkit-line-clamp: 7 !important; 
+    overflow: hidden !important;
+}
 @media (max-width: 1199px) {
     div.post {
         margin-top: 2em;
