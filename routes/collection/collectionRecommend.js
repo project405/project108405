@@ -17,7 +17,6 @@ router.get('/', function (req, res, next) {
 	} else if (req.session.memID == undefined && req.session.passport != undefined) {
 		memID = req.session.passport.user.id;
 	}
-console.log(memID);
 	//取得推薦文章
 	collection.getCollRecommend(memID).then(data => {
 		if (data == null) {
@@ -25,7 +24,6 @@ console.log(memID);
 		} else if (data == -1) {
 			res.render('notFound');  //導向找不到頁面                
 		} else {
-			// console.log(data);
 			res.render('collectionRecommend', { collData: data });
 		}
 	})

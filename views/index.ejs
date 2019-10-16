@@ -59,6 +59,7 @@
                         style="background-image: url('imgs/recommend/<%= items[4][j].imgName%>');"
                         onclick="location.href='/recommendList'" data-aos="fade-right">
                     <% isImg = true %>
+                    <% break ; %>
                 <% } %>
             <% } %>
              <!-- 如果沒抓到半張圖片 -->
@@ -100,13 +101,14 @@
                 <div class="col-lg-7">
                     <div class="card  shadow" onclick="location.href='/article/<%= items[1][0].artiNum %>'"
                         style="cursor:pointer;">
-
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][0].artiHead %>
                             </h3>
-                            <p class="card-text wrapBigHotSectionText">
-                                <%- items[1][0].artiCont %>
-                            </p>
+                            <div class="card-text wrapBigHotSectionText">
+                                <p class="card-text">
+                                    <%- items[1][0].artiCont %>
+                                </p>
+                            </div>
 
                             <p class="poster">
                                 <%= items[1][0].memID %> 於 <%= items[1][0].artiDateTime %>發佈
@@ -116,8 +118,8 @@
                             <div class="tagDiv">
                                 <% if(items[5] != undefined) { %>
                                     <% for (var j = 0 ; j < items[5].length ; j++) { %>
-                                        <% if(items[5].artiNum == items[1][0].artiNum) { %>
-                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% if(items[5][j].artiNum == items[1][0].artiNum) { %>
+                                            <button type="button" class="btn  tag"><%= items[5][j].tagName %></button>
                                         <% } %>
                                     <% } %>
                                 <% } %>
@@ -126,11 +128,11 @@
                         </div>
 
                         <!-- imgs -->
-                        <% if(items[4] != undefined ){%>
-                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
-                                <% if (items[1][0].artiNum == items[4][j].artiNum){ %>
+                        <% if(items[3] != undefined ){%>
+                            <% for(var j = 0 ; j < items[3].length ; j++) { %>
+                                <% if (items[1][0].artiNum == items[3][j].artiNum){ %>
                                     <div class="wrapperCardbig card-img-bottom"
-                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                                        style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
                                     </div>
                                 <% } %>
                             <% } %>
@@ -145,8 +147,10 @@
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][1].artiHead %>
                             </h3>
-                            <p class="card-text wrapText"><%- items[1][1].artiCont %>
-                            </p>
+                            <div>
+                                <p class="card-text wrapText"><%- items[1][1].artiCont %>
+                                </p>
+                            </div>
                             <p class="poster">
                                 <%= items[1][1].memID %> 於 <%= items[1][1].artiDateTime %> 發佈
                             </p>
@@ -155,8 +159,8 @@
                             <div class="tagDiv">
                                 <% if(items[5] != undefined) { %>
                                     <% for (var j = 0 ; j < items[5].length ; j++) { %>
-                                        <% if(items[5].artiNum == items[1][1].artiNum) { %>
-                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% if(items[5][j].artiNum == items[1][1].artiNum) { %>
+                                            <button type="button" class="btn  tag"><%= items[5][j].tagName %></button>
                                         <% } %>
                                     <% } %>
                                 <% } %>
@@ -164,11 +168,11 @@
                         </div>
 
                         <!-- imgs -->
-                        <% if(items[4] != undefined ){ %>
-                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
-                                <% if (items[1][1].artiNum == items[4][j].artiNum){ %>
-                                    <div class="wrapperCardbig card-img-bottom"
-                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                        <% if(items[3] != undefined ){ %>
+                            <% for(var j = 0 ; j < items[3].length ; j++) { %>
+                                <% if (items[1][1].artiNum == items[3][j].artiNum){ %>
+                                    <div class="wrapperCardSmall card-img-bottom"
+                                        style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
                                     </div>
                                 <% } %>
                             <% } %>
@@ -183,19 +187,22 @@
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][2].artiHead %>
                             </h3>
-                            <p class="card-text wrapText">
-                                <%- items[1][2].artiCont %>
-                            </p>
-                            <p class="poster">
+                            <div class="wrapText">
+                                <p class="card-text">
+                                    <%- items[1][2].artiCont %>
+                                </p>
+                            </div>
+
+                            <a class="poster">
                                 <%= items[1][2].memID %> 於 <%= items[1][2].artiDateTime %> 發佈
-                            </p>
+                            </a>
 
                             <!-- tag -->
                             <div class="tagDiv">
                                 <% if(items[5] != undefined) { %>
                                     <% for (var j = 0 ; j < items[5].length ; j++) { %>
-                                        <% if(items[5].artiNum == items[1][2].artiNum) { %>
-                                            <button type="button" class="btn  tag">items[5][0].tagName</button>
+                                        <% if(items[5][j].artiNum == items[1][2].artiNum) { %>
+                                            <button type="button" class="btn  tag"><%= items[5][j].tagName %></button>
                                         <% } %>
                                     <% } %>
                                 <% } %>
@@ -203,12 +210,13 @@
                         </div>
 
                          <!-- imgs -->
-                         <% if(items[4] != undefined ) { %>
-                            <% for(var j = 0 ; j < items[4].length ; j++) { %>
-                                <% if (items[1][2].artiNum == items[4][j].artiNum){ %>
-                                    <div class="wrapperCardbig card-img-bottom"
-                                        style="background-image: url( '/userImg/<%= items[4][j].imgName %>'); ">
+                         <% if(items[3] != undefined ) { %>
+                            <% for(var j = 0 ; j < items[3].length ; j++) { %>
+                                <% if (items[1][2].artiNum == items[3][j].artiNum){ %>
+                                    <div class="wrapperCardSmall card-img-bottom"
+                                        style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
                                     </div>
+                                    <% break %>
                                 <% } %>
                             <% } %>
                         <% } %>
@@ -225,7 +233,7 @@
 
             <div class="col-12 goArticleList">
                 <button type="button" class="btn goArticle" onclick="location.href='/articleList'">
-                    <h5>前往文章列表 <i class="fas fa-arrow-alt-circle-right"></i></h5>
+                    <h5>前往討論區看更多 <i class="fas fa-arrow-alt-circle-right"></i></h5>
                 </button>
 
             </div>
@@ -243,7 +251,7 @@
             <p>我們身處在一個資料越來越多、意義越來越少的世代，源源不絕的資訊不僅讓人失去學習的熱忱，也錯過了許多生命中原有的樂趣。文藝富心彙整藝文相關資訊與提供討論的空間，讓使用者能在幾分鐘之內得到完善的資訊，也提供一個安靜的角落給使用者喘息休憩。
             </p>
             <h6>聯絡我們：</h6>
-            <p>10546004@ntub.edu.tw</p>
+            <p>LiteraryArts@gmail.com</p>
 
         </div>
 
@@ -275,7 +283,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalScrollableTitle">心情專區</h5>
+              <h4 class="modal-title" id="exampleModalScrollableTitle">心情專區</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -289,32 +297,24 @@
                         我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。</h6>
                     <hr>
                     <div style="text-align: center">
-                        <a href="#" id="positiveButton" class="chooseSection">惆悵、漣漪</a>
-                        <a href="#" id="negativeButton" class="chooseSection">燦爛、溫暖</a>
+                        <a href="#/" id="positiveButton" class="chooseSection">燦爛、溫暖</a>
+                        <a href="#/" id="negativeButton" class="chooseSection">惆悵、漣漪</a>
                     </div>
                 </div>
+               <!-- 正向文章 -->
                <div class="sentimentContent">
                   <div id="positiveSection" style="display: none; word-wrap:break-word; overflow: hidden;">
-                        1:的是改編自全法中學生指定重點讀物《我答應》，描述羅曼加里成為法國文學巨擘的傳奇故事，及他與母親之間至情至性動人回憶的《黎明的承諾》。
-                    
-                        黎明的承諾 背負著父母望子成龍，羅曼加里（皮耶尼內 飾）的人生可說是精彩非凡，在波蘭度過的貧困童年、法國尼斯陽光下的青少年時期，乃至於二次世界大戰時擔任飛行員，在非洲立下的彪炳戰功。
-                        他為了成為一位偉大的男人與著名作家，艱辛嘗盡人生的酸甜苦辣，全都是為了他的母親妮娜（夏綠蒂甘絲柏格 飾）。這個可愛又特立獨行的婦人，對兒子的強烈母愛，令加里的人生充滿波折、熱情與
-                        <img class="sentimentImg" src="imgs/testImgs/10.jpg">
-                        只是，如此無止無盡的母愛，也終將成為他生命的負擔…這次要介紹的是改編自全法中學生指定重點讀物《我答應》，描述羅曼加里成為法國文學巨擘的傳奇故事，及他與母親之間至情至性動人回憶的《黎明的承諾》。
-                       龍，望女成鳳的期望努力讀書，我想這或許是每個在考試風氣盛行的東方社會中長大的學生都曾有過的經驗。
-                        
-                        而比起我們的爸爸媽媽希望我們認真念書進而考上好大學的單純盼望，《黎明的承諾》中媽媽妮娜的要求又顯得更難以企及：我的兒子會成為法國大使，他會成為舉世知名的文豪，成為保家衛國的戰爭英雄。
-                        也因此羅曼不只禮儀、寫作、槍法和戰技樣樣精通，為了得到母親的肯定，並讓對
-                  </div>
-                  <div id="negativeSection" style="display: none">
-                        2:的是改編自全法中學生指定重點讀物《我答應》，描述羅曼加里成為法國文學巨擘的傳奇故事，及他與母親之間至情至性動人回憶的《黎明的承諾》。
-                    
-                        黎明的承諾 背負著父母望子成龍，羅曼加里（皮耶尼內 飾）的人生可說是精彩非凡，在波蘭度過的貧困童年、法國尼斯陽光下的青少年時期，乃至於二次世界大戰時擔任飛行員，在非洲立下的彪炳戰功。
-                        他
-                        黎明的承諾 背負著父母望子成龍，望女成鳳的期望努力讀書，我想這或許是每個在考試風氣盛行的東方社會中長大的學生都曾有過的經驗。
-                        
-                        而比起我們的爸爸媽媽希望我們認真念書進而考上好大學的單純盼望，《黎明的承諾》中媽媽妮娜的要求又顯得更難以企及：我的兒子會成為法國大使，他會成為舉世知名的文豪，成為保家衛國的戰爭英雄。
-                        也因此羅曼不只禮儀、寫作、槍法和戰技樣樣精通，為了得到母親的肯定，並讓對
+                        <h5> <%- items[6][0].artiHead %></h5>
+                        <%- items[6][0].artiCont %> 
+                        <hr>
+                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[6][0].artiNum %>'">進入文章查看更多</button>
+                    </div>
+                    <!-- 負向文章 -->
+                    <div id="negativeSection" style="display: none">
+                        <h5> <%- items[7][0].artiHead %></h5>
+                        <%- items[7][0].artiCont %>
+                        <hr>
+                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[7][0].artiNum %>'">進入文章查看更多</button>
                   </div>
                </div>
             </div>
@@ -322,38 +322,45 @@
         </div>
       </div>
       
-      <div href="#" class="surpriseSection"  data-toggle="modal" data-target="#surpriseSectionContainer" style="cursor: pointer;">
+      <div href="#" class="surpriseSection" style="cursor: pointer;"  data-toggle="modal" data-target="#surpriseSectionContainer">
           <a class="surpriseHoverText" style="display:none">看看有沒有你喜歡的</a>
           <img src="imgs/icon/leaf45.png" alt="">
       </div>
+
     <!-- Modal -->
     <div class="modal fade" id="surpriseSectionContainer" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalScrollableTitle">你可能會想看</h5>
+              <h4 class="modal-title" id="exampleModalScrollableTitle">你可能會想看</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
                 <div style="text-align: left">
-                    
-                    <div style="text-align: center">
-                        <a href="#" id="positiveButton" class="chooseSection">惆悵、漣漪</a>
-                        <a href="#" id="negativeButton" class="chooseSection">燦爛、溫暖</a>
-                    </div>
                 </div>
                <div class="memberPrefer">
-
-                    黎明的承諾 背負著父母望子成龍，羅曼加里（皮耶尼內 飾）的人生可說是精彩非凡，在波蘭度過的貧困童年、法國尼斯陽光下的青少年時期，乃至於二次世界大戰時擔任飛行員，在非洲立下的彪炳戰功。
-                    他
-                    黎明的承諾 背負著父母望子成龍
+                    <!-- 文章 -->
+                    <% if(items[10][0].artiCont != undefined) { %>
+                        <h5><%- items[10][0].artiHead %></h5>
+                        <hr>
+                        <%- items[10][0].artiCont %>
+                        <hr>
+                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[10][0].artiNum %>'">進入文章查看更多</button>
+                    <% } else if(items[10][0].recomCont != undefined) { %>
+                        <h5><%- items[10][0].recomHead %></h5>
+                        <hr>
+                        <%- items[10][0].recomCont %>
+                        <hr>
+                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/oneRecommend/<%- items[10][0].recomNum %>'">進入文章查看更多</button>
+                    <% } %>
+                    
                </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -372,8 +379,6 @@
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/index.js"></script>
     <script src="/javascripts/navbar.js"></script>
-
-
 </body>
 
 </html>

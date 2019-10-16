@@ -43,43 +43,51 @@
 
                     <!-- list -->
                     <% for(var i=0; i<items[0].length; i++) {%>
-                    <div class="card shadow list ">
+                    <div class="card shadow list "  style="cursor:pointer;">
 
                         <div class="card-body " onclick=" location.href='/article/<%= items[0][i].artiNum %>'">
                             <div class="poster">
-                                <div class="name">
-                                    <p><%= items[0][i].memID %> 於 <%= items[0][i].artiDateTime %> 發表</p>
+                                <div class="name d-flex justify-content-between">
+                                    <div style="word-break:break-all">
+                                        <a class="floorTag"><%= items[0][i].memID %></a>
+                                        <a class="next"></a>
+                                        <a class="dateTime">於 <%= items[0][i].artiDateTime %>發表</a>
+                                    </div>
                                 </div>
-                                <hr>
+                                <hr style="margin-top: 0.5em">
                             </div>
-                            <h3 class="card-title "><%= items[0][i].artiHead %>
-                            </h3>
-                            <p class="card-text "><%- items[0][i].artiCont %>
-                            </p>
+                            <div class="row seperate">
+                                <div class="col-sm-9 articleContent">
+                                    <h3 class="card-title "><%= items[0][i].artiHead %>
+                                    </h3>
+                                    <p class="card-text limitLine"><%- items[0][i].artiCont %>
+                                    </p>
 
-                            <!-- tag -->
-                            <div class=" tagDiv col-lg-12 ">
-                            <% if(items[1] != undefined) { %>
-                                <% for(var j=0; j<items[1].length; j++) {%>
-                                    <% if(items[0][i].artiNum == items[1][j].artiNum){ %> 
-                                        <button type=" button" class="btn  tag"><%= items[1][j].tagName %></button>                            
+                                    <!-- tag -->
+                                    <div class=" tagDiv col-lg-12 ">
+                                        <% if(items[1] != undefined) { %>
+                                        <% for(var j=0; j<items[1].length; j++) {%>
+                                        <% if(items[0][i].artiNum == items[1][j].artiNum){ %>
+                                        <button type=" button" class="btn  tag"><%= items[1][j].tagName %></button>
+                                        <% } %>
+                                        <% } %>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                
+                                <!-- imgs  -->
+                                <% if(items[3] != undefined) { %>
+                                    <% for(var j = 0 ; j<items[3].length ; j++) { %>
+                                        <% if (items[0][i].artiNum == items[3][j].artiNum){ %>
+                                            <div class="wrapperCard card-img-top col-lg-3"
+                                                style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
+                                            </div>
+                                            <% break %> <!-- 取得一張照片就結束 -->
                                         <% } %>
                                     <% } %>
                                 <% } %>
                             </div>
                         </div>
-
-                        <!-- imgs  -->
-                        <% if(items[3] != undefined) { %>
-                            <% for(var j = 0 ; j<items[3].length ; j++) { %>
-                                <% if (items[0][i].artiNum == items[3][j].artiNum){ %>
-                                    <div class="wrapperCard card-img-top col-lg-3"
-                                        style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
-                                    </div>
-                                    <% break %> <!-- 取得一張照片就結束 -->
-                                <% } %>
-                            <% } %>
-                        <% } %>
 
                         <!-- info -->
                         <div class="info">
@@ -106,10 +114,10 @@
                             <% } else if(items[5][0] != undefined ) { %>
                                 <!-- 判斷是否有按過愛心 -->
                                 <% var isLike = false %>
-                                <% if(items[3] != undefined ) { %>
-                                    <%  for (var j = 0; j < items[3].length ; j++) { %>
+                                <% if(items[2] != undefined ) { %>
+                                    <%  for (var j = 0; j < items[2].length ; j++) { %>
                                         <!-- 如果有按過愛心 -->
-                                        <% if(items[0][i].artiNum == items[3][j].artiNum ) { %>
+                                        <% if(items[0][i].artiNum == items[2][j].artiNum ) { %>
                                             <script type="text/javascript">                                  
                                                 document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "inline";
                                                 document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "none";
@@ -198,7 +206,6 @@
                                         dataType: 'JSON',
                                         data: { "likeType": "article", "artiNum": artiNum },
                                         success: function (res) {
-                                            console.log("yes", JSON.stringify(res));
                                         },
                                         error: function (res) {
                                             console.log("失敗", JSON.stringify(res));
@@ -207,7 +214,6 @@
                                 };
                                 //刪除收藏
                                 function delColle(artiNum) {
-                                    // console.log("前端刪除訊息");
                                     cancelCollection(artiNum);
                                     $.ajax({
                                         url: '/delCollection',
@@ -215,7 +221,6 @@
                                         dataType: 'JSON',
                                         data: { "likeType": "article", "artiNum": artiNum },
                                         success: function (res) {
-                                            console.log("yes", JSON.stringify(res));
                                         },
                                         error: function (res) {
                                             console.log("失敗", JSON.stringify(res));
@@ -245,25 +250,22 @@
                                         dataType: 'text',
                                         data: { "likeType": "article", "artiNum": artiNum },
                                         success: function (res) {
-                                            console.log("yes", JSON.stringify(res));
                                             likeCount(artiNum);
                                             like(artiNum);
                                         },
                                         error: function (res) {
-                                            console.log("失敗", res);
+                                            console.log(res);
                                         }
                                     });
                                 };
                                 //刪除愛心
                                 function delLike(artiNum) {
-                                    // console.log("前端刪除訊息");     
                                     $.ajax({
                                         url: '/delLike',
                                         type: 'POST',
                                         dataType: 'text',
                                         data: { "likeType": "article", "artiNum": artiNum },
                                         success: function (res) {
-                                            console.log("yes", JSON.stringify(res));
                                             likeCount(artiNum);
                                             cancelLike(artiNum);
                                         },
@@ -274,7 +276,6 @@
                                 };
                                 //點愛心後改變屬性
                                 function like(artiNum) {
-                                    console.log("like", artiNum);
                                     document.getElementById("delLike" + artiNum).style.display = "inline";
                                     document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
                                     document.getElementById("addLike" + artiNum).style.display = "none";
@@ -292,13 +293,11 @@
                                         dataType: 'JSON',
                                         data: { "likeType": "article", "artiNum": artiNum },
                                         success: function (res) {
-                                            // console.log("yes", reponse.responseText);
-                                            console.log("yes", JSON.stringify(res));
                                             document.getElementById("addLikeCount" + artiNum).innerHTML = JSON.stringify(res);
                                             document.getElementById("delLikeCount" + artiNum).innerHTML = JSON.stringify(res);
                                         },
                                         error: function (res) {
-                                            console.log("no", JSON.stringify(res));
+                                            console.log(JSON.stringify(res));
                                         }
                                     });
                                 }
@@ -368,18 +367,6 @@
             <!-- 推薦結束 -->
         </div>
     </section>
-
-    <div class="fixed-bottom  d-flex justify-content-center">
-        <button type="button" class="btn btn-secondary footer">電影類</button>
-        <button type="button" class="btn btn-secondary footer">音樂類</button>
-        <button type="button" class="btn btn-secondary footer">書籍類</button>
-        <button type="button" class="btn btn-secondary footer">展覽類</button>
-        <button type="button" class="btn btn-secondary footer">全部</button>
-
-        <button type="button" class="btn postButton" onclick="location.href='/articleList/post'">
-            <i class="fas fa-edit"></i>發文</button>
-    </div>
-
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>

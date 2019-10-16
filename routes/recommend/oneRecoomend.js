@@ -15,14 +15,22 @@ router.get('/:recomNum', async function (req, res, next) {
     }
 
     recommend.getOneRecommend(recomNum, memID).then(data => {
-        console.log("data=",data);
         // 將圖片字串替代成圖片
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].recomCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[3].length; j++) {
-                    data[0][i].recomCont = data[0][i].recomCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + data[3][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    data[0][i].recomCont = data[0][i].recomCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/imgs/recommend/" + data[3][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 }
             }
+        }
+        let sumDisplayImg = 0
+        if (data[9]) {
+            data[1].forEach((item, index) => {
+                while (item.recomMessCont.match("\\:imgLocation")) {
+                    item.recomMessCont = item.recomMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/imgs/recommend/replyImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    sumDisplayImg = sumDisplayImg + 1
+                }
+            })
         }
 
         if (data == null) {

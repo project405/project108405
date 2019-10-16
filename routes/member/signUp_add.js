@@ -24,7 +24,6 @@ router.post('/', function (req, res, next) {
     }) 
     signUp.checkMail(memMail).then(data =>{
         checkMail = data[0];
-        console.log(checkMail);
     })
 
     setTimeout(function () {
@@ -48,7 +47,6 @@ router.post('/', function (req, res, next) {
                 memMail: memMail,
                 memGender: memGender
             }
-            // console.log(newData);
             
             signUp.createMember(newData).then(d => {
                 if (d == 0) {

@@ -43,7 +43,7 @@ var upload = multer({
 
 
 //post請求
-router.post('/', upload.array('userImg', 10), function (req, res, next) {
+router.post('/', upload.array('userImg', 20), function (req, res, next) {
     var memID;
     var artiHead = req.body.artiHead;
     var artiCont = req.body.artiCont;
@@ -53,17 +53,12 @@ router.post('/', upload.array('userImg', 10), function (req, res, next) {
     var negativeWords = req.body.negativeWords;
     var swearWords = req.body.swearWords;
     var artiNum = req.body.artiNum;
-    console.log('artiHead', artiHead)
-
-    console.log(req.body);
 
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
     var tagData = [];
     var imgData = [];
-    // console.log(req.files);
     //將所有換行符號替代成<br> 
     artiCont = artiCont.replace(/\n/g, "<br>");
-    console.log(artiCont,"::::cont");
 
     //判斷是使用哪種方式登入
     if (req.session.memID == undefined && req.session.passport == undefined) {
@@ -76,22 +71,12 @@ router.post('/', upload.array('userImg', 10), function (req, res, next) {
 
     for (var i in req.files) {
         imgData.push(req.files[i].filename);
-        console.log("files= ", req.files[i]);
-        // if (artiCont.match("\\:imgLocation") != null) {
-        //     console.log("近來囉");
-        //     // artiCont = artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top' style='background-image: url(/userImg/" + req.files[i].filename + "'); border-radius:8px; '></div>");
-        //     artiCont = artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + req.files[i].filename + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.35em; ' ></div>");
-        // }
-
     }
 
-    console.log(artiCont);
-    // console.log(imgData);
     // tag
     if (req.body.tag != '') {
         tagData = req.body.tag.split(",");
     }
-    // console.log("typeof", typeof req.file);
     if (memID == undefined) {
         if (req.body.userImg != 'undefined') {
             for (var i = 0; i < imgData.length; i++) {
@@ -100,7 +85,6 @@ router.post('/', upload.array('userImg', 10), function (req, res, next) {
         }
         res.send("請進行登入");
     } else {
-        // console.log(req.file,imgType);
         if (typeof (req.file) != 'undefined') {
             //如果檔案超過限制大小
             if (req.file.size > maxSize) {
@@ -136,26 +120,22 @@ router.post('/', upload.array('userImg', 10), function (req, res, next) {
                 if (artiNum) {
                     member.editArticle(memID, artiHead, artiCont, artiClass, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.remainImg).then(data => {
                         if (data == 1) {
-                            console.log("編輯成功");
                             res.send("編輯成功");
                         } else {
                             for (var i = 0; i < imgData.length; i++) {
                                 fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
                             }
-                            console.log("編輯失敗");
                             res.send("編輯失敗");
                         }
                     })
                 } else {
                     member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
                         if (data == 0) {
-                            console.log("發文成功");
                             res.send("發文成功");
                         } else {
                             for (var i = 0; i < imgData.length; i++) {
                                 fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
                             }
-                            console.log("發文失敗");
                             res.send("發文失敗");
                         }
                     })
@@ -165,7 +145,6 @@ router.post('/', upload.array('userImg', 10), function (req, res, next) {
             for (var i = 0; i < imgData.length; i++) {
                 fs.unlinkSync('public/userImg/' + imgData[i]); //刪除檔案
             }
-            console.log("發文失敗");
             res.send("發文失敗");
         }
     }

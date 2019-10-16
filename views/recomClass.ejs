@@ -8,7 +8,6 @@
 
     <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javacripts/active.js"></script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -62,6 +61,7 @@
                         <div class="wrapper col-12  col-lg-2" 
                         style="background-image: url('/imgs/recommend/<%= recom[3][j].imgName %>');">
                         <% isImg = true %>
+                        <% break ;%>
                     <% } %>
                 <% } %>
             <% } %>
@@ -76,7 +76,7 @@
                         </div>
                         <div class="project-name">
                             <p class="title"><%= recom[0][i].recomHead %> </p>
-                            <p class="content wrapText"><%= recom[0][i].recomCont %>
+                            <p class="content wrapText"><%- recom[0][i].recomCont %>
                             </p>
                         </div>
                     </div>

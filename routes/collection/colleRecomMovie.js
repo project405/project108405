@@ -16,7 +16,6 @@ router.get('/', function (req, res, next) {
     }
     
     collection.getCollRecomClassList(memID, '電影').then(data => {
-        console.log(data);
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data == -1) {

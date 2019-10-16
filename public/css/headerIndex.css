@@ -296,8 +296,8 @@ div.surpriseSection {
 }
 
 div.surpriseSection > img {
-    height: 100px;
-    width: 100px;
+    height: 90px;
+    width: 90px;
     cursor: pointer;
 }
 
@@ -320,6 +320,22 @@ a.surpriseHoverText::after {
     bottom: 2.8em;
     content: "";
 }
+
+/* div.surpriseSectionContainer {
+    border-radius: 6px;
+    height: 20em;
+    width: 20em;
+    position: fixed;
+    right: -30em;
+    bottom: 220px;
+    z-index: 1001;
+}
+div.surpriseHeader {
+    position: sticky;
+    top: 0px; 
+    z-index: 1000; 
+    background-color: white;
+} */
 @media (max-width: 575px) {
     #gotop {
         position: fixed;
@@ -347,6 +363,20 @@ a.surpriseHoverText::after {
     }
     #sentimentSectionHover {
         display: none;
+    }
+    div.surpriseSection {
+        z-index: 95;
+        bottom: 120px;
+        right: -30px;
+        /* animation: shake 4s;
+        animation-iteration-count: infinite; */
+        -webkit-animation: shakeV2 1.5s ease-in-out 1.5s infinite alternate;
+    
+    }
+    
+    div.surpriseSection > img {
+        height: 70px;
+        width: 70px;
     }
 }
 

@@ -15,10 +15,31 @@ router.get('/', function (req, res, next) {
     }
     
     index.getIndexData(memID).then(data => { 
-        // 取代圖片文字為空字串
-        for (var i = 0; i < data[1].length; i++) {
-            if (data[1][i].artiCont.match("\\:imgLocation") != null) {
-                data[1][i].artiCont = data[1][i].artiCont.replace(/\\:imgLocation/g, "");
+
+        //熱門文章 圖片標籤取代為空字串
+        if (data[0] != undefined) {
+            for (var i = 0; i < data[1].length; i++) {
+                if (data[1][i].artiCont.match("\\:imgLocation") != null) {
+                    data[1][i].artiCont = data[1][i].artiCont.replace(/\\:imgLocation/g, "");
+                }
+            }
+        }
+
+        // 將正向文章字串替換成圖片
+        for (var i = 0; i < data[6].length; i++) {
+            if (data[6][i].artiCont.match("\\:imgLocation") != null) {
+                for (var j = 0; j < data[8].length; j++) {
+                    data[6][i].artiCont = data[6][i].artiCont.replace("\\:imgLocation", "<img class='sentimentImg'  src='/userImg/" + data[8][j].imgName + "'</div>");
+                }
+            }
+        }
+
+        // 將負向文章字串替換成圖片
+        for (var i = 0; i < data[7].length; i++) {
+            if (data[7][i].artiCont.match("\\:imgLocation") != null) {
+                for (var j = 0; j < data[9].length; j++) {
+                    data[7][i].artiCont = data[7][i].artiCont.replace("\\:imgLocation", "<img class='sentimentImg' src='/userImg/" + data[9][j].imgName + "'</div>");
+                }
             }
         }
         

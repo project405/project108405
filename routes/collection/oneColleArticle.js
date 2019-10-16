@@ -20,12 +20,21 @@ router.get('/:artiNum', async function (req, res, next) {
     article.getOneArticle(artiNum, memID).then(data => {
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].artiCont.match("\\:imgLocation") != null) {
-                console.log("近來囉");
                 for (var j = 0; j < data[6].length; j++) {
                     data[0][i].artiCont = data[0][i].artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/" + data[6][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 }
             }
         }
+        let sumDisplayImg = 0
+        if (data[9]) {
+            data[1].forEach((item, index) => {
+                while (item.artiMessCont.match("\\:imgLocation")) {
+                    item.artiMessCont = item.artiMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/replyImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    sumDisplayImg = sumDisplayImg + 1
+                }
+            })
+        }
+        
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data == -1) {

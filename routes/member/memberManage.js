@@ -3,6 +3,7 @@ var router = express.Router();
 
 const member = require('../utility/member');
 const signUp = require('../utility/signUp');
+const moment = require('moment');
 
 //接收GET請求
 router.get('/', function (req, res, next) {
@@ -16,13 +17,10 @@ router.get('/', function (req, res, next) {
     } else if (req.session.memID == undefined && req.session.passport != undefined) {
         memID = req.session.passport.user.id;
     }
-    
-    member.checkAuthority(memID).then(data => {
-        var mydata = [];
-        mydata[0] = data;
-        mydata[1] = memID;
-        console.log(mydata);
-        res.render('memberManage', { items: mydata });
+
+    member.getMemberInfor(memID).then(data => {
+        data[0].memBirth = moment(data[0].memBirth).format("YYYY-MM-DD");
+        res.render('memberManage', { items: data });
     })
 
 });
@@ -44,15 +42,11 @@ router.post('/', function (req, res, next) {
     };
     signUp.checkMail(memberData.memMail).then(data => {
         checkMail = data[0];
-        // console.log("checkMail=", checkMail);
     })
     member.getOriginalMail(memID).then(data => {
         originalMail = data[0].memMail;
-        // console.log("origin=",originalMail);
-
     })
 
-    console.log(memberData);
     setTimeout(function () {
         if (memberData.memPass == "" || memberData.memCheckPass == "" || memberData.memMail == "" || memberData.memBirth == "" || memberData.memGender == "") {
             res.end('<script> alert("輸入的資料不可為空"); history.back();</script>');
@@ -65,7 +59,6 @@ router.post('/', function (req, res, next) {
         } else {
             member.modifyMember(memberData.memPass, memberData.memBirth, memberData.memMail, memberData.memGender, memberData.memAddr, memberData.memID).
                 then(data => {
-                    console.log(data);
                     if (data == 1) {
                         res.end('<script> alert("修改成功！");location.replace("/");</script>');
                     } else {

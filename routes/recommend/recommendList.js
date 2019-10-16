@@ -18,7 +18,6 @@ router.get('/', function (req, res, next) {
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else {
-            console.log(data);
             res.render('recommendList', { recom : data });
         }
     })
