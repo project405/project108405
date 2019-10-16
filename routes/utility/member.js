@@ -344,6 +344,21 @@ var deleteArticle = async function (artiNum) {
     return result;
 }
 //================================
+//-------- deleteRecommend() -------
+//================================
+var deleteRecommend = async function (recomNum) {
+    var result = 0;
+    console.log(recomNum)
+    await sql ('DELETE FROM "recommend" WHERE "recomNum" = $1',[recomNum])
+        .then((data)=> {
+            result = 1
+        },(e) => {
+            console.error(e)
+            result = 0
+        }) 
+    return result;
+}
+//================================
 //-------- deleteReply() -------
 //================================
 var deleteReply = async function (artiMessNum) {
@@ -956,7 +971,7 @@ module.exports = {
     addArticleLike, delArticleLike,
     addArticleMessLike, delArticleMessLike,
     addRecommendMessLike, delRecommendMessLike,
-    report, checkAuthority, editArticle, deleteArticle, editReply, deleteReply, 
+    report, checkAuthority, editArticle, deleteArticle, deleteRecommend, editReply, deleteReply, 
     memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
     editRecommendReply, editRecommend
 

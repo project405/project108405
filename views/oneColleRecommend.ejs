@@ -31,12 +31,25 @@
             <div class="col-lg-8 content shadow">
                 <div class="info d-flex">
                     <div><a class="floorTag">樓主</a></div>
-                    <div><a><%= items[0][0].memID %></a>
+                    <div><a>富心漢👨🏿‍🔧</a>
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[0][0].recomDateTime %>發佈</a>
                     </div>
+                    <% if(items[7] && items[7] == 'boss') {%>
+                        <div class="dropdown ml-auto">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/editRecommend/<%= items[0][0].recomNum %>">編輯</a>
+                                <a class="dropdown-item" href="#/"
+                                    onclick=<%= "delRecommend(" + items[0][0].recomNum + ")" %>>刪除</a>
+                            </div>
+                        </div>
+                    <% } %>
                 </div>
-                <hr />
+                <hr style="margin-top: 0.5em" />
 
                 <h5><%= items[0][0].recomHead %></h5>
                 <hr />
@@ -162,7 +175,7 @@
                             <a class="dateTime">於<%= items[1][i].recomMessDateTime %>留言</a>
                         </div>
                         <!-- 愛心按鈕 -->
-                        <div class="col-sm-1 ml-auto"> </div>
+                        <div class="col-sm-1 ml-auto">
                         <button type="button"
                             id=<%= "MessLikeUnLogIn" + items[0][0].recomNum + items[1][i].recomMessNum %> class="btn like"
                             style="display:none" onclick="location.href='/login'"><i
@@ -184,7 +197,8 @@
                             <a id=<%= "MessDelLikeCount" + items[0][0].recomNum + items[1][i].recomMessNum %>>
                                 <%= items[1][i].likeCount %></a>
                         </button>
-
+                    </div>
+                    </div>
                         <!-- 如果沒登入 -->
                         <% if(items[8][0] == undefined) {%>
                         <script type="text/javascript">
@@ -242,7 +256,6 @@
                             </div>
                         </div>
                     <% } %>
-                </div>
             </div>
             
             <!-- 推薦留言檢舉區塊 -->
@@ -503,6 +516,39 @@
                     }
                 });
             }
+        // delRecommend
+        function delRecommend(recomNum) {
+            $('.spinner-border').css('display', 'block')
+            $.ajax({
+            url: '/addLike',
+            type: 'POST',
+            data: { "recomNum": recomNum, "delRecommend": true },
+            success: function (res) {
+                alert('刪除成功！')
+                location.replace("/recommendlist");
+            },
+            error: function (res) {
+                alert('刪除失敗！')
+            }
+        });
+        }
+        // delReply
+        function deleteReply(artiMessNum, memID) {
+            $('.spinner-border').css('display', 'block')
+            $.ajax({
+                url: '/addLike',
+                type: 'POST',
+                data: { "recomMessNum": artiMessNum, "memID": memID, "deleteRecommendReply": true },
+                success: function (res) {
+                    alert('刪除成功！')
+                    location.reload();
+                },
+                error: function (res) {
+                    console.log('刪除失敗');
+                    alert('刪除失敗！')
+                }
+            });
+        }
         </script>
         <script>
                 Array.from($('.liContainer').find('li > a')).map((item) => {
