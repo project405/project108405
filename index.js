@@ -405,7 +405,7 @@ bot.on('message', function(event) {
                     if (item && index <= 1) {
                         // 負面
                        
-                        console.log('負面item',item)
+                        console.log('負面item',item[0].recomCont)
                         // console.log('負面index',index)
 
                         if (item.recomCont) {
