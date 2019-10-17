@@ -222,13 +222,12 @@ var getIndexData = async function (memID) {
     });
 
     //依照亂數取文章或推薦
-    r = Math.floor(Math.random() * 10) + 1
+    r = Math.floor(Math.random() * 10) + 1;
 
     //如果都沒對文章或推薦按過愛心
     if(artiClassCount.length == 0 && recomClassCount.length == 0){
         var classRandom = Math.floor(Math.random() * 3) ;
         byClassData = await byClassGetData(classRandom,r ) ; 
-
     }else{
         //加總class按讚次數
         await sumClass(classCount, artiClassCount) ;
@@ -240,10 +239,6 @@ var getIndexData = async function (memID) {
         //class次數最多的 以亂數的方式去判斷說要取文章 還是 推薦
         byClassData = await byClassGetData(classCount[0][0],r ) ; 
     }
-    
-  
-
-    console.log("byClassData",byClassData);
 
     result[0] = fourRecommend;
     result[1] = hotArticle;
@@ -339,7 +334,6 @@ async function byClassGetData(index, r){
         });
 
     }
-
     return result ; 
 }
 
