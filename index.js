@@ -9,6 +9,8 @@ const index = require('./routes/utility/index');
 const login = require('./routes/utility/login');
 const collection = require('./routes/utility/collection');
 const recommend = require('./routes/utility/recommend');
+const mood = require('./routes/utility/mood');
+
 
 //----------------------------------------
 // 填入自己在Line Developers的channel值
@@ -392,74 +394,77 @@ bot.on('message', function(event) {
     }
     //-----------心情推薦-----------
     if (text == "心情推薦"){
-        event.reply({
-            "type": "template",
-            "altText": "文藝富心",
-            "template": {
-                "type": "carousel",
-                "columns": [
-                    {
-                      "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg",
-                      "imageBackgroundColor": "#FFFFFF",
-                      "title": "好心情專區",
-                      "text": "適合好心情的語錄",
-                      "defaultAction": {
-                          "type": "uri",
-                          "label": "詳細資料",
-                          "uri": "http://weiting.nctu.me/"
-                      },
-                      "actions": [
-                          {
-                              "type": "uri",
-                              "label": "電影",
-                              "uri": "http://weiting.nctu.me/"
-                          },
-                          {
-                              "type": "uri",
-                              "label": "音樂",
-                              "uri": "http://weiting.nctu.me/"
-                          },
-                          {
-                              "type": "uri",
-                              "label": "書籍",
-                              "uri": "http://weiting.nctu.me/"
-                          }
-                      ]
-                    },
-                    {
-                      "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p02.jpg",
-                      "imageBackgroundColor": "#000000",
-                      "title": "壞心情專區",
-                      "text": "適合壞心情的語錄",
-                      "defaultAction": {
-                          "type": "uri",
-                          "label": "詳細資料",
-                          "uri": "http://weiting.nctu.me/"
-                      },
-                      "actions": [
-                        {
-                            "type": "uri",
-                            "label": "電影",
-                            "uri": "http://weiting.nctu.me/"
-                        },
-                        {
-                            "type": "uri",
-                            "label": "音樂",
-                            "uri": "http://weiting.nctu.me/"
-                        },
-                          {
-                              "type": "uri",
-                              "label": "書籍",
-                              "uri": "http://weiting.nctu.me/"
-                          }
-                      ]
-                    }
-                ],
-                "imageAspectRatio": "rectangle",
-                "imageSize": "cover"
-            }
-        });
-    }	
+        mood.getMood().then(data =>{
+            console.log(data);
+        })
+    //     event.reply({
+    //         "type": "template",
+    //         "altText": "文藝富心",
+    //         "template": {
+    //             "type": "carousel",
+    //             "columns": [
+    //                 {
+    //                   "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg",
+    //                   "imageBackgroundColor": "#FFFFFF",
+    //                   "title": "好心情專區",
+    //                   "text": "適合好心情的語錄",
+    //                   "defaultAction": {
+    //                       "type": "uri",
+    //                       "label": "詳細資料",
+    //                       "uri": "http://weiting.nctu.me/"
+    //                   },
+    //                   "actions": [
+    //                       {
+    //                           "type": "uri",
+    //                           "label": "電影",
+    //                           "uri": "http://weiting.nctu.me/"
+    //                       },
+    //                       {
+    //                           "type": "uri",
+    //                           "label": "音樂",
+    //                           "uri": "http://weiting.nctu.me/"
+    //                       },
+    //                       {
+    //                           "type": "uri",
+    //                           "label": "書籍",
+    //                           "uri": "http://weiting.nctu.me/"
+    //                       }
+    //                   ]
+    //                 },
+    //                 {
+    //                   "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p02.jpg",
+    //                   "imageBackgroundColor": "#000000",
+    //                   "title": "壞心情專區",
+    //                   "text": "適合壞心情的語錄",
+    //                   "defaultAction": {
+    //                       "type": "uri",
+    //                       "label": "詳細資料",
+    //                       "uri": "http://weiting.nctu.me/"
+    //                   },
+    //                   "actions": [
+    //                     {
+    //                         "type": "uri",
+    //                         "label": "電影",
+    //                         "uri": "http://weiting.nctu.me/"
+    //                     },
+    //                     {
+    //                         "type": "uri",
+    //                         "label": "音樂",
+    //                         "uri": "http://weiting.nctu.me/"
+    //                     },
+    //                       {
+    //                           "type": "uri",
+    //                           "label": "書籍",
+    //                           "uri": "http://weiting.nctu.me/"
+    //                       }
+    //                   ]
+    //                 }
+    //             ],
+    //             "imageAspectRatio": "rectangle",
+    //             "imageSize": "cover"
+    //         }
+    //     });
+    // }	
     console.log('使用者傳來的文字',text);
 });
 
