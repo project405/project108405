@@ -397,7 +397,7 @@ bot.on('message', function(event) {
         // app.get('/', function () {
             let negative;
             let positive;
-            let result;
+            let result = [];
         
             mood.getMood().then(data => { 
                 console.log('!!!!!!!!!!!!!!',data)
