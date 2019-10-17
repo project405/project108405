@@ -400,6 +400,7 @@ bot.on('message', function(event) {
             let result;
         
             mood.getMood().then(data => { 
+                console.log('!!!!!!!!!!!!!!',data)
                 data.map((item, index) => {
                     if (item && index <= 1) {
                         // 負面
