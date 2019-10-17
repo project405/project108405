@@ -394,7 +394,7 @@ bot.on('message', function(event) {
     }
     //-----------心情推薦-----------
     if (text == "心情推薦"){
-        app.get('/', function () {
+        // app.get('/', function () {
             let negative;
             let positive;
             let result;
@@ -421,7 +421,7 @@ bot.on('message', function(event) {
                 })
             })
             console.log('為廷的router@@@@@@@@@@@@@',result)
-        });
+        // });
         
     }
     //     event.reply({
