@@ -16,7 +16,6 @@ router.post('/', function (req, res, next) {
         memID = req.session.passport.user.id;
     }
 
-
     if (req.body.deleteRecommendReply) {
         if (memID == req.body.memID) {
             member.deleteRecommendReply(req.body.recomMessNum).then((data) => {
@@ -27,6 +26,7 @@ router.post('/', function (req, res, next) {
                 }
             })
         }
+        return;
     }
     if (req.body.deleteReply) {
         if (memID == req.body.memID) {
@@ -38,6 +38,7 @@ router.post('/', function (req, res, next) {
                 }
             })
         }
+        return;
     }
     if (req.body.delArticle) {
         if (memID == req.body.memID) {
@@ -49,6 +50,23 @@ router.post('/', function (req, res, next) {
                 }
             })
         }
+        return;
+    }
+    if (req.body.delRecommend) {
+        member.checkAuthority(memID).then((data) => {
+            if (data == 'boss') {
+                console.log('data', data)
+                console.log('req.body.recomNum',req.body.delRecommend, req.body.recomNum)
+                member.deleteRecommend(req.body.recomNum).then((data) => {
+                    if (data == 1) {
+                        res.send('刪除成功')
+                    } else {
+                        res.send('刪除失敗')
+                    }
+                })
+            }
+        })
+        return;
     }
     //推薦愛心
     if (req.body.likeType == "recommend") {

@@ -210,7 +210,7 @@
                                     <%= items[1][i].likeCount %>
                                 </a>
                             </button>
-                    </div>
+                        </div>
                     </div>
                     <hr class="smallMagin">
 
@@ -695,10 +695,11 @@
                     type: 'POST',
                     data: { "artiNum": artiNum, "memID": '<%= items[0][0].memID %>', "delArticle": true },
                     success: function (res) {
+                        alert('刪除成功！')
                         location.replace("/articleList");
                     },
                     error: function (res) {
-                        console.log('刪除失敗');
+                        alert('刪除失敗！')
                     }
                 });
             }
@@ -710,10 +711,11 @@
                     type: 'POST',
                     data: { "artiMessNum": artiMessNum, "memID": memID, "deleteReply": true },
                     success: function (res) {
+                        alert('刪除成功！')
                         location.reload();
                     },
                     error: function (res) {
-                        console.log('刪除失敗');
+                        alert('刪除失敗！')
                     }
                 });
             }

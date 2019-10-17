@@ -9,7 +9,9 @@ body {
     text-align: justify;
     text-justify: inter-ideograph;
 }
-
+p {
+    word-break: break-all !important;
+}
 .banner {
     margin-bottom: 4em;
     /* opacity: 0.6; */

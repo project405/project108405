@@ -243,7 +243,6 @@
                     <% } %>
                     <% } %>
                     <!-- info結束 -->
-
                     <p class="content"> <%- items[1][i].recomMessCont %> </p>
                     <hr>
                     <% if(items[8][0] != items[1][i].memID) {%>
@@ -626,18 +625,36 @@
                 }
             });
         }
+            // delRecommend
+        function delRecommend(recomNum) {
+            $('.spinner-border').css('display', 'block')
+            $.ajax({
+            url: '/addLike',
+            type: 'POST',
+            data: { "recomNum": recomNum, "delRecommend": true },
+            success: function (res) {
+                alert('刪除成功！')
+                location.replace("/recommendlist");
+            },
+            error: function (res) {
+                alert('刪除失敗！')
+            }
+        });
+        }
         // delReply
         function deleteReply(artiMessNum, memID) {
             $('.spinner-border').css('display', 'block')
             $.ajax({
                 url: '/addLike',
                 type: 'POST',
-                data: { "RecomMessNum": artiMessNum, "memID": memID, "deleteRecommendReply": true },
+                data: { "recomMessNum": artiMessNum, "memID": memID, "deleteRecommendReply": true },
                 success: function (res) {
+                    alert('刪除成功！')
                     location.reload();
                 },
                 error: function (res) {
                     console.log('刪除失敗');
+                    alert('刪除失敗！')
                 }
             });
         }
