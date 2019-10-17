@@ -3,7 +3,6 @@
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
 
-
 //=========================================
 //---------  getMood() -----------
 //=========================================
@@ -75,21 +74,6 @@ var getMood = async function (r) {
     console.log(result);
     return result;
 }
-
-// //=========================================
-// //---------  getgoodmood() -----------
-// //=========================================
-// var getgoodmood = async function () {
-
-//     var result = [];
-//     // -----------  取得推薦清單 --------------
-        
-    
-//     result[0] = positiverecom;
-//     result[1] = positivearti;
-//     console.log(result);
-//     return result;
-// }
 
 //匯出
 module.exports = {getMood};
