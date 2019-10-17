@@ -69,13 +69,16 @@ app.post('/webhook', function (req, res) {
         });
         byClassData.getIndexData().then(data =>{
             var pushContent = []
+            if (data[10][0].recomHead == undefined){
+                pushContent.push(data[10][0].artiHead)
+                pushContent.push(data[10][0].artiCont)
+            }else{
+                pushContent.push(data[10][0].recomHead)
+                pushContent.push(data[10][0].recomCont)
+            }
             
-            // console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomCont)
-            // pushContent.push(data[10][0].recomHead)
-            // pushContent.push(data[10][0].recomCont)
-            pushContent.push(data[10][0].artiHead)
-            pushContent.push(data[10][0].artiCont)
-            // console.log('裡面',pushContent)
+           
+            console.log('pushContent',pushContent)
 
             // console.log('req@@@@@@@@@@@@@@@@@@@@@@@@@',req)  
             request.post({
