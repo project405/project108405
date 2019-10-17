@@ -397,8 +397,8 @@ bot.on('message', function(event) {
         // app.get('/', function () {
             let negative;
             let positive;
-            let result = [1,2];
-        
+            let result = [];
+            
             mood.getMood().then(data => { 
                 console.log('data!!!!!!!!!!!!!!',data)
                 data.map((item, index) => {
@@ -411,7 +411,7 @@ bot.on('message', function(event) {
 
                         // console.log('負面index',index)
 
-                        if (item.recomCont) {
+                        if (Object.keys(item[0]).indexOf('recomCont') >= 0) {
                             negative = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
                         } else {
                             negative = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
