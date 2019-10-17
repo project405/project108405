@@ -79,7 +79,7 @@ app.post('/webhook', function (req, res) {
                 }else if(data[10][0].artiCont.match("\:imgLocation") != null){
                     pushContent.push('我有圖片')
                 }else{
-
+                    pushContent.push(data[10][0].artiCont)
                 }
             }else{
                 pushContent.push(data[10][0].recomHead)
@@ -107,7 +107,6 @@ app.post('/webhook', function (req, res) {
                         messages: [
                             {
                                 type: "template",
-                                title: "123",
                                 altText: "相信你會喜歡😎",
                                 template: {
                                     type: "confirm",
