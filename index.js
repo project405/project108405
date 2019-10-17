@@ -74,7 +74,8 @@ app.post('/webhook', function (req, res) {
                 pushContent.push(data[10][0].artiHead)
                 //Confirm template最大只能放240字元
                 if (data[10][0].artiCont.length <= 220){
-                    pushContent.push(data[10][0].artiHead.slice(0,219))
+                    // pushContent.push(data[10][0].artiHead.slice(0,219))
+                    pushContent.push(test.slice(0,219))
                 }else{
                     pushContent.push(data[10][0].artiCont)
                 }  
@@ -84,6 +85,9 @@ app.post('/webhook', function (req, res) {
             }
             
             console.log('pushContent',pushContent)
+            console.log('pushContent',pushContent[1])
+            console.log('pushContent',pushContent[1].length)
+
             // console.log('req@@@@@@@@@@@@@@@@@@@@@@@@@',req)  
             request.post({
                 headers: {
