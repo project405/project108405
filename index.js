@@ -397,6 +397,7 @@ bot.on('message', function(event) {
         mood.getMood().then(data =>{
             console.log(data);
         })
+    }
     //     event.reply({
     //         "type": "template",
     //         "altText": "文藝富心",
