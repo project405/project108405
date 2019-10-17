@@ -394,9 +394,35 @@ bot.on('message', function(event) {
     }
     //-----------心情推薦-----------
     if (text == "心情推薦"){
-        mood.getMood().then(data =>{
-            console.log('心情推薦！！！！！！！！！！！！！！！',data);
-        })
+        app.get('/', function () {
+            let negative;
+            let positive;
+            let result;
+        
+            mood.getMood().then(data => { 
+                data.map((item, index) => {
+                    if (item && index <= 1) {
+                        // 負面
+                        if (item.recomCont) {
+                            negative = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
+                        } else {
+                            negative = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
+                        } 
+                        result[0] = negative
+                    } else {
+                        // 正面
+                        if (item.recomCont) {
+                            positive = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
+                        } else {
+                            positive = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
+                        } 
+                        result[1] = positive
+                    }
+                })
+            })
+            console.log('為廷的router@@@@@@@@@@@@@',result)
+        });
+        
     }
     //     event.reply({
     //         "type": "template",
@@ -493,34 +519,6 @@ app.use(express.static('public'));
 
 
 //接收GET請求
-app.get('/', function () {
-    let negative;
-    let positive;
-    let result;
-
-    mood.getMood().then(data => { 
-        data.map((item, index) => {
-            if (item && index <= 1) {
-                // 負面
-                if (item.recomCont) {
-                    negative = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
-                } else {
-                    negative = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
-                } 
-                result[0] = negative
-            } else {
-                // 正面
-                if (item.recomCont) {
-                    positive = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
-                } else {
-                    positive = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
-                } 
-                result[1] = positive
-            }
-        })
-    })
-    console.log('為廷的router@@@@@@@@@@@@@',result)
-});
 
 
 //----------------------------------------
