@@ -404,8 +404,10 @@ bot.on('message', function(event) {
                 data.map((item, index) => {
                     if (item && index <= 1) {
                         // 負面
-                        console.log('負面item',item)
-                        console.log('負面index',index)
+                        console.log('負面item',item.recomCont)
+                        // console.log('負面index',index)
+                        console.log('負面item',item.artiCont)
+                        // console.log('負面index',index)
 
                         if (item.recomCont) {
                             negative = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
