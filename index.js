@@ -404,9 +404,10 @@ bot.on('message', function(event) {
                 data.map((item, index) => {
                     if (item && index <= 1) {
                         // 負面
-                       
-                        console.log('負面item[0].recomCont',item[0].recomCont)
-                        console.log('負面item[0].artiCont',item[0].artiCont)
+                        console.log('@@@@@@@@@@@@@@@@@',item[0])
+
+                        // console.log('負面item[0].recomCont',item[0].recomCont)
+                        // console.log('負面item[0].artiCont',item[0].artiCont)
 
                         // console.log('負面index',index)
 
@@ -418,8 +419,7 @@ bot.on('message', function(event) {
                         result[0] = negative
                     } else {
                         // 正面
-                        console.log('負面item[0].recomCont',item[0].recomCont)
-                        console.log('負面item[0].artiCont',item[0].artiCont)
+                        
                         if (item.recomCont) {
                             positive = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
                         } else {
