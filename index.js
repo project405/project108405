@@ -88,13 +88,11 @@ app.post('/webhook', function (req, res) {
                         pushContent.push(data[10][0].artiCont)
                         linePush();
                     }
-                    
                 }
             }else{
                 pushContent.push(data[10][0].recomHead)
                 pushContent.push(data[10][0].recomCont)
-                
-
+                linePush();
             }
 
             // data[1].forEach((item, index) => {
