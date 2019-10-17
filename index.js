@@ -419,8 +419,11 @@ bot.on('message', function(event) {
                         } 
                         result[1] = positive
                     }
+                    console.log('為廷的router@@@@@@@@@@@@@',result)
+
                 })
             })
+
             console.log('為廷的router@@@@@@@@@@@@@',result)
         // });
         
