@@ -519,7 +519,7 @@ app.get('/', function () {
             }
         })
     })
-    console.log(result)
+    console.log('為廷的router@@@@@@@@@@@@@',result)
 });
 
 
