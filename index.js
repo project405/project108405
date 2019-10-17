@@ -492,6 +492,37 @@ app.post('/', linebotParser);
 app.use(express.static('public'));
 
 
+//接收GET請求
+router.get('/', function () {
+    let negative;
+    let positive;
+    let result;
+
+    mood.getMood().then(data => { 
+        data.map((item, index) => {
+            if (item && index <= 1) {
+                // 負面
+                if (item.recomCont) {
+                    negative = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
+                } else {
+                    negative = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
+                } 
+                result[0] = negative
+            } else {
+                // 正面
+                if (item.recomCont) {
+                    positive = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
+                } else {
+                    positive = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
+                } 
+                result[1] = positive
+            }
+        })
+    })
+    console.log(result)
+});
+
+
 //----------------------------------------
 // 監聽3000埠號, 
 // 或是監聽Heroku設定的埠號
