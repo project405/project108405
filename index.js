@@ -80,6 +80,9 @@ app.post('/webhook', function (req, res) {
                         pushContent.push('我有圖片')
                     }
                 }else{
+                    if(data[10][0].artiCont.match("\:imgLocation") != null){
+                        pushContent.push('我有圖片')
+                    }
                     pushContent.push(data[10][0].artiCont)
                 }
             }else{
