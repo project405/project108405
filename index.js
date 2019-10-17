@@ -395,7 +395,7 @@ bot.on('message', function(event) {
     //-----------心情推薦-----------
     if (text == "心情推薦"){
         mood.getMood().then(data =>{
-            console.log(data);
+            console.log('心情推薦！！！！！！！！！！！！！！！',data);
         })
     }
     //     event.reply({
