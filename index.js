@@ -404,12 +404,6 @@ bot.on('message', function(event) {
                 data.map((item, index) => {
                     if (item && index <= 1) {
                         // 負面
-                        console.log('item[0].recomCont@@@@@@@@@@@@@@@@@',item[0].recomCont)
-
-                        // console.log('負面item[0].recomCont',item[0].recomCont)
-                        // console.log('負面item[0].artiCont',item[0].artiCont)
-
-                        // console.log('負面index',index)
 
                         if (Object.keys(item[0]).indexOf('recomCont') >= 0) {
                             negative = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
@@ -417,6 +411,8 @@ bot.on('message', function(event) {
                             negative = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
                         } 
                         result[0] = negative
+                        console.log('result[0]@@@@@@@@@@@@@',result[0])
+
                     } else {
                         // 正面
                         
@@ -426,12 +422,13 @@ bot.on('message', function(event) {
                             positive = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
                         } 
                         result[1] = positive
+                        console.log('result[1]@@@@@@@@@@@@@',result[1])
                     }
                     
                 })
             })
 
-            console.log('為廷的router@@@@@@@@@@@@@',result)
+            // console.log('為廷的router@@@@@@@@@@@@@',result)
         // });
         
     }
