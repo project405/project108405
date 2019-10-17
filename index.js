@@ -394,7 +394,7 @@ bot.on('message', function(event) {
     }
     //-----------心情推薦-----------
     if (text == "心情推薦"){
-        app.get('/', function () {
+        router.get('/', function () {
             let negative;
             let positive;
             let result;
