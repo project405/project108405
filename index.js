@@ -75,7 +75,8 @@ app.post('/webhook', function (req, res) {
                 //Confirm template最大只能放240字元
                 if (data[10][0].artiCont.length >= 220){
                     pushContent.push(data[10][0].artiHead.slice(0,219))
-                }else if(data[10][0].artiCont.indexOf('\:imgLocation')){
+                    //加入判斷圖片，依據圖片送出不同的template
+                }else if(data[10][0].artiCont.exec('\:imgLocation') != null){
                     pushContent.push('我有圖片')
                 }else{
 
