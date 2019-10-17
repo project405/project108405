@@ -404,7 +404,7 @@ bot.on('message', function(event) {
                 data.map((item, index) => {
                     if (item && index <= 1) {
                         // 負面
-                        console.log('@@@@@@@@@@@@@@@@@',item)
+                        console.log('item[0]@@@@@@@@@@@@@@@@@',item[0])
 
                         // console.log('負面item[0].recomCont',item[0].recomCont)
                         // console.log('負面item[0].artiCont',item[0].artiCont)
