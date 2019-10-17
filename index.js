@@ -91,8 +91,24 @@ app.post('/webhook', function (req, res) {
                 }
             }else{
                 pushContent.push(data[10][0].recomHead)
-                pushContent.push(data[10][0].recomCont)
-                linePush();
+                //Confirm template最大只能放240字元
+                if (data[10][0].recomCont.length >= 130){
+                    pushContent.push(data[10][0].recomCont.slice(0,129)+'...')
+                    //加入判斷圖片，依據圖片送出不同的template
+                    linePush();
+                    if(data[10][0].recomCont.match("\:imgLocation") != null){
+                        pushContent.push('我有圖片')
+                        linePushPhoto();
+                    }
+                }else{
+                    if(data[10][0].recomCont.match("\:imgLocation") != null){
+                        pushContent.push('我有圖片')
+                        linePushPhoto();
+                    }else{
+                        pushContent.push(data[10][0].recomCont)
+                        linePush();
+                    }
+                }
             }
 
             // data[1].forEach((item, index) => {
