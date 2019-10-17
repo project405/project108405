@@ -400,10 +400,13 @@ bot.on('message', function(event) {
             let result = [];
         
             mood.getMood().then(data => { 
-                // console.log('!!!!!!!!!!!!!!',data)
+                console.log('data!!!!!!!!!!!!!!',data)
                 data.map((item, index) => {
                     if (item && index <= 1) {
                         // 負面
+                        console.log('負面item',item)
+                        console.log('負面index',index)
+
                         if (item.recomCont) {
                             negative = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
                         } else {
@@ -412,6 +415,8 @@ bot.on('message', function(event) {
                         result[0] = negative
                     } else {
                         // 正面
+                        console.log('正面item',item)
+                        console.log('正面index',index)
                         if (item.recomCont) {
                             positive = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
                         } else {
