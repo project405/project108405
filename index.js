@@ -71,8 +71,10 @@ app.post('/webhook', function (req, res) {
             var pushContent = []
             
             // console.log('data[10][0]@@@@@@@@@@@@',data[10][0].recomCont)
-            pushContent.push(data[10][0].recomHead)
-            pushContent.push(data[10][0].recomCont)
+            // pushContent.push(data[10][0].recomHead)
+            // pushContent.push(data[10][0].recomCont)
+            pushContent.push(data[10][0].artiHead)
+            pushContent.push(data[10][0].artiCont)
             // console.log('裡面',pushContent)
 
             // console.log('req@@@@@@@@@@@@@@@@@@@@@@@@@',req)  
