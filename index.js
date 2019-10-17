@@ -415,7 +415,7 @@ bot.on('message', function(event) {
                     } else {
                         // 正面
                         
-                        if (item.recomCont) {
+                        if (Object.keys(item[0]).indexOf('recomCont') >= 0) {
                             positive = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
                         } else {
                             positive = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
@@ -423,7 +423,7 @@ bot.on('message', function(event) {
                         result[1] = positive
                         
                     }
-                    console.log('result[1]@@@@@@@@@@@@@',result)
+                    console.log('result@@@@@@@@@@@@@',result)
                 })
             })
 
