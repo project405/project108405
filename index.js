@@ -493,7 +493,7 @@ app.use(express.static('public'));
 
 
 //接收GET請求
-router.get('/', function () {
+app.get('/', function () {
     let negative;
     let positive;
     let result;
