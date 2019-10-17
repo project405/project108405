@@ -411,7 +411,6 @@ bot.on('message', function(event) {
                             negative = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
                         } 
                         result[0] = negative
-                        console.log('result[0]@@@@@@@@@@@@@',result[0])
 
                     } else {
                         // 正面
@@ -422,9 +421,9 @@ bot.on('message', function(event) {
                             positive = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
                         } 
                         result[1] = positive
-                        console.log('result[1]@@@@@@@@@@@@@',result[1])
+                        
                     }
-                    
+                    console.log('result[1]@@@@@@@@@@@@@',result)
                 })
             })
 
