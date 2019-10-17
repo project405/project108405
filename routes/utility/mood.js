@@ -71,7 +71,7 @@ var getMood = async function (r) {
     result[2] = positiverecom;
     result[3] = positivearti;
 
-    console.log(result);
+    // console.log(result);
     return result;
 }
 
