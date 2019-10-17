@@ -246,7 +246,7 @@ var getIndexData = async function (memID) {
     
   
 
-    // console.log("byClassData",byClassData);
+    console.log("byClassData",byClassData);
 
     result[0] = fourRecommend;
     result[1] = hotArticle;
