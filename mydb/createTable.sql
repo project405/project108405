@@ -118,7 +118,6 @@ CREATE TABLE "public"."recommend" (
 	"recomHead" varchar(100) COLLATE "pg_catalog"."default" ,
 	"recomCont" text , 
 	"recomClass" varchar(10),
-	"subNum" int4,
 	"analyzeScore" float4,
 	"positiveWords" int4,
 	"negativeWords" int4
