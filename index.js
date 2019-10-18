@@ -75,16 +75,16 @@ app.post('/webhook', function (req, res) {
                 if (data[10][0].artiCont.match("\:imgLocation") != null){
                     // pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
                     pushContent.push(data[10][0].artiCont); 
-                    if (data[10][0].artiCont.length >= 60){
+                    if (data[10][0].artiCont.length >= 70){
                         pushContent.pop()
-                        pushContent.push(data[10][0].artiCont.slice(0,61)+'...')
+                        pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
                     }
                     linePushPhoto();
                 }else{
                     pushContent.push(data[10][0].artiCont); 
-                    if (data[10][0].artiCont.length >= 60){
+                    if (data[10][0].artiCont.length >= 70){
                         pushContent.pop()
-                        pushContent.push(data[10][0].artiCont.slice(0,61)+'...')
+                        pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
                     }
                     linePush()
                 }
@@ -96,17 +96,17 @@ app.post('/webhook', function (req, res) {
                 //有圖片
                 if (data[10][0].recomCont.match("\:imgLocation") != null){
                     pushContent.push(data[10][0].recomCont); 
-                    if (data[10][0].recomCont.length >= 60){
+                    if (data[10][0].recomCont.length >= 70){
                         pushContent.pop()
-                        pushContent.push(data[10][0].recomCont.slice(0,61)+'...')
+                        pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
                     }
                     linePushPhoto();
                 //沒圖片    
                 }else{
                     pushContent.push(data[10][0].recomCont); 
-                    if (data[10][0].recomCont.length >= 60){
+                    if (data[10][0].recomCont.length >= 70){
                         pushContent.pop()
-                        pushContent.push(data[10][0].recomCont.slice(0,61)+'...')
+                        pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
                     }
                     linePush()
                 }
@@ -198,7 +198,7 @@ app.post('/webhook', function (req, res) {
                                       "actions": [
                                         {
                                           "type": "uri",
-                                          "label": "▶️想看更多",
+                                          "label": "▶️ 想看更多",
                                           "uri": "http://123.com",
                                         //   "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
                                         
