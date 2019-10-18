@@ -55,8 +55,8 @@ var server = app.listen(process.env.PORT || 3000, function() {
     console.log("正在監聽埠號:", port);
 });
 
-
-   
+pushContent = ['汪汪', '抱歉你以為是狗嗎<br><br>還是喵喵啦<br><br><br><br>\\:imgLocation'] 
+linePushPhoto()   
     
 
 app.post('/webhook', function (req, res) {
