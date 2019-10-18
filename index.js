@@ -234,8 +234,8 @@ app.post('/webhook', function (req, res) {
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
-                                        title: "Menu",
-                                        text: `【文藝富心】推薦 🎉\n🔸標題：${pushContent[0]}\n🔹內容：${pushContent[1]}`,
+                                        title: "【文藝富心】推薦 🎉",
+                                        text: `🔸標題：${pushContent[0]}\n🔹內容：${pushContent[1]}`,
                                         defaultAction: {
                                             "type": "uri",
                                             "label": "View detail",
