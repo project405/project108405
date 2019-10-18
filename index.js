@@ -190,8 +190,19 @@ app.post('/webhook', function (req, res) {
                         to: 'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                 {
-                                    "type": "text",
-                                    "text": "Hello, world!"
+                                    "type": "template",
+                                    "altText": "精選電影",
+                                    "template": {
+                                      "type": "buttons",
+                                      "text": d[0][0].recomCont,
+                                      "actions": [
+                                        {
+                                          "type": "uri",
+                                          "label": " 👀 至文藝富心官網觀看",
+                                          "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
+                                        }
+                                      ]
+                                    }
                                 },
                                 {
                                     type: "template",
