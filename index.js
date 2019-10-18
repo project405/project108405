@@ -194,12 +194,14 @@ app.post('/webhook', function (req, res) {
                                     "altText": "精選電影",
                                     "template": {
                                       "type": "buttons",
-                                      "text": d[0][0].recomCont,
+                                      "text": "test",
                                       "actions": [
                                         {
                                           "type": "uri",
                                           "label": " 👀 至文藝富心官網觀看",
-                                          "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
+                                          "uri": "http://123.com",
+                                        //   "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
+                                        
                                         }
                                       ]
                                     }
