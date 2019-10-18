@@ -69,47 +69,87 @@ app.post('/webhook', function (req, res) {
         });
         byClassData.getIndexData().then(data =>{
             var pushContent = []
-            if (data[10][0].recomHead == undefined){
+            //data為文章
+            if(data[10][0].recomHead == undefined){
                 pushContent.push(data[10][0].artiHead)
-                //Confirm template最大只能放240字元
-                if (data[10][0].artiCont.length >= 130){
-                    pushContent.push(data[10][0].artiCont.slice(0,129)+'...')
-                    //加入判斷圖片，依據圖片送出不同的template
-                    linePush();
-                    if(data[10][0].artiCont.match("\:imgLocation") != null){
-                        pushContent.push('我有圖片')
-                        linePushPhoto();
-                    }
+                //有圖片
+                if (data[10][0].artiCont.match("\:imgLocation") != null){
+                    pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
+                    // console.log(pushContent)
+                    // if (data[10][0].artiCont.length >= 130){
+                    //     pushContent.push(data[10][0].artiCont.slice(0,129)+'...')
+                    // }
                 }else{
-                    if(data[10][0].artiCont.match("\:imgLocation") != null){
-                        pushContent.push('我有圖片')
-                        linePushPhoto();
-                    }else{
-                        pushContent.push(data[10][0].artiCont)
-                        linePush();
-                    }
+
+
                 }
+
+
+            //data為推薦
             }else{
                 pushContent.push(data[10][0].recomHead)
-                //Confirm template最大只能放240字元
-                if (data[10][0].recomCont.length >= 130){
-                    pushContent.push(data[10][0].recomCont.slice(0,129)+'...')
-                    //加入判斷圖片，依據圖片送出不同的template
-                    linePush();
-                    if(data[10][0].recomCont.match("\:imgLocation") != null){
-                        pushContent.push('我有圖片')
-                        linePushPhoto();
-                    }
+                //有圖片
+                if (data[10][0].recomCont.match("\:imgLocation") != null){
+                    pushContent.push(data[10][0].recomCont.replace(/\:imgLocation/ig, "img")); 
+                    // console.log(pushContent)
+                    // if (data[10][0].artiCont.length >= 130){
+                    //     pushContent.push(data[10][0].artiCont.slice(0,129)+'...')
+                    // }
                 }else{
-                    if(data[10][0].recomCont.match("\:imgLocation") != null){
-                        pushContent.push('我有圖片')
-                        linePushPhoto();
-                    }else{
-                        pushContent.push(data[10][0].recomCont)
-                        linePush();
-                    }
+
+
                 }
+
+
+
             }
+
+            console.log(pushContent)
+
+            // ////--------------------判斷文章
+            // if (data[10][0].recomHead == undefined){
+            //     pushContent.push(data[10][0].artiHead)
+            //     //Confirm template字元限制
+            //     if(data[10][0].artiCont.match("\:imgLocation") != null){
+            //         pushContent.push('我有圖片')
+            //         linePushPhoto();
+            //     }
+            //     if (data[10][0].artiCont.length >= 130){
+            //         pushContent.push(data[10][0].artiCont.slice(0,129)+'...')
+            //         //加入判斷圖片，依據圖片送出不同的template
+            //         linePush();
+                    
+            //     }else{
+            //         if(data[10][0].artiCont.match("\:imgLocation") != null){
+            //             pushContent.push('我有圖片')
+            //             linePushPhoto();
+            //         }else{
+            //             pushContent.push(data[10][0].artiCont)
+            //             linePush();
+            //         }
+            //     }
+            // ////--------------------判斷推薦
+            // }else{
+            //     pushContent.push(data[10][0].recomHead)
+            //     //Confirm template字元限制
+            //     if (data[10][0].recomCont.length >= 130){
+            //         pushContent.push(data[10][0].recomCont.slice(0,129)+'...')
+            //         //加入判斷圖片，依據圖片送出不同的template
+            //         linePush();
+            //         if(data[10][0].recomCont.match("\:imgLocation") != null){
+            //             pushContent.push('我有圖片')
+            //             linePushPhoto();
+            //         }
+            //     }else{
+            //         if(data[10][0].recomCont.match("\:imgLocation") != null){
+            //             pushContent.push('我有圖片')
+            //             linePushPhoto();
+            //         }else{
+            //             pushContent.push(data[10][0].recomCont)
+            //             linePush();
+            //         }
+            //     }
+            // }
 
             // data[1].forEach((item, index) => {
             //     while (item.artiMessCont.match("\\:imgLocation")) {
