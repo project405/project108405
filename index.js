@@ -102,13 +102,11 @@ app.post('/webhook', function (req, res) {
 
                 }
 
-
-
             }
             // linePush();
             linePushPhoto();
 
-            console.log(pushContent)
+            console.log('pushContent@@@@@@@',pushContent)
 
             // ////--------------------判斷文章
             // if (data[10][0].recomHead == undefined){
@@ -162,7 +160,6 @@ app.post('/webhook', function (req, res) {
             // })
             
 
-            // console.log('req@@@@@@@@@@@@@@@@@@@@@@@@@',req)  
             //文章、推薦內容無圖片的推播樣式
             function linePush (){
                 request.post({
@@ -246,14 +243,14 @@ app.post('/webhook', function (req, res) {
                                         },
                                         actions: [
                                             {
-                                            "type": "message",
-                                            "label": "我喜歡",
-                                            "text": "我敲擊喜歡的唷"
+                                                "type": "message",
+                                                "label": "我喜歡",
+                                                "text": "我敲擊喜歡的唷"
                                             },
                                             {
-                                            "type": "message",
-                                            "label": "我不喜歡",
-                                            "text": "我敲擊討厭的唷"
+                                                "type": "message",
+                                                "label": "我不喜歡",
+                                                "text": "我敲擊討厭的唷"
                                             }
                                         ]
                                     }
