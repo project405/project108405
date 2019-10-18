@@ -190,6 +190,10 @@ app.post('/webhook', function (req, res) {
                         to: 'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                 {
+                                    "type": "text",
+                                    "text": "Hello, world!"
+                                },
+                                {
                                     type: "template",
                                     altText: "相信你會喜歡😎",
                                     template: {
@@ -237,7 +241,6 @@ app.post('/webhook', function (req, res) {
                         to: 'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                 {
-                                    "id": "325708",
                                     "type": "text",
                                     "text": "Hello, world!"
                                 },
