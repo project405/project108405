@@ -105,7 +105,7 @@ app.post('/webhook', function (req, res) {
 
 
             }
-            linePush();
+            // linePush();
             linePushPhotos();
 
             console.log(pushContent)
