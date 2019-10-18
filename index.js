@@ -263,7 +263,7 @@ app.post('/webhook', function (req, res) {
                                         {
                                           "type": "uri",
                                           "label": "▶️ 想看更多",
-                                          "uri": "http://123.com",
+                                          "uri": "http://123.com"
                                         //   "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
                                         
                                         }
