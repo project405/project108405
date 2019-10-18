@@ -90,11 +90,14 @@ app.post('/webhook', function (req, res) {
                 pushContent.push(data[10][0].recomHead)
                 //有圖片
                 if (data[10][0].recomCont.match("\:imgLocation") != null){
-                    pushContent.push(data[10][0].recomCont.replace(/\:imgLocation/ig, "img")); 
+                    // pushContent.push(data[10][0].recomCont.replace(/\:imgLocation/ig, "img")); 
                     // console.log(pushContent)
+                        //字超過的話要刪減  
                     // if (data[10][0].artiCont.length >= 130){
                     //     pushContent.push(data[10][0].artiCont.slice(0,129)+'...')
                     // }
+                    pushContent.push(data[10][0].recomCont); 
+
                 }else{
                     pushContent.push(data[10][0].recomCont); 
 
@@ -106,7 +109,7 @@ app.post('/webhook', function (req, res) {
             linePushPhoto();
 
             console.log('pushContent@@@@@@@',pushContent)
-            console.log('pushContent.length@@@@@@@',pushContent.length)
+            console.log('pushContent.length@@@@@@@',pushContent[1].length)
 
             // ////--------------------判斷文章
             // if (data[10][0].recomHead == undefined){
