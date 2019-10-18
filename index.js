@@ -106,6 +106,7 @@ app.post('/webhook', function (req, res) {
 
             }
             linePush();
+            linePushPhotos();
 
             console.log(pushContent)
 
@@ -160,9 +161,6 @@ app.post('/webhook', function (req, res) {
             //     }
             // })
             
-            console.log('pushContent',pushContent)
-            console.log('pushContent',pushContent[1])
-            console.log('pushContent',pushContent[1].length)
 
             // console.log('req@@@@@@@@@@@@@@@@@@@@@@@@@',req)  
             function linePush (){
@@ -187,7 +185,7 @@ app.post('/webhook', function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "confirm",
-                                        text: `【文藝富心】推薦 🎉\n〖標題〗：${pushContent[0]}\n〖內容〗：${pushContent[1]}`,
+                                        text: `【文藝富心】推薦 🎉\n🔸標題：${pushContent[0]}\n🔹內容：${pushContent[1]}`,
                                         actions: [
                                             {
                                                 "type": "message",
@@ -237,31 +235,26 @@ app.post('/webhook', function (req, res) {
                                         "imageSize": "cover",
                                         "imageBackgroundColor": "#FFFFFF",
                                         "title": "Menu",
-                                        "text": "Please select",
+                                        "text": `【文藝富心】推薦 🎉\n🔸標題：${pushContent[0]}\n🔹內容：${pushContent[1]}`,
                                         "defaultAction": {
                                             "type": "uri",
                                             "label": "View detail",
                                             "uri": "http://example.com/page/123"
                                         },
-                                        "actions": [
-                                            {
-                                              "type": "postback",
-                                              "label": "Buy",
-                                              "data": "action=buy&itemid=123"
-                                            },
-                                            {
-                                              "type": "postback",
-                                              "label": "Add to cart",
-                                              "data": "action=add&itemid=123"
-                                            },
-                                            {
-                                              "type": "uri",
-                                              "label": "View detail",
-                                              "uri": "http://example.com/page/123"
-                                            }
-                                        ]
+                                    "actions": [
+                                                {
+                                                "type": "message",
+                                                "label": "我喜歡",
+                                                "text": "我敲擊喜歡的唷"
+                                                },
+                                                {
+                                                "type": "message",
+                                                "label": "我不喜歡",
+                                                "text": "我敲擊討厭的唷"
+                                                }
+                                            ]
                                     }
-                                  }            
+                                }           
                             ]
                         })
                 }, function(error, response, body){
