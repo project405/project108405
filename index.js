@@ -82,7 +82,7 @@ app.post('/webhook', function (req, res) {
                     // pushContent.push(data[10][0].recomCont); 
                     linePushPhoto();
                 }else{
-                    pushContent.push(data[10][0].recomCont); 
+                    pushContent.push(data[10][0].artiCont); 
                     if (data[10][0].artiCont.length >= 60){
                         pushContent.push(data[10][0].artiCont.slice(0,61)+'...')
                         linePush()
