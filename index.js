@@ -194,11 +194,11 @@ app.post('/webhook', function (req, res) {
                                     "altText": "精選電影",
                                     "template": {
                                       "type": "buttons",
-                                      "text": "test",
+                                      "text": "【文藝富心】小驚喜 🎉\n對於以下推薦有興趣可至文藝富心官網看更多\n立即點選「喜歡」或「不喜歡」讓我們更了解你💞",
                                       "actions": [
                                         {
                                           "type": "uri",
-                                          "label": " 👀 至文藝富心官網觀看",
+                                          "label": "▶️想看更多",
                                           "uri": "http://123.com",
                                         //   "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
                                         
@@ -211,7 +211,7 @@ app.post('/webhook', function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "confirm",
-                                        text: `【文藝富心】推薦 🎉\n🔸標題：${pushContent[0]}\n🔹內容：${pushContent[1]}`,
+                                        text: `🔸標題：${pushContent[0]}\n🔹內容：${pushContent[1]}`,
                                         actions: [
                                             {
                                                 "type": "message",
