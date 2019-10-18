@@ -116,7 +116,8 @@ app.post('/webhook', function (req, res) {
             linePushPhoto();
 
             console.log('pushContent@@@@@@@',pushContent)
-            console.log('pushContent.length@@@@@@@',pushContent[1].length)
+            console.log('pushContent.length[1]@@@@@@@',pushContent[1].length)
+            console.log('pushContent.length@@@@@@@',pushContent.length)
 
             // ////--------------------判斷文章
             // if (data[10][0].recomHead == undefined){
