@@ -73,13 +73,21 @@ app.post('/webhook', function (req, res) {
                 pushContent.push(data[10][0].artiHead)
                 //有圖片
                 if (data[10][0].artiCont.match("\:imgLocation") != null){
-                    pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
-                    // console.log(pushContent)
-                    // if (data[10][0].artiCont.length >= 130){
-                    //     pushContent.push(data[10][0].artiCont.slice(0,129)+'...')
-                    // }
+                    // pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
+                   
+                    if (data[10][0].artiCont.length >= 60){
+                        pushContent.push(data[10][0].artiCont.slice(0,61)+'...')
+                        linePushPhoto();
+                    }
+                    // pushContent.push(data[10][0].recomCont); 
+                    linePushPhoto();
                 }else{
-                    pushContent.push(data[10][0].artiCont); 
+                    pushContent.push(data[10][0].recomCont); 
+                    if (data[10][0].artiCont.length >= 60){
+                        pushContent.push(data[10][0].artiCont.slice(0,61)+'...')
+                        linePush()
+                    }
+                    linePush()
 
 
                 }
@@ -93,15 +101,20 @@ app.post('/webhook', function (req, res) {
                     // pushContent.push(data[10][0].recomCont.replace(/\:imgLocation/ig, "img")); 
                     // console.log(pushContent)
                         //字超過的話要刪減  
-                    // if (data[10][0].artiCont.length >= 130){
-                    //     pushContent.push(data[10][0].artiCont.slice(0,129)+'...')
-                    // }
-                    pushContent.push(data[10][0].recomCont); 
-
+                    if (data[10][0].recomCont.length >= 60){
+                        pushContent.push(data[10][0].recomCont.slice(0,61)+'...')
+                        linePushPhoto();
+                    }
+                    // pushContent.push(data[10][0].recomCont); 
+                    linePushPhoto();
+                //沒圖片    
                 }else{
                     pushContent.push(data[10][0].recomCont); 
-
-
+                    if (data[10][0].recomCont.length >= 60){
+                        pushContent.push(data[10][0].recomCont.slice(0,61)+'...')
+                        linePush()
+                    }
+                    linePush()
                 }
 
             }
