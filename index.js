@@ -254,15 +254,28 @@ app.post('/webhook', function (req, res) {
                         to: 'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                 {
-                                    "type": "text",
-                                    "text": "Hello, world!"
+                                    "type": "template",
+                                    "altText": "精選電影",
+                                    "template": {
+                                      "type": "buttons",
+                                      "text": "【文藝富心】小驚喜 🎉\n對於以下推薦有興趣可至文藝富心官網看更多\n立即點選「喜歡」或「不喜歡」讓我們更了解你💞",
+                                      "actions": [
+                                        {
+                                          "type": "uri",
+                                          "label": "▶️ 想看更多",
+                                          "uri": "http://123.com",
+                                        //   "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
+                                        
+                                        }
+                                      ]
+                                    }
                                 },
                                 {
                                     type: "template",
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "buttons",
-                                        thumbnailImageUrl: "https://example.com/bot/images/image.jpg",
+                                        thumbnailImageUrl: "https://imgur.com/gallery/zhahbA1",
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
