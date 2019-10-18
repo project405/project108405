@@ -74,22 +74,19 @@ app.post('/webhook', function (req, res) {
                 //有圖片
                 if (data[10][0].artiCont.match("\:imgLocation") != null){
                     // pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
-                   
+                    pushContent.push(data[10][0].artiCont); 
                     if (data[10][0].artiCont.length >= 60){
+                        pushContent.pop()
                         pushContent.push(data[10][0].artiCont.slice(0,61)+'...')
-                        linePushPhoto();
                     }
-                    // pushContent.push(data[10][0].recomCont); 
                     linePushPhoto();
                 }else{
                     pushContent.push(data[10][0].artiCont); 
                     if (data[10][0].artiCont.length >= 60){
+                        pushContent.pop()
                         pushContent.push(data[10][0].artiCont.slice(0,61)+'...')
-                        linePush()
                     }
                     linePush()
-
-
                 }
 
 
@@ -98,21 +95,18 @@ app.post('/webhook', function (req, res) {
                 pushContent.push(data[10][0].recomHead)
                 //有圖片
                 if (data[10][0].recomCont.match("\:imgLocation") != null){
-                    // pushContent.push(data[10][0].recomCont.replace(/\:imgLocation/ig, "img")); 
-                    // console.log(pushContent)
-                        //字超過的話要刪減  
+                    pushContent.push(data[10][0].recomCont); 
                     if (data[10][0].recomCont.length >= 60){
+                        pushContent.pop()
                         pushContent.push(data[10][0].recomCont.slice(0,61)+'...')
-                        linePushPhoto();
                     }
-                    // pushContent.push(data[10][0].recomCont); 
                     linePushPhoto();
                 //沒圖片    
                 }else{
                     pushContent.push(data[10][0].recomCont); 
                     if (data[10][0].recomCont.length >= 60){
+                        pushContent.pop()
                         pushContent.push(data[10][0].recomCont.slice(0,61)+'...')
-                        linePush()
                     }
                     linePush()
                 }
