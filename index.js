@@ -80,6 +80,7 @@ app.post('/webhook', function (req, res) {
                     //     pushContent.push(data[10][0].artiCont.slice(0,129)+'...')
                     // }
                 }else{
+                    pushContent.push(data[10][0].artiCont); 
 
 
                 }
@@ -96,6 +97,7 @@ app.post('/webhook', function (req, res) {
                     //     pushContent.push(data[10][0].artiCont.slice(0,129)+'...')
                     // }
                 }else{
+                    pushContent.push(data[10][0].recomCont); 
 
 
                 }
@@ -103,6 +105,7 @@ app.post('/webhook', function (req, res) {
 
 
             }
+            linePush();
 
             console.log(pushContent)
 
