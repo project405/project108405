@@ -163,6 +163,7 @@ app.post('/webhook', function (req, res) {
             
 
             // console.log('req@@@@@@@@@@@@@@@@@@@@@@@@@',req)  
+            //文章、推薦內容無圖片的推播樣式
             function linePush (){
                 request.post({
                     headers: {
@@ -209,7 +210,7 @@ app.post('/webhook', function (req, res) {
                 
                 });
             }
-
+            //文章、推薦內容有圖片的推播樣式 
             function linePushPhoto(){
                 request.post({
                     headers: {
@@ -228,33 +229,33 @@ app.post('/webhook', function (req, res) {
                         to: 'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                 {
-                                    "type": "template",
-                                    "altText": "相信你會喜歡😎",
-                                    "template": {
-                                        "type": "buttons",
-                                        "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
-                                        "imageAspectRatio": "rectangle",
-                                        "imageSize": "cover",
-                                        "imageBackgroundColor": "#FFFFFF",
-                                        "title": "Menu",
-                                        "text": `【文藝富心】推薦 🎉\n🔸標題：${pushContent[0]}\n🔹內容：${pushContent[1]}`,
-                                        "defaultAction": {
+                                    type: "template",
+                                    altText: "相信你會喜歡😎",
+                                    template: {
+                                        type: "buttons",
+                                        thumbnailImageUrl: "https://example.com/bot/images/image.jpg",
+                                        imageAspectRatio: "rectangle",
+                                        imageSize: "cover",
+                                        imageBackgroundColor: "#FFFFFF",
+                                        title: "Menu",
+                                        text: `【文藝富心】推薦 🎉\n🔸標題：${pushContent[0]}\n🔹內容：${pushContent[1]}`,
+                                        defaultAction: {
                                             "type": "uri",
                                             "label": "View detail",
                                             "uri": "http://example.com/page/123"
                                         },
-                                    "actions": [
-                                                {
-                                                "type": "message",
-                                                "label": "我喜歡",
-                                                "text": "我敲擊喜歡的唷"
-                                                },
-                                                {
-                                                "type": "message",
-                                                "label": "我不喜歡",
-                                                "text": "我敲擊討厭的唷"
-                                                }
-                                            ]
+                                        actions: [
+                                            {
+                                            "type": "message",
+                                            "label": "我喜歡",
+                                            "text": "我敲擊喜歡的唷"
+                                            },
+                                            {
+                                            "type": "message",
+                                            "label": "我不喜歡",
+                                            "text": "我敲擊討厭的唷"
+                                            }
+                                        ]
                                     }
                                 }           
                             ]
