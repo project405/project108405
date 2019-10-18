@@ -106,7 +106,7 @@ app.post('/webhook', function (req, res) {
 
             }
             // linePush();
-            linePushPhotos();
+            linePushPhoto();
 
             console.log(pushContent)
 
@@ -210,7 +210,7 @@ app.post('/webhook', function (req, res) {
                 });
             }
 
-            function linePushPhoto (){
+            function linePushPhoto(){
                 request.post({
                     headers: {
                         'content-type' : 'application/json',
@@ -220,14 +220,16 @@ app.post('/webhook', function (req, res) {
                         // ----------正式line
                         // 'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
                     },
-                    url: 'https://api.line.me/v2/bot/message/multicast',
+                    // url: 'https://api.line.me/v2/bot/message/multicast',
+                    url: 'https://api.line.me/v2/bot/message/push',
                     body: JSON.stringify({
                         //to給資料庫有的使用者
-                        to: allUser,
+                        // to: allUser,
+                        to: 'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                 {
                                     "type": "template",
-                                    "altText": "This is a buttons template",
+                                    "altText": "相信你會喜歡😎",
                                     "template": {
                                         "type": "buttons",
                                         "thumbnailImageUrl": "https://example.com/bot/images/image.jpg",
