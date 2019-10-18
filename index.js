@@ -54,8 +54,7 @@ var server = app.listen(process.env.PORT || 3000, function() {
     const port = server.address().port;
     console.log("正在監聽埠號:", port);
 });
-var test = '敘述瑞貝爾威爾森和安海瑟薇是一對擦出精彩火花的女騙徒，她們在位於南法的一座濱海小鎮展開一場騙術大比拼。喬瑟芬柴斯特菲德（安海瑟薇 飾）是一個穿著光鮮亮麗、蠱惑誘人、善於算計、刁滑奸詐的英國正妹，她在濱海博蒙這座位於南法蔚藍海岸的小鎮擁有一棟豪宅，專門詐騙來自世界各地的有錢凱'
-console.log(test.length)
+
 
    
     
@@ -107,6 +106,7 @@ app.post('/webhook', function (req, res) {
             linePushPhoto();
 
             console.log('pushContent@@@@@@@',pushContent)
+            console.log('pushContent.length@@@@@@@',pushContent.length)
 
             // ////--------------------判斷文章
             // if (data[10][0].recomHead == undefined){
