@@ -38,7 +38,7 @@ bot.on('postback', function(event) {
             
             const userName = profile.displayName;
             const userId = profile.userId;
-            const data = event.postback.data;
+            const data = bodyParser.json(event.postback.data);
             console.log("postback 資料",data)
             //------------------------------------------------
             //----------------未綁定Line_id用戶-----------------
@@ -80,11 +80,6 @@ var server = app.listen(process.env.PORT || 3000, function() {
     const port = server.address().port;
     console.log("正在監聽埠號:", port);
 });
-
-
-
- 
-    
 
 app.post('/webhook',  function (req, res) {
     let allUser = [];
