@@ -353,6 +353,9 @@
                  data: { "artiNum" : "<%= items[0][0].artiNum %>" , "reportReason" : $("#reportReason").val()},
                  success: function (res) {
                      alert(res);
+                     if(res == "舉報成功"){
+                        $("#reportReason").val("");
+                     }
                  },
                  error: function (res) {
                      console.log("失敗", res);
@@ -369,7 +372,9 @@
                 data: { "artiMessNum" : a , "reportReason" : $("#messReportReason").val()},
                 success: function (res) {
                     alert(res);
-                    location.reload();
+                    if(res == "舉報成功"){
+                        $("#messReportReason").val("");
+                    }
                 },
                 error: function (res) {
                     console.log("失敗", res);

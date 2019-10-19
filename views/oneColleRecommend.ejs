@@ -294,7 +294,9 @@
                     data: { "recomMessNum" : a , "reportReason" : $("#messReportReason").val()},
                     success: function (res) {
                         alert(res);
-                        location.reload();
+                        if(res == "舉報成功"){
+                            $("#messReportReason").val("");
+                        }
                     },
                     error: function (res) {
                         console.log(res);

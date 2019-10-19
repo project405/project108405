@@ -30,6 +30,14 @@ router.post('/', function (req, res, next) {
     //檢舉內容
     reportData["reportReason"] = req.body.reportReason;
 
+    if(req.body.reportReason == "" || req.body.reportReason.trim() == ""){
+        if(req.body.artiNum != undefined || req.body.artiMessNum != undefined || req.body.recomMessNum != undefined){
+            res.send("內容不可為空！");
+        }else{
+            res.send('<head><meta charset="utf-8"/> </head> <script> alert("內容不可為空！");  window.history.back();</script>');
+        }
+      
+    }
     member.report(memID, reportData.artiNum, reportData.artiMessNum, reportData.recomMessNum, reportData.reportReason)
         .then(data => {
             if (data == 1) {
@@ -37,7 +45,7 @@ router.post('/', function (req, res, next) {
                     res.send("舉報成功");
                 }else{
                     // res.write('<head><meta charset="utf-8"/></head>');
-                    res.send('<head><meta charset="utf-8"/> </head> <script> alert("舉報成功！");  window.history.back();</script>');
+                    res.send('<head><meta charset="utf-8"/> </head> <script> alert("舉報成功!");  window.history.back();</script>');
                 }
             } else {
                 res.render('error');
