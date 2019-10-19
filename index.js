@@ -61,6 +61,16 @@ bot.on('postback', function() {
             // };
     });    
 });
+
+bot.on('message', function(event) {
+    //使用者傳來的文字
+    const text = event.message.text;
+    
+   console.log(text)
+    
+   
+    
+});
 //----------------------------------------
 // 建立一個網站應用程式app
 // 如果連接根目錄, 交給機器人處理
@@ -182,15 +192,14 @@ app.post('/webhook',  function (req, res) {
                                         text: `🔸標題：${pushContent[0]}\n🔹內容：${pushContent[1]}`,
                                         actions: [
                                             {
-                                                "type": "postback",
-                                                "label": "喜歡",
-                                                // "data": "like"
-                                                "data": "like"
+                                                "type": "message",
+                                                "label": "我喜歡",
+                                                "text": "我喜歡"
                                             },
                                             {
-                                                "type": "postback",
-                                                "label": "不喜歡",
-                                                "data": "dislike"
+                                                "type": "message",
+                                                "label": "我不喜歡",
+                                                "text": "我不喜歡"
                                             }
                                         ]
                                     }
@@ -256,16 +265,14 @@ app.post('/webhook',  function (req, res) {
                                         },
                                         actions: [
                                             {
-                                                "type": "postback",
-                                                "label": "喜歡",
-                                                // "data": "like"
-                                                "data": JSON.stringify({"data":"like"})
-
+                                                "type": "message",
+                                                "label": "我喜歡",
+                                                "text": "我喜歡"
                                             },
                                             {
-                                                "type": "postback",
-                                                "label": "不喜歡",
-                                                "data": "dislike"
+                                                "type": "message",
+                                                "label": "我不喜歡",
+                                                "text": "我不喜歡"
                                             }
                                         ]
                                     }
