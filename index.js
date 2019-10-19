@@ -112,8 +112,8 @@ app.post('/webhook', function (req, res) {
 
             // }
             pushContent = ['汪汪', '抱歉你以為是狗嗎<br><br>還是喵喵啦<br><br><br><br>\\:imgLocation'] 
-            // linePushPhoto()  
-            linePush()  
+            linePushPhoto()  
+            // linePush()  
 
             console.log('pushContent@@@@@@@',pushContent)
             console.log('pushContent.length[1]@@@@@@@',pushContent[1].length)
