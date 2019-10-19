@@ -1,7 +1,7 @@
 //----------------------------------------
 // 載入必要的模組
 //----------------------------------------
-
+var jsonParser = bodyParser.json();
 var linebot = require('linebot');
 var express = require('express');
 const request = require('request');
@@ -87,7 +87,7 @@ var server = app.listen(process.env.PORT || 3000, function() {
  
     
 
-app.post('/webhook', function (req, res) {
+app.post('/webhook', jsonParser, function (req, res) {
     let allUser = [];
     member.AllMember().then(data => {  
         data.forEach(item => {
@@ -189,7 +189,7 @@ app.post('/webhook', function (req, res) {
                                             {
                                                 "type": "postback",
                                                 "label": "喜歡",
-                                                "data": res.write(JSON.stringify("like"))
+                                                "data": "like"
                                             },
                                             {
                                                 "type": "postback",
