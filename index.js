@@ -1,8 +1,7 @@
 //----------------------------------------
 // 載入必要的模組
 //----------------------------------------
-var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
+const bodyParser = require('body-parser');
 var linebot = require('linebot');
 var express = require('express');
 const request = require('request');
@@ -12,7 +11,6 @@ var cors = require('cors')
 //     origin: 'http://localhost:3000/',
 //     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 // }
-const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
