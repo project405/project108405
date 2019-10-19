@@ -55,8 +55,7 @@ var server = app.listen(process.env.PORT || 3000, function() {
     console.log("正在監聽埠號:", port);
 });
 
-pushContent = ['汪汪', '抱歉你以為是狗嗎<br><br>還是喵喵啦<br><br><br><br>\\:imgLocation'] 
-linePushPhoto()   
+ 
     
 
 app.post('/webhook', function (req, res) {
@@ -69,51 +68,51 @@ app.post('/webhook', function (req, res) {
         byClassData.getIndexData().then(data =>{
             var pushContent = []
             //data為文章
-            if(data[10][0].recomHead == undefined){
-                pushContent.push(data[10][0].artiHead)
-                //有圖片
-                if (data[10][0].artiCont.match("\:imgLocation") != null){
-                    // pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
-                    pushContent.push(data[10][0].artiCont); 
-                    if (data[10][0].artiCont.length >= 70){
-                        pushContent.pop()
-                        pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
-                    }
-                    linePushPhoto();
-                }else{
-                    pushContent.push(data[10][0].artiCont); 
-                    if (data[10][0].artiCont.length >= 70){
-                        pushContent.pop()
-                        pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
-                    }
-                    linePush()
-                }
+            // if(data[10][0].recomHead == undefined){
+            //     pushContent.push(data[10][0].artiHead)
+            //     //有圖片
+            //     if (data[10][0].artiCont.match("\:imgLocation") != null){
+            //         // pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
+            //         pushContent.push(data[10][0].artiCont); 
+            //         if (data[10][0].artiCont.length >= 70){
+            //             pushContent.pop()
+            //             pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
+            //         }
+            //         linePushPhoto();
+            //     }else{
+            //         pushContent.push(data[10][0].artiCont); 
+            //         if (data[10][0].artiCont.length >= 70){
+            //             pushContent.pop()
+            //             pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
+            //         }
+            //         linePush()
+            //     }
 
 
-            //data為推薦
-            }else{
-                pushContent.push(data[10][0].recomHead)
-                //有圖片
-                if (data[10][0].recomCont.match("\:imgLocation") != null){
-                    pushContent.push(data[10][0].recomCont); 
-                    if (data[10][0].recomCont.length >= 70){
-                        pushContent.pop()
-                        pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
-                    }
-                    linePushPhoto();
-                //沒圖片    
-                }else{
-                    pushContent.push(data[10][0].recomCont); 
-                    if (data[10][0].recomCont.length >= 70){
-                        pushContent.pop()
-                        pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
-                    }
-                    linePush()
-                }
+            // //data為推薦
+            // }else{
+            //     pushContent.push(data[10][0].recomHead)
+            //     //有圖片
+            //     if (data[10][0].recomCont.match("\:imgLocation") != null){
+            //         pushContent.push(data[10][0].recomCont); 
+            //         if (data[10][0].recomCont.length >= 70){
+            //             pushContent.pop()
+            //             pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
+            //         }
+            //         linePushPhoto();
+            //     //沒圖片    
+            //     }else{
+            //         pushContent.push(data[10][0].recomCont); 
+            //         if (data[10][0].recomCont.length >= 70){
+            //             pushContent.pop()
+            //             pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
+            //         }
+            //         linePush()
+            //     }
 
-            }
-            // linePush();
-            linePushPhoto();
+            // }
+            pushContent = ['汪汪', '抱歉你以為是狗嗎<br><br>還是喵喵啦<br><br><br><br>\\:imgLocation'] 
+            linePushPhoto()  
 
             console.log('pushContent@@@@@@@',pushContent)
             console.log('pushContent.length[1]@@@@@@@',pushContent[1].length)
