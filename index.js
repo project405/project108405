@@ -32,13 +32,14 @@ var bot = linebot({
     channelAccessToken: 'QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
 });
 
-bot.on('postback', function(event) { 
-    event.source.profile().then(
+bot.on('postback', function() { 
+    source.profile().then(
         function (profile) {
             
             const userName = profile.displayName;
             const userId = profile.userId;
-            const data = event.postback.data;
+            const data = postback.data;
+            JSON.stringify(data)
             console.log("postback 資料",data)
             //------------------------------------------------
             //----------------未綁定Line_id用戶-----------------
@@ -184,7 +185,7 @@ app.post('/webhook',  function (req, res) {
                                                 "type": "postback",
                                                 "label": "喜歡",
                                                 // "data": "like"
-                                                "data": JSON.stringify({"data":"like"})
+                                                "data": "like"
                                             },
                                             {
                                                 "type": "postback",
