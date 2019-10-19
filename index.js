@@ -236,6 +236,7 @@ app.post('/webhook', function (req, res) {
             }
             //文章、推薦內容有圖片的推播樣式 
             function linePushPhoto(){
+                console.log('我有進來囉')
                 request.post({
                     headers: {
                         'content-type' : 'application/json',
