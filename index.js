@@ -1,6 +1,7 @@
 //----------------------------------------
 // 載入必要的模組
 //----------------------------------------
+var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 var linebot = require('linebot');
 var express = require('express');
