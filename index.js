@@ -38,7 +38,7 @@ bot.on('postback', function(event) {
             
             const userName = profile.displayName;
             const userId = profile.userId;
-            const data = JSON.stringify(event.postback.data);
+            const data = event.postback.data;
             console.log("postback 資料",data)
             //------------------------------------------------
             //----------------未綁定Line_id用戶-----------------
@@ -183,7 +183,8 @@ app.post('/webhook',  function (req, res) {
                                             {
                                                 "type": "postback",
                                                 "label": "喜歡",
-                                                "data": "like"
+                                                // "data": "like"
+                                                "data": JSON.stringify("like")
                                             },
                                             {
                                                 "type": "postback",
@@ -256,7 +257,9 @@ app.post('/webhook',  function (req, res) {
                                             {
                                                 "type": "postback",
                                                 "label": "喜歡",
-                                                "data": "like"
+                                                // "data": "like"
+                                                "data": JSON.stringify("like")
+
                                             },
                                             {
                                                 "type": "postback",
