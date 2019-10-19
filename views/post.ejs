@@ -120,32 +120,60 @@
                 $('#file-selector').val('')
             }
         });
-        function submitPost() {
-            var artiHead = document.getElementById("artiHead").value;
-            if (artiHead == '') {
-                alert('請輸入標題')
-                return;
-            } else if (document.querySelectorAll("div.postInput") == '') {
-                alert('請輸入內文')
-                return;
-            }
-            $('.postButton').addClass('disabled')
-            $('.postButton').attr('disabled', true)
-            $('.spinner-border').css('display', 'block')
+        async function processImg() {
+            var apiUrl = 'https://api.imgur.com/3/image';
+            var apiKey = '8b8755d8a1c4ace';
             var imgKey = []
+            var imgur = []
             if ($("#postInput").find("#postInput > img")) {
                 Array.from($("#postInput").find("#postInput > img")).map((img) => {
                     imgKey.push(img.getAttribute('key'))
                 })
-                imgs.map((img) => {
+                await imgs.map( async(img) => {
+                    console.log(img)
                     if (imgKey.indexOf(img.timeStamp) >= 0) {
                         formData.append('userImg', img);
+                        await $.ajax({
+                            "async": true,
+                            "crossDomain": true,
+                            "url": apiUrl,
+                            "method": "POST",
+                            "datatype": "json",
+                            "headers": {
+                                "Authorization": "Client-ID " + apiKey
+                            },
+                            "processData": false,
+                            "contentType": false,
+                            "data": img,
+                            success: function (res) {
+                                console.log(res.data.link)
+                                imgur.push(res.data.link)
+                                formData.append('toImgur', res.data.link);
+                            },
+                            error: function (e) {
+                                console.log(e)
+                                alert("圖片上傳失敗");
+                            }
+                        }).done(function (res) {
+                            console.log("Done");
+                        });
                     }
                 })
+
                 Array.from($("#postInput").find("#postInput > img")).forEach((img) => {
                     $(img).before("\\:imgLocation")
                 })
             }
+            // var secondCheck = setInterval(() => {
+            //     console.log(imgur.length, $("#postInput").find("#postInput > img").length)
+            //     // if (imgur.length, $("#postInput").find("#postInput > img").length) {
+            //     //     processWords()
+            //     //     clearInterval(secondCheck)
+            //     // }
+            // }, 1000)
+        }
+        async function processWords() {
+            var artiHead = document.getElementById("artiHead").value;
             var artiCont = [];
             var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
             // 取得內容
@@ -167,7 +195,7 @@
                 tag.push(element.innerText);
             }, this);
             formData.append('tag', tag);
-            $.ajax({
+            await $.ajax({
                 url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                 type: 'POST',
                 dataType: 'TEXT',
@@ -206,6 +234,26 @@
                     console.error(res)
                 }
             });
+        } 
+        async function submitPost() {
+            var artiHead = document.getElementById("artiHead").value;
+            if (artiHead == '') {
+                alert('請輸入標題')
+                return;
+            } else if ($("div.postInput") == '') {
+                alert('請輸入內文')
+                return;
+            }
+            $('.postButton').addClass('disabled')
+            $('.postButton').attr('disabled', true)
+            $('.spinner-border').css('display', 'block')
+
+            await processImg().then(function() {
+                setTimeout(() => {
+                    processWords()
+                }, 2*1000);
+            })
+
         }
     </script>
 

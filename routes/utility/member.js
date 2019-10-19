@@ -47,7 +47,14 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
     var artiNum;
     var tagNum = [];
     var result = 0;
-
+    console.log('imgData', imgData)
+    console.log(typeof(imgData))
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+        console.log(imgData)
+    }
     //新增文章
     await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime", "analyzeScore", "positiveWords", "negativeWords", "swearWords") ' +
     ' VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)  returning "article"."artiNum" ;'
