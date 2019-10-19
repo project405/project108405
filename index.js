@@ -236,7 +236,6 @@ app.post('/webhook', function (req, res) {
             }
             //文章、推薦內容有圖片的推播樣式 
             function linePushPhoto(){
-                console.log('我有進來囉')
                 request.post({
                     headers: {
                         'content-type' : 'application/json',
@@ -253,22 +252,22 @@ app.post('/webhook', function (req, res) {
                         // to: allUser,
                         to: 'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
-                                {
-                                    "type": "template",
-                                    "altText": "相信你會喜歡😎",
-                                    "template": {
-                                      "type": "buttons",
-                                      "text": "【文藝富心】小驚喜 🎉\n對於以下推薦有興趣可至文藝富心官網看更多\n立即點選「喜歡」或「不喜歡」讓我們更了解你💞",
-                                      "actions": [
-                                        {
-                                          "type": "uri",
-                                          "label": "▶️ 想看更多",
-                                          "uri": "https://123.com"
-                                        //   "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
-                                        }
-                                      ]
-                                    }
-                                },
+                                // {
+                                //     "type": "template",
+                                //     "altText": "相信你會喜歡😎",
+                                //     "template": {
+                                //       "type": "buttons",
+                                //       "text": "【文藝富心】小驚喜 🎉\n對於以下推薦有興趣可至文藝富心官網看更多\n立即點選「喜歡」或「不喜歡」讓我們更了解你💞",
+                                //       "actions": [
+                                //         {
+                                //           "type": "uri",
+                                //           "label": "▶️ 想看更多",
+                                //           "uri": "https://123.com"
+                                //         //   "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
+                                //         }
+                                //       ]
+                                //     }
+                                // },
                                 {
                                     type: "template",
                                     altText: "相信你會喜歡😎",
