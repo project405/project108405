@@ -67,9 +67,7 @@ bot.on('message', function(event) {
     const text = event.message.text;
     
    console.log(text)
-    
-   
-    
+ 
 });
 //----------------------------------------
 // 建立一個網站應用程式app
@@ -210,7 +208,7 @@ app.post('/webhook',  function (req, res) {
                 }, function(error, response, body){
                 
                     res.end(body);
-                
+                    req.write(response);
                 });
             }
             //文章、推薦內容有圖片的推播樣式 
