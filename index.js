@@ -188,7 +188,7 @@ app.post('/webhook',  function (req, res) {
                                             {
                                                 "type": "postback",
                                                 "label": "喜歡",
-                                                "data": bodyParser.json("like")
+                                                "data": "like"
                                             },
                                             {
                                                 "type": "postback",
