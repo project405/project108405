@@ -86,7 +86,7 @@ var server = app.listen(process.env.PORT || 3000, function() {
  
     
 
-app.post('/webhook', jsonParser, function (req, res) {
+app.post('/webhook',  function (req, res) {
     let allUser = [];
     member.AllMember().then(data => {  
         data.forEach(item => {
@@ -188,7 +188,7 @@ app.post('/webhook', jsonParser, function (req, res) {
                                             {
                                                 "type": "postback",
                                                 "label": "喜歡",
-                                                "data": "like"
+                                                "data": bodyParser.json("like")
                                             },
                                             {
                                                 "type": "postback",
