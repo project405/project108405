@@ -135,53 +135,57 @@ bot.on('postback', function(event) {
                         ]);		
                     }    
                 });
+            }else if (data == '我喜歡'){
+                console.log('我喜歡')
+            }else if (data == '我不喜歡'){
+                console.log('我不喜歡')
             }else{
                 login.userJudgeBind(userId).then(d =>{
                     
-                        if(d.length !== 0){                         
-                            if(d[0].lineID == userId){
-                                collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
-                                    console.log(b)
-                                    if(b == 0){
-                                        event.reply({
-                                            "type": "template",
-                                            "altText": "精選電影",
-                                            "template": {
-                                              "type": "buttons",
-                                              "text": '          '+userName+' 已重複收藏 ❌ ',
-                                              "actions": [
-                                                {
-                                                  "type": "uri",
-                                                  "label": " 👀 查看所有收藏",
-                                                  "uri": `https://project108405.herokuapp.com/collection/recommend`
-                                                }
-                                              ]
+                    if(d.length !== 0){                         
+                        if(d[0].lineID == userId){
+                            collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
+                                console.log(b)
+                                if(b == 0){
+                                    event.reply({
+                                        "type": "template",
+                                        "altText": "精選電影",
+                                        "template": {
+                                          "type": "buttons",
+                                          "text": '          '+userName+' 已重複收藏 ❌ ',
+                                          "actions": [
+                                            {
+                                              "type": "uri",
+                                              "label": " 👀 查看所有收藏",
+                                              "uri": `https://project108405.herokuapp.com/collection/recommend`
                                             }
-                                        })
-                                    }else{
-                                        event.reply({
-                                            "type": "template",
-                                            "altText": "精選電影",
-                                            "template": {
-                                              "type": "buttons",
-                                              "text": '          '+userName+' 已收藏成功 😍 ',
-                                              "actions": [
-                                                {
-                                                  "type": "uri",
-                                                  "label": " 👀 查看所有收藏",
-                                                  "uri": `https://project108405.herokuapp.com/collection/recommend`
-                                                }
-                                              ]
+                                          ]
+                                        }
+                                    })
+                                }else{
+                                    event.reply({
+                                        "type": "template",
+                                        "altText": "精選電影",
+                                        "template": {
+                                          "type": "buttons",
+                                          "text": '          '+userName+' 已收藏成功 😍 ',
+                                          "actions": [
+                                            {
+                                              "type": "uri",
+                                              "label": " 👀 查看所有收藏",
+                                              "uri": `https://project108405.herokuapp.com/collection/recommend`
                                             }
-                                        })
-                                        
-                                    }
-                                })                            
-                            }
-                            
-                        }else{
-                            event.reply(myLineTemplate)
+                                          ]
+                                        }
+                                    })
+                                    
+                                }
+                            })                            
                         }
+                        
+                    }else{
+                        event.reply(myLineTemplate)
+                    }
                 })  
             }         
     });    
