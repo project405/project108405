@@ -96,7 +96,7 @@ app.post('/webhook', function (req, res) {
         });
         byClassData.getIndexData().then(data =>{
             var pushContent = []
-            data為文章
+            //data為文章
             if(data[10][0].recomHead == undefined){
                 pushContent.push(data[10][0].artiHead)
                 //有圖片
