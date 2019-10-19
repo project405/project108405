@@ -55,6 +55,35 @@ var server = app.listen(process.env.PORT || 3000, function() {
     console.log("正在監聽埠號:", port);
 });
 
+bot.on('postback', function(event) { 
+    event.source.profile().then(
+        function (profile) {
+            
+            const userName = profile.displayName;
+            const userId = profile.userId;
+            const data = event.postback.data;
+            console.log("postback 資料",data)
+            //------------------------------------------------
+            //----------------未綁定Line_id用戶-----------------
+            //------------------------------------------------
+            var myLineTemplate={
+                type: 'template',
+                altText: '很抱歉您未綁定line',
+                template: {
+                    type: 'buttons',
+                    text: 'LINE用戶請至文藝富心登入\n登入後能：\n1.在LINE收藏你喜歡的事物\n2.不定時收到文藝相關資訊',
+                    actions: [{
+                        type:"uri",
+                        label:" 👣 至文藝富心官網登入",
+                        // uri:"line://app/1594135622-705e8pDP"   
+                        uri: "line://app/1594135622-82v9mEZq"
+
+                    }]
+                }
+            };
+    });    
+});
+
  
     
 
@@ -67,110 +96,54 @@ app.post('/webhook', function (req, res) {
         });
         byClassData.getIndexData().then(data =>{
             var pushContent = []
-            //data為文章
-            // if(data[10][0].recomHead == undefined){
-            //     pushContent.push(data[10][0].artiHead)
-            //     //有圖片
-            //     if (data[10][0].artiCont.match("\:imgLocation") != null){
-            //         // pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
-            //         pushContent.push(data[10][0].artiCont); 
-            //         if (data[10][0].artiCont.length >= 70){
-            //             pushContent.pop()
-            //             pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
-            //         }
-            //         linePushPhoto();
-            //     }else{
-            //         pushContent.push(data[10][0].artiCont); 
-            //         if (data[10][0].artiCont.length >= 70){
-            //             pushContent.pop()
-            //             pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
-            //         }
-            //         linePush()
-            //     }
-
-
-            // //data為推薦
-            // }else{
-            //     pushContent.push(data[10][0].recomHead)
-            //     //有圖片
-            //     if (data[10][0].recomCont.match("\:imgLocation") != null){
-            //         pushContent.push(data[10][0].recomCont); 
-            //         if (data[10][0].recomCont.length >= 70){
-            //             pushContent.pop()
-            //             pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
-            //         }
-            //         linePushPhoto();
-            //     //沒圖片    
-            //     }else{
-            //         pushContent.push(data[10][0].recomCont); 
-            //         if (data[10][0].recomCont.length >= 70){
-            //             pushContent.pop()
-            //             pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
-            //         }
-            //         linePush()
-            //     }
-
-            // }
-            pushContent = ['汪汪', '抱歉你以為是狗嗎<br><br>還是喵喵啦<br><br><br><br>\\:imgLocation'] 
-            linePushPhoto()  
-            // linePush()  
+            data為文章
+            if(data[10][0].recomHead == undefined){
+                pushContent.push(data[10][0].artiHead)
+                //有圖片
+                if (data[10][0].artiCont.match("\:imgLocation") != null){
+                    // pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
+                    pushContent.push(data[10][0].artiCont); 
+                    if (data[10][0].artiCont.length >= 70){
+                        pushContent.pop()
+                        pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
+                    }
+                    linePushPhoto();
+                }else{
+                    pushContent.push(data[10][0].artiCont); 
+                    if (data[10][0].artiCont.length >= 70){
+                        pushContent.pop()
+                        pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
+                    }
+                    linePush()
+                }
+            //data為推薦
+            }else{
+                pushContent.push(data[10][0].recomHead)
+                //有圖片
+                if (data[10][0].recomCont.match("\:imgLocation") != null){
+                    pushContent.push(data[10][0].recomCont); 
+                    if (data[10][0].recomCont.length >= 70){
+                        pushContent.pop()
+                        pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
+                    }
+                    linePushPhoto();
+                //沒圖片    
+                }else{
+                    pushContent.push(data[10][0].recomCont); 
+                    if (data[10][0].recomCont.length >= 70){
+                        pushContent.pop()
+                        pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
+                    }
+                    linePush()
+                }
+            }
+             
 
             console.log('pushContent@@@@@@@',pushContent)
             console.log('pushContent.length[1]@@@@@@@',pushContent[1].length)
             console.log('pushContent.length@@@@@@@',pushContent.length)
 
-            // ////--------------------判斷文章
-            // if (data[10][0].recomHead == undefined){
-            //     pushContent.push(data[10][0].artiHead)
-            //     //Confirm template字元限制
-            //     if(data[10][0].artiCont.match("\:imgLocation") != null){
-            //         pushContent.push('我有圖片')
-            //         linePushPhoto();
-            //     }
-            //     if (data[10][0].artiCont.length >= 130){
-            //         pushContent.push(data[10][0].artiCont.slice(0,129)+'...')
-            //         //加入判斷圖片，依據圖片送出不同的template
-            //         linePush();
-                    
-            //     }else{
-            //         if(data[10][0].artiCont.match("\:imgLocation") != null){
-            //             pushContent.push('我有圖片')
-            //             linePushPhoto();
-            //         }else{
-            //             pushContent.push(data[10][0].artiCont)
-            //             linePush();
-            //         }
-            //     }
-            // ////--------------------判斷推薦
-            // }else{
-            //     pushContent.push(data[10][0].recomHead)
-            //     //Confirm template字元限制
-            //     if (data[10][0].recomCont.length >= 130){
-            //         pushContent.push(data[10][0].recomCont.slice(0,129)+'...')
-            //         //加入判斷圖片，依據圖片送出不同的template
-            //         linePush();
-            //         if(data[10][0].recomCont.match("\:imgLocation") != null){
-            //             pushContent.push('我有圖片')
-            //             linePushPhoto();
-            //         }
-            //     }else{
-            //         if(data[10][0].recomCont.match("\:imgLocation") != null){
-            //             pushContent.push('我有圖片')
-            //             linePushPhoto();
-            //         }else{
-            //             pushContent.push(data[10][0].recomCont)
-            //             linePush();
-            //         }
-            //     }
-            // }
-
-            // data[1].forEach((item, index) => {
-            //     while (item.artiMessCont.match("\\:imgLocation")) {
-            //         item.artiMessCont = item.artiMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='/userImg/replyImg/" + data[9][sumDisplayImg].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
-            //     }
-            // })
             
-
             //文章、推薦內容無圖片的推播樣式
             function linePush (){
                 request.post({
@@ -214,14 +187,14 @@ app.post('/webhook', function (req, res) {
                                         text: `🔸標題：${pushContent[0]}\n🔹內容：${pushContent[1]}`,
                                         actions: [
                                             {
-                                                "type": "message",
-                                                "label": "我喜歡",
-                                                "text": "我敲擊喜歡的唷"
+                                                "type": "postback",
+                                                "label": "喜歡",
+                                                "data": "like"
                                             },
                                             {
-                                                "type": "message",
-                                                "label": "我不喜歡",
-                                                "text": "我敲擊討厭的唷"
+                                                "type": "postback",
+                                                "label": "不喜歡",
+                                                "data": "dislike"
                                             }
                                         ]
                                     }
@@ -287,14 +260,14 @@ app.post('/webhook', function (req, res) {
                                         },
                                         actions: [
                                             {
-                                                "type": "message",
-                                                "label": "我喜歡",
-                                                "text": "我敲擊喜歡的唷"
+                                                "type": "postback",
+                                                "label": "喜歡",
+                                                "data": "like"
                                             },
                                             {
-                                                "type": "message",
-                                                "label": "我不喜歡",
-                                                "text": "我敲擊討厭的唷"
+                                                "type": "postback",
+                                                "label": "不喜歡",
+                                                "data": "dislike"
                                             }
                                         ]
                                     }
