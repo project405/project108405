@@ -33,28 +33,6 @@ var bot = linebot({
     channelAccessToken: 'QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
 });
 
-
-//----------------------------------------
-// 建立一個網站應用程式app
-// 如果連接根目錄, 交給機器人處理
-//----------------------------------------
-const linebotParser = bot.parser();
-app.post('/', linebotParser);
-
-//----------------------------------------
-// 可直接取用檔案的資料夾
-//----------------------------------------
-app.use(express.static('public'));
-
-//----------------------------------------
-// 監聽3000埠號, 
-// 或是監聽Heroku設定的埠號
-//----------------------------------------
-var server = app.listen(process.env.PORT || 3000, function() {
-    const port = server.address().port;
-    console.log("正在監聽埠號:", port);
-});
-
 bot.on('postback', function(event) { 
     event.source.profile().then(
         function (profile) {
@@ -83,6 +61,28 @@ bot.on('postback', function(event) {
             // };
     });    
 });
+//----------------------------------------
+// 建立一個網站應用程式app
+// 如果連接根目錄, 交給機器人處理
+//----------------------------------------
+const linebotParser = bot.parser();
+app.post('/', linebotParser);
+
+//----------------------------------------
+// 可直接取用檔案的資料夾
+//----------------------------------------
+app.use(express.static('public'));
+
+//----------------------------------------
+// 監聽3000埠號, 
+// 或是監聽Heroku設定的埠號
+//----------------------------------------
+var server = app.listen(process.env.PORT || 3000, function() {
+    const port = server.address().port;
+    console.log("正在監聽埠號:", port);
+});
+
+
 
  
     
