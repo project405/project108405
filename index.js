@@ -38,7 +38,7 @@ bot.on('postback', function(event) {
             
             const userName = profile.displayName;
             const userId = profile.userId;
-            const data = bodyParser.json(event.postback.data);
+            const data = JSON.stringify(event.postback.data);
             console.log("postback 資料",data)
             //------------------------------------------------
             //----------------未綁定Line_id用戶-----------------
