@@ -142,8 +142,8 @@ bot.on('postback', function(event) {
                 if(data.match("article")){
                     var spliceData = data.replace('article','')
                     console.log('切割後的data!!!!!!!!',spliceData)
-                    linePush.AddArticleLike(userId,spliceData).then(data =>{
-                        console.log(data)
+                    linePush.AddArticleLike(userId,spliceData).then(firstdata =>{
+                        console.log(firstdata)
 
                     })
 
