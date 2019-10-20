@@ -154,7 +154,7 @@ bot.on('postback', function(event) {
                     var spliceData = data.replace('recommend','')
                     console.log('切割後的data!!!!!!!!',spliceData)
                     linePush.AddRecommendLike(userId,spliceData).then(data =>{
-                        console.log(data)
+                        console.log("外面的data!!!!!!!!!!",data)
                         console.log(typeof(data))
                         if(data == '1'){
                             console.log('喜愛成功')
