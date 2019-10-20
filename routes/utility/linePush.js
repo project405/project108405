@@ -19,6 +19,7 @@ var AddArticleLike = async function (lineID,artiNum) {
               'FROM "articleLike" '+
               'WHERE "memID" IN (SELECT "memID"  FROM  "member" WHERE "lineID" =  $1 and "artiNum" = $2)', [lineID,artiNum])
         .then((data) => {
+            console.log(typeof(data.rows))
             //沒有資料
             if(!data.rows){
                 isLike = undefined; 
@@ -60,7 +61,7 @@ var AddRecommendLike = async function (lineID,artiNum) {
 
 
         .then((data) => {
-            console.log(typeof(data.rows))
+            
             if(!data.rows){
                 isLike = undefined ; 
             }else{
