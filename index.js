@@ -144,7 +144,7 @@ bot.on('postback', function(event) {
                     console.log('切割後的data!!!!!!!!',spliceData)
                     linePush.AddArticleLike(userId,spliceData).then(data =>{
                         console.log(data)
-                        
+
                     })
 
                 }else{
@@ -479,10 +479,10 @@ bot.on('message', function(event) {
                             "data":'recommend14'
                           },
                           {
-                              "type": "uri",
-                              "label": "書籍",
-                              "uri": "http://weiting.nctu.me/"
-                          }
+                            "type":"postback",
+                            "label":"article17",
+                            "data":'article17'
+                          },
                       ]
                     },
                     {
