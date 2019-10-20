@@ -516,7 +516,25 @@ bot.on('message', function(event) {
     //             "imageSize": "cover"
     //         }
     //     });
-    // }	
+    // }
+    if (data == '我喜歡'){
+        console.log('我喜歡')
+        login.userJudgeBind(userId).then(d =>{
+            console.log(d)
+            console.log('1我有綁定linebot喔喔喔喔')
+
+            if(d.length !== 0){ 
+                if(d[0].lineID == userId){
+                    console.log('我有綁定linebot喔喔喔喔')
+                }
+            }else{
+
+                    console.log('我沒綁定linebot喔喔喔喔')
+            }
+    })
+    
+
+
     console.log('使用者傳來的文字',text);
 });
 
