@@ -21,14 +21,14 @@ var AddArticleLike = async function (lineID,artiNum) {
         .then((data) => {
             console.log(data.rows)
             //沒有資料
-            if(data.rows = null){
-                isLike = 0 ; 
+            if(!data.rows){
+                isLike = undefined; 
             }else{
-                isLike = 1 ;
+                isLike = data.rows;
             }
         }, (error) => {
             console.log('error喔！！！！！！！！！！！')
-            isLike = 0;
+            isLike = undefined;;
         });
     
     
