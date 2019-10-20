@@ -183,7 +183,7 @@ app.post('/webhook',  function (req, res) {
                                             {  
                                                 "type":"postback",
                                                 "label":"我喜歡",
-                                                "data":"islike"
+                                                "data":postbackData
                                             },
                                             {  
                                                 "type":"postback",
