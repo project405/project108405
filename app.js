@@ -33,6 +33,7 @@ var memberRouter = require('./routes/member/member');
 var memberManageRouter = require('./routes/member/memberManage');
 var articleManageRouter = require('./routes/member/articleManage');
 var articlePostRouter = require('./routes/member/articlePost');
+// var articlePostRouter = require('./routes/member/articleBase64');
 var loginRouter = require('./routes/member/login');
 var logOutRouter = require('./routes/member/logOut');
 var signUpRouter = require('./routes/member/signUp');

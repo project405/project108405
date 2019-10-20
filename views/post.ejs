@@ -148,7 +148,7 @@
                             success: function (res) {
                                 console.log(res.data.link)
                                 imgur.push(res.data.link)
-                                formData.append('toImgur', res.data.link);
+                                // formData.append('toImgur', res.data.link);
                             },
                             error: function (e) {
                                 console.log(e)
@@ -210,6 +210,7 @@
                     formData.append('positiveWords', positiveWords);
                     formData.append('negativeWords', negativeWords);
                     formData.append('swearWords', swearWords);
+                    console.log("哈哈=",formData.getAll("positiveWords"));
                     $.ajax({
                         url: '/article/post',
                         type: 'POST',
@@ -217,6 +218,7 @@
                         data: formData,
                         processData: false,
                         contentType: false,
+                        cache: false,
                         success: function (res) {
                             if (res == "請進行登入") {
                                 alert(res);

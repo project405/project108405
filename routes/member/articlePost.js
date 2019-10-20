@@ -54,7 +54,6 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
     var negativeWords = req.body.negativeWords;
     var swearWords = req.body.swearWords;
     var artiNum = req.body.artiNum;
-
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
     var tagData = [];
     var imgData = [];
