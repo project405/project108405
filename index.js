@@ -517,7 +517,7 @@ bot.on('message', function(event) {
     //         }
     //     });
     // }
-    if (data == '我喜歡'){
+    if (text == '我喜歡'|| text == '我不喜歡'){
         console.log('我喜歡')
         login.userJudgeBind(userId).then(d =>{
             console.log(d)
