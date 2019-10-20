@@ -17,14 +17,14 @@ var AddArticleLike = async function (lineID,artiNum) {
     // 判斷是否被使用者按愛心
     await sql('SELECT "memID", "artiNum" '+
               'FROM "articleLike" '+
-              'WHERE "memID" IN (SELECT "memID"  FROM  "member" WHERE "lineID" =  $1)', [lineID])
+              'WHERE "memID" IN (SELECT "memID"  FROM  "member" WHERE "lineID" =  $1 and "artiNum" = $2)', [lineID,artiNum])
 
 
         .then((data) => {
             if(!data.rows){
-                isLike = undefined ; 
+                isLike = 0 ; 
             }else{
-                isLike = data.rows ;
+                isLike = 1 ;
             }
         }, (error) => {
             isLike = 0;
@@ -32,15 +32,15 @@ var AddArticleLike = async function (lineID,artiNum) {
     
     
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
-    // await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [memID, artiNum, addTime])
-    //     .then((data) => {
-    //         result = 1;
-    //     }, (error) => {
-    //         result = 0;
-    //     });
-
-
-    console.log('islike@@@@@@@@@@@@@@@@@@',isLike)    
+    if(isLike = 1){
+        await sql('INSERT INTO "articleLike" ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),"artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [memID, artiNum, addTime])
+            .then((data) => {
+                result = data.rows;
+            }, (error) => {
+                result = 0;
+            });
+    }   
+        
     return result;
   
 }
