@@ -146,7 +146,7 @@ bot.on('postback', function(event) {
                         console.log(data)
                         if(data == 1){
                             console.log('喜愛成功')
-                            event.reply('你的喜歡是我們努力的動力...🌱')
+                            event.reply('你的喜歡\n是我們努力的動力...🌱')
                         }else{
                             console.log('已點選過喜愛')
                         }
