@@ -39,8 +39,8 @@ var AddArticleLike = async function (lineID,artiNum) {
             }, (error) => {
                 result = 0;
             });
-    }   
-        
+        }    
+    
     return result;
   
 }
