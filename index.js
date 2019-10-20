@@ -159,12 +159,12 @@ app.post('/webhook',  function (req, res) {
                                             {
                                                 "type": "message",
                                                 "label": "我喜歡",
-                                                "text": "我喜歡"+`${pushContent[0]}`+':'+`${pushContent[1]}`
+                                                "text": "我喜歡"+'這個'+`${pushContent[0]}`+':'+`${pushContent[1]}`
                                             },
                                             {
                                                 "type": "message",
                                                 "label": "我不喜歡",
-                                                "text": "我不喜歡"+`${pushContent[0]}`+':'+`${pushContent[1]}`
+                                                "text": "我不喜歡"+'這個'+`${pushContent[0]}`+':'+`${pushContent[1]}`
                                             }
                                         ]
                                     }
@@ -231,12 +231,12 @@ app.post('/webhook',  function (req, res) {
                                             {
                                                 "type": "message",
                                                 "label": "我喜歡",
-                                                "text": "我喜歡"+`${pushContent[0]}`+':'+`${pushContent[1]}`
+                                                "text": "我喜歡"+'這個'+`${pushContent[0]}`+':'+`${pushContent[1]}`
                                             },
                                             {
                                                 "type": "message",
                                                 "label": "我不喜歡",
-                                                "text": "我不喜歡"+`${pushContent[0]}`+':'+`${pushContent[1]}`
+                                                "text": "我不喜歡"+'這個'+`${pushContent[0]}`+':'+`${pushContent[1]}`
                                             }
                                         ]
                                     }
