@@ -11,7 +11,7 @@ const moment = require('moment');
 
 var AddArticleLike = async function (lineID,artiNum) {
     var result ;
-    var isLike = 5;
+    var isLike ;
     console.log('後台的！！！！！！！！！！！！！！',lineID)
     console.log('後台的artiNum！！！！！！！！！！！！！！',artiNum)
     // 判斷是否被使用者按愛心
@@ -21,11 +21,12 @@ var AddArticleLike = async function (lineID,artiNum) {
         .then((data) => {
             //沒有資料
             if(!data.rows){
-                isLike = 1 ; 
+                isLike = 0 ; 
             }else{
-                isLike = 0 ;
+                isLike = 1 ;
             }
         }, (error) => {
+            console.log('error喔！！！！！！！！！！！')
             isLike = 0;
         });
     
