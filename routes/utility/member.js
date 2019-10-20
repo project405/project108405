@@ -57,49 +57,57 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
     }
     //新增文章
     await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime", "analyzeScore", "positiveWords", "negativeWords", "swearWords") ' +
-    ' VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)  returning "article"."artiNum" ;'
-    , [memID, artiHead, artiCont, artiClass, artiDateTime, analyzeScore, positiveWords, negativeWords, swearWords])
-    .then((data) => {
-        if (!data.rows) {
+        ' VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)  returning "article"."artiNum" ;'
+        , [memID, artiHead, artiCont, artiClass, artiDateTime, analyzeScore, positiveWords, negativeWords, swearWords])
+        .then((data) => {
+            if (!data.rows) {
+                artiNum = undefined;
+            } else {
+                artiNum = data.rows[0].artiNum;
+            }
+        }, (error) => {
             artiNum = undefined;
-        } else {
-            artiNum = data.rows[0].artiNum;
-        }
-    }, (error) => {
-        artiNum = undefined;
     });
 
     //新增tag 
-    for (var i = 0; i < tag.length; i++) {
-        await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
-            .then((data) => {
-                if (!data.rows) {
+    console.log("tag=",tag.length);
+    console.log("imgData=",imgData);
+    
+    if(tag.length != 0){
+        for (var i = 0; i < tag.length; i++) {
+            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+                .then((data) => {
+                    if (!data.rows) {
+                        tagNum = undefined;
+                    } else {
+                        tagNum = data.rows[0].tagNum;
+                    }
+                }, (error) => {
                     tagNum = undefined;
-                } else {
-                    tagNum = data.rows[0].tagNum;
-                }
-            }, (error) => {
-                tagNum = undefined;
-            });
-
-        // --------- 新增tagLink ---------
-        await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
-            .then((data) => {
-                result = 0;
-            }, (error) => {
-                result = 1;
-            });
+                });
+    
+            // --------- 新增tagLink ---------
+            await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
+                .then((data) => {
+                    result = 0;
+                }, (error) => {
+                    result = 1;
+                });
+        }
     }
-
+    
     // --------- 新增img ---------
-    for (var i = 0; i < imgData.length; i++) {
-        await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
-            .then((data) => {
-                result = 0;
-            }, (error) => {
-                result = 1;
-            });
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
+                .then((data) => {
+                    result = 0;
+                }, (error) => {
+                    result = 1;
+                });
+        }
     }
+    
 
     return result;
 }
