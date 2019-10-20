@@ -441,8 +441,6 @@ bot.on('message', function(event) {
 
             // console.log('為廷的router@@@@@@@@@@@@@',result)
         // });
-        
-    }
         event.reply({
             "type": "template",
             "altText": "文藝富心",
@@ -510,6 +508,9 @@ bot.on('message', function(event) {
                 "imageSize": "cover"
             }
         });
+        
+    }
+        
     // }
        
     console.log('使用者傳來的文字',text);
