@@ -549,8 +549,11 @@ bot.on('message', function(event) {
     })
 });
 
-
-
+app.get('/webhook',  function (req, res) {
+    request.post({
+                    
+    })
+})
 
 
 
@@ -566,6 +569,7 @@ const linebotParser = bot.parser();
 app.post('/', linebotParser);
 
 
+
 //----------------------------------------
 // 可直接取用檔案的資料夾
 //----------------------------------------
@@ -573,7 +577,6 @@ app.use(express.static('public'));
 
 
 //接收GET請求
-
 
 //----------------------------------------
 // 監聽3000埠號, 
