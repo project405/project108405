@@ -210,6 +210,12 @@ bot.on('postback', function(event) {
 //----------------成功
 //網址需連到heroku、圖片也是
 bot.on('message', function(event) {
+    event.source.profile().then(
+        function (profile) {
+            
+            const userName = profile.displayName;
+            const userId = profile.userId;
+            
     //使用者傳來的文字
     const text = event.message.text;
     
@@ -536,6 +542,7 @@ bot.on('message', function(event) {
 
 
     console.log('使用者傳來的文字',text);
+    })
 });
 
 
