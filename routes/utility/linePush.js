@@ -59,7 +59,7 @@ var AddRecommendLike = async function (lineID,recomNum) {
     console.log('後台的recomNum！！！！！！！！！！！！！！',recomNum)
     // 判斷是否被使用者按愛心
     await sql('SELECT "memID", "recomNum" '+
-              'FROM "articleLike" '+
+              'FROM "recommendLike" '+
               'WHERE "memID" IN (SELECT "memID"  FROM  "member" WHERE "lineID" =  $1 and "recomNum" = $2)', [lineID,recomNum])
         .then((data) => {
             console.log(typeof(data.rows) === null )
@@ -78,7 +78,7 @@ var AddRecommendLike = async function (lineID,recomNum) {
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
     if(isLike != undefined){
         console.log('我有準備新增喔！')
-        await sql('INSERT INTO "articleLike" ("memID","recomNum","artiLikeDateTime") VALUES ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),$2,$3)', [lineID, recomNum, addTime])
+        await sql('INSERT INTO "recommendLike" ("memID","recomNum","artiLikeDateTime") VALUES ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),$2,$3)', [lineID, recomNum, addTime])
             .then((data) => {
                 result = 1;
             }, (error) => {
