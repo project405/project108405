@@ -531,8 +531,8 @@ bot.on('message', function(event) {
 
                     console.log('我沒綁定linebot喔喔喔喔')
             }
-    })
-    
+        })
+    }
 
 
     console.log('使用者傳來的文字',text);
