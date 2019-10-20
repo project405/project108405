@@ -248,9 +248,9 @@ app.post('/webhook',  function (req, res) {
                     res.end(body);
                 
                 });
-                app.post('https://project-108405.herokuapp.com/webhook',  function (req, res) {
-                    res.send('GET request to the homepage') 
-                })
+                // app.post('https://project-108405.herokuapp.com/webhook',  function (req, res) {
+                //     res.send('GET request to the homepage') 
+                // })
 
                 
             }
