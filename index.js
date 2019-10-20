@@ -66,6 +66,7 @@ app.post('/webhook',  function (req, res) {
             var pushContent = []
             //data為文章
             if(data[10][0].recomHead == undefined){
+                pushContent.push('article')
                 pushContent.push(data[10][0].artiNum)
                 pushContent.push(data[10][0].artiHead)
                 //有圖片
@@ -87,6 +88,7 @@ app.post('/webhook',  function (req, res) {
                 }
             //data為推薦
             }else{
+                pushContent.push('recommend')
                 pushContent.push(data[10][0].recomNum)
                 pushContent.push(data[10][0].recomHead)
                 //有圖片
