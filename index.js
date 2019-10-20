@@ -169,9 +169,12 @@ app.post('/webhook',  function (req, res) {
                                         ]
                                     }
                                 }               
-                            ]
+                            ],
+                            postback:{  
+                                "data":"我喜歡" 
+                            }    
                             
-                        })
+                    })
                 }, function(error, response, body){
                 
                     res.end(body);
