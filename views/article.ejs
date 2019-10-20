@@ -385,9 +385,9 @@
         </script>
             
     </div>
-    <div class="spinner-border" role="status">
+    <!-- <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
-    </div>
+    </div> -->
     <div class="coverContainer">
     </div>
     <!-- Optional JavaScript -->
@@ -470,6 +470,7 @@
                 })
                 Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
                     $(img).before("\\:imgLocation")
+                    // $(img).before("<a class='replyInput' style='visibility:hidden'>\\:imgLocation</div>")
                 })
             }
             formData.append('artiNum', artiNum);
