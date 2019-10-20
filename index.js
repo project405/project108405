@@ -146,6 +146,9 @@ bot.on('postback', function(event) {
                     //     console.log(data)
                     // })
 
+                }else{
+                    var spliceData = data.replace('recommend','')
+                    console.log('切割後的data!!!!!!!!',spliceData)
                 }
                 
             }else{
