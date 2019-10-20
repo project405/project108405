@@ -144,12 +144,12 @@ bot.on('postback', function(event) {
                     console.log('切割後的data!!!!!!!!',spliceData)
                     linePush.AddArticleLike(userId,spliceData).then(data =>{
                         console.log(data)
-                        if(data == 1){
+                        // if(data == 1){
                             console.log('喜愛成功')
                             event.reply('你的喜歡\n       是我們努力的動力...🌱')
-                        }else{
-                            console.log('已點選過喜愛')
-                        }
+                        // }else{
+                        //     console.log('已點選過喜愛')
+                        // }
                     })
 
                 }else{
@@ -485,18 +485,18 @@ bot.on('message', function(event) {
                       "actions": [
                           {
                             "type":"postback",
-                            "label":"article3有",
-                            "data":'article3'
+                            "label":"recommend5有",
+                            "data":'recommend5'
                           },
                           {
                             "type":"postback",
-                            "label":"recommend14",
-                            "data":'recommend14'
+                            "label":"recommend7有",
+                            "data":'recommend7'
                           },
                           {
                             "type":"postback",
-                            "label":"article8沒有",
-                            "data":'article8'
+                            "label":"recommend8沒有",
+                            "data":'recommend8'
                           },
                       ]
                     },

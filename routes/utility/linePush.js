@@ -45,7 +45,6 @@ var AddArticleLike = async function (lineID,artiNum) {
         result = 0 ;
     }       
     return result; 
-    // return isLike; 
     
 }
 
@@ -53,40 +52,42 @@ var AddArticleLike = async function (lineID,artiNum) {
 //-------- 點選推薦喜愛 --------
 //==============================
 
-var AddRecommendLike = async function (lineID,artiNum) {
+var AddRecommendLike = async function (lineID,recomNum) {
     var result ;
     var isLike ;
-    console.log('後台的～～～～～～～～～～～～',lineID)
-    console.log('後台的～～～～～～～～～～～～',artiNum)
+    console.log('後台的！！！！！！！！！！！！！！',lineID)
+    console.log('後台的recomNum！！！！！！！！！！！！！！',recomNum)
     // 判斷是否被使用者按愛心
-    await sql('SELECT "memID", "artiNum" '+
+    await sql('SELECT "memID", "recomNum" '+
               'FROM "articleLike" '+
-              'WHERE "memID" IN (SELECT "memID"  FROM  "member" WHERE "lineID" =  $1)', [lineID])
-
-
+              'WHERE "memID" IN (SELECT "memID"  FROM  "member" WHERE "lineID" =  $1 and "recomNum" = $2)', [lineID,recomNum])
         .then((data) => {
+            console.log(typeof(data.rows) === null )
             
-            if(!data.rows){
-                isLike = undefined ; 
+            
+            if(data.rows.length != 0){
+                isLike = undefined; 
             }else{
-                isLike = data.rows ;
+                isLike = data.rows;
             }
         }, (error) => {
-            isLike = 0;
+            isLike = undefined;;
         });
     
     
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
-    // await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [memID, artiNum, addTime])
-    //     .then((data) => {
-    //         result = 1;
-    //     }, (error) => {
-    //         result = 0;
-    //     });
-
-
-    console.log('islike@@@@@@@@@@@@@@@@@@',isLike)    
-    return result;
+    if(isLike != undefined){
+        console.log('我有準備新增喔！')
+        await sql('INSERT INTO "articleLike" ("memID","recomNum","artiLikeDateTime") VALUES ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),$2,$3)', [lineID, recomNum, addTime])
+            .then((data) => {
+                result = 1;
+            }, (error) => {
+                result = 0;
+            });
+    }else{
+        result = 0 ;
+    }       
+    return result; 
   
 }
 
