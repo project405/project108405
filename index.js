@@ -152,7 +152,7 @@ bot.on('postback', function(event) {
                     console.log('切割後的data!!!!!!!!',spliceData)
                     linePush.AddRecommendLike(userId,spliceData).then(data =>{
                         console.log(data)
-                        if(data = 1){
+                        if(data == 1){
                             console.log('喜愛成功')
                         }
 
