@@ -144,7 +144,10 @@ bot.on('postback', function(event) {
                     console.log('切割後的data!!!!!!!!',spliceData)
                     linePush.AddArticleLike(userId,spliceData).then(data =>{
                         console.log(data)
-
+                        console.log(typeof(data))
+                        if(data == '1'){
+                            console.log('喜愛成功')
+                        }
                     })
 
                 }else{
