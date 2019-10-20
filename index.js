@@ -158,6 +158,8 @@ bot.on('postback', function(event) {
                         console.log(typeof(data))
                         if(data == '1'){
                             console.log('喜愛成功')
+                        }else{
+                            console.log('以重複按過囉')
                         }
 
                     })
