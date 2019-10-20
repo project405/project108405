@@ -67,8 +67,6 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
     });
 
     //新增tag 
-
-    
     if(tag.length != 0){
         for (var i = 0; i < tag.length; i++) {
             await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
@@ -647,7 +645,7 @@ var myArticle = async function (memID) {
     var result = [];
 
     //--------- 取得我的文章 ----------
-    await sql('SELECT * FROM "articleListDataView" WHERE "memID" = $1', [memID])
+    await sql('SELECT * FROM "articleListDataView" WHERE "memID" = $1 ' , [memID])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;

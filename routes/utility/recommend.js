@@ -35,7 +35,10 @@ var getRecommendList = async function (memID) {
     })
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image" WHERE "recomMessNum" IS NULL ')
+    await sql('SELECT "recomNum" , "imgName" '+
+            ' FROM "image" '+
+            ' WHERE "recomMessNum" IS NULL '+
+            ' ORDER BY "recomNum" ')
     .then((data) => {
         if (!data.rows) {
             imgs = undefined;
@@ -95,7 +98,8 @@ var getOneRecommend = async function (recomNum, memID) {
             ' GROUP BY "Mess"."recomMessNum" '+
                 ' ,"Mess"."memID" '+
                 ' ,"Mess"."recomMessDateTime" '+
-                ' ,"Mess"."recomMessCont"', [recomNum])
+                ' ,"Mess"."recomMessCont"'+
+            ' ORDER BY "Mess"."recomMessDateTime"', [recomNum])
         .then((data) => {
            if(!data.rows){
                 oneRecomMessage = undefined ;
@@ -158,7 +162,10 @@ var getOneRecommend = async function (recomNum, memID) {
         });
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NULL',[recomNum])
+    await sql('SELECT "recomNum" , "imgName" '+
+             ' FROM "image" '+ 
+             ' WHERE "recomNum" = $1 and "recomMessNum" IS NULL'+
+             ' ORDER BY "recomNum"',[recomNum])
     .then((data) => {
         if (!data.rows) {
             imgs = undefined;
@@ -170,7 +177,10 @@ var getOneRecommend = async function (recomNum, memID) {
     });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "recomNum" , "imgName" FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NOT NULL',[recomNum])
+    await sql('SELECT "recomNum" , "imgName" '+
+             ' FROM "image" '+ 
+             ' WHERE "recomNum" = $1 and "recomMessNum" IS NOT NULL'+
+             ' ORDER BY "recomNum"',[recomNum])
     .then((data) => {
         if (!data.rows) {
             replyImgs = undefined;
@@ -253,7 +263,7 @@ var getOneRecommendReply = async function (recomMessNum, memID) {
     var result = [];
 
     //取得單篇留言
-    await sql('SELECT * FROM "recommendMessage" WHERE "recomMessNum"= $1 ' , [recomMessNum])
+    await sql('SELECT * FROM "recommendMessage" WHERE "recomMessNum"= $1 ORDER BY "recomMessDateTime" ' , [recomMessNum])
     .then((data) => {
         if (!data.rows) {
             oneReply = undefined;
@@ -266,7 +276,10 @@ var getOneRecommendReply = async function (recomMessNum, memID) {
     });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "recomMessNum" , "imgName" FROM "image" WHERE "recomMessNum" = $1 ',[recomMessNum])
+    await sql('SELECT "recomMessNum" , "imgName" '+
+             ' FROM "image" '+
+             ' WHERE "recomMessNum" = $1 '+
+             ' ORDER BY "recomMessNum"',[recomMessNum])
         .then((data) => {
             if (!data.rows) {
                 replyImgs = undefined;
@@ -315,7 +328,9 @@ var getRecomClassList = async function (recomClass,memID) {
     })
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image"')
+    await sql('SELECT "recomNum" , "imgName" '+
+             ' FROM "image" '+
+             ' ORDER BY "recomNum"')
     .then((data) => {
         if (!data.rows) {
             imgs = undefined;

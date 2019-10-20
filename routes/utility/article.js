@@ -55,7 +55,7 @@ var getArticleList = async function (memID) {
         });
 
     //取得照片
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiMessNum" IS NULL')
+    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiMessNum" IS NULL ORDER BY "artiNum"')
         .then((data) => {
             if (data.rows == null || data.rows == '') {
                 imgs = undefined;
@@ -176,7 +176,10 @@ var getOneArticle = async function (artiNum, memID) {
         });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiNum" = $1 AND "artiMessNum" IS NULL',[artiNum])
+    await sql('SELECT "artiNum" , "imgName" '+
+             ' FROM "image" '+
+             ' WHERE "artiNum" = $1 AND "artiMessNum" IS NULL'+
+             ' ORDER BY "artiNum"',[artiNum])
         .then((data) => {
             if (!data.rows) {
                 imgs = undefined;
@@ -225,7 +228,10 @@ var getOneArticle = async function (artiNum, memID) {
         });
     }
     //取得照片
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiNum" = $1 AND  "artiMessNum" IS NOT NULL', [artiNum])
+    await sql('SELECT "artiNum" , "imgName" '+
+        ' FROM "image" '+ 
+        ' WHERE "artiNum" = $1 AND  "artiMessNum" IS NOT NULL'+
+        ' ORDER BY "artiNum"', [artiNum])
         .then((data) => {
             if (!data.rows) {
                 replyImgs = undefined;
@@ -275,7 +281,10 @@ var getOneReply = async function (artiMessNum, memID) {
     });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "artiMessNum" , "imgName" FROM "image" WHERE "artiMessNum" = $1 ',[artiMessNum])
+    await sql('SELECT "artiMessNum" , "imgName" '+
+             ' FROM "image" '+
+             ' WHERE "artiMessNum" = $1 '+
+             ' ORDER BY "artiMessNum"',[artiMessNum])
         .then((data) => {
             if (!data.rows) {
                 replyImgs = undefined;
@@ -358,7 +367,10 @@ var getArticleClassList = async function (articleClass, memID) {
         });
 
     // ----------- 取得照片 ----------- 
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiMessNum" IS NULL')
+    await sql('SELECT "artiNum" , "imgName" '+
+    ' FROM "image" '+
+    ' WHERE "artiMessNum" IS NULL '+
+    ' ORDER BY "artiMessNum"')
         .then((data) => {
             if (data.rows == null || data.rows == '') {
                 imgs = undefined;

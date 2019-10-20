@@ -44,7 +44,8 @@ var getCollRecommend = async function (memID) {
               ' WHERE "recomNum" '+
                     ' IN (SELECT "recomNum" '+
                         ' FROM "memberCollection" '+
-                        ' WHERE "memID" = $1 )', [memID])
+                        ' WHERE "memID" = $1 )'+
+              ' ORDER BY "recomNum"', [memID])
         .then((data) => {
             if (!data.rows){
                 imgs = undefined ;
@@ -91,7 +92,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
             oneRecommend = undefined;
         });
     
-    // -----------  取得單一文章所有留言 --------------
+    // -----------  取得單一推薦所有留言 --------------
     await sql('SELECT "Mess"."recomMessNum" '+
                 ' ,"Mess"."memID" '+
                 ' ,to_char("Mess"."recomMessDateTime",\'YYYY-MM-DD\') AS "recomMessDateTime" '+
@@ -104,7 +105,8 @@ var getOneColleRecommend = async function (recomNum, memID) {
             ' GROUP BY "Mess"."recomMessNum" '+
                 ' ,"Mess"."memID" '+
                 ' ,"Mess"."recomMessDateTime" '+
-                ' ,"Mess"."recomMessCont"', [recomNum])
+                ' ,"Mess"."recomMessCont"'+
+            ' ORDER BY "recomMessNum"', [recomNum])
         .then((data) => {
            if(!data.rows){
               oneRecomMessage = undefined ;
@@ -169,7 +171,9 @@ var getOneColleRecommend = async function (recomNum, memID) {
         });
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NULL',[recomNum])
+    await sql('SELECT "recomNum" , "imgName" '+
+            ' FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NULL'+
+            ' ORDER BY "recomNum"',[recomNum])
     .then((data) => {
         if (!data.rows) {
             imgs = undefined;
@@ -180,7 +184,10 @@ var getOneColleRecommend = async function (recomNum, memID) {
         imgs = undefined;
     });
     // ----------- 取得照片 -----------
-    await sql('SELECT "recomNum" , "imgName" FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NOT NULL',[recomNum])
+    await sql('SELECT "recomNum" , "imgName" '+
+              ' FROM "image" '+
+              ' WHERE "recomNum" = $1 and "recomMessNum" IS NOT NULL '+
+              ' ORDER BY "recomNum" ',[recomNum])
     .then((data) => {
         if (!data.rows) {
             replyImgs = undefined;
@@ -273,7 +280,8 @@ var getCollArticle = async function (memID) {
              ' WHERE "artiNum" '+
                 ' IN(SELECT "artiNum" '+
                    ' FROM "memberCollection" '+
-                   ' WHERE "memID" = $1)', [memID])
+                   ' WHERE "memID" = $1)'+
+            ' ORDER BY "artiNum"' , [memID])
         .then((data) => {
             if (!data.rows) {
                 imgs = undefined ; 
@@ -327,7 +335,8 @@ var getCollRecomClassList = async function (memID, recomClass) {
              ' WHERE "recomNum" '+
                 'IN(SELECT "recomNum" '+
                     ' FROM "memberCollection" '+
-                    ' WHERE "memID" = $1)', [memID])
+                    ' WHERE "memID" = $1)'+
+            ' ORDER BY "recomNum"', [memID])
         .then((data) => {
             if (!data.rows){
                 imgs = undefined ;
@@ -399,7 +408,8 @@ var getCollArtiClassList = async function (memID, artiClass) {
                 ' WHERE "artiNum" '+
                     'IN(SELECT "artiNum" '+
                       ' FROM "memberCollection" '+
-                      ' WHERE "memID" = $1)', [memID])
+                      ' WHERE "memID" = $1)'+
+             ' ORDER BY "artiNum" ', [memID])
         .then((data) => {
         if (!data.rows){
             imgs = undefined ;
