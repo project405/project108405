@@ -170,7 +170,7 @@ app.post('/webhook',  function (req, res) {
                                     }
                                 }         
                             ],
-                            events:[{
+                            event:[{
                                 "type":"postback",
                                 "replyToken":"d7aooxxo154c6d94oo01xx28coxoxfd04",
                                 "source":{
@@ -179,7 +179,7 @@ app.post('/webhook',  function (req, res) {
                                 },
                                 "timestamp":1485251255286,
                                 "postback":{
-                                    "data":"!!!!!!!!!!!我是postback_data"
+                                    "data":"我喜歡"
                                 }
                             }]                            
                             
