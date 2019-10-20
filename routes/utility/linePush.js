@@ -30,12 +30,12 @@ var linebotAddLike = async function (lineID) {
     
     
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
-    await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [memID, artiNum, addTime])
-        .then((data) => {
-            result = 1;
-        }, (error) => {
-            result = 0;
-        });
+    // await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [memID, artiNum, addTime])
+    //     .then((data) => {
+    //         result = 1;
+    //     }, (error) => {
+    //         result = 0;
+    //     });
 
 
     console.log('islike@@@@@@@@@@@@@@@@@@',isLike)    
