@@ -64,7 +64,6 @@ app.post('/webhook',  function (req, res) {
         byClassData.getIndexData().then(data =>{
             console.log(data[10][0])
             var pushContent = [];
-            var postbackData = [];
             //data為文章
             if(data[10][0].recomHead == undefined){
                 pushContent.push('article')
@@ -111,7 +110,6 @@ app.post('/webhook',  function (req, res) {
                 }
             }
              
-            postbackData.push(pushContent[0],pushContent[1])
             console.log('pushContent@@@@@@@',pushContent)
             console.log('pushContent.length@@@@@@@',pushContent.length)
             console.log('postbackData@@@@@@@',postbackData)
@@ -183,7 +181,7 @@ app.post('/webhook',  function (req, res) {
                                             {  
                                                 "type":"postback",
                                                 "label":"我喜歡",
-                                                "data":`${postbackData}`
+                                                "data":`${postbackData[0]}+${postbackData[1]}`
                                             },
                                             {  
                                                 "type":"postback",
@@ -285,7 +283,7 @@ app.post('/webhook',  function (req, res) {
                                             {  
                                                 "type":"postback",
                                                 "label":"我喜歡",
-                                                "data":`${postbackData}`
+                                                "data":`${postbackData[0]}+${postbackData[1]}`
                                             },
                                             {  
                                                 "type":"postback",
