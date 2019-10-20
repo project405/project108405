@@ -480,8 +480,8 @@ bot.on('message', function(event) {
                           },
                           {
                             "type":"postback",
-                            "label":"article17",
-                            "data":'article17'
+                            "label":"article8",
+                            "data":'article8'
                           },
                       ]
                     },
