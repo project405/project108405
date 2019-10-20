@@ -170,7 +170,7 @@ app.post('/webhook',  function (req, res) {
                                     }
                                 }         
                             ],
-                            event:[{
+                            events:[{
                                 "type":"postback",
                                 "replyToken":"d7aooxxo154c6d94oo01xx28coxoxfd04",
                                 "source":{
