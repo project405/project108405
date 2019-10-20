@@ -63,7 +63,8 @@ app.post('/webhook',  function (req, res) {
         });
         byClassData.getIndexData().then(data =>{
             console.log(data[10][0])
-            var pushContent = []
+            var pushContent = [];
+            var postbackData = [];
             //data為文章
             if(data[10][0].recomHead == undefined){
                 pushContent.push('article')
@@ -110,10 +111,11 @@ app.post('/webhook',  function (req, res) {
                 }
             }
              
-
+            postbackData.push(pushContent[0],pushContent[1])
             console.log('pushContent@@@@@@@',pushContent)
-            console.log('pushContent.length[1]@@@@@@@',pushContent[1].length)
             console.log('pushContent.length@@@@@@@',pushContent.length)
+            console.log('postbackData@@@@@@@',postbackData)
+            console.log('postbackData.length@@@@@@@',postbackData.length)
 
             
             //文章、推薦內容無圖片的推播樣式
