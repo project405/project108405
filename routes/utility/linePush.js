@@ -47,4 +47,4 @@ var linebotAddLike = async function (lineID) {
 
 
 //匯出
-module.exports = linebotAddLike;
+module.exports = {linebotAddLike};
