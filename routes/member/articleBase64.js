@@ -17,9 +17,6 @@ router.post('/',urlencodedParser, function(req, res, next) {
     var negativeWords = req.body.negativeWords;
     var swearWords = req.body.swearWords;
     var artiNum = req.body.artiNum;
-    console.log(req.body)
-    console.log(req)
-    console.log(req.params)
 
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
     var tagData = [];
@@ -40,7 +37,6 @@ router.post('/',urlencodedParser, function(req, res, next) {
         tagData = req.body.tag.split(",");
     }
 
-    console.log(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords)
     if (memID == undefined) {
         res.send("請進行登入");
     } else {

@@ -47,13 +47,10 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
     var artiNum;
     var tagNum = [];
     var result = 0;
-    console.log('imgData', imgData)
-    console.log(typeof(imgData))
     if (typeof(imgData) == 'string') {
         var temp = imgData
         imgData = []
         imgData.push(temp)
-        console.log(imgData)
     }
     //新增文章
     await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime", "analyzeScore", "positiveWords", "negativeWords", "swearWords") ' +
@@ -70,8 +67,7 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
     });
 
     //新增tag 
-    console.log("tag=",tag.length);
-    console.log("imgData=",imgData);
+
     
     if(tag.length != 0){
         for (var i = 0; i < tag.length; i++) {
@@ -119,6 +115,11 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
     var tagNum = [];
     var result = 0;
     var imgs = []
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
     //修改文章
     await sql('UPDATE "article" SET "artiHead" = $1, "artiCont" =$2, "artiClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6, "swearWords"= $7 ' +
     ' WHERE "artiNum" = $8'
@@ -138,27 +139,29 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
     }) 
 
     //新增tag 
-    for (var i = 0; i < tag.length; i++) {
-        await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
-            .then((data) => {
-                if (!data.rows) {
+    if(tag.length != 0){
+        for (var i = 0; i < tag.length; i++) {
+            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+                .then((data) => {
+                    if (!data.rows) {
+                        tagNum = undefined;
+                    } else {
+                        tagNum = data.rows[0].tagNum;
+                    }
+                }, (error) => {
                     tagNum = undefined;
-                } else {
-                    tagNum = data.rows[0].tagNum;
-                }
-            }, (error) => {
-                tagNum = undefined;
-                console.error(error)
-            });
+                    console.error(error)
+                });
 
-        // --------- 新增tagLink ---------
-        await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
-            .then((data) => {
-                result = 1
-            }, (error) => {
-                console.log(error)
-                result = 0;
-            });
+            // --------- 新增tagLink ---------
+            await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
+                .then((data) => {
+                    result = 1
+                }, (error) => {
+                    console.log(error)
+                    result = 0;
+                });
+        }
     }
 
     await sql('SELECT * FROM "image" WHERE "artiNum" = $1 and "artiMessNum" IS NULL', [artiNum])
@@ -186,15 +189,16 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
     }
 
     // --------- 新增img ---------
-    for (var i = 0; i < imgData.length; i++) {
-        await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
-            .then((data) => {
-                result = 1;
-            }, (error) => {
-                result = 0;
-            });
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
+                .then((data) => {
+                    result = 1;
+                }, (error) => {
+                    result = 0;
+                });
+        }
     }
-
     return result;
 }
 
@@ -205,6 +209,11 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
     var tagNum = [];
     var result = 0;
     var imgs = []
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
     //修改文章
     await sql('UPDATE "recommend" SET "recomHead" = $1, "recomCont" =$2, "recomClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6' +
     ' WHERE "recomNum" = $7'
@@ -225,28 +234,30 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
     }) 
 
     //新增tag 
-    for (var i = 0; i < tag.length; i++) {
-        await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
-            .then((data) => {
-                result = 1;
-                if (!data.rows) {
+    if(tag.length != 0){
+        for (var i = 0; i < tag.length; i++) {
+            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+                .then((data) => {
+                    result = 1;
+                    if (!data.rows) {
+                        tagNum = undefined;
+                    } else {
+                        tagNum = data.rows[0].tagNum;
+                    }
+                }, (error) => {
                     tagNum = undefined;
-                } else {
-                    tagNum = data.rows[0].tagNum;
-                }
-            }, (error) => {
-                tagNum = undefined;
-                console.error(error)
-            });
+                    console.error(error)
+                });
 
-        // --------- 新增tagLink ---------
-        await sql('INSERT into "tagLinkArticle" ("recomNum","tagNum") VALUES ($1,$2)', [recomNum, tagNum])
-            .then((data) => {
-                result = 1
-            }, (error) => {
-                console.log(error)
-                result = 0;
-            });
+            // --------- 新增tagLink ---------
+            await sql('INSERT into "tagLinkArticle" ("recomNum","tagNum") VALUES ($1,$2)', [recomNum, tagNum])
+                .then((data) => {
+                    result = 1
+                }, (error) => {
+                    console.log(error)
+                    result = 0;
+                });
+        }
     }
 
     await sql('SELECT * FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NULL', [recomNum])
@@ -276,14 +287,16 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
     }
 
     // --------- 新增img ---------
-    for (var i = 0; i < imgData.length; i++) {
-        await sql('INSERT into "image" ("memID", "recomNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, recomNum, imgData[i], artiDateTime])
-            .then((data) => {
-                result = 1;
-            }, (error) => {
-                result = 0;
-                console.log(error)
-            });
+    if (imgData != undefined) {
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("memID", "recomNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, recomNum, imgData[i], artiDateTime])
+                .then((data) => {
+                    result = 1;
+                }, (error) => {
+                    result = 0;
+                    console.log(error)
+                });
+        }
     }
 
     return result;
@@ -294,6 +307,11 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
 var editRecommendReply = async function (recomNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum, remainImg) {
     var result = 0;
     var imgs = []
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
     //編輯留言
     await sql('UPDATE "recommendMessage" SET "recomMessCont"= $1, "analyzeScore" =$2, "positiveWords"= $3, "negativeWords"= $4, "swearWords"= $5 '+
     'WHERE "recomMessNum" = $6'
@@ -329,17 +347,17 @@ var editRecommendReply = async function (recomNum, memID, replyCont, postDateTim
             }
         })
     }
-
-    for (var i = 0; i < imgData.length; i++) {
-        await sql('INSERT into "image" ("recomNum", "memID", "recomMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [recomNum, memID, recomMessNum, imgData[i], postDateTime])
-            .then((data) => {
-                result = 1;
-            }, (error) => {
-                result = 0;
-                console.error(error)
-            });
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("recomNum", "memID", "recomMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [recomNum, memID, recomMessNum, imgData[i], postDateTime])
+                .then((data) => {
+                    result = 1;
+                }, (error) => {
+                    result = 0;
+                    console.error(error)
+                });
+        }
     }
-
     return result;
 }
 
@@ -411,7 +429,13 @@ var deleteRecommendReply = async function (recomMessNum) {
 var recommendPost = async function (memID, recomHead, recomCont, recomClass, recomDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords) {
     var recomNum;
     var tagNum;
-    var result;
+    var result;    
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
+
     // --------- 新增文章 ---------
     await sql('INSERT into "recommend" ("recomHead","recomCont","recomClass","recomDateTime", "analyzeScore", "positiveWords", "negativeWords")' +
         ' VALUES ($1,$2,$3,$4,$5,$6,$7)  returning "recommend"."recomNum" ;'
@@ -426,44 +450,47 @@ var recommendPost = async function (memID, recomHead, recomCont, recomClass, rec
             recomNum = undefined;
             console.log(error)
         });
-
+    
     // --------- 新增tag ---------
-    for (var i = 0; i < tag.length; i++) {
-        await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
-            .then((data) => {
-                if (!data.rows) {
+    if(tag.length != 0){
+        for (var i = 0; i < tag.length; i++) {
+            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+                .then((data) => {
+                    if (!data.rows) {
+                        tagNum = undefined;
+                    } else {
+                        tagNum = data.rows[0].tagNum;
+                    }
+                }, (error) => {
                     tagNum = undefined;
-                } else {
-                    tagNum = data.rows[0].tagNum;
-                }
-            }, (error) => {
-                tagNum = undefined;
-                console.log(error)
+                    console.log(error)
 
-            });
+                });
 
-        // --------- 新增tagLink ---------
-        await sql('INSERT into "tagLinkArticle" ("recomNum","tagNum") VALUES ($1,$2)', [recomNum, tagNum])
-            .then((data) => {
-                result = 0;
-            }, (error) => {
-                result = 1;
-            });
+            // --------- 新增tagLink ---------
+            await sql('INSERT into "tagLinkArticle" ("recomNum","tagNum") VALUES ($1,$2)', [recomNum, tagNum])
+                .then((data) => {
+                    result = 0;
+                }, (error) => {
+                    result = 1;
+                });
+        }
     }
 
 
     // --------- 新增img ---------
-    for (var i = 0; i < imgData.length; i++) {
-        await sql('INSERT into "image" ("memID", "recomNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, recomNum, imgData[i], recomDateTime])
-            .then((data) => {
-                result = 0;
-            }, (error) => {
-                result = 1;
-                console.log(error)
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("memID", "recomNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, recomNum, imgData[i], recomDateTime])
+                .then((data) => {
+                    result = 0;
+                }, (error) => {
+                    result = 1;
+                    console.log(error)
 
-            });
+                });
+        }
     }
-
     return result;
 }
 
@@ -474,6 +501,11 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
     
     var artiMessNum;
     var result = 0;
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
 
     //新增留言
     await sql('INSERT into "articleMessage" ("artiNum","memID","artiMessDateTime","artiMessCont", "analyzeScore", "positiveWords", "negativeWords", "swearWords") '+
@@ -489,15 +521,16 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
             console.error(error)
             artiMessNum = undefined;
         });
-
-    for (var i = 0; i < imgData.length; i++) {
-        await sql('INSERT into "image" ("artiNum", "memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [artiNum, memID, artiMessNum, imgData[i], postDateTime])
-            .then((data) => {
-                result = 0;
-            }, (error) => {
-                result = 1;
-                console.error(error)
-            });
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("artiNum", "memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [artiNum, memID, artiMessNum, imgData[i], postDateTime])
+                .then((data) => {
+                    result = 0;
+                }, (error) => {
+                    result = 1;
+                    console.error(error)
+                });
+        }
     }
     return result;
 }
@@ -508,6 +541,11 @@ var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMe
     
     var recomMessNum;
     var result = 0;
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
 
     //新增留言
     await sql('INSERT into "recommendMessage" ("recomNum","memID","recomMessDateTime","recomMessCont", "analyzeScore", "positiveWords", "negativeWords", "swearWords") '+
@@ -524,15 +562,16 @@ var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMe
             console.error(error)
             recomMessNum = undefined;
         });
-
-    for (var i = 0; i < imgData.length; i++) {
-        await sql('INSERT into "image" ("recomNum", "memID", "recomMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [recomNum, memID, recomMessNum, imgData[i], recomMessDateTime])
-            .then((data) => {
-                result = 1;
-            }, (error) => {
-                result = 0;
-                console.error(error)
-            });
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("recomNum", "memID", "recomMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [recomNum, memID, recomMessNum, imgData[i], recomMessDateTime])
+                .then((data) => {
+                    result = 1;
+                }, (error) => {
+                    result = 0;
+                    console.error(error)
+                });
+        }
     }
     return result;
 }
@@ -542,6 +581,11 @@ var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMe
 var editReply = async function (artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, artiMessNum, remainImg) {
     var result = 0;
     var imgs = []
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
     //新增留言
     await sql('UPDATE "articleMessage" SET "artiMessCont"= $1, "analyzeScore" =$2, "positiveWords"= $3, "negativeWords"= $4, "swearWords"= $5 '+
     'WHERE "artiMessNum" = $6'
@@ -576,15 +620,16 @@ var editReply = async function (artiNum, memID, replyCont, postDateTime, imgData
             }
         })
     }
-
-    for (var i = 0; i < imgData.length; i++) {
-        await sql('INSERT into "image" ("artiNum", "memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [artiNum, memID, artiMessNum, imgData[i], postDateTime])
-            .then((data) => {
-                result = 1;
-            }, (error) => {
-                result = 0;
-                console.error(error)
-            });
+    if(imgData != undefined) {
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("artiNum", "memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [artiNum, memID, artiMessNum, imgData[i], postDateTime])
+                .then((data) => {
+                    result = 1;
+                }, (error) => {
+                    result = 0;
+                    console.error(error)
+                });
+        }
     }
 
     return result;

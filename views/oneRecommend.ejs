@@ -30,9 +30,9 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 content shadow">
                 <div class="info d-flex">
-                    <div><a class="floorTag">樓主</a></div>
+                    <div><a class="floorTag">管理員</a></div>
                     <div>
-                        <a>富心漢👨🏿‍🔧</a>
+                        <a>文藝青年</a>
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[0][0].recomDateTime %>發佈</a>
                     </div>
@@ -351,6 +351,7 @@
             item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0, 15)}...` : item.innerText
         })
         var imgs = [];
+        var toBase64 = []
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
         $('#file-selector').change(function (event) {
@@ -385,15 +386,20 @@
             $('.submitReplyButton').addClass('disabled')
             $('.submitReplyButton').attr('disabled', true)
             $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
+
 
             var imgKey = []
             if ($("#replyInput").find("#replyInput > img")) {
                 Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
                     imgKey.push(img.getAttribute('key'))
+                    toBase64.push(img.getAttribute('src'))
                 })
                 imgs.map((img) => {
                     if (imgKey.indexOf(img.timeStamp) >= 0) {
                         formData.append('userImg', img);
+                        var base64Index = toBase64[imgKey.indexOf(img.timeStamp)]
+                        formData.append('base64Index', base64Index);
                     }
                 })
                 Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
@@ -632,6 +638,8 @@
             // delRecommend
         function delRecommend(recomNum) {
             $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
+
             $.ajax({
             url: '/addLike',
             type: 'POST',
@@ -648,6 +656,8 @@
         // delReply
         function deleteReply(artiMessNum, memID) {
             $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
+
             $.ajax({
                 url: '/addLike',
                 type: 'POST',

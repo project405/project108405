@@ -80,7 +80,7 @@
                                     <% for(var j = 0 ; j<items[3].length ; j++) { %>
                                         <% if (items[0][i].artiNum == items[3][j].artiNum){ %>
                                             <div class="wrapperCard card-img-top col-lg-3"
-                                                style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
+                                                style="background-image: url( '<%= items[3][j].imgName %>'); ">
                                             </div>
                                             <% break %> <!-- 取得一張照片就結束 -->
                                         <% } %>
@@ -338,7 +338,7 @@
                     <% for(var j = 0 ; j<items[7].length ; j++ ) { %>
                         <% if(items[6][i].recomNum == items[7][j].recomNum){ %>
                             <div class="wrapper col-12  col-lg-2"
-                            style="background-image:url('/imgs/recommend/<%= items[7][j].imgName %>');">
+                            style="background-image:url('<%= items[7][j].imgName %>');">
                             <% isImg = true %>
                         <% } %>
                     <% } %>

@@ -78,10 +78,7 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
     if (req.body.tag != '') {
         tagData = req.body.tag.split(",");
     }
-    console.log(req.body.toImgur)
 
-    console.log(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords)
-    
     //如果沒登入
     if (memID == undefined) {
         if (req.body.userImg != 'undefined') {
@@ -124,7 +121,7 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
                     }
                 }
                 if (artiNum) {
-                    member.editArticle(memID, artiHead, artiCont, artiClass, req.body.toImgur, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.remainImg).then(data => {
+                    member.editArticle(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.remainImg).then(data => {
                         if (data == 1) {
                             res.send("編輯成功");
                         } else {
@@ -135,7 +132,7 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
                         }
                     })
                 } else {
-                    member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, req.body.toImgur, tagData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
+                    member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
                         if (data == 0) {
                             res.send("發文成功");
                         } else {

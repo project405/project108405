@@ -29,7 +29,7 @@ router.get('/:recomNum', async function (req, res, next) {
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].recomCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[3].length; j++) {
-                    data[0][i].recomCont = data[0][i].recomCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top original'><img src='/imgs/recommend/" + data[3][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    data[0][i].recomCont = data[0][i].recomCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top original'><img src='" + data[3][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 }
             }
         }
@@ -39,7 +39,6 @@ router.get('/:recomNum', async function (req, res, next) {
         } else if (data == -1) {
             res.render('notFound');  //導向找不到頁面                
         } else {
-            console.log('data',data)
             res.render('editRecommend', { items: data });
         }
     })

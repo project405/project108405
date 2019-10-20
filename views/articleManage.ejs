@@ -96,7 +96,7 @@
                                     <% for(var j = 0 ; j<myArticle[2].length ; j++) { %>
                                         <% if (myArticle[0][i].artiNum == myArticle[2][j].artiNum){ %>
                                             <div class="wrapperCard card-img-top col-lg-3"
-                                                style="background-image: url( '/userImg/<%= myArticle[2][j].imgName %>'); ">
+                                                style="background-image: url( '<%= myArticle[2][j].imgName %>'); ">
                                             </div>
                                             <% break %> <!-- 取得一張照片就結束 -->
                                         <% } %>

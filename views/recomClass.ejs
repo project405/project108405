@@ -59,7 +59,7 @@
                 <% for(var j = 0 ; j<recom[3].length ; j++ ) { %>
                     <% if(recom[0][i].recomNum == recom[3][j].recomNum){ %>
                         <div class="wrapper col-12  col-lg-2" 
-                        style="background-image: url('/imgs/recommend/<%= recom[3][j].imgName %>');">
+                        style="background-image: url('<%= recom[3][j].imgName %>');">
                         <% isImg = true %>
                         <% break ;%>
                     <% } %>

@@ -108,6 +108,7 @@
     <script src="/javascripts/navbar.js"></script>
     <script>
             var imgs = [];
+            var toBase64 = []
             var formData = new FormData(); //用formData來存取要傳送的所有資料
             // 選取到檔案後開始動作
             $('#file-selector').change(function(event) {
@@ -146,14 +147,19 @@
                 $('.postButton').addClass('disabled')
                 $('.postButton').attr('disabled', true)
                 $('.spinner-border').css('display', 'block')
+                $('.coverContainer').css('display', 'block')
+
                 var imgKey = []
                 if ($("#postInput").find("#postInput > img")) {
                     Array.from($("#postInput").find("#postInput > img")).map((img) => {
                         imgKey.push(img.getAttribute('key'))
+                        toBase64.push(img.getAttribute('src'))
                     })
                     imgs.map((img) => {
                         if (imgKey.indexOf(img.timeStamp) >= 0) {
                             formData.append('userImg', img);
+                            var base64Index = toBase64[imgKey.indexOf(img.timeStamp)]
+                            formData.append('base64Index', base64Index);
                         }
                     })
                     Array.from($("#postInput").find("#postInput > img")).forEach((img) => {

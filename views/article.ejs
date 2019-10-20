@@ -453,13 +453,19 @@
             $('.spinner-border').css('display', 'block')
             $('.coverContainer').css('display', 'block')
             var imgKey = []
+            var toBase64 = []
+
             if ($("#replyInput").find("#replyInput > img")) {
                 Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
                     imgKey.push(img.getAttribute('key'))
+                    toBase64.push(img.getAttribute('src'))
                 })
                 imgs.map((img) => {
                     if (imgKey.indexOf(img.timeStamp) >= 0) {
                         formData.append('userImg', img);
+                        var base64Index = toBase64[imgKey.indexOf(img.timeStamp)]
+                        console.log(base64Index)
+                        formData.append('base64Index', base64Index);
                     }
                 })
                 Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
@@ -700,6 +706,7 @@
             // delArticle
             function delArticle(artiNum) {
                     $('.spinner-border').css('display', 'block')
+                    $('.coverContainer').css('display', 'block')
                     $.ajax({
                     url: '/addLike',
                     type: 'POST',
@@ -716,6 +723,7 @@
             // delReply
             function deleteReply(artiMessNum, memID) {
                     $('.spinner-border').css('display', 'block')
+                    $('.coverContainer').css('display', 'block')
                     $.ajax({
                     url: '/addLike',
                     type: 'POST',
