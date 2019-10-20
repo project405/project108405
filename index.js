@@ -144,11 +144,11 @@ bot.on('postback', function(event) {
                     console.log('切割後的data!!!!!!!!',spliceData)
                     linePush.AddArticleLike(userId,spliceData).then(data =>{
                         console.log(data)
-                        
                         if(data == 1){
                             console.log('喜愛成功')
+                            event.reply('你的喜歡是我們努力的動力...🌱')
                         }else{
-                            console.log('以重複按過囉')
+                            console.log('已點選過喜愛')
                         }
                     })
 
