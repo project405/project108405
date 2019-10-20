@@ -524,7 +524,6 @@ bot.on('message', function(event) {
     //     });
     // }
     if (text == '我喜歡'|| text == '我不喜歡'){
-        console.log('我喜歡')
         login.userJudgeBind(userId).then(d =>{
             console.log('d1!!!!!!!!!!!!',d)
             if(d.length !== 0){ 
@@ -534,6 +533,7 @@ bot.on('message', function(event) {
             }else{
 
                     console.log('我沒綁定linebot喔喔喔喔')
+                    // event.reply(myLineTemplate)
             }
         })
     }
