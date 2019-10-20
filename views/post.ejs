@@ -67,10 +67,11 @@
         <i class="fa fa-angle-up"></i>
     </a>
 
-
-    <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
+    <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
-     </div>
+    </div>
+    <div class="coverContainer">
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -95,6 +96,7 @@
     <script>
         var imgs = [];
         var formData = new FormData(); //用formData來存取要傳送的所有資料
+        var toBase64 = []
         // 選取到檔案後開始動作
         $('#file-selector').change(function(event) {
             let timeStamp = new Date().getTime()
@@ -110,6 +112,7 @@
                     reader.onload = (function(item) {
                         return function(event) {
                             var src = event.target.result // 圖片的編碼 , 格式為base64
+                            console.log(src)
                             var title = escape(file.name);
                             var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
                             $('#postInput').append('<div id="postInput">' + img + '</div>');
@@ -128,38 +131,41 @@
             if ($("#postInput").find("#postInput > img")) {
                 Array.from($("#postInput").find("#postInput > img")).map((img) => {
                     imgKey.push(img.getAttribute('key'))
+                    toBase64.push(img.getAttribute('src'))
                 })
                 await imgs.map( async(img) => {
                     console.log(img)
                     if (imgKey.indexOf(img.timeStamp) >= 0) {
+                        var base64Index = toBase64[imgKey.indexOf(img.timeStamp)]
+                        console.log(base64Index)
                         formData.append('userImg', img);
-                        await $.ajax({
-                            "async": true,
-                            "crossDomain": true,
-                            "url": apiUrl,
-                            "method": "POST",
-                            "datatype": "json",
-                            "headers": {
-                                "Authorization": "Client-ID " + apiKey
-                            },
-                            "processData": false,
-                            "contentType": false,
-                            "data": img,
-                            success: function (res) {
-                                console.log(res.data.link)
-                                imgur.push(res.data.link)
-                                formData.append('toImgur', res.data.link);
-                            },
-                            error: function (e) {
-                                console.log(e)
-                                alert("圖片上傳失敗");
-                            }
-                        }).done(function (res) {
-                            console.log("Done");
-                        });
+                        formData.append('base64Index', base64Index);
+                        // await $.ajax({
+                        //     "async": true,
+                        //     "crossDomain": true,
+                        //     "url": apiUrl,
+                        //     "method": "POST",
+                        //     "datatype": "json",
+                        //     "headers": {
+                        //         "Authorization": "Client-ID " + apiKey
+                        //     },
+                        //     "processData": false,
+                        //     "contentType": false,
+                        //     "data": img,
+                        //     success: function (res) {
+                        //         console.log(res.data.link)
+                        //         imgur.push(res.data.link)
+                        //         formData.append('toImgur', res.data.link);
+                        //     },
+                        //     error: function (e) {
+                        //         console.log(e)
+                        //         alert("圖片上傳失敗");
+                        //     }
+                        // }).done(function (res) {
+                        //     console.log("Done");
+                        // });
                     }
                 })
-
                 Array.from($("#postInput").find("#postInput > img")).forEach((img) => {
                     $(img).before("\\:imgLocation")
                 })
@@ -174,6 +180,13 @@
         }
         async function processWords() {
             var artiHead = document.getElementById("artiHead").value;
+            if (artiHead == '') {
+                alert('請輸入標題')
+                return;
+            } else if (document.getElementById("postInput").innerHTML == '') {
+                alert('請輸入內文')
+                return;
+            }
             var artiCont = [];
             var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
             // 取得內容
@@ -227,6 +240,7 @@
                             }
                         },
                         error: function (res) {
+                            console.log(res)
                         }
                     });
                 },
@@ -240,7 +254,7 @@
             if (artiHead == '') {
                 alert('請輸入標題')
                 return;
-            } else if ($("div.postInput") == '') {
+            } else if (document.getElementById("postInput").innerHTML == '') {
                 alert('請輸入內文')
                 return;
             }

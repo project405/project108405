@@ -64,9 +64,11 @@
             <!-- </div> -->
             <button type="submit" class="btn btn-danger col-lg-2 float-right postButton" onclick="submitModifyArticle()">提交</button>
 
-            <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
+            <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
-             </div>
+            </div>
+            <div class="coverContainer">
+            </div>
 
             
 
@@ -136,7 +138,7 @@
                 if (artiHead == '') {
                     alert('請輸入標題')
                     return;
-                } else if (document.querySelectorAll("div.postInput") == '') {
+                } else if (document.getElementById("postInput").innerHTML == '') {
                     alert('請輸入內文')
                     return;
                 }
