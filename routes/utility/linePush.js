@@ -13,9 +13,12 @@ var linebotAddLike = async function (lineID) {
     var result;
     
     // 判斷是否被使用者按愛心
-    await sql('SELECT "memID","artiNum" '+ 
-             ' FROM "articleLike" '+
-             ' WHERE "memID" = $1', [lineID])
+    
+    await sql('SELECT "memID", "artiNum" '+
+              'FROM "articleLike" '+
+              'WHERE "memID" IN (SELECT "memID"  FROM  "member" WHERE "lineID" =  $1', [lineID])
+
+
         .then((data) => {
             if(!data.rows){
                 isLike = undefined ; 
