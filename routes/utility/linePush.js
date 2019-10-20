@@ -33,7 +33,7 @@ var AddArticleLike = async function (lineID,artiNum) {
     
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
     if(isLike = 1){
-        await sql('INSERT INTO "articleLike" ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),"artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [memID, artiNum, addTime])
+        await sql('INSERT INTO "articleLike" ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),"artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [lineID, artiNum, addTime])
             .then((data) => {
                 result = data.rows;
             }, (error) => {
