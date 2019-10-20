@@ -524,6 +524,8 @@ bot.on('message', function(event) {
     //     });
     // }
     if (text == '我喜歡'|| text == '我不喜歡'){
+        console.log('前台的userId！！！！！！！！！！',userId)
+        
         login.userJudgeBind(userId).then(d =>{
             console.log('d1!!!!!!!!!!!!',d)
             if(d.length !== 0){ 

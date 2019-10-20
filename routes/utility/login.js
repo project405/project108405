@@ -63,7 +63,7 @@ var addLineID = async function(memID, lineID){
 var userJudgeBind = async function(lineID){
     
     var result = 5;
-    console.log(lineID)
+    console.log('api的lineID！！！！！！！！！！！',lineID)
     
     await sql('SELECT * FROM "member" WHERE "lineID" = $1', [lineID])
         .then((data) => {
