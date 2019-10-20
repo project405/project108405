@@ -511,11 +511,11 @@ bot.on('message', function(event) {
     //         }
     //     });
     // }
-    if (text == '我喜歡'|| text == '我不喜歡'){ 
-        console.log(userId)
-        linePush.linebotAddLike(userId).then(data =>{
-            console.log("api的return##################",data)
-        })     
+    // if (text == '我喜歡'|| text == '我不喜歡'){ 
+    //     console.log(userId)
+    //     linePush.linebotAddLike(userId).then(data =>{
+    //         console.log("api的return##################",data)
+    //     })     
         // login.userJudgeBind(userId).then(d =>{
         //     console.log('d1!!!!!!!!!!!!',d)
         //     if(d.length !== 0){ 
@@ -530,7 +530,7 @@ bot.on('message', function(event) {
         //             // event.reply(myLineTemplate)
         //     }
         // })
-    }
+    // }
     console.log('使用者傳來的文字',text);
     })
 });
