@@ -21,7 +21,7 @@ var AddArticleLike = async function (lineID,artiNum) {
         .then((data) => {
             console.log(data.rows)
             //沒有資料
-            if(!data.rows){
+            if(data.rows = null){
                 isLike = 0 ; 
             }else{
                 isLike = 1 ;
