@@ -10,8 +10,8 @@ const moment = require('moment');
 //==============================
 
 var linebotAddLike = async function (lineID) {
-    var result;
-    var isLike ;
+    var result =1;
+    var isLike =1;
     // 判斷是否被使用者按愛心
     await sql('SELECT "memID", "artiNum" '+
               'FROM "articleLike" '+
