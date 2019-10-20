@@ -149,6 +149,26 @@ app.post('/webhook',  function (req, res) {
                                       ]
                                     }
                                 },
+                                // {
+                                //     type: "template",
+                                //     altText: "相信你會喜歡😎",
+                                //     template: {
+                                //         type: "confirm",
+                                //         text: `🔸標題：${pushContent[1]}\n🔹內容：${pushContent[2]}`,
+                                //         actions: [
+                                //             {
+                                //                 "type": "message",
+                                //                 "label": "我喜歡",
+                                //                 "text": "我喜歡"
+                                //             },
+                                //             {
+                                //                 "type": "message",
+                                //                 "label": "我不喜歡",
+                                //                 "text": "我不喜歡"
+                                //             }
+                                //         ]
+                                //     }
+                                // }   
                                 {
                                     type: "template",
                                     altText: "相信你會喜歡😎",
@@ -156,32 +176,20 @@ app.post('/webhook',  function (req, res) {
                                         type: "confirm",
                                         text: `🔸標題：${pushContent[1]}\n🔹內容：${pushContent[2]}`,
                                         actions: [
-                                            {
-                                                "type": "message",
-                                                "label": "我喜歡",
-                                                "text": "我喜歡"
+                                            {  
+                                                "type":"postback",
+                                                "label":"我喜歡",
+                                                "data":"我喜歡"
                                             },
-                                            {
-                                                "type": "message",
-                                                "label": "我不喜歡",
-                                                "text": "我不喜歡"
+                                            {  
+                                                "type":"postback",
+                                                "label":"我不喜歡",
+                                                "data":"我不喜歡"
                                             }
                                         ]
                                     }
-                                }         
-                            ],
-                            events:[{
-                                "type":"postback",
-                                "replyToken":"d7aooxxo154c6d94oo01xx28coxoxfd04",
-                                "source":{
-                                    "userId":"U2251202deb66b8a73da26e53c8399a13",
-                                    "type":"user"
-                                },
-                                "timestamp":1485251255286,
-                                "postback":{
-                                    "data":"我喜歡"
-                                }
-                            }]                            
+                                }        
+                            ]                          
                             
                     })
                 }, function(error, response, body){
@@ -223,6 +231,36 @@ app.post('/webhook',  function (req, res) {
                                       ]
                                     }
                                 },
+                                // {
+                                //     type: "template",
+                                //     altText: "相信你會喜歡😎",
+                                //     template: {
+                                //         type: "buttons",
+                                //         thumbnailImageUrl: "https://i.imgur.com/z3ErJYW.jpg",
+                                //         imageAspectRatio: "rectangle",
+                                //         imageSize: "cover",
+                                //         imageBackgroundColor: "#FFFFFF",
+                                //         title: `${pushContent[1]}`,
+                                //         text: `${pushContent[2]}`,
+                                //         defaultAction: {
+                                //             "type": "uri",
+                                //             "label": "View detail",
+                                //             "uri": "http://example.com/page/123"
+                                //         },
+                                //         actions: [
+                                //             {
+                                //                 "type": "message",
+                                //                 "label": "我喜歡",
+                                //                 "text": "我喜歡"
+                                //             },
+                                //             {
+                                //                 "type": "message",
+                                //                 "label": "我不喜歡",
+                                //                 "text": "我不喜歡"
+                                //             }
+                                //         ]
+                                //     }
+                                // }
                                 {
                                     type: "template",
                                     altText: "相信你會喜歡😎",
@@ -240,19 +278,19 @@ app.post('/webhook',  function (req, res) {
                                             "uri": "http://example.com/page/123"
                                         },
                                         actions: [
-                                            {
-                                                "type": "message",
-                                                "label": "我喜歡",
-                                                "text": "我喜歡"
+                                            {  
+                                                "type":"postback",
+                                                "label":"我喜歡",
+                                                "data":"我喜歡"
                                             },
-                                            {
-                                                "type": "message",
-                                                "label": "我不喜歡",
-                                                "text": "我不喜歡"
+                                            {  
+                                                "type":"postback",
+                                                "label":"我不喜歡",
+                                                "data":"我不喜歡"
                                             }
                                         ]
                                     }
-                                }           
+                                }                
                             ]
                         })
                 }, function(error, response, body){
