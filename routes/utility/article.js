@@ -211,7 +211,7 @@ var getOneArticle = async function (artiNum, memID) {
                 guessArticle = data.rows;
             }   
         });
-        
+
     // ----------- 如果tag沒任何關聯 則隨機取三篇文章 -----------
     if(guessArticle == undefined){
         await sql('SELECT * '+
@@ -226,7 +226,40 @@ var getOneArticle = async function (artiNum, memID) {
                     guessArticle = data.rows;
                 }   
         });
+    }else if(guessArticle.length < 3 ) { //  如果tag關聯數量小於三篇文章 
+        if(guessArticle.length == 1 ){ //如果只有一篇
+            await sql('SELECT * '+
+                    ' FROM "article" '+
+                    ' WHERE "artiNum" != $1 '+
+                    ' ORDER BY random() '+
+                    ' LIMIT 2',[guessArticle[0].artiNum]) 
+            .then((data) => {
+                    if (!data.rows) {
+                        guessArticle = undefined ;
+                    } else {
+                        for(var i = 0 ; i < data.rows.length ; i++){
+                            guessArticle.push(data.rows[i]);
+                        }
+                    }   
+            });
+        }else if (guessArticle.length == 2 ){  //如果有兩篇
+            await sql('SELECT * '+
+                     ' FROM "article" '+
+                     ' WHERE "artiNum" != $1 AND "artiNum" != $2 '+
+                     ' ORDER BY random() '+
+                     ' LIMIT 1',[guessArticle[0].artiNum ,guessArticle[1].artiNum]) 
+            .then((data) => {
+                    if (!data.rows) {
+                        guessArticle = undefined ;
+                    } else {
+                        guessArticle.push(data.rows[0]);
+                    }   
+            });
+        }
+        
     }
+
+
     //取得照片
     await sql('SELECT "artiNum" , "imgName" '+
         ' FROM "image" '+ 
