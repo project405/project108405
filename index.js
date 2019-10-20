@@ -510,7 +510,7 @@ bot.on('message', function(event) {
                 "imageSize": "cover"
             }
         });
-    }
+    // }
        
     console.log('使用者傳來的文字',text);
     })
