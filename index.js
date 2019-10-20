@@ -549,11 +549,7 @@ bot.on('message', function(event) {
     })
 });
 
-app.get('/webhook',  function (req, res) {
-    request.post({
-                    
-    })
-})
+
 
 
 
