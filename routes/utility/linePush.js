@@ -47,9 +47,11 @@ var AddArticleLike = async function (lineID) {
 //-------- 點選推薦喜愛 --------
 //==============================
 
-var AddRecommendLike = async function (lineID) {
+var AddRecommendLike = async function (lineID,artiNum) {
     var result ;
     var isLike ;
+    console.log('後台的～～～～～～～～～～～～',lineID)
+    console.log('後台的～～～～～～～～～～～～',artiNum)
     // 判斷是否被使用者按愛心
     await sql('SELECT "memID", "artiNum" '+
               'FROM "articleLike" '+
