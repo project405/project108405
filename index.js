@@ -176,7 +176,7 @@ app.post('/webhook',  function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "confirm",
-                                        text: `🔸標題：${pushContent[1]}\n🔹內容：${pushContent[2]}`,
+                                        text: `🔸標題：${pushContent[2]}\n🔹內容：${pushContent[3]}`,
                                         actions: [
                                             {  
                                                 "type":"postback",
@@ -272,8 +272,8 @@ app.post('/webhook',  function (req, res) {
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
-                                        title: `${pushContent[1]}`,
-                                        text: `${pushContent[2]}`,
+                                        title: `${pushContent[2]}`,
+                                        text: `${pushContent[3]}`,
                                         defaultAction: {
                                             "type": "uri",
                                             "label": "View detail",
