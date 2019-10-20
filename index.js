@@ -140,7 +140,7 @@ bot.on('postback', function(event) {
             }else if (data.match("article") || data.match("recommend")){
                 console.log('＠＠＠＠＠＠＠＠＠＠＠進入推播喜愛')
                 if(data.match("article")){
-                    data.replace('article','')
+                    data = data.replace('article','')
                     console.log('切割後的data!!!!!!!!',data)
                     // linePush.AddArticleLike(userId).then(data =>{
                     //     console.log(data)
