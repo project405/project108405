@@ -32,43 +32,7 @@ var bot = linebot({
     channelAccessToken: 'QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
 });
 
-bot.on('postback', function() { 
-    source.profile().then(
-        function (profile) {
-            
-            const userName = profile.displayName;
-            const userId = profile.userId;
-            const data = postback.data;
-            JSON.stringify(data)
-            console.log("postback 資料",data)
-            //------------------------------------------------
-            //----------------未綁定Line_id用戶-----------------
-            //------------------------------------------------
-            // var myLineTemplate={
-            //     type: 'template',
-            //     altText: '很抱歉您未綁定line',
-            //     template: {
-            //         type: 'buttons',
-            //         text: 'LINE用戶請至文藝富心登入\n登入後能：\n1.在LINE收藏你喜歡的事物\n2.不定時收到文藝相關資訊',
-            //         actions: [{
-            //             type:"uri",
-            //             label:" 👣 至文藝富心官網登入",
-            //             // uri:"line://app/1594135622-705e8pDP"   
-            //             uri: "line://app/1594135622-82v9mEZq"
 
-            //         }]
-            //     }
-            // };
-    });    
-});
-
-bot.on('message', function(event) {
-    //使用者傳來的文字
-    const text = event.message.text;
-    
-   console.log(text)
- 
-});
 //----------------------------------------
 // 建立一個網站應用程式app
 // 如果連接根目錄, 交給機器人處理
@@ -154,9 +118,9 @@ app.post('/webhook',  function (req, res) {
                         'content-type' : 'application/json',
                         //Authorization為Channel access token 
                         // ----------測試line
-                        'Authorization': 'Bearer QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
+                        // 'Authorization': 'Bearer QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
                         // ----------正式line
-                        // 'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
+                        'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
                     },
                     // url: 'https://api.line.me/v2/bot/message/multicast',
                     url: 'https://api.line.me/v2/bot/message/push',
@@ -218,9 +182,9 @@ app.post('/webhook',  function (req, res) {
                         'content-type' : 'application/json',
                         //Authorization為Channel access token 
                         // ----------測試line
-                        'Authorization': 'Bearer QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
+                        // 'Authorization': 'Bearer QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
                         // ----------正式line
-                        // 'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
+                        'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
                     },
                     // url: 'https://api.line.me/v2/bot/message/multicast',
                     url: 'https://api.line.me/v2/bot/message/push',
