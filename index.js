@@ -139,9 +139,15 @@ bot.on('postback', function(event) {
                 });
             }else if (data.match("article") || data.match("recommend")){
                 console.log('＠＠＠＠＠＠＠＠＠＠＠進入推播喜愛')
+                if(data.match("article")){
+                    data.replace("article",'')
+                    console.log(data)
+                    // linePush.AddArticleLike(userId).then(data =>{
+                    //     console.log(data)
+                    // })
+
+                }
                 
-            }else if (data == '我不喜歡'){
-                console.log('我不喜歡')
             }else{
                 login.userJudgeBind(userId).then(d =>{
                     if(d.length !== 0){                         
