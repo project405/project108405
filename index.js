@@ -523,21 +523,24 @@ bot.on('message', function(event) {
     //         }
     //     });
     // }
-    if (text == '我喜歡'|| text == '我不喜歡'){        
-        login.userJudgeBind(userId).then(d =>{
-            console.log('d1!!!!!!!!!!!!',d)
-            if(d.length !== 0){ 
-                if(d[0].lineID == userId){
-                    console.log('我有綁定linebot喔喔喔喔')
-                    linePush.linebotAddLike(userId).then(data =>{
-                        console.log("api的return##################",data)
-                    })
-                }
-            }else{
-                    console.log('我沒綁定linebot喔喔喔喔')
-                    // event.reply(myLineTemplate)
-            }
-        })
+    if (text == '我喜歡'|| text == '我不喜歡'){   
+        linePush.linebotAddLike(userId).then(data =>{
+            console.log("api的return##################",data)
+        })     
+        // login.userJudgeBind(userId).then(d =>{
+        //     console.log('d1!!!!!!!!!!!!',d)
+        //     if(d.length !== 0){ 
+        //         if(d[0].lineID == userId){
+        //             console.log('我有綁定linebot喔喔喔喔')
+        //             linePush.linebotAddLike(userId).then(data =>{
+        //                 console.log("api的return##################",data)
+        //             })
+        //         }
+        //     }else{
+        //             console.log('我沒綁定linebot喔喔喔喔')
+        //             // event.reply(myLineTemplate)
+        //     }
+        // })
     }
 
 
