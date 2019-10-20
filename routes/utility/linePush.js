@@ -20,8 +20,9 @@ var AddArticleLike = async function (lineID,artiNum) {
               'WHERE "memID" IN (SELECT "memID"  FROM  "member" WHERE "lineID" =  $1 and "artiNum" = $2)', [lineID,artiNum])
         .then((data) => {
             console.log(typeof(data.rows) === null )
+            console.log(typeof(data.rows) === null )
             //沒有資料
-            if(!data.rows){
+            if(data.rows.length != 0){
                 isLike = undefined; 
             }else{
                 isLike = data.rows;
