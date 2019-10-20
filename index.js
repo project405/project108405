@@ -524,7 +524,7 @@ bot.on('message', function(event) {
     //     });
     // }
     if (text == '我喜歡'|| text == '我不喜歡'){ 
-        
+        console.log(userId)
         linePush.linebotAddLike(userId).then(data =>{
             console.log("api的return##################",data)
         })     
