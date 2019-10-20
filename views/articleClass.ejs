@@ -127,15 +127,17 @@
                             <% } else if(items[5][0] != undefined ) { %>
                                  <!-- 判斷是否有按過愛心 -->
                                  <% var isLike = false %>
-                                 <%  for (var j = 0; j < items[3].length ; j++) { %>
-                                     <!-- 如果有按過愛心 -->
-                                     <% if(items[0][i].artiNum == items[3][j].artiNum ) { %>
-                                        <script type="text/javascript">
-                                            document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "inline";
-                                            document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                            document.getElementById("LikeUnLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
-                                        </script>
-                                    <% isLike = true %>
+                                 <% if(items[2] != undefined ) { %>
+                                    <%  for (var j = 0; j < items[2].length ; j++) { %>
+                                        <!-- 如果有按過愛心 -->
+                                        <% if(items[0][i].artiNum == items[2][j].artiNum ) { %>
+                                            <script type="text/javascript">
+                                                document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "inline";
+                                                document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                                document.getElementById("LikeUnLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
+                                            </script>
+                                        <% isLike = true %>
+                                        <% } %>
                                     <% } %>
                                 <% } %>
                                 <!-- 如果沒按過愛心 -->
@@ -175,10 +177,10 @@
                             <!-- 如果有登入 -->
                             <% } else if(items[5][0] != undefined ) {%>
                                 <% var isCollection = false %> 
-                                <% if(items[2] != undefined){ %>
-                                    <% for(var j = 0 ; j < items[2].length ; j++) { %>
+                                <% if(items[4] != undefined){ %>
+                                    <% for(var j = 0 ; j < items[4].length ; j++) { %>
                                         <!-- 如果有點過收藏 -->
-                                        <% if (items[2][j].artiNum == items[0][i].artiNum){ %>
+                                        <% if (items[4][j].artiNum == items[0][i].artiNum){ %>
                                             <script type="text/javascript">
                                                 document.getElementById("delColle" + "<%= items[0][i].artiNum %>").style.display = "inline";
                                                 document.getElementById("addColle" + "<%= items[0][i].artiNum %>").style.display = "none";

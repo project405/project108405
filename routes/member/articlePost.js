@@ -81,6 +81,8 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
     console.log(req.body.toImgur)
 
     console.log(memID, artiHead, artiCont, artiClass, postDateTime, imgData, tagData, analyzeScore, positiveWords, negativeWords, swearWords)
+    
+    //如果沒登入
     if (memID == undefined) {
         if (req.body.userImg != 'undefined') {
             for (var i = 0; i < imgData.length; i++) {
@@ -88,7 +90,7 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
             }
         }
         res.send("請進行登入");
-    } else {
+    } else { //如果有登入 
         if (typeof (req.file) != 'undefined') {
             //如果檔案超過限制大小
             if (req.file.size > maxSize) {

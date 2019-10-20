@@ -11,6 +11,11 @@ body {
 }
 p {
     word-break: break-all !important;
+    overflow: hidden !important;
+}
+div.articleContent {
+    word-break: break-all !important;
+    overflow: hidden !important;
 }
 .banner {
     margin-bottom: 4em;
