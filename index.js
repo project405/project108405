@@ -10,7 +10,7 @@ const login = require('./routes/utility/login');
 const collection = require('./routes/utility/collection');
 const recommend = require('./routes/utility/recommend');
 const mood = require('./routes/utility/mood');
-// const linePush = require('./routes/utility/linePush');
+const linePush = require('./routes/utility/linePush');
 
 
 
