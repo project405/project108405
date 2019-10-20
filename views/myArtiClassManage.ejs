@@ -212,13 +212,13 @@
      <!-- 收藏 ajax script -->
      <script>
             $('button').click(function() {
-                if ($(this).parent('div').find('.fa-gratipay').parent('button')) {
-                    $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
-                    setTimeout(() => {
-                        $('button').attr('disabled', false)
-                    }, 1000)
-                }
-            })
+            if ($(this).children('.fa-gratipay').length > 0) {
+                $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
+                setTimeout(() => {
+                    $('button').attr('disabled', false)
+                }, 1000)
+            }
+        })
             //新增收藏
             function addColle(artiNum) {
                 collection(artiNum);

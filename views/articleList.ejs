@@ -248,7 +248,7 @@
       <!-- 收藏 ajax script -->
       <script>
         $('button').click(function() {
-            if ($(this).parent('div').find('.fa-gratipay').parent('button')) {
+            if ($(this).children('.fa-gratipay').length > 0) {
                 $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
                 setTimeout(() => {
                     $('button').attr('disabled', false)
