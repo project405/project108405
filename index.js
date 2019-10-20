@@ -149,26 +149,6 @@ app.post('/webhook',  function (req, res) {
                                       ]
                                     }
                                 },
-                                // {
-                                //     type: "template",
-                                //     altText: "相信你會喜歡😎",
-                                //     template: {
-                                //         type: "confirm",
-                                //         text: `🔸標題：${pushContent[1]}\n🔹內容：${pushContent[2]}`,
-                                //         actions: [
-                                //             {
-                                //                 "type": "message",
-                                //                 "label": "我喜歡",
-                                //                 "text": "我喜歡"
-                                //             },
-                                //             {
-                                //                 "type": "message",
-                                //                 "label": "我不喜歡",
-                                //                 "text": "我不喜歡"
-                                //             }
-                                //         ]
-                                //     }
-                                // }   
                                 {
                                     type: "template",
                                     altText: "相信你會喜歡😎",
@@ -181,10 +161,10 @@ app.post('/webhook',  function (req, res) {
                                                 "label":"我喜歡",
                                                 "data":`${pushContent[0]}`+`${pushContent[1]}`
                                             },
-                                            {
-                                                "type": "message",
-                                                "label": "我不喜歡",
-                                                "text": "文藝富心又更加了解你了"
+                                            {  
+                                                "type":"postback",
+                                                "label":"我不喜歡",
+                                                "data":'dislike'
                                             }
                                         ]
                                     }
@@ -231,36 +211,6 @@ app.post('/webhook',  function (req, res) {
                                       ]
                                     }
                                 },
-                                // {
-                                //     type: "template",
-                                //     altText: "相信你會喜歡😎",
-                                //     template: {
-                                //         type: "buttons",
-                                //         thumbnailImageUrl: "https://i.imgur.com/z3ErJYW.jpg",
-                                //         imageAspectRatio: "rectangle",
-                                //         imageSize: "cover",
-                                //         imageBackgroundColor: "#FFFFFF",
-                                //         title: `${pushContent[1]}`,
-                                //         text: `${pushContent[2]}`,
-                                //         defaultAction: {
-                                //             "type": "uri",
-                                //             "label": "View detail",
-                                //             "uri": "http://example.com/page/123"
-                                //         },
-                                //         actions: [
-                                //             {
-                                //                 "type": "message",
-                                //                 "label": "我喜歡",
-                                //                 "text": "我喜歡"
-                                //             },
-                                //             {
-                                //                 "type": "message",
-                                //                 "label": "我不喜歡",
-                                //                 "text": "我不喜歡"
-                                //             }
-                                //         ]
-                                //     }
-                                // }
                                 {
                                     type: "template",
                                     altText: "相信你會喜歡😎",
@@ -283,10 +233,10 @@ app.post('/webhook',  function (req, res) {
                                                 "label":"我喜歡",
                                                 "data":`${pushContent[0]}`+`${pushContent[1]}`
                                             },
-                                            {
-                                                "type": "message",
-                                                "label": "我不喜歡",
-                                                "text": "文藝富心又更加了解你了"
+                                            {  
+                                                "type":"postback",
+                                                "label":"我不喜歡",
+                                                "data":'dislike'
                                             }
                                         ]
                                     }
