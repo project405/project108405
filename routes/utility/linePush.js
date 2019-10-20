@@ -29,7 +29,7 @@ var linebotAddLike = async function (lineID) {
                 result = 0;
             }
         }, (error) => {
-            isLike.push('0');
+            // isLike.push('0');
         });
     
     
