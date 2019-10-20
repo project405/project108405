@@ -67,10 +67,11 @@
         <i class="fa fa-angle-up"></i>
     </a>
 
-    <div class="spinner-border" role="status">
+    <!-- <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
-    </div>
+    </div> -->
     <div class="coverContainer">
+    
     </div>
 
     <!-- Optional JavaScript -->
@@ -152,11 +153,11 @@
                     }
                 })
                 Array.from($("#postInput").find("#postInput > img")).forEach((img) => {
-                    $(img).before("<a class='postInput' style='visibility:hidden'>\\:imgLocation</a>")
+                    $(img).before("\\:imgLocation")
                 })
             }
             var artiCont = [];
-            var artiData = document.querySelectorAll("postInput"); //只取得文字部分(不含圖片) ;
+            var artiData = document.querySelectorAll(".postInput"); //只取得文字部分(不含圖片) ;
             // 取得內容
             artiData.forEach(function (element) {
                 artiCont.push(element.innerText);

@@ -535,7 +535,23 @@ i.fa-comment-dots:hover {
     height: 100%; 
     z-index: 9999;
     display: none;
+    background: url("../imgs/icon/book_b.gif");
+    opacity: 0.93;
+    background-position: center center;
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+
 }
+.coverContainer::before {
+    content: 'Loading ...';
+    font-size: 1.5em;
+    position: fixed;
+    left: 49%;
+    top: 75%;
+    margin-left: -20px;
+    color: white;
+}
+
 .spinner-border {
     position: fixed; 
     top: 45%; 
