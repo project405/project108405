@@ -137,8 +137,8 @@ bot.on('postback', function(event) {
                         ]);		
                     }    
                 });
-            }else if (data == '我喜歡'){
-                console.log('postback!!!!!!!!!!!!!!!!!我喜歡')
+            }else if (data.match("article") || data.match("recommend")){
+                console.log('＠＠＠＠＠＠＠＠＠＠＠進入推播喜愛')
                 
             }else if (data == '我不喜歡'){
                 console.log('我不喜歡')
@@ -151,7 +151,7 @@ bot.on('postback', function(event) {
                                 if(b == 0){
                                     event.reply({
                                         "type": "template",
-                                        "altText": "精選電影",
+                                        "altText": "已重複收藏 ❌ ",
                                         "template": {
                                           "type": "buttons",
                                           "text": '          '+userName+' 已重複收藏 ❌ ',
@@ -167,7 +167,7 @@ bot.on('postback', function(event) {
                                 }else{
                                     event.reply({
                                         "type": "template",
-                                        "altText": "精選電影",
+                                        "altText": "已收藏成功 😍",
                                         "template": {
                                           "type": "buttons",
                                           "text": '          '+userName+' 已收藏成功 😍 ',
@@ -407,130 +407,111 @@ bot.on('message', function(event) {
     //-----------心情推薦-----------
     if (text == "心情推薦"){
         // app.get('/', function () {
-            let negative;
-            let positive;
-            let result = [1,2];
+            // let negative;
+            // let positive;
+            // let result = [1,2];
             
-            mood.getMood().then(data => { 
-                console.log('data!!!!!!!!!!!!!!',data)
-                data.map((item, index) => {
-                    if (item && index <= 1) {
-                        // 負面
+            // mood.getMood().then(data => { 
+            //     console.log('data!!!!!!!!!!!!!!',data)
+            //     data.map((item, index) => {
+            //         if (item && index <= 1) {
+            //             // 負面
 
-                        if (Object.keys(item[0]).indexOf('recomCont') >= 0) {
-                            negative = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
-                        } else {
-                            negative = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
-                        } 
-                        result[0] = negative
+            //             if (Object.keys(item[0]).indexOf('recomCont') >= 0) {
+            //                 negative = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
+            //             } else {
+            //                 negative = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
+            //             } 
+            //             result[0] = negative
 
-                    } else {
-                        // 正面
+            //         } else {
+            //             // 正面
                         
-                        if (Object.keys(item[0]).indexOf('recomCont') >= 0) {
-                            positive = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
-                        } else {
-                            positive = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
-                        } 
-                        result[1] = positive
+            //             if (Object.keys(item[0]).indexOf('recomCont') >= 0) {
+            //                 positive = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
+            //             } else {
+            //                 positive = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
+            //             } 
+            //             result[1] = positive
                         
-                    }
-                    console.log('result@@@@@@@@@@@@@',result)
-                })
-            })
+            //         }
+            //         console.log('result@@@@@@@@@@@@@',result)
+            //     })
+            // })
 
             // console.log('為廷的router@@@@@@@@@@@@@',result)
         // });
         
     }
-    //     event.reply({
-    //         "type": "template",
-    //         "altText": "文藝富心",
-    //         "template": {
-    //             "type": "carousel",
-    //             "columns": [
-    //                 {
-    //                   "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg",
-    //                   "imageBackgroundColor": "#FFFFFF",
-    //                   "title": "好心情專區",
-    //                   "text": "適合好心情的語錄",
-    //                   "defaultAction": {
-    //                       "type": "uri",
-    //                       "label": "詳細資料",
-    //                       "uri": "http://weiting.nctu.me/"
-    //                   },
-    //                   "actions": [
-    //                       {
-    //                           "type": "uri",
-    //                           "label": "電影",
-    //                           "uri": "http://weiting.nctu.me/"
-    //                       },
-    //                       {
-    //                           "type": "uri",
-    //                           "label": "音樂",
-    //                           "uri": "http://weiting.nctu.me/"
-    //                       },
-    //                       {
-    //                           "type": "uri",
-    //                           "label": "書籍",
-    //                           "uri": "http://weiting.nctu.me/"
-    //                       }
-    //                   ]
-    //                 },
-    //                 {
-    //                   "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p02.jpg",
-    //                   "imageBackgroundColor": "#000000",
-    //                   "title": "壞心情專區",
-    //                   "text": "適合壞心情的語錄",
-    //                   "defaultAction": {
-    //                       "type": "uri",
-    //                       "label": "詳細資料",
-    //                       "uri": "http://weiting.nctu.me/"
-    //                   },
-    //                   "actions": [
-    //                     {
-    //                         "type": "uri",
-    //                         "label": "電影",
-    //                         "uri": "http://weiting.nctu.me/"
-    //                     },
-    //                     {
-    //                         "type": "uri",
-    //                         "label": "音樂",
-    //                         "uri": "http://weiting.nctu.me/"
-    //                     },
-    //                       {
-    //                           "type": "uri",
-    //                           "label": "書籍",
-    //                           "uri": "http://weiting.nctu.me/"
-    //                       }
-    //                   ]
-    //                 }
-    //             ],
-    //             "imageAspectRatio": "rectangle",
-    //             "imageSize": "cover"
-    //         }
-    //     });
-    // }
-    // if (text == '我喜歡'|| text == '我不喜歡'){ 
-    //     console.log(userId)
-    //     linePush.linebotAddLike(userId).then(data =>{
-    //         console.log("api的return##################",data)
-    //     })     
-        // login.userJudgeBind(userId).then(d =>{
-        //     console.log('d1!!!!!!!!!!!!',d)
-        //     if(d.length !== 0){ 
-        //         if(d[0].lineID == userId){
-        //             console.log('我有綁定linebot喔喔喔喔')
-        //             linePush.linebotAddLike(userId).then(data =>{
-        //                 console.log("api的return##################",data)
-        //             })
-        //         }
-        //     }else{
-        //             console.log('我沒綁定linebot喔喔喔喔')
-        //             // event.reply(myLineTemplate)
-        //     }
-        // })
-    // }
+        event.reply({
+            "type": "template",
+            "altText": "文藝富心",
+            "template": {
+                "type": "carousel",
+                "columns": [
+                    {
+                      "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg",
+                      "imageBackgroundColor": "#FFFFFF",
+                      "title": "好心情專區",
+                      "text": "適合好心情的語錄",
+                      "defaultAction": {
+                          "type": "uri",
+                          "label": "詳細資料",
+                          "uri": "http://weiting.nctu.me/"
+                      },
+                      "actions": [
+                          {
+                            "type":"postback",
+                            "label":"article13",
+                            "data":'article13'
+                          },
+                          {
+                            "type":"postback",
+                            "label":"recommend13",
+                            "data":'recommend13'
+                          },
+                          {
+                              "type": "uri",
+                              "label": "書籍",
+                              "uri": "http://weiting.nctu.me/"
+                          }
+                      ]
+                    },
+                    {
+                      "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p02.jpg",
+                      "imageBackgroundColor": "#000000",
+                      "title": "壞心情專區",
+                      "text": "適合壞心情的語錄",
+                      "defaultAction": {
+                          "type": "uri",
+                          "label": "詳細資料",
+                          "uri": "http://weiting.nctu.me/"
+                      },
+                      "actions": [
+                        {
+                            "type": "uri",
+                            "label": "電影",
+                            "uri": "http://weiting.nctu.me/"
+                        },
+                        {
+                            "type": "uri",
+                            "label": "音樂",
+                            "uri": "http://weiting.nctu.me/"
+                        },
+                          {
+                              "type": "uri",
+                              "label": "書籍",
+                              "uri": "http://weiting.nctu.me/"
+                          }
+                      ]
+                    }
+                ],
+                "imageAspectRatio": "rectangle",
+                "imageSize": "cover"
+            }
+        });
+    }
+       
     console.log('使用者傳來的文字',text);
     })
 });
