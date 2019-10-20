@@ -529,8 +529,8 @@ bot.on('message', function(event) {
             if(d.length !== 0){ 
                 if(d[0].lineID == userId){
                     console.log('我有綁定linebot喔喔喔喔')
-                    linePush.linebotAddLike(userId).then(d =>{
-                        console.log("api的return##################",d)
+                    linePush.linebotAddLike(userId).then(data =>{
+                        console.log("api的return##################",data)
                     })
                 }
             }else{
