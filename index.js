@@ -10,6 +10,8 @@ const login = require('./routes/utility/login');
 const collection = require('./routes/utility/collection');
 const recommend = require('./routes/utility/recommend');
 const mood = require('./routes/utility/mood');
+const linebotAddLike = require('./routes/utility/linePush');
+
 
 
 //----------------------------------------
@@ -137,11 +139,22 @@ bot.on('postback', function(event) {
                 });
             }else if (data == '我喜歡'){
                 console.log('我喜歡')
+                login.userJudgeBind(userId).then(d =>{
+                    if(d.length !== 0){ 
+                        if(d[0].lineID == userId){
+                            console.log('我有綁定linebot喔喔喔喔')
+                        }
+                    }else{
+
+                            console.log('我沒綁定linebot喔喔喔喔')
+
+
+                    }
+                })
             }else if (data == '我不喜歡'){
                 console.log('我不喜歡')
             }else{
                 login.userJudgeBind(userId).then(d =>{
-                    
                     if(d.length !== 0){                         
                         if(d[0].lineID == userId){
                             collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
