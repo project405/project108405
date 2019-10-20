@@ -172,7 +172,6 @@ app.post('/webhook',  function (req, res) {
                 }, function(error, response, body){
                 
                     res.end(body);
-                    req.write(response);
                 });
             }
             //文章、推薦內容有圖片的推播樣式 
