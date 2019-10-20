@@ -144,6 +144,7 @@ bot.on('postback', function(event) {
                     console.log('切割後的data!!!!!!!!',spliceData)
                     linePush.AddArticleLike(userId,spliceData).then(data =>{
                         console.log(data)
+                        
                     })
 
                 }else{
@@ -469,8 +470,8 @@ bot.on('message', function(event) {
                       "actions": [
                           {
                             "type":"postback",
-                            "label":"article13",
-                            "data":'article13'
+                            "label":"article14",
+                            "data":'article14'
                           },
                           {
                             "type":"postback",
