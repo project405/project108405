@@ -157,12 +157,12 @@ bot.on('postback', function(event) {
                 console.log('切割後的data!!!!!!!!',spliceData)
                 linePush.AddRecommendLike(userId,spliceData).then(data =>{
                     console.log("外面的data!!!!!!!!!!",data)
-                    if(data == 1){
+                    // if(data == 1){
                         console.log('喜愛成功')
                         event.reply('你的喜歡\n       是我們努力的動力...🌱')
-                    }else{
-                        console.log('已重複按過囉')
-                    }
+                    // }else{
+                    //     console.log('已重複按過囉')
+                    // }
 
                 })
             }else{
