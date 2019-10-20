@@ -78,7 +78,7 @@ var AddRecommendLike = async function (lineID,recomNum) {
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
     if(isLike != undefined){
         console.log('我有準備新增喔！')
-        await sql('INSERT INTO "recommendLike" ("memID","recomNum","artiLikeDateTime") VALUES ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),$2,$3)', [lineID, recomNum, addTime])
+        await sql('INSERT INTO "recommendLike" ("memID","recomNum","recomLikeDateTime") VALUES ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),$2,$3)', [lineID, recomNum, addTime])
             .then((data) => {
                 result = 1;
             }, (error) => {
