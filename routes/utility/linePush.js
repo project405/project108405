@@ -60,7 +60,7 @@ var AddRecommendLike = async function (lineID,artiNum) {
 
 
         .then((data) => {
-            console.log(data.rows )
+            console.log(typeof(data.rows))
             if(!data.rows){
                 isLike = undefined ; 
             }else{
