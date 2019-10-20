@@ -181,7 +181,7 @@ app.post('/webhook',  function (req, res) {
                                             {  
                                                 "type":"postback",
                                                 "label":"我喜歡",
-                                                "data":`${postbackData[0]}+${postbackData[1]}`
+                                                "data":`${postbackData[0]}``${postbackData[1]}`
                                             },
                                             {  
                                                 "type":"postback",
@@ -283,7 +283,7 @@ app.post('/webhook',  function (req, res) {
                                             {  
                                                 "type":"postback",
                                                 "label":"我喜歡",
-                                                "data":`${postbackData[0]}+${postbackData[1]}`
+                                                "data":`${postbackData[0]}``${postbackData[1]}`
                                             },
                                             {  
                                                 "type":"postback",
