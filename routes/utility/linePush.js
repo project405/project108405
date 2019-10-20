@@ -26,7 +26,6 @@ var AddArticleLike = async function (lineID,artiNum) {
                 isLike = data.rows;
             }
         }, (error) => {
-            console.log('error喔！！！！！！！！！！！')
             isLike = undefined;;
         });
     
@@ -61,6 +60,7 @@ var AddRecommendLike = async function (lineID,artiNum) {
 
 
         .then((data) => {
+            console.log(data.rows )
             if(!data.rows){
                 isLike = undefined ; 
             }else{
