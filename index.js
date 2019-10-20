@@ -530,7 +530,7 @@ bot.on('message', function(event) {
                 if(d[0].lineID == userId){
                     console.log('我有綁定linebot喔喔喔喔')
                     linePush.linebotAddLike(userId).then(d =>{
-                        
+                        console.log("api的return##################",d)
                     })
                 }
             }else{
