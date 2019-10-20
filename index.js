@@ -168,11 +168,17 @@ app.post('/webhook',  function (req, res) {
                                             }
                                         ]
                                     }
-                                }               
+                                }         
                             ],
-                            postback:{  
-                                "data":"我喜歡" 
-                            }    
+                            events:[{
+                                "type":"postback",
+                                "replyToken":"d7aooxxo154c6d94oo01xx28coxoxfd04",
+                                "source":{
+                                    "userId":"U2251202deb66b8a73da26e53c8399a13",
+                                    "type":"user"
+                                },
+                                "timestamp":1485251255286,
+                                "postback":{"data":"!!!!!!!!!!!我是postback_data"}}]                            
                             
                     })
                 }, function(error, response, body){
