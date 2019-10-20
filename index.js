@@ -140,7 +140,8 @@ bot.on('postback', function(event) {
             }else if (data == '我喜歡'){
                 console.log('我喜歡')
                 login.userJudgeBind(userId).then(d =>{
-                    console.log('我有綁定linebot喔喔喔喔')
+                    console.log(d)
+                    console.log('1我有綁定linebot喔喔喔喔')
 
                     if(d.length !== 0){ 
                         if(d[0].lineID == userId){
