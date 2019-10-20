@@ -19,11 +19,13 @@ var AddArticleLike = async function (lineID,artiNum) {
               'FROM "articleLike" '+
               'WHERE "memID" IN (SELECT "memID"  FROM  "member" WHERE "lineID" =  $1 and "artiNum" = $2)', [lineID,artiNum])
         .then((data) => {
+            console.log(typeof(data.rows) === null )
+            
             
             if(data.rows.length != 0){
                 isLike = undefined; 
             }else{
-                isLike = 0;
+                isLike = data.rows;
             }
         }, (error) => {
             isLike = undefined;;
@@ -31,17 +33,17 @@ var AddArticleLike = async function (lineID,artiNum) {
     
     
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
-    if(isLike = 0){
-        console.log('準備新增喔')
-        await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),$2,$3)', [lineID, artiNum, addTime])
-            .then((data) => {
-                result = 1;
-            }, (error) => {
-                result = 0;
-            });
-              
-    return result; 
-    } 
+    // if(isLike = 0){
+    //     await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),$2,$3)', [lineID, artiNum, addTime])
+    //         .then((data) => {
+    //             result = 1;
+    //         }, (error) => {
+    //             result = 0;
+    //         });
+    //     }       
+    // return result; 
+    return isLike; 
+    
 }
 
 //==============================
