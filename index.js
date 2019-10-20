@@ -137,37 +137,34 @@ bot.on('postback', function(event) {
                         ]);		
                     }    
                 });
-            }else if (data.match("article") || data.match("recommend")){
-                console.log('＠＠＠＠＠＠＠＠＠＠＠進入推播喜愛')
-                if(data.match("article")){
-                    var spliceData = data.replace('article','')
-                    console.log('切割後的data!!!!!!!!',spliceData)
-                    linePush.AddArticleLike(userId,spliceData).then(data =>{
-                        console.log(data)
-                        // if(data == 1){
-                            console.log('喜愛成功')
-                            event.reply('你的喜歡\n       是我們努力的動力...🌱')
-                        // }else{
-                        //     console.log('已點選過喜愛')
-                        // }
-                    })
+            }else if (data.match("article")){
+               
+                var spliceData = data.replace('article','')
+                console.log('切割後的data!!!!!!!!',spliceData)
+                linePush.AddArticleLike(userId,spliceData).then(data =>{
+                    console.log(data)
+                    // if(data == 1){
+                        console.log('喜愛成功')
+                        event.reply('你的喜歡\n       是我們努力的動力...🌱')
+                    // }else{
+                    //     console.log('已點選過喜愛')
+                    // }
+                })
 
-                }else{
-                    var spliceData = data.replace('recommend','')
-                    console.log('切割後的data!!!!!!!!',spliceData)
-                    linePush.AddRecommendLike(userId,spliceData).then(data =>{
-                        console.log("外面的data!!!!!!!!!!",data)
-                     
-                        if(data = 1){
-                            console.log('喜愛成功')
-                            event.reply('你的喜歡\n       是我們努力的動力...🌱')
-                        }else{
-                            console.log('已重複按過囉')
-                        }
-
-                    })
-                }
                 
+            }else if (data.match("recommend")){
+                var spliceData = data.replace('recommend','')
+                console.log('切割後的data!!!!!!!!',spliceData)
+                linePush.AddRecommendLike(userId,spliceData).then(data =>{
+                    console.log("外面的data!!!!!!!!!!",data)
+                    if(data = 1){
+                        console.log('喜愛成功')
+                        event.reply('你的喜歡\n       是我們努力的動力...🌱')
+                    }else{
+                        console.log('已重複按過囉')
+                    }
+
+                })
             }else{
                 login.userJudgeBind(userId).then(d =>{
                     if(d.length !== 0){                         
