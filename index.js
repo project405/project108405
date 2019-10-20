@@ -154,17 +154,17 @@ app.post('/webhook',  function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "confirm",
-                                        text: `🔸標題：${pushContent[0]}\n🔹內容：${pushContent[1]}`,
+                                        text: `🔸標題：${pushContent[1]}\n🔹內容：${pushContent[2]}`,
                                         actions: [
                                             {
                                                 "type": "message",
                                                 "label": "我喜歡",
-                                                "text": "我喜歡"
+                                                "text": "我喜歡"+`${pushContent[0]}`+':'`${pushContent[1]}`
                                             },
                                             {
                                                 "type": "message",
                                                 "label": "我不喜歡",
-                                                "text": "我不喜歡"
+                                                "text": "我不喜歡"+`${pushContent[0]}`+':'`${pushContent[1]}`
                                             }
                                         ]
                                     }
@@ -220,8 +220,8 @@ app.post('/webhook',  function (req, res) {
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
-                                        title: `${pushContent[0]}`,
-                                        text: `${pushContent[1]}`,
+                                        title: `${pushContent[1]}`,
+                                        text: `${pushContent[2]}`,
                                         defaultAction: {
                                             "type": "uri",
                                             "label": "View detail",
@@ -231,12 +231,12 @@ app.post('/webhook',  function (req, res) {
                                             {
                                                 "type": "message",
                                                 "label": "我喜歡",
-                                                "text": "我喜歡"
+                                                "text": "我喜歡"+`${pushContent[0]}`+':'`${pushContent[1]}`
                                             },
                                             {
                                                 "type": "message",
                                                 "label": "我不喜歡",
-                                                "text": "我不喜歡"
+                                                "text": "我不喜歡"+`${pushContent[0]}`+':'`${pushContent[1]}`
                                             }
                                         ]
                                     }
