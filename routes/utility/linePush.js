@@ -25,7 +25,7 @@ var linebotAddLike = async function (lineID) {
                 isLike = data.rows ;
             }
         }, (error) => {
-            isLike.push('0');
+            isLike = 0;
         });
     
     
