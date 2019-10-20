@@ -112,8 +112,6 @@ app.post('/webhook',  function (req, res) {
              
             console.log('pushContent@@@@@@@',pushContent)
             console.log('pushContent.length@@@@@@@',pushContent.length)
-            console.log('postbackData@@@@@@@',postbackData)
-            console.log('postbackData.length@@@@@@@',postbackData.length)
 
             
             //文章、推薦內容無圖片的推播樣式
@@ -181,12 +179,12 @@ app.post('/webhook',  function (req, res) {
                                             {  
                                                 "type":"postback",
                                                 "label":"我喜歡",
-                                                "data":`${postbackData[0]}``${postbackData[1]}`
+                                                "data":`${pushContent[0]}`+`${pushContent[1]}`
                                             },
-                                            {  
-                                                "type":"postback",
-                                                "label":"我不喜歡",
-                                                "data":"dislike"
+                                            {
+                                                "type": "message",
+                                                "label": "我不喜歡",
+                                                "text": "文藝富心又更加了解你了"
                                             }
                                         ]
                                     }
@@ -283,12 +281,12 @@ app.post('/webhook',  function (req, res) {
                                             {  
                                                 "type":"postback",
                                                 "label":"我喜歡",
-                                                "data":`${postbackData[0]}``${postbackData[1]}`
+                                                "data":`${pushContent[0]}`+`${pushContent[1]}`
                                             },
-                                            {  
-                                                "type":"postback",
-                                                "label":"我不喜歡",
-                                                "data":"dislike"
+                                            {
+                                                "type": "message",
+                                                "label": "我不喜歡",
+                                                "text": "文藝富心又更加了解你了"
                                             }
                                         ]
                                     }
@@ -300,11 +298,7 @@ app.post('/webhook',  function (req, res) {
                     res.end(body);
                 
                 });
-                // app.post('https://project-108405.herokuapp.com/webhook',  function (req, res) {
-                //     res.send('GET request to the homepage') 
-                // })
-
-                
+               
             }
     
         })    
