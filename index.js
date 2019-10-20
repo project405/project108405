@@ -141,7 +141,7 @@ bot.on('postback', function(event) {
                 console.log('＠＠＠＠＠＠＠＠＠＠＠進入推播喜愛')
                 if(data.match("article")){
                     data.replace("article",'')
-                    console.log(data)
+                    console.log('切割後的data!!!!!!!!',data)
                     // linePush.AddArticleLike(userId).then(data =>{
                     //     console.log(data)
                     // })
