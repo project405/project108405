@@ -49,12 +49,15 @@
             <!-- </div> -->
             <button type="submit" class="btn btn-danger col-lg-2 float-right submitReplyButton" onclick=<%= "submitEditReply(" + items[0][0].artiNum + ")" %>>提交</button>
 
-            <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
+            <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
-             </div>
+            </div>
+            <div class="coverContainer">
+            </div>
 
             <script>
                 var imgs = [];
+                var toBase64 = []
                 var formData = new FormData(); //用formData來存取要傳送的所有資料
                 // 選取到檔案後開始動作
                 $('#file-selector').change(function(event) {
@@ -82,16 +85,22 @@
                     }
                 });
         function submitEditReply(artiNum) {
+            if (document.getElementById("replyInput").innerHTML == '') {
+                alert('請輸入內文')
+                return;
+            }
             var artiMessNum ='<%= items[0][0].artiMessNum%>'
             var remainImg = []
             $('.submitReplyButton').addClass('disabled')
             $('.submitReplyButton').attr('disabled', true)
             $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
+
 
             if ($("#replyInput > .original")) {
                 Array.from($("#replyInput").find('.original > img')).map((img) => {
                     $(img).before("\\:imgLocation")
-                    remainImg.push(img.getAttribute('src').replace('/userImg/replyImg/',''))
+                    remainImg.push(img.getAttribute('src'))
                 })
             }
 
@@ -99,10 +108,13 @@
             if ($("#replyInput").find("#replyInput > img")) {
                 Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
                     imgKey.push(img.getAttribute('key'))
+                    toBase64.push(img.getAttribute('src'))
                 })
                 imgs.map((img) => {
                     if (imgKey.indexOf(img.timeStamp) >= 0) {
                         formData.append('userImg', img);
+                        var base64Index = toBase64[imgKey.indexOf(img.timeStamp)]
+                        formData.append('base64Index', base64Index);
                     }
                 })
                 Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {

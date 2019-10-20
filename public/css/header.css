@@ -526,3 +526,21 @@ i.fa-gratipay:hover {
 i.fa-comment-dots:hover {
     color:rgb(60, 123, 246);
 } 
+
+.coverContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 100%; 
+    z-index: 9999;
+    display: none;
+}
+.spinner-border {
+    position: fixed; 
+    top: 45%; 
+    left: 50%; 
+    margin-left: -20px; 
+    display: none;
+    z-index: 10000;
+}

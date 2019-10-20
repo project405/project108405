@@ -385,10 +385,11 @@
         </script>
             
     </div>
-    <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
+    <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
-     </div>
-
+    </div>
+    <div class="coverContainer">
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
@@ -443,18 +444,28 @@
             }
         });
         function submitReply(artiNum) {
+            if (document.getElementById('replyInput').innerHTML == '') {
+                alert('請輸入回復內容！')
+                return;
+            }
             $('.submitReplyButton').addClass('disabled')
             $('.submitReplyButton').attr('disabled', true)
             $('.spinner-border').css('display', 'block')
-
+            $('.coverContainer').css('display', 'block')
             var imgKey = []
+            var toBase64 = []
+
             if ($("#replyInput").find("#replyInput > img")) {
                 Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
                     imgKey.push(img.getAttribute('key'))
+                    toBase64.push(img.getAttribute('src'))
                 })
                 imgs.map((img) => {
                     if (imgKey.indexOf(img.timeStamp) >= 0) {
                         formData.append('userImg', img);
+                        var base64Index = toBase64[imgKey.indexOf(img.timeStamp)]
+                        console.log(base64Index)
+                        formData.append('base64Index', base64Index);
                     }
                 })
                 Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
@@ -695,6 +706,7 @@
             // delArticle
             function delArticle(artiNum) {
                     $('.spinner-border').css('display', 'block')
+                    $('.coverContainer').css('display', 'block')
                     $.ajax({
                     url: '/addLike',
                     type: 'POST',
@@ -711,6 +723,7 @@
             // delReply
             function deleteReply(artiMessNum, memID) {
                     $('.spinner-border').css('display', 'block')
+                    $('.coverContainer').css('display', 'block')
                     $.ajax({
                     url: '/addLike',
                     type: 'POST',

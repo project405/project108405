@@ -55,8 +55,6 @@ router.post('/', function (req, res, next) {
     if (req.body.delRecommend) {
         member.checkAuthority(memID).then((data) => {
             if (data == 'boss') {
-                console.log('data', data)
-                console.log('req.body.recomNum',req.body.delRecommend, req.body.recomNum)
                 member.deleteRecommend(req.body.recomNum).then((data) => {
                     if (data == 1) {
                         res.send('刪除成功')
