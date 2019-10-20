@@ -11,7 +11,7 @@ const moment = require('moment');
 
 var AddArticleLike = async function (lineID,artiNum) {
     var result ;
-    
+    var isLike ;
     // 判斷是否被使用者按愛心
     await sql('SELECT "memID", "artiNum" '+
               'FROM "articleLike" '+
