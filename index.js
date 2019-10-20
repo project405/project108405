@@ -10,7 +10,7 @@ const login = require('./routes/utility/login');
 const collection = require('./routes/utility/collection');
 const recommend = require('./routes/utility/recommend');
 const mood = require('./routes/utility/mood');
-const linebotAddLike = require('./routes/utility/linePush');
+const linePush = require('./routes/utility/linePush');
 
 
 
@@ -523,17 +523,17 @@ bot.on('message', function(event) {
     //         }
     //     });
     // }
-    if (text == '我喜歡'|| text == '我不喜歡'){
-        console.log('前台的userId！！！！！！！！！！',userId)
-        
+    if (text == '我喜歡'|| text == '我不喜歡'){        
         login.userJudgeBind(userId).then(d =>{
             console.log('d1!!!!!!!!!!!!',d)
             if(d.length !== 0){ 
                 if(d[0].lineID == userId){
                     console.log('我有綁定linebot喔喔喔喔')
+                    linePush.linebotAddLike(userId).then(d =>{
+                        
+                    })
                 }
             }else{
-
                     console.log('我沒綁定linebot喔喔喔喔')
                     // event.reply(myLineTemplate)
             }

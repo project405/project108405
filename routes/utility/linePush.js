@@ -9,13 +9,13 @@ const moment = require('moment');
 //------ 對推播內容點選喜愛 ------
 //==============================
 
-var linebotAddLike = async function () {
+var linebotAddLike = async function (lineID) {
     var result;
     
     // 判斷是否被使用者按愛心
     await sql('SELECT "memID","artiNum" '+ 
              ' FROM "articleLike" '+
-             ' WHERE "memID" = $1', [memID])
+             ' WHERE "memID" = $1', [lineID])
         .then((data) => {
             if(!data.rows){
                 isLike = undefined ; 
