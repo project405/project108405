@@ -62,7 +62,7 @@ app.post('/webhook',  function (req, res) {
             console.log(allUser)
         });
         byClassData.getIndexData().then(data =>{
-            console.log(data)
+            console.log('%%%%%%%%%%%%%%%%%%%data[10]',data[10])
             var pushContent = []
             //data為文章
             if(data[10][0].recomHead == undefined){
