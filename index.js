@@ -165,6 +165,9 @@ bot.on('postback', function(event) {
                     // }
 
                 })
+            }else if (data == 'dislike'){
+                event.reply('文藝富心又更加了解你了')
+
             }else{
                 login.userJudgeBind(userId).then(d =>{
                     if(d.length !== 0){                         
