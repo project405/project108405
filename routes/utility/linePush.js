@@ -31,15 +31,16 @@ var AddArticleLike = async function (lineID,artiNum) {
     
     
     var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
-    if(isLike = 0){
-        await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),$2,$3)', [lineID, artiNum, addTime])
-            .then((data) => {
-                result = 1;
-            }, (error) => {
-                result = 0;
-            });
-        }       
-    return result;  
+    // if(isLike = 0){
+    //     await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ((SELECT "memID"  FROM  "member" WHERE "lineID" =  $1),$2,$3)', [lineID, artiNum, addTime])
+    //         .then((data) => {
+    //             result = 1;
+    //         }, (error) => {
+    //             result = 0;
+    //         });
+    //     }       
+    // return result; 
+    return isLike; 
     
 }
 

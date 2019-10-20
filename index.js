@@ -470,8 +470,8 @@ bot.on('message', function(event) {
                       "actions": [
                           {
                             "type":"postback",
-                            "label":"article14",
-                            "data":'article14'
+                            "label":"article3沒有",
+                            "data":'article3'
                           },
                           {
                             "type":"postback",
@@ -480,7 +480,7 @@ bot.on('message', function(event) {
                           },
                           {
                             "type":"postback",
-                            "label":"article8",
+                            "label":"article8有",
                             "data":'article8'
                           },
                       ]
