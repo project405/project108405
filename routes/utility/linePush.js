@@ -16,13 +16,12 @@ var AddArticleLike = async function (lineID,artiNum) {
     await sql('SELECT "memID", "artiNum" '+
               'FROM "articleLike" '+
               'WHERE "memID" IN (SELECT "memID"  FROM  "member" WHERE "lineID" =  $1 and "artiNum" = $2)', [lineID,artiNum])
-
-
         .then((data) => {
+            //沒有資料
             if(!data.rows){
-                isLike = 0 ; 
+                isLike = 1 ; 
             }else{
-                isLike = 1 ;
+                isLike = 0 ;
             }
         }, (error) => {
             isLike = 0;
