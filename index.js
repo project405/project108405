@@ -446,7 +446,7 @@ bot.on('message', function(event) {
         });
     }
     //-----------心情推薦-----------
-    if (text == "心情推薦"){
+    if (text == "情緒專區"){
         mood.getMood().then((data) => {
             console.log('loginData', data)
         })
