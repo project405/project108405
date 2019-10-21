@@ -179,10 +179,10 @@ $(document).ready(() => {
                 $.post('https://project-108405-test.herokuapp.com/webhook', () => {
                 }) 
                 .done (() => {
-                    alert('推播成功！');
+                    swal('推播成功！');
                 })
                 .fail(() => {
-                    alert('推播失敗！');
+                    swal('推播失敗！');
                 })
             };
                 //如果有登入可是沒推薦權限

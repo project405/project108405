@@ -659,3 +659,11 @@ i.fa-comment-dots:hover {
     display: none;
     z-index: 10000;
 }
+
+.swal-button {
+    background-color: rgb(177, 187, 171);
+    border: solid 1px rgb(177, 187, 171) !important;
+}
+.swal-button:hover {
+    background-color: rgb(101, 108, 97) !important;
+}
