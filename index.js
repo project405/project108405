@@ -86,17 +86,28 @@ app.post('/webhook',  function (req, res) {
         // }).done(function (res) {
         //     console.log("Done");
         // });
-            fetch('https://api.imgur.com/3/upload.json', {
-            method: 'POST',
-            headers: {
-            Accept: 'application/json',
-            Authorization: 'Client-ID 8b8755d8a1c4ace'// imgur specific
-            },
-            body: img
-        })
-            .then(processStatus)
-            .then(parseJson)
+        // fetch('https://api.imgur.com/3/upload.json', {
+        //     method: 'POST',
+        //     headers: {
+        //     Accept: 'application/json',
+        //     Authorization: 'Client-ID 8b8755d8a1c4ace'// imgur specific
+        //     },
+        //     body: img
+        // })
+        //     .then(processStatus)
+        //     .then(parseJson)
         
+        request.post({
+            headers: {
+                'content-type' : 'application/json',
+                'Authorization': 'Client-ID 8b8755d8a1c4ace'
+            },
+            url: 'https://api.imgur.com/3/upload.json',
+            body: JSON.stringify({img})
+        }).then((data) => {
+            console.log(data)
+        })
+
     })
 
      
