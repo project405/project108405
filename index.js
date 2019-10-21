@@ -57,7 +57,7 @@ var server = app.listen(process.env.PORT || 3000, function() {
 app.post('/webhook',  function (req, res) {
 
     member.artiImg('105').then(data =>{
-        console.log(data)
+        console.log(data.imgName)
 
    
     request.post({
@@ -97,7 +97,7 @@ app.post('/webhook',  function (req, res) {
                         altText: "相信你會喜歡😎",
                         template: {
                             type: "buttons",
-                            thumbnailImageUrl: data,
+                            thumbnailImageUrl: data.imgName,
                             imageAspectRatio: "rectangle",
                             imageSize: "cover",
                             imageBackgroundColor: "#FFFFFF",
