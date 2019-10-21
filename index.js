@@ -104,8 +104,6 @@ app.post('/webhook',  function (req, res) {
             },
             url: 'https://api.imgur.com/3/upload.json',
             body: JSON.stringify({img})
-        }).then((data) => {
-            console.log(data)
         })
 
     })
