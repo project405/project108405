@@ -207,7 +207,7 @@ bot.on('postback', function(event) {
                         // console.log(data[1].recomCont)
                         data[1].recomHead = data[1].recomHead.length>30 ? `${data[1].recomHead.substr(0,25)}...` : data[1].recomHead
                         data[1].recomCont = data[1].recomCont.length>50 ? `${data[1].recomCont.substr(0,45)}...` : data[1].recomCont
-                        goodMoodRecommend.push(data[1].recomNum)
+                        goodMoodRecommend.push('oneRecommend/'+data[1].recomNum)
                         goodMoodRecommend.push(data[1].recomHead)
                         goodMoodRecommend.push(data[1].recomCont)
                     }
@@ -246,7 +246,7 @@ bot.on('postback', function(event) {
                         // console.log(data[0].artiCont)
                         data[0].artiHead = data[0].artiHead.length>30 ? `${data[0].artiHead.substr(0,25)}...` : data[0].artiHead
                         data[0].artiCont = data[0].artiCont.length>50 ? `${data[0].artiCont.substr(0,45)}...` : data[0].artiCont
-                        badMoodRecommend.push(data[0].artiNum)
+                        badMoodRecommend.push('article/'+data[0].artiNum)
                         badMoodRecommend.push(data[0].artiHead)
                         badMoodRecommend.push(data[0].artiCont)
                         
@@ -256,7 +256,7 @@ bot.on('postback', function(event) {
                         // console.log(data[0].recomCont)
                         data[0].recomHead = data[0].recomHead.length>30 ? `${data[0].recomHead.substr(0,25)}...` : data[0].recomHead
                         data[0].recomCont = data[0].recomCont.length>50 ? `${data[0].recomCont.substr(0,45)}...` : data[0].recomCont
-                        badMoodRecommend.push(data[0].recomNum)
+                        badMoodRecommend.push('oneRecommend/'+data[0].recomNum)
                         badMoodRecommend.push(data[0].recomHead)
                         badMoodRecommend.push(data[0].recomCont)
                     }
@@ -275,7 +275,6 @@ bot.on('postback', function(event) {
                                         {
                                             "type": "uri",
                                             "label": " 👀 至文藝富心官網觀看",
-                                    
                                             "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
                                         }
                                     ]
