@@ -23,4 +23,5 @@ var getNotifyList = async function (memID) {
     return result;
 }
 
+
 module.exports = { getNotifyList };

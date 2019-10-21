@@ -1022,6 +1022,23 @@ var getMemberInfor = async function (memID) {
 
     return result;
 }
+var bestReply = async function (memID) {
+    var result = [];
+    var checkAuthority;
+    await sql('SELECT * FROM "recommend" WHERE "memID"=$1', [memID])
+        .then((data) => {
+            for (let i = 0; i < data.rows.length; i++) {
+                data.rows[i].memMessDateTime = moment(data.rows[i].memMessDateTime).format("YYYY-MM-DD hh:mm:ss");
+            }
+            result.push(data.rows);
+        }, (error) => {
+            result = null;
+        });
+
+    result.push([memID]);
+
+    return result;
+}
 
 //匯出
 module.exports = {
@@ -1032,6 +1049,6 @@ module.exports = {
     addRecommendMessLike, delRecommendMessLike,
     report, checkAuthority, editArticle, deleteArticle, deleteRecommend, editReply, deleteReply, 
     memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
-    editRecommendReply, editRecommend
+    editRecommendReply, editRecommend, bestReply
 
 };
