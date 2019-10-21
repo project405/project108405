@@ -194,10 +194,7 @@ bot.on('postback', function(event) {
                         while( data[1].artiCont.match('<br>') ) {
                             　data[1].artiCont.replace('<br>','')
                         }
-                        while( data[1].artiCont.match('\r') ) {
-                            　data[1].artiCont.replace('\r','')
-                        }
-                        
+                       
                         data[1].artiCont = data[1].artiCont.length>70 ? `${data[1].artiCont.substr(0,65)}...` : data[1].artiCont
                         goodMoodRecommend.push(data[1].artiNum)
                         goodMoodRecommend.push(data[1].artiHead)
