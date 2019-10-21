@@ -215,7 +215,7 @@ bot.on('postback', function(event) {
                     console.log('good!!!!!!!!!!!!!!!!!',goodMoodRecommend)
                     event.reply({
                         "type": "template",
-                        "altText": "挖掘好心情️ ☀️ ",
+                        "altText": " 體會，每一種情緒 ",
                         "template": {
                             "type": "carousel",
                             "columns": [
@@ -238,19 +238,47 @@ bot.on('postback', function(event) {
                 
             }else if(data == 'Badmood'){
                 mood.getMood().then((data) => {
+                    var badMoodRecommend = [];
+
                     if(data[0].artiNum !=  undefined){
-                        console.log(data[0].artiNum)
-                        console.log(data[0].artiHead)
-                        console.log(data[0].artiCont)
-                        goodMoodRecommend.push(data[1].artiNum)
-                        goodMoodRecommend.push(data[1].artiHead)
-                        goodMoodRecommend.push(data[1].artiCont)
+                        // console.log(data[0].artiNum)
+                        // console.log(data[0].artiHead)
+                        // console.log(data[0].artiCont)
+                        badMoodRecommend.push(data[0].artiNum)
+                        badMoodRecommend.push(data[0].artiHead)
+                        badMoodRecommend.push(data[0].artiCont)
                         
                     }else{
-                        console.log(data[0].recomNum)
-                        console.log(data[0].recomHead)
-                        console.log(data[0].recomCont)
+                        // console.log(data[0].recomNum)
+                        // console.log(data[0].recomHead)
+                        // console.log(data[0].recomCont)
+                        badMoodRecommend.push(data[0].recomNum)
+                        badMoodRecommend.push(data[0].recomHead)
+                        badMoodRecommend.push(data[0].recomCont)
                     }
+
+                    console.log('good!!!!!!!!!!!!!!!!!',badMoodRecommend)
+                    event.reply({
+                        "type": "template",
+                        "altText": " 體會，每一種情緒 ",
+                        "template": {
+                            "type": "carousel",
+                            "columns": [
+                                {
+                                    "title": "【" + badMoodRecommend[1] + "】" ,
+                                    "text": badMoodRecommend[2] ,
+                                    "actions": [
+                                        {
+                                            "type": "uri",
+                                            "label": " 👀 至文藝富心官網觀看",
+                                            // "uri": `https://project108405.herokuapp.com/article`
+                                            "uri": 'https://project108405.herokuapp.com/article'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    });
                 })
             }else{
                 login.userJudgeBind(userId).then(d =>{
