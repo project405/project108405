@@ -191,9 +191,9 @@ bot.on('postback', function(event) {
                         // console.log(data[1].artiNum)
                         // console.log(data[1].artiHead)
                         // console.log(data[1].artiCont)
-                        // while( data[1].artiCont.match('\r') = '\r' ) {
-                        //     　data[1].artiCont.replace('\r','')
-                        // }
+                        while (data[1].artiCont.match('<br>')) {
+                            data[1].artiCont = data[1].artiCont.replace('<br>','')
+                        }
                        
                         data[1].artiHead = data[1].artiHead.length>30 ? `${data[1].artiHead.substr(0,25)}...` : data[1].artiHead
                         data[1].artiCont = data[1].artiCont.length>50 ? `${data[1].artiCont.substr(0,45)}...` : data[1].artiCont
@@ -205,6 +205,9 @@ bot.on('postback', function(event) {
                         // console.log(data[1].recomNum)
                         // console.log(data[1].recomHead)
                         // console.log(data[1].recomCont)
+                        while (data[1].recomCont.match('<br>')) {
+                            data[1].recomCont = data[1].recomCont.replace('<br>','')
+                        }
                         data[1].recomHead = data[1].recomHead.length>30 ? `${data[1].recomHead.substr(0,25)}...` : data[1].recomHead
                         data[1].recomCont = data[1].recomCont.length>50 ? `${data[1].recomCont.substr(0,45)}...` : data[1].recomCont
                         goodMoodRecommend.push('oneRecommend/'+data[1].recomNum)
@@ -244,6 +247,11 @@ bot.on('postback', function(event) {
                         // console.log(data[0].artiNum)
                         // console.log(data[0].artiHead)
                         // console.log(data[0].artiCont)
+                        while (data[0].artiCont.match('<br>')) {
+                            data[0].artiCont = data[0].artiCont.replace('<br>','')
+                        }
+
+
                         data[0].artiHead = data[0].artiHead.length>30 ? `${data[0].artiHead.substr(0,25)}...` : data[0].artiHead
                         data[0].artiCont = data[0].artiCont.length>50 ? `${data[0].artiCont.substr(0,45)}...` : data[0].artiCont
                         badMoodRecommend.push('article/'+data[0].artiNum)
@@ -254,6 +262,9 @@ bot.on('postback', function(event) {
                         // console.log(data[0].recomNum)
                         // console.log(data[0].recomHead)
                         // console.log(data[0].recomCont)
+                        while (data[0].recomCont.match('<br>')) {
+                            data[0].recomCont = data[0].recomCont.replace('<br>','')
+                        }
                         data[0].recomHead = data[0].recomHead.length>30 ? `${data[0].recomHead.substr(0,25)}...` : data[0].recomHead
                         data[0].recomCont = data[0].recomCont.length>50 ? `${data[0].recomCont.substr(0,45)}...` : data[0].recomCont
                         badMoodRecommend.push('oneRecommend/'+data[0].recomNum)
