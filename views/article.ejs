@@ -75,7 +75,7 @@
                         onclick=<%= "delLike(" + items[0][0].artiNum + ")" %>><i class="fab fa-gratipay" style="color:#c93737"></i><a
                             id="delLikeCount"><%= items[0][0].likeCount %> </a></button>
                     <!-- 如果沒登入 -->
-                    <% if(items[7][0] == undefined) {%>
+                    <% if(items[7][0] == undefined) { %>
                     <script type="text/javascript">
                         document.getElementById("LikeUnLogIn").style.display = "inline";
                         document.getElementById("addLike").style.display = "none";
@@ -130,7 +130,7 @@
                     </script>
 
                     <!-- 如果有登入及沒按過收藏 -->
-                    <% }else if(items[3][0] == undefined && items[7][0] != undefined ) {%>
+                    <% } else if(items[3][0] == undefined && items[7][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("addColle").style.display = "inline";
                         document.getElementById("unLogIn").style.display = "none";
@@ -387,8 +387,20 @@
     <!-- <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
     </div> -->
-    <div class="coverContainer">
+    <!-- <div class="coverContainer">
+    </div> -->
+    <div class='coverContainer'>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
+        </div>
     </div>
+          
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "

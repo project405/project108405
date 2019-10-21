@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    swal("Hello world!");
+
     // $(document).click(function(event) {
     //     $('.navbar-collapse').collapse('hide');
     // });
