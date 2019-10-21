@@ -188,50 +188,47 @@ bot.on('postback', function(event) {
                     var goodMoodRecommend = [];
                     
                     if(data[1].artiNum !=  undefined){
-                        console.log(data[1].artiNum)
-                        console.log(data[1].artiHead)
-                        console.log(data[1].artiCont)
+                        // console.log(data[1].artiNum)
+                        // console.log(data[1].artiHead)
+                        // console.log(data[1].artiCont)
                         goodMoodRecommend.push(data[1].artiNum)
                         goodMoodRecommend.push(data[1].artiHead)
                         goodMoodRecommend.push(data[1].artiCont)
                         
                     }else{
-                        console.log(data[1].recomNum)
-                        console.log(data[1].recomHead)
-                        console.log(data[1].recomCont)
+                        // console.log(data[1].recomNum)
+                        // console.log(data[1].recomHead)
+                        // console.log(data[1].recomCont)
                         goodMoodRecommend.push(data[1].recomNum)
                         goodMoodRecommend.push(data[1].recomHead)
                         goodMoodRecommend.push(data[1].recomCont)
                     }
 
                     console.log('good!!!!!!!!!!!!!!!!!',goodMoodRecommend)
-                    // event.reply({
-                    //     "type": "template",
-                    //     "altText": "熱門文章",
-                    //     "template": {
-                    //         "type": "carousel",
-                    //         "columns": [
-                    //             {
-                    //                 "title": "【" + data[1][0].artiHead + "】" ,
-                    //                 "text":'時間：' + data[1][0].artiDateTime  + '\n' + data[1][0].artiCont ,
-                    //                 "actions": [
+                    event.reply({
+                        "type": "template",
+                        "altText": "熱門文章",
+                        "template": {
+                            "type": "carousel",
+                            "columns": [
+                                {
+                                    "title": "【" + goodMoodRecommend[1] + "】" ,
+                                    "text": goodMoodRecommend[2] ,
+                                    "actions": [
                                         
-                    //                     {
-                    //                         "type": "uri",
-                    //                         "label": " 👀 至文藝富心官網觀看",
-                    //                         "uri": `https://project108405.herokuapp.com/article/${data[1][0].artiNum}`
-                    //                     }
-                    //                 ]
-                    //             }
-                    //         ]
-                    //         // ,
-                    //         // "imageAspectRatio": "rectangle",
-                    //         // "imageSize": "cover"
-                    //     }
-                    // });
-                   
-
-
+                                        {
+                                            "type": "uri",
+                                            "label": " 👀 至文藝富心官網觀看",
+                                            "uri": `https://project108405.herokuapp.com/article/${data[1][0].artiNum}`
+                                        }
+                                    ]
+                                }
+                            ]
+                            // ,
+                            // "imageAspectRatio": "rectangle",
+                            // "imageSize": "cover"
+                        }
+                    });
                 })
                 
             }else if(data == 'Badmood'){
