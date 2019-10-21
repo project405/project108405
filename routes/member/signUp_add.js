@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
+var crypto = require('crypto');
 
 //增加引用函式
 const signUp = require('../utility/signUp');
-
+const secret = "project108405"
 //接收POST請求
 router.post('/', function (req, res, next) {
     res.write('<head><meta charset="utf-8"/></head>');
@@ -38,10 +39,14 @@ router.post('/', function (req, res, next) {
         } else if (checkMail) {
             res.end('<script> alert("此Email已經被註冊過囉！請重新輸入。"); history.back();</script>');
         } else {
+            //密碼加密
+            var hmac = crypto.createHmac("sha256",secret);
+            var pwd = hmac.update(memPass);
+            var cryptoPWD = pwd.digest("hex");
             // 建立一個新資料物件
             var newData = {
                 memID: memID,
-                memPass: memPass,
+                memPass: cryptoPWD,
                 memBirth: memBirth,
                 memName: memName,
                 memMail: memMail,
