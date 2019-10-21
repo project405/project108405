@@ -203,7 +203,7 @@ bot.on('postback', function(event) {
                         // console.log(data[1].recomNum)
                         // console.log(data[1].recomHead)
                         // console.log(data[1].recomCont)
-                        data[1].recomCont = data[1].recomCont.length>120 ? `${data[1].recomCont.substr(0,110)}...` : data[1].recomCont
+                        data[1].recomCont = data[1].recomCont.length>70 ? `${data[1].recomCont.substr(0,65)}...` : data[1].recomCont
                         goodMoodRecommend.push(data[1].recomNum)
                         goodMoodRecommend.push(data[1].recomHead)
                         goodMoodRecommend.push(data[1].recomCont)
