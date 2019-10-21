@@ -610,13 +610,16 @@ bot.on('message', function(event) {
     console.log('使用者傳來的文字',text);
     }else{
         event.reply(
-            {"type": "text",
-            "text": "我不是很了解你的意思，請透過圖文選單與我們溝通"},            
+            {   
+                "type": "text",
+                "text": "我不是很了解你的意思，請透過圖文選單與我們溝通"
+            },            
             {
-            "type": "sticker",
-            "packageId": "1",
-            "stickerId": "1"
-            })
+                "type": "sticker",
+                "packageId": "11539",
+                "stickerId": "52114136"
+            }
+        )
     }
 
 
