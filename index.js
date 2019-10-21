@@ -192,12 +192,21 @@ bot.on('postback', function(event) {
                     console.log('data[1]正向', data[1])
                     console.log('data[1]正向.artiNum', data[1].artiNum)
                     console.log('data[1]正向.recomNum', data[1].recomNum)
-                    
+            
                     // console.log('loginData', data)
                     // console.log('loginData', data)
                     // console.log('loginData', data)
                     
-
+                    if(data[0].artiNum !=  undefined){
+                        console.log(data[0].artiNum)
+                        console.log(data[0].artiHead)
+                        console.log(data[0].artiCont)
+                        
+                    }else{
+                        console.log(data[0].recomNum)
+                        console.log(data[0].recomHead)
+                        console.log(data[0].recomCont)
+                    }
 
                     // event.reply({
                     //     "type": "template",
@@ -228,6 +237,19 @@ bot.on('postback', function(event) {
 
                 })
                 
+            }else if(data == 'Badmood'){
+                mood.getMood().then((data) => {
+                    if(data[0].artiNum !=  undefined){
+                        console.log(data[0].artiNum)
+                        console.log(data[0].artiHead)
+                        console.log(data[0].artiCont)
+                        
+                    }else{
+                        console.log(data[0].recomNum)
+                        console.log(data[0].recomHead)
+                        console.log(data[0].recomCont)
+                    }
+                })
             }else{
                 login.userJudgeBind(userId).then(d =>{
                     if(d.length !== 0){                         
