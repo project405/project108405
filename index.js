@@ -191,6 +191,7 @@ bot.on('postback', function(event) {
                         // console.log(data[1].artiNum)
                         // console.log(data[1].artiHead)
                         // console.log(data[1].artiCont)
+                        data[1].artiCont = data[1].artiCont.length>25 ? `${data[1].artiCont.substr(0,20)}...` : data[1].artiCont
                         goodMoodRecommend.push(data[1].artiNum)
                         goodMoodRecommend.push(data[1].artiHead)
                         goodMoodRecommend.push(data[1].artiCont)
@@ -199,6 +200,7 @@ bot.on('postback', function(event) {
                         // console.log(data[1].recomNum)
                         // console.log(data[1].recomHead)
                         // console.log(data[1].recomCont)
+                        data[1].recomCont = data[1].recomCont.length>25 ? `${data[1].recomCont.substr(0,20)}...` : data[1].recomCont
                         goodMoodRecommend.push(data[1].recomNum)
                         goodMoodRecommend.push(data[1].recomHead)
                         goodMoodRecommend.push(data[1].recomCont)
@@ -207,7 +209,7 @@ bot.on('postback', function(event) {
                     console.log('good!!!!!!!!!!!!!!!!!',goodMoodRecommend)
                     event.reply({
                         "type": "template",
-                        "altText": "熱門文章",
+                        "altText": "挖掘好心情️ ☀️ ",
                         "template": {
                             "type": "carousel",
                             "columns": [
@@ -215,7 +217,6 @@ bot.on('postback', function(event) {
                                     "title": "【" + goodMoodRecommend[1] + "】" ,
                                     "text": goodMoodRecommend[2] ,
                                     "actions": [
-                                        
                                         {
                                             "type": "uri",
                                             "label": " 👀 至文藝富心官網觀看",
@@ -225,9 +226,6 @@ bot.on('postback', function(event) {
                                     ]
                                 }
                             ]
-                            // ,
-                            // "imageAspectRatio": "rectangle",
-                            // "imageSize": "cover"
                         }
                     });
                 })
