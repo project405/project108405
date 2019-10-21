@@ -194,7 +194,7 @@ bot.on('postback', function(event) {
                         while( data[1].artiCont.match('<br>') ) {
                             　data[1].artiCont.replace('<br>','')
                         }
-                        data[1].artiCont = data[1].artiCont.length>50 ? `${data[1].artiCont.substr(0,45)}...` : data[1].artiCont
+                        data[1].artiCont = data[1].artiCont.length>70 ? `${data[1].artiCont.substr(0,65)}...` : data[1].artiCont
                         goodMoodRecommend.push(data[1].artiNum)
                         goodMoodRecommend.push(data[1].artiHead)
                         goodMoodRecommend.push(data[1].artiCont)
@@ -203,7 +203,7 @@ bot.on('postback', function(event) {
                         // console.log(data[1].recomNum)
                         // console.log(data[1].recomHead)
                         // console.log(data[1].recomCont)
-                        data[1].recomCont = data[1].recomCont.length>25 ? `${data[1].recomCont.substr(0,20)}...` : data[1].recomCont
+                        data[1].recomCont = data[1].recomCont.length>120 ? `${data[1].recomCont.substr(0,110)}...` : data[1].recomCont
                         goodMoodRecommend.push(data[1].recomNum)
                         goodMoodRecommend.push(data[1].recomHead)
                         goodMoodRecommend.push(data[1].recomCont)
