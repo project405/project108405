@@ -59,6 +59,7 @@ app.post('/webhook',  function (req, res) {
     member.artiImg('105').then(data =>{
         console.log(data.imgName)
         console.log(typeof(data.imgName))
+    })
         // var img = data.imgName.replace('data:image/jpeg;base64,', '')
         // var apiUrl = 'https://api.imgur.com/3/image';
         // var apiKey = '8b8755d8a1c4ace';
