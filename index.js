@@ -191,9 +191,9 @@ bot.on('postback', function(event) {
                         // console.log(data[1].artiNum)
                         // console.log(data[1].artiHead)
                         // console.log(data[1].artiCont)
-                        while( data[1].artiCont.match('\r') = '\r' ) {
-                            　data[1].artiCont.replace('\r','')
-                        }
+                        // while( data[1].artiCont.match('\r') = '\r' ) {
+                        //     　data[1].artiCont.replace('\r','')
+                        // }
                        
                         data[1].artiHead = data[1].artiHead.length>40 ? `${data[1].artiHead.substr(0,35)}...` : data[1].artiHead
                         data[1].artiCont = data[1].artiCont.length>70 ? `${data[1].artiCont.substr(0,65)}...` : data[1].artiCont
