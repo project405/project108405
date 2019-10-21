@@ -35,7 +35,7 @@
 
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-lock"></span></span>
-                <input type="password" class="input-with-icon" id="password" name="memPass" placeholder="新密碼"
+                <input type="password" class="input-with-icon" id="password" name="memPass" value= <%= items[0].memPass %>
                     onchange="passcheck()">
             </div>
             <p id="passwordAlarm"></p>
@@ -43,7 +43,7 @@
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-lock"></span></span>
                 <input type="password" class="input-with-icon" id="checkPassword" name="memCheckPass"
-                    placeholder="確認新密碼" onchange="passcheck()">
+                value= <%= items[0].memPass %> onchange="passcheck()">
             </div>
             <p id="checkPasswordAlarm"></p>
 
@@ -53,11 +53,10 @@
                     value=<%= items[0].memMail %> >
             </div>
 
-            <!-- <%= items[0].memBirth %> -->
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-birthday-cake"></span></span>
                 <input type="date" class="input-with-icon" id="birthday" name="memBirth" placeholder="生日"
-                    onchange="birthdayValidateForm()" value="1997-09-28">
+                    onchange="birthdayValidateForm()" value= <%= items[0].memBirth %>>
             </div>
             <p id="birthdayAlarm"></p>
 
