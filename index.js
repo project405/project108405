@@ -449,79 +449,66 @@ bot.on('message', function(event) {
     if (text == "情緒專區"){
         mood.getMood().then((data) => {
             console.log('loginData', data)
+            event.reply({
+                "type": "template",
+                "altText": "文藝富心",
+                "template": {
+                    "type": "carousel",
+                    "columns": [
+                        {
+                          "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/QNd8AT.jpg",
+                          "imageBackgroundColor": "#FFFFFF",
+                          "title": "燦爛、溫暖",
+                          "text": "微小的快樂，便足以支撐龐然荒涼的人生。文藝富心帶領你挖掘好心情＿",
+                          "defaultAction": {
+                              "type": "uri",
+                              "label": "詳細資料",
+                              "uri": "http://weiting.nctu.me/"
+                          },
+                          "actions": [
+                              {
+                                  "type": "postback",
+                                  "label": "推薦給我",
+                                  "data": "Goodmood"
+                              },
+                              {
+                                  "type": "uri",
+                                  "label": "自行探索",
+                                  "uri": "http://weiting.nctu.me/"
+                              }
+                          ]
+                        },
+                        {    
+                          "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/2EWOCG.jpg",
+                          "imageBackgroundColor": "#000000",
+                          "title": "惆悵、漣漪",
+                          "text": "打擊與挫敗是成功的踏腳石，而不是絆腳石。文藝富心陪你克服這道關卡＿",
+                          "defaultAction": {
+                              "type": "uri",
+                              "label": "詳細資料",
+                              "uri": "http://weiting.nctu.me/"
+                          },
+                          "actions": [
+                            {
+                                "type": "postback",
+                                "label": "推薦給我",
+                                "data": "Badmood"
+                            },
+                            {
+                                "type": "uri",
+                                "label": "自行探索",
+                                "uri": "http://weiting.nctu.me/"
+                            }
+                          ]
+                        }
+                    ],
+                    "imageAspectRatio": "rectangle",
+                    "imageSize": "cover"
+                } 
+            });
         })
-        // event.reply({
-        //     "type": "template",
-        //     "altText": "文藝富心",
-        //     "template": {
-        //         "type": "carousel",
-        //         "columns": [
-        //             {
-        //               "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg",
-        //               "imageBackgroundColor": "#FFFFFF",
-        //               "title": "好心情專區",
-        //               "text": "適合好心情的語錄",
-        //               "defaultAction": {
-        //                   "type": "uri",
-        //                   "label": "詳細資料",
-        //                   "uri": "http://weiting.nctu.me/"
-        //               },
-        //               "actions": [
-        //                   {
-        //                     "type":"postback",
-        //                     "label":"recommend5有",
-        //                     "data":'recommend5'
-        //                   },
-        //                   {
-        //                     "type":"postback",
-        //                     "label":"recommend7有",
-        //                     "data":'recommend7'
-        //                   },
-        //                   {
-        //                     "type":"postback",
-        //                     "label":"recommend8沒有",
-        //                     "data":'recommend8'
-        //                   },
-        //               ]
-        //             },
-        //             {
-        //               "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p02.jpg",
-        //               "imageBackgroundColor": "#000000",
-        //               "title": "壞心情專區",
-        //               "text": "適合壞心情的語錄",
-        //               "defaultAction": {
-        //                   "type": "uri",
-        //                   "label": "詳細資料",
-        //                   "uri": "http://weiting.nctu.me/"
-        //               },
-        //               "actions": [
-        //                 {
-        //                     "type": "uri",
-        //                     "label": "電影",
-        //                     "uri": "http://weiting.nctu.me/"
-        //                 },
-        //                 {
-        //                     "type": "uri",
-        //                     "label": "音樂",
-        //                     "uri": "http://weiting.nctu.me/"
-        //                 },
-        //                   {
-        //                       "type": "uri",
-        //                       "label": "書籍",
-        //                       "uri": "http://weiting.nctu.me/"
-        //                   }
-        //               ]
-        //             }
-        //         ],
-        //         "imageAspectRatio": "rectangle",
-        //         "imageSize": "cover"
-        //     }
-        // });
-        
-    }
-        
+    } 
     // }
-       
     console.log('使用者傳來的文字',text);
     })
 });
