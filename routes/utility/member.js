@@ -1022,7 +1022,135 @@ var getMemberInfor = async function (memID) {
 
     return result;
 }
+//=========================================
+//---------  getMood() -----------
+//=========================================
+var getMood = async function (r) {
+    var negativerecom= [];
+    var negativearti = [];
+    var positiverecom = [];
+    var positivearti = [];
+    var temp = []
+    var result = [];
+    var positiveChoose = Math.round(Math.random())
+    var negativeChoose = Math.round(Math.random())
+    async function compare(item, index) {
+        if (item.length != 0 && index <= 1) {
+            console.log(item)
+            if (Object.keys(item).indexOf('artiNum') >= 0 ) {
+                console.log('負向文章')
+                console.log(item[0].artiCont)
+                result.push(item[0].artiCont)
+              } else {
+                // 推薦
+                console.log('負向推薦')
+                console.log(item[0].recomCont)
+                result.push(item[0].recomCont)
+              }
+            // console.log(item[0])
+            console.log('=============================')
+        } else if (item.length != 0 && index >= 2) {
+            if (Object.keys(item).indexOf('artiNum') >= 0 ) {
+                //  文章
+                console.log('正向文章')
+                result.push(item[0].artiCont)
+              } else {
+                // 推薦
+                console.log('正向推薦')
+                console.log(item[0].recomCont)
+                result.push(item[0].recomCont)
 
+              }
+        }
+    }
+
+    // -----------  取得推薦清單 --------------
+
+    if (negativeChoose == 0) {
+        await sql('SELECT * FROM( SELECT * FROM "recommend" WHERE "analyzeScore" < 0 ORDER BY "negativeWords" DESC, "analyzeScore" DESC LIMIT 5) AS "A" ORDER BY random() LIMIT 1 ')
+        .then((data) => {
+            if (data.rows != undefined) {
+                negativerecom = data.rows
+            } else {
+                negativerecom = undefined
+            }
+        }, (error) => {
+            negativerecom = undefined;
+        });
+    } else {
+        await sql('SELECT * FROM( SELECT * FROM "article" WHERE "analyzeScore" < 0 ORDER BY "negativeWords" DESC, "analyzeScore" DESC LIMIT 5) AS "A" ORDER BY random() LIMIT 1 ')
+        .then((data) => {
+            if (data.rows != undefined) {
+                negativearti = data.rows
+            } else {
+                negativearti = undefined
+            }
+        }, (error) => {
+            negativearti = undefined;
+        });
+    }
+
+    if (positiveChoose == 0) {
+        await sql('SELECT * FROM(SELECT * FROM "recommend" WHERE "analyzeScore" > 0.5 ORDER BY "positiveWords" DESC, "analyzeScore" DESC LIMIT 5) AS "A" ORDER BY random() LIMIT 1 ')
+        .then((data) => {
+            if (data.rows != undefined) {
+                positiverecom = data.rows
+            } else {
+                positiverecom = undefined
+            }
+        }, (error) => {
+            positiverecom = undefined;
+        });
+    } else {
+        await sql('SELECT * FROM( SELECT * FROM "article" WHERE "analyzeScore" > 0.5 ORDER BY "positiveWords" DESC, "analyzeScore" DESC LIMIT 5) AS "A" ORDER BY random() LIMIT 1 ')
+        .then((data) => {
+            if (data.rows != undefined) {
+                positivearti = data.rows
+            } else {
+                positivearti = undefined
+            }
+        }, (error) => {
+            positivearti = undefined;
+        });
+    
+    }
+    
+    temp[0] = negativerecom;
+    temp[1] = negativearti;
+    temp[2] = positiverecom;
+    temp[3] = positivearti;
+    
+    temp.map( async(item, index) => {
+        await compare(item, index)
+    })
+
+    console.log('result', result)
+
+    // console.log('==================================')
+    // console.log(result)
+    // console.log('==================================')
+
+    // if (result[0][0] && Object.keys(result[0][0]).indexOf('artiNum') >= 0 ) {
+    //     console.log('負向文章')
+    //     console.log(result[0][0].artiCont)
+    //   } else {
+    //     // 推薦
+    //     console.log('負向推薦')
+    //     console.log(result[0][0].recomCont)
+    //   }
+    //   console.log('=============================')
+    //   if (result[0][1] && Object.keys(result[0][1]).indexOf('artiNum') >= 0 ) {
+    //     //  文章
+    //     console.log('正向文章')
+    //     console.log(result[0][1].artiCont)
+    //   } else {
+    //     // 推薦
+    //     console.log('正向推薦')
+    //     console.log(result[0][1].recomCont)
+    //   }
+
+    return result;
+}
 
 //匯出
 module.exports = {
@@ -1033,6 +1161,6 @@ module.exports = {
     addRecommendMessLike, delRecommendMessLike,
     report, checkAuthority, editArticle, deleteArticle, deleteRecommend, editReply, deleteReply, 
     memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
-    editRecommendReply, editRecommend
+    editRecommendReply, editRecommend, getMood
 
 };
