@@ -219,7 +219,8 @@ bot.on('postback', function(event) {
                                         {
                                             "type": "uri",
                                             "label": " 👀 至文藝富心官網觀看",
-                                            "uri": `https://project108405.herokuapp.com/article`
+                                            // "uri": `https://project108405.herokuapp.com/article`
+                                            "uri": 'https://project108405.herokuapp.com/article'
                                         }
                                     ]
                                 }
