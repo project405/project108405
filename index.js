@@ -581,7 +581,7 @@ bot.on('message', function(event) {
                           "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/2EWOCG.jpg",
                           "imageBackgroundColor": "#000000",
                           "title": "惆悵、漣漪",
-                          "text": "打擊與挫敗是成功的踏腳石，而不是絆腳石。文藝富心陪你克服這道關卡。",
+                          "text": "打擊與挫敗是成功的踏腳石s而不是絆腳石。文藝富心陪你克服這道關卡。",
                           "defaultAction": {
                               "type": "uri",
                               "label": "詳細資料",
