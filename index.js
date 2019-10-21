@@ -128,7 +128,9 @@ app.post('/webhook',  function (req, res) {
             json:true
         };
 
-        feachImgur().then()
+        feachImgur().then((data) => {
+            console.log(data)
+        })
 
 
     }   
