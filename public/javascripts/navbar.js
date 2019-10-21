@@ -103,14 +103,17 @@ $(document).ready(() => {
                             <li class="nav-item">\
                                 <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
                             </li>\
-                            <li class="nav-item">\
-                            <a class="nav-link" href="#/" onclick="reply()">\
-                            Line推播</a>\
-                          </li>\
-                            <li class="nav-item">\
-                                <a class="nav-link" href="/recommend/post/page">\
-                                新增推薦</a>\
-                            </li>\
+                            <li class="nav-item dropdown">\
+                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+                                管理者選項\
+                            </a>\
+                            <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
+                                <a class="dropdown-item" href="#/" onclick="reply()">Line推播</a>\
+                                <a class="dropdown-item" href="/recommend/post/page">新增推薦</a>\
+                                <a class="dropdown-item" href="/member/articleManage">選出最佳留言</a>\
+                            </div>\
+                        </li>\
+                        <li class="nav-item">\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/recommendlist">\
                                 推薦</a>\
