@@ -18,6 +18,11 @@ router.get('/', function (req, res, next) {
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else {
+            data[0].map((item) => {
+                while (item.recomCont.match('<br>')) {
+                    item.recomCont = item.recomCont.replace('<br>',' ')
+                }
+            })
             res.render('recommendList', { recom : data });
         }
     })

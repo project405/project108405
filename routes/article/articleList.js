@@ -19,6 +19,8 @@ router.get('/', function (req, res, next) {
             for (var i = 0; i < data[0].length; i++) {
                 if (data[0][i].artiCont.match("\\:imgLocation") != null) {
                     data[0][i].artiCont = data[0][i].artiCont.replace(/\\:imgLocation/g, "");
+                } else if (data[0][i].artiCont.match('<br>')){
+                    data[0][i].artiCont = data[0][i].artiCont.replace(/<br>/g,' ');
                 }
             }
         }

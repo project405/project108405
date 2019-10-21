@@ -31,6 +31,11 @@ $(document).ready(function () {
     $("#tagInput").blur(function () {
         $("div.tag").css("box-shadow", "none");
     });
+    
+    Array.from($('.fourRecommend')).map((item) => {
+        console.log(item.innerText.length)
+        item.innerText = item.innerText.length > 150 ? `${item.innerText.substr(0,150)}...` : item.innerText
+    })
 
     $(".wrapText").each(function () {
 
