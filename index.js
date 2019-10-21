@@ -197,7 +197,7 @@ bot.on('postback', function(event) {
                        
                         data[1].artiHead = data[1].artiHead.length>30 ? `${data[1].artiHead.substr(0,25)}...` : data[1].artiHead
                         data[1].artiCont = data[1].artiCont.length>50 ? `${data[1].artiCont.substr(0,45)}...` : data[1].artiCont
-                        goodMoodRecommend.push(data[1].artiNum)
+                        goodMoodRecommend.push('article/'+data[1].artiNum)
                         goodMoodRecommend.push(data[1].artiHead)
                         goodMoodRecommend.push(data[1].artiCont)
                         
@@ -226,8 +226,8 @@ bot.on('postback', function(event) {
                                         {
                                             "type": "uri",
                                             "label": " 👀 至文藝富心官網觀看",
-                                            // "uri": `https://project108405.herokuapp.com/article`
-                                            "uri": 'https://project108405.herokuapp.com/article'
+                                            "uri": `https://project108405.herokuapp.com/${goodMoodRecommend[0]}`
+                                            
                                         }
                                     ]
                                 }
@@ -275,8 +275,8 @@ bot.on('postback', function(event) {
                                         {
                                             "type": "uri",
                                             "label": " 👀 至文藝富心官網觀看",
-                                            // "uri": `https://project108405.herokuapp.com/article`
-                                            "uri": 'https://project108405.herokuapp.com/article'
+                                    
+                                            "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
                                         }
                                     ]
                                 }
