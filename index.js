@@ -61,18 +61,27 @@ app.post('/webhook',  function (req, res) {
             allUser.push(item.lineID);
             console.log(allUser)
         });
-        byClassData.getIndexData().then(data =>{
+        // byClassData.getIndexData().then(data =>{
             console.log(data[10][0])
             var pushContent = [];
+            data[10][0].artiNum = '101'
+            data[10][0].artiHead = 'sadsadsad'
+            data[10][0].artiCont = 'asdasdsad<br><br><br><br><br>\:imgLocation<br>\:imgLocation<br>\:imgLocation'
+            data[10][0].recomNum = '16'
+            data[10][0].recomHead = '先讓我發一個費文'
+            data[10][0].recomCont = '123123<br>123123123<br><br><br><br>e<br>2<br>14<br><br><br>4<br><br>4<br><br><br><br><br>\:imgLocation'
+        
             //data為文章
             if(data[10][0].recomHead == undefined){
                 pushContent.push('article')
                 pushContent.push(data[10][0].artiNum)
                 pushContent.push(data[10][0].artiHead)
+               
                 //有圖片
                 if (data[10][0].artiCont.match("\:imgLocation") != null){
                     // pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
-                    pushContent.push(data[10][0].artiCont); 
+                    // pushContent.push(data[10][0].artiCont); 
+                    pushContent.push('圖片喔！！！'); 
                     // if (data[10][0].artiCont.length >= 70){
                     //     pushContent.pop()
                     //     pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
@@ -93,7 +102,8 @@ app.post('/webhook',  function (req, res) {
                 pushContent.push(data[10][0].recomHead)
                 //有圖片
                 if (data[10][0].recomCont.match("\:imgLocation") != null){
-                    pushContent.push(data[10][0].recomCont); 
+                    // pushContent.push(data[10][0].recomCont); 
+                    pushContent.push('圖片喔！！！');
                     // if (data[10][0].recomCont.length >= 70){
                     //     pushContent.pop()
                     //     pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
@@ -251,6 +261,6 @@ app.post('/webhook',  function (req, res) {
                
             }
     
-        })    
+        // })    
     })      
 });
