@@ -581,7 +581,7 @@ bot.on('message', function(event) {
                           "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/2EWOCG.jpg",
                           "imageBackgroundColor": "#000000",
                           "title": "惆悵、漣漪",
-                          "text": "打擊與挫敗是成功的踏腳石s而不是絆腳石。文藝富心陪你克服這道關卡。",
+                          "text": "打擊與挫敗是成功的踏腳石而不是絆腳石。文藝富心陪你克服這道關卡。",
                           "defaultAction": {
                               "type": "uri",
                               "label": "詳細資料",
@@ -608,7 +608,18 @@ bot.on('message', function(event) {
     
     // }
     console.log('使用者傳來的文字',text);
-        }
+    }else{
+        event.reply(
+            {"type": "text",
+            "text": "我不是很了解你的意思，請透過圖文選單與我們溝通"},            
+            {
+            "type": "sticker",
+            "packageId": "1",
+            "stickerId": "1"
+            })
+    }
+
+
     });
 });
 
