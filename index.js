@@ -191,7 +191,7 @@ bot.on('postback', function(event) {
                         // console.log(data[1].artiNum)
                         // console.log(data[1].artiHead)
                         // console.log(data[1].artiCont)
-                        while( data[1].artiCont.match('\r') ) {
+                        while( data[1].artiCont.match('\r') = '\r' ) {
                             　data[1].artiCont.replace('\r','')
                         }
                        
