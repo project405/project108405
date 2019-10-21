@@ -6,14 +6,53 @@ const sql = require('./asyncDB');
 //=========================================
 //---------  getMood() -----------
 //=========================================
-var getMood = async function (r) {
+var getMood = async function () {
     var negativerecom= [];
     var negativearti = [];
     var positiverecom = [];
     var positivearti = [];
+    var temp = []
     var result = [];
     var positiveChoose = Math.round(Math.random())
     var negativeChoose = Math.round(Math.random())
+    async function compare(item, index) {
+        if (item.length != 0 && index <= 1) {
+            if (Object.keys(item[0]).indexOf('artiNum') >= 0 ) {
+                var contentObj =  {
+                    artiNum: item[0].artiNum,
+                    artiHead:  item[0].artiHead,
+                    artiCont:  item[0].artiCont,
+                }
+                result.push(contentObj)
+              } else {
+                // 推薦
+                var contentObj =  {
+                    recomNum: item[0].recomNum,
+                    recomHead:  item[0].recomHead,
+                    recomCont:  item[0].recomCont,
+                }
+                result.push(contentObj)
+              }
+        } else if (item.length != 0 && index >= 2) {
+            if (Object.keys(item[0]).indexOf('artiNum') >= 0 ) {
+                //  文章
+                var contentObj =  {
+                    artiNum: item[0].artiNum,
+                    artiHead:  item[0].artiHead,
+                    artiCont:  item[0].artiCont,
+                }
+                result.push(contentObj)
+              } else {
+                // 推薦
+                var contentObj =  {
+                    recomNum: item[0].recomNum,
+                    recomHead:  item[0].recomHead,
+                    recomCont:  item[0].recomCont,
+                }
+                result.push(contentObj)
+            }
+        }
+    }
 
     // -----------  取得推薦清單 --------------
 
@@ -65,13 +104,17 @@ var getMood = async function (r) {
         });
     
     }
-        
-    result[0] = negativerecom;
-    result[1] = negativearti;
-    result[2] = positiverecom;
-    result[3] = positivearti;
-
-    // console.log(result);
+    
+    temp[0] = negativerecom;
+    temp[1] = negativearti;
+    temp[2] = positiverecom;
+    temp[3] = positivearti;
+    
+    temp.map( async(item, index) => {
+        if (item != '') {
+            await compare(item, index)
+        }
+    })
     return result;
 }
 

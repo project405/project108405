@@ -447,108 +447,76 @@ bot.on('message', function(event) {
     }
     //-----------心情推薦-----------
     if (text == "心情推薦"){
-        // app.get('/', function () {
-            // let negative;
-            // let positive;
-            // let result = [1,2];
-            
-            // mood.getMood().then(data => { 
-            //     console.log('data!!!!!!!!!!!!!!',data)
-            //     data.map((item, index) => {
-            //         if (item && index <= 1) {
-            //             // 負面
-
-            //             if (Object.keys(item[0]).indexOf('recomCont') >= 0) {
-            //                 negative = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
-            //             } else {
-            //                 negative = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
-            //             } 
-            //             result[0] = negative
-
-            //         } else {
-            //             // 正面
-                        
-            //             if (Object.keys(item[0]).indexOf('recomCont') >= 0) {
-            //                 positive = item.recomCont > 75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
-            //             } else {
-            //                 positive = item.artiCont > 75 ? `${item.artiCont.substr(0,75)}...` : item.artiCont
-            //             } 
-            //             result[1] = positive
-                        
-            //         }
-            //         console.log('result@@@@@@@@@@@@@',result)
-            //     })
-            // })
-
-            // console.log('為廷的router@@@@@@@@@@@@@',result)
+        mood.getMood().then((data) => {
+            console.log('loginData', data)
+        })
+        // event.reply({
+        //     "type": "template",
+        //     "altText": "文藝富心",
+        //     "template": {
+        //         "type": "carousel",
+        //         "columns": [
+        //             {
+        //               "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg",
+        //               "imageBackgroundColor": "#FFFFFF",
+        //               "title": "好心情專區",
+        //               "text": "適合好心情的語錄",
+        //               "defaultAction": {
+        //                   "type": "uri",
+        //                   "label": "詳細資料",
+        //                   "uri": "http://weiting.nctu.me/"
+        //               },
+        //               "actions": [
+        //                   {
+        //                     "type":"postback",
+        //                     "label":"recommend5有",
+        //                     "data":'recommend5'
+        //                   },
+        //                   {
+        //                     "type":"postback",
+        //                     "label":"recommend7有",
+        //                     "data":'recommend7'
+        //                   },
+        //                   {
+        //                     "type":"postback",
+        //                     "label":"recommend8沒有",
+        //                     "data":'recommend8'
+        //                   },
+        //               ]
+        //             },
+        //             {
+        //               "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p02.jpg",
+        //               "imageBackgroundColor": "#000000",
+        //               "title": "壞心情專區",
+        //               "text": "適合壞心情的語錄",
+        //               "defaultAction": {
+        //                   "type": "uri",
+        //                   "label": "詳細資料",
+        //                   "uri": "http://weiting.nctu.me/"
+        //               },
+        //               "actions": [
+        //                 {
+        //                     "type": "uri",
+        //                     "label": "電影",
+        //                     "uri": "http://weiting.nctu.me/"
+        //                 },
+        //                 {
+        //                     "type": "uri",
+        //                     "label": "音樂",
+        //                     "uri": "http://weiting.nctu.me/"
+        //                 },
+        //                   {
+        //                       "type": "uri",
+        //                       "label": "書籍",
+        //                       "uri": "http://weiting.nctu.me/"
+        //                   }
+        //               ]
+        //             }
+        //         ],
+        //         "imageAspectRatio": "rectangle",
+        //         "imageSize": "cover"
+        //     }
         // });
-        event.reply({
-            "type": "template",
-            "altText": "文藝富心",
-            "template": {
-                "type": "carousel",
-                "columns": [
-                    {
-                      "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p01.jpg",
-                      "imageBackgroundColor": "#FFFFFF",
-                      "title": "好心情專區",
-                      "text": "適合好心情的語錄",
-                      "defaultAction": {
-                          "type": "uri",
-                          "label": "詳細資料",
-                          "uri": "http://weiting.nctu.me/"
-                      },
-                      "actions": [
-                          {
-                            "type":"postback",
-                            "label":"recommend5有",
-                            "data":'recommend5'
-                          },
-                          {
-                            "type":"postback",
-                            "label":"recommend7有",
-                            "data":'recommend7'
-                          },
-                          {
-                            "type":"postback",
-                            "label":"recommend8沒有",
-                            "data":'recommend8'
-                          },
-                      ]
-                    },
-                    {
-                      "thumbnailImageUrl": "https://tomlin-app-1.herokuapp.com/imgs/p02.jpg",
-                      "imageBackgroundColor": "#000000",
-                      "title": "壞心情專區",
-                      "text": "適合壞心情的語錄",
-                      "defaultAction": {
-                          "type": "uri",
-                          "label": "詳細資料",
-                          "uri": "http://weiting.nctu.me/"
-                      },
-                      "actions": [
-                        {
-                            "type": "uri",
-                            "label": "電影",
-                            "uri": "http://weiting.nctu.me/"
-                        },
-                        {
-                            "type": "uri",
-                            "label": "音樂",
-                            "uri": "http://weiting.nctu.me/"
-                        },
-                          {
-                              "type": "uri",
-                              "label": "書籍",
-                              "uri": "http://weiting.nctu.me/"
-                          }
-                      ]
-                    }
-                ],
-                "imageAspectRatio": "rectangle",
-                "imageSize": "cover"
-            }
-        });
         
     }
         
