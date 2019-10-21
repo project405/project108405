@@ -97,16 +97,41 @@ app.post('/webhook',  function (req, res) {
         //     .then(processStatus)
         //     .then(parseJson)
         
-        request.post({
-            headers: {
-                'content-type' : 'application/json',
-                'Authorization': 'Client-ID 8b8755d8a1c4ace'
-            },
-            url: 'https://api.imgur.com/3/upload.json',
-            body: JSON.stringify({img})
+        // request.post({
+        //     headers: {
+        //         'content-type' : 'application/json',
+        //         'Authorization': 'Client-ID 8b8755d8a1c4ace'
+        //     },
+        //     url: 'https://api.imgur.com/3/upload.json',
+        //     body: JSON.stringify({img})
+        // })
+
+
+        request({
+            url: "https://www.cwb.gov.tw/V7/js/HDRadar_1000_n_val.js",
+            method: "GET"
+           }, (error, response, body)=>{
+            if(error || !body) return;
+            var $ = cheerio.load(body);
+            var start_idx = body.indexOf('","')+3;
+            var end_idx = body.indexOf('"),');
+            weather_img ="https://www.cwb.gov.tw"+body.substring(start_idx,end_idx);
+
         })
 
-    })
+        var feachImgur ={
+            method: "GET",
+            uri: "https://api.imgur.com/3/upload.json",
+            headers: {
+                'Authorization': "Client-ID " + apiKey
+            },
+            json:true
+        };
+
+        feachImgur().then()
+
+
+    }   
 
      
         
