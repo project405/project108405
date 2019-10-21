@@ -185,29 +185,26 @@ bot.on('postback', function(event) {
 
             }else if(data == 'Goodmood'){
                 mood.getMood().then((data) => {
-                    // console.log('loginData', data)
-                    // console.log('data[0]負向', data[0])
-                    // console.log('data[0]負向.artiNum', data[0].artiNum)
-                    // console.log('data[0]負向.recomNum', data[0].recomNum)
-                    // console.log('data[1]正向', data[1])
-                    // console.log('data[1]正向.artiNum', data[1].artiNum)
-                    // console.log('data[1]正向.recomNum', data[1].recomNum)
-            
-                    // console.log('loginData', data)
-                    // console.log('loginData', data)
-                    // console.log('loginData', data)
+                    var goodMoodRecommend = [];
                     
                     if(data[1].artiNum !=  undefined){
                         console.log(data[1].artiNum)
                         console.log(data[1].artiHead)
                         console.log(data[1].artiCont)
+                        goodMoodRecommend.push(data[1].artiNum)
+                        goodMoodRecommend.push(data[1].artiHead)
+                        goodMoodRecommend.push(data[1].artiCont)
                         
                     }else{
                         console.log(data[1].recomNum)
                         console.log(data[1].recomHead)
                         console.log(data[1].recomCont)
+                        goodMoodRecommend.push(data[1].recomNum)
+                        goodMoodRecommend.push(data[1].recomHead)
+                        goodMoodRecommend.push(data[1].recomCont)
                     }
 
+                    console.log('good!!!!!!!!!!!!!!!!!',goodMoodRecommend)
                     // event.reply({
                     //     "type": "template",
                     //     "altText": "熱門文章",
@@ -243,6 +240,9 @@ bot.on('postback', function(event) {
                         console.log(data[0].artiNum)
                         console.log(data[0].artiHead)
                         console.log(data[0].artiCont)
+                        goodMoodRecommend.push(data[1].artiNum)
+                        goodMoodRecommend.push(data[1].artiHead)
+                        goodMoodRecommend.push(data[1].artiCont)
                         
                     }else{
                         console.log(data[0].recomNum)
