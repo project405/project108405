@@ -57,8 +57,8 @@ var server = app.listen(process.env.PORT || 3000, function() {
 app.post('/webhook',  function (req, res) {
 
     member.artiImg('105').then(data =>{
-        console.log(data[0].imgName)
-        console.log(typeof(data[0].imgName))
+        // console.log(data[0].imgName)
+        // console.log(typeof(data[0].imgName))
         var img = data[0].imgName.replace('data:image/jpeg;base64,', '')
         var apiUrl = 'https://api.imgur.com/3/image';
         var apiKey = '8b8755d8a1c4ace';
