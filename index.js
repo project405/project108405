@@ -187,7 +187,12 @@ bot.on('postback', function(event) {
                 mood.getMood().then((data) => {
                     console.log('loginData', data)
                     console.log('data[0]負向', data[0])
+                    console.log('data[0]負向.artiNum', data[0].artiNum)
+                    console.log('data[0]負向.recomNum', data[0].recomNum)
                     console.log('data[1]正向', data[1])
+                    console.log('data[1]正向.artiNum', data[1].artiNum)
+                    console.log('data[1]正向.recomNum', data[1].recomNum)
+                    
                     // console.log('loginData', data)
                     // console.log('loginData', data)
                     // console.log('loginData', data)
