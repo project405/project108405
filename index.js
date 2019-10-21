@@ -548,7 +548,8 @@ bot.on('message', function(event) {
     
     // }
     console.log('使用者傳來的文字',text);
-    }
+        }
+    });
 });
 
 
