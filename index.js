@@ -183,6 +183,46 @@ bot.on('postback', function(event) {
             }else if (data == 'dislike'){
                 event.reply('文藝富心又更加了解你了')
 
+            }else if(data == 'Goodmood'){
+                mood.getMood().then((data) => {
+                    console.log('loginData', data)
+                    console.log('data[0]負向', data[0])
+                    console.log('data[1]正向', data[1])
+                    // console.log('loginData', data)
+                    // console.log('loginData', data)
+                    // console.log('loginData', data)
+                    
+
+
+                    // event.reply({
+                    //     "type": "template",
+                    //     "altText": "熱門文章",
+                    //     "template": {
+                    //         "type": "carousel",
+                    //         "columns": [
+                    //             {
+                    //                 "title": "【" + data[1][0].artiHead + "】" ,
+                    //                 "text":'時間：' + data[1][0].artiDateTime  + '\n' + data[1][0].artiCont ,
+                    //                 "actions": [
+                                        
+                    //                     {
+                    //                         "type": "uri",
+                    //                         "label": " 👀 至文藝富心官網觀看",
+                    //                         "uri": `https://project108405.herokuapp.com/article/${data[1][0].artiNum}`
+                    //                     }
+                    //                 ]
+                    //             }
+                    //         ]
+                    //         // ,
+                    //         // "imageAspectRatio": "rectangle",
+                    //         // "imageSize": "cover"
+                    //     }
+                    // });
+                   
+
+
+                })
+                
             }else{
                 login.userJudgeBind(userId).then(d =>{
                     if(d.length !== 0){                         
@@ -447,8 +487,7 @@ bot.on('message', function(event) {
     }
     //-----------心情推薦-----------
     if (text == "情緒專區"){
-        mood.getMood().then((data) => {
-            console.log('loginData', data)
+        
             event.reply({
                 "type": "template",
                 "altText": "文藝富心",
@@ -459,7 +498,7 @@ bot.on('message', function(event) {
                           "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/QNd8AT.jpg",
                           "imageBackgroundColor": "#FFFFFF",
                           "title": "燦爛、溫暖",
-                          "text": "微小的快樂，便足以支撐龐然荒涼的人生。文藝富心帶領你挖掘好心情＿",
+                          "text": "微小的快樂，便足以支撐龐然荒涼的人生。文藝富心帶領你挖掘好心情。",
                           "defaultAction": {
                               "type": "uri",
                               "label": "詳細資料",
@@ -482,7 +521,7 @@ bot.on('message', function(event) {
                           "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/2EWOCG.jpg",
                           "imageBackgroundColor": "#000000",
                           "title": "惆悵、漣漪",
-                          "text": "打擊與挫敗是成功的踏腳石，而不是絆腳石。文藝富心陪你克服這道關卡＿",
+                          "text": "打擊與挫敗是成功的踏腳石，而不是絆腳石。文藝富心陪你克服這道關卡。",
                           "defaultAction": {
                               "type": "uri",
                               "label": "詳細資料",
@@ -506,8 +545,7 @@ bot.on('message', function(event) {
                     "imageSize": "cover"
                 } 
             });
-        })
-    } 
+    
     // }
     console.log('使用者傳來的文字',text);
     })
