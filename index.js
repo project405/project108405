@@ -196,7 +196,7 @@ bot.on('postback', function(event) {
                         // }
                        
                         data[1].artiHead = data[1].artiHead.length>40 ? `${data[1].artiHead.substr(0,35)}...` : data[1].artiHead
-                        data[1].artiCont = data[1].artiCont.length>70 ? `${data[1].artiCont.substr(0,65)}...` : data[1].artiCont
+                        data[1].artiCont = data[1].artiCont.length>50 ? `${data[1].artiCont.substr(0,45)}...` : data[1].artiCont
                         goodMoodRecommend.push(data[1].artiNum)
                         goodMoodRecommend.push(data[1].artiHead)
                         goodMoodRecommend.push(data[1].artiCont)
