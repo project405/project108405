@@ -195,6 +195,7 @@ bot.on('postback', function(event) {
                             　data[1].artiCont.replace('<br>','')
                         }
                        
+                        data[1].artiHead = data[1].artiHead.length>40 ? `${data[1].artiHead.substr(0,35)}...` : data[1].artiHead
                         data[1].artiCont = data[1].artiCont.length>70 ? `${data[1].artiCont.substr(0,65)}...` : data[1].artiCont
                         goodMoodRecommend.push(data[1].artiNum)
                         goodMoodRecommend.push(data[1].artiHead)
@@ -204,6 +205,7 @@ bot.on('postback', function(event) {
                         // console.log(data[1].recomNum)
                         // console.log(data[1].recomHead)
                         // console.log(data[1].recomCont)
+                        data[1].recomHead = data[1].recomHead.length>40 ? `${data[1].recomHead.substr(0,35)}...` : data[1].recomHead
                         data[1].recomCont = data[1].recomCont.length>70 ? `${data[1].recomCont.substr(0,65)}...` : data[1].recomCont
                         goodMoodRecommend.push(data[1].recomNum)
                         goodMoodRecommend.push(data[1].recomHead)
