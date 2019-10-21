@@ -106,10 +106,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
+    console.log(1);
     done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
+    console.log(2);
     done(null, user);
 });
 
@@ -121,8 +123,9 @@ passport.use(
     new GoogleStrategy({
         clientID: '535503110825-vsqohis8p2itidvaqii3akbmha3kluie.apps.googleusercontent.com', 
         clientSecret: 'vx7elBl3NGlZcnNPFV3QNH7l',
-        callbackURL: "https://project108405.herokuapp.com/auth/google/callback" 
+        callbackURL: "http://localhost:3000/auth/google/callback" 
     },
+    // https://project108405.herokuapp.com/auth/google/callback
     function(accessToken, refreshToken, profile, done) {
         if (profile) {
             return done(null, profile);
@@ -245,6 +248,7 @@ app.get('/user/login',
 app.get('/auth/google/callback', 
     passport.authenticate('google', { failureRedirect: '/login' }),   //導向登入失敗頁面	
     function(req, res) {
+        console.log(4);
         // 如果登入成功, 使用者資料已存在session
         var checkID ;
         signUp.checkMemID(req.session.passport.user.id).then((data) => {      
@@ -259,9 +263,14 @@ app.get('/auth/google/callback',
     });
 
 app.get('/user/logout', function(req, res){    
-    req.logout();        //將使用者資料從session移除
-    req.session.memID = undefined ;
-    res.redirect('/');   //導向登出頁面
+    if(req.session.passport != undefined){
+        req.logout();
+        req.session.passport = undefined ; 
+    }else {
+        req.session.memID = undefined ; 
+    }
+  
+    res.redirect('/logIn');   //導向登出頁面
 });    
 
 

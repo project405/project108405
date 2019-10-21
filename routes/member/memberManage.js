@@ -51,7 +51,7 @@ router.post('/', function (req, res, next) {
         if (memberData.memPass == "" || memberData.memCheckPass == "" || memberData.memMail == "" || memberData.memBirth == "" || memberData.memGender == "") {
             res.end('<script> alert("輸入的資料不可為空"); history.back();</script>');
         } else if (memberData.memPass != memberData.memCheckPass) {
-            res.end('<script> alert("輸入的密碼與確認密碼不正確，請重新輸入"); history.back();</script>');
+            res.end('<script> alert("輸入的密碼與確認密不正確，請重新輸入"); history.back();</script>');
         } else if (memberData.memMail.search(emailRule) == -1) {
             res.end('<script> alert("非法的email，請重新輸入。"); history.back();</script>');
         } else if (checkMail && originalMail != memberData.memMail) {
