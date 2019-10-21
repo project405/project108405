@@ -191,7 +191,10 @@ bot.on('postback', function(event) {
                         // console.log(data[1].artiNum)
                         // console.log(data[1].artiHead)
                         // console.log(data[1].artiCont)
-                        data[1].artiCont = data[1].artiCont.length>25 ? `${data[1].artiCont.substr(0,20)}...` : data[1].artiCont
+                        while( data[1].artiCont.match('<br>') ) {
+                            　data[1].artiCont.replace('<br>','')
+                        }
+                        data[1].artiCont = data[1].artiCont.length>50 ? `${data[1].artiCont.substr(0,45)}...` : data[1].artiCont
                         goodMoodRecommend.push(data[1].artiNum)
                         goodMoodRecommend.push(data[1].artiHead)
                         goodMoodRecommend.push(data[1].artiCont)
