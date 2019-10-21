@@ -198,14 +198,14 @@ bot.on('postback', function(event) {
                     // console.log('loginData', data)
                     
                     if(data[0].artiNum !=  undefined){
-                        console.log(data[0].artiNum)
-                        console.log(data[0].artiHead)
-                        console.log(data[0].artiCont)
+                        console.log(data[1].artiNum)
+                        console.log(data[1].artiHead)
+                        console.log(data[1].artiCont)
                         
                     }else{
-                        console.log(data[0].recomNum)
-                        console.log(data[0].recomHead)
-                        console.log(data[0].recomCont)
+                        console.log(data[1].recomNum)
+                        console.log(data[1].recomHead)
+                        console.log(data[1].recomCont)
                     }
 
                     // event.reply({
