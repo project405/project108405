@@ -31,13 +31,12 @@
             <div class="col-lg-8 content shadow">
                 <div class="info d-flex">
                     <div><a class="floorTag">管理員</a></div>
-                    <div>
-                        <a>文藝青年</a>
+                    <div><a>文藝青年</a>
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[0][0].recomDateTime %>發佈</a>
                     </div>
                     <% if(items[7] && items[7] == 'boss') {%>
-                    <div class="dropdown ml-auto">
+                    <div class="dropdown ml-auto" style="margin-bottom: -0.5em">
                         <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-h"></i>
@@ -51,7 +50,6 @@
                     <% } %>
                 </div>
                 <hr style="margin-top: 0.5em" />
-
                 <h5><%= items[0][0].recomHead %></h5>
                 <hr />
 
@@ -163,7 +161,7 @@
         </div>
 
         <center>
-            <h1>文章留言</h1>
+            <h4>文章留言</h4>
             <hr class="separate">
         </center>
 
@@ -306,7 +304,7 @@
                 </label>
 
                 <button type="submit" class="btn btn-danger float-right submitReplyButton col-lg-2"
-                    onclick=<%= "submitReply(" + items[0][0].recomNum + ")" %>>提交回覆</button>
+                    onclick=<%= "submitReply(" + items[0][0].recomNum + ")" %>>提交</button>
             </div>
         </div>
         <!-- replying end -->
@@ -319,8 +317,17 @@
     <!-- <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
     </div> -->
-    <div class="coverContainer">
-    </div>
+    <div class='coverContainer'>
+            <div class='loader'>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--text'></div>
+            </div>
+        </div>
 
 
     <!-- Optional JavaScript -->

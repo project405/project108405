@@ -1021,7 +1021,6 @@ var getMemberInfor = async function (memID) {
     return result;
 }
 
-
 //匯出
 module.exports = {
     articlePost, recommendPost, replyPost, myArticle, modifyMember, getOriginalMail,

@@ -36,7 +36,7 @@
                         <a class="dateTime">於<%= items[0][0].recomDateTime %>發佈</a>
                     </div>
                     <% if(items[7] && items[7] == 'boss') {%>
-                        <div class="dropdown ml-auto">
+                        <div class="dropdown ml-auto"  style="margin-bottom: -0.5em">
                             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-ellipsis-h"></i>
@@ -156,7 +156,7 @@
         <!-- 使用者發文結束' -->
 
         <center>
-            <h1>文章留言</h1>
+            <h4>文章留言</h4>
             <hr class="separate">
         </center>
 
@@ -284,8 +284,17 @@
         <!-- <div class="spinner-border" role="status">
                 <span class="sr-only">Loading...</span>
         </div> -->
-        <div class="coverContainer">
-        </div>
+        <div class='coverContainer'>
+                <div class='loader'>
+                    <div class='loader--dot'></div>
+                    <div class='loader--dot'></div>
+                    <div class='loader--dot'></div>
+                    <div class='loader--dot'></div>
+                    <div class='loader--dot'></div>
+                    <div class='loader--dot'></div>
+                    <div class='loader--text'></div>
+                </div>
+            </div>
         <script>
             //推薦留言檢舉ajax
             function ftn_messReport(a){
@@ -318,7 +327,7 @@
                     <i class="fas fa-images" style="padding-right:5px"></i>加圖片
                 </label>
                 <button type="submit" class="btn btn-danger float-right submitReply col-lg-2 shadow-none"
-                onclick=<%= "submitReply(" + items[0][0].recomNum + ")" %>>提交回覆</button>
+                onclick=<%= "submitReply(" + items[0][0].recomNum + ")" %>>提交</button>
 
             </div>
 

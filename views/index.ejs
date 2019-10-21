@@ -75,7 +75,7 @@
                         <div class="project-name">
                             <p class="title"><%= items[0][i].recomHead %></p>
                             </p>
-                            <p class="content wrapText"><%- items[0][i].recomCont %>
+                            <p class="content fourRecommend"><%- items[0][i].recomCont %>
                             </p>
                         </div>
                     </div>
@@ -274,7 +274,7 @@
         <i class="fa fa-angle-up"></i>
     </a>
 
-    <a id="sentimentSectionHover" style="visibility: hidden;">心情專區</a>
+    <a id="sentimentSectionHover" style="visibility: hidden;">情緒專區</a>
     <a href="#" id="sentimentSection" data-toggle="modal" data-target="#sentimentSectionContainer">
         <!-- <i class="fas fa-kiss "></i> -->
         <img style="width:75%" src="../imgs/icon/bulb.png" alt="">
@@ -285,7 +285,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="exampleModalScrollableTitle">心情專區</h4>
+              <h4 class="modal-title" id="exampleModalScrollableTitle">情緒專區</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -378,6 +378,8 @@
         crossorigin="anonymous"></script>
     <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
     <script src="/javascripts/aos.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/index.js"></script>
     <script src="/javascripts/navbar.js"></script>
