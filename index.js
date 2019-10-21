@@ -62,31 +62,43 @@ app.post('/webhook',  function (req, res) {
         var img = data[0].imgName.replace('data:image/jpeg;base64,', '')
         var apiUrl = 'https://api.imgur.com/3/image';
         var apiKey = '8b8755d8a1c4ace';
-        $.ajax({
-            "async": true,
-            "crossDomain": true,
-            "url": apiUrl,
-            "method": "POST",
-            "datatype": "json",
-            "headers": {
-                "Authorization": "Client-ID " + apiKey
+        // $.ajax({
+        //     "async": true,
+        //     "crossDomain": true,
+        //     "url": apiUrl,
+        //     "method": "POST",
+        //     "datatype": "json",
+        //     "headers": {
+        //         "Authorization": "Client-ID " + apiKey
+        //     },
+        //     "processData": false,
+        //     "contentType": false,
+        //     "data": img,
+        //     success: function (res) {
+        //         console.log(res.data.link)
+        //         imgur.push(res.data.link)
+        //         formData.append('toImgur', res.data.link);
+        //     },
+        //     error: function (e) {
+        //         console.log(e)
+        //         alert("圖片上傳失敗");
+        //     }
+        // }).done(function (res) {
+        //     console.log("Done");
+        // });
+            fetch('https://api.imgur.com/3/upload.json', {
+            method: 'POST',
+            headers: {
+            Accept: 'application/json',
+            Authorization: 'Client-ID 8b8755d8a1c4ace'// imgur specific
             },
-            "processData": false,
-            "contentType": false,
-            "data": img,
-            success: function (res) {
-                console.log(res.data.link)
-                imgur.push(res.data.link)
-                formData.append('toImgur', res.data.link);
-            },
-            error: function (e) {
-                console.log(e)
-                alert("圖片上傳失敗");
-            }
-        }).done(function (res) {
-            console.log("Done");
-        });
+            body: img
+        })
+            .then(processStatus)
+            .then(parseJson)
+        
     })
+
      
         
 
