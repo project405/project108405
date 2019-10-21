@@ -61,7 +61,7 @@ app.post('/webhook',  function (req, res) {
             allUser.push(item.lineID);
             console.log(allUser)
         });
-        // byClassData.getIndexData().then(data =>{
+        byClassData.getIndexData().then(data =>{
             console.log(data[10][0])
             var pushContent = [];
             data[10][0].artiNum = '101'
@@ -70,7 +70,7 @@ app.post('/webhook',  function (req, res) {
             data[10][0].recomNum = '16'
             data[10][0].recomHead = '先讓我發一個費文'
             data[10][0].recomCont = '123123<br>123123123<br><br><br><br>e<br>2<br>14<br><br><br>4<br><br>4<br><br><br><br><br>\:imgLocation'
-        
+            
             //data為文章
             if(data[10][0].recomHead == undefined){
                 pushContent.push('article')
@@ -261,6 +261,6 @@ app.post('/webhook',  function (req, res) {
                
             }
     
-        // })    
+        })    
     })      
 });
