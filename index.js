@@ -67,12 +67,12 @@ app.post('/webhook',  function (req, res) {
             data[10][0].artiNum = '101'
             data[10][0].artiHead = 'sadsadsad'
             data[10][0].artiCont = 'asdasdsad<br><br><br><br><br>\:imgLocation<br>\:imgLocation<br>\:imgLocation'
-            data[10][0].recomNum = '16'
-            data[10][0].recomHead = '先讓我發一個費文'
-            data[10][0].recomCont = '123123<br>123123123<br><br><br><br>e<br>2<br>14<br><br><br>4<br><br>4<br><br><br><br><br>\:imgLocation'
+            // data[10][0].recomNum = '16'
+            // data[10][0].recomHead = '先讓我發一個費文'
+            // data[10][0].recomCont = '123123<br>123123123<br><br><br><br>e<br>2<br>14<br><br><br>4<br><br>4<br><br><br><br><br>\:imgLocation'
             
             //data為文章
-            if(data[10][0].recomHead == undefined){
+            // if(data[10][0].recomHead == undefined){
                 pushContent.push('article')
                 pushContent.push(data[10][0].artiNum)
                 pushContent.push(data[10][0].artiHead)
@@ -96,29 +96,29 @@ app.post('/webhook',  function (req, res) {
                     linePush()
                 }
             //data為推薦
-            }else{
-                pushContent.push('recommend')
-                pushContent.push(data[10][0].recomNum)
-                pushContent.push(data[10][0].recomHead)
-                //有圖片
-                if (data[10][0].recomCont.match("\:imgLocation") != null){
-                    // pushContent.push(data[10][0].recomCont); 
-                    pushContent.push('圖片喔！！！');
-                    // if (data[10][0].recomCont.length >= 70){
-                    //     pushContent.pop()
-                    //     pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
-                    // }
-                    linePushPhoto();
-                //沒圖片    
-                }else{
-                    pushContent.push(data[10][0].recomCont); 
-                    // if (data[10][0].recomCont.length >= 70){
-                    //     pushContent.pop()
-                    //     pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
-                    // }
-                    linePush()
-                }
-            }
+            // }else{
+            //     pushContent.push('recommend')
+            //     pushContent.push(data[10][0].recomNum)
+            //     pushContent.push(data[10][0].recomHead)
+            //     //有圖片
+            //     if (data[10][0].recomCont.match("\:imgLocation") != null){
+            //         // pushContent.push(data[10][0].recomCont); 
+            //         pushContent.push('圖片喔！！！');
+            //         // if (data[10][0].recomCont.length >= 70){
+            //         //     pushContent.pop()
+            //         //     pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
+            //         // }
+            //         linePushPhoto();
+            //     //沒圖片    
+            //     }else{
+            //         pushContent.push(data[10][0].recomCont); 
+            //         // if (data[10][0].recomCont.length >= 70){
+            //         //     pushContent.pop()
+            //         //     pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
+            //         // }
+            //         linePush()
+            //     }
+            // }
              
             console.log('pushContent@@@@@@@',pushContent)
             console.log('pushContent.length@@@@@@@',pushContent.length)
