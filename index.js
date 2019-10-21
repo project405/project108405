@@ -197,7 +197,7 @@ bot.on('postback', function(event) {
                     // console.log('loginData', data)
                     // console.log('loginData', data)
                     
-                    if(data[0].artiNum !=  undefined){
+                    if(data[1].artiNum !=  undefined){
                         console.log(data[1].artiNum)
                         console.log(data[1].artiHead)
                         console.log(data[1].artiCont)
