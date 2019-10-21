@@ -146,9 +146,9 @@
                     </script>
                     <% } %>
 
-                    
-                    <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiReportPost">檢舉</button>
-
+                    <% if(items[7][0] != items[0][0].memID) {%>
+                        <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiReportPost">檢舉</button>
+                    <% } %>
                 </div>
 
                 <!-- info結束 -->

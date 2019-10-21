@@ -1025,7 +1025,7 @@ var getMemberInfor = async function (memID) {
 //=========================================
 //---------  getMood() -----------
 //=========================================
-var getMood = async function (r) {
+var getMood = async function () {
     var negativerecom= [];
     var negativearti = [];
     var positiverecom = [];
@@ -1036,31 +1036,40 @@ var getMood = async function (r) {
     var negativeChoose = Math.round(Math.random())
     async function compare(item, index) {
         if (item.length != 0 && index <= 1) {
-            console.log(item)
-            if (Object.keys(item).indexOf('artiNum') >= 0 ) {
-                console.log('負向文章')
-                console.log(item[0].artiCont)
-                result.push(item[0].artiCont)
+            if (Object.keys(item[0]).indexOf('artiNum') >= 0 ) {
+                var contentObj =  {
+                    artiNum: item[0].artiNum,
+                    artiHead:  item[0].artiHead,
+                    artiCont:  item[0].artiCont,
+                }
+                result.push(contentObj)
               } else {
                 // 推薦
-                console.log('負向推薦')
-                console.log(item[0].recomCont)
-                result.push(item[0].recomCont)
+                var contentObj =  {
+                    recomNum: item[0].recomNum,
+                    recomHead:  item[0].recomHead,
+                    recomCont:  item[0].recomCont,
+                }
+                result.push(contentObj)
               }
-            // console.log(item[0])
-            console.log('=============================')
         } else if (item.length != 0 && index >= 2) {
-            if (Object.keys(item).indexOf('artiNum') >= 0 ) {
+            if (Object.keys(item[0]).indexOf('artiNum') >= 0 ) {
                 //  文章
-                console.log('正向文章')
-                result.push(item[0].artiCont)
+                var contentObj =  {
+                    artiNum: item[0].artiNum,
+                    artiHead:  item[0].artiHead,
+                    artiCont:  item[0].artiCont,
+                }
+                result.push(contentObj)
               } else {
                 // 推薦
-                console.log('正向推薦')
-                console.log(item[0].recomCont)
-                result.push(item[0].recomCont)
-
-              }
+                var contentObj =  {
+                    recomNum: item[0].recomNum,
+                    recomHead:  item[0].recomHead,
+                    recomCont:  item[0].recomCont,
+                }
+                result.push(contentObj)
+            }
         }
     }
 
@@ -1121,34 +1130,10 @@ var getMood = async function (r) {
     temp[3] = positivearti;
     
     temp.map( async(item, index) => {
-        await compare(item, index)
+        if (item != '') {
+            await compare(item, index)
+        }
     })
-
-    console.log('result', result)
-
-    // console.log('==================================')
-    // console.log(result)
-    // console.log('==================================')
-
-    // if (result[0][0] && Object.keys(result[0][0]).indexOf('artiNum') >= 0 ) {
-    //     console.log('負向文章')
-    //     console.log(result[0][0].artiCont)
-    //   } else {
-    //     // 推薦
-    //     console.log('負向推薦')
-    //     console.log(result[0][0].recomCont)
-    //   }
-    //   console.log('=============================')
-    //   if (result[0][1] && Object.keys(result[0][1]).indexOf('artiNum') >= 0 ) {
-    //     //  文章
-    //     console.log('正向文章')
-    //     console.log(result[0][1].artiCont)
-    //   } else {
-    //     // 推薦
-    //     console.log('正向推薦')
-    //     console.log(result[0][1].recomCont)
-    //   }
-
     return result;
 }
 
