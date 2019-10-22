@@ -62,7 +62,7 @@ app.post('/webhook',  function (req, res) {
     member.artiImg('105').then(data =>{
         // console.log(data[0].imgName)
         // console.log(typeof(data[0].imgName))
-        var img = data[0].imgName.replace('data:image/jpeg;base64,', '')
+        var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
         var apiUrl = 'https://api.imgur.com/3/image';
         var apiKey = '8b8755d8a1c4ace';
         // $.ajax({
@@ -139,7 +139,7 @@ app.post('/webhook',  function (req, res) {
         async function test() {
             const url = 'https://api.imgur.com/3/image',
             // try {
-                var request = await fetch(url, {
+                const request = await fetch(url, {
                     method: 'POST',
                     headers: {
                       "Authorization": 'Client-ID 8b8755d8a1c4ace',
