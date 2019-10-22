@@ -73,7 +73,7 @@ app.post('/webhook',  function (req, res) {
             // try {
                 request = await fetch(url, {
                     method: 'POST',
-                    header: {
+                    headers: {
                       "Authorization": 'Client-ID 8b8755d8a1c4ace',
                     },
                     form: {
