@@ -153,7 +153,7 @@ app.post('/webhook',  function (req, res) {
               const response = await request.json();
               console.log(response);
             } catch (e) {
-              throw new Error(e);
+            //   throw new Error(e);
             }
             
             
