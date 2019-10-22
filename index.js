@@ -88,7 +88,7 @@ app.post('/webhook',  function (req, res) {
         
               const response = await request.json();
               bbb = await bbb.push(response);
-              console.log('response@@',response.data);
+              console.log('response@@',response.data.link);
             //   console.log('bbb@@',bbb);
             //   console.log('response@@',response);
             // return response;
