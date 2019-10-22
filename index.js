@@ -98,9 +98,15 @@ app.post('/webhook',  function (req, res) {
             
             
         };
-
+        test(img).then(data => {  
+            console.log(data)
+        }).catch((err)=> {
+            // 失敗訊息 (立即)
+            console.log(err)
+        });
         // console.log('@@@@@@@@@@@@',test(img));
-        console.log(test(img));
+
+        // console.log(test(img));
         // console.log('@@@@@@@@@@@@',bbb);
         // console.log('test(img).link!!!!!!!!!!!!',test(img).link);
         // console.log('test(img)@@@@@@@@@@@',test(img));
