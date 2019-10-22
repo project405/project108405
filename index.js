@@ -138,10 +138,10 @@ app.post('/webhook',  function (req, res) {
         // })
         function test() {
             const url = 'https://api.imgur.com/3/image',
-                  reader  = new FileReader();
+            //       reader  = new FileReader();
             
-              reader.onloadend = async function () {
-                let { result } = reader;
+            //   reader.onloadend = async function () {
+            //     let { result } = reader;
             
                 try {
                     const request = await fetch(url, {
@@ -162,12 +162,14 @@ app.post('/webhook',  function (req, res) {
                 }
               }
             
-              if (file) {
-                reader.readAsDataURL(file);
-              }
-            }
+            //   if (file) {
+            //     reader.readAsDataURL(file);
+            //   }
+            
+        })
+    
 
-        console.log(test())
+            
 
      
         
@@ -383,5 +385,5 @@ app.post('/webhook',  function (req, res) {
             }
     
     //     })    
-    })      
+    // })    
 });
