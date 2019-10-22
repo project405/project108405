@@ -87,8 +87,8 @@ app.post('/webhook',  function (req, res) {
                 });
         
               const response = await request.json();
-              bbb = await bbb.push(response);
-              console.log('response@@',response.data.link);
+              
+            //   console.log('response@@',response.data.link);
             //   console.log('bbb@@',bbb);
             //   console.log('response@@',response);
             return response.data.link;
@@ -100,7 +100,7 @@ app.post('/webhook',  function (req, res) {
         };
 
         // console.log('@@@@@@@@@@@@',test(img));
-        console.lod(test(img));
+        console.log(test(img));
         // console.log('@@@@@@@@@@@@',bbb);
         // console.log('test(img).link!!!!!!!!!!!!',test(img).link);
         // console.log('test(img)@@@@@@@@@@@',test(img));
