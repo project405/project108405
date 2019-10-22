@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 var linebot = require('linebot');
 var express = require('express');
 const request = require('request');
+var rp = require('request-promise');
+
 const app = express();
 var cors = require('cors')
 // var corsOptions = {
@@ -107,17 +109,17 @@ app.post('/webhook',  function (req, res) {
         // })
 
 
-        // request({
-        //     url: "https://www.cwb.gov.tw/V7/js/HDRadar_1000_n_val.js",
-        //     method: "GET"
-        //    }, (error, response, body)=>{
-        //     if(error || !body) return;
-        //     var $ = cheerio.load(body);
-        //     var start_idx = body.indexOf('","')+3;
-        //     var end_idx = body.indexOf('"),');
-        //     weather_img ="https://www.cwb.gov.tw"+body.substring(start_idx,end_idx);
+        request({
+            url: "https://www.cwb.gov.tw/V7/js/HDRadar_1000_n_val.js",
+            method: "GET"
+           }, (error, response, body)=>{
+            if(error || !body) return;
+            var $ = cheerio.load(body);
+            var start_idx = body.indexOf('","')+3;
+            var end_idx = body.indexOf('"),');
+            weather_img ="https://www.cwb.gov.tw"+body.substring(start_idx,end_idx);
 
-        // })
+        })
 
         var feachImgur ={
             method: "GET",
@@ -128,12 +130,11 @@ app.post('/webhook',  function (req, res) {
             json:true
         };
 
-        feachImgur().then((data) => {
-            console.log(data)
+        return rp(feachImgur)
+        .then(function (imgur_response) {
+            console.log(imgur_response)
         })
-
-
-    })   
+    }   
 
      
         
