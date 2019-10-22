@@ -145,8 +145,8 @@ app.post('/webhook',  function (req, res) {
                       "Authorization": 'Client-ID 8b8755d8a1c4ace',
                     },
                     form: {
-                      "image": img,
-                      "type": "base64"
+                      "image": img
+                    //   "type": "base64"
                     }
                 });
         
