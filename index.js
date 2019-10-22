@@ -136,31 +136,26 @@ app.post('/webhook',  function (req, res) {
         // .then(function (imgur_response) {
         //     console.log(imgur_response)
         // })
-        function test() {
+        async function test() {
             const url = 'https://api.imgur.com/3/image',
-                  reader  = new FileReader();
+            try {
+                const request = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                      "Authorization": 'Client-ID 8b8755d8a1c4ace',
+                    },
+                    form: {
+                      "image": img,
+                      "type": "base64"
+                    }
+                });
+        
+              const response = await request.json();
+              console.log(response);
+            } catch (e) {
+              throw new Error(e);
+            }
             
-              reader.onloadend = async function () {
-                let { result } = reader;
-            
-                try {
-                    const request = await fetch(url, {
-                        method: 'POST',
-                        headers: {
-                          "Authorization": 'Client-ID 8b8755d8a1c4ace',
-                        },
-                        form: {
-                          "image": img,
-                          "type": "base64"
-                        }
-                    });
-            
-                  const response = await request.json();
-                  console.log(response);
-                } catch (e) {
-                  throw new Error(e);
-                }
-              }
             
         }
 
