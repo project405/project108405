@@ -98,6 +98,7 @@ app.post('/webhook',  function (req, res) {
         };
 
         // console.log('@@@@@@@@@@@@',test(img));
+        test();
         console.log('@@@@@@@@@@@@',test);
         // console.log('test(img).link!!!!!!!!!!!!',test(img).link);
         // console.log('test(img)@@@@@@@@@@@',test(img));
