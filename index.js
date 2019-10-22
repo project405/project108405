@@ -124,7 +124,8 @@ app.post('/webhook',  function (req, res) {
 
         var feachImgur ={
             method: "GET",
-            uri: "https://api.imgur.com/3/upload.json",
+            // uri: "https://api.imgur.com/3/upload.json",
+            uri: "https://api.imgur.com/3/image/"+img,
             headers: {
                 'Authorization': "Client-ID " + apiKey
             },
