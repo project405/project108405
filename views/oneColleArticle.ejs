@@ -332,6 +332,7 @@
         <script>
             //文章檢舉ajax
             $("#artiReport").click(function() {
+                $('#artiReport').attr('disabled',true)
                 $.ajax({
                     url: "/report",
                     type: 'POST',
@@ -339,8 +340,10 @@
                     data: { "artiNum" : "<%= items[0][0].artiNum %>" , "reportReason" : $("#reportReason").val()},
                     success: function (res) {
                         alert(res);
-                        if(res == "舉報成功"){
+                        if(res == "申報成功"){
                             $("#reportReason").val("");
+                            $('#artiReport').attr('disabled',false)
+                            $("#artiReportPost").modal('hide')
                         }
                     },
                     error: function (res) {
@@ -351,6 +354,7 @@
 
             //文章留言檢舉ajax
             function ftn_messReport(a){
+                
                 $.ajax({
                     url: "/report",
                     type: 'POST',
@@ -358,7 +362,7 @@
                     data: { "artiMessNum" : a , "reportReason" : $("#messReportReason").val()},
                     success: function (res) {
                         alert(res);
-                        if(res == "舉報成功"){
+                        if(res == "申報成功"){
                             $("#messReportReason").val("");
                         }
                     },

@@ -70,7 +70,10 @@ var getIndexData = async function (memID) {
         }
     }
     // -----------  熱門文章 --------------
-    await sql('SELECT * FROM "articleListDataView" ORDER BY "likeCount" DESC , "artiDateTime" DESC LIMIT 3')
+    await sql('SELECT "articleListDataView".*, "member"."memName" ' + 
+              'FROM "articleListDataView" '+
+              'INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"' +
+              'ORDER BY "likeCount" DESC , "artiDateTime" DESC LIMIT 3')
         .then((data) => {
             if (!data.rows) {
                 hotArticle = undefined;

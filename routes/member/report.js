@@ -42,10 +42,10 @@ router.post('/', function (req, res, next) {
         .then(data => {
             if (data == 1) {
                 if(req.body.artiNum != undefined || req.body.artiMessNum != undefined || req.body.recomMessNum != undefined){
-                    res.send("舉報成功");
+                    res.send("申報成功");
                 }else{
                     // res.write('<head><meta charset="utf-8"/></head>');
-                    res.send('<head><meta charset="utf-8"/> </head> <script> alert("舉報成功!");  window.history.back();</script>');
+                    res.send('<head><meta charset="utf-8"/> </head> <script> alert("申報成功!");  window.history.back();</script>');
                 }
             } else {
                 res.render('error');

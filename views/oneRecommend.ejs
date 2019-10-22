@@ -244,7 +244,7 @@
                     <p class="content"> <%- items[1][i].recomMessCont %> </p>
                     <hr>
                     <% if(items[8][0] != items[1][i].memID) {%>
-                    <button type="button" class="btn report" id="postReport" data-toggle="modal"
+                    <button type="button" class="btn report postReport" id="postReport" data-toggle="modal"
                         data-target="#recomMessReportPost">檢舉</button>
                     <% } else { %>
                     <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
@@ -347,6 +347,15 @@
     <script src="/javascripts/navbar.js"></script>
     <script>
         var member = '<%=items[8][0]%>'
+        console.log(member)
+        console.log( $('#postReport'))
+        $('.postReport').click(() => {
+            console.log(111)
+            if (!member) {
+                alert('請進行登入再檢舉')
+                location.replace("/logIn");
+            }
+        })
         $('#replyInput').click(() => {
             if (!member) {
                 alert('請進行登入再留言！')
@@ -691,14 +700,17 @@
     <script>
         //推薦留言檢舉ajax
         function ftn_messReport(a) {
+            $('#messReport').attr('disabled',true)
             $.ajax({
                 url: "/report",
                 type: 'POST',
                 dataType: 'TEXT',
                 data: { "recomMessNum": a, "reportReason": $("#messReportReason").val() },
                 success: function (res) {
-                    alert(res);
-                    location.reload();
+                    alert('檢舉成功！')
+                    $('#messReport').attr('disabled',false)
+                    $("#messReportReason").val("");
+                    $("#recomMessReportPost").modal('hide')
                 },
                 error: function (res) {
                     console.log("失敗", res);

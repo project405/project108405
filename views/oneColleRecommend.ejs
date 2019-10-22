@@ -298,15 +298,18 @@
         <script>
             //推薦留言檢舉ajax
             function ftn_messReport(a){
+                $('#messReport').attr('disabled',true)
                 $.ajax({
                     url: "/report",
                     type: 'POST',
                     dataType: 'TEXT',
                     data: { "recomMessNum" : a , "reportReason" : $("#messReportReason").val()},
                     success: function (res) {
-                        alert(res);
-                        if(res == "舉報成功"){
+                        alert('檢舉成功');
+                        if(res == "申報成功"){
+                            $('#messReport').attr('disabled',false)
                             $("#messReportReason").val("");
+                            $("#recomMessReportPost").modal('hide')
                         }
                     },
                     error: function (res) {
