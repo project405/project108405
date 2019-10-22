@@ -138,7 +138,7 @@ app.post('/webhook',  function (req, res) {
         // })
         async function test() {
             const url = 'https://api.imgur.com/3/image',
-            try {
+            // try {
                 const request = await fetch(url, {
                     method: 'POST',
                     headers: {
@@ -152,9 +152,9 @@ app.post('/webhook',  function (req, res) {
         
               const response = await request.json();
               console.log(response);
-            } catch (e) {
-            //   throw new Error(e);
-            }
+            // } catch (e) {
+            // //   throw new Error(e);
+            // }
             
             
         }
