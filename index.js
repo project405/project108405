@@ -76,6 +76,7 @@ app.post('/webhook',  function (req, res) {
                     headers: {
                       "Authorization": 'Client-ID 8b8755d8a1c4ace',
                     },
+                    dataType:"json" ,
                     form: {
                       "image": img,
                       "type": "base64"
