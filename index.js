@@ -89,6 +89,8 @@ app.post('/webhook',  function (req, res) {
               const response = await request.json();
               bbb = await bbb.push(response);
               console.log('response@@',response);
+              console.log('bbb@@',bbb);
+            //   console.log('response@@',response);
             // return response;
             // } catch (e) {
             // //   throw new Error(e);
@@ -99,7 +101,7 @@ app.post('/webhook',  function (req, res) {
 
         // console.log('@@@@@@@@@@@@',test(img));
         test(img);
-        console.log('@@@@@@@@@@@@',bbb);
+        // console.log('@@@@@@@@@@@@',bbb);
         // console.log('test(img).link!!!!!!!!!!!!',test(img).link);
         // console.log('test(img)@@@@@@@@@@@',test(img));
 
