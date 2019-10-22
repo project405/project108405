@@ -138,8 +138,9 @@ app.post('/webhook',  function (req, res) {
         // })
         async function test() {
             const url = 'https://api.imgur.com/3/image',
+            // const request;
             // try {
-                const request = await fetch(url, {
+                request = await fetch(url, {
                     method: 'POST',
                     headers: {
                       "Authorization": 'Client-ID 8b8755d8a1c4ace',
