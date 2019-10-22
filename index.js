@@ -67,8 +67,7 @@ app.post('/webhook',  function (req, res) {
         var apiUrl = 'https://api.imgur.com/3/image';
         var apiKey = '8b8755d8a1c4ace';
         
-        async function test() {
-            console.log("!!!!!!!!!!!",img);
+        async function test(img) {
             const url = 'https://api.imgur.com/3/image',
             // const request;
             // try {
@@ -92,8 +91,7 @@ app.post('/webhook',  function (req, res) {
             
         };
 
-        console.log(test());
-    
+        console.log(test(img));
 
             
 
