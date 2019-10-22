@@ -74,6 +74,7 @@ app.post('/webhook',  function (req, res) {
                 request = await fetch(url, {
                     method: 'POST',
                     headers: {
+                      "Content-Type: application/json", 
                       "Authorization": 'Client-ID 8b8755d8a1c4ace',
                     },
                     dataType:"json" ,
