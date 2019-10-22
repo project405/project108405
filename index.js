@@ -91,7 +91,7 @@ app.post('/webhook',  function (req, res) {
               console.log('response@@',response.data.link);
             //   console.log('bbb@@',bbb);
             //   console.log('response@@',response);
-            // return response;
+            return response.data.link;
             // } catch (e) {
             // //   throw new Error(e);
             // }
@@ -100,7 +100,7 @@ app.post('/webhook',  function (req, res) {
         };
 
         // console.log('@@@@@@@@@@@@',test(img));
-        test(img);
+        console.lod(test(img));
         // console.log('@@@@@@@@@@@@',bbb);
         // console.log('test(img).link!!!!!!!!!!!!',test(img).link);
         // console.log('test(img)@@@@@@@@@@@',test(img));
