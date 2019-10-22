@@ -63,7 +63,7 @@ app.post('/webhook',  function (req, res) {
     member.artiImg('105').then(data =>{
         // console.log(data[0].imgName)
         // console.log(typeof(data[0].imgName))
-        var test = [];
+        // var test = [];
         var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
         var apiUrl = 'https://api.imgur.com/3/image';
         var apiKey = '8b8755d8a1c4ace';
@@ -87,7 +87,7 @@ app.post('/webhook',  function (req, res) {
                 });
         
               const response = await request.json();
-              test.push(response);
+              const test = await test.push(response);
               console.log('response@@',response);
             // return response;
             // } catch (e) {
@@ -98,7 +98,7 @@ app.post('/webhook',  function (req, res) {
         };
 
         // console.log('@@@@@@@@@@@@',test(img));
-        test();
+        test(img);
         console.log('@@@@@@@@@@@@',test);
         // console.log('test(img).link!!!!!!!!!!!!',test(img).link);
         // console.log('test(img)@@@@@@@@@@@',test(img));
