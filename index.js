@@ -1,6 +1,7 @@
 //----------------------------------------
 // 載入必要的模組
 //----------------------------------------
+const cheerio = require('cheerio'）;
 const bodyParser = require('body-parser');
 var linebot = require('linebot');
 var express = require('express');
