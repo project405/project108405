@@ -16,6 +16,9 @@ router.get('/', function (req, res, next) {
 	}
 
     collection.getCollArtiClassList(memID, 'music').then(data => {
+        data[0].map((item) => {
+            item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ");
+        })
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data == -1) {

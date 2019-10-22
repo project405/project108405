@@ -15,7 +15,10 @@ var getArticleList = async function (memID) {
     var result = [];
 
     // -----------  取得文章清單 --------------
-    await sql('SELECT * FROM "articleListDataView"')
+    await sql('SELECT"articleListDataView".*, "member"."memName"'+
+             ' FROM "articleListDataView"' +
+             ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"'+
+             ' ORDER BY "articleListDataView"."artiNum" DESC')
         .then((data) => {
             articleList = data.rows;
         }, (error) => {
@@ -92,7 +95,10 @@ var getOneArticle = async function (artiNum, memID) {
     var guessArticle = undefined ; //取得猜測使用者可能喜歡的文章
 
     // -----------  取得單一文章 --------------
-    await sql('SELECT * FROM "articleListDataView" WHERE "artiNum" = $1', [artiNum])
+    await sql('SELECT "articleListDataView".*, "member"."memName" ' +
+              'FROM "articleListDataView" ' +
+              'INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID" ' +
+              'WHERE "artiNum" = $1', [artiNum])
         .then((data) => {
             if (data.rows.length > 0) {
                 oneArticle = data.rows;
@@ -108,14 +114,18 @@ var getOneArticle = async function (artiNum, memID) {
                 ' ,to_char("Mess"."artiMessDateTime",\'YYYY-MM-DD\') AS "artiMessDateTime" '+
                 ' ,"Mess"."artiMessCont" '+
                 ' ,count("MessLike"."artiMessNum") AS "likeCount" '+
+                ',"member"."memName"' +
               ' FROM "articleMessage" AS "Mess" '+
                     ' LEFT JOIN "articleMessageLike" AS "MessLike" '+
                         ' ON "Mess"."artiMessNum" = "MessLike"."artiMessNum" '+
+                    'INNER JOIN "member"' +
+                    'ON "member"."memID" = "Mess"."memID"' +
               ' WHERE "Mess"."artiNum" = $1 '+
               ' GROUP BY "Mess"."artiMessNum" '+
                     ' ,"Mess"."memID" '+
                     ' ,"Mess"."artiMessDateTime" '+
-                    ' ,"Mess"."artiMessCont" '+
+                    ' ,"Mess"."artiMessCont" ' +
+                    ' ,"member"."memName" ' +
              ' ORDER BY "artiMessDateTime" ', [artiNum])
         .then((data) => {
             oneArtiMessage = data.rows;
@@ -347,7 +357,11 @@ var getArticleClassList = async function (articleClass, memID) {
     var imgs = [] ; 
     var result = [] ; 
     // -----------  取得分類文章 --------------
-    await sql('SELECT * FROM "articleListDataView" WHERE "artiClass" = $1', [articleClass])
+    await sql('SELECT "articleListDataView".*, "member"."memName" ' +
+              'FROM "articleListDataView" '+
+              'INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"' +
+              'WHERE "artiClass" = $1' +
+              'ORDER BY "articleListDataView"."artiNum" DESC', [articleClass])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;

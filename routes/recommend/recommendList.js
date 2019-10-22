@@ -19,9 +19,7 @@ router.get('/', function (req, res, next) {
             res.render('error');  //導向錯誤頁面
         } else {
             data[0].map((item) => {
-                while (item.recomCont.match('<br>')) {
-                    item.recomCont = item.recomCont.replace('<br>',' ')
-                }
+                item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ")
             })
             res.render('recommendList', { recom : data });
         }

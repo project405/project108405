@@ -16,6 +16,9 @@ router.get('/', function (req, res, next) {
     }
     
     collection.getCollRecomClassList(memID, '書籍').then(data => {
+        data[0].map((item) => {
+            item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ")
+        })
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data == -1) {

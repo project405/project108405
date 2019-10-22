@@ -20,8 +20,10 @@ router.get('/', function (req, res, next) {
         //將照片字串取代為空
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].artiCont.match("\\:imgLocation") != null) {
-                data[0][i].artiCont = data[0][i].artiCont.replace(/\\:imgLocation/g, "");
-            }
+                data[0][i].artiCont = data[0][i].artiCont.replace(/\\:imgLocation/g, " ");
+            } 
+            data[0][i].artiCont = data[0][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ');
+            
         }
 
         if (data == null) {

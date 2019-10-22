@@ -43,8 +43,17 @@ var upload = multer({
 
 
 //post請求
-router.post('/', upload.array('userImg', 20), function (req, res, next) {
-    var memID = req.session.memID;
+router.post('/', upload.array('userImg', 100), function (req, res, next) {
+    var memID;
+
+    //判斷是使用哪種方式登入
+    if (req.session.memID == undefined && req.session.passport == undefined) {
+        memID = undefined;
+    } else if (req.session.memID != undefined && req.session.passport == undefined) {
+        memID = req.session.memID;
+    } else if (req.session.memID == undefined && req.session.passport != undefined) {
+        memID = req.session.passport.user.id;
+    }
     if (!memID) {
         res.send("請進行登入");
         return;
@@ -56,8 +65,7 @@ router.post('/', upload.array('userImg', 20), function (req, res, next) {
     var negativeWords = req.body.negativeWords;
     var swearWords = req.body.swearWords;
     var editReply = req.body.editReply;
-    console.log('req.body.base64Index', req.body.base64Index)
-    
+
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
     var imgData = [];
     //將所有換行符號替代成<br> 

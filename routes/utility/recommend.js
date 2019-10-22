@@ -14,7 +14,9 @@ var getRecommendList = async function (memID) {
     var imgs = [] ; 
     var result = [];
     // -----------  取得推薦清單 --------------
-    await sql('SELECT * FROM "recommendListDataView"')
+    await sql('SELECT * ' +
+              'FROM "recommendListDataView"' +
+              'ORDER BY "recommendListDataView"."recomNum" DESC')
         .then((data) => {
             if (data.rows != undefined) {
                 recommendList = data.rows
@@ -91,14 +93,18 @@ var getOneRecommend = async function (recomNum, memID) {
                 ' ,to_char("Mess"."recomMessDateTime",\'YYYY-MM-DD\') AS "recomMessDateTime" '+
                 ' ,"Mess"."recomMessCont" '+
                 ' ,count("MessLike"."recomMessNum") AS "likeCount" '+
+                ',"member"."memName"' +
             ' FROM "recommendMessage" AS "Mess" '+
                 ' LEFT JOIN "recommendMessageLike" AS "MessLike" '+
                     ' ON "Mess"."recomMessNum" = "MessLike"."recomMessNum" '+
+                'INNER JOIN "member"' +
+                    'ON "member"."memID" = "Mess"."memID"' +
             ' WHERE "Mess"."recomNum" = $1 '+
             ' GROUP BY "Mess"."recomMessNum" '+
                 ' ,"Mess"."memID" '+
                 ' ,"Mess"."recomMessDateTime" '+
                 ' ,"Mess"."recomMessCont"'+
+                ' ,"member"."memName" ' +
             ' ORDER BY "Mess"."recomMessDateTime"', [recomNum])
         .then((data) => {
            if(!data.rows){
@@ -307,7 +313,10 @@ var getRecomClassList = async function (recomClass,memID) {
     var imgs = [] ;
     var result = [];
     // -----------  取得文章清單 --------------
-    await sql('SELECT * FROM "recommendListDataView" WHERE "recomClass" = $1', [recomClass])
+    await sql('SELECT *' +
+              'FROM "recommendListDataView"'+
+              'WHERE "recomClass" = $1' + 
+              'ORDER BY "recommendListDataView"."recomNum" DESC', [recomClass])
         .then((data) => {
           if(!data.rows){
             recommendData = undefined ;

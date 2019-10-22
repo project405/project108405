@@ -106,12 +106,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
-    console.log(1);
     done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {
-    console.log(2);
     done(null, user);
 });
 
@@ -248,7 +246,6 @@ app.get('/user/login',
 app.get('/auth/google/callback', 
     passport.authenticate('google', { failureRedirect: '/login' }),   //導向登入失敗頁面	
     function(req, res) {
-        console.log(4);
         // 如果登入成功, 使用者資料已存在session
         var checkID ;
         signUp.checkMemID(req.session.passport.user.id).then((data) => {      

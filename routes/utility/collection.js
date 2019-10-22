@@ -98,14 +98,18 @@ var getOneColleRecommend = async function (recomNum, memID) {
                 ' ,to_char("Mess"."recomMessDateTime",\'YYYY-MM-DD\') AS "recomMessDateTime" '+
                 ' ,"Mess"."recomMessCont" '+
                 ' ,count("MessLike"."recomMessNum") AS "likeCount" '+
+                ' ,"member"."memName"' +
             ' FROM "recommendMessage" AS "Mess" '+
                 ' LEFT JOIN "recommendMessageLike" AS "MessLike" '+
                     ' ON "Mess"."recomMessNum" = "MessLike"."recomMessNum" '+
+                'INNER JOIN "member"' +
+                    'ON "member"."memID" = "Mess"."memID"' +
             ' WHERE "Mess"."recomNum" = $1 '+
             ' GROUP BY "Mess"."recomMessNum" '+
                 ' ,"Mess"."memID" '+
                 ' ,"Mess"."recomMessDateTime" '+
                 ' ,"Mess"."recomMessCont"'+
+                ' ,"member"."memName" ' +
             ' ORDER BY "recomMessNum"', [recomNum])
         .then((data) => {
            if(!data.rows){
@@ -224,8 +228,9 @@ var getCollArticle = async function (memID) {
     var result = [];
 
     //---------  取得每個會員收藏的文章內容 -------------
-    await sql('SELECT * '+
+    await sql('SELECT "artiView".*, "member"."memName"'+
              ' FROM "articleListDataView" AS "artiView" '+
+             ' INNER JOIN "member" ON "member"."memID" = "artiView"."memID" '+
              ' WHERE "artiView"."artiNum" '+
                 ' IN (SELECT "artiNum" '+
                     ' FROM "memberCollection"  '+
@@ -368,8 +373,9 @@ var getCollArtiClassList = async function (memID, artiClass) {
     var result = [];
 
     //--------- 根據分類取得會員收藏的文章內容 ---------
-    await sql('SELECT * '+
+    await sql('SELECT "articleListDataView".*, "member"."memName" '+
              ' FROM "articleListDataView" '+
+             ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID" ' +
              ' WHERE "artiNum" '+
                 ' IN (SELECT "artiNum" '+
                     ' FROM "memberCollection" '+

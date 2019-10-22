@@ -461,7 +461,7 @@ div.searchSection {
     text-align: center;
     float: center;
     overflow: hidden;
-    width: 18em;
+    width: 13em;
     margin-left: auto;
     margin-right: auto;
 }
@@ -477,7 +477,7 @@ input.navSearch {
     box-sizing: border-box;
     /* 使元素的寬度包括padding margin, border*/
     -moz-box-sizing: border-box;
-    width: 15em;
+    width: 10em;
 }
 
 input.navSearch:focus,

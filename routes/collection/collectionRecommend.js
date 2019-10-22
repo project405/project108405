@@ -19,6 +19,9 @@ router.get('/', function (req, res, next) {
 	}
 	//取得推薦文章
 	collection.getCollRecommend(memID).then(data => {
+		data[0].map((item) => {
+            item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ")
+        })
 		if (data == null) {
 			res.render('error');  //導向錯誤頁面
 		} else if (data == -1) {

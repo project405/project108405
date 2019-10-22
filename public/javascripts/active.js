@@ -33,7 +33,6 @@ $(document).ready(function () {
     });
     
     Array.from($('.fourRecommend')).map((item) => {
-        console.log(item.innerText.length)
         item.innerText = item.innerText.length > 150 ? `${item.innerText.substr(0,150)}...` : item.innerText
     })
 

@@ -201,7 +201,6 @@
                     formData.append('positiveWords', positiveWords);
                     formData.append('negativeWords', negativeWords);
                     formData.append('swearWords', swearWords);
-                    console.log("哈哈=",formData.getAll("positiveWords"));
                     $.ajax({
                         url: '/article/post',
                         type: 'POST',
