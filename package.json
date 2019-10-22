@@ -15,6 +15,7 @@
         "express": "^4.16.3",
         "linebot": "^1.4.1",
         "moment": "^2.24.0",
+        "node-fetch": "^2.6.0",
         "pg": "^7.4.3",
         "request": "^2.88.0",
         "request-promise": "^4.2.4"

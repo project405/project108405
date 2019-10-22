@@ -1,6 +1,7 @@
 //----------------------------------------
 // 載入必要的模組
 //----------------------------------------
+const fetch = require("node-fetch");
 const cheerio = require('cheerio');
 const bodyParser = require('body-parser');
 var linebot = require('linebot');
@@ -140,7 +141,7 @@ app.post('/webhook',  function (req, res) {
             const url = 'https://api.imgur.com/3/image',
             // const request;
             // try {
-                request = await node-fetch(url, {
+                request = await fetch(url, {
                     method: 'POST',
                     headers: {
                       "Authorization": 'Client-ID 8b8755d8a1c4ace',
