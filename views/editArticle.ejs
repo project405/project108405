@@ -221,11 +221,12 @@
                         var positiveWords = analyzeRes.analyze[1]
                         var negativeWords = analyzeRes.analyze[2]
                         var swearWords = analyzeRes.analyze[3]
+                        var score2 = analyzeRes.analyze[4]
                         formData.append('analyzeScore', analyzeScore);
                         formData.append('positiveWords', positiveWords);
                         formData.append('negativeWords', negativeWords);
                         formData.append('swearWords', swearWords);
-                        formData.append('remainImg', remainImg);
+                        formData.append('score2', score2);
 
                         $.ajax({
                             url: '/article/post',

@@ -120,7 +120,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
                     }
                 }
                 if (artiNum) {
-                    member.editArticle(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.remainImg).then(data => {
+                    member.editArticle(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.remainImg, req.body.score2).then(data => {
                         if (data == 1) {
                             res.send("編輯成功");
                         } else {
@@ -131,7 +131,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
                         }
                     })
                 } else {
-                    member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords).then(data => {
+                    member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.score2).then(data => {
                         if (data == 0) {
                             res.send("發文成功");
                         } else {

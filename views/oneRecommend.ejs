@@ -347,10 +347,7 @@
     <script src="/javascripts/navbar.js"></script>
     <script>
         var member = '<%=items[8][0]%>'
-        console.log(member)
-        console.log( $('#postReport'))
         $('.postReport').click(() => {
-            console.log(111)
             if (!member) {
                 alert('請進行登入再檢舉')
                 location.replace("/logIn");
@@ -441,10 +438,12 @@
                     var positiveWords = analyzeRes.analyze[1]
                     var negativeWords = analyzeRes.analyze[2]
                     var swearWords = analyzeRes.analyze[3]
+                    var score2 = analyzeRes.analyze[4]
                     formData.append('analyzeScore', analyzeScore);
                     formData.append('positiveWords', positiveWords);
                     formData.append('negativeWords', negativeWords);
                     formData.append('swearWords', swearWords);
+                    formData.append('score2', score2);
                     $.ajax({
                         url: '/recommend/reply',
                         type: 'POST',

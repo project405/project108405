@@ -43,7 +43,7 @@ var memberInformation = async function (memID) {
 //================================
 //-------- articlePost() ---------
 //================================
-var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords) {
+var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, score2) {
     var artiNum;
     var tagNum = [];
     var result = 0;
@@ -53,9 +53,9 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
         imgData.push(temp)
     }
     //新增文章
-    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime", "analyzeScore", "positiveWords", "negativeWords", "swearWords") ' +
-        ' VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)  returning "article"."artiNum" ;'
-        , [memID, artiHead, artiCont, artiClass, artiDateTime, analyzeScore, positiveWords, negativeWords, swearWords])
+    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime", "analyzeScore", "positiveWords", "negativeWords", "swearWords", "score2") ' +
+        ' VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)  returning "article"."artiNum" ;'
+        , [memID, artiHead, artiCont, artiClass, artiDateTime, analyzeScore, positiveWords, negativeWords, swearWords, score2])
         .then((data) => {
             if (!data.rows) {
                 artiNum = undefined;
@@ -109,7 +109,7 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
 //================================
 //-------- editArticle() ---------
 //================================
-var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime, remainImg) {
+var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime, remainImg, score2) {
     var tagNum = [];
     var result = 0;
     var imgs = []
@@ -119,9 +119,9 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
         imgData.push(temp)
     }
     //修改文章
-    await sql('UPDATE "article" SET "artiHead" = $1, "artiCont" =$2, "artiClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6, "swearWords"= $7 ' +
+    await sql('UPDATE "article" SET "artiHead" = $1, "artiCont" =$2, "artiClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6, "swearWords"= $7, "score2"= $9' +
     ' WHERE "artiNum" = $8'
-    , [artiHead, artiCont, artiClass, analyzeScore, positiveWords, negativeWords, swearWords, artiNum])
+    , [artiHead, artiCont, artiClass, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, score2])
     .then((data) => {
         result = 1;
     }, (error) => {
@@ -203,7 +203,7 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
 //================================
 //-------- editRecommend()--------
 //================================
-var editRecommend = async function (memID, recomHead, recomCont, recomClass, imgData, tag, analyzeScore, positiveWords, negativeWords, recomNum, artiDateTime, remainImg) {
+var editRecommend = async function (memID, recomHead, recomCont, recomClass, imgData, tag, analyzeScore, positiveWords, negativeWords, recomNum, artiDateTime, remainImg, score2) {
     var tagNum = [];
     var result = 0;
     var imgs = []
@@ -213,9 +213,9 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
         imgData.push(temp)
     }
     //修改文章
-    await sql('UPDATE "recommend" SET "recomHead" = $1, "recomCont" =$2, "recomClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6' +
+    await sql('UPDATE "recommend" SET "recomHead" = $1, "recomCont" =$2, "recomClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6, "score2"= $8'+
     ' WHERE "recomNum" = $7'
-    , [recomHead, recomCont, recomClass, analyzeScore, positiveWords, negativeWords, recomNum])
+    , [recomHead, recomCont, recomClass, analyzeScore, positiveWords, negativeWords, recomNum, score2])
     .then((data) => {
         result = 1;
     }, (error) => {
@@ -302,7 +302,7 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
 //================================
 //---- editRecommendReply() ------
 //================================
-var editRecommendReply = async function (recomNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum, remainImg) {
+var editRecommendReply = async function (recomNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum, remainImg, score2) {
     var result = 0;
     var imgs = []
     if (typeof(imgData) == 'string') {
@@ -311,9 +311,9 @@ var editRecommendReply = async function (recomNum, memID, replyCont, postDateTim
         imgData.push(temp)
     }
     //編輯留言
-    await sql('UPDATE "recommendMessage" SET "recomMessCont"= $1, "analyzeScore" =$2, "positiveWords"= $3, "negativeWords"= $4, "swearWords"= $5 '+
+    await sql('UPDATE "recommendMessage" SET "recomMessCont"= $1, "analyzeScore" =$2, "positiveWords"= $3, "negativeWords"= $4, "swearWords"= $5, "score2"= $7 '+
     'WHERE "recomMessNum" = $6'
-        , [replyCont, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum])
+        , [replyCont, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum, score2])
         .then((data) => {
             result = 1;
         }, (error) => {
@@ -424,7 +424,7 @@ var deleteRecommendReply = async function (recomMessNum) {
 //================================
 //-------- recommendPost() ---------
 //================================
-var recommendPost = async function (memID, recomHead, recomCont, recomClass, recomDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords) {
+var recommendPost = async function (memID, recomHead, recomCont, recomClass, recomDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords, score2) {
     var recomNum;
     var tagNum;
     var result;    
@@ -435,9 +435,9 @@ var recommendPost = async function (memID, recomHead, recomCont, recomClass, rec
     }
 
     // --------- 新增文章 ---------
-    await sql('INSERT into "recommend" ("recomHead","recomCont","recomClass","recomDateTime", "analyzeScore", "positiveWords", "negativeWords")' +
-        ' VALUES ($1,$2,$3,$4,$5,$6,$7)  returning "recommend"."recomNum" ;'
-        , [recomHead, recomCont, recomClass, recomDateTime, analyzeScore, positiveWords, negativeWords])
+    await sql('INSERT into "recommend" ("recomHead","recomCont","recomClass","recomDateTime", "analyzeScore", "positiveWords", "negativeWords", "score2")' +
+        ' VALUES ($1,$2,$3,$4,$5,$6,$7,$8)  returning "recommend"."recomNum" ;'
+        , [recomHead, recomCont, recomClass, recomDateTime, analyzeScore, positiveWords, negativeWords, score2])
         .then((data) => {
             if (!data.rows) {
                 recomNum = undefined;
@@ -495,7 +495,7 @@ var recommendPost = async function (memID, recomHead, recomCont, recomClass, rec
 //================================
 //-------- replyPost() ---------
 //================================
-var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords) {
+var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, score2) {
     
     var artiMessNum;
     var result = 0;
@@ -506,9 +506,9 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
     }
 
     //新增留言
-    await sql('INSERT into "articleMessage" ("artiNum","memID","artiMessDateTime","artiMessCont", "analyzeScore", "positiveWords", "negativeWords", "swearWords") '+
-    'VALUES ($1,$2,$3,$4,$5,$6,$7,$8) returning "articleMessage"."artiMessNum" ;'
-        , [artiNum, memID, postDateTime, replyCont, analyzeScore, positiveWords, negativeWords, swearWords])
+    await sql('INSERT into "articleMessage" ("artiNum","memID","artiMessDateTime","artiMessCont", "analyzeScore", "positiveWords", "negativeWords", "swearWords", "score2") '+
+    'VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning "articleMessage"."artiMessNum" ;'
+        , [artiNum, memID, postDateTime, replyCont, analyzeScore, positiveWords, negativeWords, swearWords, score2])
         .then((data) => {
             if(!data.rows){
                 artiMessNum = undefined ;
@@ -535,7 +535,7 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
 //================================
 //-------- recommendReplyPost() --
 //================================
-var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMessDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords) {
+var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMessDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, score2) {
     
     var recomMessNum;
     var result = 0;
@@ -546,9 +546,9 @@ var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMe
     }
 
     //新增留言
-    await sql('INSERT into "recommendMessage" ("recomNum","memID","recomMessDateTime","recomMessCont", "analyzeScore", "positiveWords", "negativeWords", "swearWords") '+
-    'VALUES ($1,$2,$3,$4,$5,$6,$7,$8) returning "recommendMessage"."recomMessNum" ;'
-        , [recomNum, memID, recomMessDateTime, recomMessCont, analyzeScore, positiveWords, negativeWords, swearWords])
+    await sql('INSERT into "recommendMessage" ("recomNum","memID","recomMessDateTime","recomMessCont", "analyzeScore", "positiveWords", "negativeWords", "swearWords", "score2") '+
+    'VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) returning "recommendMessage"."recomMessNum" ;'
+        , [recomNum, memID, recomMessDateTime, recomMessCont, analyzeScore, positiveWords, negativeWords, swearWords, score2])
         .then((data) => {
             result = 1;
             if(!data.rows){
@@ -576,7 +576,7 @@ var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMe
 //================================
 //-------- editReply() ---------
 //================================
-var editReply = async function (artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, artiMessNum, remainImg) {
+var editReply = async function (artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, artiMessNum, remainImg, score2) {
     var result = 0;
     var imgs = []
     if (typeof(imgData) == 'string') {
@@ -585,9 +585,9 @@ var editReply = async function (artiNum, memID, replyCont, postDateTime, imgData
         imgData.push(temp)
     }
     //新增留言
-    await sql('UPDATE "articleMessage" SET "artiMessCont"= $1, "analyzeScore" =$2, "positiveWords"= $3, "negativeWords"= $4, "swearWords"= $5 '+
+    await sql('UPDATE "articleMessage" SET "artiMessCont"= $1, "analyzeScore" =$2, "positiveWords"= $3, "negativeWords"= $4, "swearWords"= $5, "score2"=$7 '+
     'WHERE "artiMessNum" = $6'
-        , [replyCont, analyzeScore, positiveWords, negativeWords, swearWords, artiMessNum])
+        , [replyCont, analyzeScore, positiveWords, negativeWords, swearWords, artiMessNum, score2])
         .then((data) => {
             result = 1;
         }, (error) => {

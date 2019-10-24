@@ -117,7 +117,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
                   }
               }
               if (recomNum) {
-                member.editRecommend(memID, recomHead, recomCont, recomClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, recomNum, postDateTime, req.body.remainImg).then(data => {
+                member.editRecommend(memID, recomHead, recomCont, recomClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, recomNum, postDateTime, req.body.remainImg, req.body.score2).then(data => {
                     if (data == 1) {
                         res.send("編輯成功");
                     } else {
@@ -128,7 +128,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
                     }
                 })
               } else {
-                  member.recommendPost(memID, recomHead, recomCont, recomClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords).then(data => {
+                  member.recommendPost(memID, recomHead, recomCont, recomClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, req.body.score2).then(data => {
                       if (data == 0) {
                           res.send("發文成功");
                       } else {
