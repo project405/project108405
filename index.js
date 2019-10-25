@@ -596,7 +596,7 @@ bot.on('message', function(event) {
                 } 
             });
     
-    }else if (text != "情緒專區" || text != "本週推薦" || text != "熱門文章"){
+    }else if (text != "情緒專區" && text != "本週推薦" && text != "熱門文章"){
         event.reply(
             {   
                 "type": "text",
@@ -615,9 +615,6 @@ bot.on('message', function(event) {
 
     });
 });
-
-
-
 
 //========================================
 
