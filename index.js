@@ -417,9 +417,6 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
-            
-            
-           
             console.log('@@@@@@@@@@@@',typeof(data[0][0].recomDateTime))
             console.log('@@@@@@@@@@@@',data[0][0].recomDateTime)
 
@@ -599,20 +596,20 @@ bot.on('message', function(event) {
                 } 
             });
     
-    }else if (text != "情緒專區" ||text != "本週推薦" || text != "熱門文章"){
+    }else if (text != "情緒專區" || text != "本週推薦" || text != "熱門文章"){
         event.reply(
             {   
                 "type": "text",
                 "text": "我不是很了解你的意思，請透過圖文選單與我們溝通"
             }            
         )
-        event.reply(
-            {
-                "type": "sticker",
-                "packageId": "11539",
-                "stickerId": "52114136"
-            }
-        )
+        // event.reply(
+        //     {
+        //         "type": "sticker",
+        //         "packageId": "11539",
+        //         "stickerId": "52114136"
+        //     }
+        // )
     }
     console.log('使用者傳來的文字',text);
 
