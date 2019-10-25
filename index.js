@@ -157,9 +157,6 @@ bot.on('postback', function(event) {
                         event.reply(myLineTemplate)
                     }
                 })
-                
-
-                
             }else if (data.match("recommend")){
                 login.userJudgeBind(userId).then(d =>{
                     if(d.length !== 0){                         
@@ -188,13 +185,9 @@ bot.on('postback', function(event) {
                     var goodMoodRecommend = [];
                     
                     if(data[1].artiNum !=  undefined){
-                        // console.log(data[1].artiNum)
-                        // console.log(data[1].artiHead)
-                        // console.log(data[1].artiCont)
                         while (data[1].artiCont.match('<br>')) {
                             data[1].artiCont = data[1].artiCont.replace('<br>','')
                         }
-                       
                         data[1].artiHead = data[1].artiHead.length>30 ? `${data[1].artiHead.substr(0,25)}...` : data[1].artiHead
                         data[1].artiCont = data[1].artiCont.length>50 ? `${data[1].artiCont.substr(0,45)}...` : data[1].artiCont
                         goodMoodRecommend.push('article/'+data[1].artiNum)
@@ -202,9 +195,6 @@ bot.on('postback', function(event) {
                         goodMoodRecommend.push(data[1].artiCont)
                         
                     }else{
-                        // console.log(data[1].recomNum)
-                        // console.log(data[1].recomHead)
-                        // console.log(data[1].recomCont)
                         while (data[1].recomCont.match('<br>')) {
                             data[1].recomCont = data[1].recomCont.replace('<br>','')
                         }
@@ -244,14 +234,9 @@ bot.on('postback', function(event) {
                     var badMoodRecommend = [];
 
                     if(data[0].artiNum !=  undefined){
-                        // console.log(data[0].artiNum)
-                        // console.log(data[0].artiHead)
-                        // console.log(data[0].artiCont)
                         while (data[0].artiCont.match('<br>')) {
                             data[0].artiCont = data[0].artiCont.replace('<br>','')
                         }
-
-
                         data[0].artiHead = data[0].artiHead.length>30 ? `${data[0].artiHead.substr(0,25)}...` : data[0].artiHead
                         data[0].artiCont = data[0].artiCont.length>50 ? `${data[0].artiCont.substr(0,45)}...` : data[0].artiCont
                         badMoodRecommend.push('article/'+data[0].artiNum)
@@ -259,9 +244,6 @@ bot.on('postback', function(event) {
                         badMoodRecommend.push(data[0].artiCont)
                         
                     }else{
-                        // console.log(data[0].recomNum)
-                        // console.log(data[0].recomHead)
-                        // console.log(data[0].recomCont)
                         while (data[0].recomCont.match('<br>')) {
                             data[0].recomCont = data[0].recomCont.replace('<br>','')
                         }
@@ -617,7 +599,7 @@ bot.on('message', function(event) {
                 } 
             });
     
-    }else{
+    }else if (text != "情緒專區" ||text != "本週推薦" || text != "熱門文章"){
         event.reply(
             {   
                 "type": "text",
