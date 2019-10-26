@@ -14,7 +14,7 @@ const fetch = require("node-fetch");
 var AllMember = async function () {
     var result;
     
-    await sql('SELECT "lineID" FROM "member" where "lineID" is not null')
+    await sql('SELECT "lineID","memID" FROM "member" where "lineID" is not null')
         .then((data) => {
             
             if (!data.rows) {
@@ -28,6 +28,7 @@ var AllMember = async function () {
        
     return result;
 }
+
 
 //==============================
 //-------- 抓取推薦圖片 --------

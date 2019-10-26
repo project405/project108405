@@ -1,13 +1,13 @@
 //----------------------------------------
 // 載入必要的模組
 //----------------------------------------
-const fetch = require("node-fetch");
-const cheerio = require('cheerio');
+// const fetch = require("node-fetch");
+// const cheerio = require('cheerio');
 const bodyParser = require('body-parser');
 var linebot = require('linebot');
 var express = require('express');
 const request = require('request');
-var rp = require('request-promise');
+// var rp = require('request-promise');
 
 const app = express();
 var cors = require('cors')
@@ -17,15 +17,10 @@ var cors = require('cors')
 // }
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
 app.use(cors())
 
-// const article = require('./utility/article');
-// const member = require('./utility/member');
-const member = require('./utility/LinePush');
+const LinePush = require('./utility/LinePush');
 const byClassData = require('./utility/index');
-
-
 
 //----------------------------------------
 // 填入自己在Line Developers的channel值
@@ -59,22 +54,18 @@ var server = app.listen(process.env.PORT || 3000, function() {
 });
 
 app.post('/webhook',  function (req, res) {
-
-    // member.artiImg('111').then(data =>{
-
+    
     let allUser = [];
-    member.AllMember().then(data => {  
+    LinePush.AllMember().then(data => {  
         data.forEach(item => {
             allUser.push(item.lineID);
-            console.log(allUser)
+            console.log('allUser',allUser)
         });
         byClassData.getIndexData().then(data =>{
-            console.log(data[10][0])
             var pushContent = [];
             var pushImg = [];
             //data為文章
             if(data[10][0].recomHead == undefined){
-                
                 pushContent.push('article')
                 pushContent.push(data[10][0].artiNum)
                 pushContent.push(data[10][0].artiHead)
@@ -84,17 +75,14 @@ app.post('/webhook',  function (req, res) {
                 //有圖片
                 if (articleCont.match("\\:imgLocation") != null){
                     pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
-                    // member.artiImg(data[10][0].artiNum).then(secondData =>{
-                    member.artiImg(data[10][0].artiNum).then(secondData =>{
-                        // console.log('~~~secondData',secondData)
+                    LinePush.artiImg(data[10][0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        member.Imgur(img).then(thirdData => {  
+                        LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                             if (articleCont.length >= 70){
                                 pushContent.pop()
                                 pushContent.push(articleCont.slice(0,71)+'...')
                             }
-                            console.log('裡面pushContent',pushContent)
                             linePushPhoto(pushImg);
                         }).catch((err)=> {
                             console.log(err)
@@ -118,9 +106,9 @@ app.post('/webhook',  function (req, res) {
                 //有圖片
                 if (recommendCont.match("\\:imgLocation") != null){
                     pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
-                    member.recomImg(data[10][0].recomNum).then(secondData =>{
+                    LinePush.recomImg(data[10][0].recomNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        member.Imgur(img).then(thirdData => {  
+                        LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                             if (recommendCont.length >= 70){
                                 pushContent.pop()
@@ -142,8 +130,6 @@ app.post('/webhook',  function (req, res) {
                 }
             }
              
-            console.log('外面pushContent@@@@@@@',pushContent)
-            console.log('外面pushContent.length@@@@@@@',pushContent.length)
             //文章、推薦內容無圖片的推播樣式
             function linePush (){
                 request.post({
@@ -167,7 +153,7 @@ app.post('/webhook',  function (req, res) {
                             messages: [
                                 {
                                     "type": "template",
-                                    "altText": "精選電影",
+                                    "altText": "相信你會喜歡😎",
                                     "template": {
                                       "type": "buttons",
                                       "text": "【文藝富心】小驚喜 🎉\n對於以下推薦有興趣可至文藝富心官網看更多\n立即點選「喜歡」或「不喜歡」讓我們更了解你💞",
