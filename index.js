@@ -92,13 +92,13 @@ app.post('/webhook',  function (req, res) {
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                             // console.log('pushIMG!!!!!!!!',pushImg)                            
-                            linePushPhoto(pushImg);
+                            // linePushPhoto();
                             
                         }).catch((err)=> {
                             console.log(err)
                         });
                     }); 
-                      
+                    linePushPhoto(); 
                 }else{
                     
                     linePush();
@@ -129,11 +129,12 @@ app.post('/webhook',  function (req, res) {
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                             // console.log('pushIMG!!!!!!!!',pushImg)                            
-                            linePushPhoto(pushImg);
+                            // linePushPhoto();
                         }).catch((err)=> {
                             console.log(err)
                         });
                     }); 
+                    linePushPhoto();
                 //沒圖片    
                 }else{
                     //-------------------------------------------------------------------push-3
