@@ -706,7 +706,8 @@ var myArticle = async function (memID) {
              ' WHERE "artiNum" ' +
                 ' IN(SELECT "artiNum" ' +
                    ' FROM "articleListDataView" ' +
-                   ' WHERE "memID" = $1)', [memID])
+                   ' WHERE "memID" = $1) '+
+             'ORDER BY "imgNum"', [memID])
         .then((data) => {
             if (!data.rows) {
                 imgs = undefined;
@@ -833,7 +834,7 @@ var getMyArticleClassList = async function (artiClass, memID) {
         });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "artiNum" , "imgName" FROM "image"')
+    await sql('SELECT "artiNum" , "imgName" FROM "image" ORDER BY "imgNum"')
         .then((data) => {
             if (!data.rows) {
                 imgs = undefined;

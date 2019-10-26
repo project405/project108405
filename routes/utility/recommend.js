@@ -40,7 +40,7 @@ var getRecommendList = async function (memID) {
     await sql('SELECT "recomNum" , "imgName" '+
             ' FROM "image" '+
             ' WHERE "recomMessNum" IS NULL '+
-            ' ORDER BY "recomNum" ')
+            ' ORDER BY "imgNum" ')
     .then((data) => {
         if (!data.rows) {
             imgs = undefined;
@@ -171,7 +171,7 @@ var getOneRecommend = async function (recomNum, memID) {
     await sql('SELECT "recomNum" , "imgName" '+
              ' FROM "image" '+ 
              ' WHERE "recomNum" = $1 and "recomMessNum" IS NULL'+
-             ' ORDER BY "recomNum"',[recomNum])
+             ' ORDER BY "imgNum"',[recomNum])
     .then((data) => {
         if (!data.rows) {
             imgs = undefined;
@@ -186,7 +186,7 @@ var getOneRecommend = async function (recomNum, memID) {
     await sql('SELECT "recomNum" , "imgName" '+
              ' FROM "image" '+ 
              ' WHERE "recomNum" = $1 and "recomMessNum" IS NOT NULL'+
-             ' ORDER BY "recomNum"',[recomNum])
+             ' ORDER BY "imgNum"',[recomNum])
     .then((data) => {
         if (!data.rows) {
             replyImgs = undefined;
@@ -285,7 +285,7 @@ var getOneRecommendReply = async function (recomMessNum, memID) {
     await sql('SELECT "recomMessNum" , "imgName" '+
              ' FROM "image" '+
              ' WHERE "recomMessNum" = $1 '+
-             ' ORDER BY "recomMessNum"',[recomMessNum])
+             ' ORDER BY "imgNum"',[recomMessNum])
         .then((data) => {
             if (!data.rows) {
                 replyImgs = undefined;
@@ -339,7 +339,7 @@ var getRecomClassList = async function (recomClass,memID) {
     //----------- 取得照片 ----------- 
     await sql('SELECT "recomNum" , "imgName" '+
              ' FROM "image" '+
-             ' ORDER BY "recomNum"')
+             ' ORDER BY "imgNum"')
     .then((data) => {
         if (!data.rows) {
             imgs = undefined;
