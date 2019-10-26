@@ -93,7 +93,7 @@ app.post('/webhook',  function (req, res) {
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                             // console.log('pushIMG!!!!!!!!',pushImg)                            
-                            var aoi = thirdData                            
+                            var aoi = thirdData ;                       
                             linePushPhoto(aoi);
                             
                         }).catch((err)=> {
@@ -132,7 +132,7 @@ app.post('/webhook',  function (req, res) {
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                             // console.log('pushIMG!!!!!!!!',pushImg)
-                            var aoi = thirdData                            
+                            var aoi = thirdData;                            
                             linePushPhoto(aoi);
                         }).catch((err)=> {
                             console.log(err)
