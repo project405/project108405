@@ -85,6 +85,7 @@ app.post('/webhook',  function (req, res) {
                 }
                 //有圖片
                 if (data[0].artiCont.match("\\:imgLocation") != null){
+                    console.log('進來嚕ㄛ!!')
                     var pushImg = [];
                     LinePush.artiImg(data[0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
@@ -139,7 +140,7 @@ app.post('/webhook',  function (req, res) {
                                                         }
                                                     ]
                                                 }
-                                              }
+                                            }
                                             // {
                                             //     "type": "template",
                                             //     "altText": "相信你會喜歡😎",
