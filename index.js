@@ -63,7 +63,8 @@ app.post('/webhook',  function (req, res) {
         });
 
         var p = allUserLineID.map(item => {
-            console.log('item.allUserLineID!!!',item.allUserLineID)
+            console.log('item!!', item)
+            // console.log('item.allUserLineID!!!',item.allUserLineID)
             //---------------
         LinePush.getIndexData(item.allUserLineID).then(data =>{
             console.log(data[0].artiNum)
