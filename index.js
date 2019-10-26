@@ -426,6 +426,7 @@ bot.on('message', function(event) {
 
 
             linePush.recomImg(movieNum).then(data =>{
+                console.log('data!!!!!!!!!',data)
                 var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
             
                 linePush.Imgur(img).then(data => {  
