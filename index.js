@@ -84,6 +84,7 @@ app.post('/webhook',  function (req, res) {
                     var a ;
                     // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
                     a = articleCont.replace(/\\:imgLocation/ig, ' ');
+                    console.log("長度！！",a)
                     if (a.length >= 60){
                         pushContent.push(a.slice(0,61)+'...')
                     }else{
@@ -121,6 +122,7 @@ app.post('/webhook',  function (req, res) {
                     var a ;
                     // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
                     a = recommendCont.replace(/\\:imgLocation/ig, ' ');
+                    console.log("長度！！",a)
                     if (a.length >= 60){
                         pushContent.push(a.slice(0,61)+'...')
                     }else{
