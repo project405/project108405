@@ -62,7 +62,7 @@ app.post('/webhook',  function (req, res) {
             console.log('allUserLineID',allUserLineID)
         });
 
-        // allUserLineID.forEach(item => {
+        allUserLineID.forEach(item => {
             //---------------
         LinePush.getIndexData(allUserLineID).then(data =>{
             console.log(data[0].artiNum)
@@ -274,7 +274,7 @@ app.post('/webhook',  function (req, res) {
    
         });
         //---------------
-        // })
+        })
         
     });
 });
