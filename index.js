@@ -71,7 +71,7 @@ app.post('/webhook',  function (req, res) {
         byClassData.getIndexData().then(data =>{
             console.log(data[10][0])
             var pushContent = [];
-            // var pushImg = [];
+            var pushImg = [];
             //data為文章
             if(data[10][0].recomHead == undefined){
                 
@@ -91,14 +91,15 @@ app.post('/webhook',  function (req, res) {
                         member.Imgur(img).then(thirdData => {  
                             // console.log('thirdData@@@@@@@@@@@@@@@@@@@',thirdData)
                             // pushImg.push(thirdData);
-                            pushContent.push(thirdData)
+                            // pushContent.push(thirdData)
+                            pushImg.push(thirdData);
                             // console.log('pushImg[0]@@@@@@@@@@@@@@@@@@@',pushImg[0]);
                             if (articleCont.length >= 70){
                                 pushContent.pop()
                                 pushContent.push(articleCont.slice(0,71)+'...')
                             }
                             console.log('裡面pushContent',pushContent)
-                            linePushPhoto(pushContent);
+                            linePushPhoto(pushImg);
                         }).catch((err)=> {
                             console.log(err)
                         });
@@ -128,15 +129,14 @@ app.post('/webhook',  function (req, res) {
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         member.Imgur(img).then(thirdData => {  
                             // console.log('thirdData@@@@@@@@@@@@@@@@@@@',thirdData)
-                            // pushImg.push(thirdData);
-                            pushContent.push(thirdData)
+                            pushImg.push(thirdData);
+                            // pushContent.push(thirdData)
                             // console.log('pushImg[0]@@@@@@@@@@@@@@@@@@@',pushImg[0]);
                             if (recommendCont.length >= 70){
                                 pushContent.pop()
                                 pushContent.push(recommendCont.slice(0,71)+'...')
                             }
-                            console.log('裡面pushContent',pushContent)
-                            linePushPhoto(pushContent);
+                            linePushPhoto(pushImg);
                         }).catch((err)=> {
                             console.log(err)
                         });
@@ -258,7 +258,7 @@ app.post('/webhook',  function (req, res) {
                                     template: {
                                         type: "buttons",
                                         // thumbnailImageUrl: `${pushImg[0]}`,
-                                        thumbnailImageUrl: `${pushContent[4]}`,
+                                        thumbnailImageUrl: `${pushImg[0]}`,
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
