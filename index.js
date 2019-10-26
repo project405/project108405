@@ -86,8 +86,6 @@ app.post('/webhook',  function (req, res) {
                     a = articleCont.replace(/\\:imgLocation/ig, ' ');
                     if (a.length >= 60){
                         pushContent.push(a.slice(0,61)+'...')
-                        console.log("長度！！",(a.slice(0,61)).length)
-
                     }else{
                         pushContent.push(a)
                     }
@@ -125,54 +123,24 @@ app.post('/webhook',  function (req, res) {
                     a = recommendCont.replace(/\\:imgLocation/ig, ' ');
                     if (a.length >= 60){
                         pushContent.push(a.slice(0,61)+'...')
-                        console.log("長度！！",(a.slice(0,61)).length)
-                        LinePush.recomImg(data[0].recomNum).then(secondData =>{
-                            // if (recommendCont.length >= 60){
-                            //     pushContent.pop()
-                            //     pushContent.push(recommendCont.slice(0,61)+'...')
-                            // }
-                            var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                            LinePush.Imgur(img).then(thirdData => {  
-                                pushImg.push(thirdData);
-                                console.log('pushIMG!!!!!!!!',pushImg)                            
-                                linePushPhoto(pushImg);
-                            }).catch((err)=> {
-                                console.log(err)
-                            });
-                        }); 
                     }else{
                         pushContent.push(a)
-                        LinePush.recomImg(data[0].recomNum).then(secondData =>{
-                            // if (recommendCont.length >= 60){
-                            //     pushContent.pop()
-                            //     pushContent.push(recommendCont.slice(0,61)+'...')
-                            // }
-                            var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                            LinePush.Imgur(img).then(thirdData => {  
-                                pushImg.push(thirdData);
-                                console.log('pushIMG!!!!!!!!',pushImg)                            
-                                linePushPhoto(pushImg);
-                            }).catch((err)=> {
-                                console.log(err)
-                            });
-                        }); 
                     }
                     // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
-                    // keep
-                    // LinePush.recomImg(data[0].recomNum).then(secondData =>{
-                    //     // if (recommendCont.length >= 60){
-                    //     //     pushContent.pop()
-                    //     //     pushContent.push(recommendCont.slice(0,61)+'...')
-                    //     // }
-                    //     var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                    //     LinePush.Imgur(img).then(thirdData => {  
-                    //         pushImg.push(thirdData);
-                    //         console.log('pushIMG!!!!!!!!',pushImg)                            
-                    //         linePushPhoto(pushImg);
-                    //     }).catch((err)=> {
-                    //         console.log(err)
-                    //     });
-                    // }); 
+                    LinePush.recomImg(data[0].recomNum).then(secondData =>{
+                        // if (recommendCont.length >= 60){
+                        //     pushContent.pop()
+                        //     pushContent.push(recommendCont.slice(0,61)+'...')
+                        // }
+                        var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                        LinePush.Imgur(img).then(thirdData => {  
+                            pushImg.push(thirdData);
+                            console.log('pushIMG!!!!!!!!',pushImg)                            
+                            linePushPhoto(pushImg);
+                        }).catch((err)=> {
+                            console.log(err)
+                        });
+                    }); 
                 //沒圖片    
                 }else{
                     pushContent.push(recommendCont); 
