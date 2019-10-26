@@ -81,13 +81,14 @@ app.post('/webhook',  function (req, res) {
                 if (data[10][0].artiCont.match("\\:imgLocation") != null){
                     pushContent.push(data[10][0].artiCont.replace(/\\:imgLocation/ig, "img"));
                     linePush.artiImg(data[10][0].artiNum).then(secondData =>{
-                        var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        linePush.Imgur(img).then(thirdData => {  
-                            console.log(thirdData)
-                            pushImg = thirdData;
-                        }).catch((err)=> {
-                            console.log(err)
-                        });
+                        console.log('~~~secondData',secondData)
+                        // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                        // linePush.Imgur(img).then(thirdData => {  
+                        //     console.log(thirdData)
+                        //     pushImg = thirdData;
+                        // }).catch((err)=> {
+                        //     console.log(err)
+                        // });
                     });           
                     // pushContent.push(data[10][0].artiCont); 
                     // pushContent.push('圖片喔！！！'); 
@@ -113,13 +114,14 @@ app.post('/webhook',  function (req, res) {
                 if (data[10][0].recomCont.match("\\:imgLocation") != null){
                     pushContent.push(data[10][0].recomCont.replace(/\\:imgLocation/ig, "img")); 
                     linePush.recomImg(data[10][0].recomNum).then(secondData =>{
-                        var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        linePush.Imgur(img).then(thirdData => {  
-                            console.log(thirdData)
-                            pushImg = thirdData;
-                        }).catch((err)=> {
-                            console.log(err)
-                        });
+                        console.log('~~~secondData',secondData)
+                        // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                        // linePush.Imgur(img).then(thirdData => {  
+                        //     console.log(thirdData)
+                        //     pushImg = thirdData;
+                        // }).catch((err)=> {
+                        //     console.log(err)
+                        // });
                     });  
                     // pushContent.push(data[10][0].recomCont); 
                     // pushContent.push('圖片喔！！！');
