@@ -84,12 +84,13 @@ app.post('/webhook',  function (req, res) {
                     pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
                     LinePush.artiImg(data[0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                        if (articleCont.length >= 70){
+                            pushContent.pop()
+                            pushContent.push(articleCont.slice(0,71)+'...')
+                        }
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
-                            if (articleCont.length >= 70){
-                                pushContent.pop()
-                                pushContent.push(articleCont.slice(0,71)+'...')
-                            }
+                            
                             linePushPhoto(pushImg);
                         }).catch((err)=> {
                             console.log(err)
@@ -114,13 +115,14 @@ app.post('/webhook',  function (req, res) {
                 if (recommendCont.match("\\:imgLocation") != null){
                     pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
                     LinePush.recomImg(data[0].recomNum).then(secondData =>{
+                        if (recommendCont.length >= 70){
+                            pushContent.pop()
+                            pushContent.push(recommendCont.slice(0,71)+'...')
+                        }
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
-                            if (recommendCont.length >= 70){
-                                pushContent.pop()
-                                pushContent.push(recommendCont.slice(0,71)+'...')
-                            }
+                            
                             linePushPhoto(pushImg);
                         }).catch((err)=> {
                             console.log(err)
