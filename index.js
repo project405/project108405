@@ -55,11 +55,14 @@ var server = app.listen(process.env.PORT || 3000, function() {
 
 app.post('/webhook',  function (req, res) {
     
-    let allUser = [];
+    let allUserLineID = [];
+    let allUserMemID =[];
     LinePush.AllMember().then(data => {  
         data.forEach(item => {
-            allUser.push(item.lineID);
-            console.log('allUser',allUser)
+            allUserLineID.push(item.lineID);
+            allUserLineID.push(item.memID);
+            console.log('allUserLineID',allUserLineID)
+            console.log('allUserMemID',allUserMemID)
         });
         byClassData.getIndexData().then(data =>{
             var pushContent = [];
@@ -148,7 +151,7 @@ app.post('/webhook',  function (req, res) {
                     // url: 'https://api.line.me/v2/bot/message/push',
                     body: JSON.stringify({
                         //to給資料庫有的使用者
-                        to: allUser,
+                        to: allUserLineID,
                         // to: 'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                 {
@@ -211,7 +214,7 @@ app.post('/webhook',  function (req, res) {
                     // url: 'https://api.line.me/v2/bot/message/push',
                     body: JSON.stringify({
                         //to給資料庫有的使用者
-                        to: allUser,
+                        to: allUserLineID,
                         // to: 'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                 {
