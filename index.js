@@ -143,7 +143,7 @@ app.post('/webhook',  function (req, res) {
              
             console.log('pushContent@@@@@@@',pushContent)
             console.log('pushContent.length@@@@@@@',pushContent.length)
-            // console.log('pushImg@@@@@@@',pushImg)
+            console.log('外面的pushImg@@@@@@@',pushImg)
 
             
             //文章、推薦內容無圖片的推播樣式
