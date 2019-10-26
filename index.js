@@ -71,6 +71,18 @@ app.post('/webhook',  function (req, res) {
             console.log('recomNum@@@@@@@@@@',data[0].recomNum)
             var pushContent = [];
             var pushImg = [];
+            LinePush.artiImg(data[0].artiNum).then(secondData =>{
+                var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                
+                LinePush.Imgur(img).then(thirdData => {  
+                    pushImg.push(thirdData);
+                    linePushPhoto(pushImg);
+                    console.log('pushIMG!!!!!!!!',pushImg)
+                    
+                }).catch((err)=> {
+                    console.log(err)
+                });
+            }); 
             //data為文章
             if(data[0].recomHead == undefined){
                 //-------------------------------------------------------------------push-0.1.2
@@ -97,19 +109,7 @@ app.post('/webhook',  function (req, res) {
                     // }else{
                     //     //-------------------------------------------------------------------push-3
                     // }
-                    
-                    LinePush.artiImg(data[0].artiNum).then(secondData =>{
-                        var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        
-                        LinePush.Imgur(img).then(thirdData => {  
-                            pushImg.push(thirdData);
-                            linePushPhoto(pushImg);
-                            console.log('pushIMG!!!!!!!!',pushImg)
-                            
-                        }).catch((err)=> {
-                            console.log(err)
-                        });
-                    });   
+                      
                 }else{
                     //-------------------------------------------------------------------push-3
                     // pushContent.push(articleCont); 
