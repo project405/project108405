@@ -93,15 +93,16 @@ app.post('/webhook',  function (req, res) {
                             // pushImg.push(thirdData);
                             pushContent.push(thirdData)
                             // console.log('pushImg[0]@@@@@@@@@@@@@@@@@@@',pushImg[0]);
+                            if (articleCont.length >= 70){
+                                pushContent.pop()
+                                pushContent.push(articleCont.slice(0,71)+'...')
+                            }
+                            linePushPhoto();
                         }).catch((err)=> {
                             console.log(err)
                         });
                     });           
-                    if (articleCont.length >= 70){
-                        pushContent.pop()
-                        pushContent.push(articleCont.slice(0,71)+'...')
-                    }
-                    linePushPhoto();
+                    
                 }else{
                     pushContent.push(articleCont); 
                     if (articleCont.length >= 70){
@@ -129,15 +130,16 @@ app.post('/webhook',  function (req, res) {
                             // pushImg.push(thirdData);
                             pushContent.push(thirdData)
                             // console.log('pushImg[0]@@@@@@@@@@@@@@@@@@@',pushImg[0]);
+                            if (recommendCont.length >= 70){
+                                pushContent.pop()
+                                pushContent.push(recommendCont.slice(0,71)+'...')
+                            }
+                            linePushPhoto();
                         }).catch((err)=> {
                             console.log(err)
                         });
                     });   
-                    if (recommendCont.length >= 70){
-                        pushContent.pop()
-                        pushContent.push(recommendCont.slice(0,71)+'...')
-                    }
-                    linePushPhoto();
+                    
                 //沒圖片    
                 }else{
                     pushContent.push(recommendCont); 
