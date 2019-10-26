@@ -238,8 +238,7 @@ app.post('/webhook',  function (req, res) {
                                         {
                                           "type": "uri",
                                           "label": "▶️ 想看更多",
-                                          "uri": `https://project108405.herokuapp.com/oneRecommend/${data[3][0].recomNum}`
-                                        //   "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
+                                          "uri": `https://project108405.herokuapp.com/${pushContent[0]}/${pushContent[1]}`
                                         }
                                       ]
                                     }
