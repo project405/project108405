@@ -93,7 +93,8 @@ app.post('/webhook',  function (req, res) {
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                             // console.log('pushIMG!!!!!!!!',pushImg)                            
-                            linePushPhoto();
+                            var aoi = thirdData                            
+                            linePushPhoto(aoi);
                             
                         }).catch((err)=> {
                             console.log(err)
@@ -129,9 +130,10 @@ app.post('/webhook',  function (req, res) {
                         
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
-                            this.pushImg.push(thirdData);
-                            // console.log('pushIMG!!!!!!!!',pushImg)                            
-                            linePushPhoto();
+                            pushImg.push(thirdData);
+                            // console.log('pushIMG!!!!!!!!',pushImg)
+                            var aoi = thirdData                            
+                            linePushPhoto(aoi);
                         }).catch((err)=> {
                             console.log(err)
                         });
@@ -216,8 +218,7 @@ app.post('/webhook',  function (req, res) {
                 });
             }
             //文章、推薦內容有圖片的推播樣式 
-            function linePushPhoto(){
-                console.log('推播圖片裡的＠＠pushImg[0]',pushImg[0])
+            function linePushPhoto(aoi){
                 request.post({
                     headers: {
                         'content-type' : 'application/json',
@@ -257,7 +258,7 @@ app.post('/webhook',  function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "buttons",
-                                        thumbnailImageUrl: `${pushImg[0]}`,
+                                        thumbnailImageUrl: `${aoi}`,
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
