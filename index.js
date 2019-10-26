@@ -91,7 +91,7 @@ app.post('/webhook',  function (req, res) {
                         
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
-                            linePushPhoto(pushImg);
+                            linePushPhoto(thirdData);
                             console.log('pushIMG!!!!!!!!',pushImg)
                             
                         }).catch((err)=> {
@@ -129,7 +129,7 @@ app.post('/webhook',  function (req, res) {
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                             console.log('pushIMG!!!!!!!!',pushImg)                            
-                            linePushPhoto(pushImg);
+                            linePushPhoto(thirdData);
                         }).catch((err)=> {
                             console.log(err)
                         });
@@ -253,7 +253,7 @@ app.post('/webhook',  function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "buttons",
-                                        thumbnailImageUrl: `${pushImg[0]}`,
+                                        thumbnailImageUrl: `${pushImg}`,
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
