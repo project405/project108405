@@ -210,7 +210,8 @@ app.post('/webhook',  function (req, res) {
                 });
             }
             //文章、推薦內容有圖片的推播樣式 
-            function linePushPhoto(){
+            function linePushPhoto(url){
+                console.log(url)
                 request.post({
                     headers: {
                         'content-type' : 'application/json',
