@@ -67,17 +67,17 @@ app.post('/webhook',  function (req, res) {
             var pushContent = [];
             var pushImg = [];
             //data為文章
-            if(data[10][0].recomHead == undefined){
+            if(data[0].recomHead == undefined){
                 pushContent.push('article')
-                pushContent.push(data[10][0].artiNum)
-                pushContent.push(data[10][0].artiHead)
+                pushContent.push(data[0].artiNum)
+                pushContent.push(data[0].artiHead)
                 //處理文章內容
-                let articleCont = data[10][0].artiCont.replace(/<br>/ig, '') 
+                let articleCont = data[0].artiCont.replace(/<br>/ig, '') 
                 
                 //有圖片
                 if (articleCont.match("\\:imgLocation") != null){
                     pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
-                    LinePush.artiImg(data[10][0].artiNum).then(secondData =>{
+                    LinePush.artiImg(data[0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
@@ -102,13 +102,13 @@ app.post('/webhook',  function (req, res) {
             }else{
                 
                 pushContent.push('oneRecommend')
-                pushContent.push(data[10][0].recomNum)
-                pushContent.push(data[10][0].recomHead)
-                let recommendCont = data[10][0].recomCont.replace(/<br>/ig, '') 
+                pushContent.push(data[0].recomNum)
+                pushContent.push(data[0].recomHead)
+                let recommendCont = data[0].recomCont.replace(/<br>/ig, '') 
                 //有圖片
                 if (recommendCont.match("\\:imgLocation") != null){
                     pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
-                    LinePush.recomImg(data[10][0].recomNum).then(secondData =>{
+                    LinePush.recomImg(data[0].recomNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
