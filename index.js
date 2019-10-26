@@ -84,8 +84,8 @@ app.post('/webhook',  function (req, res) {
                     var a ;
                     // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
                     a = articleCont.replace(/\\:imgLocation/ig, ' ');
-                    if (a.length >= 60){
-                        pushContent.push(a.slice(0,61)+'...')
+                    if (a.length >= 50){
+                        pushContent.push(a.slice(0,51)+'...')
                     }else{
                         pushContent.push(a)
                     }
@@ -121,8 +121,8 @@ app.post('/webhook',  function (req, res) {
                     var a ;
                     // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
                     a = recommendCont.replace(/\\:imgLocation/ig, ' ');
-                    if (a.length >= 60){
-                        pushContent.push(a.slice(0,61)+'...')
+                    if (a.length >= 50){
+                        pushContent.push(a.slice(0,51)+'...')
                     }else{
                         pushContent.push(a)
                     }
