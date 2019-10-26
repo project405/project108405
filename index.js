@@ -224,6 +224,7 @@ app.post('/webhook',  function (req, res) {
                 //有圖片
                 if (data[0].recomCont.match("\\:imgLocation") != null){
                     console.log('進來嚕ㄛ!!')
+                    console.log('item!!!',item)
                     var pushImg = [];
 
                     // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
