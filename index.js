@@ -86,6 +86,7 @@ app.post('/webhook',  function (req, res) {
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         if (articleCont.length >= 70){
                             pushContent.pop()
+                            console.log('articleCont.slice(0,71)@@@',articleCont.slice(0,71))
                             pushContent.push(articleCont.slice(0,71)+'...')
                         }
                         LinePush.Imgur(img).then(thirdData => {  
