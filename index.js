@@ -74,48 +74,51 @@ app.post('/webhook',  function (req, res) {
             
             //data為文章
             if(data[10][0].recomHead == undefined){
-                
+                pushContent.push('article')
+                pushContent.push(data[10][0].artiNum)
+                pushContent.push(data[10][0].artiHead)
                 //有圖片
                 if (data[10][0].artiCont.match("\:imgLocation") != null){
-                    // pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
+                    pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
                     // pushContent.push(data[10][0].artiCont); 
-                    pushContent.push('圖片喔！！！'); 
-                    // if (data[10][0].artiCont.length >= 70){
-                    //     pushContent.pop()
-                    //     pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
-                    // }
+                    // pushContent.push('圖片喔！！！'); 
+                    if (data[10][0].artiCont.length >= 70){
+                        pushContent.pop()
+                        pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
+                    }
                     linePushPhoto();
                 }else{
                     pushContent.push(data[10][0].artiCont); 
-                    // if (data[10][0].artiCont.length >= 70){
-                    //     pushContent.pop()
-                    //     pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
-                    // }
+                    if (data[10][0].artiCont.length >= 70){
+                        pushContent.pop()
+                        pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
+                    }
                     linePush()
                 }
             //data為推薦
-            // }else{
-            //     pushContent.push('recommend')
-            //     pushContent.push(data[10][0].recomNum)
-            //     pushContent.push(data[10][0].recomHead)
-            //     //有圖片
-            //     if (data[10][0].recomCont.match("\:imgLocation") != null){
-            //         // pushContent.push(data[10][0].recomCont); 
-            //         pushContent.push('圖片喔！！！');
-            //         // if (data[10][0].recomCont.length >= 70){
-            //         //     pushContent.pop()
-            //         //     pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
-            //         // }
-            //         linePushPhoto();
-            //     //沒圖片    
-            //     }else{
-            //         pushContent.push(data[10][0].recomCont); 
-            //         // if (data[10][0].recomCont.length >= 70){
-            //         //     pushContent.pop()
-            //         //     pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
-            //         // }
-            //         linePush()
-            //     }
+            }else{
+                pushContent.push('recommend')
+                pushContent.push(data[10][0].recomNum)
+                pushContent.push(data[10][0].recomHead)
+                //有圖片
+                if (data[10][0].recomCont.match("\:imgLocation") != null){
+                    pushContent.push(data[10][0].recomCont.replace(/\:imgLocation/ig, "img")); 
+                    // pushContent.push(data[10][0].recomCont); 
+                    // pushContent.push('圖片喔！！！');
+                    if (data[10][0].recomCont.length >= 70){
+                        pushContent.pop()
+                        pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
+                    }
+                    linePushPhoto();
+                //沒圖片    
+                }else{
+                    pushContent.push(data[10][0].recomCont); 
+                    if (data[10][0].recomCont.length >= 70){
+                        pushContent.pop()
+                        pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
+                    }
+                    linePush()
+                }
             }
              
             console.log('pushContent@@@@@@@',pushContent)
