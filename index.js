@@ -97,7 +97,7 @@ app.post('/webhook',  function (req, res) {
                                 pushContent.pop()
                                 pushContent.push(articleCont.slice(0,71)+'...')
                             }
-                            linePushPhoto();
+                            linePushPhoto(pushContent);
                         }).catch((err)=> {
                             console.log(err)
                         });
@@ -109,7 +109,7 @@ app.post('/webhook',  function (req, res) {
                         pushContent.pop()
                         pushContent.push(articleCont.slice(0,71)+'...')
                     }
-                    linePush()
+                    linePush();
                 }
             //data為推薦
             }else{
@@ -134,12 +134,11 @@ app.post('/webhook',  function (req, res) {
                                 pushContent.pop()
                                 pushContent.push(recommendCont.slice(0,71)+'...')
                             }
-                            linePushPhoto();
+                            linePushPhoto(pushContent);
                         }).catch((err)=> {
                             console.log(err)
                         });
-                    });   
-                    
+                    }); 
                 //沒圖片    
                 }else{
                     pushContent.push(recommendCont); 
@@ -147,7 +146,7 @@ app.post('/webhook',  function (req, res) {
                         pushContent.pop()
                         pushContent.push(recommendCont.slice(0,71)+'...')
                     }
-                    linePush()
+                    linePush();
                 }
             }
              
