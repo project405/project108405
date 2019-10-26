@@ -421,9 +421,11 @@ bot.on('message', function(event) {
             var musicNum = data[1][0].recomNum;
             var bookNum = data[2][0].recomNum;
             var exhibitionNum = data[3][0].recomNum;
-            console.log(movieNum,musicNum,bookNum,exhibitionNum)
+            console.log(movieNum)
+            console.log(data[0][0].recomHead)
 
-            linePush.artiImg('111').then(data =>{
+
+            linePush.artiImg(movieNum).then(data =>{
                 var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
             
                 linePush.Imgur(img).then(data => {  
