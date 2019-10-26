@@ -90,6 +90,7 @@ app.post('/webhook',  function (req, res) {
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         
                         LinePush.Imgur(img).then(thirdData => {  
+                            console.log('thirdData', thirdData)
                             request.post({
                                 headers: {
                                     'content-type' : 'application/json',
@@ -195,6 +196,8 @@ app.post('/webhook',  function (req, res) {
                         
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
+                            console.log('thirdData', thirdData)
+
                             // pushImg.push(thirdData);
                             // pushContent.push(thirdData)        
                             // linePushPhoto(pushImg);
