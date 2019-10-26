@@ -84,8 +84,8 @@ app.post('/webhook',  function (req, res) {
                     var a ;
                     // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
                     a = articleCont.replace(/\\:imgLocation/ig, ' ');
-                    if (a.length >= 70){
-                        pushContent.push(a.slice(0,71)+'...')
+                    if (a.length >= 60){
+                        pushContent.push(a.slice(0,61)+'...')
                     }else{
                         pushContent.push(a)
                     }
@@ -103,9 +103,9 @@ app.post('/webhook',  function (req, res) {
                     });   
                 }else{
                     pushContent.push(articleCont); 
-                    if (articleCont.length >= 70){
+                    if (articleCont.length >= 60){
                         pushContent.pop()
-                        pushContent.push(articleCont.slice(0,71)+'...')
+                        pushContent.push(articleCont.slice(0,61)+'...')
                     }
                     linePush();
                 }
@@ -121,16 +121,16 @@ app.post('/webhook',  function (req, res) {
                     var a ;
                     // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
                     a = recommendCont.replace(/\\:imgLocation/ig, ' ');
-                    if (a.length >= 70){
-                        pushContent.push(a.slice(0,71)+'...')
+                    if (a.length >= 60){
+                        pushContent.push(a.slice(0,61)+'...')
                     }else{
                         pushContent.push(a)
                     }
                     // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
                     LinePush.recomImg(data[0].recomNum).then(secondData =>{
-                        // if (recommendCont.length >= 70){
+                        // if (recommendCont.length >= 60){
                         //     pushContent.pop()
-                        //     pushContent.push(recommendCont.slice(0,71)+'...')
+                        //     pushContent.push(recommendCont.slice(0,61)+'...')
                         // }
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
@@ -144,9 +144,9 @@ app.post('/webhook',  function (req, res) {
                 //沒圖片    
                 }else{
                     pushContent.push(recommendCont); 
-                    if (recommendCont.length >= 70){
+                    if (recommendCont.length >= 60){
                         pushContent.pop()
-                        pushContent.push(recommendCont.slice(0,71)+'...')
+                        pushContent.push(recommendCont.slice(0,61)+'...')
                     }
                     linePush();
                 }
