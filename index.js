@@ -90,9 +90,75 @@ app.post('/webhook',  function (req, res) {
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         
                         LinePush.Imgur(img).then(thirdData => {  
-                            pushImg.push(thirdData);
-                                                 
-                            linePushPhoto(pushImg);
+                            request.post({
+                                headers: {
+                                    'content-type' : 'application/json',
+                                    //Authorization為Channel access token 
+                                    // ----------測試line
+                                    // 'Authorization': 'Bearer QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
+                                    // ----------測試line02
+                                    'Authorization': 'Bearer Z4vMgts4631BG4tdMbxpal4bt8o6ccm03m6jQ6vtlMkpoETTqJYziSEXEchdA3HagjcIvsfkbtkAXCFhi2FcleGZeN5SGna82KtnfHA0dT4gALHq64UV1BPuoJ7Mwua2AkzbdPDUl9Md8ndoxbHcfwdB04t89/1O/w1cDnyilFU='
+                                    
+                                    // ----------正式line
+                                    // 'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
+                                },
+                                // url: 'https://api.line.me/v2/bot/message/multicast',
+                                url: 'https://api.line.me/v2/bot/message/push',
+                                body: JSON.stringify({
+                                    //to給資料庫有的使用者
+                                    // to: allUserLineID,
+                                    to: item,
+                                        messages: [
+                                            {
+                                                "type": "template",
+                                                "altText": "相信你會喜歡😎",
+                                                "template": {
+                                                  "type": "buttons",
+                                                  "text": "【文藝富心】小驚喜 🎉\n對於以下推薦有興趣可至文藝富心官網看更多\n立即點選「喜歡」或「不喜歡」讓我們更了解你💞",
+                                                  "actions": [
+                                                    {
+                                                      "type": "uri",
+                                                      "label": "▶️ 想看更多",
+                                                      "uri": `https://project108405.herokuapp.com/${pushContent[0]}/${pushContent[1]}`
+                                                    }
+                                                  ]
+                                                }
+                                            },
+                                            {
+                                                type: "template",
+                                                altText: "相信你會喜歡😎",
+                                                template: {
+                                                    type: "buttons",
+                                                    thumbnailImageUrl: `${thirdData}`,
+                                                    imageAspectRatio: "rectangle",
+                                                    imageSize: "cover",
+                                                    imageBackgroundColor: "#FFFFFF",
+                                                    title: `${pushContent[2]}`,
+                                                    text: `${pushContent[3]}`,
+                                                    defaultAction: {
+                                                        "type": "uri",
+                                                        "label": "View detail",
+                                                        "uri": "http://example.com/page/123"
+                                                    },
+                                                    actions: [
+                                                        {  
+                                                            "type":"postback",
+                                                            "label":"我喜歡",
+                                                            "data":`${pushContent[0]}`+`${pushContent[1]}`
+                                                        },
+                                                        {  
+                                                            "type":"postback",
+                                                            "label":"我不喜歡",
+                                                            "data":'dislike'
+                                                        }
+                                                    ]
+                                                }
+                                            }                
+                                        ]
+                                    })
+                            }, function(error, response, body){
+                                res.end(body);
+                            });
                             
                         }).catch((err)=> {
                             console.log(err)
@@ -129,10 +195,79 @@ app.post('/webhook',  function (req, res) {
                         
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
-                            pushImg.push(thirdData);
-                                                 
-                            linePushPhoto(pushImg);
-                            
+                            // pushImg.push(thirdData);
+                            // pushContent.push(thirdData)        
+                            // linePushPhoto(pushImg);
+                            // console.log('@@@@@@@@@@@@@@@@@@@@',url[0])
+                            request.post({
+                                headers: {
+                                    'content-type' : 'application/json',
+                                    //Authorization為Channel access token 
+                                    // ----------測試line
+                                    // 'Authorization': 'Bearer QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
+                                    // ----------測試line02
+                                    'Authorization': 'Bearer Z4vMgts4631BG4tdMbxpal4bt8o6ccm03m6jQ6vtlMkpoETTqJYziSEXEchdA3HagjcIvsfkbtkAXCFhi2FcleGZeN5SGna82KtnfHA0dT4gALHq64UV1BPuoJ7Mwua2AkzbdPDUl9Md8ndoxbHcfwdB04t89/1O/w1cDnyilFU='
+                                    
+                                    // ----------正式line
+                                    // 'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
+                                },
+                                // url: 'https://api.line.me/v2/bot/message/multicast',
+                                url: 'https://api.line.me/v2/bot/message/push',
+                                body: JSON.stringify({
+                                    //to給資料庫有的使用者
+                                    // to: allUserLineID,
+                                    to: item,
+                                        messages: [
+                                            {
+                                                "type": "template",
+                                                "altText": "相信你會喜歡😎",
+                                                "template": {
+                                                  "type": "buttons",
+                                                  "text": "【文藝富心】小驚喜 🎉\n對於以下推薦有興趣可至文藝富心官網看更多\n立即點選「喜歡」或「不喜歡」讓我們更了解你💞",
+                                                  "actions": [
+                                                    {
+                                                      "type": "uri",
+                                                      "label": "▶️ 想看更多",
+                                                      "uri": `https://project108405.herokuapp.com/${pushContent[0]}/${pushContent[1]}`
+                                                    }
+                                                  ]
+                                                }
+                                            },
+                                            {
+                                                type: "template",
+                                                altText: "相信你會喜歡😎",
+                                                template: {
+                                                    type: "buttons",
+                                                    thumbnailImageUrl: `${thirdData}`,
+                                                    imageAspectRatio: "rectangle",
+                                                    imageSize: "cover",
+                                                    imageBackgroundColor: "#FFFFFF",
+                                                    title: `${pushContent[2]}`,
+                                                    text: `${pushContent[3]}`,
+                                                    defaultAction: {
+                                                        "type": "uri",
+                                                        "label": "View detail",
+                                                        "uri": "http://example.com/page/123"
+                                                    },
+                                                    actions: [
+                                                        {  
+                                                            "type":"postback",
+                                                            "label":"我喜歡",
+                                                            "data":`${pushContent[0]}`+`${pushContent[1]}`
+                                                        },
+                                                        {  
+                                                            "type":"postback",
+                                                            "label":"我不喜歡",
+                                                            "data":'dislike'
+                                                        }
+                                                    ]
+                                                }
+                                            }                
+                                        ]
+                                    })
+                            }, function(error, response, body){
+                                res.end(body);
+                            });
                         }).catch((err)=> {
                             console.log(err)
                         });
