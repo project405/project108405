@@ -103,14 +103,13 @@ app.post('/webhook',  function (req, res) {
                         img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                     }); 
                     LinePush.Imgur(img).then(thirdData => {  
-                        pushImg.push(thirdData);
-                                             
-                        linePushPhoto();
+                        pushImg.push(thirdData);                         
+                        // linePushPhoto();
                         
                     }).catch((err)=> {
                         console.log(err)
                     });
-                
+                    linePushPhoto();
                 }else{
                     
                     linePush();
