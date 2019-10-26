@@ -131,7 +131,7 @@ app.post('/webhook',  function (req, res) {
                                                 template: {
                                                     type: "buttons",
                                                     // thumbnailImageUrl: `${thirdData}`,
-                                                    thumbnailImageUrl: `https://123.com`,
+                                                    thumbnailImageUrl: `https://i.imgur.com/OIiSIdb.jpg`,
                                                     imageAspectRatio: "rectangle",
                                                     imageSize: "cover",
                                                     imageBackgroundColor: "#FFFFFF",
@@ -243,7 +243,7 @@ app.post('/webhook',  function (req, res) {
                                                 template: {
                                                     type: "buttons",
                                                     // thumbnailImageUrl: `${thirdData}`,
-                                                    thumbnailImageUrl: `https://123.com`,
+                                                    thumbnailImageUrl: `https://i.imgur.com/OIiSIdb.jpg`,
                                                     imageAspectRatio: "rectangle",
                                                     imageSize: "cover",
                                                     imageBackgroundColor: "#FFFFFF",
