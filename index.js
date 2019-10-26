@@ -98,6 +98,7 @@ app.post('/webhook',  function (req, res) {
                             console.log(err)
                         });
                     }); 
+                    console.log('pushIMG!!!!!!!!',pushImg) 
                     linePushPhoto(); 
                 }else{
                     
@@ -134,6 +135,7 @@ app.post('/webhook',  function (req, res) {
                             console.log(err)
                         });
                     }); 
+                    console.log('pushIMG!!!!!!!!',pushImg) 
                     linePushPhoto();
                 //沒圖片    
                 }else{
