@@ -98,7 +98,7 @@ app.post('/webhook',  function (req, res) {
                                 pushContent.push(articleCont.slice(0,71)+'...')
                             }
                             console.log('裡面pushContent',pushContent)
-                            linePushPhoto();
+                            linePushPhoto(pushContent);
                         }).catch((err)=> {
                             console.log(err)
                         });
@@ -136,7 +136,7 @@ app.post('/webhook',  function (req, res) {
                                 pushContent.push(recommendCont.slice(0,71)+'...')
                             }
                             console.log('裡面pushContent',pushContent)
-                            linePushPhoto();
+                            linePushPhoto(pushContent);
                         }).catch((err)=> {
                             console.log(err)
                         });
