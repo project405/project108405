@@ -86,30 +86,20 @@ app.post('/webhook',  function (req, res) {
                 //有圖片
                 if (data[0].artiCont.match("\\:imgLocation") != null){
                     var pushImg = [];
-                    var img ;
-                    // LinePush.artiImg(data[0].artiNum).then(secondData =>{
-                    //     var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        
-                    //     LinePush.Imgur(img).then(thirdData => {  
-                    //         pushImg.push(thirdData);
-                                                 
-                    //         linePushPhoto();
-                            
-                    //     }).catch((err)=> {
-                    //         console.log(err)
-                    //     });
-                    // }); 
                     LinePush.artiImg(data[0].artiNum).then(secondData =>{
-                        img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                    }); 
-                    LinePush.Imgur(img).then(thirdData => {  
-                        pushImg.push(thirdData);                         
-                        // linePushPhoto();
+                        var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         
-                    }).catch((err)=> {
-                        console.log(err)
-                    });
-                    linePushPhoto();
+                        LinePush.Imgur(img).then(thirdData => {  
+                            pushImg.push(thirdData);
+                                                 
+                            linePushPhoto();
+                            
+                        }).catch((err)=> {
+                            console.log(err)
+                        });
+                    }); 
+                    
+                
                 }else{
                     
                     linePush();
@@ -140,9 +130,9 @@ app.post('/webhook',  function (req, res) {
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
-                            // console.log('pushIMG!!!!!!!!',pushImg)
-                            var aoi = thirdData                            
-                            linePushPhoto(aoi);
+                                                 
+                            linePushPhoto();
+                            
                         }).catch((err)=> {
                             console.log(err)
                         });
@@ -150,14 +140,7 @@ app.post('/webhook',  function (req, res) {
                     
                 //沒圖片    
                 }else{
-                    //-------------------------------------------------------------------push-3
-                    // pushContent.push(recommendCont); 
-                    // if (recommendCont.length >= 60){
-                    //     //-------------------------------------------------------------------pop-3
-                    //     pushContent.pop()
-                    //     //-------------------------------------------------------------------push-3
-                    //     pushContent.push(recommendCont.slice(0,61)+'...')
-                    // }
+                    
                     linePush();
                 }
             }
@@ -227,7 +210,7 @@ app.post('/webhook',  function (req, res) {
                 });
             }
             //文章、推薦內容有圖片的推播樣式 
-            function linePushPhoto(aoi){
+            function linePushPhoto(){
                 request.post({
                     headers: {
                         'content-type' : 'application/json',
@@ -267,7 +250,7 @@ app.post('/webhook',  function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "buttons",
-                                        thumbnailImageUrl: `${aoi}`,
+                                        thumbnailImageUrl: `${pushImg[0]}`,
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
