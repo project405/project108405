@@ -155,7 +155,7 @@
                             </script>
                             <% } %>
                             <!-- 留言數量按鈕 -->
-                            <button type="button" class="btn postInfo"><i
+                            <button type="button" class="btn postInfo" onclick="location.href='/article/<%= items[0][i].artiNum %>' "><i
                                     class="fas fa-comment-dots"></i><a><%= items[0][i].messCount %></a></button>
                             <!-- 收藏按鈕 -->
                             <button type="button" id=<%= "unLogIn" + items[0][i].artiNum %> class="btn postInfo"

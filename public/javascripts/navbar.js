@@ -25,11 +25,11 @@ $(document).ready(() => {
                                 <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
                             </li>\
                             <li class="nav-item">\
-                                <a class="nav-link" href="/recommendlist">\
+                                <a class="nav-link" href="/recommendList/1">\
                                 官方推薦</a>\
                             </li>\
                             <li class="nav-item">\
-                                <a class="nav-link" href="/articleList">\
+                                <a class="nav-link" href="/articleList/1">\
                                     討論區</a>\
                             </li>\
                             <li class="nav-item">\
@@ -115,11 +115,11 @@ $(document).ready(() => {
                         </li>\
                         <li class="nav-item">\
                             <li class="nav-item">\
-                                <a class="nav-link" href="/recommendlist">\
+                                <a class="nav-link" href="/recommendList/1">\
                                 官方推薦</a>\
                             </li>\
                             <li class="nav-item">\
-                                <a class="nav-link" href="/articleList">\
+                                <a class="nav-link" href="/articleList/1">\
                                     討論區</a>\
                             </li>\
                             <li class="nav-item">\
@@ -209,11 +209,11 @@ $(document).ready(() => {
                             <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
                         </li>\
                         <li class="nav-item">\
-                            <a class="nav-link" href="/recommendlist">\
+                            <a class="nav-link" href="/recommendList/1">\
                             官方推薦</a>\
                         </li>\
                         <li class="nav-item">\
-                            <a class="nav-link" href="/articleList">\
+                            <a class="nav-link" href="/articleList/1">\
                                 討論區</a>\
                         </li>\
                         <li class="nav-item">\

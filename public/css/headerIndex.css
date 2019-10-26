@@ -646,3 +646,11 @@ button.navSearch:focus {
     box-shadow: none;
     outline: none;
 }
+
+.swal-button {
+    background-color: rgb(177, 187, 171);
+    border: solid 1px rgb(177, 187, 171) !important;
+}
+.swal-button:hover {
+    background-color: rgb(101, 108, 97) !important;
+}
