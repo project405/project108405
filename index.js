@@ -76,13 +76,13 @@ app.post('/webhook',  function (req, res) {
             if(data[10][0].recomHead == undefined){
                 member.artiImg(data[10][0].artiNum).then(secondData =>{
                     console.log('~~~secondData',secondData)
-                    // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                    // linePush.Imgur(img).then(thirdData => {  
-                    //     console.log(thirdData)
-                    //     pushImg = thirdData;
-                    // }).catch((err)=> {
-                    //     console.log(err)
-                    // });
+                    var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                    linePush.Imgur(img).then(thirdData => {  
+                        console.log(thirdData)
+                        pushImg = thirdData;
+                    }).catch((err)=> {
+                        console.log(err)
+                    });
                 }); 
                 pushContent.push('article')
                 pushContent.push(data[10][0].artiNum)
@@ -110,13 +110,13 @@ app.post('/webhook',  function (req, res) {
             }else{
                 member.recomImg(data[10][0].recomNum).then(secondData =>{
                     console.log('~~~secondData',secondData)
-                    // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                    // linePush.Imgur(img).then(thirdData => {  
-                    //     console.log(thirdData)
-                    //     pushImg = thirdData;
-                    // }).catch((err)=> {
-                    //     console.log(err)
-                    // });
+                    var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                    linePush.Imgur(img).then(thirdData => {  
+                        console.log(thirdData)
+                        pushImg = thirdData;
+                    }).catch((err)=> {
+                        console.log(err)
+                    });
                 });   
                 pushContent.push('recommend')
                 pushContent.push(data[10][0].recomNum)
