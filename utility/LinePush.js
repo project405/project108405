@@ -255,4 +255,4 @@ return response.data.link;
 
 
 //匯出
-module.exports = {AllMember,getIndexDatarecomImg,artiImg,Imgur};
+module.exports = {AllMember,getIndexData,recomImg,artiImg,Imgur};
