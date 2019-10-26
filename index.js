@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 app.use(cors())
 
-const article = require('./utility/article');
+// const article = require('./utility/article');
 // const member = require('./utility/member');
 const member = require('./utility/LinePush');
 const byClassData = require('./utility/index');
@@ -71,7 +71,7 @@ app.post('/webhook',  function (req, res) {
         byClassData.getIndexData().then(data =>{
             console.log(data[10][0])
             var pushContent = [];
-            
+            var pushImg ;
             //data為文章
             if(data[10][0].recomHead == undefined){
                 pushContent.push('article')
@@ -79,8 +79,16 @@ app.post('/webhook',  function (req, res) {
                 pushContent.push(data[10][0].artiHead)
                 //有圖片
                 if (data[10][0].artiCont.match("\\:imgLocation") != null){
-                    // pushContent.push(data[10][0].artiCont.replace(/\\:imgLocation/ig, "img")); 
-                    pushContent.push(data[10][0].artiCont.replace('\\:imgLocation', "img")); 
+                    pushContent.push(data[10][0].artiCont.replace(/\\:imgLocation/ig, "img"));
+                    linePush.artiImg(data[10][0].artiNum).then(secondData =>{
+                        var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                        linePush.Imgur(img).then(thirdData => {  
+                            console.log(thirdData)
+                            pushImg = thirdData;
+                        }).catch((err)=> {
+                            console.log(err)
+                        });
+                    });           
                     // pushContent.push(data[10][0].artiCont); 
                     // pushContent.push('圖片喔！！！'); 
                     if (data[10][0].artiCont.length >= 70){
@@ -104,6 +112,15 @@ app.post('/webhook',  function (req, res) {
                 //有圖片
                 if (data[10][0].recomCont.match("\\:imgLocation") != null){
                     pushContent.push(data[10][0].recomCont.replace(/\\:imgLocation/ig, "img")); 
+                    linePush.recomImg(data[10][0].recomNum).then(secondData =>{
+                        var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                        linePush.Imgur(img).then(thirdData => {  
+                            console.log(thirdData)
+                            pushImg = thirdData;
+                        }).catch((err)=> {
+                            console.log(err)
+                        });
+                    });  
                     // pushContent.push(data[10][0].recomCont); 
                     // pushContent.push('圖片喔！！！');
                     if (data[10][0].recomCont.length >= 70){
@@ -124,6 +141,7 @@ app.post('/webhook',  function (req, res) {
              
             console.log('pushContent@@@@@@@',pushContent)
             console.log('pushContent.length@@@@@@@',pushContent.length)
+            console.log('pushImg@@@@@@@',pushImg)
 
             
             //文章、推薦內容無圖片的推播樣式
