@@ -23,6 +23,15 @@ var bot = linebot({
     channelAccessToken: 'xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
 });
 
+linePush.artiImg('111').then(data =>{
+    var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
+
+    linePush.Imgur(img).then(data => {  
+        console.log(data)
+    }).catch((err)=> {
+        // 失敗訊息 (立即)
+        console.log(err)
+    });
 
 //========================================
 // 機器人接受回覆的處理
@@ -600,7 +609,7 @@ bot.on('message', function(event) {
         event.reply(
             {   
                 "type": "text",
-                "text": "我不是很了解你的意思，請透過圖文選單與我們溝通"
+                "text": "我不是很了解你的意思\n請透過圖文選單與我們溝通👋"
             }            
         )
         // event.reply(

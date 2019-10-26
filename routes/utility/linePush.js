@@ -91,5 +91,59 @@ var AddRecommendLike = async function (lineID,recomNum) {
   
 }
 
+
+var artiImg = async function (artiNum) {
+    var result;
+    await sql('SELECT "imgName" FROM "image" WHERE "artiNum" = $1 LIMIT 1', [artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                result = undefined;
+            } else {
+                result = data.rows;
+            }
+        }, (error) => {
+            result = undefined;
+        });
+    return result;
+}
+
+//==============================
+//-------- 解碼base64 --------
+//==============================
+// var apiUrl = 'https://api.imgur.com/3/image';
+// var apiKey = '8b8755d8a1c4ace';
+        
+        
+var Imgur = async function (img) {
+            const url = 'https://api.imgur.com/3/image',
+            // const request;
+            // try {
+                request = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                      "Content-Type": "application/json", 
+                      "Authorization": 'Client-ID 8b8755d8a1c4ace',
+                    },
+                    dataType:"json" ,
+                    body: img
+                    // form: {
+                    //   "image": img,
+                    //   "image": img,
+                    //   "type": "base64"
+                    // }
+                });
+        
+              const response = await request.json();
+              
+            //   console.log('response@@',response.data.link);
+            //   console.log('bbb@@',bbb);
+            //   console.log('response@@',response);
+            return response.data.link;
+            // } catch (e) {
+            // //   throw new Error(e);
+            // }
+};
+        
+
 //匯出
-module.exports = {AddArticleLike,AddRecommendLike};
+module.exports = {AddArticleLike,AddRecommendLike,Imgur,artiImg};
