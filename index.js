@@ -86,20 +86,30 @@ app.post('/webhook',  function (req, res) {
                 //有圖片
                 if (data[0].artiCont.match("\\:imgLocation") != null){
                     var pushImg = [];
-
-                    LinePush.artiImg(data[0].artiNum).then(secondData =>{
-                        var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                    var img ;
+                    // LinePush.artiImg(data[0].artiNum).then(secondData =>{
+                    //     var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         
-                        LinePush.Imgur(img).then(thirdData => {  
-                            pushImg.push(thirdData);
-                            // console.log('pushIMG!!!!!!!!',pushImg)                            
-                            var aoi = thirdData ;                       
-                            linePushPhoto(aoi);
+                    //     LinePush.Imgur(img).then(thirdData => {  
+                    //         pushImg.push(thirdData);
+                                                 
+                    //         linePushPhoto();
                             
-                        }).catch((err)=> {
-                            console.log(err)
-                        });
+                    //     }).catch((err)=> {
+                    //         console.log(err)
+                    //     });
+                    // }); 
+                    LinePush.artiImg(data[0].artiNum).then(secondData =>{
+                        img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                     }); 
+                    LinePush.Imgur(img).then(thirdData => {  
+                        pushImg.push(thirdData);
+                                             
+                        linePushPhoto();
+                        
+                    }).catch((err)=> {
+                        console.log(err)
+                    });
                 
                 }else{
                     
@@ -132,7 +142,7 @@ app.post('/webhook',  function (req, res) {
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                             // console.log('pushIMG!!!!!!!!',pushImg)
-                            var aoi = thirdData;                            
+                            var aoi = thirdData                            
                             linePushPhoto(aoi);
                         }).catch((err)=> {
                             console.log(err)
