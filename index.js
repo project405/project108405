@@ -184,7 +184,6 @@ app.post('/webhook',  function (req, res) {
                             
                     })
                 }, function(error, response, body){
-                
                     res.end(body);
                 });
             }
@@ -255,9 +254,7 @@ app.post('/webhook',  function (req, res) {
                             ]
                         })
                 }, function(error, response, body){
-                
                     res.end(body);
-                
                 });
                
             }
