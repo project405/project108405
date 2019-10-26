@@ -60,7 +60,7 @@ app.post('/webhook',  function (req, res) {
     LinePush.AllMember().then(data => {  
         data.forEach(item => {
             allUserLineID.push(item.lineID);
-            allUserLineID.push(item.memID);
+            allUserMemID.push(item.memID);
             console.log('allUserLineID',allUserLineID)
             console.log('allUserMemID',allUserMemID)
         });
