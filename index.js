@@ -333,16 +333,7 @@ bot.on('postback', function(event) {
 //----------------成功
 //網址需連到heroku、圖片也是
 bot.on('message', function(event) {
-    linePush.artiImg('111').then(data =>{
-        var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
     
-        linePush.Imgur(img).then(data => {  
-            console.log(data)
-        }).catch((err)=> {
-            // 失敗訊息 (立即)
-            console.log(err)
-        });
-    });  
     event.source.profile().then(
         function (profile) {
             
@@ -406,9 +397,6 @@ bot.on('message', function(event) {
                             ]
                         }      
                     ]
-                    // ,
-                    // "imageAspectRatio": "rectangle",
-                    // "imageSize": "cover"
                 }
             });
            
@@ -428,18 +416,23 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
-            console.log('@@@@@@@@@@@@',typeof(data[0][0].recomDateTime))
-            console.log('@@@@@@@@@@@@',data[0][0].recomDateTime)
-
+            
             var movieNum = data[0][0].recomNum;
             var musicNum = data[1][0].recomNum;
             var bookNum = data[2][0].recomNum;
             var exhibitionNum = data[3][0].recomNum;
+            console.log(movieNum,musicNum,bookNum,exhibitionNum)
 
-            // console.log(movieNum);
-            // console.log(musicNum);
-            // console.log(bookNum);
-            // console.log(exhibitionNum);
+            linePush.artiImg('111').then(data =>{
+                var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
+            
+                linePush.Imgur(img).then(data => {  
+                    console.log(data)
+                }).catch((err)=> {
+                    // 失敗訊息 (立即)
+                    console.log(err)
+                });
+            });  
 
             event.reply({
                 "type": "template",

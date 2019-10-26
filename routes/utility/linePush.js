@@ -92,6 +92,28 @@ var AddRecommendLike = async function (lineID,recomNum) {
   
 }
 
+//==============================
+//-------- 抓取推薦圖片 --------
+//==============================        
+
+var recomImg = async function (recomNum) {
+    var result;
+    await sql('SELECT "imgName" FROM "image" WHERE "recomNum" = $1 LIMIT 1',[recomNum])
+        .then((data) => {
+            if (!data.rows) {
+                result = undefined;
+            } else {
+                result = data.rows;
+            }
+        }, (error) => {
+            result = undefined;
+        });
+    return result;     
+}
+
+//==============================
+//-------- 抓取文章圖片 --------
+//==============================        
 
 var artiImg = async function (artiNum) {
     var result;
@@ -109,16 +131,10 @@ var artiImg = async function (artiNum) {
 }
 
 //==============================
-//-------- 解碼base64 --------
-//==============================
-// var apiUrl = 'https://api.imgur.com/3/image';
-// var apiKey = '8b8755d8a1c4ace';
-        
-        
+//-------- 圖片解碼base64 --------
+//==============================        
 var Imgur = async function (img) {
             const url = 'https://api.imgur.com/3/image',
-            // const request;
-            // try {
                 request = await fetch(url, {
                     method: 'POST',
                     headers: {
@@ -127,24 +143,13 @@ var Imgur = async function (img) {
                     },
                     dataType:"json" ,
                     body: img
-                    // form: {
-                    //   "image": img,
-                    //   "image": img,
-                    //   "type": "base64"
-                    // }
+                    
                 });
-        
-              const response = await request.json();
-              
-            //   console.log('response@@',response.data.link);
-            //   console.log('bbb@@',bbb);
-            //   console.log('response@@',response);
-            return response.data.link;
-            // } catch (e) {
-            // //   throw new Error(e);
-            // }
+        const response = await request.json();
+        return response.data.link;
 };
         
 
 //匯出
-module.exports = {AddArticleLike,AddRecommendLike,Imgur,artiImg};
+module.exports = {AddArticleLike,AddRecommendLike,
+                  artiImg,recomImg,Imgur};
