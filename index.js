@@ -247,7 +247,8 @@ app.post('/webhook',  function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "buttons",
-                                        thumbnailImageUrl: `${pushImg[0]}`,
+                                        // thumbnailImageUrl: `${pushImg[0]}`,
+                                        thumbnailImageUrl: pushImg[0],
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
