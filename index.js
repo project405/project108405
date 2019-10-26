@@ -65,7 +65,7 @@ app.post('/webhook',  function (req, res) {
             console.log('artiNum@@@@@@@@@@',data[0].artiNum)
             console.log('recomNum@@@@@@@@@@',data[0].recomNum)
             var pushContent = [];
-            var pushImg = [];
+            // var pushImg = [];
             
             //data為文章
             if(data[0].recomHead == undefined){
@@ -90,9 +90,9 @@ app.post('/webhook',  function (req, res) {
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         
                         LinePush.Imgur(img).then(thirdData => {  
-                            pushImg.push(thirdData);
+                            // pushImg.push(thirdData);
                             linePushPhoto(thirdData);
-                            console.log('pushIMG!!!!!!!!',pushImg)
+                            // console.log('pushIMG!!!!!!!!',pushImg)
                             
                         }).catch((err)=> {
                             console.log(err)
@@ -127,8 +127,8 @@ app.post('/webhook',  function (req, res) {
                         
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
-                            pushImg.push(thirdData);
-                            console.log('pushIMG!!!!!!!!',pushImg)                            
+                            // pushImg.push(thirdData);
+                            // console.log('pushIMG!!!!!!!!',pushImg)                            
                             linePushPhoto(thirdData);
                         }).catch((err)=> {
                             console.log(err)
