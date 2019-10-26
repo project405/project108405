@@ -70,20 +70,20 @@ app.post('/webhook',  function (req, res) {
         });
         byClassData.getIndexData().then(data =>{
             console.log(data[10][0])
-            linePush.artiImg(data[10][0].artiNum).then(secondData =>{
-                console.log('~~~secondData',secondData)
-                // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                // linePush.Imgur(img).then(thirdData => {  
-                //     console.log(thirdData)
-                //     pushImg = thirdData;
-                // }).catch((err)=> {
-                //     console.log(err)
-                // });
-            }); 
             var pushContent = [];
             var pushImg ;
             //data為文章
             if(data[10][0].recomHead == undefined){
+                linePush.artiImg(data[10][0].artiNum).then(secondData =>{
+                    console.log('~~~secondData',secondData)
+                    // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                    // linePush.Imgur(img).then(thirdData => {  
+                    //     console.log(thirdData)
+                    //     pushImg = thirdData;
+                    // }).catch((err)=> {
+                    //     console.log(err)
+                    // });
+                }); 
                 pushContent.push('article')
                 pushContent.push(data[10][0].artiNum)
                 pushContent.push(data[10][0].artiHead)
@@ -108,22 +108,23 @@ app.post('/webhook',  function (req, res) {
                 }
             //data為推薦
             }else{
+                linePush.recomImg(data[10][0].recomNum).then(secondData =>{
+                    console.log('~~~secondData',secondData)
+                    // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                    // linePush.Imgur(img).then(thirdData => {  
+                    //     console.log(thirdData)
+                    //     pushImg = thirdData;
+                    // }).catch((err)=> {
+                    //     console.log(err)
+                    // });
+                });   
                 pushContent.push('recommend')
                 pushContent.push(data[10][0].recomNum)
                 pushContent.push(data[10][0].recomHead)
                 //有圖片
                 if (data[10][0].recomCont.match("\\:imgLocation") != null){
                     pushContent.push(data[10][0].recomCont.replace(/\\:imgLocation/ig, "img")); 
-                    linePush.recomImg(data[10][0].recomNum).then(secondData =>{
-                        console.log('~~~secondData',secondData)
-                        // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        // linePush.Imgur(img).then(thirdData => {  
-                        //     console.log(thirdData)
-                        //     pushImg = thirdData;
-                        // }).catch((err)=> {
-                        //     console.log(err)
-                        // });
-                    });  
+                    
                     // pushContent.push(data[10][0].recomCont); 
                     // pushContent.push('圖片喔！！！');
                     if (data[10][0].recomCont.length >= 70){
