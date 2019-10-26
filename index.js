@@ -62,7 +62,8 @@ app.post('/webhook',  function (req, res) {
             console.log('allUserLineID',allUserLineID)
         });
         LinePush.getIndexData(allUserLineID[0]).then(data =>{
-            console.log(data)
+            console.log(data.artiNum)
+            console.log(data.recomNum)
             var pushContent = [];
             var pushImg = [];
             //data為文章
