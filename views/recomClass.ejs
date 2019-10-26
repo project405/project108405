@@ -36,14 +36,14 @@
 
     <div class="d-flex justify-content-center" style="margin-bottom:1.5em;">
         <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/movie'">電影類</button>
+            onclick="location.href='/recommendList/movie/1'">電影類</button>
         <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/music'">音樂類</button>
+            onclick="location.href='/recommendList/music/1'">音樂類</button>
         <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/book'">書籍類</button>
+            onclick="location.href='/recommendList/book/1'">書籍類</button>
         <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/exhibition'">展覽類</button>
-        <button type="button" class="btn btn-secondary footer" onclick="location.href='/recommendList'">全部</button>
+            onclick="location.href='/recommendList/exhibition/1'">展覽類</button>
+        <button type="button" class="btn btn-secondary footer" onclick="location.href='/recommendList/1'">全部</button>
     </div>
 
     <!-- Portfolio Section -->
@@ -88,10 +88,46 @@
             <% } %>
             <!-- 推薦結束 -->
         </div>
+        <nav aria-label="Page navigation example" style="margin-bottom: 4em;">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item previous">
+                    <a class="page-link" href="#/" onclick="location.href=`${pagePrevious}`" tabindex="-1" aria-disabled="true"><i class="fas fa-chevron-left"></i></a>
+                    </li>
+                    <% for(var j = 1 ; j <= recom[4][0].count ; j++) {%>
+                    <li class="page-item"><a class="page-link" href="<%=j%>"><%=j%></a></li>
+                    <% } %>
+                    <li class="page-item next">
+                    <a class="page-link" href="#/" onclick="location.href=`${pageNext}`"><i class="fas fa-chevron-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
     </section>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        var pagePrevious = parseInt('<%= recom[5][0]%>')-1
+        var pageNext = parseInt('<%= recom[5][0]%>')+1
+        if (pagePrevious == 0) {
+             $('.previous').addClass('disabled')
+        } else {
+            $('.previous').remove('disabled')
+        }
+        if ('<%= recom[4][0].count%>' == '<%= recom[5][0]%>') {
+            $('.next').addClass('disabled')
+        } else {
+            $('.next').remove('disabled')
+        }
+        Array.from($('.pagination').find('.page-link')).map((item) => {
+            if (item.innerText == '<%= recom[5][0]%>') {
+                item.parentElement.classList.add('disabled')
+                item.style.fontWeight = 'bolder'
+            }
+        })
+        Array.from($('.page-link').parent('li.disabled')).map((item) => {
+            item.children[0].style.color = "#d9d9d9"
+        })
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

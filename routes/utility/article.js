@@ -439,29 +439,44 @@ var getOneReply = async function (artiMessNum, memID) {
 //=========================================
 //---------  getArticleClassList() --------
 //=========================================
-var getArticleClassList = async function (articleClass, memID) {
+var getArticleClassList = async function (articleClass, memID, artiListNum) {
+    console.log(artiListNum)
     var articleList = [];
     var tag = [];
     var isCollection = [];
     var isLike = [];
     var imgs = [] ; 
     var result = [] ; 
+    var articleSum;
     // -----------  取得分類文章 --------------
     await sql('SELECT "articleListDataView".*, "member"."memName" ' +
-              'FROM "articleListDataView" '+
-              'INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"' +
-              'WHERE "artiClass" = $1' +
-              'ORDER BY "articleListDataView"."artiNum" DESC', [articleClass])
+              ' FROM "articleListDataView" '+
+              ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"' +
+              ' WHERE "artiClass" = $1' +
+              ' ORDER BY "articleListDataView"."artiNum" DESC' +
+              ' LIMIT 10' +
+              ' OFFSET $2', [articleClass, (artiListNum-1) * 10])
         .then((data) => {
+            console.log(data,'data')
             if (!data.rows) {
                 articleList = undefined;
             } else {
                 articleList = data.rows;
+                console.log('articleList', articleList)
             }
         }, (error) => {
+            console.log(error)
             articleList = null;
         });
 
+    await sql('SELECT COUNT(*) ' +
+              'FROM "articleListDataView"' +
+              'WHERE "artiClass" = $1' , [articleClass])
+    .then((data) => {
+        articleSum = data.rows;
+    }, (error) => {
+        articleSum = undefined;
+    })
     // ----------- 取得 tag -----------
     await sql('SELECT * '+
              ' FROM "articleTagView" '+
@@ -524,6 +539,8 @@ var getArticleClassList = async function (articleClass, memID) {
     result[3] = isLike ;
     result[4] = imgs ;
     result[5] = [memID] ;
+    result[6] = articleSum;
+    result[7] = [artiListNum];
 
     return result ; 
 }

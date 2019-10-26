@@ -16,7 +16,7 @@ router.get('/:artiListNum', function (req, res, next) {
     }
 
     article.getArticleListPagination(memID, artiListNum).then(data => {
-        data[6][0].count = Math.floor(data[6][0].count / 10) 
+        data[6][0].count = Math.ceil(data[6][0].count / 10) 
         if (data[0] != undefined) {
             for (var i = 0; i < data[0].length; i++) {
                 if (data[0][i].artiCont.match("\\:imgLocation") != null) {
@@ -29,7 +29,7 @@ router.get('/:artiListNum', function (req, res, next) {
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data.length > 0) {
-            res.render('articleListPagination', { items: data });  //將資料傳給顯示頁面
+            res.render('articleList', { items: data });  //將資料傳給顯示頁面
         } else {
             res.render('notFound');  //導向找不到頁面
         }

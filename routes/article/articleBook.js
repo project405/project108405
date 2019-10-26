@@ -4,9 +4,9 @@ var router = express.Router();
 const article = require('../utility/article');
 
 //接收GET請求
-router.get('/', function (req, res, next) {
+router.get('/:artiListNum', function (req, res, next) {
+    var artiListNum = req.params.artiListNum;   //取出參數
     var memID ;
-
     //判斷是使用哪種方式登入
 	if (req.session.memID != undefined && req.session.passport == undefined) {
 		memID = req.session.memID;
@@ -14,7 +14,9 @@ router.get('/', function (req, res, next) {
 		memID = req.session.passport.user.id;
     }
     
-    article.getArticleClassList('book', memID).then(data => {
+    article.getArticleClassList('book', memID, artiListNum).then(data => {
+        data[6][0].count = Math.ceil(data[6][0].count / 10) 
+        console.log('data[6][0]', data[6][0])
         // 將圖片字串取代成空字串
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].artiCont.match("\\:imgLocation") != null) {
