@@ -111,7 +111,7 @@ app.post('/webhook',  function (req, res) {
             //data為推薦
             }else{
                 
-                pushContent.push('Recommend')
+                pushContent.push('oneRecommend')
                 pushContent.push(data[10][0].recomNum)
                 pushContent.push(data[10][0].recomHead)
                 let recommendCont = data[10][0].recomCont.replace(/<br>/ig, '') 
@@ -176,7 +176,7 @@ app.post('/webhook',  function (req, res) {
                                           "type": "uri",
                                           "label": "▶️ 想看更多",
                                         //   "uri": "http://123.com",
-                                          "uri": `https://project108405.herokuapp.com/one${pushContent[0]}/${pushContent[1]}`
+                                          "uri": `https://project108405.herokuapp.com/${pushContent[0]}/${pushContent[1]}`
                                         }
                                       ]
                                     }
