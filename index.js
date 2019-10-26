@@ -115,7 +115,7 @@ app.post('/webhook',  function (req, res) {
                 pushContent.push('recommend')
                 pushContent.push(data[10][0].recomNum)
                 pushContent.push(data[10][0].recomHead)
-                let recommendCont = data[10][0].recomCont = data[10][0].recomCont.replace(/<br>/ig, ' ') 
+                let recommendCont = data[10][0].recomCont.replace(/<br>/ig, '') 
                 //有圖片
                 if (recommendCont.match("\\:imgLocation") != null){
                     pushContent.push(recommendCont.replace(/\\:imgLocation/ig, "img")); 
