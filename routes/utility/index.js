@@ -97,7 +97,7 @@ var getIndexData = async function (memID) {
         });
 
     //----------- 取得文章照片 ----------- 
-    await sql('SELECT "artiNum" , "imgName" FROM "image"')
+    await sql('SELECT "artiNum" , "imgName" FROM "image" ORDER BY "imgNum" ')
         .then((data) => {
             if (!data.rows) {
                 articleImgs = undefined;
@@ -109,7 +109,7 @@ var getIndexData = async function (memID) {
         });
     
     //----------- 取得推薦照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image"')
+    await sql('SELECT "recomNum" , "imgName" FROM "image" ORDER BY "imgNum"')
         .then((data) => {
             if (!data.rows) {
                 recommendImgs = undefined;
@@ -163,7 +163,8 @@ var getIndexData = async function (memID) {
     //----------- 正向照片 ----------- 
     await sql('SELECT "imgName" '+
              ' FROM "image" '+
-             ' WHERE "artiNum" = $1',[positiveArticle[0].artiNum])
+             ' WHERE "artiNum" = $1 '+
+             ' ORDER BY "imgNum" ',[positiveArticle[0].artiNum])
     .then((data) => {
         if (!data.rows) {
             positiveImg = undefined;
@@ -177,7 +178,8 @@ var getIndexData = async function (memID) {
     //----------- 負向照片 ----------- 
     await sql('SELECT "imgName" '+
         ' FROM "image" '+
-        ' WHERE "artiNum" = $1',[negativeArticle[0].artiNum])
+        ' WHERE "artiNum" = $1 '+
+        ' ORDER BY "imgNum"',[negativeArticle[0].artiNum])
     .then((data) => {
         if (!data.rows) {
             negativeImg = undefined;

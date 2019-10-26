@@ -45,7 +45,7 @@ var getCollRecommend = async function (memID) {
                     ' IN (SELECT "recomNum" '+
                         ' FROM "memberCollection" '+
                         ' WHERE "memID" = $1 )'+
-              ' ORDER BY "recomNum"', [memID])
+              ' ORDER BY "imgNum"', [memID])
         .then((data) => {
             if (!data.rows){
                 imgs = undefined ;
@@ -177,7 +177,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     //----------- 取得照片 ----------- 
     await sql('SELECT "recomNum" , "imgName" '+
             ' FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NULL'+
-            ' ORDER BY "recomNum"',[recomNum])
+            ' ORDER BY "imgNum"',[recomNum])
     .then((data) => {
         if (!data.rows) {
             imgs = undefined;
@@ -191,7 +191,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     await sql('SELECT "recomNum" , "imgName" '+
               ' FROM "image" '+
               ' WHERE "recomNum" = $1 and "recomMessNum" IS NOT NULL '+
-              ' ORDER BY "recomNum" ',[recomNum])
+              ' ORDER BY "imgNum" ',[recomNum])
     .then((data) => {
         if (!data.rows) {
             replyImgs = undefined;
@@ -286,7 +286,7 @@ var getCollArticle = async function (memID) {
                 ' IN(SELECT "artiNum" '+
                    ' FROM "memberCollection" '+
                    ' WHERE "memID" = $1)'+
-            ' ORDER BY "artiNum"' , [memID])
+            ' ORDER BY "imgNum"' , [memID])
         .then((data) => {
             if (!data.rows) {
                 imgs = undefined ; 
@@ -341,7 +341,7 @@ var getCollRecomClassList = async function (memID, recomClass) {
                 'IN(SELECT "recomNum" '+
                     ' FROM "memberCollection" '+
                     ' WHERE "memID" = $1)'+
-            ' ORDER BY "recomNum"', [memID])
+            ' ORDER BY "imgNum"', [memID])
         .then((data) => {
             if (!data.rows){
                 imgs = undefined ;
@@ -415,7 +415,7 @@ var getCollArtiClassList = async function (memID, artiClass) {
                     'IN(SELECT "artiNum" '+
                       ' FROM "memberCollection" '+
                       ' WHERE "memID" = $1)'+
-             ' ORDER BY "artiNum" ', [memID])
+             ' ORDER BY "imgNum" ', [memID])
         .then((data) => {
         if (!data.rows){
             imgs = undefined ;

@@ -58,7 +58,7 @@ var getArticleList = async function (memID) {
         });
 
     //取得照片
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiMessNum" IS NULL ORDER BY "artiNum"')
+    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiMessNum" IS NULL ORDER BY "imgNum"')
         .then((data) => {
             if (data.rows == null || data.rows == '') {
                 imgs = undefined;
@@ -189,7 +189,7 @@ var getOneArticle = async function (artiNum, memID) {
     await sql('SELECT "artiNum" , "imgName" '+
              ' FROM "image" '+
              ' WHERE "artiNum" = $1 AND "artiMessNum" IS NULL'+
-             ' ORDER BY "artiNum"',[artiNum])
+             ' ORDER BY "imgNum"',[artiNum])
         .then((data) => {
             if (!data.rows) {
                 imgs = undefined;
@@ -269,12 +269,11 @@ var getOneArticle = async function (artiNum, memID) {
         
     }
 
-
     //取得照片
     await sql('SELECT "artiNum" , "imgName" '+
         ' FROM "image" '+ 
         ' WHERE "artiNum" = $1 AND  "artiMessNum" IS NOT NULL'+
-        ' ORDER BY "artiNum"', [artiNum])
+        ' ORDER BY "imgNum"', [artiNum])
         .then((data) => {
             if (!data.rows) {
                 replyImgs = undefined;
@@ -327,7 +326,7 @@ var getOneReply = async function (artiMessNum, memID) {
     await sql('SELECT "artiMessNum" , "imgName" '+
              ' FROM "image" '+
              ' WHERE "artiMessNum" = $1 '+
-             ' ORDER BY "artiMessNum"',[artiMessNum])
+             ' ORDER BY "imgNum"',[artiMessNum])
         .then((data) => {
             if (!data.rows) {
                 replyImgs = undefined;
@@ -417,7 +416,7 @@ var getArticleClassList = async function (articleClass, memID) {
     await sql('SELECT "artiNum" , "imgName" '+
     ' FROM "image" '+
     ' WHERE "artiMessNum" IS NULL '+
-    ' ORDER BY "artiMessNum"')
+    ' ORDER BY "imgNum"')
         .then((data) => {
             if (data.rows == null || data.rows == '') {
                 imgs = undefined;
