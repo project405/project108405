@@ -81,14 +81,16 @@ app.post('/webhook',  function (req, res) {
                 
                 //有圖片
                 if (articleCont.match("\\:imgLocation") != null){
-                    pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
+                    var a ;
+                    // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
+                    a = articleCont.replace(/\\:imgLocation/ig, ' ');
+                    if (a.length >= 70){
+                        pushContent.push(a.slice(0,71)+'...')
+                    }
+                    pushContent.push(a)
                     LinePush.artiImg(data[0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        if (articleCont.length >= 70){
-                            pushContent.pop()
-                            console.log('articleCont.slice(0,71)@@@',articleCont.slice(0,71))
-                            pushContent.push(articleCont.slice(0,71)+'...')
-                        }
+                        
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                             console.log('pushIMG!!!!!!!!',pushImg)
