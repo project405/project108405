@@ -71,7 +71,7 @@ app.post('/webhook',  function (req, res) {
         byClassData.getIndexData().then(data =>{
             console.log(data[10][0])
             var pushContent = [];
-            var pushImg = [];
+            // var pushImg = [];
             //data為文章
             if(data[10][0].recomHead == undefined){
                 
@@ -89,9 +89,10 @@ app.post('/webhook',  function (req, res) {
                         // console.log('~~~secondData',secondData)
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         member.Imgur(img).then(thirdData => {  
-                            console.log('thirdData@@@@@@@@@@@@@@@@@@@',thirdData)
-                            pushImg.push(thirdData);
-                            console.log('pushImg[0]@@@@@@@@@@@@@@@@@@@',pushImg[0]);
+                            // console.log('thirdData@@@@@@@@@@@@@@@@@@@',thirdData)
+                            // pushImg.push(thirdData);
+                            pushContent.push(thirdData)
+                            // console.log('pushImg[0]@@@@@@@@@@@@@@@@@@@',pushImg[0]);
                         }).catch((err)=> {
                             console.log(err)
                         });
@@ -124,9 +125,10 @@ app.post('/webhook',  function (req, res) {
                         // console.log('~~~secondData',secondData)
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         member.Imgur(img).then(thirdData => {  
-                            console.log('thirdData@@@@@@@@@@@@@@@@@@@',thirdData)
-                            pushImg.push(thirdData);
-                            console.log('pushImg[0]@@@@@@@@@@@@@@@@@@@',pushImg[0]);
+                            // console.log('thirdData@@@@@@@@@@@@@@@@@@@',thirdData)
+                            // pushImg.push(thirdData);
+                            pushContent.push(thirdData)
+                            // console.log('pushImg[0]@@@@@@@@@@@@@@@@@@@',pushImg[0]);
                         }).catch((err)=> {
                             console.log(err)
                         });
@@ -149,7 +151,7 @@ app.post('/webhook',  function (req, res) {
              
             console.log('pushContent@@@@@@@',pushContent)
             console.log('pushContent.length@@@@@@@',pushContent.length)
-            console.log('外面的pushImg@@@@@@@',pushImg)
+            // console.log('外面的pushImg@@@@@@@',pushImg)
 
             
             //文章、推薦內容無圖片的推播樣式
