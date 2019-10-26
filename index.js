@@ -71,7 +71,7 @@ app.post('/webhook',  function (req, res) {
         byClassData.getIndexData().then(data =>{
             console.log(data[10][0])
             var pushContent = [];
-            var pushImg ;
+            var pushImg = 0;
             //data為文章
             if(data[10][0].recomHead == undefined){
                 
@@ -116,10 +116,10 @@ app.post('/webhook',  function (req, res) {
                 if (data[10][0].recomCont.match("\\:imgLocation") != null){
                     pushContent.push(data[10][0].recomCont.replace(/\\:imgLocation/ig, "img")); 
                     member.recomImg(data[10][0].recomNum).then(secondData =>{
-                        console.log('~~~secondData',secondData)
+                        // console.log('~~~secondData',secondData)
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         member.Imgur(img).then(thirdData => {  
-                            console.log(thirdData)
+                            // console.log(thirdData)
                             pushImg = thirdData;
                         }).catch((err)=> {
                             console.log(err)
