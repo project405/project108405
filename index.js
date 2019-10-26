@@ -130,7 +130,8 @@ app.post('/webhook',  function (req, res) {
                                                 altText: "相信你會喜歡😎",
                                                 template: {
                                                     type: "buttons",
-                                                    thumbnailImageUrl: `${thirdData}`,
+                                                    // thumbnailImageUrl: `${thirdData}`,
+                                                    thumbnailImageUrl: `https://123.com`,
                                                     imageAspectRatio: "rectangle",
                                                     imageSize: "cover",
                                                     imageBackgroundColor: "#FFFFFF",
@@ -241,7 +242,8 @@ app.post('/webhook',  function (req, res) {
                                                 altText: "相信你會喜歡😎",
                                                 template: {
                                                     type: "buttons",
-                                                    thumbnailImageUrl: `${thirdData}`,
+                                                    // thumbnailImageUrl: `${thirdData}`,
+                                                    thumbnailImageUrl: `https://123.com`,
                                                     imageAspectRatio: "rectangle",
                                                     imageSize: "cover",
                                                     imageBackgroundColor: "#FFFFFF",
