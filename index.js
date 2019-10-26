@@ -116,12 +116,19 @@ app.post('/webhook',  function (req, res) {
                 let recommendCont = data[0].recomCont.replace(/<br>/ig, '') 
                 //有圖片
                 if (recommendCont.match("\\:imgLocation") != null){
-                    pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
+                    var a ;
+                    // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
+                    a = recommendCont.replace(/\\:imgLocation/ig, ' ');
+                    if (a.length >= 70){
+                        pushContent.push(a.slice(0,71)+'...')
+                    }
+                    pushContent.push(a)
+                    // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
                     LinePush.recomImg(data[0].recomNum).then(secondData =>{
-                        if (recommendCont.length >= 70){
-                            pushContent.pop()
-                            pushContent.push(recommendCont.slice(0,71)+'...')
-                        }
+                        // if (recommendCont.length >= 70){
+                        //     pushContent.pop()
+                        //     pushContent.push(recommendCont.slice(0,71)+'...')
+                        // }
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
