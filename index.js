@@ -139,6 +139,7 @@ app.post('/webhook',  function (req, res) {
                 }
             }
              
+            console.log(pushContent)
             //文章、推薦內容無圖片的推播樣式
             function linePush (){
                 request.post({
