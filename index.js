@@ -84,9 +84,10 @@ app.post('/webhook',  function (req, res) {
                     var a ;
                     // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
                     a = articleCont.replace(/\\:imgLocation/ig, ' ');
-                    console.log("長度！！",a.length)
                     if (a.length >= 60){
                         pushContent.push(a.slice(0,61)+'...')
+                        console.log("長度！！",(a.slice(0,61)).length)
+
                     }else{
                         pushContent.push(a)
                     }
@@ -122,9 +123,9 @@ app.post('/webhook',  function (req, res) {
                     var a ;
                     // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
                     a = recommendCont.replace(/\\:imgLocation/ig, ' ');
-                    console.log("長度！！",a.length)
                     if (a.length >= 60){
                         pushContent.push(a.slice(0,61)+'...')
+                        console.log("長度！！",(a.slice(0,61)).length)
                         LinePush.recomImg(data[0].recomNum).then(secondData =>{
                             // if (recommendCont.length >= 60){
                             //     pushContent.pop()
