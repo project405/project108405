@@ -73,22 +73,30 @@ app.post('/webhook',  function (req, res) {
             var pushImg = [];
             //data為文章
             if(data[0].recomHead == undefined){
+                //-------------------------------------------------------------------push-0.1.2
                 pushContent.push('article')
                 pushContent.push(data[0].artiNum)
                 pushContent.push(data[0].artiHead)
                 //處理文章內容
                 let articleCont = data[0].artiCont.replace(/<br>/ig, '') 
-                
+                var a = articleCont.replace(/\\:imgLocation/ig, ' ');
+                if (a.length >= 50){
+                    pushContent.push(a.slice(0,51)+'...')
+                }else{
+                    pushContent.push(a)
+                }
+
+
                 //有圖片
-                if (articleCont.match("\\:imgLocation") != null){
-                    var a ;
-                    // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
-                    a = articleCont.replace(/\\:imgLocation/ig, ' ');
-                    if (a.length >= 50){
-                        pushContent.push(a.slice(0,51)+'...')
-                    }else{
-                        pushContent.push(a)
-                    }
+                if (data[0].artiCont.match("\\:imgLocation") != null){
+                    // var a ;
+                    // // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
+                    // // a = articleCont.replace(/\\:imgLocation/ig, ' ');
+                    // if (a.length >= 50){
+                    //     //-------------------------------------------------------------------push-3
+                    // }else{
+                    //     //-------------------------------------------------------------------push-3
+                    // }
                     
                     LinePush.artiImg(data[0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
@@ -102,16 +110,19 @@ app.post('/webhook',  function (req, res) {
                         });
                     });   
                 }else{
-                    pushContent.push(articleCont); 
-                    if (articleCont.length >= 60){
-                        pushContent.pop()
-                        pushContent.push(articleCont.slice(0,61)+'...')
-                    }
+                    //-------------------------------------------------------------------push-3
+                    // pushContent.push(articleCont); 
+                    // if (articleCont.length >= 60){
+                    //     //-------------------------------------------------------------------pop-3
+                    //     pushContent.pop()
+                    //     //-------------------------------------------------------------------push-3
+                    //     pushContent.push(articleCont.slice(0,61)+'...')
+                    // }
                     linePush();
                 }
             //data為推薦
             }else{
-                
+                //-------------------------------------------------------------------push-0.1.2
                 pushContent.push('oneRecommend')
                 pushContent.push(data[0].recomNum)
                 pushContent.push(data[0].recomHead)
@@ -122,6 +133,7 @@ app.post('/webhook',  function (req, res) {
                     // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
                     a = recommendCont.replace(/\\:imgLocation/ig, ' ');
                     if (a.length >= 50){
+                        //-------------------------------------------------------------------push-3
                         pushContent.push(a.slice(0,51)+'...')
                         
                     }else{
@@ -144,9 +156,12 @@ app.post('/webhook',  function (req, res) {
                     }); 
                 //沒圖片    
                 }else{
+                    //-------------------------------------------------------------------push-3
                     pushContent.push(recommendCont); 
                     if (recommendCont.length >= 60){
+                        //-------------------------------------------------------------------pop-3
                         pushContent.pop()
+                        //-------------------------------------------------------------------push-3
                         pushContent.push(recommendCont.slice(0,61)+'...')
                     }
                     linePush();
