@@ -70,6 +70,16 @@ app.post('/webhook',  function (req, res) {
         });
         byClassData.getIndexData().then(data =>{
             console.log(data[10][0])
+            linePush.artiImg(data[10][0].artiNum).then(secondData =>{
+                console.log('~~~secondData',secondData)
+                // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                // linePush.Imgur(img).then(thirdData => {  
+                //     console.log(thirdData)
+                //     pushImg = thirdData;
+                // }).catch((err)=> {
+                //     console.log(err)
+                // });
+            }); 
             var pushContent = [];
             var pushImg ;
             //data為文章
@@ -80,16 +90,7 @@ app.post('/webhook',  function (req, res) {
                 //有圖片
                 if (data[10][0].artiCont.match("\\:imgLocation") != null){
                     pushContent.push(data[10][0].artiCont.replace(/\\:imgLocation/ig, "img"));
-                    linePush.artiImg(data[10][0].artiNum).then(secondData =>{
-                        console.log('~~~secondData',secondData)
-                        // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        // linePush.Imgur(img).then(thirdData => {  
-                        //     console.log(thirdData)
-                        //     pushImg = thirdData;
-                        // }).catch((err)=> {
-                        //     console.log(err)
-                        // });
-                    });           
+                              
                     // pushContent.push(data[10][0].artiCont); 
                     // pushContent.push('圖片喔！！！'); 
                     if (data[10][0].artiCont.length >= 70){
