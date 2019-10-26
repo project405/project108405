@@ -78,10 +78,12 @@ app.post('/webhook',  function (req, res) {
                 pushContent.push('article')
                 pushContent.push(data[10][0].artiNum)
                 pushContent.push(data[10][0].artiHead)
-                data[10][0].artiCont = data[10][0].artiCont.replace(/<br>/ig, ' ') 
+                //處理文章內容
+                let articleCont = data[10][0].artiCont.replace(/<br>/ig, '') 
+                
                 //有圖片
-                if (data[10][0].artiCont.match("\\:imgLocation") != null){
-                    pushContent.push(data[10][0].artiCont.replace(/\\:imgLocation/ig, "img"));
+                if (articleCont.match("\\:imgLocation") != null){
+                    pushContent.push(articleCont.replace(/\\:imgLocation/ig, "img"));
                     // member.artiImg(data[10][0].artiNum).then(secondData =>{
                     member.artiImg(150).then(secondData =>{
                         // console.log('~~~secondData',secondData)
@@ -94,16 +96,16 @@ app.post('/webhook',  function (req, res) {
                             console.log(err)
                         });
                     });           
-                    if (data[10][0].artiCont.length >= 70){
+                    if (articleCont.length >= 70){
                         pushContent.pop()
-                        pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
+                        pushContent.push(articleCont.slice(0,71)+'...')
                     }
                     linePushPhoto();
                 }else{
-                    pushContent.push(data[10][0].artiCont); 
-                    if (data[10][0].artiCont.length >= 70){
+                    pushContent.push(articleCont); 
+                    if (articleCont.length >= 70){
                         pushContent.pop()
-                        pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
+                        pushContent.push(articleCont.slice(0,71)+'...')
                     }
                     linePush()
                 }
@@ -113,10 +115,10 @@ app.post('/webhook',  function (req, res) {
                 pushContent.push('recommend')
                 pushContent.push(data[10][0].recomNum)
                 pushContent.push(data[10][0].recomHead)
-                data[10][0].recomCont = data[10][0].recomCont.replace(/<br>/ig, ' ') 
+                let recommendCont = data[10][0].recomCont = data[10][0].recomCont.replace(/<br>/ig, ' ') 
                 //有圖片
-                if (data[10][0].recomCont.match("\\:imgLocation") != null){
-                    pushContent.push(data[10][0].recomCont.replace(/\\:imgLocation/ig, "img")); 
+                if (recommendCont.match("\\:imgLocation") != null){
+                    pushContent.push(recommendCont.replace(/\\:imgLocation/ig, "img")); 
                     member.recomImg(21).then(secondData =>{
                     // member.recomImg(data[10][0].recomNum).then(secondData =>{
                         // console.log('~~~secondData',secondData)
@@ -129,17 +131,17 @@ app.post('/webhook',  function (req, res) {
                             console.log(err)
                         });
                     });   
-                    if (data[10][0].recomCont.length >= 70){
+                    if (recommendCont.length >= 70){
                         pushContent.pop()
-                        pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
+                        pushContent.push(recommendCont.slice(0,71)+'...')
                     }
                     linePushPhoto();
                 //沒圖片    
                 }else{
-                    pushContent.push(data[10][0].recomCont); 
-                    if (data[10][0].recomCont.length >= 70){
+                    pushContent.push(recommendCont); 
+                    if (recommendCont.length >= 70){
                         pushContent.pop()
-                        pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
+                        pushContent.push(recommendCont.slice(0,71)+'...')
                     }
                     linePush()
                 }
