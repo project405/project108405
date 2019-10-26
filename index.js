@@ -85,7 +85,7 @@ app.post('/webhook',  function (req, res) {
                         // console.log('~~~secondData',secondData)
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         member.Imgur(img).then(thirdData => {  
-                            // console.log(thirdData)
+                            console.log('thirdData@@@@@@@@@@@@@@@@@@@',thirdData)
                             pushImg.push(thirdData);
                         }).catch((err)=> {
                             console.log(err)
@@ -117,7 +117,7 @@ app.post('/webhook',  function (req, res) {
                         // console.log('~~~secondData',secondData)
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         member.Imgur(img).then(thirdData => {  
-                            // console.log(thirdData)
+                            console.log('thirdData@@@@@@@@@@@@@@@@@@@',thirdData)
                             pushImg.push(thirdData);
                         }).catch((err)=> {
                             console.log(err)
