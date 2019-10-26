@@ -120,7 +120,7 @@ app.post('/webhook',  function (req, res) {
                     pushContent.push(a)
                 }
                 //有圖片
-                if (recommendCont.match("\\:imgLocation") != null){
+                if (data[0].recomCont.match("\\:imgLocation") != null){
                     
                     // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
                     LinePush.recomImg(data[0].recomNum).then(secondData =>{
