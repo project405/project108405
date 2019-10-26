@@ -89,11 +89,7 @@ app.post('/webhook',  function (req, res) {
                         // console.log('~~~secondData',secondData)
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         member.Imgur(img).then(thirdData => {  
-                            // console.log('thirdData@@@@@@@@@@@@@@@@@@@',thirdData)
-                            // pushImg.push(thirdData);
-                            // pushContent.push(thirdData)
                             pushImg.push(thirdData);
-                            // console.log('pushImg[0]@@@@@@@@@@@@@@@@@@@',pushImg[0]);
                             if (articleCont.length >= 70){
                                 pushContent.pop()
                                 pushContent.push(articleCont.slice(0,71)+'...')
@@ -103,8 +99,7 @@ app.post('/webhook',  function (req, res) {
                         }).catch((err)=> {
                             console.log(err)
                         });
-                    });           
-                    
+                    });   
                 }else{
                     pushContent.push(articleCont); 
                     if (articleCont.length >= 70){
@@ -116,7 +111,7 @@ app.post('/webhook',  function (req, res) {
             //data為推薦
             }else{
                 
-                pushContent.push('recommend')
+                pushContent.push('Recommend')
                 pushContent.push(data[10][0].recomNum)
                 pushContent.push(data[10][0].recomHead)
                 let recommendCont = data[10][0].recomCont.replace(/<br>/ig, '') 
@@ -124,14 +119,9 @@ app.post('/webhook',  function (req, res) {
                 if (recommendCont.match("\\:imgLocation") != null){
                     pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
                     member.recomImg(data[10][0].recomNum).then(secondData =>{
-                    // member.recomImg(data[10][0].recomNum).then(secondData =>{
-                        // console.log('~~~secondData',secondData)
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         member.Imgur(img).then(thirdData => {  
-                            // console.log('thirdData@@@@@@@@@@@@@@@@@@@',thirdData)
                             pushImg.push(thirdData);
-                            // pushContent.push(thirdData)
-                            // console.log('pushImg[0]@@@@@@@@@@@@@@@@@@@',pushImg[0]);
                             if (recommendCont.length >= 70){
                                 pushContent.pop()
                                 pushContent.push(recommendCont.slice(0,71)+'...')
@@ -154,8 +144,6 @@ app.post('/webhook',  function (req, res) {
              
             console.log('外面pushContent@@@@@@@',pushContent)
             console.log('外面pushContent.length@@@@@@@',pushContent.length)
-
-            
             //文章、推薦內容無圖片的推播樣式
             function linePush (){
                 request.post({
@@ -187,9 +175,8 @@ app.post('/webhook',  function (req, res) {
                                         {
                                           "type": "uri",
                                           "label": "▶️ 想看更多",
-                                          "uri": "http://123.com",
-                                        //   "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
-                                        
+                                        //   "uri": "http://123.com",
+                                          "uri": `https://project108405.herokuapp.com/one${pushContent[0]}/${pushContent[1]}`
                                         }
                                       ]
                                     }
@@ -252,7 +239,7 @@ app.post('/webhook',  function (req, res) {
                                         {
                                           "type": "uri",
                                           "label": "▶️ 想看更多",
-                                          "uri": "https://123.com"
+                                          "uri": `https://project108405.herokuapp.com/oneRecommend/${data[3][0].recomNum}`
                                         //   "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
                                         }
                                       ]
@@ -263,7 +250,6 @@ app.post('/webhook',  function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "buttons",
-                                        // thumbnailImageUrl: `${pushImg[0]}`,
                                         thumbnailImageUrl: `${pushImg[0]}`,
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
