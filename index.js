@@ -74,7 +74,7 @@ app.post('/webhook',  function (req, res) {
             var pushImg ;
             //data為文章
             if(data[10][0].recomHead == undefined){
-                linePush.artiImg(data[10][0].artiNum).then(secondData =>{
+                member.artiImg(data[10][0].artiNum).then(secondData =>{
                     console.log('~~~secondData',secondData)
                     // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                     // linePush.Imgur(img).then(thirdData => {  
@@ -108,7 +108,7 @@ app.post('/webhook',  function (req, res) {
                 }
             //data為推薦
             }else{
-                linePush.recomImg(data[10][0].recomNum).then(secondData =>{
+                member.recomImg(data[10][0].recomNum).then(secondData =>{
                     console.log('~~~secondData',secondData)
                     // var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                     // linePush.Imgur(img).then(thirdData => {  
