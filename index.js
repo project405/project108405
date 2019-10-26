@@ -83,7 +83,7 @@ app.post('/webhook',  function (req, res) {
                 
                 //有圖片
                 if (articleCont.match("\\:imgLocation") != null){
-                    pushContent.push(articleCont.replace(/\\:imgLocation/ig, "img"));
+                    pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
                     // member.artiImg(data[10][0].artiNum).then(secondData =>{
                     member.artiImg(data[10][0].artiNum).then(secondData =>{
                         // console.log('~~~secondData',secondData)
@@ -122,7 +122,7 @@ app.post('/webhook',  function (req, res) {
                 let recommendCont = data[10][0].recomCont.replace(/<br>/ig, '') 
                 //有圖片
                 if (recommendCont.match("\\:imgLocation") != null){
-                    pushContent.push(recommendCont.replace(/\\:imgLocation/ig, "img")); 
+                    pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
                     member.recomImg(data[10][0].recomNum).then(secondData =>{
                     // member.recomImg(data[10][0].recomNum).then(secondData =>{
                         // console.log('~~~secondData',secondData)
