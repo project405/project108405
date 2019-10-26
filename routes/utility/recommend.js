@@ -8,24 +8,39 @@ var moment = require('moment');
 //=========================================
 //---------  getRecommendList() -----------
 //=========================================
-var getRecommendList = async function (memID) {
+var getRecommendList = async function (memID, recomPage) {
     var recommendList = [];
     var checkAuthority;
     var imgs = [] ; 
     var result = [];
+    var recommendSum;
+    console.log(recomPage,recomPage,recomPage,recomPage,recomPage)
     // -----------  取得推薦清單 --------------
     await sql('SELECT * ' +
               'FROM "recommendListDataView"' +
-              'ORDER BY "recommendListDataView"."recomNum" DESC')
+              'ORDER BY "recommendListDataView"."recomNum" DESC' +
+              ' LIMIT 8' +
+              ' OFFSET $1', [(recomPage-1) * 8])
         .then((data) => {
+            console.log(data)
             if (data.rows != undefined) {
                 recommendList = data.rows
             } else {
                 recommendList = undefined
             }
         }, (error) => {
+            console.log(error)
             recommendList = undefined;
         });
+    
+    await sql('SELECT COUNT(*) ' +
+              'FROM "recommendListDataView"')
+        .then((data) => {
+            recommendSum = data.rows;
+        }, (error) => {
+            console.log(error)
+            recommendSum = undefined;
+        })
 
     //取得權限
     await member.checkAuthority(memID).then(data => {
@@ -48,12 +63,15 @@ var getRecommendList = async function (memID) {
             imgs = data.rows;
         }
     }, (error) => {
+        console.log(error)
         imgs = undefined;
     });
     result[0] = recommendList;
     result[1] = [memID];
     result[2] = checkAuthority;
     result[3] = imgs ;
+    result[4] = recommendSum ;
+    result[5] = [recomPage] ;
     return result;
 }
 
@@ -307,16 +325,20 @@ var getOneRecommendReply = async function (recomMessNum, memID) {
 //---- getRecomClassList () ----
 //==============================
 //---------  getRecomClassList() -------------
-var getRecomClassList = async function (recomClass,memID) {
+var getRecomClassList = async function (recomClass, memID, recomPage) {
     var recommendData = [];
     var checkAuthority;
     var imgs = [] ;
     var result = [];
+    var recomSum;
+
     // -----------  取得文章清單 --------------
     await sql('SELECT *' +
               'FROM "recommendListDataView"'+
               'WHERE "recomClass" = $1' + 
-              'ORDER BY "recommendListDataView"."recomNum" DESC', [recomClass])
+              'ORDER BY "recommendListDataView"."recomNum" DESC' +
+              ' LIMIT 8' +
+              ' OFFSET $2', [recomClass, (recomPage-1)*8])
         .then((data) => {
           if(!data.rows){
             recommendData = undefined ;
@@ -326,6 +348,15 @@ var getRecomClassList = async function (recomClass,memID) {
         }, (error) => {
             recommendData = undefined ;
         });
+
+    await sql('SELECT COUNT(*) ' +
+              'FROM "recommendListDataView"' +
+              'WHERE "recomClass" = $1' , [recomClass])
+    .then((data) => {
+        recomSum = data.rows;
+    }, (error) => {
+        recomSum = undefined;
+    })
 
     //取得權限
     await member.checkAuthority(memID).then(data => {
@@ -354,6 +385,9 @@ var getRecomClassList = async function (recomClass,memID) {
     result[1] = [memID];
     result[2] = checkAuthority;
     result[3] = imgs ; 
+    result[4] = recomSum;
+    result[5] = [recomPage];
+
 
     return result;
 }

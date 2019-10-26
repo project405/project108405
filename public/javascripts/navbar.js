@@ -26,7 +26,7 @@ $(document).ready(() => {
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/recommendlist">\
-                                推薦</a>\
+                                官方推薦</a>\
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/articleList">\
@@ -116,7 +116,7 @@ $(document).ready(() => {
                         <li class="nav-item">\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/recommendlist">\
-                                推薦</a>\
+                                官方推薦</a>\
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/articleList">\
@@ -255,7 +255,7 @@ $(document).ready(() => {
                         </li>\
                         <li class="nav-item">\
                             <a class="nav-link" href="/recommendlist">\
-                            推薦</a>\
+                            官方推薦</a>\
                         </li>\
                         <li class="nav-item">\
                             <a class="nav-link" href="/articleList">\
