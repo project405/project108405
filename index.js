@@ -213,7 +213,7 @@ app.post('/webhook',  function (req, res) {
                 });
             }
             //文章、推薦內容有圖片的推播樣式 
-            function linePushPhoto(s){
+            function linePushPhoto(pushImg){
                 console.log('推播圖片裡的＠＠pushImg[0]',pushImg[0])
                 console.log('推播圖片裡的＠＠s',s)
                 request.post({
@@ -255,7 +255,7 @@ app.post('/webhook',  function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "buttons",
-                                        thumbnailImageUrl: `${s[0]}`,
+                                        thumbnailImageUrl: `${pushImg[0]}`,
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
