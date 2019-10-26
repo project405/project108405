@@ -85,7 +85,7 @@ app.post('/webhook',  function (req, res) {
                 if (articleCont.match("\\:imgLocation") != null){
                     pushContent.push(articleCont.replace(/\\:imgLocation/ig, "img"));
                     // member.artiImg(data[10][0].artiNum).then(secondData =>{
-                    member.artiImg(150).then(secondData =>{
+                    member.artiImg(data[10][0].artiNum).then(secondData =>{
                         // console.log('~~~secondData',secondData)
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         member.Imgur(img).then(thirdData => {  
@@ -120,7 +120,7 @@ app.post('/webhook',  function (req, res) {
                 //有圖片
                 if (recommendCont.match("\\:imgLocation") != null){
                     pushContent.push(recommendCont.replace(/\\:imgLocation/ig, "img")); 
-                    member.recomImg(21).then(secondData =>{
+                    member.recomImg(data[10][0].recomNum).then(secondData =>{
                     // member.recomImg(data[10][0].recomNum).then(secondData =>{
                         // console.log('~~~secondData',secondData)
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
@@ -256,7 +256,7 @@ app.post('/webhook',  function (req, res) {
                                     template: {
                                         type: "buttons",
                                         // thumbnailImageUrl: `${pushImg[0]}`,
-                                        thumbnailImageUrl: `${pushImg[0]}`,
+                                        thumbnailImageUrl: `${pushContent[4]}`,
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
