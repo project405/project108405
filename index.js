@@ -64,9 +64,9 @@ app.post('/webhook',  function (req, res) {
 
         var p = allUserLineID.map(item => {
             console.log('item!!', item)
-            // console.log('item.allUserLineID!!!',item.allUserLineID)
+            // console.log('item!!!',item)
             //---------------
-        LinePush.getIndexData(item.allUserLineID).then(data =>{
+        LinePush.getIndexData(item).then(data =>{
             console.log(data[0].artiNum)
             console.log(data[0].recomNum)
             var pushContent = [];
@@ -156,7 +156,7 @@ app.post('/webhook',  function (req, res) {
                     body: JSON.stringify({
                         //to給資料庫有的使用者
                         // to: allUserLineID,
-                        to: item.allUserLineID,
+                        to: item,
                             messages: [
                                 {
                                     "type": "template",
@@ -219,7 +219,7 @@ app.post('/webhook',  function (req, res) {
                     body: JSON.stringify({
                         //to給資料庫有的使用者
                         // to: allUserLineID,
-                        to: item.allUserLineID,
+                        to: item,
                             messages: [
                                 {
                                     "type": "template",
