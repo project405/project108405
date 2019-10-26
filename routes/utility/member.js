@@ -1021,20 +1021,70 @@ var getMemberInfor = async function (memID) {
 
     return result;
 }
-var bestReply = async function (memID) {
+
+//=========================================
+//--------------  getBestReply() --------
+//=========================================
+var getBestReply = async function (month,memID) {
+    var recommendData= [] ;
+    var recomNum = [] ;
     var result = [];
-    var checkAuthority;
-    await sql('SELECT * FROM "recommend" WHERE "memID"=$1', [memID])
+
+    //先找Like數max值，再撈出所有like數 = max 的所有留言編號 ，再根據所有留言編號找到推薦文章
+    await sql('SELECT * '+
+            ' FROM "recommend" '+
+            ' WHERE "recomNum"'+ 
+            ' IN ( '+
+                ' SELECT "recomNum" '+
+                ' FROM "recommendMessage" '+
+                ' WHERE "recomMessNum" '+
+                ' IN (SELECT "recomMessNum" '+
+                    ' FROM "recommendMessageLike" '+
+                    ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
+                    ' GROUP BY "recomMessNum", "memID" '+
+                    ' HAVING COUNT("recomMessNum") '+ 
+                        ' IN( SELECT  COUNT("recomMessNum") '+
+                            ' FROM "recommendMessageLike" '+
+                            ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
+                            ' GROUP BY "recomMessNum" ,"memID" '+
+                            ' ORDER BY "count" DESC '+
+                            ' LIMIT 1 ) '+
+                            ' ) '+
+                ')', [month])
         .then((data) => {
-            for (let i = 0; i < data.rows.length; i++) {
-                data.rows[i].memMessDateTime = moment(data.rows[i].memMessDateTime).format("YYYY-MM-DD hh:mm:ss");
+            if (!data.rows) {
+                recommendData = undefined;
+            } else {
+                recommendData = data.rows;
             }
-            result.push(data.rows);
         }, (error) => {
-            result = null;
+            recommendData = null;
         });
 
-    result.push([memID]);
+    //先找Like數max值，再撈出所有like數 = max 的所有留言編號 跟留言的人
+    await sql('SELECT "recomMessNum", "memID" '+
+            ' FROM "recommendMessageLike" '+
+            ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
+            ' GROUP BY "recomMessNum", "memID" '+
+            ' HAVING COUNT("recomMessNum") '+ 
+                ' IN( SELECT  COUNT("recomMessNum") '+
+                    ' FROM "recommendMessageLike" '+
+                    ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
+                    ' GROUP BY "recomMessNum"	,"memID" '+
+                    ' ORDER BY "count" DESC '+
+                    ' LIMIT 1 )',[month]) 
+            .then((data) => {
+                if (!data.rows) {
+                    recomNum = undefined;
+                } else {
+                    recomNum = data.rows;
+                }
+            }, (error) => {
+                recomNum = null;
+            });
+    console.log(recomNum);
+    result[0] = recommendData ;
+    result[1] = recomNum ; 
 
     return result;
 }
@@ -1048,6 +1098,6 @@ module.exports = {
     addRecommendMessLike, delRecommendMessLike,
     report, checkAuthority, editArticle, deleteArticle, deleteRecommend, editReply, deleteReply, 
     memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
-    editRecommendReply, editRecommend, bestReply
+    editRecommendReply, editRecommend, getBestReply
 
 };

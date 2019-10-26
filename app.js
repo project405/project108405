@@ -45,6 +45,7 @@ var addLikeRouter = require('./routes/member/addLike');
 var delLikeRouter = require('./routes/member/delLike');
 var reportRouter = require('./routes/member/report');
 var replyPostRouter = require('./routes/member/replyPost');
+var bestReplyRouter = require('./routes/member/bestReply')
 
 // ---------------  four Class -------------------
 var myMovieArticleRouter = require('./routes/member/myMovieArticle');
@@ -191,6 +192,7 @@ app.use('/notify', notifyRouter);
 app.use('/addLike', addLikeRouter);
 app.use('/delLike', delLikeRouter);
 app.use('/report', reportRouter);
+app.use('/bestReply', bestReplyRouter);
 
 // -------------- four Class use----------------
 app.use('/articleManage/movie', myMovieArticleRouter);

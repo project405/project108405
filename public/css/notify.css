@@ -57,7 +57,3 @@ body>div.container.table>table>tbody>tr>td {
 .center {
     text-align: center;
 }
-
-tr:hover {
-    cursor: pointer;
-}
