@@ -667,3 +667,10 @@ i.fa-comment-dots:hover {
 .swal-button:hover {
     background-color: rgb(101, 108, 97) !important;
 }
+
+.page-link {
+    color: #2D4F41;
+}
+.page-link:hover {
+    color: #2D4F41;
+}

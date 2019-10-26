@@ -221,6 +221,19 @@
                     <!-- listEnd -->
                 </div>
             </div>
+            <nav aria-label="Page navigation example" style="margin-bottom: 4em;">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item previous">
+                    <a class="page-link" href="#/" onclick="location.href=`/articleList/${pagePrevious}`" tabindex="-1" aria-disabled="true"><i class="fas fa-chevron-left"></i></a>
+                  </li>
+                  <% for(var j = 1 ; j <= items[6][0].count ; j++) {%>
+                    <li class="page-item"><a class="page-link" href="/articleList/<%=j%>"><%=j%></a></li>
+                  <% } %>
+                  <li class="page-item next">
+                    <a class="page-link" href="#/" onclick="location.href=`/articleList/${pageNext}`"><i class="fas fa-chevron-right"></i></a>
+                  </li>
+                </ul>
+              </nav>
     </section>
 
     <!-- 文章列表區塊結束 -->
@@ -247,6 +260,27 @@
     <script src="/javascripts/navbar.js"></script>
       <!-- 收藏 ajax script -->
       <script>
+        var pagePrevious = parseInt('<%= items[7][0]%>')-1
+        var pageNext = parseInt('<%= items[7][0]%>')+1
+        if (pagePrevious == 0) {
+             $('.previous').addClass('disabled')
+        } else {
+            $('.previous').remove('disabled')
+        }
+        if ('<%= items[6][0].count%>' == '<%= items[7][0]%>') {
+            $('.next').addClass('disabled')
+        } else {
+            $('.next').remove('disabled')
+        }
+        Array.from($('.pagination').find('.page-link')).map((item) => {
+            if (item.innerText == '<%= items[7][0]%>') {
+                item.parentElement.classList.add('disabled')
+            }
+        })
+        Array.from($('.page-link').parent('li.disabled')).map((item) => {
+            item.children[0].style.color = "#d9d9d9"
+        })
+        
         $('button').click(function() {
             if ($(this).children('.fa-gratipay').length > 0) {
                 $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
