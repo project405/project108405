@@ -120,7 +120,7 @@ app.post('/webhook',  function (req, res) {
                                                     "imageSize": "cover",
                                                     "imageBackgroundColor": "#FFFFFF",
                                                     "title": "recommend post test score2",
-                                                    "text": "零鎮親說發推薦有問題我來試試看 123213213       ",
+                                                    "text": "零鎮親說發推薦有問題我來試試看",
                                                     "defaultAction": {
                                                         "type": "uri",
                                                         "label": "View detail",
@@ -262,7 +262,7 @@ app.post('/webhook',  function (req, res) {
                                                     "imageSize": "cover",
                                                     "imageBackgroundColor": "#FFFFFF",
                                                     "title": "recommend post test score2",
-                                                    "text": "零鎮親說發推薦有問題我來試試看 123213213       ",
+                                                    "text": "零鎮親說發推薦有問題我來試試看",
                                                     "defaultAction": {
                                                         "type": "uri",
                                                         "label": "View detail",
