@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(cors())
 
 const LinePush = require('./utility/LinePush');
-const byClassData = require('./utility/index');
+// const byClassData = require('./utility/index');
 
 //----------------------------------------
 // 填入自己在Line Developers的channel值
@@ -56,15 +56,13 @@ var server = app.listen(process.env.PORT || 3000, function() {
 app.post('/webhook',  function (req, res) {
     
     let allUserLineID = [];
-    let allUserMemID =[];
     LinePush.AllMember().then(data => {  
         data.forEach(item => {
             allUserLineID.push(item.lineID);
-            allUserMemID.push(item.memID);
             console.log('allUserLineID',allUserLineID)
-            console.log('allUserMemID',allUserMemID)
         });
-        byClassData.getIndexData().then(data =>{
+        LinePush.getIndexData(allUserLineID[0]).then(data =>{
+            console.log(data)
             var pushContent = [];
             var pushImg = [];
             //data為文章
