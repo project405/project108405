@@ -79,7 +79,8 @@ app.post('/webhook',  function (req, res) {
                 pushContent.push(data[10][0].artiHead)
                 //有圖片
                 if (data[10][0].artiCont.match("\\:imgLocation") != null){
-                    pushContent.push(data[10][0].artiCont.replace(/\\:imgLocation/ig, "img")); 
+                    // pushContent.push(data[10][0].artiCont.replace(/\\:imgLocation/ig, "img")); 
+                    pushContent.push(data[10][0].artiCont.replace('\\:imgLocation', "img")); 
                     // pushContent.push(data[10][0].artiCont); 
                     // pushContent.push('圖片喔！！！'); 
                     if (data[10][0].artiCont.length >= 70){
