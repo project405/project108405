@@ -11,16 +11,12 @@ const request = require('request');
 
 const app = express();
 var cors = require('cors')
-// var corsOptions = {
-//     origin: 'http://localhost:3000/',
-//     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// }
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors())
 
 const LinePush = require('./utility/LinePush');
-// const byClassData = require('./utility/index');
 
 //----------------------------------------
 // 填入自己在Line Developers的channel值
@@ -81,22 +77,15 @@ app.post('/webhook',  function (req, res) {
                 let articleCont = data[0].artiCont.replace(/<br>/ig, '') 
                 var a = articleCont.replace(/\\:imgLocation/ig, ' ');
                 if (a.length >= 50){
+                    //-------------------------------------------------------------------push-3
                     pushContent.push(a.slice(0,51)+'...')
                 }else{
+                    //-------------------------------------------------------------------push-3
                     pushContent.push(a)
                 }
-
-
                 //有圖片
                 if (data[0].artiCont.match("\\:imgLocation") != null){
-                    // var a ;
-                    // // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
-                    // // a = articleCont.replace(/\\:imgLocation/ig, ' ');
-                    // if (a.length >= 50){
-                    //     //-------------------------------------------------------------------push-3
-                    // }else{
-                    //     //-------------------------------------------------------------------push-3
-                    // }
+                    
                     LinePush.artiImg(data[0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         
@@ -111,14 +100,7 @@ app.post('/webhook',  function (req, res) {
                     }); 
                       
                 }else{
-                    //-------------------------------------------------------------------push-3
-                    // pushContent.push(articleCont); 
-                    // if (articleCont.length >= 60){
-                    //     //-------------------------------------------------------------------pop-3
-                    //     pushContent.pop()
-                    //     //-------------------------------------------------------------------push-3
-                    //     pushContent.push(articleCont.slice(0,61)+'...')
-                    // }
+                    
                     linePush();
                 }
             //data為推薦
@@ -127,25 +109,22 @@ app.post('/webhook',  function (req, res) {
                 pushContent.push('oneRecommend')
                 pushContent.push(data[0].recomNum)
                 pushContent.push(data[0].recomHead)
-                let recommendCont = data[0].recomCont.replace(/<br>/ig, '') 
+                //處理推薦內容 
+                let recommendCont = data[0].recomCont.replace(/<br>/ig, '')
+                var a = recommendCont.replace(/\\:imgLocation/ig, ' ');
+                if (a.length >= 50){
+                    //-------------------------------------------------------------------push-3
+                    pushContent.push(a.slice(0,51)+'...')
+                }else{
+                    //-------------------------------------------------------------------push-3
+                    pushContent.push(a)
+                }
                 //有圖片
                 if (recommendCont.match("\\:imgLocation") != null){
-                    var a ;
-                    // pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
-                    a = recommendCont.replace(/\\:imgLocation/ig, ' ');
-                    if (a.length >= 50){
-                        //-------------------------------------------------------------------push-3
-                        pushContent.push(a.slice(0,51)+'...')
-                        
-                    }else{
-                        pushContent.push(a)
-                    }
+                    
                     // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
                     LinePush.recomImg(data[0].recomNum).then(secondData =>{
-                        // if (recommendCont.length >= 60){
-                        //     pushContent.pop()
-                        //     pushContent.push(recommendCont.slice(0,61)+'...')
-                        // }
+                        
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
@@ -158,13 +137,13 @@ app.post('/webhook',  function (req, res) {
                 //沒圖片    
                 }else{
                     //-------------------------------------------------------------------push-3
-                    pushContent.push(recommendCont); 
-                    if (recommendCont.length >= 60){
-                        //-------------------------------------------------------------------pop-3
-                        pushContent.pop()
-                        //-------------------------------------------------------------------push-3
-                        pushContent.push(recommendCont.slice(0,61)+'...')
-                    }
+                    // pushContent.push(recommendCont); 
+                    // if (recommendCont.length >= 60){
+                    //     //-------------------------------------------------------------------pop-3
+                    //     pushContent.pop()
+                    //     //-------------------------------------------------------------------push-3
+                    //     pushContent.push(recommendCont.slice(0,61)+'...')
+                    // }
                     linePush();
                 }
             }
