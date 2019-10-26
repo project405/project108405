@@ -36,6 +36,7 @@ bot.on('postback', function(event) {
             const userId = profile.userId;
             const data = event.postback.data;
             console.log("postback 資料",data)
+            console.log("userId",userId)
             //------------------------------------------------
             //----------------未綁定Line_id用戶-----------------
             //------------------------------------------------
@@ -158,7 +159,7 @@ bot.on('postback', function(event) {
                         event.reply(myLineTemplate)
                     }
                 })
-            }else if (data.match("recommend")){
+            }else if (data.match("oneRecommend")){
                 login.userJudgeBind(userId).then(d =>{
                     if(d.length !== 0){                         
                         if(d[0].lineID == userId){
@@ -422,19 +423,6 @@ bot.on('message', function(event) {
             var bookNum = data[2][0].recomNum;
             var exhibitionNum = data[3][0].recomNum;
 
-
-            linePush.recomImg(movieNum).then(data =>{
-                
-                var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
-            
-                linePush.Imgur(img).then(data => {  
-                    console.log(data)
-                }).catch((err)=> {
-                    // 失敗訊息 (立即)
-                    console.log(err)
-                });
-            });  
-
             event.reply({
                 "type": "template",
                 "altText": " 👋 本週新推薦",
@@ -542,7 +530,6 @@ bot.on('message', function(event) {
     }
     //-----------心情推薦-----------
     if (text == "情緒專區"){
-        
             event.reply({
                 "type": "template",
                 "altText": "文藝富心",
@@ -557,7 +544,7 @@ bot.on('message', function(event) {
                           "defaultAction": {
                               "type": "uri",
                               "label": "詳細資料",
-                              "uri": "http://weiting.nctu.me/"
+                              "uri": "https://project108405.herokuapp.com/"
                           },
                           "actions": [
                               {
@@ -568,7 +555,7 @@ bot.on('message', function(event) {
                               {
                                   "type": "uri",
                                   "label": "自行探索",
-                                  "uri": "http://weiting.nctu.me/"
+                                  "uri": "https://project108405.herokuapp.com/"
                               }
                           ]
                         },
@@ -580,7 +567,7 @@ bot.on('message', function(event) {
                           "defaultAction": {
                               "type": "uri",
                               "label": "詳細資料",
-                              "uri": "http://weiting.nctu.me/"
+                              "uri": "https://project108405.herokuapp.com/"
                           },
                           "actions": [
                             {
@@ -591,7 +578,7 @@ bot.on('message', function(event) {
                             {
                                 "type": "uri",
                                 "label": "自行探索",
-                                "uri": "http://weiting.nctu.me/"
+                                "uri": "https://project108405.herokuapp.com/"
                             }
                           ]
                         }
@@ -608,13 +595,7 @@ bot.on('message', function(event) {
                 "text": "我不是很了解你的意思\n請透過圖文選單與我們溝通👋"
             }            
         )
-        // event.reply(
-        //     {
-        //         "type": "sticker",
-        //         "packageId": "11539",
-        //         "stickerId": "52114136"
-        //     }
-        // )
+
     }
     console.log('使用者傳來的文字',text);
 
