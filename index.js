@@ -250,7 +250,7 @@ app.post('/webhook',  function (req, res) {
                                     template: {
                                         type: "buttons",
                                         // thumbnailImageUrl: `${pushImg[0]}`,
-                                        thumbnailImageUrl: pushImg[0],
+                                        thumbnailImageUrl: '"'+`${pushImg[0]}`+'"',
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
