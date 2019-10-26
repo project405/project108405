@@ -123,24 +123,52 @@ app.post('/webhook',  function (req, res) {
                     a = recommendCont.replace(/\\:imgLocation/ig, ' ');
                     if (a.length >= 50){
                         pushContent.push(a.slice(0,51)+'...')
+                        LinePush.recomImg(data[0].recomNum).then(secondData =>{
+                            // if (recommendCont.length >= 60){
+                            //     pushContent.pop()
+                            //     pushContent.push(recommendCont.slice(0,61)+'...')
+                            // }
+                            var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                            LinePush.Imgur(img).then(thirdData => {  
+                                pushImg.push(thirdData);
+                                console.log('pushIMG!!!!!!!!',pushImg)                            
+                                linePushPhoto(pushImg);
+                            }).catch((err)=> {
+                                console.log(err)
+                            });
+                        }); 
                     }else{
                         pushContent.push(a)
+                        LinePush.recomImg(data[0].recomNum).then(secondData =>{
+                            // if (recommendCont.length >= 60){
+                            //     pushContent.pop()
+                            //     pushContent.push(recommendCont.slice(0,61)+'...')
+                            // }
+                            var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                            LinePush.Imgur(img).then(thirdData => {  
+                                pushImg.push(thirdData);
+                                console.log('pushIMG!!!!!!!!',pushImg)                            
+                                linePushPhoto(pushImg);
+                            }).catch((err)=> {
+                                console.log(err)
+                            });
+                        }); 
                     }
                     // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
-                    LinePush.recomImg(data[0].recomNum).then(secondData =>{
-                        // if (recommendCont.length >= 60){
-                        //     pushContent.pop()
-                        //     pushContent.push(recommendCont.slice(0,61)+'...')
-                        // }
-                        var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        LinePush.Imgur(img).then(thirdData => {  
-                            pushImg.push(thirdData);
-                            console.log('pushIMG!!!!!!!!',pushImg)                            
-                            linePushPhoto(pushImg);
-                        }).catch((err)=> {
-                            console.log(err)
-                        });
-                    }); 
+                    // LinePush.recomImg(data[0].recomNum).then(secondData =>{
+                    //     // if (recommendCont.length >= 60){
+                    //     //     pushContent.pop()
+                    //     //     pushContent.push(recommendCont.slice(0,61)+'...')
+                    //     // }
+                    //     var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                    //     LinePush.Imgur(img).then(thirdData => {  
+                    //         pushImg.push(thirdData);
+                    //         console.log('pushIMG!!!!!!!!',pushImg)                            
+                    //         linePushPhoto(pushImg);
+                    //     }).catch((err)=> {
+                    //         console.log(err)
+                    //     });
+                    // }); 
                 //沒圖片    
                 }else{
                     pushContent.push(recommendCont); 
