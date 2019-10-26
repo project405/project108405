@@ -74,7 +74,7 @@ app.post('/webhook',  function (req, res) {
                 pushContent.push(data[0].artiNum)
                 pushContent.push(data[0].artiHead)
                 //處理文章內容
-                let articleCont = data[0].artiCont.replace(/<br>/ig, '') 
+                let articleCont = data[0].artiCont.replace(/<br>/ig, ' ') 
                 var a = articleCont.replace(/\\:imgLocation/ig, ' ');
                 if (a.length >= 50){
                     //-------------------------------------------------------------------push-3
@@ -112,50 +112,80 @@ app.post('/webhook',  function (req, res) {
                                         messages: [
                                             {
                                                 "type": "template",
-                                                "altText": "相信你會喜歡😎",
+                                                "altText": "This is a buttons template",
                                                 "template": {
-                                                  "type": "buttons",
-                                                  "text": "【文藝富心】小驚喜 🎉\n對於以下推薦有興趣可至文藝富心官網看更多\n立即點選「喜歡」或「不喜歡」讓我們更了解你💞",
-                                                  "actions": [
-                                                    {
-                                                      "type": "uri",
-                                                      "label": "▶️ 想看更多",
-                                                      "uri": `https://project108405.herokuapp.com/${pushContent[0]}/${pushContent[1]}`
-                                                    }
-                                                  ]
-                                                }
-                                            },
-                                            {
-                                                type: "template",
-                                                altText: "相信你會喜歡😎",
-                                                template: {
-                                                    type: "buttons",
-                                                    // thumbnailImageUrl: `${thirdData}`,
-                                                    thumbnailImageUrl: `https://i.imgur.com/OIiSIdb.jpg`,
-                                                    imageAspectRatio: "rectangle",
-                                                    imageSize: "cover",
-                                                    imageBackgroundColor: "#FFFFFF",
-                                                    title: `${pushContent[2]}`,
-                                                    text: `${pushContent[3]}`,
-                                                    defaultAction: {
+                                                    "type": "buttons",
+                                                    "thumbnailImageUrl": "https://i.imgur.com/O9syBO0.jpg",
+                                                    "imageAspectRatio": "rectangle",
+                                                    "imageSize": "cover",
+                                                    "imageBackgroundColor": "#FFFFFF",
+                                                    "title": "recommend post test score2",
+                                                    "text": "零鎮親說發推薦有問題我來試試看 123213213       ",
+                                                    "defaultAction": {
                                                         "type": "uri",
                                                         "label": "View detail",
                                                         "uri": "http://example.com/page/123"
                                                     },
-                                                    actions: [
-                                                        {  
-                                                            "type":"postback",
-                                                            "label":"我喜歡",
-                                                            "data":`${pushContent[0]}`+`${pushContent[1]}`
+                                                    "actions": [
+                                                        {
+                                                          "type": "postback",
+                                                          "label": "Buy",
+                                                          "data": "action=buy&itemid=123"
                                                         },
-                                                        {  
-                                                            "type":"postback",
-                                                            "label":"我不喜歡",
-                                                            "data":'dislike'
+                                                        {
+                                                          "type": "postback",
+                                                          "label": "Add to cart",
+                                                          "data": "action=add&itemid=123"
                                                         }
                                                     ]
                                                 }
-                                            }                
+                                              }
+                                            // {
+                                            //     "type": "template",
+                                            //     "altText": "相信你會喜歡😎",
+                                            //     "template": {
+                                            //       "type": "buttons",
+                                            //       "text": "【文藝富心】小驚喜 🎉\n對於以下推薦有興趣可至文藝富心官網看更多\n立即點選「喜歡」或「不喜歡」讓我們更了解你💞",
+                                            //       "actions": [
+                                            //         {
+                                            //           "type": "uri",
+                                            //           "label": "▶️ 想看更多",
+                                            //           "uri": `https://project108405.herokuapp.com/${pushContent[0]}/${pushContent[1]}`
+                                            //         }
+                                            //       ]
+                                            //     }
+                                            // },
+                                            // {
+                                            //     type: "template",
+                                            //     altText: "相信你會喜歡😎",
+                                            //     template: {
+                                            //         type: "buttons",
+                                            //         // thumbnailImageUrl: `${thirdData}`,
+                                            //         thumbnailImageUrl: `https://i.imgur.com/OIiSIdb.jpg`,
+                                            //         imageAspectRatio: "rectangle",
+                                            //         imageSize: "cover",
+                                            //         imageBackgroundColor: "#FFFFFF",
+                                            //         title: `${pushContent[2]}`,
+                                            //         text: `${pushContent[3]}`,
+                                            //         defaultAction: {
+                                            //             "type": "uri",
+                                            //             "label": "View detail",
+                                            //             "uri": "http://example.com/page/123"
+                                            //         },
+                                            //         actions: [
+                                            //             {  
+                                            //                 "type":"postback",
+                                            //                 "label":"我喜歡",
+                                            //                 "data":`${pushContent[0]}`+`${pushContent[1]}`
+                                            //             },
+                                            //             {  
+                                            //                 "type":"postback",
+                                            //                 "label":"我不喜歡",
+                                            //                 "data":'dislike'
+                                            //             }
+                                            //         ]
+                                            //     }
+                                            // }                
                                         ]
                                     })
                             }, function(error, response, body){
@@ -224,50 +254,80 @@ app.post('/webhook',  function (req, res) {
                                         messages: [
                                             {
                                                 "type": "template",
-                                                "altText": "相信你會喜歡😎",
+                                                "altText": "This is a buttons template",
                                                 "template": {
-                                                  "type": "buttons",
-                                                  "text": "【文藝富心】小驚喜 🎉\n對於以下推薦有興趣可至文藝富心官網看更多\n立即點選「喜歡」或「不喜歡」讓我們更了解你💞",
-                                                  "actions": [
-                                                    {
-                                                      "type": "uri",
-                                                      "label": "▶️ 想看更多",
-                                                      "uri": `https://project108405.herokuapp.com/${pushContent[0]}/${pushContent[1]}`
-                                                    }
-                                                  ]
-                                                }
-                                            },
-                                            {
-                                                type: "template",
-                                                altText: "相信你會喜歡😎",
-                                                template: {
-                                                    type: "buttons",
-                                                    // thumbnailImageUrl: `${thirdData}`,
-                                                    thumbnailImageUrl: `https://i.imgur.com/OIiSIdb.jpg`,
-                                                    imageAspectRatio: "rectangle",
-                                                    imageSize: "cover",
-                                                    imageBackgroundColor: "#FFFFFF",
-                                                    title: `${pushContent[2]}`,
-                                                    text: `${pushContent[3]}`,
-                                                    defaultAction: {
+                                                    "type": "buttons",
+                                                    "thumbnailImageUrl": "https://i.imgur.com/O9syBO0.jpg",
+                                                    "imageAspectRatio": "rectangle",
+                                                    "imageSize": "cover",
+                                                    "imageBackgroundColor": "#FFFFFF",
+                                                    "title": "recommend post test score2",
+                                                    "text": "零鎮親說發推薦有問題我來試試看 123213213       ",
+                                                    "defaultAction": {
                                                         "type": "uri",
                                                         "label": "View detail",
                                                         "uri": "http://example.com/page/123"
                                                     },
-                                                    actions: [
-                                                        {  
-                                                            "type":"postback",
-                                                            "label":"我喜歡",
-                                                            "data":`${pushContent[0]}`+`${pushContent[1]}`
+                                                    "actions": [
+                                                        {
+                                                          "type": "postback",
+                                                          "label": "Buy",
+                                                          "data": "action=buy&itemid=123"
                                                         },
-                                                        {  
-                                                            "type":"postback",
-                                                            "label":"我不喜歡",
-                                                            "data":'dislike'
+                                                        {
+                                                          "type": "postback",
+                                                          "label": "Add to cart",
+                                                          "data": "action=add&itemid=123"
                                                         }
                                                     ]
                                                 }
-                                            }                
+                                            }
+                                            // {
+                                            //     "type": "template",
+                                            //     "altText": "相信你會喜歡😎",
+                                            //     "template": {
+                                            //       "type": "buttons",
+                                            //       "text": "【文藝富心】小驚喜 🎉\n對於以下推薦有興趣可至文藝富心官網看更多\n立即點選「喜歡」或「不喜歡」讓我們更了解你💞",
+                                            //       "actions": [
+                                            //         {
+                                            //           "type": "uri",
+                                            //           "label": "▶️ 想看更多",
+                                            //           "uri": `https://project108405.herokuapp.com/${pushContent[0]}/${pushContent[1]}`
+                                            //         }
+                                            //       ]
+                                            //     }
+                                            // },
+                                            // {
+                                            //     type: "template",
+                                            //     altText: "相信你會喜歡😎",
+                                            //     template: {
+                                            //         type: "buttons",
+                                            //         // thumbnailImageUrl: `${thirdData}`,
+                                            //         thumbnailImageUrl: `https://i.imgur.com/OIiSIdb.jpg`,
+                                            //         imageAspectRatio: "rectangle",
+                                            //         imageSize: "cover",
+                                            //         imageBackgroundColor: "#FFFFFF",
+                                            //         title: `${pushContent[2]}`,
+                                            //         text: `${pushContent[3]}`,
+                                            //         defaultAction: {
+                                            //             "type": "uri",
+                                            //             "label": "View detail",
+                                            //             "uri": "http://example.com/page/123"
+                                            //         },
+                                            //         actions: [
+                                            //             {  
+                                            //                 "type":"postback",
+                                            //                 "label":"我喜歡",
+                                            //                 "data":`${pushContent[0]}`+`${pushContent[1]}`
+                                            //             },
+                                            //             {  
+                                            //                 "type":"postback",
+                                            //                 "label":"我不喜歡",
+                                            //                 "data":'dislike'
+                                            //             }
+                                            //         ]
+                                            //     }
+                                            // }                
                                         ]
                                     })
                             }, function(error, response, body){
