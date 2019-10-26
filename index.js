@@ -78,8 +78,8 @@ app.post('/webhook',  function (req, res) {
                 pushContent.push(data[10][0].artiNum)
                 pushContent.push(data[10][0].artiHead)
                 //有圖片
-                if (data[10][0].artiCont.match("\:imgLocation") != null){
-                    pushContent.push(data[10][0].artiCont.replace(/\:imgLocation/ig, "img")); 
+                if (data[10][0].artiCont.match("\\:imgLocation") != null){
+                    pushContent.push(data[10][0].artiCont.replace(/\\:imgLocation/ig, "img")); 
                     // pushContent.push(data[10][0].artiCont); 
                     // pushContent.push('圖片喔！！！'); 
                     if (data[10][0].artiCont.length >= 70){
@@ -101,8 +101,8 @@ app.post('/webhook',  function (req, res) {
                 pushContent.push(data[10][0].recomNum)
                 pushContent.push(data[10][0].recomHead)
                 //有圖片
-                if (data[10][0].recomCont.match("\:imgLocation") != null){
-                    pushContent.push(data[10][0].recomCont.replace(/\:imgLocation/ig, "img")); 
+                if (data[10][0].recomCont.match("\\:imgLocation") != null){
+                    pushContent.push(data[10][0].recomCont.replace(/\\:imgLocation/ig, "img")); 
                     // pushContent.push(data[10][0].recomCont); 
                     // pushContent.push('圖片喔！！！');
                     if (data[10][0].recomCont.length >= 70){
