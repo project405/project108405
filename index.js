@@ -80,8 +80,8 @@ app.post('/webhook',  function (req, res) {
                 let articleCont = data[0].artiCont.replace(/<br>/ig, '') 
                 
                 //有圖片
-                if (articleCont.match("\\:imgLocation") != null){
-                    pushContent.push(articleCont.replace(/\\:imgLocation/ig, ' '));
+                if (articleCont.match("\:imgLocation") != null){
+                    pushContent.push(articleCont.replace(/\:imgLocation/ig, ' '));
                     LinePush.artiImg(data[0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
@@ -111,8 +111,8 @@ app.post('/webhook',  function (req, res) {
                 pushContent.push(data[0].recomHead)
                 let recommendCont = data[0].recomCont.replace(/<br>/ig, '') 
                 //有圖片
-                if (recommendCont.match("\\:imgLocation") != null){
-                    pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
+                if (recommendCont.match("\:imgLocation") != null){
+                    pushContent.push(recommendCont.replace(/\:imgLocation/ig, ' ')); 
                     LinePush.recomImg(data[0].recomNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
