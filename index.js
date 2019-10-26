@@ -213,7 +213,7 @@ app.post('/webhook',  function (req, res) {
                 });
             }
             //文章、推薦內容有圖片的推播樣式 
-            function linePushPhoto(thirdData){
+            function linePushPhoto(a){
                 request.post({
                     headers: {
                         'content-type' : 'application/json',
@@ -253,7 +253,7 @@ app.post('/webhook',  function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "buttons",
-                                        thumbnailImageUrl: `${thirdData}`,
+                                        thumbnailImageUrl: `${a}`,
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
