@@ -97,7 +97,8 @@ app.post('/webhook',  function (req, res) {
                                 pushContent.pop()
                                 pushContent.push(articleCont.slice(0,71)+'...')
                             }
-                            linePushPhoto(pushContent);
+                            console.log('裡面pushContent',pushContent)
+                            linePushPhoto();
                         }).catch((err)=> {
                             console.log(err)
                         });
@@ -134,7 +135,8 @@ app.post('/webhook',  function (req, res) {
                                 pushContent.pop()
                                 pushContent.push(recommendCont.slice(0,71)+'...')
                             }
-                            linePushPhoto(pushContent);
+                            console.log('裡面pushContent',pushContent)
+                            linePushPhoto();
                         }).catch((err)=> {
                             console.log(err)
                         });
@@ -150,9 +152,8 @@ app.post('/webhook',  function (req, res) {
                 }
             }
              
-            console.log('pushContent@@@@@@@',pushContent)
-            console.log('pushContent.length@@@@@@@',pushContent.length)
-            // console.log('外面的pushImg@@@@@@@',pushImg)
+            console.log('外面pushContent@@@@@@@',pushContent)
+            console.log('外面pushContent.length@@@@@@@',pushContent.length)
 
             
             //文章、推薦內容無圖片的推播樣式
