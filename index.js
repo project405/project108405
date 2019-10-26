@@ -71,7 +71,7 @@ app.post('/webhook',  function (req, res) {
         byClassData.getIndexData().then(data =>{
             console.log(data[10][0])
             var pushContent = [];
-            var pushImg = 0;
+            var pushImg = [];
             //data為文章
             if(data[10][0].recomHead == undefined){
                 
@@ -85,14 +85,12 @@ app.post('/webhook',  function (req, res) {
                         // console.log('~~~secondData',secondData)
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         member.Imgur(img).then(thirdData => {  
-                            console.log(thirdData)
-                            pushImg = thirdData;
+                            // console.log(thirdData)
+                            pushImg.push(thirdData);
                         }).catch((err)=> {
                             console.log(err)
                         });
                     });           
-                    // pushContent.push(data[10][0].artiCont); 
-                    // pushContent.push('圖片喔！！！'); 
                     if (data[10][0].artiCont.length >= 70){
                         pushContent.pop()
                         pushContent.push(data[10][0].artiCont.slice(0,71)+'...')
@@ -120,13 +118,11 @@ app.post('/webhook',  function (req, res) {
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         member.Imgur(img).then(thirdData => {  
                             // console.log(thirdData)
-                            pushImg = thirdData;
+                            pushImg.push(thirdData);
                         }).catch((err)=> {
                             console.log(err)
                         });
                     });   
-                    // pushContent.push(data[10][0].recomCont); 
-                    // pushContent.push('圖片喔！！！');
                     if (data[10][0].recomCont.length >= 70){
                         pushContent.pop()
                         pushContent.push(data[10][0].recomCont.slice(0,71)+'...')
