@@ -61,11 +61,11 @@ bot.on('postback', function(event) {
                
                 //---------------進到四大推薦---------------
                 // recommend.getFourRecomClassList().then(d =>{
-                    index.getIndexData().then(data => {  
+                    index.getIndexData().then(d => {  
                         
                         let recommendCont = [];
                         let recommendNum = [];
-                        data[0].forEach(item => {
+                        d[0].forEach(item => {
                             item.recomCont = item.recomCont.length>75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
                             recommendCont.push(item.recomCont);
                             recommendNum.push(item.recomNum);
