@@ -419,13 +419,14 @@ bot.on('message', function(event) {
         // recommend.getFourRecomClassList().then(data =>{
         index.getIndexData().then(data => {  
             let recommendNum = []  
+            //順序為電影、展覽、書籍、音樂
             data[0].forEach(item => {
                 console.log('item!!!',item.recomNum);
                 console.log('item!!!',item.recomClass);
-                // recommendNum.push(item.recomNum);
+                recommendNum.push(item.recomNum);
                 
             });
-
+            console.log(recommendNum)
             // var movieNum = data[0][0].recomNum;
             // var musicNum = data[1][0].recomNum;
             // var bookNum = data[2][0].recomNum;
