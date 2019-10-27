@@ -362,9 +362,12 @@ var getWebSearch = async function (searchParams, memID) {
     //======================================
 
     // -----------  取得文章清單 -------------
-    await sql('SELECT * '+
-              ' FROM "articleListDataView" '+
-              ' WHERE "artiHead" LIKE $1 or "artiCont" LIKE $1  or "artiClass" LIKE $1 ',['%' + searchParams + '%'])
+    await sql('SELECT"articleListDataView".*, "member"."memName" '+
+            ' FROM "articleListDataView" '+
+                ' INNER JOIN "member" '+ 
+                    ' ON "member"."memID" = "articleListDataView"."memID" '+
+            ' WHERE "artiHead" LIKE $1 or "artiCont" LIKE $1  or "artiClass" LIKE $1 '+ 
+            ' ORDER BY "articleListDataView"."artiNum" DESC',['%' + searchParams + '%'])
         .then((data) => {
             articleList = data.rows;
         }, (error) => {

@@ -44,12 +44,11 @@
                     <!-- list -->
                     <% for(var i=0; i<items[0].length; i++) {%>
                     <div class="card shadow list "  style="cursor:pointer;">
-
                         <div class="card-body " onclick=" location.href='/article/<%= items[0][i].artiNum %>'">
                             <div class="poster">
                                 <div class="name d-flex justify-content-between">
                                     <div style="word-break:break-all">
-                                        <a class="floorTag"><%= items[0][i].memID %></a>
+                                        <a class="floorTag"><%= items[0][i].memName %></a>
                                         <a class="next"></a>
                                         <a class="dateTime">於 <%= items[0][i].artiDateTime %>發表</a>
                                     </div>
@@ -234,6 +233,7 @@
                             <div class="wrapper col-12  col-lg-2"
                             style="background-image:url('<%= items[7][j].imgName %>');">
                             <% isImg = true %>
+                            <% break ;%>
                         <% } %>
                     <% } %>
                 <% } %>

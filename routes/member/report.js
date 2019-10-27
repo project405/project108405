@@ -8,9 +8,6 @@ router.post('/', function (req, res, next) {
     var reportData =[] ; 
 
     //判斷是使用哪種方式登入
-    // if (req.session.memID == undefined && req.session.passport == undefined) {
-    //     res.render('login');
-    // } else 
     if (req.session.memID != undefined && req.session.passport == undefined) {
         memID = req.session.memID;
     } else if (req.session.memID == undefined && req.session.passport != undefined) {
@@ -20,10 +17,19 @@ router.post('/', function (req, res, next) {
     
     //判斷是哪一個檢舉
     if(req.body.artiNum != undefined){
+        if (req.session.memID == undefined && req.session.passport == undefined) {
+            res.render('login');
+        } 
         reportData["artiNum"] = req.body.artiNum;
     }else if (req.body.artiMessNum != undefined){
+        if (req.session.memID == undefined && req.session.passport == undefined) {
+            res.render('login');
+        }
         reportData["artiMessNum"] = req.body.artiMessNum;
     }else if (req.body.recomMessNum != undefined){
+        if (req.session.memID == undefined && req.session.passport == undefined) {
+            res.render('login');
+        }
         reportData["recomMessNum"] = req.body.recomMessNum;
     }
 
