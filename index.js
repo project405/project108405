@@ -419,14 +419,21 @@ bot.on('message', function(event) {
         // recommend.getFourRecomClassList().then(data =>{
         index.getIndexData().then(data => {  
             let recommendNum = []  
+            let recommendHead = []  
+            let recommendCont = []  
+            // let recommendNum = []  
             //順序為電影、展覽、書籍、音樂
             data[0].forEach(item => {
                 console.log('item!!!',item.recomNum);
                 console.log('item!!!',item.recomClass);
                 recommendNum.push(item.recomNum);
+                recommendHead.push(item.recomHead);
+                recommendCont.push(item.recomCont);
                 
             });
             console.log(recommendNum)
+            console.log(recommendHead)
+            console.log(recommendCont)
             // var movieNum = data[0][0].recomNum;
             // var musicNum = data[1][0].recomNum;
             // var bookNum = data[2][0].recomNum;
