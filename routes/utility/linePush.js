@@ -97,7 +97,7 @@ var AddRecommendLike = async function (lineID,recomNum) {
 //==============================        
 
 var recomImg = async function (recomNum) {
-    console.log('linspush!!!!!!!!',recomNum)
+    // console.log('linspush!!!!!!!!',recomNum)
     var result;
     await sql('SELECT "imgName" FROM "image" WHERE "recomNum" = $1 LIMIT 1',[recomNum])
         .then((data) => {
