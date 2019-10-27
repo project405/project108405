@@ -102,8 +102,6 @@ app.post('/webhook',  function (req, res) {
                             }).catch((err)=> {
                                 console.log(err)
                             });
-                      
-                        
                     }); 
                 
                 }else{
@@ -165,7 +163,7 @@ app.post('/webhook',  function (req, res) {
                         // ----------測試line
                         // 'Authorization': 'Bearer QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
                         // ----------測試line02
-                        'Authorization': 'Bearer lG12s3k4ax8boXiwacHC5PHcO4tMpoiSLBPMsaB33DQDJLh5CPPsvlLd1SW/livzu30EnoB0RnZT5G1amnocW4gyZu/xUA4i+4Uer8pR7gswY4mhWG/KWcT2HM2RqS6Ozubx08NFXShqaxf0CqQc7QdB04t89/1O/w1cDnyilFU='
+                        'Authorization': 'Bearer R8lcHnPCuZUl1bN572jcpz1z17xTC0nmXBuGBzDbBpsvPXd8uLhbJxsYw0xKzlqJuEOUmPkMg4R50tsO/HS3xer18+xRNAK27JyiS1Maj+v2MefUSMQpz1hxfyFMBCKdk5bAmsRhBbM3nEVtsJjCxgdB04t89/1O/w1cDnyilFU='
                         
                         // ----------正式line
                         // 'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
