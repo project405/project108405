@@ -213,8 +213,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     // result[7] = checkAuthority;
     result[8] = [memID];
     result[9] = replyImgs;
-
-
+    
     return result;
 }
 //=========================================
