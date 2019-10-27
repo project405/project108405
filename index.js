@@ -93,7 +93,7 @@ app.post('/webhook',  function (req, res) {
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         if(img){
                             LinePush.Imgur(img).then(thirdData => {  
-                                pushImg.push(thirdData);
+                                this.pushImg.push(thirdData);
                                                      
                                 // linePushPhoto(pushImg[0]);
                                 linePushPhoto();
@@ -135,7 +135,7 @@ app.post('/webhook',  function (req, res) {
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         if(img){
                             LinePush.Imgur(img).then(thirdData => {  
-                                pushImg.push(thirdData);
+                                this.pushImg.push(thirdData);
                                                      
                                 // linePushPhoto(pushImg[0]);
                                 linePushPhoto();
