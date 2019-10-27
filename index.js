@@ -418,7 +418,7 @@ bot.on('message', function(event) {
 	if(text == '本週推薦'){
         // recommend.getFourRecomClassList().then(data =>{
         index.getIndexData().then(data => {    
-            data.forEach(item => {
+            data[0].forEach(item => {
                 console.log('item!!!',item);
                 // if(item.lineID != ''){
                 //     allUserLineID.push(item.lineID);
