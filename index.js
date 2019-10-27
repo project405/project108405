@@ -289,10 +289,11 @@ bot.on('postback', function(event) {
                     });
                 })
             }else{
-                login.userJudgeBind(userId).then(d =>{
-                    if(d.length !== 0){                         
-                        if(d[0].lineID == userId){
-                            collection.addLineColleRecommend(d[0].memID, parseInt(data)).then(b =>{
+                login.userJudgeBind(userId).then(userID =>{
+                    console.log('userID!!!!!!!',userID)
+                    if(userID.length !== 0){                         
+                        if(userID[0].lineID == userId){
+                            collection.addLineColleRecommend(userID[0].memID, parseInt(data)).then(b =>{
                                 console.log(b)
                                 if(b == 0){
                                     event.reply({
