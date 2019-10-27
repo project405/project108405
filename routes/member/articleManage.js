@@ -3,7 +3,8 @@ var router = express.Router();
 
 const member = require('../utility/member');
 //接收GET請求
-router.get('/', function (req, res, next) {
+router.get('/:artiPage', function (req, res, next) {
+    var artiPage = req.params.artiPage;   //取出參數
     var memID;
 
     //判斷是使用哪種方式登入
@@ -15,7 +16,9 @@ router.get('/', function (req, res, next) {
         memID = req.session.passport.user.id;
     }
 
-    member.myArticle(memID).then(data => {
+    member.myArticle(memID, artiPage).then(data => {
+        data[6][0].count = Math.ceil(data[6][0].count / 10) 
+        console.log('get!', data[0])
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].artiCont.match("\\:imgLocation") != null) {
                 data[0][i].artiCont = data[0][i].artiCont.replace(/\\:imgLocation/g, " ");

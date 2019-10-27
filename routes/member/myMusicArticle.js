@@ -3,7 +3,8 @@ var router = express.Router();
 
 const member = require('../utility/member');
 //接收GET請求
-router.get('/', function (req, res, next) {
+router.get('/:artiPage', function (req, res, next) {
+    var artiPage = req.params.artiPage;   //取出參數
     var memID;
 
     //判斷是使用哪種方式登入
@@ -15,7 +16,7 @@ router.get('/', function (req, res, next) {
         memID = req.session.passport.user.id;
     }
     
-    member.getMyArticleClassList('music', memID).then(data => {
+    member.getMyArticleClassList('music', memID, artiPage).then(data => {
 
         //將照片字串取代為空
         for (var i = 0; i < data[0].length; i++) {
