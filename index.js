@@ -65,7 +65,7 @@ app.post('/webhook',  function (req, res) {
             console.log('item!!', item)
             
         LinePush.getIndexData(item).then(data =>{
-            linePushPhoto();
+            // linePushPhoto();
 
             console.log('artiNum@@@@@@@@@@',data[0].artiNum)
             console.log('recomNum@@@@@@@@@@',data[0].recomNum)
