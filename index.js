@@ -431,15 +431,18 @@ bot.on('message', function(event) {
                 recommendNum.push(item.recomNum);
                 recommendHead.push(item.recomHead);
                 recommendCont.push(item.recomCont);
-                linePush.recomImg(item.recommendNum).then(data => {
+                
+            });
+
+            recommendNum.map(item =>{
+                linePush.recomImg(item).then(data => {
                     console.log('data!!!!!!!!',data)
                     // recommendImg.push();
-
                 }).catch(() => {
                     console.log('Do that');
                 })
-                
-            });
+            })
+
             console.log(recommendNum)
             console.log(recommendHead)
             console.log(recommendCont)
