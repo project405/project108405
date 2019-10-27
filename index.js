@@ -438,109 +438,109 @@ bot.on('message', function(event) {
 
             // }
 
-            event.reply({
-                "type": "template",
-                "altText": " 👋 本週新推薦",
-                "template": {
-                    "type": "carousel",
-                    "columns": [
-                        {
-                          "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/movie1.jpg",
-                          "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
-                          "text": DateTimeFormat(data[0][0].recomDateTime),
-                          "defaultAction": {
-                              "type": "uri",
-                              "label": "知道更多",
-                              "uri": `https://project108405.herokuapp.com/oneRecommend/${data[0][0].recomNum}`
-                          },
-                          "actions": [
-                              {
-                                  "type": "postback",
-                                  "label": "劇情概要",
-                                  "data": 'movie'
-                              },
-                              {
+            // event.reply({
+            //     "type": "template",
+            //     "altText": " 👋 本週新推薦",
+            //     "template": {
+            //         "type": "carousel",
+            //         "columns": [
+            //             {
+            //               "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/movie1.jpg",
+            //               "title": "【" + msgs[0] + "】" + data[0][0].recomHead,
+            //               "text": DateTimeFormat(data[0][0].recomDateTime),
+            //               "defaultAction": {
+            //                   "type": "uri",
+            //                   "label": "知道更多",
+            //                   "uri": `https://project108405.herokuapp.com/oneRecommend/${data[0][0].recomNum}`
+            //               },
+            //               "actions": [
+            //                   {
+            //                       "type": "postback",
+            //                       "label": "劇情概要",
+            //                       "data": 'movie'
+            //                   },
+            //                   {
                                 
-                                  "type": "postback",
-                                  "label": "新增至我的收藏",
-                                  "data": movieNum
-                              }
-                          ]
-                        },
-                        {
-                          "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/music1.jpg",
-                          "title":"【" + msgs[1] + "】" + data[1][0].recomHead,
-                          "text": DateTimeFormat(data[1][0].recomDateTime),
-                          "defaultAction": {
-                              "type": "uri",
-                              "label": "詳細資料",
-                              "uri": `https://project108405.herokuapp.com/oneRecommend/${data[1][0].recomNum}`
-                          },
-                          "actions": [
-                                {
-                                    "type": "postback",
-                                    "label": "音樂資訊",
-                                    "data": 'music'
-                                },
-                                {
+            //                       "type": "postback",
+            //                       "label": "新增至我的收藏",
+            //                       "data": movieNum
+            //                   }
+            //               ]
+            //             },
+            //             {
+            //               "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/music1.jpg",
+            //               "title":"【" + msgs[1] + "】" + data[1][0].recomHead,
+            //               "text": DateTimeFormat(data[1][0].recomDateTime),
+            //               "defaultAction": {
+            //                   "type": "uri",
+            //                   "label": "詳細資料",
+            //                   "uri": `https://project108405.herokuapp.com/oneRecommend/${data[1][0].recomNum}`
+            //               },
+            //               "actions": [
+            //                     {
+            //                         "type": "postback",
+            //                         "label": "音樂資訊",
+            //                         "data": 'music'
+            //                     },
+            //                     {
                                
-                                    "type": "postback",
-                                    "label": "新增至我的收藏",
-                                    "data": musicNum
-                                }
-                            ]   
-                        },
-                        {
-                            "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/book1.jpg",
-                            "title":"【" + msgs[2] + "】" + data[2][0].recomHead,
-                            "text": DateTimeFormat(data[2][0].recomDateTime),
-                            "defaultAction": {
-                                "type": "uri",
-                                "label": "詳細資料",
-                                "uri": `https://project108405.herokuapp.com/oneRecommend/${data[2][0].recomNum}`
-                            },
-                            "actions": [
-                                {
-                                    "type": "postback",
-                                    "label": "書籍資訊",
-                                    "data": 'book'
-                                },
-                                {
+            //                         "type": "postback",
+            //                         "label": "新增至我的收藏",
+            //                         "data": musicNum
+            //                     }
+            //                 ]   
+            //             },
+            //             {
+            //                 "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/book1.jpg",
+            //                 "title":"【" + msgs[2] + "】" + data[2][0].recomHead,
+            //                 "text": DateTimeFormat(data[2][0].recomDateTime),
+            //                 "defaultAction": {
+            //                     "type": "uri",
+            //                     "label": "詳細資料",
+            //                     "uri": `https://project108405.herokuapp.com/oneRecommend/${data[2][0].recomNum}`
+            //                 },
+            //                 "actions": [
+            //                     {
+            //                         "type": "postback",
+            //                         "label": "書籍資訊",
+            //                         "data": 'book'
+            //                     },
+            //                     {
                                   
-                                    "type": "postback",
-                                    "label": "新增至我的收藏",
-                                    "data": bookNum
-                                }
-                            ]
-                          },
-                          {
-                            "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/exhibition1.jpg",
-                            "title":"【" + msgs[3] + "】" + data[3][0].recomHead,
-                            "text": DateTimeFormat(data[3][0].recomDateTime),
-                            "defaultAction": {
-                                "type": "uri",
-                                "label": "詳細資料",
-                                "uri": `https://project108405.herokuapp.com/oneRecommend/${data[3][0].recomNum}`
-                            },
-                            "actions": [
-                                {
-                                    "type": "postback",
-                                    "label": "展覽內容",
-                                    "data": 'exhibition'
-                                },
-                                {
+            //                         "type": "postback",
+            //                         "label": "新增至我的收藏",
+            //                         "data": bookNum
+            //                     }
+            //                 ]
+            //               },
+            //               {
+            //                 "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/exhibition1.jpg",
+            //                 "title":"【" + msgs[3] + "】" + data[3][0].recomHead,
+            //                 "text": DateTimeFormat(data[3][0].recomDateTime),
+            //                 "defaultAction": {
+            //                     "type": "uri",
+            //                     "label": "詳細資料",
+            //                     "uri": `https://project108405.herokuapp.com/oneRecommend/${data[3][0].recomNum}`
+            //                 },
+            //                 "actions": [
+            //                     {
+            //                         "type": "postback",
+            //                         "label": "展覽內容",
+            //                         "data": 'exhibition'
+            //                     },
+            //                     {
                                  
-                                    "type": "postback",
-                                    "label": "新增至我的收藏",
-                                    "data": exhibitionNum
-                                }
-                            ]
-                          }
-                    ],
-                    "imageAspectRatio": "rectangle",
-                    "imageSize": "cover"
-                }
-            });
+            //                         "type": "postback",
+            //                         "label": "新增至我的收藏",
+            //                         "data": exhibitionNum
+            //                     }
+            //                 ]
+            //               }
+            //         ],
+            //         "imageAspectRatio": "rectangle",
+            //         "imageSize": "cover"
+            //     }
+            // });
         });
     }
     //-----------心情推薦-----------
