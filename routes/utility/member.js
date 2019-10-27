@@ -751,7 +751,7 @@ var modifyMember = async function (memPass, memBirth, memMail, memGender, memAdd
 //================================
 var getOriginalMail = async function (memID) {
     var result;
-    console.log("memID = ", memID) ;
+
     // -----------  修改會員資料 --------------
     await sql('SELECT "memMail" from "member" where "memID" = $1', [memID])
         .then((data) => {
