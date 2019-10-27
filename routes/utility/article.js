@@ -90,7 +90,7 @@ var getArticleListPagination = async function (memID, artiListNum) {
     result[6] = articleSum;
     result[7] = [artiListNum];
 
-
+console.log("!!!!!!!!!!!!!!!!!",articleList);
     return result;
 }
 

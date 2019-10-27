@@ -33,7 +33,7 @@ $(document).ready(() => {
                                     討論區</a>\
                             </li>\
                             <li class="nav-item">\
-                            <a class="nav-link" href="/articleList/post">\
+                            <a class="nav-link" href="/post">\
                             <i class="fas fa-pen"></i>&nbsp;發文</a>\
                             </li>\
                             <li class="nav-item">\
@@ -123,7 +123,7 @@ $(document).ready(() => {
                                     討論區</a>\
                             </li>\
                             <li class="nav-item">\
-                            <a class="nav-link" href="/articleList/post">\
+                            <a class="nav-link" href="/post">\
                             <i class="fas fa-pen"></i>&nbsp;發文</a>\
                             </li>\
                             <li class="nav-item dropdown">\
@@ -262,7 +262,7 @@ $(document).ready(() => {
                                 討論區</a>\
                         </li>\
                         <li class="nav-item">\
-                        <a class="nav-link" href="/articleList/post">\
+                        <a class="nav-link" href="/post">\
                         <i class="fas fa-pen"></i>&nbsp;發文</a>\
                         </li>\
                         <li class="nav-item">\
