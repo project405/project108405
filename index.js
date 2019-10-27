@@ -67,7 +67,7 @@ app.post('/webhook',  function (req, res) {
             console.log('artiNum@@@@@@@@@@',data[0].artiNum)
             console.log('recomNum@@@@@@@@@@',data[0].recomNum)
             var pushContent = [];
-            // var pushImg = [];
+            var pushImg = [];
             
             //data為文章
             if(data[0].recomHead == undefined){
@@ -88,7 +88,7 @@ app.post('/webhook',  function (req, res) {
                 //有圖片
                 if (data[0].artiCont.match("\\:imgLocation") != null){
                     console.log('文章～有進來圖片這區')
-                    var pushImg = [];
+                    // var pushImg = [];
                     LinePush.artiImg(data[0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         if(img){
@@ -127,7 +127,7 @@ app.post('/webhook',  function (req, res) {
                 }
                 //有圖片
                 if (data[0].recomCont.match("\\:imgLocation") != null){
-                    var pushImg = [];
+                    // var pushImg = [];
 
                     // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
                     LinePush.recomImg(data[0].recomNum).then(secondData =>{
