@@ -5,7 +5,8 @@ var router = express.Router();
 
 const collection = require('../utility/collection');
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/:collPage', function (req, res, next) {
+	var collPage = req.params.collPage;   //取出參數
 	var memID;
 
 	//判斷是使用哪種方式登入
@@ -17,7 +18,12 @@ router.get('/', function (req, res, next) {
 		memID = req.session.passport.user.id;
 	}
 	
-	collection.getCollArticle(memID).then(data => {
+	collection.getCollArticle(memID, collPage).then(data => {
+		console.log('data[5][0].count', data[5][0])
+		data[5][0].count = Math.ceil(data[5][0].count / 10) 
+		data[5][0].count = data[5][0].count == 0 ? 1 : data[5][0].count
+
+		console.log(data[0])
 		for (var i = 0; i < data[0].length; i++) {
 			data[0][i].artiCont = data[0][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ");
 		}

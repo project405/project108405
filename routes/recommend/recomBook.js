@@ -15,7 +15,9 @@ router.get('/:recomListNum', function (req, res, next) {
     }
 
     recommend.getRecomClassList('書籍', memID, recomListNum).then(data => {
-        data[4][0].count = Math.ceil(data[4][0].count / 8) 
+        data[4][0].count = Math.ceil(data[4][0].count / 8)
+        data[4][0].count = data[4][0].count == 0 ? 1 : data[4][0].count
+ 
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data == -1) {

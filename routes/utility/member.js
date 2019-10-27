@@ -787,6 +787,7 @@ var getOriginalMail = async function (memID) {
 //----- getMyArticleClassList() -----
 //===================================
 var getMyArticleClassList = async function (artiClass, memID, artiPage) {
+    console.log(artiClass, memID, artiPage)
     var articleList = [];
     var tag = [];
     var isCollection = [];
@@ -797,8 +798,9 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
 
     // -----------  取得分類文章 --------------
     await sql(' SELECT "articleListDataView".*, "member"."memName"' +
+              ' FROM "articleListDataView" '+
               ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"' +
-              ' WHERE "artiClass" = $1 AND "memID" = $2'+
+              ' WHERE "artiClass" = $1 AND "articleListDataView"."memID" = $2'+
               ' ORDER BY "articleListDataView"."artiNum" DESC '+
               ' LIMIT 10 '+
               ' OFFSET $3', [artiClass, memID, (artiPage-1) * 10])
@@ -810,8 +812,17 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
             }
         }, (error) => {
             articleList = undefined;
+            console.log(error)
         });
-
+    await sql('SELECT COUNT(*) ' +
+              'FROM "articleListDataView"' +
+              'WHERE "artiClass" = $1 AND "memID" = $2', [artiClass, memID])
+            .then((data) => {
+                articleSum = data.rows;
+            }, (error) => {
+                console.log(error)
+                articleSum = undefined;
+            })
     // -----------  取得tag --------------
     await sql('SELECT  * ' +
              ' FROM "articleTagView" ' +
@@ -875,6 +886,8 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
     result[3] = isLike;
     result[4] = isCollection;
     result[5] = [memID];
+    result[6] = articleSum;
+    result[7] = [artiPage];
 
     return result;
 

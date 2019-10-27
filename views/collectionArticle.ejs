@@ -36,15 +36,15 @@
             </center>
             <div class="d-flex justify-content-center" style="margin-bottom: 1.5em">
                 <button type="button " class="btn btn-secondary footer"
-                    onclick="location.href='/collection/article/movie'">電影類</button>
+                    onclick="location.href='/collection/article/movie/1'">電影類</button>
                 <button type="button " class="btn btn-secondary footer"
-                    onclick="location.href='/collection/article/music'">音樂類</button>
+                    onclick="location.href='/collection/article/music/1'">音樂類</button>
                 <button type="button " class="btn btn-secondary footer"
-                    onclick="location.href='/collection/article/book'">書籍類</button>
+                    onclick="location.href='/collection/article/book/1'">書籍類</button>
                 <button type="button " class="btn btn-secondary footer"
-                    onclick="location.href='/collection/article/exhibition'">展覽類</button>
+                    onclick="location.href='/collection/article/exhibition/1'">展覽類</button>
                 <button type="button " class="btn btn-secondary footer"
-                    onclick="location.href='/collection/article'">全部</button>
+                    onclick="location.href='/collection/article/1'">全部</button>
             </div>
 
             <div class="row d-flex justify-content-center no-gutters">
@@ -190,6 +190,19 @@
                 </div>
             </div>
         </div>
+        <nav aria-label="Page navigation example" style="margin-bottom: 4em;">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item previous">
+                    <a class="page-link" href="#/" onclick="location.href=`/collection/article/${pagePrevious}`" tabindex="-1" aria-disabled="true"><i class="fas fa-chevron-left"></i></a>
+                  </li>
+                  <% for(var j = 1 ; j <= collData[5][0].count; j++) {%>
+                    <li class="page-item"><a class="page-link" href="/collection/article/<%=j%>"><%=j%></a></li>
+                  <% } %>
+                  <li class="page-item next">
+                    <a class="page-link" href="#/" onclick="location.href=`/collection/article/${pageNext}`"><i class="fas fa-chevron-right"></i></a>
+                  </li>
+                </ul>
+              </nav>
     </section>
     <!-- 文章列表區塊結束 -->
 
@@ -215,7 +228,28 @@
     <script src="/javascripts/navbar.js"></script>
     <!-- 收藏 ajax script -->
     <script>
-            $('button').click(function() {
+        var pagePrevious = parseInt('<%= collData[6][0]%>')-1
+        var pageNext = parseInt('<%= collData[6][0]%>')+1
+        if (pagePrevious == 0) {
+             $('.previous').addClass('disabled')
+        } else {
+            $('.previous').remove('disabled')
+        }
+        if ('<%= collData[5][0].count %>' == '<%= collData[6][0]%>') {
+            $('.next').addClass('disabled')
+        } else {
+            $('.next').remove('disabled')
+        }
+        Array.from($('.pagination').find('.page-link')).map((item) => {
+            if (item.innerText == '<%= collData[6][0]%>') {
+                item.parentElement.classList.add('disabled')
+                item.style.fontWeight = 'bolder'
+            }
+        })
+        Array.from($('.page-link').parent('li.disabled')).map((item) => {
+            item.children[0].style.color = "#d9d9d9"
+        })
+        $('button').click(function() {
             if ($(this).children('.fa-gratipay').length > 0) {
                 $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
                 setTimeout(() => {

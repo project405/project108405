@@ -163,7 +163,7 @@ app.use('/article', articleRouter);
 app.use('/editArticle', editArticleRouter);
 app.use('/editReply', editReplyRouter);
 app.use('/articleList', articleListRouter);
-app.use('/articleList/post', postRouter);
+app.use('/post', postRouter);
 app.use('/article/post', articlePostRouter);
 app.use('/article/reply', replyPostRouter);
 app.use('/addCollection', addCollectionRouter);

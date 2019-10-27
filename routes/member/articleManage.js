@@ -18,14 +18,10 @@ router.get('/:artiPage', function (req, res, next) {
 
     member.myArticle(memID, artiPage).then(data => {
         data[6][0].count = Math.ceil(data[6][0].count / 10) 
-        console.log('get!', data[0])
-        for (var i = 0; i < data[0].length; i++) {
-            if (data[0][i].artiCont.match("\\:imgLocation") != null) {
-                data[0][i].artiCont = data[0][i].artiCont.replace(/\\:imgLocation/g, " ");
-            } 
-            data[0][i].artiCont = data[0][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ');
-            
+        data[6][0].count = data[6][0].count == 0 ? 1 : data[6][0].count
 
+        for (var i = 0; i < data[0].length; i++) {
+            data[0][i].artiCont = data[0][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g,' ')
         }
         if (data == null) {
             res.render('error');
