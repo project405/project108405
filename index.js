@@ -94,7 +94,7 @@ app.post('/webhook',  function (req, res) {
                        
                             LinePush.Imgur(img).then(thirdData => {  
                                 this.pushImg = thirdData;
-                                                     
+                                console.log('pushImg',pushImg)             
                                 // linePushPhoto(pushImg[0]);
                                 linePushPhoto();
                                 
@@ -136,7 +136,7 @@ app.post('/webhook',  function (req, res) {
                         
                             LinePush.Imgur(img).then(thirdData => {  
                                 this.pushImg = thirdData;
-                                                     
+                                console.log('pushImg',pushImg)                     
                                 // linePushPhoto(pushImg[0]);
                                 linePushPhoto();
                                 
@@ -156,7 +156,6 @@ app.post('/webhook',  function (req, res) {
             }
              
             console.log(pushContent)
-            console.log('pushImg',pushImg)
             //文章、推薦內容無圖片的推播樣式
             function linePush (){
                 request.post({
