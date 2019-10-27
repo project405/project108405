@@ -428,7 +428,7 @@ bot.on('message', function(event) {
             //順序為電影、展覽、書籍、音樂
             data[0].forEach(item => {
                 
-
+                console.log(item)
                 // console.log('item!!!',item.recomNum);
                 // console.log('item!!!',item.recomClass);
                 recommendNum.push(item.recomNum);
