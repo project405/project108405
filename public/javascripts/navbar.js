@@ -254,7 +254,7 @@ $(document).ready(() => {
                             <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
                         </li>\
                         <li class="nav-item">\
-                            <a class="nav-link" href="/recommendlist">\
+                            <a class="nav-link" href="/recommendist">\
                             官方推薦</a>\
                         </li>\
                         <li class="nav-item">\
