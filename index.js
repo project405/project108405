@@ -94,7 +94,8 @@ app.post('/webhook',  function (req, res) {
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                                                  
-                            linePushPhoto(pushImg[0]);
+                            // linePushPhoto(pushImg[0]);
+                            linePushPhoto();
                             
                         }).catch((err)=> {
                             console.log(err)
@@ -133,7 +134,8 @@ app.post('/webhook',  function (req, res) {
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
                                                  
-                            linePushPhoto(pushImg[0]s);
+                            // linePushPhoto(pushImg[0]);
+                            linePushPhoto();
                             
                         }).catch((err)=> {
                             console.log(err)
