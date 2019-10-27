@@ -428,16 +428,10 @@ bot.on('message', function(event) {
             //順序為電影、展覽、書籍、音樂
             data[0].forEach(item => {
                 
-                console.log(item.recomDateTime)
-                // console.log('item!!!',item.recomNum);
-                // console.log('item!!!',item.recomClass);
                 recommendNum.push(item.recomNum);
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
-                // recommendCont.push(item.recomCont);
-                // linePush.recomImg(item.recomNum).then(Senconddata => {
-                //     console.log('data!!!!!!!!',Senconddata)
-                //     recommendImg.push(Senconddata);
+                
             });
 
             console.log(recommendDateTime)
@@ -472,7 +466,7 @@ bot.on('message', function(event) {
                             }
                             ,
                             {
-                              "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/music1.jpg",
+                              "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/exhibition1.jpg",
                               "title":"【" + msgs[1] + "】" + recommendHead[1],
                               "text": DateTimeFormat(recommendDateTime[1]),
                               "defaultAction": {
@@ -483,8 +477,8 @@ bot.on('message', function(event) {
                               "actions": [
                                     {
                                         "type": "postback",
-                                        "label": "音樂資訊",
-                                        "data": 'music'
+                                        "label": "展覽內容",
+                                        "data": 'exhibition'
                                     },
                                     {
                                    
@@ -518,7 +512,7 @@ bot.on('message', function(event) {
                                 ]
                               },
                               {
-                                "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/exhibition1.jpg",
+                                "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/music1.jpg",
                                 "title":"【" + msgs[3] + "】" + recommendHead[3],
                                 "text": DateTimeFormat(recommendDateTime[3]),
                                 "defaultAction": {
@@ -529,8 +523,8 @@ bot.on('message', function(event) {
                                 "actions": [
                                     {
                                         "type": "postback",
-                                        "label": "展覽內容",
-                                        "data": 'exhibition'
+                                        "label": "音樂資訊",
+                                        "data": 'music'
                                     },
                                     {
                                      
