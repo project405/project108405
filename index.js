@@ -53,7 +53,7 @@ app.post('/webhook',  function (req, res) {
     let allUserLineID = [];
     LinePush.AllMember().then(data => {  
         // linePushPhoto();
-        linePush();
+        // linePush();
         data.forEach(item => {
             if(item.lineID != ''){
                 allUserLineID.push(item.lineID);
@@ -65,6 +65,8 @@ app.post('/webhook',  function (req, res) {
             console.log('item!!', item)
             
         LinePush.getIndexData(item).then(data =>{
+            linePushPhoto();
+
             console.log('artiNum@@@@@@@@@@',data[0].artiNum)
             console.log('recomNum@@@@@@@@@@',data[0].recomNum)
             var pushContent = [];
