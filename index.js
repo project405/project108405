@@ -54,8 +54,10 @@ app.post('/webhook',  function (req, res) {
     let allUserLineID = [];
     LinePush.AllMember().then(data => {  
         data.forEach(item => {
-            allUserLineID.push(item.lineID);
-            console.log('allUserLineID',allUserLineID)
+            if(item.lineID != ''){
+                allUserLineID.push(item.lineID);
+                console.log('allUserLineID',allUserLineID)
+            }
         });
 
         var p = allUserLineID.map(item => {
