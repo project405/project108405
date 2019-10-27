@@ -21,7 +21,6 @@ $(document).ready(function () {
     c = currentScrollTop;
     });
 
-    
 
     $("#tagInput").focus(function () {
         $("div.tag").css("box-shadow", "0 5px 15px rgba(0, 0, 0, 0.3)");
@@ -48,6 +47,15 @@ $(document).ready(function () {
         var subStr = str.substring(0, 75);
         //如果長度大於75就添加省略號否則就填空
         var data = subStr + (str.length > 75 ? '...' : '');
+        $(this).html(data);
+    });
+    $(".limitLine").each(function () {
+        //取得內容
+        var str = $(this).html();
+        //截取内容75字
+        var subStr = str.substring(0, 150);
+        //如果長度大於75就添加省略號否則就填空
+        var data = subStr + (str.length > 150 ? '...' : '');
         $(this).html(data);
     });
     $(".wrapBigHotSectionText").each(function () {

@@ -1,4 +1,4 @@
--<!doctype html>
+<!doctype html>
 <html>
 
 <head>
@@ -37,15 +37,15 @@
 
             <div class="d-flex justify-content-center" style="margin-bottom: 1.5em">
                 <button type="button " class="btn btn-secondary align-middle footer"
-                    onclick="location.href='/articleManage/movie'">電影類</button>
+                    onclick="location.href='/articleManage/movie/1'">電影類</button>
                 <button type="button " class="btn btn-secondary align-middle footer"
-                    onclick="location.href='/articleManage/music'">音樂類</button>
+                    onclick="location.href='/articleManage/music/1'">音樂類</button>
                 <button type="button " class="btn btn-secondary align-middle footer"
-                    onclick="location.href='/articleManage/book'">書籍類</button>
+                    onclick="location.href='/articleManage/book/1'">書籍類</button>
                 <button type="button " class="btn btn-secondary align-middle footer"
-                    onclick="location.href='/articleManage/exhibition'">展覽類</button>
+                    onclick="location.href='/articleManage/exhibition/1'">展覽類</button>
                 <button type="button " class="btn btn-secondary footer"
-                    onclick="location.href='/member/articleManage'">全部</button>
+                    onclick="location.href='/member/articleManage/1'">全部</button>
             </div>
 
             <div class="row d-flex justify-content-center  no-gutters">
@@ -77,7 +77,7 @@
                                 <div class="col-sm-9 articleContent">
                                     <h3 class="card-title "><%= myArtiClass[0][i].artiHead %>
                                     </h3>
-                                    <p class="card-text "><%- myArtiClass[0][i].artiCont %>
+                                    <p class="card-text limitLine"><%- myArtiClass[0][i].artiCont %>
                                     </p>
 
                                     <!-- tag -->
@@ -188,6 +188,20 @@
                     <!-- listEnd -->
             </div>
         </div>
+        <nav aria-label="Page navigation example" style="margin-bottom: 4em;">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item previous">
+                    <a class="page-link" href="#/" onclick="location.href=`${pagePrevious}`" tabindex="-1" aria-disabled="true"><i class="fas fa-chevron-left"></i></a>
+                    </li>
+
+                    <% for(var j = 1 ; j <= myArtiClass[6][0].count ; j++) {%>
+                    <li class="page-item"><a class="page-link" href="#/" onclick="location.href=`<%=j%>`"><%=j%></a></li>
+                    <% } %>
+                    <li class="page-item next">
+                    <a class="page-link" href="#/" onclick="location.href=`${pageNext}`"><i class="fas fa-chevron-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
     </section>
     <!-- 文章列表區塊結束 -->
 
@@ -212,7 +226,28 @@
     <script src="/javascripts/navbar.js"></script>
      <!-- 收藏 ajax script -->
      <script>
-            $('button').click(function() {
+        var pagePrevious = parseInt('<%= myArtiClass[7][0]%>')-1
+        var pageNext = parseInt('<%= myArtiClass[7][0]%>')+1
+        if (pagePrevious == 0) {
+             $('.previous').addClass('disabled')
+        } else {
+            $('.previous').remove('disabled')
+        }
+        if ('<%= myArtiClass[6][0].count%>' == '<%= myArtiClass[7][0]%>') {
+            $('.next').addClass('disabled')
+        } else {
+            $('.next').remove('disabled')
+        }
+        Array.from($('.pagination').find('.page-link')).map((item) => {
+            if (item.innerText == '<%= myArtiClass[7][0]%>') {
+                item.parentElement.classList.add('disabled')
+                item.style.fontWeight = 'bolder'
+            }
+        })
+        Array.from($('.page-link').parent('li.disabled')).map((item) => {
+            item.children[0].style.color = "#d9d9d9"
+        })
+        $('button').click(function() {
             if ($(this).children('.fa-gratipay').length > 0) {
                 $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
                 setTimeout(() => {

@@ -39,15 +39,15 @@
 
     <div class="d-flex justify-content-center" style="margin-bottom: 1.5em;">
         <button type="button " class="btn btn-secondary footer"
-            onclick="location.href='/collection/recommend/movie'">電影類</button>
+            onclick="location.href='/collection/recommend/movie/1'">電影類</button>
         <button type="button " class="btn btn-secondary footer"
-            onclick="location.href='/collection/recommend/music'">音樂類</button>
+            onclick="location.href='/collection/recommend/music/1'">音樂類</button>
         <button type="button " class="btn btn-secondary footer"
-            onclick="location.href='/collection/recommend/book'">書籍類</button>
+            onclick="location.href='/collection/recommend/book/1'">書籍類</button>
         <button type="button " class="btn btn-secondary footer"
-            onclick="location.href='/collection/recommend/exhibition'">展覽類</button>
+            onclick="location.href='/collection/recommend/exhibition/1'">展覽類</button>
         <button type="button " class="btn btn-secondary footer"
-            onclick="location.href='/collection/recommend'">全部</button>
+            onclick="location.href='/collection/recommend/1'">全部</button>
     </div>
 
     <!-- Portfolio Section -->
@@ -95,6 +95,19 @@
             <!-- 收藏區塊結束 -->
         </div>
         <div class="w-100"></div>
+        <nav aria-label="Page navigation example" style="margin-bottom: 4em;">
+            <ul class="pagination justify-content-center">
+                <li class="page-item previous">
+                <a class="page-link" href="#/" onclick="location.href=`${pagePrevious}`" tabindex="-1" aria-disabled="true"><i class="fas fa-chevron-left"></i></a>
+                </li>
+                <% for(var j = 1 ; j <= items[4][0].count ; j++) {%>
+                <li class="page-item"><a class="page-link" href="<%=j%>"><%=j%></a></li>
+                <% } %>
+                <li class="page-item next">
+                <a class="page-link" href="#/" onclick="location.href=`${pageNext}`"><i class="fas fa-chevron-right"></i></a>
+                </li>
+            </ul>
+        </nav>
     </section>
 
     <!-- Optional JavaScript -->
@@ -110,6 +123,29 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
     <script src="/javascripts/navbar.js"></script>
+    <script>
+        var pagePrevious = parseInt('<%= items[5][0]%>')-1
+        var pageNext = parseInt('<%= items[5][0]%>')+1
+        if (pagePrevious == 0) {
+                $('.previous').addClass('disabled')
+        } else {
+            $('.previous').remove('disabled')
+        }
+        if ('<%= items[4][0].count%>' == '<%= items[5][0]%>') {
+            $('.next').addClass('disabled')
+        } else {
+            $('.next').remove('disabled')
+        }
+        Array.from($('.pagination').find('.page-link')).map((item) => {
+            if (item.innerText == '<%= items[5][0]%>') {
+                item.parentElement.classList.add('disabled')
+                item.style.fontWeight = 'bolder'
+            }
+        })
+        Array.from($('.page-link').parent('li.disabled')).map((item) => {
+            item.children[0].style.color = "#d9d9d9"
+        })
+    </script>
 </body>
 
 </html>

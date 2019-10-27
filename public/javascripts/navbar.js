@@ -132,9 +132,9 @@ $(document).ready(() => {
                                 </a>\
                                 <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
                                     <a class="dropdown-item" href="/notify"><i class="fas fa-bell" style="color:white;"></i></a>\
-                                    <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>\
-                                    <a class="dropdown-item" href="/collection/article">文章收藏</a>\
-                                    <a class="dropdown-item" href="/member/articleManage">文章管理</a>\
+                                    <a class="dropdown-item" href="/collection/recommend/1">推薦收藏</a>\
+                                    <a class="dropdown-item" href="/collection/article/1">文章收藏</a>\
+                                    <a class="dropdown-item" href="/member/articleManage/1">文章管理</a>\
                                     <a class="dropdown-item" href="/member/memberManage">會員資料修改</a>\
                                     <a class="dropdown-item" href="/user/logout">登出</a>\
                                 </div>\
@@ -274,9 +274,9 @@ $(document).ready(() => {
                             </a>\
                             <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
                                 <a class="nav-link" href="/notify"><i class="fas fa-bell" style="color:white;"></i></a>\
-                                <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>\
-                                <a class="dropdown-item" href="/collection/article">文章收藏</a>\
-                                <a class="dropdown-item" href="/member/articleManage">文章管理</a>\
+                                <a class="dropdown-item" href="/collection/recommend/1">推薦收藏</a>\
+                                <a class="dropdown-item" href="/collection/article/1">文章收藏</a>\
+                                <a class="dropdown-item" href="/member/articleManage/1">文章管理</a>\
                                 <a class="dropdown-item" href="/member/memberManage">會員資料修改</a>\
                                 <a class="dropdown-item" href="/user/logout">登出</a>\
                             </div>\

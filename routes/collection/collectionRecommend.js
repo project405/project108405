@@ -6,7 +6,8 @@ var router = express.Router();
 const collection = require('../utility/collection');
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/:recomPage', function (req, res, next) {
+	var recomPage = req.params.recomPage;   //取出參數
 	var memID;
 
 	//判斷是使用哪種方式登入
@@ -18,7 +19,9 @@ router.get('/', function (req, res, next) {
 		memID = req.session.passport.user.id;
 	}
 	//取得推薦文章
-	collection.getCollRecommend(memID).then(data => {
+	collection.getCollRecommend(memID, recomPage).then(data => {
+		data[4][0].count = Math.ceil(data[4][0].count / 8) 
+		data[4][0].count = data[4][0].count == 0 ? 1 : data[4][0].count
 		data[0].map((item) => {
             item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ")
         })

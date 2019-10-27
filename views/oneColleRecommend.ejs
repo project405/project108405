@@ -611,7 +611,9 @@
                     }
                 });
                 function submitReply(artiNum) {
-                    if (document.getElementById('replyInput').innerHTML == '') {
+                    var templateCont = document.getElementById('replyInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+
+                    if (templateCont == '') {
                         alert('請輸入回覆內容！')
                         return;
                     }

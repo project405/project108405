@@ -8,11 +8,11 @@ var moment = require('moment');
 //=========================================
 //---------  getCollRecommend() -----------
 //=========================================
-var getCollRecommend = async function (memID) {
+var getCollRecommend = async function (memID, recompage) {
     var recommendList = [];
     var imgs = [] ; 
     var result = [];
-
+    var collSum;
     //---------  取得收藏推薦內容 -------------
     await sql('SELECT "recomNum" '+
                     ' ,to_char("recomDateTime",\'YYYY-MM-DD\') AS "recomDateTime" '+
@@ -27,7 +27,9 @@ var getCollRecommend = async function (memID) {
               ' WHERE "recomNum" '+
                 ' IN (SELECT "recomNum" '+
                     ' FROM "memberCollection"  '+
-                    ' WHERE "memID" = $1 )', [memID])
+                    ' WHERE "memID" = $1 )'+
+              ' LIMIT 8'+
+              ' OFFSET $2' , [memID, (recompage-1)*8])
         .then((data) => {
             if (!data.rows){
                 recommendList = undefined ;
@@ -37,6 +39,19 @@ var getCollRecommend = async function (memID) {
         }, (error) => {
             recommendList = undefined ;
         });
+
+    await sql(' SELECT COUNT(*) ' +
+        ' FROM "recommend"' +
+        ' WHERE "recomNum"' +
+        ' IN (SELECT "recomNum" '+
+        ' FROM "memberCollection" '+
+        ' WHERE "memID" = $1 ) ', [memID])
+        .then((data) => {
+            collSum = data.rows;
+        }, (error) => {
+            collSum = undefined;
+            console.log(error)
+        })
 
     // --------- 取得照片 --------- 
     await sql('SELECT "recomNum","imgName" '+
@@ -61,6 +76,8 @@ var getCollRecommend = async function (memID) {
     result[1] = [memID] ;
     // result[2] = checkAuthority ;
     result[3] = imgs;
+    result[4] = collSum;
+    result[5] = [recompage];
 
     return result;
 }
@@ -219,13 +236,15 @@ var getOneColleRecommend = async function (recomNum, memID) {
 //=========================================
 //---------  getCollArticle() -------------
 //=========================================
-var getCollArticle = async function (memID) {
+var getCollArticle = async function (memID, collpage) {
     var colleArticle = [];
     var tag = [];
     var isLike = [];
     var imgs = [];
     var result = [];
+    var collSum;
 
+    console.log(memID, collpage)
     //---------  取得每個會員收藏的文章內容 -------------
     await sql('SELECT "artiView".*, "member"."memName"'+
              ' FROM "articleListDataView" AS "artiView" '+
@@ -233,7 +252,9 @@ var getCollArticle = async function (memID) {
              ' WHERE "artiView"."artiNum" '+
                 ' IN (SELECT "artiNum" '+
                     ' FROM "memberCollection"  '+
-                    ' WHERE "memID" = $1 )',  [memID])
+                    ' WHERE "memID" = $1 )'+
+            ' LIMIT 10' +
+            ' OFFSET $2',  [memID, (collpage-1)*10 ])
         .then((data) => {
             if(!data.rows){
                 colleArticle = undefined ; 
@@ -243,6 +264,16 @@ var getCollArticle = async function (memID) {
         }, (error) => {
             colleArticle = undefined ;
         });
+
+    await sql('SELECT COUNT(*) ' +
+            'FROM "articleListDataView" AS "artiView"' +
+            'WHERE "artiView"."artiNum" '+
+            'IN (SELECT "artiNum" FROM "memberCollection"  WHERE "memID" = $1)' , [memID])
+    .then((data) => {
+        collSum = data.rows;
+    }, (error) => {
+        collSum = undefined;
+    })
 
     // -----------  取得每篇收藏文章的tag --------------
     await sql('SELECT "tagName" '+
@@ -301,6 +332,8 @@ var getCollArticle = async function (memID) {
     result[2] = isLike;
     result[3] = imgs;
     result[4] = [memID];
+    result[5] = collSum;
+    result[6] = [collpage];
 
     return result;
 }
@@ -308,11 +341,11 @@ var getCollArticle = async function (memID) {
 //===============================
 //---- getCollRecomClassList ----
 //===============================
-var getCollRecomClassList = async function (memID, recomClass) {
+var getCollRecomClassList = async function (memID, recomClass, recompage) {
     var recommendList = [];
     var imgs = [] ;
     var result = [];
-
+    var collSum;
     //--------- 根據分類取得會員收藏的推薦內容 ---------
     await sql('SELECT  "recomView"."recomNum" '+
                 ' ,"recomView"."recomHead" '+
@@ -322,7 +355,9 @@ var getCollRecomClassList = async function (memID, recomClass) {
              ' WHERE "recomView"."recomNum" '+
                     'IN (SELECT "recomNum" '+
                         ' FROM "memberCollection" '+
-                        ' WHERE "memID" = $1 ) AND "recomView"."recomClass" = $2', [memID, recomClass])
+                        ' WHERE "memID" = $1 ) AND "recomView"."recomClass" = $2'+
+            ' LIMIT 8' +
+            ' OFFSET $3 ' , [memID, recomClass, (recompage-1)*8])
         .then((data) => {
             if(!data.rows){
                 recommendList = undefined ; 
@@ -332,7 +367,20 @@ var getCollRecomClassList = async function (memID, recomClass) {
         }, (error) => {
             recommendList = undefined ; 
         });
-      
+
+    await sql(' SELECT COUNT(*) ' +
+            ' FROM "recommend"' +
+            ' WHERE "recomNum"' +
+            ' IN (SELECT "recomNum" '+
+            ' FROM "memberCollection" '+
+            ' WHERE "memID" = $2 ) '+
+            ' AND "recomClass" = $1', [recomClass, memID])
+    .then((data) => {
+        collSum = data.rows;
+    }, (error) => {
+        collSum = undefined;
+        console.log(error)
+    })
     // --------- 取得照片 --------- 
     await sql('SELECT "recomNum" , "imgName" '+
              ' FROM "image"  '+
@@ -356,6 +404,8 @@ var getCollRecomClassList = async function (memID, recomClass) {
     result[1] = imgs ;
     // result[2] = checkAuthority ;
     result[3] = [memID];
+    result[4] = collSum;
+    result[5] = [recompage];
 
     return result ;
 
@@ -364,13 +414,13 @@ var getCollRecomClassList = async function (memID, recomClass) {
 //===============================
 //---- getCollArtiClassList ----
 //===============================
-var getCollArtiClassList = async function (memID, artiClass) {
+var getCollArtiClassList = async function (memID, artiClass, collpage) {
     var articleList = [];
     var tag = [] ;
     var isLike = [] ;
     var imgs = [] ;
     var result = [];
-
+    var collSum;
     //--------- 根據分類取得會員收藏的文章內容 ---------
     await sql('SELECT "articleListDataView".*, "member"."memName" '+
              ' FROM "articleListDataView" '+
@@ -379,7 +429,9 @@ var getCollArtiClassList = async function (memID, artiClass) {
                 ' IN (SELECT "artiNum" '+
                     ' FROM "memberCollection" '+
                     ' WHERE "memID" = $1 ) '+
-              ' AND "artiClass" = $2 ', [memID, artiClass])
+              ' AND "artiClass" = $2 '+
+              ' LIMIT 10' +
+              ' OFFSET $3' , [memID, artiClass, (collpage-1)* 10])
         .then((data) => {
             if(!data.rows){
                 articleList = undefined ; 
@@ -387,9 +439,23 @@ var getCollArtiClassList = async function (memID, artiClass) {
                 articleList = data.rows ;
             }     
         }, (error) => {
+            console.log(error)
             articleList = undefined ; 
         });
+    await sql(' SELECT COUNT(*) ' +
+              ' FROM "articleListDataView"' +
+              ' WHERE "artiNum"' +
+              ' IN (SELECT "artiNum" '+
+              ' FROM "memberCollection" '+
+              ' WHERE "memID" = $2 ) '+
+              ' AND "artiClass" = $1', [artiClass, memID])
+        .then((data) => {
+            collSum = data.rows;
+        }, (error) => {
+            collSum = undefined;
+            console.log(error)
 
+        })
     // -----------  取得每篇收藏文章的tag --------------
     await sql('SELECT "tagName" '+
               ' FROM "articleTagView" '+
@@ -449,6 +515,8 @@ var getCollArtiClassList = async function (memID, artiClass) {
     result[3] = isLike ; 
     // result[4] = checkAuthority ;
     result[5] = [memID];
+    result[6] = collSum;
+    result[7] = [collpage];
 
     return result ;
 
