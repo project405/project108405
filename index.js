@@ -91,16 +91,18 @@ app.post('/webhook',  function (req, res) {
                     var pushImg = [];
                     LinePush.artiImg(data[0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                        if(img){
+                            LinePush.Imgur(img).then(thirdData => {  
+                                pushImg.push(thirdData);
+                                                     
+                                // linePushPhoto(pushImg[0]);
+                                linePushPhoto();
+                                
+                            }).catch((err)=> {
+                                console.log(err)
+                            });
+                        }
                         
-                        LinePush.Imgur(img).then(thirdData => {  
-                            pushImg.push(thirdData);
-                                                 
-                            // linePushPhoto(pushImg[0]);
-                            // linePushPhoto();
-                            
-                        }).catch((err)=> {
-                            console.log(err)
-                        });
                     }); 
                 
                 }else{
@@ -131,15 +133,18 @@ app.post('/webhook',  function (req, res) {
                     LinePush.recomImg(data[0].recomNum).then(secondData =>{
                         console.log('推薦～有進來圖片這區')
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        LinePush.Imgur(img).then(thirdData => {  
-                            pushImg.push(thirdData);
-                                                 
-                            // linePushPhoto(pushImg[0]);
-                            // linePushPhoto();
-                            
-                        }).catch((err)=> {
-                            console.log(err)
-                        });
+                        if(img){
+                            LinePush.Imgur(img).then(thirdData => {  
+                                pushImg.push(thirdData);
+                                                     
+                                // linePushPhoto(pushImg[0]);
+                                linePushPhoto();
+                                
+                            }).catch((err)=> {
+                                console.log(err)
+                            });
+                        }
+                       
                     }); 
                     
                     
