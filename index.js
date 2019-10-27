@@ -435,6 +435,8 @@ bot.on('message', function(event) {
                     console.log('data!!!!!!!!',data)
                     // recommendImg.push();
 
+                }).catch(() => {
+                    console.log('Do that');
                 })
                 
             });
