@@ -34,7 +34,7 @@ var getIndexData = async function (memID) {
     var result = [];
 
     // -----------  每週推薦 --------------
-    await sql('SELECT * FROM "recommend"')
+    await sql('SELECT * FROM "recommend" ORDER BY "recomNum" DESC')
         .then((data) => {
             // 將每周推薦的類別改為中文
             for (let i = 0; i < data.rows.length; i++) {
