@@ -60,11 +60,20 @@ bot.on('postback', function(event) {
             if (data == 'movie' ||data == 'music' ||data == 'book' || data =='exhibition'){
                
                 //---------------進到四大推薦---------------
-                recommend.getFourRecomClassList().then(d =>{
-                    d[0][0].recomCont = d[0][0].recomCont.length>75 ? `${d[0][0].recomCont.substr(0,75)}...` : d[0][0].recomCont
-                    d[1][0].recomCont = d[1][0].recomCont.length>75 ? `${d[1][0].recomCont.substr(0,75)}...` : d[1][0].recomCont
-                    d[2][0].recomCont = d[2][0].recomCont.length>75 ? `${d[2][0].recomCont.substr(0,75)}...` : d[2][0].recomCont
-                    d[3][0].recomCont = d[3][0].recomCont.length>75 ? `${d[3][0].recomCont.substr(0,75)}...` : d[3][0].recomCont
+                // recommend.getFourRecomClassList().then(d =>{
+                    index.getIndexData().then(data => {  
+                        
+                        let recommendCont = [];
+                        let recommendNum = [];
+                        data[0].forEach(item => {
+                            item.recomCont = item.recomCont.length>75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
+                            recommendCont.push(item.recomCont);
+                            recommendNum.push(item.recomNum);
+                        });
+                    // d[0][0].recomCont = d[0][0].recomCont.length>75 ? `${d[0][0].recomCont.substr(0,75)}...` : d[0][0].recomCont
+                    // d[1][0].recomCont = d[1][0].recomCont.length>75 ? `${d[1][0].recomCont.substr(0,75)}...` : d[1][0].recomCont
+                    // d[2][0].recomCont = d[2][0].recomCont.length>75 ? `${d[2][0].recomCont.substr(0,75)}...` : d[2][0].recomCont
+                    // d[3][0].recomCont = d[3][0].recomCont.length>75 ? `${d[3][0].recomCont.substr(0,75)}...` : d[3][0].recomCont
                     if (data == 'movie'){
                         return event.reply([
                             {
@@ -72,48 +81,12 @@ bot.on('postback', function(event) {
                                 "altText": "精選電影",
                                 "template": {
                                   "type": "buttons",
-                                  "text": d[0][0].recomCont,
+                                  "text": recommendCont[0],
                                   "actions": [
                                     {
                                       "type": "uri",
                                       "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${d[0][0].recomNum}`
-                                    }
-                                  ]
-                                }
-                            }
-                        ]);		
-                    }else if(data == 'music'){
-                        return event.reply([
-                            {
-                                "type": "template",
-                                "altText": "精選音樂",
-                                "template": {
-                                  "type": "buttons",
-                                  "text": d[1][0].recomCont,
-                                  "actions": [
-                                    {
-                                      "type": "uri",
-                                      "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${d[1][0].recomNum}`
-                                    }
-                                  ]
-                                }
-                            }
-                        ]);		
-                    }else if(data == 'book'){
-                        return event.reply([
-                            {
-                                "type": "template",
-                                "altText": "精選書籍",
-                                "template": {
-                                  "type": "buttons",
-                                  "text": d[2][0].recomCont,
-                                  "actions": [
-                                    {
-                                      "type": "uri",
-                                      "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${d[2][0].recomNum}`
+                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[0]}`
                                     }
                                   ]
                                 }
@@ -126,17 +99,54 @@ bot.on('postback', function(event) {
                                 "altText": "精選展覽",
                                 "template": {
                                   "type": "buttons",
-                                  "text": d[3][0].recomCont,
+                                  "text": recommendCont[1],
                                   "actions": [
                                     {
                                       "type": "uri",
                                       "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${d[3][0].recomNum}`
+                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[1]}`
+                                    }
+                                  ]
+                                }
+                            }
+                        ]);	
+                        	
+                    }else if(data == 'book'){
+                        return event.reply([
+                            {
+                                "type": "template",
+                                "altText": "精選書籍",
+                                "template": {
+                                  "type": "buttons",
+                                  "text": recommendCont[2],
+                                  "actions": [
+                                    {
+                                      "type": "uri",
+                                      "label": " 👀 至文藝富心官網觀看",
+                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[2]}`
                                     }
                                   ]
                                 }
                             }
                         ]);		
+                    }else if(data == 'music'){
+                        return event.reply([
+                            {
+                                "type": "template",
+                                "altText": "精選音樂",
+                                "template": {
+                                  "type": "buttons",
+                                  "text": recommendCont[3],
+                                  "actions": [
+                                    {
+                                      "type": "uri",
+                                      "label": " 👀 至文藝富心官網觀看",
+                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[3]}`
+                                    }
+                                  ]
+                                }
+                            }
+                        ]);	
                     }    
                 });
             }else if (data.match("article")){
@@ -433,8 +443,6 @@ bot.on('message', function(event) {
                 recommendDateTime.push(item.recomDateTime);
                 
             });
-
-            console.log(recommendDateTime)
                 event.reply({
                     "type": "template",
                     "altText": " 👋 本週新推薦",
@@ -539,7 +547,6 @@ bot.on('message', function(event) {
                         "imageSize": "cover"
                     }
                 });
-            
         });
     }
     //-----------心情推薦-----------
