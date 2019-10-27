@@ -66,7 +66,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
     var swearWords = req.body.swearWords;
     var editReply = req.body.editReply;
 
-    var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
+    var postDateTime = moment(Date().now).format("YYYY-MM-DD HH:mm:ss");
     var imgData = [];
     //將所有換行符號替代成<br> 
     replyCont = replyCont.replace(/\n/g, "<br>");

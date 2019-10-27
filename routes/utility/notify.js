@@ -10,7 +10,7 @@ var getNotifyList = async function (memID) {
     await sql('SELECT * FROM "memberMessage" WHERE "memID"=$1 ORDER BY "memMessDateTime" DESC' , [memID])
         .then((data) => {
             for (let i = 0; i < data.rows.length; i++) {
-                data.rows[i].memMessDateTime = moment(data.rows[i].memMessDateTime).format("YYYY-MM-DD hh:mm:ss");
+                data.rows[i].memMessDateTime = moment(data.rows[i].memMessDateTime).format("YYYY-MM-DD HH:mm:ss");
             }
             result.push(data.rows);
         }, (error) => {

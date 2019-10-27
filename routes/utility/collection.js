@@ -14,22 +14,22 @@ var getCollRecommend = async function (memID, recompage) {
     var result = [];
     var collSum;
     //---------  取得收藏推薦內容 -------------
-    await sql('SELECT "recomNum" '+
-                    ' ,to_char("recomDateTime",\'YYYY-MM-DD\') AS "recomDateTime" '+
-                    ' ,"recomHead" '+
-                    ' ,"recomCont" '+
-                    ' ,CASE WHEN "recomClass" = \'movie\' THEN \'電影\' '+
-                    ' WHEN "recomClass" = \'music\' THEN \'音樂\' '+
-                    ' WHEN "recomClass" = \'book\' THEN \'書籍\' '+
-                    ' WHEN "recomClass" = \'exhibition\' THEN \'展覽\' '+
-                    ' END AS "recomClass" '+
-              ' FROM "recommend" '+
-              ' WHERE "recomNum" '+
-                ' IN (SELECT "recomNum" '+
-                    ' FROM "memberCollection"  '+
-                    ' WHERE "memID" = $1 )'+
-              ' LIMIT 8'+
-              ' OFFSET $2' , [memID, (recompage-1)*8])
+    await sql('SELECT "m"."recomNum" '+
+                    ' ,to_char("recomDateTime",\'YYYY-MM-DD\') AS "recomDateTime" '+ 
+                    ' ,"recomHead" '+ 
+                    ' ,"recomCont" '+ 
+                    ' ,CASE WHEN "recomClass" = \'movie\' THEN \'電影\' '+ 
+                    ' WHEN "recomClass" = \'music\' THEN \'音樂\' '+ 
+                    ' WHEN "recomClass" = \'book\' THEN \'書籍\' '+ 
+                    ' WHEN "recomClass" = \'exhibition\' THEN \'展覽\' '+ 
+                    ' END AS "recomClass" '+ 
+            ' FROM "memberCollection" AS "m" '+
+            ' INNER JOIN "recommend" AS "r" '+
+            ' ON "m"."recomNum" = "r"."recomNum" '+
+            ' WHERE "memID" = $1 '+ 
+            ' ORDER BY "collDateTime"	DESC '+
+            ' LIMIT 8 '+
+            ' OFFSET $2', [memID, (recompage-1)*8])
         .then((data) => {
             if (!data.rows){
                 recommendList = undefined ;
@@ -44,8 +44,8 @@ var getCollRecommend = async function (memID, recompage) {
         ' FROM "recommend"' +
         ' WHERE "recomNum"' +
         ' IN (SELECT "recomNum" '+
-        ' FROM "memberCollection" '+
-        ' WHERE "memID" = $1 ) ', [memID])
+            ' FROM "memberCollection" '+
+            ' WHERE "memID" = $1 ) ', [memID])
         .then((data) => {
             collSum = data.rows;
         }, (error) => {
@@ -246,14 +246,15 @@ var getCollArticle = async function (memID, collpage) {
 
     console.log(memID, collpage)
     //---------  取得每個會員收藏的文章內容 -------------
-    await sql('SELECT "artiView".*, "member"."memName"'+
-             ' FROM "articleListDataView" AS "artiView" '+
-             ' INNER JOIN "member" ON "member"."memID" = "artiView"."memID" '+
-             ' WHERE "artiView"."artiNum" '+
-                ' IN (SELECT "artiNum" '+
-                    ' FROM "memberCollection"  '+
-                    ' WHERE "memID" = $1 )'+
-            ' LIMIT 10' +
+    await sql('SELECT "a".*, "mem"."memName" '+
+            ' FROM "memberCollection"  AS "m" '+
+            ' INNER JOIN "articleListDataView" AS "a" '+
+                ' ON "m"."artiNum" = "a"."artiNum" '+
+            ' INNER JOIN "member" AS "mem" '+
+                ' ON "mem"."memID" = "a"."memID" '+
+            ' WHERE "m"."memID" = $1 '+
+            ' ORDER BY	"collDateTime" DESC '+
+            ' LIMIT 10 '+
             ' OFFSET $2',  [memID, (collpage-1)*10 ])
         .then((data) => {
             if(!data.rows){
@@ -526,7 +527,7 @@ var getCollArtiClassList = async function (memID, artiClass, collpage) {
 //---------  addCollention() --------------
 //=========================================
 var addColleArticle = async function (memID, artiNum) {
-    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
+    var addTime = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
     var result;
 
     await sql('INSERT INTO "memberCollection" ("memID","artiNum","collDateTime") VALUES ($1,$2,$3)', [memID, artiNum, addTime])
@@ -543,7 +544,7 @@ var addColleArticle = async function (memID, artiNum) {
 //---------  addColleRecommend() ----------
 //=========================================
 var addColleRecommend = async function (memID, recomNum) {
-    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
+    var addTime = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
     var result;
 
     await sql('INSERT INTO "memberCollection" ("memID","recomNum","collDateTime") VALUES ($1,$2,$3)', [memID, recomNum,addTime])
