@@ -425,7 +425,10 @@ bot.on('message', function(event) {
             
             // let recommendNum = []  
             //順序為電影、展覽、書籍、音樂
-            data[0].forEach(item => {
+            data[0].map((map,index) => {
+                console.log('map!!',map)
+                console.log('index',index)
+
                 // console.log('item!!!',item.recomNum);
                 // console.log('item!!!',item.recomClass);
                 recommendNum.push(item.recomNum);
