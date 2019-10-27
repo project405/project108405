@@ -434,7 +434,7 @@ bot.on('message', function(event) {
                 
             });
 
-            recommendNum.map(item =>{
+            recommendNum.forEach(item =>{
                 linePush.recomImg(item).then(data => {
                     console.log('data!!!!!!!!',data)
                     // recommendImg.push();
