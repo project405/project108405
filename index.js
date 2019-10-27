@@ -50,9 +50,9 @@ var server = app.listen(process.env.PORT || 3000, function() {
 });
 
 app.post('/webhook',  function (req, res) {
-    linePushPhoto()
     let allUserLineID = [];
     LinePush.AllMember().then(data => {  
+        linePushPhoto();
         data.forEach(item => {
             if(item.lineID != ''){
                 allUserLineID.push(item.lineID);
