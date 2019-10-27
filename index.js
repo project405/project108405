@@ -443,6 +443,7 @@ bot.on('message', function(event) {
             // })
 
             console.log(recommendNum)
+            console.log(recommendNum[0])
             console.log(recommendHead)
             console.log(recommendCont)
             console.log(recommendImg)
