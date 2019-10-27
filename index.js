@@ -438,10 +438,10 @@ bot.on('message', function(event) {
                 linePush.recomImg(item).then(data => {
                     console.log('data!!!!!!!!',data)
                     // recommendImg.push();
-                }).catch(() => {
-                    console.log('Do that');
-                })
-            })
+                // }).catch(() => {
+                //     console.log('Do that');
+                // })
+            });
 
             console.log(recommendNum)
             console.log(recommendHead)
