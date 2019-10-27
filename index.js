@@ -439,6 +439,8 @@ bot.on('message', function(event) {
                 //     console.log('data!!!!!!!!',Senconddata)
                 //     recommendImg.push(Senconddata);
             });
+
+            console.log(recommendDateTime)
                 event.reply({
                     "type": "template",
                     "altText": " 👋 本週新推薦",
