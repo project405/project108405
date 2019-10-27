@@ -48,7 +48,7 @@ var server = app.listen(process.env.PORT || 3000, function() {
     const port = server.address().port;
     console.log("正在監聽埠號:", port);
 });
-
+linePushPhoto()
 app.post('/webhook',  function (req, res) {
     
     let allUserLineID = [];
