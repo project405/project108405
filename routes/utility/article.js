@@ -328,8 +328,9 @@ var getOneArticle = async function (artiNum, memID) {
     if(guessArticle == undefined){
         await sql('SELECT * '+
             ' FROM "article" '+
+            ' WHERE "artiNum" != $1 '+
             ' ORDER BY random() '+
-            ' LIMIT 3') 
+            ' LIMIT 3',[artiNum]) 
         .then((data) => {
                 if (!data.rows) {
                     guessArticle = undefined ;
