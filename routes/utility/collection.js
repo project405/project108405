@@ -348,17 +348,14 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
     var result = [];
     var collSum;
     //--------- 根據分類取得會員收藏的推薦內容 ---------
-    await sql('SELECT  "recomView"."recomNum" '+
-                ' ,"recomView"."recomHead" '+
-                ' ,"recomView"."recomCont" '+
-                ' ,"recomView"."recomClass" '+
-             ' FROM "recommendListDataView" AS "recomView" '+
-             ' WHERE "recomView"."recomNum" '+
-                    'IN (SELECT "recomNum" '+
-                        ' FROM "memberCollection" '+
-                        ' WHERE "memID" = $1 ) AND "recomView"."recomClass" = $2'+
-            ' LIMIT 8' +
-            ' OFFSET $3 ' , [memID, recomClass, (recompage-1)*8])
+    await sql('SELECT "r".* '+ 
+             ' FROM "memberCollection" AS "m" '+
+                 ' INNER JOIN "recommendListDataView" AS "r" '+
+                     ' ON "m"."recomNum" = "r"."recomNum" '+
+             ' WHERE "m"."memID" = $1 AND "r"."recomClass" = $2 '+
+             ' ORDER BY "collDateTime" DESC'+
+             ' LIMIT 8' +
+             ' OFFSET $3 ' , [memID, recomClass, (recompage-1)*8])
         .then((data) => {
             if(!data.rows){
                 recommendList = undefined ; 
@@ -423,16 +420,16 @@ var getCollArtiClassList = async function (memID, artiClass, collpage) {
     var result = [];
     var collSum;
     //--------- 根據分類取得會員收藏的文章內容 ---------
-    await sql('SELECT "articleListDataView".*, "member"."memName" '+
-             ' FROM "articleListDataView" '+
-             ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID" ' +
-             ' WHERE "artiNum" '+
-                ' IN (SELECT "artiNum" '+
-                    ' FROM "memberCollection" '+
-                    ' WHERE "memID" = $1 ) '+
-              ' AND "artiClass" = $2 '+
-              ' LIMIT 10' +
-              ' OFFSET $3' , [memID, artiClass, (collpage-1)* 10])
+    await sql('SELECT "a".*, "mem"."memName" '+
+             ' FROM "memberCollection"  AS "m" '+
+                 ' INNER JOIN "articleListDataView" AS "a" '+
+                     ' ON "m"."artiNum" = "a"."artiNum" '+
+                 ' INNER JOIN "member" AS "mem" '+
+                     ' ON "mem"."memID" = "a"."memID" '+
+             ' WHERE "m"."memID" = $1 AND "a"."artiClass" = $2 '+
+             ' ORDER BY	"collDateTime" DESC'+
+             ' LIMIT 10' +
+             ' OFFSET $3' , [memID, artiClass, (collpage-1)* 10])
         .then((data) => {
             if(!data.rows){
                 articleList = undefined ; 
