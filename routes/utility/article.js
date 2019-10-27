@@ -90,7 +90,7 @@ var getArticleListPagination = async function (memID, artiListNum) {
     result[6] = articleSum;
     result[7] = [artiListNum];
 
-
+console.log("!!!!!!!!!!!!!!!!!",articleList);
     return result;
 }
 
@@ -217,7 +217,7 @@ var getOneArticle = async function (artiNum, memID) {
                     ' ,"Mess"."artiMessDateTime" '+
                     ' ,"Mess"."artiMessCont" ' +
                     ' ,"member"."memName" ' +
-             ' ORDER BY "artiMessDateTime" ', [artiNum])
+             ' ORDER BY "artiMessNum" ', [artiNum])
         .then((data) => {
             oneArtiMessage = data.rows;
         }, (error) => {
@@ -292,19 +292,30 @@ var getOneArticle = async function (artiNum, memID) {
         });
 
     // ----------- 根據該文章的tag去猜測使用者可能喜歡的文章 -----------
-    await sql('SELECT * '+
-                ' FROM "article" '+
-                ' WHERE "artiNum" '+
-                    ' IN(SELECT "A"."artiNum" '+
-                    ' FROM (SELECT "artiNum" ,count(*) '+
-                            ' FROM "tagLinkArticle" '+
-                            ' WHERE "tagNum" '+
-                                ' IN (SELECT "tagNum" '+
-                                    ' FROM "tagLinkArticle" '+
-                                    ' WHERE "artiNum" = $1) AND "artiNum" != $1 '+
-                            ' GROUP BY "artiNum" '+
-                            ' ORDER BY "count" DESC , "artiNum" DESC '+
-                            ' LIMIT 3) AS "A")', [artiNum])
+    await sql('SELECT * '+ 
+             ' FROM "article" '+
+             ' WHERE "artiNum" '+ 
+                ' IN(SELECT "A"."artiNum" '+
+                   ' FROM(SELECT "artiNum" , count("artiNum") '+
+                        ' FROM "tagLinkArticle" '+
+                        ' WHERE "tagNum" '+ 
+                            ' IN(SELECT "tagNum" '+
+                                ' FROM "tag" '+
+                                ' WHERE "tagName"  '+
+                                    ' IN(SELECT "tagName" '+
+                                        ' FROM "tag" '+
+                                        ' WHERE "tagNum" '+
+                                            ' IN (SELECT "tagNum" '+ 
+                                                ' FROM "tagLinkArticle" '+ 
+                                                ' WHERE "artiNum" = $1 ) '+
+                                        ' ) '+
+                                ' ) AND "artiNum" != $1 '+
+                        ' GROUP BY "artiNum" '+
+                        ' ORDER BY "count" DESC ,"artiNum" DESC '+
+                        ' LiMIT 3 '+
+                        ' ) AS "A" '+
+                    ') '+
+            ' ORDER BY "artiNum" DESC', [artiNum])
         .then((data) => {
             if (data.rowCount <= 0) {
                 guessArticle = undefined ;
@@ -317,8 +328,9 @@ var getOneArticle = async function (artiNum, memID) {
     if(guessArticle == undefined){
         await sql('SELECT * '+
             ' FROM "article" '+
+            ' WHERE "artiNum" != $1 '+
             ' ORDER BY random() '+
-            ' LIMIT 3') 
+            ' LIMIT 3',[artiNum]) 
         .then((data) => {
                 if (!data.rows) {
                     guessArticle = undefined ;

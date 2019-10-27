@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var crypto = require('crypto');
+const secret = "project108405"
 
 const member = require('../utility/member');
 const signUp = require('../utility/signUp');
@@ -31,6 +33,11 @@ router.post('/', function (req, res, next) {
     var checkMail;
     var originalMail;//目前使用者原本的Mail
     var memID = req.session.memID;
+    //密碼加密
+    var hmac = crypto.createHmac("sha256",secret);
+    var pwd = hmac.update(memPass);
+    var cryptoPWD = pwd.digest("hex");
+
     var memberData = {
         "memID": memID,
         "memPass": req.body.memPass,
@@ -40,6 +47,7 @@ router.post('/', function (req, res, next) {
         "memAddr": req.body.memAddr,
         "memGender": req.body.memGender
     };
+
     signUp.checkMail(memberData.memMail).then(data => {
         checkMail = data[0];
     })
@@ -57,7 +65,12 @@ router.post('/', function (req, res, next) {
         } else if (checkMail && originalMail != memberData.memMail) {
             res.end('<script> alert("此Email已經被註冊過囉！請重新輸入。"); history.back();</script>');
         } else {
-            member.modifyMember(memberData.memPass, memberData.memBirth, memberData.memMail, memberData.memGender, memberData.memAddr, memberData.memID).
+            //密碼加密
+            var hmac = crypto.createHmac("sha256",secret);
+            var pwd = hmac.update(memPass);
+            var cryptoPWD = pwd.digest("hex");
+
+            member.modifyMember(cryptoPWD, memberData.memBirth, memberData.memMail, memberData.memGender, memberData.memAddr, memberData.memID).
                 then(data => {
                     if (data == 1) {
                         res.end('<script> alert("修改成功！");location.replace("/");</script>');

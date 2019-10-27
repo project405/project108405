@@ -64,12 +64,18 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
     var negativeWords = req.body.negativeWords;
     var swearWords = req.body.swearWords;
     var editReply = req.body.editReply;
-    
     var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
     var imgData = [];
     //將所有換行符號替代成<br> 
     recomMessCont = recomMessCont.replace(/\n/g, "<br>");
 
+    //內容、標題不可為空
+    if(recomMessCont == null ){
+
+
+    }
+
+    //img
     for (var i in req.files) {
         imgData.push(req.files[i].filename);
     }

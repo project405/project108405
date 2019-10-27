@@ -467,7 +467,7 @@
         });
         function submitReply(artiNum) {
             if (document.getElementById('replyInput').innerHTML == '') {
-                alert('請輸入回復內容！')
+                alert('請輸入回覆內容！')
                 return;
             }
             $('.submitReplyButton').addClass('disabled')
@@ -744,7 +744,7 @@
                     data: { "artiNum": artiNum, "memID": '<%= items[0][0].memID %>', "delArticle": true },
                     success: function (res) {
                         alert('刪除成功！')
-                        location.replace("/articleList");
+                        location.replace("/articleList/1");
                     },
                     error: function (res) {
                         alert('刪除失敗！')

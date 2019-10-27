@@ -33,7 +33,6 @@ var memberRouter = require('./routes/member/member');
 var memberManageRouter = require('./routes/member/memberManage');
 var articleManageRouter = require('./routes/member/articleManage');
 var articlePostRouter = require('./routes/member/articlePost');
-// var articlePostRouter = require('./routes/member/articleBase64');
 var loginRouter = require('./routes/member/login');
 var logOutRouter = require('./routes/member/logOut');
 var signUpRouter = require('./routes/member/signUp');
@@ -45,6 +44,7 @@ var addLikeRouter = require('./routes/member/addLike');
 var delLikeRouter = require('./routes/member/delLike');
 var reportRouter = require('./routes/member/report');
 var replyPostRouter = require('./routes/member/replyPost');
+var bestReplyRouter = require('./routes/member/bestReply')
 
 // ---------------  four Class -------------------
 var myMovieArticleRouter = require('./routes/member/myMovieArticle');
@@ -191,6 +191,7 @@ app.use('/notify', notifyRouter);
 app.use('/addLike', addLikeRouter);
 app.use('/delLike', delLikeRouter);
 app.use('/report', reportRouter);
+app.use('/bestReply', bestReplyRouter);
 
 // -------------- four Class use----------------
 app.use('/articleManage/movie', myMovieArticleRouter);

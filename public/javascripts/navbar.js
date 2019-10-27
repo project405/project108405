@@ -110,7 +110,7 @@ $(document).ready(() => {
                             <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
                                 <a class="dropdown-item" href="#/" onclick="reply()">Line推播</a>\
                                 <a class="dropdown-item" href="/recommend/post/page">新增推薦</a>\
-                                <a class="dropdown-item" href="/member/articleManage">選出最佳留言</a>\
+                                <a class="dropdown-item" href="#/" onclick="bestReply()">選出最佳留言</a>\
                             </div>\
                         </li>\
                         <li class="nav-item">\
@@ -188,6 +188,51 @@ $(document).ready(() => {
                     swal('推播失敗！');
                 })
             };
+            bestReply = () => {
+                $.post('/bestReply', () => {
+                     
+                }).done((res) =>{
+                    var str = "上月最佳留言 \n";
+                    for (var i = 0 ; i < res[1].length ; i++){
+                        str += "留言編號:" + res[1][i].recomMessNum + "  使用者帳號為:" + res[1][i].memID + '\n' ; 
+                    }
+
+                    if(confirm(str)){
+                        var recomHead = [] ; 
+                        var memID = [] ; 
+                        var result = [] ; 
+                        for(var i = 0 ; i < res[0].length ; i++){
+                            console.log(res[0][i].recomHead);
+                            recomHead.push(res[0][i].recomHead);
+                        }
+
+                        for(var i = 0 ; i < res[1].length ; i++){
+                            console.log(res[1][i].memID);
+                            memID.push(res[1][i].memID);
+                        }
+                        result[0] = recomHead ;
+                        result[1] = memID ; 
+
+                        $.ajax({
+                            url: "/notify",
+                            type: 'POST',
+                            dataType: 'TEXT',
+                            data: {"recom" : JSON.stringify(recomHead), "member" : JSON.stringify(memID)},
+                            success: function (res) {
+                                alert(res); 
+                            },
+                            error: function (res) {
+                                console.log("失敗", res);
+                            }
+                         }); 
+                        
+                    }else{
+                        alert("取消寄出");
+                    };
+                })
+
+
+            };
                 //如果有登入可是沒推薦權限
             } else if (data[0] && !data[1]) {
                 document.getElementById('header').innerHTML = '\
@@ -217,7 +262,7 @@ $(document).ready(() => {
                                 討論區</a>\
                         </li>\
                         <li class="nav-item">\
-                        <a class="nav-link" href="/articleList/post">\
+                        <a class="nav-link" href="/post">\
                         <i class="fas fa-pen"></i>&nbsp;發文</a>\
                         </li>\
                         <li class="nav-item">\
