@@ -437,11 +437,13 @@ bot.on('message', function(event) {
             recommendNum.forEach(item =>{
                 linePush.recomImg(item).then(data => {
                     console.log('data!!!!!!!!',data)
-                    // recommendImg.push();
+                    recommendImg.push();
                 // }).catch(() => {
                 //     console.log('Do that');
-                })
-            });
+                    
+                // })
+                });
+            })
 
             console.log(recommendNum)
             console.log(recommendHead)
