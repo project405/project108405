@@ -95,13 +95,13 @@ app.post('/webhook',  function (req, res) {
                             pushImg.push(thirdData);
                                                  
                             // linePushPhoto(pushImg[0]);
-                            linePushPhoto();
+                            // linePushPhoto();
                             
                         }).catch((err)=> {
                             console.log(err)
                         });
                     }); 
-                    
+                    linePushPhoto();
                 
                 }else{
                     
@@ -135,12 +135,13 @@ app.post('/webhook',  function (req, res) {
                             pushImg.push(thirdData);
                                                  
                             // linePushPhoto(pushImg[0]);
-                            linePushPhoto();
+                            // linePushPhoto();
                             
                         }).catch((err)=> {
                             console.log(err)
                         });
                     }); 
+                    linePushPhoto();
                     
                 //沒圖片    
                 }else{
