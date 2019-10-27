@@ -421,14 +421,15 @@ bot.on('message', function(event) {
             let recommendNum = []  
             data[0].forEach(item => {
                 console.log('item!!!',item.recomNum);
+                console.log('item!!!',item.recomClass);
                 // recommendNum.push(item.recomNum);
                 
             });
 
-            var movieNum = data[0][0].recomNum;
-            var musicNum = data[1][0].recomNum;
-            var bookNum = data[2][0].recomNum;
-            var exhibitionNum = data[3][0].recomNum;
+            // var movieNum = data[0][0].recomNum;
+            // var musicNum = data[1][0].recomNum;
+            // var bookNum = data[2][0].recomNum;
+            // var exhibitionNum = data[3][0].recomNum;
             
             
 
