@@ -51,9 +51,7 @@ var server = app.listen(process.env.PORT || 3000, function() {
 
 app.post('/webhook',  function (req, res) {
     let allUserLineID = [];
-    LinePush.AllMember().then(data => {  
-        // linePushPhoto();
-        // linePush();
+    LinePush.AllMember().then(data => { 
         data.forEach(item => {
             if(item.lineID != ''){
                 allUserLineID.push(item.lineID);
@@ -147,7 +145,6 @@ app.post('/webhook',  function (req, res) {
                                 console.log(err)
                             });
                       
-                       
                     }); 
                     
                     
