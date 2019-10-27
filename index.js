@@ -440,7 +440,7 @@ bot.on('message', function(event) {
                     // recommendImg.push();
                 // }).catch(() => {
                 //     console.log('Do that');
-                // })
+                })
             });
 
             console.log(recommendNum)
