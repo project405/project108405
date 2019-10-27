@@ -67,7 +67,7 @@ app.post('/webhook',  function (req, res) {
             console.log('artiNum@@@@@@@@@@',data[0].artiNum)
             console.log('recomNum@@@@@@@@@@',data[0].recomNum)
             var pushContent = [];
-            var pushImg = [];
+            let pushImg = [];
             
             //data為文章
             if(data[0].recomHead == undefined){
