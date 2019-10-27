@@ -437,7 +437,7 @@ bot.on('message', function(event) {
             recommendNum.forEach(item =>{
                 linePush.recomImg(item).then(data => {
                     console.log('data!!!!!!!!',data)
-                    // recommendImg.push();
+                    recommendImg.push(data);
                 
                 });
             })
@@ -445,6 +445,7 @@ bot.on('message', function(event) {
             console.log(recommendNum)
             console.log(recommendHead)
             console.log(recommendCont)
+            console.log(recommendImg)
             // var movieNum = data[0][0].recomNum;
             // var musicNum = data[1][0].recomNum;
             // var bookNum = data[2][0].recomNum;
