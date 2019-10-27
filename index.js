@@ -433,7 +433,7 @@ bot.on('message', function(event) {
                 // console.log('item!!!',item.recomClass);
                 recommendNum.push(item.recomNum);
                 recommendHead.push(item.recomHead);
-                recommendHead.push(item.recomDateTime);
+                recommendDateTime.push(item.recomDateTime);
                 // recommendCont.push(item.recomCont);
                 // linePush.recomImg(item.recomNum).then(Senconddata => {
                 //     console.log('data!!!!!!!!',Senconddata)
