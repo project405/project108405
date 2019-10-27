@@ -18,6 +18,7 @@ router.get('/:recomPage', function (req, res, next) {
     
     collection.getCollRecomClassList(memID, '電影', recomPage).then(data => {
         data[4][0].count = Math.ceil(data[4][0].count / 8) 
+        console.log(data[4][0].count)
         data[4][0].count = data[4][0].count == 0 ? 1 : data[4][0].count
 
         data[0].map((item) => {
