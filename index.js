@@ -100,8 +100,8 @@ app.post('/webhook',  function (req, res) {
                         }).catch((err)=> {
                             console.log(err)
                         });
+                        linePushPhoto();
                     }); 
-                    linePushPhoto();
                 
                 }else{
                     
@@ -140,8 +140,9 @@ app.post('/webhook',  function (req, res) {
                         }).catch((err)=> {
                             console.log(err)
                         });
+                        linePushPhoto();
                     }); 
-                    linePushPhoto();
+                    
                     
                 //沒圖片    
                 }else{
