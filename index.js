@@ -432,9 +432,9 @@ bot.on('message', function(event) {
             
             
 
-            linePush.recomImg(){
+            // linePush.recomImg(){
 
-            }
+            // }
 
             event.reply({
                 "type": "template",
