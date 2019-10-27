@@ -420,6 +420,7 @@ bot.on('message', function(event) {
         index.getIndexData().then(data => {  
             let recommendNum = []  
             let recommendHead = []  
+            let recommendDateTime = []  
             let recommendCont = []  
             let recommendImg = []  
             
@@ -432,6 +433,7 @@ bot.on('message', function(event) {
                 // console.log('item!!!',item.recomClass);
                 recommendNum.push(item.recomNum);
                 recommendHead.push(item.recomHead);
+                recommendHead.push(item.recomDateTime);
                 // recommendCont.push(item.recomCont);
                 // linePush.recomImg(item.recomNum).then(Senconddata => {
                 //     console.log('data!!!!!!!!',Senconddata)
@@ -446,7 +448,7 @@ bot.on('message', function(event) {
                             {
                               "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/movie1.jpg",
                               "title": "【" + msgs[0] + "】" + recommendHead[0],
-                              "text": DateTimeFormat(item.recomDateTime),
+                              "text": DateTimeFormat(recommendDateTime[0]),
                               "defaultAction": {
                                   "type": "uri",
                                   "label": "知道更多",
@@ -470,7 +472,7 @@ bot.on('message', function(event) {
                             {
                               "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/music1.jpg",
                               "title":"【" + msgs[1] + "】" + recommendHead[1],
-                              "text": DateTimeFormat(data[1][0].recomDateTime),
+                              "text": DateTimeFormat(recommendDateTime[1]),
                               "defaultAction": {
                                   "type": "uri",
                                   "label": "詳細資料",
@@ -493,7 +495,7 @@ bot.on('message', function(event) {
                             {
                                 "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/book1.jpg",
                                 "title":"【" + msgs[2] + "】" + recommendHead[2],
-                                "text": DateTimeFormat(data[2][0].recomDateTime),
+                                "text": DateTimeFormat(recommendDateTime[2]),
                                 "defaultAction": {
                                     "type": "uri",
                                     "label": "詳細資料",
@@ -516,7 +518,7 @@ bot.on('message', function(event) {
                               {
                                 "thumbnailImageUrl": "https://project108405.herokuapp.com/imgs/recommend/exhibition1.jpg",
                                 "title":"【" + msgs[3] + "】" + recommendHead[3],
-                                "text": DateTimeFormat(data[3][0].recomDateTime),
+                                "text": DateTimeFormat(recommendDateTime[3]),
                                 "defaultAction": {
                                     "type": "uri",
                                     "label": "詳細資料",
@@ -541,13 +543,6 @@ bot.on('message', function(event) {
                         "imageSize": "cover"
                     }
                 });
-                
-            
-            
-            
-
-            
-            
             
         });
     }
