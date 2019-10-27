@@ -134,12 +134,13 @@
         async function submitPost() {
             var imgKey = []
             var toBase64 = []
-
+            var templateCont = document.getElementById('postInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+            var templateHead = document.getElementById('artiHead').value.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
             var artiHead = document.getElementById("artiHead").value;
-            if (artiHead == '') {
+            if (templateHead == '') {
                 alert('請輸入標題')
                 return;
-            } else if (document.getElementById("postInput").innerHTML == '') {
+            } else if (templateCont == '') {
                 alert('請輸入內文')
                 return;
             }
