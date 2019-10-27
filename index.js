@@ -87,6 +87,7 @@ app.post('/webhook',  function (req, res) {
                 }
                 //有圖片
                 if (data[0].artiCont.match("\\:imgLocation") != null){
+                    console.log('文章～有進來圖片這區')
                     var pushImg = [];
                     LinePush.artiImg(data[0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
@@ -100,7 +101,6 @@ app.post('/webhook',  function (req, res) {
                         }).catch((err)=> {
                             console.log(err)
                         });
-                        linePushPhoto();
                     }); 
                 
                 }else{
@@ -129,7 +129,7 @@ app.post('/webhook',  function (req, res) {
 
                     // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
                     LinePush.recomImg(data[0].recomNum).then(secondData =>{
-                        
+                        console.log('推薦～有進來圖片這區')
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(thirdData => {  
                             pushImg.push(thirdData);
@@ -140,7 +140,6 @@ app.post('/webhook',  function (req, res) {
                         }).catch((err)=> {
                             console.log(err)
                         });
-                        linePushPhoto();
                     }); 
                     
                     
