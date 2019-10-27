@@ -229,10 +229,8 @@ app.post('/webhook',  function (req, res) {
                     headers: {
                         'content-type' : 'application/json',
                         //Authorization為Channel access token 
-                        // ----------測試line
-                        // 'Authorization': 'Bearer QRKiyeWZcixMaO55Yf35KXjZTkrDD70ZAP2gyt8W55aeLgtA75mOVIkOZpruRurKgUgq6ow1+V85huiGRDEBas0Uq57+o4nNREgClY6s+gSg28gC1HNAbELCV7JxGEDlA2bkF8SuWeFNULCG1Z/lwgdB04t89/1O/w1cDnyilFU='
                         // ----------測試line02
-                        'Authorization': 'Bearer Z4vMgts4631BG4tdMbxpal4bt8o6ccm03m6jQ6vtlMkpoETTqJYziSEXEchdA3HagjcIvsfkbtkAXCFhi2FcleGZeN5SGna82KtnfHA0dT4gALHq64UV1BPuoJ7Mwua2AkzbdPDUl9Md8ndoxbHcfwdB04t89/1O/w1cDnyilFU='
+                        'Authorization': 'Bearer R8lcHnPCuZUl1bN572jcpz1z17xTC0nmXBuGBzDbBpsvPXd8uLhbJxsYw0xKzlqJuEOUmPkMg4R50tsO/HS3xer18+xRNAK27JyiS1Maj+v2MefUSMQpz1hxfyFMBCKdk5bAmsRhBbM3nEVtsJjCxgdB04t89/1O/w1cDnyilFU='
                         
                         // ----------正式line
                         // 'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
