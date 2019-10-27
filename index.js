@@ -417,11 +417,24 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         recommend.getFourRecomClassList().then(data =>{
-            
+            data.forEach(item => {
+                console.log('item!!!',item);
+                // if(item.lineID != ''){
+                //     allUserLineID.push(item.lineID);
+                //     console.log('allUserLineID',allUserLineID)
+                // }
+            });
+
             var movieNum = data[0][0].recomNum;
             var musicNum = data[1][0].recomNum;
             var bookNum = data[2][0].recomNum;
             var exhibitionNum = data[3][0].recomNum;
+            
+            
+
+            linePush.recomImg(){
+
+            }
 
             event.reply({
                 "type": "template",
