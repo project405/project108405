@@ -7,7 +7,8 @@ const recommend = require('../utility/recommend');
 router.get('/:recomMessNum', async function (req, res, next) {
     var recomMessNum = req.params.recomMessNum;   //取出參數
     var memID ;
-
+    
+    console.log(recomMessNum,recomMessNum,recomMessNum,recomMessNum,recomMessNum)
     //判斷是使用哪種方式登入
 	if (req.session.memID != undefined && req.session.passport == undefined) {
 		memID = req.session.memID;
@@ -21,7 +22,6 @@ router.get('/:recomMessNum', async function (req, res, next) {
     }
 
     recommend.getOneRecommendReply(recomMessNum, memID).then(data => {
-
         if (data[2][0] != data[0][0].memID) {
             res.write('<head><meta charset="utf-8"/></head>');
             res.end('<script> alert("您沒有編輯該留言的權限"); history.back();</script>');
