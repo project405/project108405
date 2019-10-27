@@ -91,7 +91,7 @@ app.post('/webhook',  function (req, res) {
                     // var pushImg = [];
                     LinePush.artiImg(data[0].artiNum).then(secondData =>{
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        if(img){
+                       
                             LinePush.Imgur(img).then(thirdData => {  
                                 this.pushImg = thirdData;
                                                      
@@ -101,7 +101,7 @@ app.post('/webhook',  function (req, res) {
                             }).catch((err)=> {
                                 console.log(err)
                             });
-                        }
+                      
                         
                     }); 
                 
@@ -133,7 +133,7 @@ app.post('/webhook',  function (req, res) {
                     LinePush.recomImg(data[0].recomNum).then(secondData =>{
                         console.log('推薦～有進來圖片這區')
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        if(img){
+                        
                             LinePush.Imgur(img).then(thirdData => {  
                                 this.pushImg = thirdData;
                                                      
@@ -143,7 +143,7 @@ app.post('/webhook',  function (req, res) {
                             }).catch((err)=> {
                                 console.log(err)
                             });
-                        }
+                      
                        
                     }); 
                     
