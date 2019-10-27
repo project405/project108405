@@ -494,7 +494,7 @@ bot.on('message', function(event) {
                                    
                                         "type": "postback",
                                         "label": "新增至我的收藏",
-                                        "data": recommendNum[0]
+                                        "data": recommendNum[1]
                                     }
                                 ]   
                             },
@@ -517,7 +517,7 @@ bot.on('message', function(event) {
                                       
                                         "type": "postback",
                                         "label": "新增至我的收藏",
-                                        "data": recommendNum[0]
+                                        "data": recommendNum[2]
                                     }
                                 ]
                               },
@@ -540,7 +540,7 @@ bot.on('message', function(event) {
                                      
                                         "type": "postback",
                                         "label": "新增至我的收藏",
-                                        "data": recommendNum[0]
+                                        "data": recommendNum[3]
                                     }
                                 ]
                               }
