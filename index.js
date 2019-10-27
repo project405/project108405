@@ -293,6 +293,7 @@ bot.on('postback', function(event) {
                     console.log('userID!!!!!!!',userID)
                     if(userID.length !== 0){                         
                         if(userID[0].lineID == userId){
+                            console.log('data!!!!!!!!!!!!!!!!',data)
                             collection.addLineColleRecommend(userID[0].memID, parseInt(data)).then(b =>{
                                 console.log(b)
                                 if(b == 0){
