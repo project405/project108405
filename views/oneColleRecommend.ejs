@@ -355,6 +355,8 @@
         crossorigin="anonymous "></script>
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
+    <script src="/javascripts/post.js"></script>
+
     <!-- 收藏 ajax script  -->
     <script>
             $('button').click(function() {
@@ -612,7 +614,7 @@
                 });
                 function submitReply(artiNum) {
                     var templateCont = document.getElementById('replyInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
-
+                    console.log(templateCont)
                     if (templateCont == '') {
                         alert('請輸入回覆內容！')
                         return;

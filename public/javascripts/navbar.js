@@ -219,7 +219,7 @@ $(document).ready(() => {
                             dataType: 'TEXT',
                             data: {"recom" : JSON.stringify(recomHead), "member" : JSON.stringify(memID)},
                             success: function (res) {
-                                alert(res); 
+                                swal(res); 
                             },
                             error: function (res) {
                                 console.log("失敗", res);

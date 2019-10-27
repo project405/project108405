@@ -347,6 +347,7 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
     var imgs = [] ;
     var result = [];
     var collSum;
+    console.log(memID, recomClass, recompage)
     //--------- 根據分類取得會員收藏的推薦內容 ---------
     await sql('SELECT "r".* '+ 
              ' FROM "memberCollection" AS "m" '+
@@ -365,16 +366,16 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
         }, (error) => {
             recommendList = undefined ; 
         });
-
     await sql(' SELECT COUNT(*) ' +
-            ' FROM "recommend"' +
-            ' WHERE "recomNum"' +
-            ' IN (SELECT "recomNum" '+
+            ' FROM "recommendListDataView" AS "recomView" ' +
+            ' WHERE "recomView"."recomNum"' +
+            ' IN (SELECT "recomNum"  '+
             ' FROM "memberCollection" '+
             ' WHERE "memID" = $2 ) '+
-            ' AND "recomClass" = $1', [recomClass, memID])
+            ' AND "recomView"."recomClass" = $1', [recomClass, memID])
     .then((data) => {
         collSum = data.rows;
+        console.log(collSum)
     }, (error) => {
         collSum = undefined;
         console.log(error)

@@ -68,7 +68,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
     var imgData = [];
     //將所有換行符號替代成<br> 
     recomMessCont = recomMessCont.replace(/\n/g, "<br>");
-
+    console.log(recomNum, memID, recomMessCont, postDateTime, req.body.base64Index, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.remainImg, req.body.score2)
     //內容、標題不可為空
     if(recomMessCont == null ){
 

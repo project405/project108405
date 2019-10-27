@@ -304,6 +304,7 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
 //================================
 var editRecommendReply = async function (recomNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum, remainImg, score2) {
     var result = 0;
+    console.log(recomNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum, remainImg, score2)
     var imgs = []
     if (typeof(imgData) == 'string') {
         var temp = imgData
@@ -536,7 +537,7 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
 //-------- recommendReplyPost() --
 //================================
 var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMessDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, score2) {
-    
+    console.log(recomNum, memID, recomMessCont, recomMessDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, score2)
     var recomMessNum;
     var result = 0;
     if (typeof(imgData) == 'string') {
