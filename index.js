@@ -417,13 +417,12 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         // recommend.getFourRecomClassList().then(data =>{
-        index.getIndexData().then(data => {    
+        index.getIndexData().then(data => {  
+            let recommendNum = []  
             data[0].forEach(item => {
-                console.log('item!!!',item);
-                // if(item.lineID != ''){
-                //     allUserLineID.push(item.lineID);
-                //     console.log('allUserLineID',allUserLineID)
-                // }
+                console.log('item!!!',item.recomNum);
+                // recommendNum.push(item.recomNum);
+                
             });
 
             var movieNum = data[0][0].recomNum;
