@@ -33,10 +33,6 @@ router.post('/', function (req, res, next) {
     var checkMail;
     var originalMail;//目前使用者原本的Mail
     var memID = req.session.memID;
-    //密碼加密
-    var hmac = crypto.createHmac("sha256",secret);
-    var pwd = hmac.update(memPass);
-    var cryptoPWD = pwd.digest("hex");
 
     var memberData = {
         "memID": memID,
@@ -67,7 +63,7 @@ router.post('/', function (req, res, next) {
         } else {
             //密碼加密
             var hmac = crypto.createHmac("sha256",secret);
-            var pwd = hmac.update(memPass);
+            var pwd = hmac.update(memberData.memPass);
             var cryptoPWD = pwd.digest("hex");
 
             member.modifyMember(cryptoPWD, memberData.memBirth, memberData.memMail, memberData.memGender, memberData.memAddr, memberData.memID).

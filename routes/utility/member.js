@@ -772,7 +772,7 @@ var modifyMember = async function (memPass, memBirth, memMail, memGender, memAdd
 //================================
 var getOriginalMail = async function (memID) {
     var result;
-    console.log("memID = ", memID) ;
+
     // -----------  修改會員資料 --------------
     await sql('SELECT "memMail" from "member" where "memID" = $1', [memID])
         .then((data) => {
@@ -898,7 +898,7 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
 //---------  addArticleLike() -----------
 //=========================================
 var addArticleLike = async function (memID, artiNum) {
-    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
+    var addTime = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
     var result;
 
     await sql('INSERT INTO "articleLike" ("memID","artiNum","artiLikeDateTime") VALUES ($1,$2,$3)', [memID, artiNum, addTime])
@@ -930,7 +930,7 @@ var delArticleLike = async function (memID, artiNum) {
 //---------  addArticleMessLike() ---------
 //=========================================
 var addArticleMessLike = async function (memID, artiMessNum) {
-    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
+    var addTime = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
     var result;
 
     await sql('INSERT INTO "articleMessageLike" ("memID","artiMessNum","artiMessLikeDateTime") VALUES ($1,$2,$3)', [memID, artiMessNum, addTime])
@@ -962,7 +962,7 @@ var delArticleMessLike = async function (memID, artiMessNum) {
 //---------  addRecommendMessLike() -------
 //=========================================
 var addRecommendMessLike = async function (memID, recomMessNum) {
-    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
+    var addTime = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
     var result;
 
     await sql('INSERT INTO "recommendMessageLike" ("memID","recomMessNum","recomMessLikeDateTime") '+
@@ -996,7 +996,7 @@ var delRecommendMessLike = async function (memID, recomMessNum) {
 //--------------  report() ----------------
 //=========================================
 var report = async function (memID, artiNum, artiMessNum, recomMessNum, reportReason) {
-    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
+    var addTime = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
     var result;
 
     //系統舉報

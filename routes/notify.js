@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function(req, res, next){
 	var alertMessage = [] ;
-	var dateTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss"); 
+	var dateTime = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"); 
 	var recomHead = JSON.parse(req.body.recom);
 	var memID = JSON.parse(req.body.member);
 	var month = parseInt(moment(Date.now()).format("MM"))-1; 

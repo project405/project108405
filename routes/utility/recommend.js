@@ -396,7 +396,7 @@ var getRecomClassList = async function (recomClass, memID, recomPage) {
 //---------  addRecommendLike() -----------
 //=========================================
 var addRecommendLike = async function (memID, recomNum) {
-    var addTime = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss");
+    var addTime = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss");
     var result;
 
     await sql('INSERT INTO "recommendLike" ("memID","recomNum","recomLikeDateTime") VALUES ($1,$2,$3)', [memID, recomNum, addTime])

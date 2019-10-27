@@ -54,7 +54,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
     var negativeWords = req.body.negativeWords;
     var swearWords = req.body.swearWords;
     var artiNum = req.body.artiNum;
-    var postDateTime = moment(Date().now).format("YYYY-MM-DD hh:mm:ss");
+    var postDateTime = moment(Date().now).format("YYYY-MM-DD HH:mm:ss");
     var tagData = [];
     var imgData = [];
     //將所有換行符號替代成<br> 
