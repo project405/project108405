@@ -421,6 +421,8 @@ bot.on('message', function(event) {
             let recommendNum = []  
             let recommendHead = []  
             let recommendCont = []  
+            let recommendImg = []  
+            
             // let recommendNum = []  
             //順序為電影、展覽、書籍、音樂
             data[0].forEach(item => {
@@ -429,6 +431,11 @@ bot.on('message', function(event) {
                 recommendNum.push(item.recomNum);
                 recommendHead.push(item.recomHead);
                 recommendCont.push(item.recomCont);
+                linePush.recomImg(item.recommendNum).then(data => {
+                    console.log('data!!!!!!!!',data)
+                    // recommendImg.push();
+
+                })
                 
             });
             console.log(recommendNum)
@@ -441,9 +448,7 @@ bot.on('message', function(event) {
             
             
 
-            // linePush.recomImg(){
-
-            // }
+            
 
             // event.reply({
             //     "type": "template",
