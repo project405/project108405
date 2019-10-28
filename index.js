@@ -365,13 +365,13 @@ bot.on('message', function(event) {
                 item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
                 item.artiCont = item.artiCont.length>35 ? `${item.artiCont.substr(0,34)}...` : item.artiCont
             })
-
+            event.reply({
+                "type":"text",
+                "text":`${userName}+你好！`
+                }
+            )
             event.reply(
                 {
-                    "type":"text",
-                    "text":`${userName}+你好！`
-                }
-                ,{
                 "type": "template",
                 "altText": "熱門文章",
                 "template": {
