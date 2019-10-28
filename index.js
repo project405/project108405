@@ -364,6 +364,10 @@ bot.on('message', function(event) {
    
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
+            data[1][0].artiCont = data[1][0].artiCont.replace('<br>','')
+            data[1][1].artiCont = data[1][1].artiCont.replace('<br>','')
+            data[1][2].artiCont = data[1][2].artiCont.replace('<br>','')
+
             data[1][0].artiCont = data[1][0].artiCont.length>25 ? `${data[1][0].artiCont.substr(0,20)}...` : data[1][0].artiCont
             data[1][1].artiCont = data[1][1].artiCont.length>25 ? `${data[1][1].artiCont.substr(0,25)}...` : data[1][1].artiCont
             data[1][2].artiCont = data[1][2].artiCont.length>25 ? `${data[1][2].artiCont.substr(0,25)}...` : data[1][2].artiCont
