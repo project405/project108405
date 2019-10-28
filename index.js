@@ -364,16 +364,20 @@ bot.on('message', function(event) {
    
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
-            console.log(data[1][0].artiCont)
-            console.log(data[1][1].artiCont)
-            console.log(data[1][2].artiCont)
-            data[1][0].artiCont = data[1][0].artiCont.replace(/<br>/g,'')
-            data[1][1].artiCont = data[1][1].artiCont.replace(/<br>/g,'')
-            data[1][2].artiCont = data[1][2].artiCont.replace(/<br>/g,'')
+            console.log('前',data[1][0].artiCont)
+            console.log('前',data[1][1].artiCont)
+            console.log('前',data[1][2].artiCont)
 
-            data[1][0].artiCont = data[1][0].artiCont.length>25 ? `${data[1][0].artiCont.substr(0,20)}...` : data[1][0].artiCont
-            data[1][1].artiCont = data[1][1].artiCont.length>25 ? `${data[1][1].artiCont.substr(0,25)}...` : data[1][1].artiCont
-            data[1][2].artiCont = data[1][2].artiCont.length>25 ? `${data[1][2].artiCont.substr(0,25)}...` : data[1][2].artiCont
+            
+            data[1].forEach(item =>{
+                item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
+                item.artiCont = item.artiCont.length>25 ? `${item.artiCont.substr(0,20)}...` : item.artiCont
+            })
+
+            console.log('後',data[1][0].artiCont)
+            console.log('後',data[1][1].artiCont)
+            console.log('後',data[1][2].artiCont)
+           
             event.reply({
                 "type": "template",
                 "altText": "熱門文章",
