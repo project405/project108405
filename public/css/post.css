@@ -178,6 +178,9 @@ div.tag input {
     background-color: #eee !important;
 
 }
+div.tag {
+    overflow: hidden;
+}
 
 span.tag {
     font-size: 0.9em;
