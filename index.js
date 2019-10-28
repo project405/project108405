@@ -368,12 +368,6 @@ bot.on('message', function(event) {
             
             event.reply(
                 {
-                    
-                        "type":"text",
-                        "text":`${userName}你好！`
-                    
-                },
-                {
                 "type": "template",
                 "altText": "熱門文章",
                 "template": {
