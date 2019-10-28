@@ -44,9 +44,9 @@ $(document).ready(function () {
             str = str.replace("\\:imgLocation",'')
         }
         //截取内容75字
-        var subStr = str.substring(0, 75);
+        var subStr = str.substring(0, 40);
         //如果長度大於75就添加省略號否則就填空
-        var data = subStr + (str.length > 75 ? '...' : '');
+        var data = subStr + (str.length > 40 ? '...' : '');
         $(this).html(data);
     });
     $(".limitLine").each(function () {

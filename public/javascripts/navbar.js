@@ -22,9 +22,6 @@ $(document).ready(() => {
                                 <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
                             <li class="nav-item">\
-                                <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
-                            </li>\
-                            <li class="nav-item">\
                                 <a class="nav-link" href="/recommendList/1">\
                                 官方推薦</a>\
                             </li>\
@@ -35,9 +32,6 @@ $(document).ready(() => {
                             <li class="nav-item">\
                             <a class="nav-link" href="/post">\
                             <i class="fas fa-pen"></i>&nbsp;發文</a>\
-                            </li>\
-                            <li class="nav-item">\
-                                <a class="nav-link" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/logIn">登入</a>\
@@ -100,9 +94,6 @@ $(document).ready(() => {
                                 <input type="text" class="navSearch" id="input_search" />\
                                 <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
-                            <li class="nav-item">\
-                                <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
-                            </li>\
                             <li class="nav-item dropdown">\
                             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                                 管理者選項\
@@ -136,6 +127,7 @@ $(document).ready(() => {
                                     <a class="dropdown-item" href="/collection/article/1">文章收藏</a>\
                                     <a class="dropdown-item" href="/member/articleManage/1">文章管理</a>\
                                     <a class="dropdown-item" href="/member/memberManage">會員資料修改</a>\
+                                    <a class="dropdown-item" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
                                     <a class="dropdown-item" href="/user/logout">登出</a>\
                                 </div>\
                             </li>\
@@ -251,9 +243,6 @@ $(document).ready(() => {
                             <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                         </div>\
                         <li class="nav-item">\
-                            <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
-                        </li>\
-                        <li class="nav-item">\
                             <a class="nav-link" href="/recommendList/1">\
                             官方推薦</a>\
                         </li>\
@@ -265,9 +254,6 @@ $(document).ready(() => {
                         <a class="nav-link" href="/post">\
                         <i class="fas fa-pen"></i>&nbsp;發文</a>\
                         </li>\
-                        <li class="nav-item">\
-                            <a class="nav-link" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
-                        </li>\
                         <li class="nav-item dropdown">\
                             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                                 會員\
@@ -278,6 +264,7 @@ $(document).ready(() => {
                                 <a class="dropdown-item" href="/collection/article/1">文章收藏</a>\
                                 <a class="dropdown-item" href="/member/articleManage/1">文章管理</a>\
                                 <a class="dropdown-item" href="/member/memberManage">會員資料修改</a>\
+                                <a class="dropdown-item" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
                                 <a class="dropdown-item" href="/user/logout">登出</a>\
                             </div>\
                         </li>\
