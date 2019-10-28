@@ -364,6 +364,9 @@ bot.on('message', function(event) {
    
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
+            console.log(data[1][0].artiCont)
+            console.log(data[1][1].artiCont)
+            console.log(data[1][2].artiCont)
             data[1][0].artiCont = data[1][0].artiCont.replace(/<br>/g,'')
             data[1][1].artiCont = data[1][1].artiCont.replace(/<br>/g,'')
             data[1][2].artiCont = data[1][2].artiCont.replace(/<br>/g,'')
