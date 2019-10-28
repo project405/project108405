@@ -70,10 +70,7 @@ bot.on('postback', function(event) {
                             recommendCont.push(item.recomCont);
                             recommendNum.push(item.recomNum);
                         });
-                    // d[0][0].recomCont = d[0][0].recomCont.length>75 ? `${d[0][0].recomCont.substr(0,75)}...` : d[0][0].recomCont
-                    // d[1][0].recomCont = d[1][0].recomCont.length>75 ? `${d[1][0].recomCont.substr(0,75)}...` : d[1][0].recomCont
-                    // d[2][0].recomCont = d[2][0].recomCont.length>75 ? `${d[2][0].recomCont.substr(0,75)}...` : d[2][0].recomCont
-                    // d[3][0].recomCont = d[3][0].recomCont.length>75 ? `${d[3][0].recomCont.substr(0,75)}...` : d[3][0].recomCont
+                    
                     if (data == 'movie'){
                         return event.reply([
                             {
@@ -364,21 +361,17 @@ bot.on('message', function(event) {
    
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
-            console.log('前',data[1][0].artiCont)
-            console.log('前',data[1][1].artiCont)
-            console.log('前',data[1][2].artiCont)
-
-            
             data[1].forEach(item =>{
                 item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
                 item.artiCont = item.artiCont.length>35 ? `${item.artiCont.substr(0,34)}...` : item.artiCont
             })
 
-            console.log('後',data[1][0].artiCont)
-            console.log('後',data[1][1].artiCont)
-            console.log('後',data[1][2].artiCont)
-           
-            event.reply({
+            event.reply(
+                {
+                    "type":"text",
+                    "text":userName+'你好！'
+                }
+                ,{
                 "type": "template",
                 "altText": "熱門文章",
                 "template": {
@@ -444,8 +437,7 @@ bot.on('message', function(event) {
             let recommendNum = []  
             let recommendHead = []  
             let recommendDateTime = []  
-            let recommendCont = []  
-            let recommendImg = []  
+            
             
             // let recommendNum = []  
             //順序為電影、展覽、書籍、音樂
