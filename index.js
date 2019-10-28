@@ -288,7 +288,7 @@ bot.on('postback', function(event) {
             }else{
                 login.userJudgeBind(userId).then(userID =>{
                     console.log('userID!!!!!!!',userID)
-                    if(userID.length !== 0){                         
+                    // if(userID.length !== 0){                         
                         if(userID[0].lineID == userId){
                             console.log('data!!!!!!!!!!!!!!!!',data)
                             collection.addLineColleRecommend(userID[0].memID, parseInt(data)).then(b =>{
@@ -331,9 +331,9 @@ bot.on('postback', function(event) {
                             })                            
                         }
                         
-                    }else{
-                        event.reply(myLineTemplate)
-                    }
+                    // }else{
+                    //     event.reply(myLineTemplate)
+                    // }
                 })  
             }         
     });    
