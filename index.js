@@ -371,7 +371,7 @@ bot.on('message', function(event) {
             
             data[1].forEach(item =>{
                 item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
-                item.artiCont = item.artiCont.length>25 ? `${item.artiCont.substr(0,20)}...` : item.artiCont
+                item.artiCont = item.artiCont.length>45 ? `${item.artiCont.substr(0,40)}...` : item.artiCont
             })
 
             console.log('後',data[1][0].artiCont)
