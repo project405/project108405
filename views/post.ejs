@@ -104,8 +104,6 @@
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/navbar.js"></script>
     <script>
-        var imgKey = []
-        var toBase64 = []
         var imgs = [];
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
@@ -134,7 +132,8 @@
             }
         });
         async function submitPost() {
-  
+            var imgKey = []
+            var toBase64 = []
             var templateCont = document.getElementById('postInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
             var templateHead = document.getElementById('artiHead').value.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
             var artiHead = document.getElementById("artiHead").value;

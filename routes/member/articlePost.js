@@ -15,6 +15,7 @@ var upload = multer({
 
 //post請求
 router.post('/', upload.array('userImg', 100), function (req, res, next) {
+    console.log('articlepostData!@@@@@@@@@@@@@@@@@@@@@@@@', memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.score2)
     var memID;
     var artiHead = req.body.artiHead;
     var artiCont = req.body.artiCont;
