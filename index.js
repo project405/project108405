@@ -304,7 +304,8 @@ bot.on('postback', function(event) {
                                             {
                                               "type": "uri",
                                               "label": " 👀 查看所有收藏",
-                                              "uri": `https://project108405.herokuapp.com/collection/recommend/1`
+                                            //   "uri": `https://project108405.herokuapp.com/collection/recommend/1`
+                                              "uri": `https://8d9dfb88.ngrok.io/collection/recommend/1`
                                             }
                                           ]
                                         }
