@@ -148,7 +148,7 @@
 
             if ($("#postInput").find("#postInput > img")) {
                 Array.from($("#postInput").find("#postInput > img")).map((img) => {
-                    formData.append('base64Index', img.getAttribute('src'));
+                    formData.append('base64Index', '123123');
                     $(img).before("\\:imgLocation")
                 })
             }
