@@ -108,6 +108,7 @@ div.article {
     font-size: 0.75em;
     text-align: center;
     font-weight: bold;
+    padding: 0 1em;
 }
 
 #portfolio p.content {
@@ -115,6 +116,7 @@ div.article {
     padding: 0em 1.25em 0.5em 1.25em;
     text-align: justify;
 }
+
 
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {
     opacity: 1;
