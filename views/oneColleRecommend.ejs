@@ -617,7 +617,6 @@
         });
         function submitReply(artiNum) {
             var templateCont = document.getElementById('replyInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
-            console.log(templateCont)
             if (templateCont == '') {
                 alert('請輸入回覆內容！')
                 return;
