@@ -421,6 +421,7 @@
         crossorigin="anonymous "></script>
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
+    <script src="/javascripts/imageCompression.js"></script>
     <script>
         var member = '<%=items[7][0]%>'
         $('.postReport,.replyReport').click(() => {
@@ -438,7 +439,7 @@
         Array.from($('.liContainer').find('li > a')).map((item) => {
             item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
         })
-        var imgs = [];
+
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
         $('#file-selector').change(function(event) {
@@ -447,18 +448,23 @@
             //如果有檔案就要加入formData
             if (file.files.length) {
                 Object.keys(file.files).map((img, index) => {
-                    file.files[img].timeStamp = `${timeStamp}${index}`
-                    imgs.push(file.files[img])
                     // 解析檔案
                     var item = file.files[img]
                     var reader = new FileReader();
                     reader.onload = (function(item) {
-                        return function(event) {
-                            var src = event.target.result // 圖片的編碼 , 格式為base64
-                            var title = escape(file.name);
-                            var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
-                            $('#replyInput').append('<div id="replyInput">' + img + '</div>');
-                        };
+                        return async function(event) {
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function(size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function(strDataURI) {
+                                    var title = escape(file.name);
+                                    var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
+                                    $('#replyInput').append('<div id="replyInput">' + img + '</div>');
+                                }, (e) => {
+                                    console.log(e)
+                                    })
+                                })
+                            };
                     })(file);
                     reader.readAsDataURL(item);
                 })
@@ -475,22 +481,10 @@
             $('.submitReplyButton').attr('disabled', true)
             $('.spinner-border').css('display', 'block')
             $('.coverContainer').css('display', 'block')
-            var imgKey = []
-            var toBase64 = []
 
             if ($("#replyInput").find("#replyInput > img")) {
                 Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
-                    imgKey.push(img.getAttribute('key'))
-                    toBase64.push(img.getAttribute('src'))
-                })
-                imgs.map((img) => {
-                    if (imgKey.indexOf(img.timeStamp) >= 0) {
-                        formData.append('userImg', img);
-                        var base64Index = toBase64[imgKey.indexOf(img.timeStamp)]
-                        formData.append('base64Index', base64Index);
-                    }
-                })
-                Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
+                    formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
             }

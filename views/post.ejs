@@ -103,32 +103,32 @@
     <script src="/javascripts/tag.js"></script>
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/navbar.js"></script>
+    <script src="/javascripts/imageCompression.js"></script>
     <script>
-        var imgs = [];
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
         $('#file-selector').change(function(event) {
             var file = $("#file-selector")[0];  //取得檔案
-            console.log(file)
             //如果有檔案就要加入formData
             if (file.files.length) {
                 Object.keys(file.files).map((img, index) => {
-                    console.log(img)
-                    imgs.push(file.files[img])
-                    console.log(file.files[img])
                     // 解析檔案
                     var item = file.files[img]
                     var reader = new FileReader();
                     reader.onload = (function(item) {
-                        console.log(item)
-                        return function(event) {
-                            console.log(event)
-                            var src = event.target.result // 圖片的編碼 , 格式為base64
-                            // canvas.getContext('2d');
-                            var title = escape(file.name);
-                            var img = '<img class="upload-img" src="' + src + '" title="' + title + '"/> ';
-                            $('#postInput').append('<div id="postInput">' + img + '</div>');
-                        };
+                        return async function(event) {
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function(size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function(strDataURI) {
+                                    var title = escape(file.name);
+                                    var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
+                                    $('#postInput').append('<div id="postInput">' + img + '</div>');
+                                }, (e) => {
+                                    console.log(e)
+                                    })
+                                })
+                            };
                     })(file);
                     reader.readAsDataURL(item);
                 })
@@ -151,10 +151,9 @@
             $('.spinner-border').css('display', 'block')
             $('.coverContainer').css('display', 'block')
             //img process
-
             if ($("#postInput").find("#postInput > img")) {
-                Array.from($("#postInput").find("#postInput > img")).map((img) => {
-                    formData.append('base64Index', img.getAttribute('src').substring(0,1000));
+                Array.from($("#postInput").find("#postInput > img")).map(async(img) => {
+                    formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
             }
@@ -181,7 +180,6 @@
                 dataType: 'TEXT',
                 data: { 'artiCont': `${artiCont}` },
                 success: function (res) {
-                    console.log(res)
                     var analyzeRes = JSON.parse(res)
                     var analyzeScore = analyzeRes.analyze[0]
                     var positiveWords = analyzeRes.analyze[1]
