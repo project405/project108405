@@ -366,9 +366,13 @@ bot.on('message', function(event) {
                 item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
                 item.artiCont = item.artiCont.length>35 ? `${item.artiCont.substr(0,34)}...` : item.artiCont
             })
+            
             console.log('標題',data[1][0].artiHead)
             console.log('內容',data[1][0].artiCont)
-            
+            console.log('標題',data[1][1].artiHead)
+            console.log('內容',data[1][1].artiCont)
+            console.log('標題',data[1][2].artiHead)
+            console.log('內容',data[1][2].artiCont)
             
             event.reply(
                 {
