@@ -15,7 +15,6 @@ var upload = multer({
 
 //post請求
 router.post('/', upload.array('userImg', 100), function (req, res, next) {
-    console.log('articlepostData!@@@@@@@@@@@@@@@@@@@@@@@@', memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.score2)
     var memID;
     var artiHead = req.body.artiHead;
     var artiCont = req.body.artiCont;
@@ -54,7 +53,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
                 res.send("標題及內容不可為空，請重新輸入");
             } else {
                 if (artiNum) {
-                    member.editArticle(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.remainImg, req.body.score2).then(data => {
+                    member.editArticle(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.score2).then(data => {
                         if (data == 1) {
                             res.send("編輯成功");
                         } else {

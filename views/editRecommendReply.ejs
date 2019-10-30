@@ -121,7 +121,7 @@
                                 canvasUrl.then(function(strDataURI) {
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
-                                    $('#replyInput').append('<div id="replyInput">' + img + '</div>');
+                                    $('#replyInput').append(img);
                                 }, (e) => {
                                     console.log(e)
                                     })
@@ -140,20 +140,13 @@
                 return;
             }
             var artiMessNum ='<%= items[0][0].recomMessNum%>'
-            var remainImg = []
             $('.submitReplyButton').addClass('disabled')
             $('.submitReplyButton').attr('disabled', true)
             $('.spinner-border').css('display', 'block')
             $('.coverContainer').css('display', 'block')
 
-            if ($("#replyInput > .original")) {
-                Array.from($("#replyInput").find('.original > img')).map((img) => {
-                    $(img).before("\\:imgLocation")
-                    remainImg.push(img.getAttribute('src'))
-                })
-            }
-            if ($("#replyInput").find("#replyInput > img")) {
-                Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
+            if ($("#replyInput").find("img")) {
+                Array.from($("#replyInput").find("img")).map((img) => {
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
@@ -185,7 +178,6 @@
                     formData.append('artiNum', artiNum);
                     formData.append('artiMessNum', artiMessNum);
                     formData.append('editReply', true);
-                    formData.append('remainImg', remainImg);
                     formData.append('score2', score2);
                     $.ajax({
                         url: '/recommend/reply',
@@ -196,10 +188,10 @@
                         contentType: false,
                         success: function (res) {
                             if (res == "請進行登入") {
-                                alert(res);
+                                alert('請進行登入');
                                 location.replace("/logIn");
                             } else {
-                                alert(res);
+                                alert('編輯成功');
                                 location.replace(`/oneRecommend/${artiNum}`);
                             }
                         },

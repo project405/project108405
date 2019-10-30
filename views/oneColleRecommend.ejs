@@ -583,7 +583,7 @@
     <script src="/javascripts/imageCompression.js"></script>
     <script>
         Array.from($('.liContainer').find('li > a')).map((item) => {
-            item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
+            item.innerText = item.innerText.length > 20 ? `${item.innerText.substring(0,20)}...` : item.innerText
         })
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
@@ -603,7 +603,7 @@
                                 canvasUrl.then(function(strDataURI) {
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
-                                    $('#replyInput').append('<div id="replyInput">' + img + '</div>');
+                                    $('#replyInput').append(img);
                                 }, (e) => {
                                     console.log(e)
                                     })
@@ -626,8 +626,8 @@
             $('.spinner-border').css('display', 'block')
             $('.coverContainer').css('display', 'block')
 
-            if ($("#replyInput").find("#replyInput > img")) {
-                Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
+            if ($("#replyInput").find("img")) {
+                Array.from($("#replyInput").find("img")).map((img) => {
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })

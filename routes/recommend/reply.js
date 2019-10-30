@@ -45,7 +45,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
     } else {
         if (isRender) {
             if (editReply) {
-                member.editRecommendReply(recomNum, memID, recomMessCont, postDateTime, req.body.base64Index, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.remainImg, req.body.score2).then(data => {
+                member.editRecommendReply(recomNum, memID, recomMessCont, postDateTime, req.body.base64Index, analyzeScore, positiveWords, negativeWords, swearWords, req.body.artiMessNum, req.body.score2).then(data => {
                     if (data == 1) {
                         res.send("編輯留言成功");
                     } else {

@@ -134,7 +134,7 @@
                                 canvasUrl.then(function(strDataURI) {
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
-                                    $('#postInput').append('<div id="postInput">' + img + '</div>');
+                                    $('#postInput').append(img);
                                 }, (e) => {
                                     console.log(e)
                                     })
@@ -157,22 +157,14 @@
                 alert('請輸入內文')
                 return;
             }
-            var remainImg = []
             artiNum = '<%= items[0][0].artiNum %>'
             $('.postButton').addClass('disabled')
             $('.postButton').attr('disabled', true)
             $('.spinner-border').css('display', 'block')
             $('.coverContainer').css('display', 'block')
 
-            if ($("#postInput > .original")) {
-                Array.from($("#postInput").find('.original > img')).map((img) => {
-                    remainImg.push(img.getAttribute('src'))
-                    $(img).before("\\:imgLocation")
-                })
-            }
-            var imgKey = []
-            if ($("#postInput").find("#postInput > img")) {
-                Array.from($("#postInput").find("#postInput > img")).map((img) => {
+            if ($("#postInput").find("img")) {
+                Array.from($("#postInput").find("img")).map((img) => {
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
