@@ -204,7 +204,7 @@ var getOneRecommend = async function (recomNum, memID) {
     await sql('SELECT "recomNum" , "imgName" '+
              ' FROM "image" '+ 
              ' WHERE "recomNum" = $1 and "recomMessNum" IS NOT NULL'+
-             ' ORDER BY "imgNum"',[recomNum])
+             ' ORDER BY "recomMessNum","imgNum"',[recomNum])
     .then((data) => {
         if (!data.rows) {
             replyImgs = undefined;

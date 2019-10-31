@@ -55,7 +55,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
                 res.send("標題及內容不可為空，請重新輸入");
             } else {
                 if (artiNum) {
-                    member.editArticle(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.remainImg, req.body.score2).then(data => {
+                    member.editArticle(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.score2).then(data => {
                         if (data == 1) {
                             res.send("編輯成功");
                         } else {

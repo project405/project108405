@@ -64,137 +64,9 @@
                         <div class='loader--text'></div>
                     </div>
                 </div>
-
-            <script>
-                var imgs = [];
-                var toBase64 = []
-                var formData = new FormData(); //用formData來存取要傳送的所有資料
-                // 選取到檔案後開始動作
-                $('#file-selector').change(function(event) {
-                    let timeStamp = new Date().getTime()
-                    var file = $("#file-selector")[0];  //取得檔案
-                    //如果有檔案就要加入formData
-                    if (file.files.length) {
-                        Object.keys(file.files).map((img, index) => {
-                            file.files[img].timeStamp = `${timeStamp}${index}`
-                            imgs.push(file.files[img])
-                            // 解析檔案
-                            var item = file.files[img]
-                            var reader = new FileReader();
-                            reader.onload = (function(item) {
-                                return function(event) {
-                                    var src = event.target.result // 圖片的編碼 , 格式為base64
-                                    var title = escape(file.name);
-                                    var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
-                                    $('#replyInput').append('<div id="replyInput">' + img + '</div>');
-                                };
-                            })(file);
-                            reader.readAsDataURL(item);
-                        })
-                        $('#file-selector').val('')
-                    }
-                });
-        function submitEditReply(artiNum) {
-            var templateCont = document.getElementById('replyInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
-            console.log(templateCont)
-            if (templateCont == '') {
-                alert('請輸入內文')
-                return;
-            }
-            var artiMessNum ='<%= items[0][0].recomMessNum%>'
-            var remainImg = []
-            $('.submitReplyButton').addClass('disabled')
-            $('.submitReplyButton').attr('disabled', true)
-            $('.spinner-border').css('display', 'block')
-            $('.coverContainer').css('display', 'block')
-
-
-            if ($("#replyInput > .original")) {
-                Array.from($("#replyInput").find('.original > img')).map((img) => {
-                    $(img).before("\\:imgLocation")
-                    remainImg.push(img.getAttribute('src'))
-                })
-            }
-
-            var imgKey = []
-            if ($("#replyInput").find("#replyInput > img")) {
-                Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
-                    imgKey.push(img.getAttribute('key'))
-                    toBase64.push(img.getAttribute('src'))
-                })
-                imgs.map((img) => {
-                    if (imgKey.indexOf(img.timeStamp) >= 0) {
-                        formData.append('userImg', img);
-                        var base64Index = toBase64[imgKey.indexOf(img.timeStamp)]
-                        formData.append('base64Index', base64Index);
-                    }
-                })
-                Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
-                    $(img).before("\\:imgLocation")
-                })
-            }
-            var replyCont = [];
-            var replyData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
-            // 取得內容
-            replyData.forEach(function (element) {
-                replyCont.push(element.innerText);
-            }, this);
-            formData.append('replyCont', replyCont);
-            $.ajax({
-                url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
-                type: 'POST',
-                dataType: 'TEXT',
-                data: { 'artiCont': `${replyCont}` },
-                success: function (res) {
-                    var analyzeRes = JSON.parse(res)
-                    var analyzeScore = analyzeRes.analyze[0]
-                    var positiveWords = analyzeRes.analyze[1]
-                    var negativeWords = analyzeRes.analyze[2]
-                    var swearWords = analyzeRes.analyze[3]
-                    var score2 = analyzeRes.analyze[4]
-                    console.log(score2)
-                    formData.append('analyzeScore', analyzeScore);
-                    formData.append('positiveWords', positiveWords);
-                    formData.append('negativeWords', negativeWords);
-                    formData.append('swearWords', swearWords);
-                    formData.append('artiNum', artiNum);
-                    formData.append('artiMessNum', artiMessNum);
-                    formData.append('editReply', true);
-                    formData.append('remainImg', remainImg);
-                    formData.append('score2', score2);
-                    $.ajax({
-                        url: '/recommend/reply',
-                        type: 'POST',
-                        dataType: 'TEXT',
-                        data: formData,
-                        processData: false,
-                        contentType: false,
-                        success: function (res) {
-                            if (res == "請進行登入") {
-                                alert(res);
-                                location.replace("/logIn");
-                            } else {
-                                alert(res);
-                                location.replace(`/oneRecommend/${artiNum}`);
-                            }
-                        },
-                        error: function (res) {
-                            alert("哎呀，出現錯誤");
-                        }
-                    });
-                },
-                error: function (res) {
-                    console.error(res)
-                }
-            });
-        }
-            </script>
-
-
+            </div>
         </div>
-    </div>
-</section>
-
+    </section>
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
@@ -230,6 +102,110 @@
     <script src="/javascripts/tag.js"></script>
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/navbar.js"></script>
+    <script src="/javascripts/imageCompression.js"></script>
+    <script>
+        var formData = new FormData(); //用formData來存取要傳送的所有資料
+        $('#file-selector').change(function(event) {
+            var file = $("#file-selector")[0];  //取得檔案
+            //如果有檔案就要加入formData
+            if (file.files.length) {
+                Object.keys(file.files).map((img, index) => {
+                    // 解析檔案
+                    var item = file.files[img]
+                    var reader = new FileReader();
+                    reader.onload = (function(item) {
+                        return async function(event) {
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function(size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function(strDataURI) {
+                                    var title = escape(file.name);
+                                    var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
+                                    $('#replyInput').append(img);
+                                }, (e) => {
+                                    console.log(e)
+                                    })
+                                })
+                            };
+                    })(file);
+                    reader.readAsDataURL(item);
+                })
+                $('#file-selector').val('')
+            }
+        });
+        function submitEditReply(artiNum) {
+            var templateCont = document.getElementById('replyInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+            if (templateCont == '') {
+                alert('請輸入內文')
+                return;
+            }
+            var artiMessNum ='<%= items[0][0].recomMessNum%>'
+            $('.submitReplyButton').addClass('disabled')
+            $('.submitReplyButton').attr('disabled', true)
+            $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
+
+            if ($("#replyInput").find("img")) {
+                Array.from($("#replyInput").find("img")).map((img) => {
+                    formData.append('base64Index', img.getAttribute('src'));
+                    $(img).before("\\:imgLocation")
+                })
+            }
+            var replyCont = [];
+            var replyData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
+            // 取得內容
+            replyData.forEach(function (element) {
+                replyCont.push(element.innerText);
+            }, this);
+            formData.append('replyCont', replyCont);
+            $.ajax({
+                url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
+                type: 'POST',
+                dataType: 'TEXT',
+                data: { 'artiCont': `${replyCont}` },
+                success: function (res) {
+                    var analyzeRes = JSON.parse(res)
+                    var analyzeScore = analyzeRes.analyze[0]
+                    var positiveWords = analyzeRes.analyze[1]
+                    var negativeWords = analyzeRes.analyze[2]
+                    var swearWords = analyzeRes.analyze[3]
+                    var score2 = analyzeRes.analyze[4]
+                    console.log(score2)
+                    formData.append('analyzeScore', analyzeScore);
+                    formData.append('positiveWords', positiveWords);
+                    formData.append('negativeWords', negativeWords);
+                    formData.append('swearWords', swearWords);
+                    formData.append('artiNum', artiNum);
+                    formData.append('artiMessNum', artiMessNum);
+                    formData.append('editReply', true);
+                    formData.append('score2', score2);
+                    $.ajax({
+                        url: '/recommend/reply',
+                        type: 'POST',
+                        dataType: 'TEXT',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            if (res == "請進行登入") {
+                                alert('請進行登入');
+                                location.replace("/logIn");
+                            } else {
+                                alert('編輯成功');
+                                location.replace(`/oneRecommend/${artiNum}`);
+                            }
+                        },
+                        error: function (res) {
+                            alert("哎呀，出現錯誤");
+                        }
+                    });
+                },
+                error: function (res) {
+                    console.error(res)
+                }
+            });
+        }
+    </script>
 
 </body>
 

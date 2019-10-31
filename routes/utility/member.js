@@ -109,10 +109,9 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
 //================================
 //-------- editArticle() ---------
 //================================
-var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime, remainImg, score2) {
+var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime, score2) {
     var tagNum = [];
     var result = 0;
-    var imgs = []
     if (typeof(imgData) == 'string') {
         var temp = imgData
         imgData = []
@@ -162,29 +161,11 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
         }
     }
 
-    await sql('SELECT * FROM "image" WHERE "artiNum" = $1 and "artiMessNum" IS NULL', [artiNum])
+    await sql('DELETE FROM "image" WHERE "artiNum" = $1 and "artiMessNum" IS NULL', [artiNum])
     .then((data) => {
-        if (!data.rows) {
-            imgs = undefined;
-        } else {
-            imgs = data.rows;
-        }
     }, (error) => {
-        imgs = undefined;
         console.log(error)
     })
-
-    if (imgs) {
-        imgs.map( async(original) => {
-            if (remainImg.indexOf(original.imgName) < 0) {
-                await sql ('DELETE FROM "image" WHERE "imgName" = $1 and "artiMessNum" IS NULL',[original.imgName])
-                .then((data)=> {
-                },(e) => {
-                    console.error(e)
-                }) 
-            }
-        })
-    }
 
     // --------- 新增img ---------
     if(imgData != undefined){
@@ -203,10 +184,9 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
 //================================
 //-------- editRecommend()--------
 //================================
-var editRecommend = async function (memID, recomHead, recomCont, recomClass, imgData, tag, analyzeScore, positiveWords, negativeWords, recomNum, artiDateTime, remainImg, score2) {
+var editRecommend = async function (memID, recomHead, recomCont, recomClass, imgData, tag, analyzeScore, positiveWords, negativeWords, recomNum, artiDateTime, score2) {
     var tagNum = [];
     var result = 0;
-    var imgs = []
     if (typeof(imgData) == 'string') {
         var temp = imgData
         imgData = []
@@ -258,31 +238,11 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
         }
     }
 
-    await sql('SELECT * FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NULL', [recomNum])
+    await sql('DELETE FROM "image" WHERE "recomNum" = $1 and "recomMessNum" IS NULL', [recomNum])
     .then((data) => {
-        result = 1;
-        if (!data.rows) {
-            imgs = undefined;
-        } else {
-            imgs = data.rows;
-        }
     }, (error) => {
-        imgs = undefined;
         console.log(error)
     })
-
-    if (imgs) {
-        imgs.map( async(original) => {
-            if (remainImg.indexOf(original.imgName) < 0) {
-                await sql ('DELETE FROM "image" WHERE "imgName" = $1 and "recomMessNum" IS NULL',[original.imgName])
-                .then((data)=> {
-                    result = 1;
-                },(e) => {
-                    console.error(e)
-                }) 
-            }
-        })
-    }
 
     // --------- 新增img ---------
     if (imgData != undefined) {
@@ -302,10 +262,8 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
 //================================
 //---- editRecommendReply() ------
 //================================
-var editRecommendReply = async function (recomNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum, remainImg, score2) {
+var editRecommendReply = async function (recomNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum, score2) {
     var result = 0;
-    console.log(recomNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, recomMessNum, remainImg, score2)
-    var imgs = []
     if (typeof(imgData) == 'string') {
         var temp = imgData
         imgData = []
@@ -322,30 +280,12 @@ var editRecommendReply = async function (recomNum, memID, replyCont, postDateTim
             result = 0;
         });
         
-    await sql('SELECT * FROM "image" WHERE "recomMessNum" = $1', [recomMessNum])
+    await sql('DELETE FROM "image" WHERE "recomMessNum" = $1', [recomMessNum])
     .then((data) => {
-        if (!data.rows) {
-            imgs = undefined;
-        } else {
-            imgs = data.rows;
-        }
     }, (error) => {
-        imgs = undefined;
         console.log(error)
     })
 
-    if (imgs) {
-        imgs.map( async(original) => {
-            if (remainImg.indexOf(original.imgName) < 0) {
-                await sql ('DELETE FROM "image" WHERE "imgName" = $1 ',[original.imgName])
-                .then((data)=> {
-                    console.log(data)
-                },(e) => {
-                    console.error(e)
-                }) 
-            }
-        })
-    }
     if(imgData != undefined){
         for (var i = 0; i < imgData.length; i++) {
             await sql('INSERT into "image" ("recomNum", "memID", "recomMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [recomNum, memID, recomMessNum, imgData[i], postDateTime])
@@ -577,9 +517,8 @@ var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMe
 //================================
 //-------- editReply() ---------
 //================================
-var editReply = async function (artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, artiMessNum, remainImg, score2) {
+var editReply = async function (artiNum, memID, replyCont, postDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, artiMessNum, score2) {
     var result = 0;
-    var imgs = []
     if (typeof(imgData) == 'string') {
         var temp = imgData
         imgData = []
@@ -596,29 +535,12 @@ var editReply = async function (artiNum, memID, replyCont, postDateTime, imgData
             result = 0;
         });
         
-    await sql('SELECT * FROM "image" WHERE "artiMessNum" = $1', [artiMessNum])
+    await sql('DELETE FROM "image" WHERE "artiMessNum" = $1', [artiMessNum])
     .then((data) => {
-        if (!data.rows) {
-            imgs = undefined;
-        } else {
-            imgs = data.rows;
-        }
     }, (error) => {
-        imgs = undefined;
         console.log(error)
     })
 
-    if (imgs) {
-        imgs.map( async(original) => {
-            if (remainImg.indexOf(original.imgName) < 0) {
-                await sql ('DELETE FROM "image" WHERE "imgName" = $1 ',[original.imgName])
-                .then((data)=> {
-                },(e) => {
-                    console.error(e)
-                }) 
-            }
-        })
-    }
     if(imgData != undefined) {
         for (var i = 0; i < imgData.length; i++) {
             await sql('INSERT into "image" ("artiNum", "memID", "artiMessNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4,$5)', [artiNum, memID, artiMessNum, imgData[i], postDateTime])
@@ -1137,5 +1059,4 @@ module.exports = {
     report, checkAuthority, editArticle, deleteArticle, deleteRecommend, editReply, deleteReply, 
     memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
     editRecommendReply, editRecommend, getBestReply
-
 };

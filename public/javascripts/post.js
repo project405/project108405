@@ -4,8 +4,6 @@ document.querySelector('div[contenteditable="true"]').addEventListener("paste", 
     var text = e.clipboardData.getData("text/plain");
     document.execCommand("insertHTML", false, text);
 });
-
-
 [].forEach.call(document.querySelectorAll('div[contenteditable="true"]'), function(el) {
     el.addEventListener('paste', function(e) {
         e.preventDefault();
@@ -13,10 +11,6 @@ document.querySelector('div[contenteditable="true"]').addEventListener("paste", 
         document.execCommand("insertHTML", false, text);
     }, false);
 });
-
-
-
-
 $('div[contenteditable]').keydown(function(e) {
     // trap the return key being pressed
     if (e.keyCode === 13) {
