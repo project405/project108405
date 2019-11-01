@@ -124,7 +124,7 @@
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
                                     $('#postInput').append(img);
-                                    $('#postInput').append('<div class="br"><br></div>');
+                                    $('#postInput').append('<div class="br"><br></div>').focus()
                                 }, (e) => {
                                     console.log(e)
                                     })
@@ -134,21 +134,15 @@
                     reader.readAsDataURL(item);
                 })
                 $('#file-selector').val('')
-                // console.log(document.getElementById('postInput').find('br'))
-                // console.log($('#postInput')[0].childElementCount)
-                // console.log(document.querySelector("#postInput"))
-                $(document).on('change','#file-selector',function(){
-                   $('#postInput').focus()
+                // document.onmousemove = function(e) {
+                //     console.log(e)
+                // }
+                $(document).on("focus","#postInput",function(){  
+                    setTimeout(() => {
+                        console.log($('.br:last-child'))
+                        $('.br').focus()
+                    },0) 
                 });
-                $(document).on('click','#postInput',() => {
-                    console.log('456')
-                    // console.log($(this).children('.br'))
-                    console.log($(this).children('div.br:last-child'))
-                    $(this).children('div.br:last-child').focus()
-                    return;
-                });
-                // Array.from($('#postInput').children('br').last()).focus()
-                // $('#postInput').children('br').last().focus()
             }
         });
         async function submitPost() {
