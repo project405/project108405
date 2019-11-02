@@ -262,7 +262,7 @@ bot.on('postback', function(event) {
                             // badMoodRecommend.push(imgData)
                         }
                     }else{
-                        badMoodRecommendImg = 'https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2019/10/28/99/6995952.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=1050';
+                        badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
                     }
 
                     if(data[0].artiNum !=  undefined){
