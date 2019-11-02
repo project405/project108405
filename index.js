@@ -261,6 +261,8 @@ bot.on('postback', function(event) {
                             badMoodRecommendImg = data[0].imgName;
                             // badMoodRecommend.push(imgData)
                         }
+                    }else{
+                        badMoodRecommendImg = 'https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2019/10/28/99/6995952.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=1050';
                     }
 
                     if(data[0].artiNum !=  undefined){
@@ -297,7 +299,7 @@ bot.on('postback', function(event) {
                               "imageAspectRatio": "rectangle",
                               "imageSize": "contain",
                             //   "thumbnailImageUrl": badMoodRecommend[3],
-                              "thumbnailImageUrl": `https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2019/10/28/99/6995952.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=1050`,
+                              "thumbnailImageUrl": ``,
                               "imageBackgroundColor": "#a8e8fb",
                               "title":  "【" + badMoodRecommend[1] + "】",
                               "text":  badMoodRecommend[2],
