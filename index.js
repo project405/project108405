@@ -299,7 +299,7 @@ bot.on('postback', function(event) {
                               "imageAspectRatio": "rectangle",
                               "imageSize": "contain",
                             //   "thumbnailImageUrl": badMoodRecommend[3],
-                              "thumbnailImageUrl": ``,
+                              "thumbnailImageUrl": badMoodRecommendImg,
                               "imageBackgroundColor": "#a8e8fb",
                               "title":  "【" + badMoodRecommend[1] + "】",
                               "text":  badMoodRecommend[2],
