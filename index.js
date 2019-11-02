@@ -594,7 +594,7 @@ bot.on('message', function(event) {
                       "items": [
                         {
                           "type": "action", // ③
-                          "imageUrl": "https://example.com/sushi.png",
+                          "imageUrl": "https://i.imgur.com/vFck7Yg.jpg",
                           "action": {
                             "type": "message",
                             "label": "Sushi",
