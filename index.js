@@ -243,7 +243,6 @@ bot.on('postback', function(event) {
                 
             }else if(data == 'Badmood'){
                 mood.getMood().then((data) => {
-                    console.log('data',data)
                     var badMoodRecommend = [];
 
                     if(data[0].artiNum !=  undefined){

@@ -22,6 +22,7 @@ var getMood = async function () {
                     artiNum: item[0].artiNum,
                     artiHead:  item[0].artiHead,
                     artiCont:  item[0].artiCont,
+                    analyzeScore: item[0].analyzeScore,
                 }
                 result.push(contentObj)
               } else {
@@ -30,6 +31,7 @@ var getMood = async function () {
                     recomNum: item[0].recomNum,
                     recomHead:  item[0].recomHead,
                     recomCont:  item[0].recomCont,
+                    analyzeScore: item[0].analyzeScore,
                 }
                 result.push(contentObj)
               }
@@ -40,6 +42,7 @@ var getMood = async function () {
                     artiNum: item[0].artiNum,
                     artiHead:  item[0].artiHead,
                     artiCont:  item[0].artiCont,
+                    analyzeScore: item[0].analyzeScore,
                 }
                 result.push(contentObj)
               } else {
@@ -48,6 +51,7 @@ var getMood = async function () {
                     recomNum: item[0].recomNum,
                     recomHead:  item[0].recomHead,
                     recomCont:  item[0].recomCont,
+                    analyzeScore: item[0].analyzeScore,
                 }
                 result.push(contentObj)
             }
