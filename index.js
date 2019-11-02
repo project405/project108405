@@ -193,12 +193,12 @@ bot.on('postback', function(event) {
                 mood.getMood().then((data) => {
                     console.log('Goodmood',data)
                     var goodMoodRecommend = [];
-                    data[1].artiCont = data[1].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
 
                     if(data[1].artiNum !=  undefined){
                         while (data[1].artiCont.match('<br>')) {
                             data[1].artiCont = data[1].artiCont.replace('<br>','')
                         }
+                        data[1].artiCont = data[1].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
                         data[1].artiHead = data[1].artiHead.length>30 ? `${data[1].artiHead.substr(0,25)}...` : data[1].artiHead
                         data[1].artiCont = data[1].artiCont.length>50 ? `${data[1].artiCont.substr(0,45)}...` : data[1].artiCont
                         goodMoodRecommend.push('article/'+data[1].artiNum)
