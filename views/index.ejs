@@ -306,17 +306,21 @@
                <!-- 正向文章 -->
                <div class="sentimentContent">
                   <div id="positiveSection" style="display: none; word-wrap:break-word; overflow: hidden;">
-                        <h5> <%- items[6][0].artiHead %></h5>
-                        <%- items[6][0].artiCont %> 
-                        <hr>
-                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[6][0].artiNum %>'">進入文章查看更多</button>
+                        <% if(items[6].length > 0 ) { %>
+                            <h5> <%- items[6][0].artiHead %></h5>
+                            <%- items[6][0].artiCont %> 
+                            <hr>
+                            <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[6][0].artiNum %>'">進入文章查看更多</button>
+                        <% } %>
                     </div>
                     <!-- 負向文章 -->
                     <div id="negativeSection" style="display: none">
-                        <h5> <%- items[7][0].artiHead %></h5>
-                        <%- items[7][0].artiCont %>
-                        <hr>
-                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[7][0].artiNum %>'">進入文章查看更多</button>
+                        <% if(items[7].length > 0 ) { %>
+                            <h5> <%- items[7][0].artiHead %></h5>
+                            <%- items[7][0].artiCont %>
+                            <hr>
+                            <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[7][0].artiNum %>'">進入文章查看更多</button>
+                        <% } %>
                   </div>
                </div>
             </div>

@@ -121,15 +121,15 @@ var getIndexData = async function (memID) {
         });
 
     //----------- 正向文章 ----------- 
-    await sql('SELECT * '+
-             ' FROM( '+
+    await sql('SELECT * '+ 
+            ' FROM( '+
                 ' SELECT * '+
                 ' FROM "article" '+
-                ' WHERE "analyzeScore" > 0 '+
+                ' WHERE "score2" >= 20 '+
                 ' ORDER BY "positiveWords" DESC, "analyzeScore" DESC '+
                 ' LIMIT 5) AS "A" '+
-             ' ORDER BY random() '+
-             ' LIMIT 1 ')
+            ' ORDER BY random() '+
+            ' LIMIT 1 ')
     .then((data) => {
         if (!data.rows) {
             positiveArticle = undefined;
@@ -142,14 +142,14 @@ var getIndexData = async function (memID) {
 
     //----------- 負向文章 ----------- 
     await sql('SELECT * '+
-             ' FROM( '+
-                 ' SELECT * '+
-                 ' FROM "article" '+
-                 ' WHERE "analyzeScore" < 0 '+
-                 ' ORDER BY "negativeWords" DESC, "analyzeScore" DESC '+
-                 ' LIMIT 5) AS "A" '+
-             ' ORDER BY random() '+
-             ' LIMIT 1 ')
+            ' FROM( '+
+                ' SELECT * '+
+                ' FROM "article" '+
+                ' WHERE "score2" <= -15 '+
+                ' ORDER BY "negativeWords" DESC, "analyzeScore" DESC '+
+                ' LIMIT 5) AS "A" '+
+            ' ORDER BY random() '+
+            ' LIMIT 1 ')
     .then((data) => {
         if (!data.rows) {
             negativeArticle = undefined;
