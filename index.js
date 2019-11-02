@@ -453,7 +453,7 @@ bot.on('message', function(event) {
                         var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         // recommendImg.push(SecondData)
                         linePush.Imgur(img).then(ThirdData =>{
-                            console.log('ThirdData',ThirdData)
+                            // console.log('ThirdData',ThirdData)
                             recommendImg.push(ThirdData)
                         }) 
                     }else{
