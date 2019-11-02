@@ -197,10 +197,8 @@ bot.on('postback', function(event) {
                         while (data[1].artiCont.match('<br>')) {
                             data[1].artiCont = data[1].artiCont.replace('<br>','')
                         }
-                        data[1].artiCont = data[1].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
                         data[1].artiHead = data[1].artiHead.length>30 ? `${data[1].artiHead.substr(0,25)}...` : data[1].artiHead
                         data[1].artiCont = data[1].artiCont.length>50 ? `${data[1].artiCont.substr(0,45)}...` : data[1].artiCont
-                        
                         goodMoodRecommend.push('article/'+data[1].artiNum)
                         goodMoodRecommend.push(data[1].artiHead)
                         goodMoodRecommend.push(data[1].artiCont)
@@ -209,7 +207,6 @@ bot.on('postback', function(event) {
                         while (data[1].recomCont.match('<br>')) {
                             data[1].recomCont = data[1].recomCont.replace('<br>','')
                         }
-                        data[1].recomCont = data[1].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
                         data[1].recomHead = data[1].recomHead.length>30 ? `${data[1].recomHead.substr(0,25)}...` : data[1].recomHead
                         data[1].recomCont = data[1].recomCont.length>50 ? `${data[1].recomCont.substr(0,45)}...` : data[1].recomCont
                         goodMoodRecommend.push('oneRecommend/'+data[1].recomNum)
@@ -440,12 +437,10 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         index.getIndexData().then(data => {  
-            console.log(data[0])
             // let recommendNum = []  
             // let recommendHead = []  
             // let recommendDateTime = []  
             // let recommendImg = []  
-
             // //順序為電影、展覽、書籍、音樂
             // data[0].forEach(item => {
                 
@@ -458,14 +453,13 @@ bot.on('message', function(event) {
             //             var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
             //             // recommendImg.push(SecondData)
             //             linePush.Imgur(img).then(ThirdData =>{
-            //                 // console.log('ThirdData',ThirdData)
+            //                 console.log('ThirdData',ThirdData)
             //                 recommendImg.push(ThirdData)
-            //             }).catch((err)=> {
-            //                 console.log(err)
-            //             });
+            //             }) 
             //         }else{
             //             recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg') 
             //         }
+            //         console.log()
             //     }) 
             // });
 
