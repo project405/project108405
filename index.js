@@ -448,9 +448,9 @@ bot.on('message', function(event) {
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
                 linePush.recomImg(item.recomNum).then(SecondData =>{
-                    console.log('Seconddata',SecondData)
+                    var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
                     // recommendImg.push(SecondData)
-                    linePush.Imgur(SecondData).then(ThirdData =>{
+                    linePush.Imgur(img).then(ThirdData =>{
                         console.log('ThirdData',ThirdData)
                     })    
                 })  
