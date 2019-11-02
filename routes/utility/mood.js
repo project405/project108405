@@ -55,9 +55,17 @@ var getMood = async function () {
     }
 
     // -----------  取得推薦清單 --------------
-
+    //負向
     if (negativeChoose == 0) {
-        await sql('SELECT * FROM( SELECT * FROM "recommend" WHERE "analyzeScore" < 0 ORDER BY "negativeWords" DESC, "analyzeScore" DESC LIMIT 5) AS "A" ORDER BY random() LIMIT 1 ')
+        await sql(`SELECT * 
+                    FROM( 
+                        SELECT * 
+                        FROM "recommend" 
+                        WHERE "score2" <= -15 
+                        ORDER BY "negativeWords" DESC, "analyzeScore" DESC 
+                        LIMIT 5) AS "A" 
+                    ORDER BY random() 
+                    LIMIT 1 `)
         .then((data) => {
             if (data.rows != undefined) {
                 negativerecom = data.rows
@@ -68,7 +76,15 @@ var getMood = async function () {
             negativerecom = undefined;
         });
     } else {
-        await sql('SELECT * FROM( SELECT * FROM "article" WHERE "analyzeScore" < 0 ORDER BY "negativeWords" DESC, "analyzeScore" DESC LIMIT 5) AS "A" ORDER BY random() LIMIT 1 ')
+        await sql(`SELECT * 
+                    FROM( 
+                        SELECT * 
+                        FROM "article" 
+                        WHERE "score2" <= -15 
+                        ORDER BY "negativeWords" DESC, "analyzeScore" DESC 
+                        LIMIT 5) AS "A" 
+                    ORDER BY random() 
+                    LIMIT 1 `)
         .then((data) => {
             if (data.rows != undefined) {
                 negativearti = data.rows
@@ -79,9 +95,17 @@ var getMood = async function () {
             negativearti = undefined;
         });
     }
-
+    //正向
     if (positiveChoose == 0) {
-        await sql('SELECT * FROM(SELECT * FROM "recommend" WHERE "analyzeScore" > 0.5 ORDER BY "positiveWords" DESC, "analyzeScore" DESC LIMIT 5) AS "A" ORDER BY random() LIMIT 1 ')
+        await sql(`SELECT *  
+                    FROM( 
+                        SELECT * 
+                        FROM "recommend" 
+                        WHERE "score2" >= 20 
+                        ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
+                        LIMIT 5) AS "A" 
+                    ORDER BY random() 
+                    LIMIT 1 `)
         .then((data) => {
             if (data.rows != undefined) {
                 positiverecom = data.rows
@@ -92,7 +116,15 @@ var getMood = async function () {
             positiverecom = undefined;
         });
     } else {
-        await sql('SELECT * FROM( SELECT * FROM "article" WHERE "analyzeScore" > 0.5 ORDER BY "positiveWords" DESC, "analyzeScore" DESC LIMIT 5) AS "A" ORDER BY random() LIMIT 1 ')
+        await sql(`SELECT *  
+                    FROM( 
+                        SELECT * 
+                        FROM "article" 
+                        WHERE "score2" >= 20 
+                        ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
+                        LIMIT 5) AS "A" 
+                    ORDER BY random() 
+                    LIMIT 1 `)
         .then((data) => {
             if (data.rows != undefined) {
                 positivearti = data.rows
