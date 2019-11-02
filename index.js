@@ -589,25 +589,25 @@ bot.on('message', function(event) {
             event.reply(
                 {
                     "type": "text", // ①
-                    "text": "Select your favorite food category or send me your location!",
+                    "text": "「情緒，其實是一種能量，也是一種指引，\n當它向浪潮一般撲襲而來，你能做的就是任它流淌而過，\n只有感受過，你才得以在人生大海中繼續航行。」 ---- 留佩萱《療癒，從感受情緒開始》\n文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，\n我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。",
                     "quickReply": { // ②
                       "items": [
                         {
                           "type": "action", // ③
                           "imageUrl": "https://i.imgur.com/WiHuD6g.png",
                           "action": {
-                            "type": "message",
+                            "type": "postback",
                             "label": "燦爛、溫暖",
-                            "text": "Sushi"
+                            "data": "Goodmood"
                           }
                         },
                         {
                           "type": "action",
                           "imageUrl": "https://i.imgur.com/3vXMTpA.png",
                           "action": {
-                            "type": "message",
+                            "type": "postback",
                             "label": "惆悵、漣漪",
-                            "text": "Tempura"
+                            "data": "Badmood"
                           }
                         }
                       ]
