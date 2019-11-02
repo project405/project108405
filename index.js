@@ -586,7 +586,12 @@ bot.on('message', function(event) {
     }
     //-----------心情推薦-----------
     if (text == "情緒專區"){
-            event.reply({
+            event.reply(
+                {
+                    "type":"text",
+                    "text":"123"
+                }
+                ,{
                 "type": "template",
                 "altText": "文藝富心",
                 "template": {
