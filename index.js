@@ -441,6 +441,7 @@ bot.on('message', function(event) {
             let recommendHead = []  
             let recommendDateTime = []  
             let recommendImg = []  
+
             //順序為電影、展覽、書籍、音樂
             data[0].forEach(item => {
                 
@@ -461,14 +462,13 @@ bot.on('message', function(event) {
                     }else{
                         recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg') 
                     }
-                    console.log('recommendImg',recommendImg)
                 }) 
             });
 
-            // console.log('recommendNum',recommendNum)
-            // console.log('recommendHead',recommendHead)
-            // console.log('recommendDateTime',recommendDateTime)
-            // console.log('recommendImg',recommendImg)
+            console.log('recommendNum',recommendNum)
+            console.log('recommendHead',recommendHead)
+            console.log('recommendDateTime',recommendDateTime)
+            console.log('recommendImg',recommendImg)
             
 
 
