@@ -3,6 +3,8 @@
 //----------------------------------------
 var linebot = require('linebot');
 var express = require('express');
+var Promise = require('express-promise');
+
 //增加引用函式
 // const collection = require('./utility/collection');
 const index = require('./routes/utility/index');
@@ -11,6 +13,7 @@ const collection = require('./routes/utility/collection');
 const recommend = require('./routes/utility/recommend');
 const mood = require('./routes/utility/mood');
 const linePush = require('./routes/utility/linePush');
+
 
 
 
@@ -244,82 +247,93 @@ bot.on('postback', function(event) {
                 })
                 
             }else if(data == 'Badmood'){
+                function promiseGetBadMood() {
+                    new Promise((resolve, reject) => {
+                        var badMoodRecommendImg ;
+                        if(data[0].imgName){
+                            if(data[0].imgName.match('data:image/jpeg;base64')){
+                                console.log('11111')
+                                var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
+                                linePush.Imgur(img).then((imgData) =>{
+                                    console.log('我有進來誒')
+                                    badMoodRecommendImg = imgData;
+                                })
+                            }else{
+                                console.log('22222')
+                                badMoodRecommendImg = data[0].imgName;
+                            }
+                        }else{
+                            badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
+                        }
+                        resolve(badMoodRecommendImg)
+                    }) 
+                }
                 mood.getMood().then((data) => {
                     console.log('data[0]',data[0])
                     console.log('data[0].imgName',data[0].imgName)
                     // console.log('data.analyzeScore',data[0].analyzeScore)
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     var badMoodRecommend = [];
-                    var badMoodRecommendImg ;
-                    if(data[0].imgName){
-                        if(data[0].imgName.match('data:image/jpeg;base64')){
-                            console.log('11111')
-                            var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
-                            linePush.Imgur(img).then((imgData) =>{
-                                console.log('我有進來誒')
-                                badMoodRecommendImg = imgData;
-                            })
-                        }else{
-                            console.log('22222')
-                            badMoodRecommendImg = data[0].imgName;
-                        }
-                    }else{
-                        badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
-                    }
-
-                    if(data[0].artiNum !=  undefined){
-                        while (data[0].artiCont.match('<br>')) {
-                            data[0].artiCont = data[0].artiCont.replace('<br>','')
-                        }
-                        data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
-                        data[0].artiHead = data[0].artiHead.length>30 ? `${data[0].artiHead.substr(0,25)}...` : data[0].artiHead
-                        data[0].artiCont = data[0].artiCont.length>50 ? `${data[0].artiCont.substr(0,45)}...` : data[0].artiCont
-                        badMoodRecommend.push('article/'+data[0].artiNum)
-                        badMoodRecommend.push(data[0].artiHead)
-                        badMoodRecommend.push(data[0].artiCont)
-                        
-                    }else{
-                        while (data[0].recomCont.match('<br>')) {
-                            data[0].recomCont = data[0].recomCont.replace('<br>','')
-                        }
-                        data[0].recomCont = data[0].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
-                        data[0].recomHead = data[0].recomHead.length>30 ? `${data[0].recomHead.substr(0,25)}...` : data[0].recomHead
-                        data[0].recomCont = data[0].recomCont.length>50 ? `${data[0].recomCont.substr(0,45)}...` : data[0].recomCont
-                        badMoodRecommend.push('oneRecommend/'+data[0].recomNum)
-                        badMoodRecommend.push(data[0].recomHead)
-                        badMoodRecommend.push(data[0].recomCont)
-
-                    }
-                    console.log('badMoodRecommendImg',badMoodRecommendImg)
-                    console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
-                    event.reply(
-                        {
-                            "type": "template",
-                            "altText": " 體會，每一種情緒 ",
-                            "template": {
-                              "type": "buttons",
-                              "imageAspectRatio": "rectangle",
-                              "imageSize": "contain",
-                              "thumbnailImageUrl": badMoodRecommendImg,
-                              "imageBackgroundColor": '#ffffff',
-                              "title":  "【" + badMoodRecommend[1] + "】",
-                              "text":  badMoodRecommend[2],
-                              "defaultAction": {
-                                "type": "message",
-                                "label": "點到圖片或標題",
-                                "text": "0"
-                              },
-                              "actions": [
-                                {
-                                    "type": "uri",
-                                    "label": " 👀 至文藝富心官網觀看",
-                                    "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
-                                }
-                              ]
+                    var getBadMood = promiseGetBadMood(data[0].imgName)
+                    getBadMood.then((imgName) => {
+                        if(data[0].artiNum !=  undefined){
+                            while (data[0].artiCont.match('<br>')) {
+                                data[0].artiCont = data[0].artiCont.replace('<br>','')
                             }
-                        }    
-                    );
-                })
+                            data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
+                            data[0].artiHead = data[0].artiHead.length>30 ? `${data[0].artiHead.substr(0,25)}...` : data[0].artiHead
+                            data[0].artiCont = data[0].artiCont.length>50 ? `${data[0].artiCont.substr(0,45)}...` : data[0].artiCont
+                            badMoodRecommend.push('article/'+data[0].artiNum)
+                            badMoodRecommend.push(data[0].artiHead)
+                            badMoodRecommend.push(data[0].artiCont)
+                            
+                        }else{
+                            while (data[0].recomCont.match('<br>')) {
+                                data[0].recomCont = data[0].recomCont.replace('<br>','')
+                            }
+                            data[0].recomCont = data[0].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
+                            data[0].recomHead = data[0].recomHead.length>30 ? `${data[0].recomHead.substr(0,25)}...` : data[0].recomHead
+                            data[0].recomCont = data[0].recomCont.length>50 ? `${data[0].recomCont.substr(0,45)}...` : data[0].recomCont
+                            badMoodRecommend.push('oneRecommend/'+data[0].recomNum)
+                            badMoodRecommend.push(data[0].recomHead)
+                            badMoodRecommend.push(data[0].recomCont)
+    
+                        }
+                        console.log('badMoodRecommendImg',badMoodRecommendImg)
+                        console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
+                        event.reply(
+                            {
+                                "type": "template",
+                                "altText": " 體會，每一種情緒 ",
+                                "template": {
+                                  "type": "buttons",
+                                  "imageAspectRatio": "rectangle",
+                                  "imageSize": "contain",
+                                  "thumbnailImageUrl": imgName,
+                                  "imageBackgroundColor": '#ffffff',
+                                  "title":  "【" + badMoodRecommend[1] + "】",
+                                  "text":  badMoodRecommend[2],
+                                  "defaultAction": {
+                                    "type": "message",
+                                    "label": "點到圖片或標題",
+                                    "text": "0"
+                                  },
+                                  "actions": [
+                                    {
+                                        "type": "uri",
+                                        "label": " 👀 至文藝富心官網觀看",
+                                        "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
+                                    }
+                                  ]
+                                }
+                            }    
+                        );
+                    
+                    })
+                    
+                })    
+
+                    
             }else{
                 login.userJudgeBind(userId).then(userID =>{
                     console.log('userID!!!!!!!',userID)
