@@ -249,7 +249,7 @@ bot.on('postback', function(event) {
                     // console.log('data.analyzeScore',data[0].analyzeScore)
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     var badMoodRecommend = [];
-
+                    var badMoodRecommendImg ;
                     if(data[0].artiNum !=  undefined){
                         while (data[0].artiCont.match('<br>')) {
                             data[0].artiCont = data[0].artiCont.replace('<br>','')
@@ -276,14 +276,15 @@ bot.on('postback', function(event) {
                         linePush.Imgur(data[0].imgName).then(imgData =>{
                             if(data[0].imgName.match('data:image/jpeg;base64') != null){
                                 var img = imgData[0].imgName.replace('data:image/jpeg;base64,', '');
-                                badMoodRecommend.push(img)
+                                badMoodRecommendImg =img
                             }else{
-                                badMoodRecommend.push(imgData)
+                                badMoodRecommendImg = imgData
+                                // badMoodRecommend.push(imgData)
                             }
                         })
                     }
                     
-
+                    console.log('badMoodRecommendImg',badMoodRecommendImg)
                     console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
                     event.reply(
                         {
