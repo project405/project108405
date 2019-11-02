@@ -440,6 +440,7 @@ bot.on('message', function(event) {
             let recommendNum = []  
             let recommendHead = []  
             let recommendDateTime = []  
+            let recommendImg = []  
             //順序為電影、展覽、書籍、音樂
             data[0].forEach(item => {
                 
@@ -448,11 +449,16 @@ bot.on('message', function(event) {
                 recommendDateTime.push(item.recomDateTime);
                 linePush.recomImg(item.recomNum).then(SecondData =>{
                     // console.log('data',Seconddata)
-                        linePush.Imgur(SecondData).then(ThirdData =>{
-                            console.log('data',ThirdData)
-                        })
-                })
+                    // recommendImg.push(SecondData)
+                    linePush.Imgur(SecondData).then(ThirdData =>{
+                        console.log('daa',ThirdData)
+                    })    
+                })  
             });
+            
+            // linePush.Imgur(SecondData).then(ThirdData =>{
+            //     console.log('data',ThirdData)
+            // })
 
             // linePush.recomImg(){
 
