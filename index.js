@@ -449,28 +449,24 @@ bot.on('message', function(event) {
                 recommendDateTime.push(item.recomDateTime);
                 linePush.recomImg(item.recomNum).then(SecondData =>{
                     console.log('SecondData[0].imgName',SecondData[0].imgName)
-                    if(!SecondData[0].imgName){
-                        recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg')
-                    }else{
+                    if(SecondData[0].imgName != null){
                         var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         // recommendImg.push(SecondData)
                         linePush.Imgur(img).then(ThirdData =>{
                             console.log('ThirdData',ThirdData)
                             recommendImg.push(ThirdData)
-                        })   
+                        }) 
+                        
+                    }else{
+                        recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg')  
                         
                     }
                     
-                })  
+                }) 
+                console.log('recommendImg',recommendImg) 
             });
             console.log('recommendImg',recommendImg)
-            // linePush.Imgur(SecondData).then(ThirdData =>{
-            //     console.log('data',ThirdData)
-            // })
-
-            // linePush.recomImg(){
-
-            // }
+         
 
 
                 // event.reply({
