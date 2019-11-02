@@ -448,10 +448,10 @@ bot.on('message', function(event) {
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
                 linePush.recomImg(item.recomNum).then(SecondData =>{
-                    // console.log('data',Seconddata)
+                    console.log('Seconddata',Seconddata)
                     // recommendImg.push(SecondData)
                     linePush.Imgur(SecondData).then(ThirdData =>{
-                        console.log('daa',ThirdData)
+                        console.log('ThirdData',ThirdData)
                     })    
                 })  
             });
