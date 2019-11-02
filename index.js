@@ -448,7 +448,7 @@ bot.on('message', function(event) {
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
                 linePush.recomImg(item.recomNum).then(SecondData =>{
-                    console.log('SecondData[0].imgName',SecondData[0].imgName)
+                    // console.log('SecondData[0].imgName',SecondData[0].imgName)
                     if(SecondData.length > 0){
                         var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         // recommendImg.push(SecondData)
@@ -459,10 +459,8 @@ bot.on('message', function(event) {
                     }else{
                         recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg') 
                     }
-                    
                 }) 
                 console.log('recommendImg',recommendImg)
-
             });
          
 
