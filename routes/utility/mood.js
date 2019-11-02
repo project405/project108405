@@ -15,10 +15,6 @@ var getMood = async function () {
     var result = [];
     var positiveChoose = Math.round(Math.random())
     var negativeChoose = Math.round(Math.random())
-    var negativerecomImg = [];
-    var negativeartiImg = [];
-    var positiverecomImg = [];
-    var positiveartiImg = [];
 
 
     async function compare(item, index) {
@@ -31,6 +27,7 @@ var getMood = async function () {
                     artiCont:  item[0].artiCont,
                     analyzeScore: item[0].analyzeScore,
                     score2: item[0].score2,
+                    imgName: item[0].imgName,
                 }
                 result.push(contentObj)
               } else {
@@ -41,6 +38,7 @@ var getMood = async function () {
                     recomCont:  item[0].recomCont,
                     analyzeScore: item[0].analyzeScore,
                     score2: item[0].score2,
+                    imgName: item[0].imgName,
                 }
                 result.push(contentObj)
               }
@@ -53,6 +51,7 @@ var getMood = async function () {
                     artiCont:  item[0].artiCont,
                     analyzeScore: item[0].analyzeScore,
                     score2: item[0].score2,
+                    imgName: item[0].imgName,
                     
                 }
                 result.push(contentObj)
@@ -64,6 +63,7 @@ var getMood = async function () {
                     recomCont:  item[0].recomCont,
                     analyzeScore: item[0].analyzeScore,
                     score2: item[0].score2,
+                    imgName: item[0].imgName,
                 }
                 result.push(contentObj)
             }
@@ -78,13 +78,15 @@ var getMood = async function () {
     if (negativeChoose == 0) {
         await sql(`SELECT * 
                     FROM( 
-                        SELECT * 
+                        SELECT "recommend".*, "image"."imgName" 
                         FROM "recommend" 
+                            LEFT JOIN "image"
+                            ON "image"."recomNum" = "recommend"."recomNum"
                         WHERE "score2" <= -15 
                         ORDER BY "negativeWords" DESC, "analyzeScore" DESC 
                         LIMIT 5) AS "A" 
                     ORDER BY random() 
-                    LIMIT 1 `)
+                    LIMIT 1`)
         .then((data) => {
             if (data.rows != undefined) {
                 negativerecom = data.rows
@@ -94,29 +96,16 @@ var getMood = async function () {
         }, (error) => {
             negativerecom = undefined;
         });
-        //取得負向推薦圖片
-        if(negativerecom.length != 0 ){
-            await sql('SELECT "imgName" '+
-                ' FROM "image" '+
-                ' WHERE "recomNum" = $1 '+
-                ' ORDER BY "imgNum" ',[negativerecom[0].recomNum])
-            .then((data) => {
-                if (!data.rows) {
-                    negativerecomImg = undefined;
-                } else {
-                    negativerecomImg = data.rows;
-                }
-            }, (error) => {
-                negativerecomImg = undefined;
-            });
-        }
+        
 
     } else {
         await sql(`SELECT * 
                     FROM( 
-                        SELECT * 
+                        SELECT "article".*, "image"."imgName"
                         FROM "article" 
-                        WHERE "score2" <= -15 
+                            LEFT JOIN "image"
+                            ON "image"."artiNum" = "article"."artiNum"
+                        WHERE "score2" <= -15 		
                         ORDER BY "negativeWords" DESC, "analyzeScore" DESC 
                         LIMIT 5) AS "A" 
                     ORDER BY random() 
@@ -130,30 +119,16 @@ var getMood = async function () {
         }, (error) => {
             negativearti = undefined;
         });
-        //取得負向文章圖片
-        if(negativearti.length != 0 ){
-            await sql('SELECT "imgName" '+
-                ' FROM "image" '+
-                ' WHERE "artiNum" = $1 '+
-                ' ORDER BY "imgNum" ',[negativearti[0].artiNum])
-            .then((data) => {
-                if (!data.rows) {
-                    negativeartiImg = undefined;
-                } else {
-                    negativeartiImg = data.rows;
-                }
-            }, (error) => {
-                negativeartiImg = undefined;
-            });
-        }
-
+        
     }
     //正向
     if (positiveChoose == 0) {
         await sql(`SELECT *  
                     FROM( 
-                        SELECT * 
+                        SELECT "recommend".*, "image"."imgName" 
                         FROM "recommend" 
+                            LEFT JOIN "image"
+                            ON "image"."recomNum" = "recommend"."recomNum"
                         WHERE "score2" >= 20 
                         ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
                         LIMIT 5) AS "A" 
@@ -169,26 +144,14 @@ var getMood = async function () {
             positiverecom = undefined;
         });
 
-        if(positiverecom.length != 0 ){
-            await sql('SELECT "imgName" '+
-                ' FROM "image" '+
-                ' WHERE "recomNum" = $1 '+
-                ' ORDER BY "imgNum" ',[positiverecom[0].recomNum])
-            .then((data) => {
-                if (!data.rows) {
-                    positiverecomImg = undefined;
-                } else {
-                    positiverecomImg = data.rows;
-                }
-            }, (error) => {
-                positiverecomImg = undefined;
-            });
-        }
+        
     } else {
         await sql(`SELECT *  
                     FROM( 
-                        SELECT * 
+                        SELECT "article".*, "image"."imgName"
                         FROM "article" 
+                            LEFT JOIN "image"
+                            ON "image"."artiNum" = "article"."artiNum"
                         WHERE "score2" >= 20 
                         ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
                         LIMIT 5) AS "A" 
@@ -203,23 +166,6 @@ var getMood = async function () {
         }, (error) => {
             positivearti = undefined;
         });
-
-        if(positivearti.length != 0 ){
-            await sql('SELECT "imgName" '+
-                ' FROM "image" '+
-                ' WHERE "artiNum" = $1 '+
-                ' ORDER BY "imgNum" ',[positivearti[0].artiNum])
-            .then((data) => {
-                if (!data.rows) {
-                    positiveartiImg = undefined;
-                } else {
-                    positiveartiImg = data.rows;
-                }
-            }, (error) => {
-                positiveartiImg = undefined;
-            });
-        }
-    
     }
     
     temp[0] = negativerecom;
@@ -233,7 +179,7 @@ var getMood = async function () {
         }
     })
 
-    
+
 
     return result;
 }

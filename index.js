@@ -191,8 +191,9 @@ bot.on('postback', function(event) {
 
             }else if(data == 'Goodmood'){
                 mood.getMood().then((data) => {
+                    console.log('data',data[1])
                     // console.log('data.analyzeScore',data[1].analyzeScore)                    
-                    console.log('@@@@@@@@@@@@@@@@@data.score2,',data[1].score2)                    
+                    // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[1].score2)                    
                     var goodMoodRecommend = [];
 
                     if(data[1].artiNum !=  undefined){
@@ -244,8 +245,9 @@ bot.on('postback', function(event) {
                 
             }else if(data == 'Badmood'){
                 mood.getMood().then((data) => {
+                    console.log('data',data[0])
                     // console.log('data.analyzeScore',data[0].analyzeScore)
-                    console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
+                    // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     var badMoodRecommend = [];
                     if(data[0].artiNum !=  undefined){
                         while (data[0].artiCont.match('<br>')) {
