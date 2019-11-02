@@ -448,12 +448,17 @@ bot.on('message', function(event) {
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
                 linePush.recomImg(item.recomNum).then(SecondData =>{
-                    var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                    // recommendImg.push(SecondData)
-                    linePush.Imgur(img).then(ThirdData =>{
-                        console.log('ThirdData',ThirdData)
-                        recommendImg.push(ThirdData)
-                    })    
+                    if(SecondData[0].imgName){
+                        var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                        // recommendImg.push(SecondData)
+                        linePush.Imgur(img).then(ThirdData =>{
+                            console.log('ThirdData',ThirdData)
+                            recommendImg.push(ThirdData)
+                        })    
+                    }else{
+                        recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg')
+                    }
+                    
                 })  
             });
             console.log('recommendImg',recommendImg)
