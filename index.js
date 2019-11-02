@@ -192,6 +192,7 @@ bot.on('postback', function(event) {
             }else if(data == 'Goodmood'){
                 mood.getMood().then((data) => {
                     console.log('data.analyzeScore',data.analyzeScore)                    
+                    console.log('data.score2,',data.score2)                    
                     var goodMoodRecommend = [];
 
                     if(data[1].artiNum !=  undefined){
@@ -244,6 +245,7 @@ bot.on('postback', function(event) {
             }else if(data == 'Badmood'){
                 mood.getMood().then((data) => {
                     console.log('data.analyzeScore',data.analyzeScore)
+                    console.log('data.score2,',data.score2)                    
                     var badMoodRecommend = [];
                     if(data[0].artiNum !=  undefined){
                         while (data[0].artiCont.match('<br>')) {
