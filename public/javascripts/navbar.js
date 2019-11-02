@@ -18,7 +18,7 @@ $(document).ready(() => {
                     <div class="collapse navbar-collapse" id="navbarNav">\
                         <ul class="navbar-nav ml-auto">\
                             <div class="searchSection">\
-                                <input type="text" class="navSearch" id="input_search" />\
+                                <input type="text" class="navSearch" id="input_search" placeholder="搜尋"/>\
                                 <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
                             <li class="nav-item">\
@@ -91,7 +91,7 @@ $(document).ready(() => {
                     <div class="collapse navbar-collapse" id="navbarNav">\
                         <ul class="navbar-nav ml-auto">\
                             <div class="searchSection">\
-                                <input type="text" class="navSearch" id="input_search" />\
+                                <input type="text" class="navSearch" id="input_search" placeholder="搜尋"/>\
                                 <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
                             <li class="nav-item dropdown">\
@@ -239,7 +239,7 @@ $(document).ready(() => {
                 <div class="collapse navbar-collapse" id="navbarNav">\
                     <ul class="navbar-nav ml-auto">\
                         <div class="searchSection">\
-                            <input type="text" class="navSearch" id="input_search" />\
+                            <input type="text" class="navSearch" id="input_search" placeholder="搜尋"/>\
                             <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                         </div>\
                         <li class="nav-item">\

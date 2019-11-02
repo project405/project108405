@@ -16,7 +16,7 @@ var getArticleListPagination = async function (memID, artiListNum) {
     var imgs ;
     var result = [];
     var articleSum;
-
+    var pageImage = [];
     // -----------  取得文章清單 --------------
     await sql('SELECT"articleListDataView".*, "member"."memName"'+
              ' FROM "articleListDataView"' +
@@ -70,15 +70,24 @@ var getArticleListPagination = async function (memID, artiListNum) {
         });
 
     //取得照片
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiMessNum" IS NULL ORDER BY "imgNum"')
+    articleList.map((item) => {
+        pageImage.push(item.artiNum)
+    })
+
+    await sql('SELECT "artiNum" , "imgName" ' +
+              ' FROM "image"'+
+              ' WHERE "artiNum" = ANY($1::INT[]) AND "artiMessNum" IS NULL'+
+              ' ORDER BY "imgNum"', [pageImage])
         .then((data) => {
             if (data.rows == null || data.rows == '') {
                 imgs = undefined;
             } else {
+                console.log(data)
                 imgs = data.rows;
             }
         }, (error) => {
             imgs = undefined;
+            console.log(error)
         });
 
     result[0] = articleList; 
@@ -90,7 +99,6 @@ var getArticleListPagination = async function (memID, artiListNum) {
     result[6] = articleSum;
     result[7] = [artiListNum];
 
-console.log("!!!!!!!!!!!!!!!!!",articleList);
     return result;
 }
 

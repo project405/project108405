@@ -290,6 +290,7 @@ div.replyInput {
     border-radius: 8px;
     caret-color: #2D4F41;
     cursor: text;
+    text-align: left !important;
 }
 
 .input:empty::before {
