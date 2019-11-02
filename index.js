@@ -447,7 +447,7 @@ bot.on('message', function(event) {
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
                 linePush.recomImg(item.recomNum).then(Seconddata =>{
-                    console.log(data)
+                    console.log('data',Seconddata)
                     // linePush.Imgur()
                 })
             });
