@@ -603,7 +603,7 @@ bot.on('message', function(event) {
                         },
                         {
                           "type": "action",
-                          "imageUrl": "https://imgur.com/3vXMTpA",
+                          "imageUrl": "https://i.imgur.com/3vXMTpA.png",
                           "action": {
                             "type": "message",
                             "label": "惆悵、漣漪",
