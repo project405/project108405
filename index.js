@@ -216,7 +216,7 @@ bot.on('postback', function(event) {
                         goodMoodRecommend.push(data[1].recomCont)
                     }
 
-                    console.log('good!!!!!!!!!!!!!!!!!',goodMoodRecommend)
+                    // console.log('good!!!!!!!!!!!!!!!!!',goodMoodRecommend)
                     event.reply({
                         "type": "template",
                         "altText": " 體會，每一種情緒 ",
