@@ -191,8 +191,10 @@ bot.on('postback', function(event) {
 
             }else if(data == 'Goodmood'){
                 mood.getMood().then((data) => {
+                    console.log('Goodmood',data)
                     var goodMoodRecommend = [];
-                    
+                    data[1].artiCont = data[1].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
+
                     if(data[1].artiNum !=  undefined){
                         while (data[1].artiCont.match('<br>')) {
                             data[1].artiCont = data[1].artiCont.replace('<br>','')
