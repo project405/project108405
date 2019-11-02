@@ -462,6 +462,9 @@ bot.on('message', function(event) {
                 }) 
             });
             console.log('recommendNum',recommendNum)
+            console.log('recommendHead',recommendHead)
+            console.log('recommendDateTime',recommendDateTime)
+            console.log('recommendImg',recommendImg)
 
 
 
