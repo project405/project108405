@@ -147,6 +147,7 @@ var Imgur = async function (img) {
                     
                 });
         const response = await request.json();
+        console.log('response.data.link',response.data.link)
         return response.data.link;
 };
         
