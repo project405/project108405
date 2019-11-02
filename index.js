@@ -253,7 +253,7 @@ bot.on('postback', function(event) {
                     var badMoodRecommendImg ;
                     if(data[0].imgName){
                         if(data[0].imgName.match('data:image/jpeg;base64')){
-                            var img = imgData.imgName.replace('data:image/jpeg;base64,', '');
+                            var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
                             linePush.Imgur(img).then(imgData =>{
                                 badMoodRecommendImg = imgData;
                             })
@@ -299,7 +299,7 @@ bot.on('postback', function(event) {
                               "imageAspectRatio": "rectangle",
                               "imageSize": "contain",
                               "thumbnailImageUrl": badMoodRecommendImg,
-                              "imageBackgroundColor": '#000000',
+                              "imageBackgroundColor": '#ffffff',
                               "title":  "【" + badMoodRecommend[1] + "】",
                               "text":  badMoodRecommend[2],
                               "defaultAction": {
