@@ -245,7 +245,8 @@ bot.on('postback', function(event) {
                 
             }else if(data == 'Badmood'){
                 mood.getMood().then((data) => {
-                    console.log('data',data[0])
+                    console.log('data[0]',data[0])
+                    console.log('data[0].imgName',data[0].imgName)
                     // console.log('data.analyzeScore',data[0].analyzeScore)
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     var badMoodRecommend = [];
