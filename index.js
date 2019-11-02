@@ -272,15 +272,17 @@ bot.on('postback', function(event) {
                         badMoodRecommend.push(data[0].recomHead)
                         badMoodRecommend.push(data[0].recomCont)
                     }
-
-                    linePush.Imgur(data[0].imgName).then(imgData =>{
-                        if(data[0].imgName.match('data:image/jpeg;base64') != null){
-                            var img = imgData[0].imgName.replace('data:image/jpeg;base64,', '');
-                            badMoodRecommend.push(img)
-                        }else{
-                            badMoodRecommend.push(imgData)
-                        }
-                    })
+                    if(data[0].imgName.length != 0){
+                        linePush.Imgur(data[0].imgName).then(imgData =>{
+                            if(data[0].imgName.match('data:image/jpeg;base64') != null){
+                                var img = imgData[0].imgName.replace('data:image/jpeg;base64,', '');
+                                badMoodRecommend.push(img)
+                            }else{
+                                badMoodRecommend.push(imgData)
+                            }
+                        })
+                    }
+                    
 
                     console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
                     event.reply(
