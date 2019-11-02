@@ -249,6 +249,7 @@ bot.on('postback', function(event) {
                     // console.log('data.analyzeScore',data[0].analyzeScore)
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     var badMoodRecommend = [];
+
                     if(data[0].artiNum !=  undefined){
                         while (data[0].artiCont.match('<br>')) {
                             data[0].artiCont = data[0].artiCont.replace('<br>','')
@@ -272,27 +273,38 @@ bot.on('postback', function(event) {
                         badMoodRecommend.push(data[0].recomCont)
                     }
 
+                    linePush.Imgur(data[0].imgName).then(imgData =>{
+                        badMoodRecommend.push(imgData)
+                    })
+
                     console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
-                    event.reply({
-                        "type": "template",
-                        "altText": " 體會，每一種情緒 ",
-                        "template": {
-                            "type": "carousel",
-                            "columns": [
+                    event.reply(
+                        {
+                            "type": "template",
+                            "altText": " 體會，每一種情緒 ",
+                            "template": {
+                              "type": "buttons",
+                              "imageAspectRatio": "rectangle",
+                              "imageSize": "contain",
+                              "thumbnailImageUrl": badMoodRecommend[3],
+                              "imageBackgroundColor": "#a8e8fb",
+                              "title":  "【" + badMoodRecommend[1] + "】",
+                              "text":  badMoodRecommend[2],
+                              "defaultAction": {
+                                "type": "message",
+                                "label": "點到圖片或標題",
+                                "text": "0"
+                              },
+                              "actions": [
                                 {
-                                    "title": "【" + badMoodRecommend[1] + "】" ,
-                                    "text": badMoodRecommend[2] ,
-                                    "actions": [
-                                        {
-                                            "type": "uri",
-                                            "label": " 👀 至文藝富心官網觀看",
-                                            "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
-                                        }
-                                    ]
+                                    "type": "uri",
+                                    "label": " 👀 至文藝富心官網觀看",
+                                    "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
                                 }
-                            ]
-                        }
-                    });
+                              ]
+                            }
+                        }    
+                    );
                 })
             }else{
                 login.userJudgeBind(userId).then(userID =>{
