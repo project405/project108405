@@ -255,7 +255,8 @@ bot.on('postback', function(event) {
                         if(data[0].imgName.match('data:image/jpeg;base64')){
                             console.log('11111')
                             var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
-                            linePush.Imgur(img).then(imgData =>{
+                            linePush.Imgur(img).then((imgData) =>{
+                                console.log('我有進來誒')
                                 badMoodRecommendImg = imgData;
                             })
                         }else{
