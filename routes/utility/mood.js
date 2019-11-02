@@ -15,9 +15,16 @@ var getMood = async function () {
     var result = [];
     var positiveChoose = Math.round(Math.random())
     var negativeChoose = Math.round(Math.random())
+    var negativerecomImg = [];
+    var negativeartiImg = [];
+    var positiverecomImg = [];
+    var positiveartiImg = [];
+
+
     async function compare(item, index) {
         if (item.length != 0 && index <= 1) {
             if (Object.keys(item[0]).indexOf('artiNum') >= 0 ) {
+                //  文章
                 var contentObj =  {
                     artiNum: item[0].artiNum,
                     artiHead:  item[0].artiHead,
@@ -63,6 +70,9 @@ var getMood = async function () {
         }
     }
 
+    
+   
+
     // -----------  取得推薦清單 --------------
     //負向
     if (negativeChoose == 0) {
@@ -84,6 +94,23 @@ var getMood = async function () {
         }, (error) => {
             negativerecom = undefined;
         });
+        //取得負向推薦圖片
+        if(negativerecom.length != 0 ){
+            await sql('SELECT "imgName" '+
+                ' FROM "image" '+
+                ' WHERE "recomNum" = $1 '+
+                ' ORDER BY "imgNum" ',[negativerecom[0].recomNum])
+            .then((data) => {
+                if (!data.rows) {
+                    negativerecomImg = undefined;
+                } else {
+                    negativerecomImg = data.rows;
+                }
+            }, (error) => {
+                negativerecomImg = undefined;
+            });
+        }
+
     } else {
         await sql(`SELECT * 
                     FROM( 
@@ -103,6 +130,23 @@ var getMood = async function () {
         }, (error) => {
             negativearti = undefined;
         });
+        //取得負向文章圖片
+        if(negativearti.length != 0 ){
+            await sql('SELECT "imgName" '+
+                ' FROM "image" '+
+                ' WHERE "artiNum" = $1 '+
+                ' ORDER BY "imgNum" ',[negativearti[0].artiNum])
+            .then((data) => {
+                if (!data.rows) {
+                    negativeartiImg = undefined;
+                } else {
+                    negativeartiImg = data.rows;
+                }
+            }, (error) => {
+                negativeartiImg = undefined;
+            });
+        }
+
     }
     //正向
     if (positiveChoose == 0) {
@@ -124,6 +168,22 @@ var getMood = async function () {
         }, (error) => {
             positiverecom = undefined;
         });
+
+        if(positiverecom.length != 0 ){
+            await sql('SELECT "imgName" '+
+                ' FROM "image" '+
+                ' WHERE "recomNum" = $1 '+
+                ' ORDER BY "imgNum" ',[positiverecom[0].recomNum])
+            .then((data) => {
+                if (!data.rows) {
+                    positiverecomImg = undefined;
+                } else {
+                    positiverecomImg = data.rows;
+                }
+            }, (error) => {
+                positiverecomImg = undefined;
+            });
+        }
     } else {
         await sql(`SELECT *  
                     FROM( 
@@ -143,6 +203,22 @@ var getMood = async function () {
         }, (error) => {
             positivearti = undefined;
         });
+
+        if(positivearti.length != 0 ){
+            await sql('SELECT "imgName" '+
+                ' FROM "image" '+
+                ' WHERE "artiNum" = $1 '+
+                ' ORDER BY "imgNum" ',[positivearti[0].artiNum])
+            .then((data) => {
+                if (!data.rows) {
+                    positiveartiImg = undefined;
+                } else {
+                    positiveartiImg = data.rows;
+                }
+            }, (error) => {
+                positiveartiImg = undefined;
+            });
+        }
     
     }
     
@@ -156,6 +232,9 @@ var getMood = async function () {
             await compare(item, index)
         }
     })
+
+    
+
     return result;
 }
 
