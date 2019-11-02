@@ -198,6 +198,18 @@ button.postButton:hover {
     overflow: hidden;
 }
 
+a.dateTime {
+    font-size: 0.9em !important;
+    color: rgb(104, 102, 102) !important;
+    margin: 0;
+}
+
+@media (max-width: 450px) {
+    a.next::before {
+        white-space: pre;
+        content: '\A';
+    }
+}
 
 /* -------------- */
 

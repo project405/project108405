@@ -216,20 +216,32 @@ var getOneRecommend = async function (recomNum, memID) {
         console.log(error)
     });
 
+    
     // ----------- 根據該文章的tag去猜測使用者可能喜歡的文章 -----------
-    await sql('SELECT * '+
-                ' FROM "recommend" '+
-                ' WHERE "recomNum" '+
-                    ' IN(SELECT "A"."recomNum" '+
-                    ' FROM (SELECT "recomNum" ,count(*) '+
-                            ' FROM "tagLinkArticle" '+
-                            ' WHERE "tagNum" '+
-                                ' IN (SELECT "tagNum" '+
-                                    ' FROM "tagLinkArticle" '+
-                                    ' WHERE "recomNum" = $1) AND "recomNum" != $1 '+
-                            ' GROUP BY "recomNum" '+
-                            ' ORDER BY "count" DESC , "recomNum" DESC '+
-                            ' LIMIT 3) AS "A")', [recomNum])
+    await sql('SELECT * '+ 
+              ' FROM "recommend" '+
+              ' WHERE "recomNum" '+ 
+              ' IN(SELECT "A"."recomNum" '+
+                ' FROM(SELECT "recomNum" , count("recomNum") '+
+                    ' FROM "tagLinkArticle" '+
+                    ' WHERE "tagNum" '+ 
+                        ' IN(SELECT "tagNum" '+
+                            ' FROM "tag" '+
+                            ' WHERE "tagName"  '+
+                                ' IN(SELECT "tagName" '+
+                                    ' FROM "tag" '+
+                                    ' WHERE "tagNum" '+
+                                        ' IN (SELECT "tagNum" '+ 
+                                            ' FROM "tagLinkArticle" '+ 
+                                            ' WHERE "recomNum" = $1 ) '+
+                                    ' ) '+
+                            ' ) AND "recomNum" != $1 '+
+                    ' GROUP BY "recomNum" '+
+                    ' ORDER BY "count" DESC ,"recomNum" DESC '+
+                    ' LiMIT 3 '+
+                    ' ) AS "A" '+
+                ') '+
+        ' ORDER BY "recomNum" DESC', [recomNum])
         .then((data) => {
             if (data.rowCount <= 0) {
                 guessRecommend = undefined ;
