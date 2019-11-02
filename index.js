@@ -460,11 +460,15 @@ bot.on('message', function(event) {
                         recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg') 
                     }
                 }) 
+
+                console.log('recommendNum',recommendNum)
+                console.log('recommendHead',recommendHead)
+                console.log('recommendDateTime',recommendDateTime)
+                console.log('recommendImg',recommendImg)
+
+
             });
-            console.log('recommendNum',recommendNum)
-            console.log('recommendHead',recommendHead)
-            console.log('recommendDateTime',recommendDateTime)
-            console.log('recommendImg',recommendImg)
+            
 
 
 
