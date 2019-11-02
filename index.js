@@ -260,6 +260,18 @@ bot.on('postback', function(event) {
                         badMoodRecommend.push('article/'+data[0].artiNum)
                         badMoodRecommend.push(data[0].artiHead)
                         badMoodRecommend.push(data[0].artiCont)
+
+                        if(data[0].imgName.length != 0){
+                            linePush.Imgur(data[0].imgName).then(imgData =>{
+                                if(data[0].imgName.match('data:image/jpeg;base64') != null){
+                                    var img = imgData[0].imgName.replace('data:image/jpeg;base64,', '');
+                                    badMoodRecommendImg =img
+                                }else{
+                                    badMoodRecommendImg = imgData
+                                    // badMoodRecommend.push(imgData)
+                                }
+                            })
+                        }
                         
                     }else{
                         while (data[0].recomCont.match('<br>')) {
@@ -271,18 +283,20 @@ bot.on('postback', function(event) {
                         badMoodRecommend.push('oneRecommend/'+data[0].recomNum)
                         badMoodRecommend.push(data[0].recomHead)
                         badMoodRecommend.push(data[0].recomCont)
+
+                        if(data[0].imgName.length != 0){
+                            linePush.Imgur(data[0].imgName).then(imgData =>{
+                                if(data[0].imgName.match('data:image/jpeg;base64') != null){
+                                    var img = imgData[0].imgName.replace('data:image/jpeg;base64,', '');
+                                    badMoodRecommendImg =img
+                                }else{
+                                    badMoodRecommendImg = imgData
+                                    // badMoodRecommend.push(imgData)
+                                }
+                            })
+                        }
                     }
-                    if(data[0].imgName.length != 0){
-                        linePush.Imgur(data[0].imgName).then(imgData =>{
-                            if(data[0].imgName.match('data:image/jpeg;base64') != null){
-                                var img = imgData[0].imgName.replace('data:image/jpeg;base64,', '');
-                                badMoodRecommendImg =img
-                            }else{
-                                badMoodRecommendImg = imgData
-                                // badMoodRecommend.push(imgData)
-                            }
-                        })
-                    }
+                    
                     
                     console.log('badMoodRecommendImg',badMoodRecommendImg)
                     console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
