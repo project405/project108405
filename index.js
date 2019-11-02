@@ -594,19 +594,19 @@ bot.on('message', function(event) {
                       "items": [
                         {
                           "type": "action", // ③
-                          "imageUrl": "https://i.imgur.com/vFck7Yg.jpg",
+                          "imageUrl": "https://i.imgur.com/WiHuD6g.png",
                           "action": {
                             "type": "message",
-                            "label": "Sushi",
+                            "label": "燦爛、溫暖",
                             "text": "Sushi"
                           }
                         },
                         {
                           "type": "action",
-                          "imageUrl": "https://example.com/tempura.png",
+                          "imageUrl": "https://imgur.com/3vXMTpA",
                           "action": {
                             "type": "message",
-                            "label": "Tempura",
+                            "label": "惆悵、漣漪",
                             "text": "Tempura"
                           }
                         },
