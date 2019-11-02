@@ -609,13 +609,6 @@ bot.on('message', function(event) {
                             "label": "惆悵、漣漪",
                             "text": "Tempura"
                           }
-                        },
-                        {
-                          "type": "action", // ④
-                          "action": {
-                            "type": "location",
-                            "label": "Send location"
-                          }
                         }
                       ]
                     }
