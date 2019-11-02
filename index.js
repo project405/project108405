@@ -278,9 +278,8 @@ bot.on('postback', function(event) {
                             var img = imgData[0].imgName.replace('data:image/jpeg;base64,', '');
                             badMoodRecommend.push(img)
                         }else{
-                            badMoodRecommend.push(data[0].imgName)
+                            badMoodRecommend.push(imgData)
                         }
-                        
                     })
 
                     console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
