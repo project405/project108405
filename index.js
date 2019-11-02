@@ -449,15 +449,16 @@ bot.on('message', function(event) {
                 recommendDateTime.push(item.recomDateTime);
                 linePush.recomImg(item.recomNum).then(SecondData =>{
                     console.log('SecondData[0].imgName',SecondData[0].imgName)
-                    if(SecondData[0].imgName != undefined){
+                    if(!SecondData[0].imgName){
+                        recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg')
+                    }else{
                         var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         // recommendImg.push(SecondData)
                         linePush.Imgur(img).then(ThirdData =>{
                             console.log('ThirdData',ThirdData)
                             recommendImg.push(ThirdData)
-                        })    
-                    }else{
-                        recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg')
+                        })   
+                        
                     }
                     
                 })  
