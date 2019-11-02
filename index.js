@@ -588,66 +588,96 @@ bot.on('message', function(event) {
     if (text == "情緒專區"){
             event.reply(
                 {
-                    "type":"text",
-                    "text":"123"
-                }
-                ,{
-                "type": "template",
-                "altText": "文藝富心",
-                "template": {
-                    "type": "carousel",
-                    "columns": [
+                    "type": "text", // ①
+                    "text": "Select your favorite food category or send me your location!",
+                    "quickReply": { // ②
+                      "items": [
                         {
-                          "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/QNd8AT.jpg",
-                          "imageBackgroundColor": "#FFFFFF",
-                          "title": "燦爛、溫暖",
-                          "text": "微小的快樂，便足以支撐龐然荒涼的人生。文藝富心帶領你挖掘好心情。",
-                          "defaultAction": {
-                              "type": "uri",
-                              "label": "詳細資料",
-                              "uri": "https://project108405.herokuapp.com/"
-                          },
-                          "actions": [
-                              {
-                                  "type": "postback",
-                                  "label": "推薦給我",
-                                  "data": "Goodmood"
-                              },
-                              {
-                                  "type": "uri",
-                                  "label": "自行探索",
-                                  "uri": "https://project108405.herokuapp.com/"
-                              }
-                          ]
+                          "type": "action", // ③
+                          "imageUrl": "https://example.com/sushi.png",
+                          "action": {
+                            "type": "message",
+                            "label": "Sushi",
+                            "text": "Sushi"
+                          }
                         },
-                        {    
-                          "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/2EWOCG.jpg",
-                          "imageBackgroundColor": "#000000",
-                          "title": "惆悵、漣漪",
-                          "text": "打擊與挫敗是成功的踏腳石而不是絆腳石。文藝富心陪你克服這道關卡。",
-                          "defaultAction": {
-                              "type": "uri",
-                              "label": "詳細資料",
-                              "uri": "https://project108405.herokuapp.com/"
-                          },
-                          "actions": [
-                            {
-                                "type": "postback",
-                                "label": "推薦給我",
-                                "data": "Badmood"
-                            },
-                            {
-                                "type": "uri",
-                                "label": "自行探索",
-                                "uri": "https://project108405.herokuapp.com/"
-                            }
-                          ]
+                        {
+                          "type": "action",
+                          "imageUrl": "https://example.com/tempura.png",
+                          "action": {
+                            "type": "message",
+                            "label": "Tempura",
+                            "text": "Tempura"
+                          }
+                        },
+                        {
+                          "type": "action", // ④
+                          "action": {
+                            "type": "location",
+                            "label": "Send location"
+                          }
                         }
-                    ],
-                    "imageAspectRatio": "rectangle",
-                    "imageSize": "cover"
-                } 
-            });
+                      ]
+                    }
+                  }
+            //     {
+            //     "type": "template",
+            //     "altText": "文藝富心",
+            //     "template": {
+            //         "type": "carousel",
+            //         "columns": [
+            //             {
+            //               "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/QNd8AT.jpg",
+            //               "imageBackgroundColor": "#FFFFFF",
+            //               "title": "燦爛、溫暖",
+            //               "text": "微小的快樂，便足以支撐龐然荒涼的人生。文藝富心帶領你挖掘好心情。",
+            //               "defaultAction": {
+            //                   "type": "uri",
+            //                   "label": "詳細資料",
+            //                   "uri": "https://project108405.herokuapp.com/"
+            //               },
+            //               "actions": [
+            //                   {
+            //                       "type": "postback",
+            //                       "label": "推薦給我",
+            //                       "data": "Goodmood"
+            //                   },
+            //                   {
+            //                       "type": "uri",
+            //                       "label": "自行探索",
+            //                       "uri": "https://project108405.herokuapp.com/"
+            //                   }
+            //               ]
+            //             },
+            //             {    
+            //               "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/2EWOCG.jpg",
+            //               "imageBackgroundColor": "#000000",
+            //               "title": "惆悵、漣漪",
+            //               "text": "打擊與挫敗是成功的踏腳石而不是絆腳石。文藝富心陪你克服這道關卡。",
+            //               "defaultAction": {
+            //                   "type": "uri",
+            //                   "label": "詳細資料",
+            //                   "uri": "https://project108405.herokuapp.com/"
+            //               },
+            //               "actions": [
+            //                 {
+            //                     "type": "postback",
+            //                     "label": "推薦給我",
+            //                     "data": "Badmood"
+            //                 },
+            //                 {
+            //                     "type": "uri",
+            //                     "label": "自行探索",
+            //                     "uri": "https://project108405.herokuapp.com/"
+            //                 }
+            //               ]
+            //             }
+            //         ],
+            //         "imageAspectRatio": "rectangle",
+            //         "imageSize": "cover"
+            //     } 
+            // });
+            );
     
     }else if (text != "情緒專區" && text != "本週推薦" && text != "熱門文章"){
         event.reply(
