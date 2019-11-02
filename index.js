@@ -298,9 +298,8 @@ bot.on('postback', function(event) {
                               "type": "buttons",
                               "imageAspectRatio": "rectangle",
                               "imageSize": "contain",
-                            //   "thumbnailImageUrl": badMoodRecommend[3],
                               "thumbnailImageUrl": badMoodRecommendImg,
-                              "imageBackgroundColor": "#a8e8fb",
+                              "imageBackgroundColor": '#000000',
                               "title":  "【" + badMoodRecommend[1] + "】",
                               "text":  badMoodRecommend[2],
                               "defaultAction": {
