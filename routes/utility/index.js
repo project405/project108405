@@ -20,7 +20,7 @@ var getIndexData = async function (memID) {
     var tag = [] ;
     var result = [];
     // -----------  每週推薦 --------------
-    await sql('SELECT * FROM "recommend"')
+    await sql('SELECT * FROM "recommend" ORDER BY "recomNum" DESC')
         .then((data) => {
             // console.log("data=", data.rows);
             for (let i = 0; i < data.rows.length; i++) {
@@ -39,6 +39,8 @@ var getIndexData = async function (memID) {
         }, (error) => {
             weekRecommend = null;
         })
+
+    
 
     // 將推薦的movie改為中文
     for (var i = 0; i < weekRecommend.length; i++) {
