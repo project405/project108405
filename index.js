@@ -274,7 +274,13 @@ bot.on('postback', function(event) {
                     }
 
                     linePush.Imgur(data[0].imgName).then(imgData =>{
-                        badMoodRecommend.push(imgData)
+                        if(data[0].imgName.match('data:image/jpeg;base64') != null){
+                            var img = imgData[0].imgName.replace('data:image/jpeg;base64,', '');
+                            badMoodRecommend.push(img)
+                        }else{
+                            badMoodRecommend.push(data[0].imgName)
+                        }
+                        
                     })
 
                     console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
