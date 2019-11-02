@@ -251,7 +251,7 @@ bot.on('postback', function(event) {
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     var badMoodRecommend = [];
                     var badMoodRecommendImg ;
-                    if(data[0].imgName.length != 0){
+                    if(data[0].imgName.length != null){
                         linePush.Imgur(data[0].imgName).then(imgData =>{
                             if(data[0].imgName.match('data:image/jpeg;base64') != null){
                                 var img = imgData[0].imgName.replace('data:image/jpeg;base64,', '');
