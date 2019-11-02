@@ -161,34 +161,40 @@ var getIndexData = async function (memID) {
     });
 
     //----------- 正向照片 ----------- 
-    await sql('SELECT "imgName" '+
-             ' FROM "image" '+
-             ' WHERE "artiNum" = $1 '+
-             ' ORDER BY "imgNum" ',[positiveArticle[0].artiNum])
-    .then((data) => {
-        if (!data.rows) {
+    if(positiveArticle.length != 0 ){
+        await sql('SELECT "imgName" '+
+            ' FROM "image" '+
+            ' WHERE "artiNum" = $1 '+
+            ' ORDER BY "imgNum" ',[positiveArticle[0].artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                positiveImg = undefined;
+            } else {
+                positiveImg = data.rows;
+            }
+        }, (error) => {
             positiveImg = undefined;
-        } else {
-            positiveImg = data.rows;
-        }
-    }, (error) => {
-        positiveImg = undefined;
-    });
+        });
+    }
+    
 
     //----------- 負向照片 ----------- 
-    await sql('SELECT "imgName" '+
-        ' FROM "image" '+
-        ' WHERE "artiNum" = $1 '+
-        ' ORDER BY "imgNum"',[negativeArticle[0].artiNum])
-    .then((data) => {
-        if (!data.rows) {
+    if(negativeArticle.length != 0 ){
+        await sql('SELECT "imgName" '+
+            ' FROM "image" '+
+            ' WHERE "artiNum" = $1 '+
+            ' ORDER BY "imgNum"',[negativeArticle[0].artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                negativeImg = undefined;
+            } else {
+                negativeImg = data.rows;
+            }
+        }, (error) => {
             negativeImg = undefined;
-        } else {
-            negativeImg = data.rows;
-        }
-    }, (error) => {
-        negativeImg = undefined;
-    });
+        });
+    }
+    
 
     // ----------- 計算文章class的數量-----------
     await sql('SELECT "artiClass" AS "class" , count("artiClass") '+
