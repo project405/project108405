@@ -452,10 +452,11 @@ bot.on('message', function(event) {
                     // recommendImg.push(SecondData)
                     linePush.Imgur(img).then(ThirdData =>{
                         console.log('ThirdData',ThirdData)
+                        recommendImg.push(ThirdData)
                     })    
                 })  
             });
-            
+            console.log('recommendImg',recommendImg)
             // linePush.Imgur(SecondData).then(ThirdData =>{
             //     console.log('data',ThirdData)
             // })

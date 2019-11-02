@@ -135,7 +135,6 @@ var artiImg = async function (artiNum) {
 //-------- 圖片解碼base64 --------
 //==============================        
 var Imgur = async function (img) {
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!',img)
             const url = 'https://api.imgur.com/3/image',
                 request = await fetch(url, {
                     method: 'POST',
@@ -148,7 +147,6 @@ var Imgur = async function (img) {
                     
                 });
         const response = await request.json();
-        console.log('response.data.link',response.data.link)
         return response.data.link;
 };
         
