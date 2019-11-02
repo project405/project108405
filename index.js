@@ -455,7 +455,9 @@ bot.on('message', function(event) {
                         linePush.Imgur(img).then(ThirdData =>{
                             // console.log('ThirdData',ThirdData)
                             recommendImg.push(ThirdData)
-                        }) 
+                        }).catch((err)=> {
+                            console.log(err)
+                        });
                     }else{
                         recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg') 
                     }
