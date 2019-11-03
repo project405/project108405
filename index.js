@@ -251,14 +251,15 @@ bot.on('postback', function(event) {
                                 console.log('11111')
                                 var img = GetBadMoodImg.replace('data:image/jpeg;base64,', '');
                                 linePush.Imgur(img).then((imgData) =>{
-                                    console.log('我有進來誒')
+                                    console.log('成功轉換base64')
                                     badMoodRecommendImg = imgData;
                                 })
                             }else{
-                                console.log('22222')
+                                console.log('有圖片但不是base64')
                                 badMoodRecommendImg = GetBadMoodImg;
                             }
                         }else{
+                            console.log('沒有圖片的')
                             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
                         }
                         resolve(badMoodRecommendImg)                  
