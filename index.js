@@ -313,36 +313,37 @@ bot.on('postback', function(event) {
                         }
                         setTimeout(() => {
                             console.log('badMoodRecommendImg',imgName)
+                            console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
+                            event.reply(
+                                {
+                                    "type": "template",
+                                    "altText": " 體會，每一種情緒 ",
+                                    "template": {
+                                    "type": "buttons",
+                                    "imageAspectRatio": "rectangle",
+                                    "imageSize": "contain",
+                                    "thumbnailImageUrl": imgName,
+                                    "imageBackgroundColor": '#ffffff',
+                                    "title":  "【" + badMoodRecommend[1] + "】",
+                                    "text":  badMoodRecommend[2],
+                                    "defaultAction": {
+                                        "type": "message",
+                                        "label": "點到圖片或標題",
+                                        "text": "0"
+                                    },
+                                    "actions": [
+                                        {
+                                            "type": "uri",
+                                            "label": " 👀 至文藝富心官網觀看",
+                                            "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
+                                        }
+                                    ]
+                                    }
+                                }    
+                            );
                         })
                         
-                        console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
-                        event.reply(
-                            {
-                                "type": "template",
-                                "altText": " 體會，每一種情緒 ",
-                                "template": {
-                                  "type": "buttons",
-                                  "imageAspectRatio": "rectangle",
-                                  "imageSize": "contain",
-                                  "thumbnailImageUrl": imgName,
-                                  "imageBackgroundColor": '#ffffff',
-                                  "title":  "【" + badMoodRecommend[1] + "】",
-                                  "text":  badMoodRecommend[2],
-                                  "defaultAction": {
-                                    "type": "message",
-                                    "label": "點到圖片或標題",
-                                    "text": "0"
-                                  },
-                                  "actions": [
-                                    {
-                                        "type": "uri",
-                                        "label": " 👀 至文藝富心官網觀看",
-                                        "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
-                                    }
-                                  ]
-                                }
-                            }    
-                        );
+                        
                     
                     })
                     
