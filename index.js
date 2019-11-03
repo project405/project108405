@@ -244,7 +244,7 @@ bot.on('postback', function(event) {
                 
             }else if(data == 'Badmood'){
                 function promiseGetBadMood() {
-                    return new Promise(function(resolve, reject) => {
+                    return new Promise(function(resolve, reject){
                         var badMoodRecommendImg ;
                         if(data[0].imgName){
                             if(data[0].imgName.match('data:image/jpeg;base64')){
@@ -272,7 +272,7 @@ bot.on('postback', function(event) {
                     var badMoodRecommend = [];
                     var getBadMood =  promiseGetBadMood(data[0].imgName)
                     // getBadMood.then(function(imgName) => {
-                    getBadMood.then(function(imgName) => {
+                    getBadMood.then(function(imgName)  {
                         if(data[0].artiNum !=  undefined){
                             
                             data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
