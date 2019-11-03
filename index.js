@@ -255,10 +255,9 @@ bot.on('postback', function(event) {
                                         console.log('成功轉換base64')
                                         console.log(imgData)
                                         badMoodRecommendImg = imgData;
-                                        resolve(badMoodRecommendImg);
+                                        return resolve(badMoodRecommendImg);
                                     })
                                 })
-                                
                             }else{
                                 console.log('有圖片但不是base64')
                                 badMoodRecommendImg = GetBadMoodImg;
