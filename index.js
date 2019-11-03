@@ -253,7 +253,7 @@ bot.on('postback', function(event) {
                                 imgur.then(function(imgurData){
                                     setTimeout(() => {
                                         resolve(imgurData);                  
-                                    },1000)
+                                    },3000)
                                 })
                             }else{
                                 console.log('有圖片但不是base64')
@@ -278,9 +278,8 @@ bot.on('postback', function(event) {
                         // })
                         linePush.Imgur(img).then((imgData) =>{
                             console.log('成功轉換base64')  
-                            
+                            resolve(imgData)
                         })
-                        resolve(imgData)
                         
                     })
                 }
