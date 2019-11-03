@@ -252,6 +252,7 @@ bot.on('postback', function(event) {
                                 var img = GetBadMoodImg.replace('data:image/jpeg;base64,', '');
                                 linePush.Imgur(img).then((imgData) =>{
                                     console.log('成功轉換base64')
+                                    console.log(imgData)
                                     badMoodRecommendImg = imgData;
                                 })
                             }else{
