@@ -249,15 +249,11 @@ bot.on('postback', function(event) {
                         if(GetBadMoodImg){
                             if(GetBadMoodImg.match('data:image/jpeg;base64')){
                                 console.log('11111')
-                                var img = GetBadMoodImg.replace('data:image/jpeg;base64,', '');
-                                return new Promise(function(resolve, reject){
-                                    linePush.Imgur(img).then((imgData) =>{
-                                        console.log('成功轉換base64')
-                                        console.log(imgData)
-                                        badMoodRecommendImg = imgData;
-                                        
-                                    })
-                                }).resolve(badMoodRecommendImg);
+                                var imgur = imgurGetBadMood(GetBadMoodImg)
+                                imgur.then(function(imgurData){
+                                    badMoodRecommendImg = imgurData
+                                })
+                                 
                             }else{
                                 console.log('有圖片但不是base64')
                                 badMoodRecommendImg = GetBadMoodImg;
@@ -269,6 +265,19 @@ bot.on('postback', function(event) {
                         resolve(badMoodRecommendImg)                  
                     }) 
                 }
+                function imgurGetBadMood(GetBadMoodImg) {
+                    return new Promise(function(resolve, reject){
+                        var img = GetBadMoodImg.replace('data:image/jpeg;base64,', '');
+                        linePush.Imgur(img).then((imgData) =>{
+                            console.log('成功轉換base64')
+                            console.log(imgData)
+                            badMoodRecommendImg = imgData;  
+                        })
+                        resolve(badMoodRecommendImg)
+                    })
+                }
+
+
                 mood.getMood().then((data) => {
                     console.log('data[0]',data[0])
                     console.log('data[0].imgName',data[0].imgName)
