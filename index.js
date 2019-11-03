@@ -253,13 +253,16 @@ bot.on('postback', function(event) {
                                 imgur.then(function(imgurData){
                                     badMoodRecommendImg = imgurData;
                                 })
+                                resolve(badMoodRecommendImg)
                             }else{
                                 console.log('有圖片但不是base64')
                                 badMoodRecommendImg = GetBadMoodImg;
+                                resolve(badMoodRecommendImg)
                             }
                         }else{
                             console.log('沒有圖片的')
                             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
+                            resolve(badMoodRecommendImg)ㄋ
                         }
                         resolve(badMoodRecommendImg)                  
                     }) 
@@ -284,8 +287,8 @@ bot.on('postback', function(event) {
                     // console.log('data.analyzeScore',data[0].analyzeScore)
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     var badMoodRecommend = [];
-                    var test =  promiseGetBadMood(data[0].imgName);                  
-                    test.then(function(imgName){
+                                      
+                    promiseGetBadMood(data[0].imgName).then(function(imgName){
                         if(data[0].artiNum !=  undefined){
                             
                             data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
