@@ -256,8 +256,8 @@ bot.on('postback', function(event) {
                                         console.log(imgData)
                                         badMoodRecommendImg = imgData;
                                         
-                                    }).resolve(badMoodRecommendImg);
-                                })
+                                    })
+                                }).resolve(badMoodRecommendImg);
                             }else{
                                 console.log('有圖片但不是base64')
                                 badMoodRecommendImg = GetBadMoodImg;
