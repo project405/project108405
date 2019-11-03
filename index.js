@@ -253,9 +253,7 @@ bot.on('postback', function(event) {
                                 imgur.then(function(imgurData){
                                     badMoodRecommendImg = imgurData;
                                 })
-                                setTimeout(() => {
-                                    resolve(badMoodRecommendImg)                  
-                                }, 3000)
+                                
                             }else{
                                 console.log('有圖片但不是base64')
                                 badMoodRecommendImg = GetBadMoodImg;
@@ -278,7 +276,10 @@ bot.on('postback', function(event) {
                             console.log(imgData)
                             badMoodRecommendImg = imgData;  
                         })
-                        resolve(badMoodRecommendImg)
+                        setTimeout(() => {
+                            resolve(badMoodRecommendImg)                  
+                        }, 3000)
+                        
                     })
                 }
 
