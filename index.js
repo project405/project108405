@@ -251,9 +251,8 @@ bot.on('postback', function(event) {
                                 console.log('11111')
                                 var imgur = imgurGetBadMood(GetBadMoodImg)
                                 imgur.then(function(imgurData){
-                                    badMoodRecommendImg = imgurData
+                                    badMoodRecommendImg = imgurData;
                                 })
-                                 
                             }else{
                                 console.log('有圖片但不是base64')
                                 badMoodRecommendImg = GetBadMoodImg;
