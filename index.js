@@ -272,7 +272,7 @@ bot.on('postback', function(event) {
                     var badMoodRecommend = [];
                     var getBadMood =  promiseGetBadMood(data[0].imgName)
                   
-                    promiseGetBadMood(data[0].imgName).then(function(imgName){
+                    this.promiseGetBadMood(data[0].imgName).then(function(imgName){
                         if(data[0].artiNum !=  undefined){
                             
                             data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
