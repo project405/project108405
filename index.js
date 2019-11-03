@@ -341,8 +341,7 @@ bot.on('postback', function(event) {
                                     }
                                 }    
                             );
-                        })
-                        
+                        }, 3000)
                         
                     
                     })
