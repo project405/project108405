@@ -250,13 +250,16 @@ bot.on('postback', function(event) {
                             if(GetBadMoodImg.match('data:image/jpeg;base64')){
                                 console.log('11111')
                                 var imgur = imgurGetBadMood(GetBadMoodImg)
-                                imgur.then(function(imgurData){
-                                    console.log('imgurData',imgurData)
-                                    // resolve(imgurData)
-                                        // resolve(badMoodRecommendImg)
-                                    badMoodRecommendImg = imgurData;                  
-                                                
-                                })
+                                setTimeout(() => {
+                                    imgur.then(function(imgurData){
+                                        console.log('imgurData',imgurData)
+                                        // resolve(imgurData)
+                                            // resolve(badMoodRecommendImg)
+                                        badMoodRecommendImg = imgurData;                  
+                                                    
+                                    })
+                      
+                                }, 3000)
                                 
                             }else{
                                 console.log('有圖片但不是base64')
