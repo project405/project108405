@@ -253,16 +253,18 @@ bot.on('postback', function(event) {
                                 imgur.then(function(imgurData){
                                     badMoodRecommendImg = imgurData;
                                 })
-                                resolve(badMoodRecommendImg)
+                                setTimeout(() => {
+                                    resolve(badMoodRecommendImg)                  
+                                }, 1000)
                             }else{
                                 console.log('有圖片但不是base64')
                                 badMoodRecommendImg = GetBadMoodImg;
-                                resolve(badMoodRecommendImg)
+                                
                             }
                         }else{
                             console.log('沒有圖片的')
                             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
-                            resolve(badMoodRecommendImg)
+                            
                         }
                         resolve(badMoodRecommendImg)                  
                     }) 
