@@ -556,25 +556,25 @@ var getArticleClassList = async function (articleClass, memID, artiListNum) {
         });
 
     // ----------- 取得照片 ----------- 
-    await sql('SELECT "artiNum" , "imgName" '+
-    ' FROM "image" '+
-    ' WHERE "artiMessNum" IS NULL '+
-    ' ORDER BY "imgNum"')
-        .then((data) => {
-            if (data.rows == null || data.rows == '') {
-                imgs = undefined;
-            } else {
-                imgs = data.rows;
-            }
-        }, (error) => {
-            imgs = undefined;
-        });
+    // await sql('SELECT "artiNum" , "imgName" '+
+    // ' FROM "image" '+
+    // ' WHERE "artiMessNum" IS NULL '+
+    // ' ORDER BY "imgNum"')
+    //     .then((data) => {
+    //         if (data.rows == null || data.rows == '') {
+    //             imgs = undefined;
+    //         } else {
+    //             imgs = data.rows;
+    //         }
+    //     }, (error) => {
+    //         imgs = undefined;
+    //     });
 
     result[0] = articleList ;
     result[1] = tag ; 
     result[2] = isCollection ;
     result[3] = isLike ;
-    result[4] = imgs ;
+    // result[4] = imgs ;
     result[5] = [memID] ;
     result[6] = articleSum;
     result[7] = [artiListNum];
