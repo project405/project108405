@@ -200,10 +200,8 @@ bot.on('postback', function(event) {
                     var goodMoodRecommend = [];
 
                     if(data[1].artiNum !=  undefined){
-                        while (data[1].artiCont.match('<br>')) {
-                            data[1].artiCont = data[1].artiCont.replace('<br>','')
-                        }
-                        data[1].artiCont = data[1].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
+                       
+                        data[1].artiCont = data[1].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
                         data[1].artiHead = data[1].artiHead.length>30 ? `${data[1].artiHead.substr(0,25)}...` : data[1].artiHead
                         data[1].artiCont = data[1].artiCont.length>50 ? `${data[1].artiCont.substr(0,45)}...` : data[1].artiCont
                         goodMoodRecommend.push('article/'+data[1].artiNum)
@@ -211,10 +209,8 @@ bot.on('postback', function(event) {
                         goodMoodRecommend.push(data[1].artiCont)
                         
                     }else{
-                        while (data[1].recomCont.match('<br>')) {
-                            data[1].recomCont = data[1].recomCont.replace('<br>','')
-                        }
-                        data[1].recomCont = data[1].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
+                        
+                        data[1].recomCont = data[1].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
                         data[1].recomHead = data[1].recomHead.length>30 ? `${data[1].recomHead.substr(0,25)}...` : data[1].recomHead
                         data[1].recomCont = data[1].recomCont.length>50 ? `${data[1].recomCont.substr(0,45)}...` : data[1].recomCont
                         goodMoodRecommend.push('oneRecommend/'+data[1].recomNum)
@@ -248,7 +244,7 @@ bot.on('postback', function(event) {
                 
             }else if(data == 'Badmood'){
                 function promiseGetBadMood() {
-                    return new Promise((resolve, reject) => {
+                    return new Promise(function(resolve, reject) => {
                         var badMoodRecommendImg ;
                         if(data[0].imgName){
                             if(data[0].imgName.match('data:image/jpeg;base64')){
@@ -275,12 +271,11 @@ bot.on('postback', function(event) {
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     var badMoodRecommend = [];
                     var getBadMood =  promiseGetBadMood(data[0].imgName)
-                    getBadMood.then((imgName) => {
+                    // getBadMood.then(function(imgName) => {
+                    getBadMood.then(function(imgName) => {
                         if(data[0].artiNum !=  undefined){
-                            while (data[0].artiCont.match('<br>')) {
-                                data[0].artiCont = data[0].artiCont.replace('<br>','')
-                            }
-                            data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
+                            
+                            data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
                             data[0].artiHead = data[0].artiHead.length>30 ? `${data[0].artiHead.substr(0,25)}...` : data[0].artiHead
                             data[0].artiCont = data[0].artiCont.length>50 ? `${data[0].artiCont.substr(0,45)}...` : data[0].artiCont
                             badMoodRecommend.push('article/'+data[0].artiNum)
@@ -288,10 +283,8 @@ bot.on('postback', function(event) {
                             badMoodRecommend.push(data[0].artiCont)
                             
                         }else{
-                            while (data[0].recomCont.match('<br>')) {
-                                data[0].recomCont = data[0].recomCont.replace('<br>','')
-                            }
-                            data[0].recomCont = data[0].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ');
+                            
+                            data[0].recomCont = data[0].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
                             data[0].recomHead = data[0].recomHead.length>30 ? `${data[0].recomHead.substr(0,25)}...` : data[0].recomHead
                             data[0].recomCont = data[0].recomCont.length>50 ? `${data[0].recomCont.substr(0,45)}...` : data[0].recomCont
                             badMoodRecommend.push('oneRecommend/'+data[0].recomNum)
@@ -631,7 +624,7 @@ bot.on('message', function(event) {
             event.reply(
                 {
                     "type": "text", // ①
-                    "text": "============\n情緒，其實是一種能量，\n也是一種指引，\n當它向浪潮一般撲襲而來，你能做的\n就是任它流淌而過，\n只有感受過，你才得以\n在人生大海中繼續航行。 \n---- 留佩萱《療癒，從感受情緒開始》\n============\n文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，\n我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。",
+                    "text": "================\n情緒，其實是一種能量，\n也是一種指引，\n當它向浪潮一般撲襲而來，你能做的\n就是任它流淌而過，\n只有感受過，你才得以\n在人生大海中繼續航行。 \n---- 留佩萱\n《療癒，從感受情緒開始》\n================\n文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，\n我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。",
                     "quickReply": { // ②
                       "items": [
                         {
