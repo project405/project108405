@@ -251,7 +251,7 @@ bot.on('postback', function(event) {
                                 console.log('11111')
                                 var imgur = imgurGetBadMood(GetBadMoodImg)
                                 imgur.then(function(imgurData){
-                                    badMoodRecommendImg = imgurData;
+                                    resolve(imgurData)                  
                                 })
                                 
                             }else{
@@ -276,9 +276,9 @@ bot.on('postback', function(event) {
                             console.log(imgData)
                             badMoodRecommendImg = imgData;  
                         })
-                        setTimeout(() => {
+                        // setTimeout(() => {
                             resolve(badMoodRecommendImg)                  
-                        }, 3000)
+                        // }, 3000)
                         
                     })
                 }
