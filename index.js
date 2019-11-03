@@ -250,16 +250,15 @@ bot.on('postback', function(event) {
                             if(GetBadMoodImg.match('data:image/jpeg;base64')){
                                 console.log('11111')
                                 var imgur = imgurGetBadMood(GetBadMoodImg)
-                                setTimeout(() => {
+                                // setTimeout(() => {
                                     imgur.then(function(imgurData){
                                         console.log('imgurData',imgurData)
-                                        // resolve(imgurData)
-                                            // resolve(badMoodRecommendImg)
+                                       
                                         badMoodRecommendImg = imgurData;                  
                                                     
                                     })
                       
-                                }, 3000)
+                                // }, 3000)
                                 
                             }else{
                                 console.log('有圖片但不是base64')
@@ -269,7 +268,6 @@ bot.on('postback', function(event) {
                         }else{
                             console.log('沒有圖片的')
                             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
-                            
                         }
                         resolve(badMoodRecommendImg)                  
                     }) 
@@ -277,16 +275,16 @@ bot.on('postback', function(event) {
 
                 function imgurGetBadMood(GetBadMoodImg) {
                     return new Promise(function(resolve, reject){
-                        var badMoodRecommendImg ;
                         var img = GetBadMoodImg.replace('data:image/jpeg;base64,', '');
+                        // linePush.Imgur(img).then((imgData) =>{
+                        //     console.log('成功轉換base64')
+                        //     console.log(imgData)
+                        //     badMoodRecommendImg = imgData;  
+                        // })
                         linePush.Imgur(img).then((imgData) =>{
-                            console.log('成功轉換base64')
-                            console.log(imgData)
-                            badMoodRecommendImg = imgData;  
+                            console.log('成功轉換base64')  
+                            resolve(imgData)
                         })
-                        // setTimeout(() => {
-                            resolve(badMoodRecommendImg)                  
-                        // }, 3000)
                         
                     })
                 }
