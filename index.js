@@ -248,7 +248,7 @@ bot.on('postback', function(event) {
                 
             }else if(data == 'Badmood'){
                 function promiseGetBadMood() {
-                    new Promise((resolve, reject) => {
+                    return new Promise((resolve, reject) => {
                         var badMoodRecommendImg ;
                         if(data[0].imgName){
                             if(data[0].imgName.match('data:image/jpeg;base64')){
@@ -265,6 +265,7 @@ bot.on('postback', function(event) {
                         }else{
                             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
                         }
+                        // resolve(badMoodRecommendImg)
                         resolve(badMoodRecommendImg)
                     }) 
                 }
@@ -274,7 +275,7 @@ bot.on('postback', function(event) {
                     // console.log('data.analyzeScore',data[0].analyzeScore)
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     var badMoodRecommend = [];
-                    var getBadMood = promiseGetBadMood(data[0].imgName)
+                    var getBadMood =  promiseGetBadMood(data[0].imgName)
                     getBadMood.then((imgName) => {
                         if(data[0].artiNum !=  undefined){
                             while (data[0].artiCont.match('<br>')) {
