@@ -255,7 +255,7 @@ bot.on('postback', function(event) {
                                 })
                                 setTimeout(() => {
                                     resolve(badMoodRecommendImg)                  
-                                }, 1000)
+                                }, 3000)
                             }else{
                                 console.log('有圖片但不是base64')
                                 badMoodRecommendImg = GetBadMoodImg;
