@@ -147,7 +147,6 @@ var Imgur = async function (img) {
                     
                 }).catch(error => console.error('Error:', error));
         const response = await request.json();
-        console.log('!!!!!!!!!!!!!!!!!',response.data.link);
         return response.data.link;
 };
         
