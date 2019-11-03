@@ -248,7 +248,7 @@ bot.on('postback', function(event) {
                 
             }else if(data == 'Badmood'){
                 function promiseGetBadMood() {
-                    new Promise((resolve, reject) => {
+                    return new Promise((resolve, reject) => {
                         var badMoodRecommendImg ;
                         if(data[0].imgName){
                             if(data[0].imgName.match('data:image/jpeg;base64')){
