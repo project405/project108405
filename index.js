@@ -276,7 +276,7 @@ bot.on('postback', function(event) {
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     var badMoodRecommend = [];
                     var getBadMood =  promiseGetBadMood(data[0].imgName)
-                    this.getBadMood.then((imgName) => {
+                    getBadMood().then((imgName) => {
                         if(data[0].artiNum !=  undefined){
                             while (data[0].artiCont.match('<br>')) {
                                 data[0].artiCont = data[0].artiCont.replace('<br>','')
