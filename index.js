@@ -311,7 +311,10 @@ bot.on('postback', function(event) {
                             badMoodRecommend.push(data[0].recomCont)
     
                         }
-                        console.log('badMoodRecommendImg',imgName)
+                        setTimeout(() => {
+                            console.log('badMoodRecommendImg',imgName)
+                        })
+                        
                         console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
                         event.reply(
                             {
