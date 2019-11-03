@@ -250,11 +250,15 @@ bot.on('postback', function(event) {
                             if(GetBadMoodImg.match('data:image/jpeg;base64')){
                                 console.log('11111')
                                 var img = GetBadMoodImg.replace('data:image/jpeg;base64,', '');
-                                linePush.Imgur(img).then((imgData) =>{
-                                    console.log('成功轉換base64')
-                                    console.log(imgData)
-                                    badMoodRecommendImg = imgData;
+                                return new Promise(function(resolve, reject){
+                                    linePush.Imgur(img).then((imgData) =>{
+                                        console.log('成功轉換base64')
+                                        console.log(imgData)
+                                        badMoodRecommendImg = imgData;
+                                        resolve(badMoodRecommendImg);
+                                    })
                                 })
+                                
                             }else{
                                 console.log('有圖片但不是base64')
                                 badMoodRecommendImg = GetBadMoodImg;
