@@ -261,7 +261,7 @@ bot.on('postback', function(event) {
                         }else{
                             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
                         }
-                        return resolve(badMoodRecommendImg)                  
+                        resolve(badMoodRecommendImg)                  
                     }) 
                 }
                 mood.getMood().then((data) => {
