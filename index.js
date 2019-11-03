@@ -269,9 +269,7 @@ bot.on('postback', function(event) {
                     console.log('data[0].imgName',data[0].imgName)
                     // console.log('data.analyzeScore',data[0].analyzeScore)
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
-                    var badMoodRecommend = [];
-                    var getBadMood =  promiseGetBadMood(data[0].imgName)
-                  
+                    var badMoodRecommend = [];                  
                     promiseGetBadMood(data[0].imgName).then(function(imgName){
                         if(data[0].artiNum !=  undefined){
                             
