@@ -252,7 +252,7 @@ bot.on('postback', function(event) {
                                 var imgur = imgurGetBadMood(GetBadMoodImg)
                                 imgur.then(function(imgurData){
                                     setTimeout(() => {
-                                        resolve(imgurData)                  
+                                        resolve(imgurData);                  
                                     },1000)
                                 })
                             }else{
