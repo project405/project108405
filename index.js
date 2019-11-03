@@ -265,7 +265,6 @@ bot.on('postback', function(event) {
                         }else{
                             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
                         }
-                        // resolve(badMoodRecommendImg)
                         resolve(badMoodRecommendImg)
                     }) 
                 }
@@ -276,7 +275,7 @@ bot.on('postback', function(event) {
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     var badMoodRecommend = [];
                     var getBadMood =  promiseGetBadMood(data[0].imgName)
-                    this.getBadMood.then((imgName) => {
+                    getBadMood.then((imgName) => {
                         if(data[0].artiNum !=  undefined){
                             while (data[0].artiCont.match('<br>')) {
                                 data[0].artiCont = data[0].artiCont.replace('<br>','')
@@ -632,7 +631,7 @@ bot.on('message', function(event) {
             event.reply(
                 {
                     "type": "text", // ①
-                    "text": "「情緒，其實是一種能量，\n也是一種指引，\n當它向浪潮一般撲襲而來，你能做的就是任它流淌而過，\n只有感受過，你才得以在人生大海中繼續航行。」 ---- 留佩萱《療癒，從感受情緒開始》\n文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，\n我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。",
+                    "text": "情緒，其實是一種能量，\n也是一種指引，\n當它向浪潮一般撲襲而來，你能做的\n就是任它流淌而過，\n只有感受過，\n你才得以在人生大海中繼續航行。 ---- 留佩萱《療癒，從感受情緒開始》\n文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，\n我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。",
                     "quickReply": { // ②
                       "items": [
                         {
