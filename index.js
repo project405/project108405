@@ -262,7 +262,7 @@ bot.on('postback', function(event) {
                         }else{
                             console.log('沒有圖片的')
                             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
-                            resolve(badMoodRecommendImg)ㄋ
+                            resolve(badMoodRecommendImg)
                         }
                         resolve(badMoodRecommendImg)                  
                     }) 
