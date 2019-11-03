@@ -278,8 +278,9 @@ bot.on('postback', function(event) {
                         // })
                         linePush.Imgur(img).then((imgData) =>{
                             console.log('成功轉換base64')  
-                            resolve(imgData)
+                            
                         })
+                        resolve(imgData)
                         
                     })
                 }
