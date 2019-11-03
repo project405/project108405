@@ -86,16 +86,9 @@
                                 </div>
                                 
                                 <!-- imgs  -->
-                                <% if(items[3] != undefined) { %>
-                                    <% for(var j = 0 ; j<items[3].length ; j++) { %>
-                                        <% if (items[0][i].artiNum == items[3][j].artiNum){ %>
-                                            <div class="wrapperCard card-img-top col-lg-3"
-                                                style="background-image: url( '<%= items[3][j].imgName %>'); ">
-                                            </div>
-                                            <% break %> <!-- 取得一張照片就結束 -->
-                                        <% } %>
-                                    <% } %>
-                                <% } %>
+                                <div class="wrapperCard card-img-top col-lg-3"
+                                    style="background-image: url( '<%= items[0][i].imgName %>'); ">
+                                </div>
                             </div>
                         </div>
                         <!-- info -->

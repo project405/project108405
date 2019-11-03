@@ -59,18 +59,11 @@
                 <% for(var i=0; i<items[0].length; i++) {%>
                     <% isImg = false %>
                     <!-- 如果有抓到圖片 -->
-                    <% if(items[1] != undefined) { %>
-                        <% for(var j = 0 ; j < items[1].length ; j++ ) { %>
-                                <% if(items[0][i].recomNum == items[1][j].recomNum){ %>
-                                    <div class="wrapper col-12  col-lg-2" 
-                                    style="background-image: url('<%= items[1][j].imgName %>');">
-                                <% isImg = true %>
-                                <% break %>
-                                <% } %>
-                        <% } %>
-                    <% } %>
+                    <% if(collData[0][i].imgName) { %> 
+                        <div class="wrapper col-12  col-lg-2" 
+                        style="background-image: url('<%= items[1][j].imgName %>');">
                     <!-- 如果沒抓到半張圖片 -->
-                    <% if(isImg == false) { %>
+                    <% } else { %>
                         <div class="wrapper col-12  col-lg-2">
                     <% } %>
                     

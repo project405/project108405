@@ -569,13 +569,21 @@ var myArticle = async function (memID, artiPage) {
     var articleSum;
 
     //--------- 取得我的文章 ----------
-    await sql(' SELECT "articleListDataView".*, "member"."memName"' +
-              ' FROM "articleListDataView" '+
-              ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"'+
-              ' WHERE "articleListDataView"."memID" = $1' +
-              ' ORDER BY "articleListDataView"."artiNum" DESC' +
-              ' LIMIT 10' +
-              ' OFFSET $2', [memID, (artiPage-1) * 10])
+    await sql(`SELECT "T2".*, "M"."memName"
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "articleListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                                ON "A"."artiNum" = "I"."artiNum"
+                        WHERE "I"."artiMessNum" IS NULL)  AS "T1"
+                    WHERE "T1"."Rank" = '1' AND "T1"."memID" = $1
+                    ORDER BY "artiNum" DESC
+                    LIMIT 10
+                    OFFSET $2 ) AS "T2"
+                    INNER JOIN "member" "M"
+                    ON "M"."memID" = "T2"."memID"`, [memID, (artiPage-1) * 10])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;
@@ -642,26 +650,26 @@ var myArticle = async function (memID, artiPage) {
         });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "artiNum" , "imgName" ' +
-             ' FROM "image" ' +
-             ' WHERE "artiNum" ' +
-                ' IN(SELECT "artiNum" ' +
-                   ' FROM "articleListDataView" ' +
-                   ' WHERE "memID" = $1) '+
-             'ORDER BY "imgNum"', [memID])
-        .then((data) => {
-            if (!data.rows) {
-                imgs = undefined;
-            } else {
-                imgs = data.rows;
-            }
-        }, (error) => {
-            imgs = undefined;
-        });
+    // await sql('SELECT "artiNum" , "imgName" ' +
+    //          ' FROM "image" ' +
+    //          ' WHERE "artiNum" ' +
+    //             ' IN(SELECT "artiNum" ' +
+    //                ' FROM "articleListDataView" ' +
+    //                ' WHERE "memID" = $1) '+
+    //          'ORDER BY "imgNum"', [memID])
+    //     .then((data) => {
+    //         if (!data.rows) {
+    //             imgs = undefined;
+    //         } else {
+    //             imgs = data.rows;
+    //         }
+    //     }, (error) => {
+    //         imgs = undefined;
+    //     });
 
     result[0] = articleList;
     result[1] = tag;
-    result[2] = imgs;
+    // result[2] = imgs;
     result[3] = isLike;
     result[4] = isCollection;
     result[5] = [memID];
@@ -720,13 +728,21 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
     var articleSum;
 
     // -----------  取得分類文章 --------------
-    await sql(' SELECT "articleListDataView".*, "member"."memName"' +
-              ' FROM "articleListDataView" '+
-              ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"' +
-              ' WHERE "artiClass" = $1 AND "articleListDataView"."memID" = $2'+
-              ' ORDER BY "articleListDataView"."artiNum" DESC '+
-              ' LIMIT 10 '+
-              ' OFFSET $3', [artiClass, memID, (artiPage-1) * 10])
+    await sql(`SELECT "T2".*, "M"."memName"
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "articleListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                                ON "A"."artiNum" = "I"."artiNum"
+                        WHERE "I"."artiMessNum" IS NULL)  AS "T1"
+                    WHERE "T1"."Rank" = '1' AND "T1"."memID" = $2 AND "artiClass" = $1
+                    ORDER BY "artiNum" DESC
+                    LIMIT 10
+                    OFFSET $3 ) AS "T2"
+                    INNER JOIN "member" "M"
+                    ON "M"."memID" = "T2"."memID"`, [artiClass, memID, (artiPage-1) * 10])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;
@@ -792,20 +808,20 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
         });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "artiNum" , "imgName" FROM "image" ORDER BY "imgNum"')
-        .then((data) => {
-            if (!data.rows) {
-                imgs = undefined;
-            } else {
-                imgs = data.rows;
-            }
-        }, (error) => {
-            imgs = undefined;
-        });
+    // await sql('SELECT "artiNum" , "imgName" FROM "image" ORDER BY "imgNum"')
+    //     .then((data) => {
+    //         if (!data.rows) {
+    //             imgs = undefined;
+    //         } else {
+    //             imgs = data.rows;
+    //         }
+    //     }, (error) => {
+    //         imgs = undefined;
+    //     });
 
     result[0] = articleList;
     result[1] = tag;
-    result[2] = imgs;
+    // result[2] = imgs;
     result[3] = isLike;
     result[4] = isCollection;
     result[5] = [memID];

@@ -43,6 +43,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
   if (req.body.tag != '') {
       tagData = req.body.tag.split(",");
   }
+  console.log(memID, recomHead, recomCont, recomClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, req.body.score2)
   if (memID == undefined) {
       res.send("請進行登入");
   } else {
