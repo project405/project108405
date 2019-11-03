@@ -264,6 +264,7 @@ bot.on('postback', function(event) {
                         resolve(badMoodRecommendImg)                  
                     }) 
                 }
+
                 function imgurGetBadMood(GetBadMoodImg) {
                     return new Promise(function(resolve, reject){
                         var img = GetBadMoodImg.replace('data:image/jpeg;base64,', '');
@@ -282,8 +283,9 @@ bot.on('postback', function(event) {
                     console.log('data[0].imgName',data[0].imgName)
                     // console.log('data.analyzeScore',data[0].analyzeScore)
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
-                    var badMoodRecommend = [];                  
-                    promiseGetBadMood(data[0].imgName).then(function(imgName){
+                    var badMoodRecommend = [];
+                    var test =  promiseGetBadMood(data[0].imgName);                  
+                    test.then(function(imgName){
                         if(data[0].artiNum !=  undefined){
                             
                             data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
