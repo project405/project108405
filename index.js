@@ -243,20 +243,20 @@ bot.on('postback', function(event) {
                 })
                 
             }else if(data == 'Badmood'){
-                function promiseGetBadMood() {
+                function promiseGetBadMood(GetBadMoodImg) {
                     return new Promise(function(resolve, reject){
                         var badMoodRecommendImg ;
-                        if(data[0].imgName){
-                            if(data[0].imgName.match('data:image/jpeg;base64')){
+                        if(GetBadMoodImg){
+                            if(GetBadMoodImg.match('data:image/jpeg;base64')){
                                 console.log('11111')
-                                var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
+                                var img = GetBadMoodImg.replace('data:image/jpeg;base64,', '');
                                 linePush.Imgur(img).then((imgData) =>{
                                     console.log('我有進來誒')
                                     badMoodRecommendImg = imgData;
                                 })
                             }else{
                                 console.log('22222')
-                                badMoodRecommendImg = data[0].imgName;
+                                badMoodRecommendImg = GetBadMoodImg;
                             }
                         }else{
                             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
@@ -272,7 +272,7 @@ bot.on('postback', function(event) {
                     var badMoodRecommend = [];
                     var getBadMood =  promiseGetBadMood(data[0].imgName)
                   
-                    this.promiseGetBadMood(data[0].imgName).then(function(imgName){
+                    promiseGetBadMood(data[0].imgName).then(function(imgName){
                         if(data[0].artiNum !=  undefined){
                             
                             data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
