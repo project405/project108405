@@ -99,9 +99,9 @@ bot.on('postback', function(event) {
                     console.log('userID!!!!!!!',userID)
                     if(userID.length !== 0){                         
                         if(userID[0].lineID == userId){
-                            data = data.replace('add','')
-                            console.log('data!!!!!!!!!!!!!!!!',data)
-                            collection.addLineColleRecommend(userID[0].memID, parseInt(data)).then(b =>{
+                            var addRecom = data.replace('add','')
+                            console.log('addRecom!!!!!!!!!!!!!!!!',addRecom)
+                            collection.addLineColleRecommend(userID[0].memID, parseInt(addRecom)).then(b =>{
                                 console.log(b)
                                 if(b == 0){
                                     event.reply({
