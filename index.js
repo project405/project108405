@@ -252,13 +252,13 @@ bot.on('postback', function(event) {
                                 var imgur = imgurGetBadMood(GetBadMoodImg)
                                 imgur.then(function(imgurData){
                                     setTimeout(() => {
-                                        resolve(imgurData);                  
+                                        // resolve(imgurData);
+                                        badMoodRecommendImg = imgurData;                  
                                     },1000)
                                 })
                             }else{
                                 console.log('有圖片但不是base64')
                                 badMoodRecommendImg = GetBadMoodImg;
-                                
                             }
                         }else{
                             console.log('沒有圖片的')
@@ -271,7 +271,6 @@ bot.on('postback', function(event) {
                 function imgurGetBadMood(GetBadMoodImg) {
                     return new Promise(function(resolve, reject){
                         var img = GetBadMoodImg.replace('data:image/jpeg;base64,', '');
-                        
                         linePush.Imgur(img).then((imgData) =>{
                             console.log('成功轉換base64')  
                             resolve(imgData)
