@@ -497,31 +497,31 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
 
-        function promiseGetBadMood(GetBadMoodImg) {
-            return new Promise(function(resolve, reject){
-                var badMoodRecommendImg ;
-                if(GetBadMoodImg){
-                    if(GetBadMoodImg.match('data:image/jpeg;base64')){
-                        console.log('11111')
-                        var imgur = imgurGetBadMood(GetBadMoodImg)
-                        imgur.then(function(imgurData){
-                            setTimeout(() => {
-                                console.log('近來了！！！')
-                                // resolve(imgurData);
-                                badMoodRecommendImg = imgurData;                  
-                            },1000)
-                        })
-                    }else{
-                        console.log('有圖片但不是base64')
-                        badMoodRecommendImg = GetBadMoodImg;
-                    }
-                }else{
-                    console.log('沒有圖片的')
-                    badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
-                }
-                resolve(badMoodRecommendImg)                  
-            }) 
-        }
+        // function promiseGetBadMood(GetBadMoodImg) {
+        //     return new Promise(function(resolve, reject){
+        //         var badMoodRecommendImg ;
+        //         if(GetBadMoodImg){
+        //             if(GetBadMoodImg.match('data:image/jpeg;base64')){
+        //                 console.log('11111')
+        //                 var imgur = imgurGetBadMood(GetBadMoodImg)
+        //                 imgur.then(function(imgurData){
+        //                     setTimeout(() => {
+        //                         console.log('近來了！！！')
+        //                         // resolve(imgurData);
+        //                         badMoodRecommendImg = imgurData;                  
+        //                     },1000)
+        //                 })
+        //             }else{
+        //                 console.log('有圖片但不是base64')
+        //                 badMoodRecommendImg = GetBadMoodImg;
+        //             }
+        //         }else{
+        //             console.log('沒有圖片的')
+        //             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
+        //         }
+        //         resolve(badMoodRecommendImg)                  
+        //     }) 
+        // }
 
         index.getIndexData().then(data => {  
             
@@ -539,6 +539,7 @@ bot.on('message', function(event) {
                 if(item.imgName){
                     var img = item.imgName.replace('data:image/jpeg;base64,', '');
                     linePush.Imgur(img).then(imgurData => {
+                        console.log('imgurData@@@@@@',imgurData)
                         recommendImg.push(imgurData);
                     })  
                 }else{
