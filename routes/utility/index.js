@@ -70,21 +70,23 @@ var getIndexData = async function (memID) {
         }
     }
     // -----------  熱門文章 --------------
-    await sql('SELECT * FROM '+
-                ' (SELECT "artiNum" , '+ 
-                                ' "memID" , '+
-                                ' "artiDateTime", '+
-                                ' "artiHead", '+
-                                ' "artiCont", '+
-                                ' "artiClass", '+
-                                ' "likeCount", '+
-                                ' "messCount", '+
-                                ' RANK () OVER (ORDER BY  "likeCount" DESC) AS "likeRank" '+
-                    ' FROM "articleListDataView" AS "data" '+
-                    ' ) AS "A" '+
-              ' WHERE "A"."likeRank" <= 5 '+
-              ' ORDER BY RANDOM() '+
-              ' LIMIT 3') 
+    await sql(`SELECT * FROM 
+                (SELECT "artiNum" , 
+                            "memID" , 
+                            "artiDateTime", 
+                            "artiHead", 
+                            "artiCont", 
+                            "artiClass", 
+                            "likeCount", 
+                            "messCount", 
+                            RANK () OVER (ORDER BY  "likeCount" DESC) AS "likeRank" 
+                        FROM "articleListDataView" AS "data" 
+                        ) AS "A" 
+                        LEFT JOIN  "image" AS "I"
+                        ON "A"."artiNum" = "I"."artiNum"
+            WHERE "A"."likeRank" <= 5 
+            ORDER BY RANDOM() 
+            LIMIT 3`) 
         .then((data) => {
             
             if (!data.rows) {
