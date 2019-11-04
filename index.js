@@ -538,7 +538,7 @@ bot.on('message', function(event) {
                 //-------------
                 if(item.imgName){
                     var img = item.imgName.replace('data:image/jpeg;base64,', '');
-                    await linePush.Imgur(img).then((imgurData) => {
+                    await linePush.Imgur(img).then(async function (imgurData) {
                         console.log('imgurData@@@@@@',imgurData)
                         recommendImg.push(imgurData);
                     })  
