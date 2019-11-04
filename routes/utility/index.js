@@ -20,13 +20,18 @@ var getIndexData = async function (memID) {
     var tag = [] ;
     var result = [];
     // -----------  每週推薦 --------------
-    await sql(`SELECT "A".*
-                FROM
-                    (SELECT *, ROW_NUMBER() OVER
-                        (PARTITION BY "recomClass" ORDER BY "recomDateTime" DESC ) 
-                            AS "Rank" FROM "recommend" ) AS "A"
-                WHERE "Rank" = '1'			
-                ORDER BY "recomDateTime" DESC`)
+    await sql(`SELECT *
+                FROM(
+                    SELECT "A".*, "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."recomNum" ORDER BY "imgDateTime" DESC ) AS "R"
+                        FROM( 
+                            SELECT *, ROW_NUMBER() OVER(PARTITION BY "recomClass" ORDER BY "recomDateTime" DESC ) AS "Rank"
+                            FROM "recommend"
+                            ORDER BY "recomDateTime" DESC ) AS "A"
+                        LEFT JOIN  "image" AS "I"
+                            ON "A"."recomNum" = "I"."recomNum"
+                        WHERE "Rank" = '1' AND "I"."recomMessNum" IS NULL
+                        ORDER BY "recomNum" ) AS "B"
+                WHERE "B"."R" = '1'`)
         .then((data) => {
             // console.log("data=", data.rows);
             for (let i = 0; i < data.rows.length; i++) {

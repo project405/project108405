@@ -280,7 +280,6 @@ bot.on('postback', function(event) {
                     })
                 }
 
-
                 mood.getMood().then((data) => {
                     console.log('data[0]',data[0])
                     console.log('data[0].imgName',data[0].imgName)
@@ -498,6 +497,7 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         index.getIndexData().then(data => {  
+            console.log('data!!!!!!!!!!!',data)
             // let recommendNum = []  
             // let recommendHead = []  
             // let recommendDateTime = []  
