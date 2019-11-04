@@ -38,20 +38,21 @@ $(document).ready(function () {
     $(".wrapText").each(function () {
 
         //取得內容
-        var str = $(this).html();
+        var str = $(this).html().trim();
 
         while (str.match("\\:imgLocation")) {
             str = str.replace("\\:imgLocation",'')
         }
         //截取内容75字
         var subStr = str.substring(0, 40);
+        console.log(subStr)
         //如果長度大於75就添加省略號否則就填空
         var data = subStr + (str.length > 40 ? '...' : '');
         $(this).html(data);
     });
     $(".limitLine").each(function () {
         //取得內容
-        var str = $(this).html();
+        var str = $(this).html().trim();
         //截取内容75字
         var subStr = str.substring(0, 150);
         //如果長度大於75就添加省略號否則就填空
@@ -61,7 +62,7 @@ $(document).ready(function () {
     $(".wrapBigHotSectionText").each(function () {
 
         //取得內容
-        var str = $(this).html();
+        var str = $(this).html().trim();
 
         while (str.match("\\:imgLocation")) {
             str = str.replace("\\:imgLocation",'')
@@ -75,7 +76,7 @@ $(document).ready(function () {
     $(".project-name > .title").each(function () {
 
         //取得內容
-        var str = $(this).html();
+        var str = $(this).html().trim();
         var subStr = str.substring(0, 11);
         var data = subStr + (str.length > 11 ? '...' : '');
         $(this).html(data);

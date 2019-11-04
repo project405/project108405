@@ -73,7 +73,7 @@ $(document).ready(() => {
                               </button>\
                         </div>\
                         <div class="modal-body" style="padding:0em;">\
-                        <img src="imgs/icon/aboutUS.png" alt="" style="width: 100%;"></div>\
+                        <img src="/imgs/icon/aboutUS.png" alt="" style="width: 100%;"></div>\
                     </div>\
                 </div>\
             </div>\ '
@@ -291,7 +291,7 @@ $(document).ready(() => {
                           </button>\
                     </div>\
                     <div class="modal-body" style="padding:0em;">\
-                        <img src="imgs/icon/aboutUS.png" alt="" style="width: 100%;"> </div>\
+                        <img src="/imgs/icon/aboutUS.png" alt="" style="width: 100%;"> </div>\
                 </div>\
             </div>\
         </div>\ '

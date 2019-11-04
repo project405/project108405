@@ -52,6 +52,14 @@ div.article {
     border: 3px solid #fff;
     /* text-align: left !important; */
 }
+@media (max-width: 991px) {
+    div.wrapperCard {
+        width: 100% !important;
+        display: block;
+        height: 6em !important;
+        background-position: center center;
+    }
+}
 
 p.poster {
     text-align: right;
