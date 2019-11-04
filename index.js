@@ -501,7 +501,7 @@ bot.on('message', function(event) {
             let recommendNum = []  
             let recommendHead = []  
             let recommendDateTime = []  
-            var recommendImg = [];
+            let recommendImg = [];
             //順序為電影、展覽、書籍、音樂
             data[0].forEach(item => {
                 recommendNum.push(item.recomNum);
@@ -521,7 +521,6 @@ bot.on('message', function(event) {
                 }
                 //-------------
             });
-
             console.log('recommendNum',recommendNum)
             console.log('recommendHead',recommendHead)
             console.log('recommendDateTime',recommendDateTime)
