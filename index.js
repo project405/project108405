@@ -515,7 +515,11 @@ bot.on('message', function(event) {
                         if(SecondData[0].imgName.match('data:image/jpeg;base64,') != null){
                             var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
                             // recommendImg.push(SecondData)
-                            linePush.Imgur(img).then(ThirdData =>{
+                            // linePush.Imgur(img).then(ThirdData =>{
+                            //     console.log('ThirdData',ThirdData)
+                            //     recommendImg.push(ThirdData)
+                            // })
+                            linePush.Imgur(img).then(function(ThirdData) {
                                 console.log('ThirdData',ThirdData)
                                 recommendImg.push(ThirdData)
                             }) 
@@ -526,12 +530,8 @@ bot.on('message', function(event) {
                         recommendImg.push('https://i.imgur.com/oNykVvA.jpg') 
                     }
                 }) 
-                
                 //-------------
             });
-
-            
-              
 
             console.log('recommendNum',recommendNum)
             console.log('recommendHead',recommendHead)
