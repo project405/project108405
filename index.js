@@ -523,7 +523,7 @@ bot.on('message', function(event) {
                 if(item.imgName){
                     var imgur = promiseGetRecommend(item.imgName)
                     imgur.then(function(imgurData){
-                        console.log(imgurData)
+                        console.log('imgurData',imgurData)
                     })
                     // var img = item.imgName.replace('data:image/jpeg;base64,', '');
                     // linePush.Imgur(img).then(imgurData => {
