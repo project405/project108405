@@ -537,6 +537,7 @@ bot.on('message', function(event) {
             });
 
             const asyncRunFail = async () => {
+                let recommendImg = [];
                 await linePush.recomImg(item.recomNum).then(SecondData =>{
                     // console.log('SecondData[0].imgName',SecondData[0].imgName)
                     if(SecondData.length > 0){
