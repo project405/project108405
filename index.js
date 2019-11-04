@@ -497,16 +497,32 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
 
-        function promiseGetRecommend(imgName) {
-            var test;
+        function promiseGetBadMood(GetBadMoodImg) {
             return new Promise(function(resolve, reject){
-                var img = imgName.replace('data:image/jpeg;base64,', '');
-                    linePush.Imgur(img).then(imgurData => {
-                        test = imgurData;
-                    }) 
-                resolve(test);                  
+                var badMoodRecommendImg ;
+                if(GetBadMoodImg){
+                    if(GetBadMoodImg.match('data:image/jpeg;base64')){
+                        console.log('11111')
+                        var imgur = imgurGetBadMood(GetBadMoodImg)
+                        imgur.then(function(imgurData){
+                            setTimeout(() => {
+                                console.log('近來了！！！')
+                                // resolve(imgurData);
+                                badMoodRecommendImg = imgurData;                  
+                            },1000)
+                        })
+                    }else{
+                        console.log('有圖片但不是base64')
+                        badMoodRecommendImg = GetBadMoodImg;
+                    }
+                }else{
+                    console.log('沒有圖片的')
+                    badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
+                }
+                resolve(badMoodRecommendImg)                  
             }) 
         }
+
         index.getIndexData().then(data => {  
             
             let recommendNum = []  
@@ -521,14 +537,10 @@ bot.on('message', function(event) {
                 recommendDateTime.push(item.recomDateTime);
                 //-------------
                 if(item.imgName){
-                    var imgur = promiseGetRecommend(item.imgName)
-                    imgur.then(function(imgurData){
-                        console.log('imgurData',imgurData)
-                    })
-                    // var img = item.imgName.replace('data:image/jpeg;base64,', '');
-                    // linePush.Imgur(img).then(imgurData => {
-                    //     recommendImg.push(imgurData);
-                    // })  
+                    var img = item.imgName.replace('data:image/jpeg;base64,', '');
+                    linePush.Imgur(img).then(imgurData => {
+                        recommendImg.push(imgurData);
+                    })  
                 }else{
                     recommendImg.push('https://i.imgur.com/oNykVvA.jpg')
                 }
