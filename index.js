@@ -302,7 +302,7 @@ bot.on('postback', function(event) {
                             badMoodRecommend.push(data[0].recomCont)
     
                         }
-                        // setTimeout(() => {
+                        
                             console.log('badMoodRecommendImg',imgName)
                             console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
                             event.reply(
@@ -332,8 +332,7 @@ bot.on('postback', function(event) {
                                     }
                                 }    
                             );
-                        // }, 3000)
-                        
+                       
                     
                     })
                     
@@ -418,17 +417,11 @@ bot.on('message', function(event) {
    
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
+            console.log(data)
             data[1].forEach(item =>{
                 item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
                 item.artiCont = item.artiCont.length>35 ? `${item.artiCont.substr(0,34)}...` : item.artiCont
             })
-            
-            console.log('標題',data[1][0].artiHead)
-            console.log('內容',data[1][0].artiCont)
-            console.log('標題',data[1][1].artiHead)
-            console.log('內容',data[1][1].artiCont)
-            console.log('標題',data[1][2].artiHead)
-            console.log('內容',data[1][2].artiCont)
             
             event.reply(
                 {
@@ -492,33 +485,6 @@ bot.on('message', function(event) {
 
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
-
-        // function promiseGetBadMood(GetBadMoodImg) {
-        //     return new Promise(function(resolve, reject){
-        //         var badMoodRecommendImg ;
-        //         if(GetBadMoodImg){
-        //             if(GetBadMoodImg.match('data:image/jpeg;base64')){
-        //                 console.log('11111')
-        //                 var imgur = imgurGetBadMood(GetBadMoodImg)
-        //                 imgur.then(function(imgurData){
-        //                     setTimeout(() => {
-        //                         console.log('近來了！！！')
-        //                         // resolve(imgurData);
-        //                         badMoodRecommendImg = imgurData;                  
-        //                     },1000)
-        //                 })
-        //             }else{
-        //                 console.log('有圖片但不是base64')
-        //                 badMoodRecommendImg = GetBadMoodImg;
-        //             }
-        //         }else{
-        //             console.log('沒有圖片的')
-        //             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
-        //         }
-        //         resolve(badMoodRecommendImg)                  
-        //     }) 
-        // }
-
         index.getIndexData().then(function(data) {  
             
             let recommendNum = []  
