@@ -497,13 +497,14 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         index.getIndexData().then(data => {  
-            console.log(data[0].recomClass)
+            
             let recommendNum = []  
             let recommendHead = []  
             let recommendDateTime = []  
             let recommendImg = [];
             //順序為電影、展覽、書籍、音樂
             data[0].forEach(item => {
+                console.log(item.recomClass)
                 recommendNum.push(item.recomNum);
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
