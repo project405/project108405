@@ -549,113 +549,113 @@ bot.on('message', function(event) {
                 }
                 var secondCheck = setInterval(() => {
                     if (recommendImg.length == 4) {
-                        console.log(recommendImg)
-                        clearInterval(secondCheck);
-
-                    }
+                        console.log(recommendImg);
                         event.reply({
-                        "type": "template",
-                        "altText": " 👋 本週新推薦",
-                        "template": {
-                            "type": "carousel",
-                            "columns": [
+                            "type": "template",
+                            "altText": " 👋 本週新推薦",
+                            "template": {
+                                "type": "carousel",
+                                "columns": [
+                                        {
+                                            "thumbnailImageUrl": recommendImg[0],
+                                            "title": "【" + recommendClass[0] + "】" + recommendHead[0],
+                                            "text": DateTimeFormat(recommendDateTime[0]),
+                                            "defaultAction": {
+                                                "type": "uri",
+                                                "label": "知道更多",
+                                                "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[0]}`
+                                            },
+                                            "actions": [
+                                                {
+                                                    "type": "postback",
+                                                    "label": "劇情概要",
+                                                    "data": 'movie'
+                                                },
+                                                {
+                                                    
+                                                    "type": "postback",
+                                                    "label": "新增至我的收藏",
+                                                    "data": recommendNum[0]
+                                                }
+                                            ]
+                                        }
+                                    ,{
+                                    "thumbnailImageUrl": recommendImg[1],
+                                    "title":"【" + recommendClass[1] + "】" + recommendHead[1],
+                                    "text": DateTimeFormat(recommendDateTime[1]),
+                                    "defaultAction": {
+                                        "type": "uri",
+                                        "label": "詳細資料",
+                                        "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[1]}`
+                                    },
+                                    "actions": [
+                                            {
+                                                "type": "postback",
+                                                "label": "展覽內容",
+                                                "data": 'exhibition'
+                                            },
+                                            {
+                                        
+                                                "type": "postback",
+                                                "label": "新增至我的收藏",
+                                                "data": recommendNum[1]
+                                            }
+                                        ]   
+                                    },
                                     {
-                                        "thumbnailImageUrl": recommendImg[0],
-                                        "title": "【" + recommendClass[0] + "】" + recommendHead[0],
-                                        "text": DateTimeFormat(recommendDateTime[0]),
+                                        "thumbnailImageUrl": recommendImg[2],
+                                        "title":"【" + recommendClass[2] + "】" + recommendHead[2],
+                                        "text": DateTimeFormat(recommendDateTime[2]),
                                         "defaultAction": {
                                             "type": "uri",
-                                            "label": "知道更多",
-                                            "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[0]}`
+                                            "label": "詳細資料",
+                                            "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[2]}`
                                         },
                                         "actions": [
                                             {
                                                 "type": "postback",
-                                                "label": "劇情概要",
-                                                "data": 'movie'
+                                                "label": "書籍資訊",
+                                                "data": 'book'
                                             },
                                             {
-                                                
+                                            
                                                 "type": "postback",
                                                 "label": "新增至我的收藏",
-                                                "data": recommendNum[0]
+                                                "data": recommendNum[2]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "thumbnailImageUrl": recommendImg[3],
+                                        "title":"【" + recommendClass[3] + "】" + recommendHead[3],
+                                        "text": DateTimeFormat(recommendDateTime[3]),
+                                        "defaultAction": {
+                                            "type": "uri",
+                                            "label": "詳細資料",
+                                            "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[3]}`
+                                        },
+                                        "actions": [
+                                            {
+                                                "type": "postback",
+                                                "label": "音樂資訊",
+                                                "data": 'music'
+                                            },
+                                            {
+                                            
+                                                "type": "postback",
+                                                "label": "新增至我的收藏",
+                                                "data": recommendNum[3]
                                             }
                                         ]
                                     }
-                                ,{
-                                "thumbnailImageUrl": recommendImg[1],
-                                "title":"【" + recommendClass[1] + "】" + recommendHead[1],
-                                "text": DateTimeFormat(recommendDateTime[1]),
-                                "defaultAction": {
-                                    "type": "uri",
-                                    "label": "詳細資料",
-                                    "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[1]}`
-                                },
-                                "actions": [
-                                        {
-                                            "type": "postback",
-                                            "label": "展覽內容",
-                                            "data": 'exhibition'
-                                        },
-                                        {
-                                    
-                                            "type": "postback",
-                                            "label": "新增至我的收藏",
-                                            "data": recommendNum[1]
-                                        }
-                                    ]   
-                                },
-                                {
-                                    "thumbnailImageUrl": recommendImg[2],
-                                    "title":"【" + recommendClass[2] + "】" + recommendHead[2],
-                                    "text": DateTimeFormat(recommendDateTime[2]),
-                                    "defaultAction": {
-                                        "type": "uri",
-                                        "label": "詳細資料",
-                                        "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[2]}`
-                                    },
-                                    "actions": [
-                                        {
-                                            "type": "postback",
-                                            "label": "書籍資訊",
-                                            "data": 'book'
-                                        },
-                                        {
-                                        
-                                            "type": "postback",
-                                            "label": "新增至我的收藏",
-                                            "data": recommendNum[2]
-                                        }
-                                    ]
-                                },
-                                {
-                                    "thumbnailImageUrl": recommendImg[3],
-                                    "title":"【" + recommendClass[3] + "】" + recommendHead[3],
-                                    "text": DateTimeFormat(recommendDateTime[3]),
-                                    "defaultAction": {
-                                        "type": "uri",
-                                        "label": "詳細資料",
-                                        "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[3]}`
-                                    },
-                                    "actions": [
-                                        {
-                                            "type": "postback",
-                                            "label": "音樂資訊",
-                                            "data": 'music'
-                                        },
-                                        {
-                                        
-                                            "type": "postback",
-                                            "label": "新增至我的收藏",
-                                            "data": recommendNum[3]
-                                        }
-                                    ]
-                                }
-                            ],
-                            "imageAspectRatio": "rectangle",
-                            "imageSize": "cover"
-                        }
-                    });
+                                ],
+                                "imageAspectRatio": "rectangle",
+                                "imageSize": "cover"
+                            }
+                        });
+                        clearInterval(secondCheck);
+                    }
+                        
                 }, 1000)
                 //-------------
             });
