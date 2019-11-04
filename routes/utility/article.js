@@ -2,7 +2,124 @@
 
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
-const member = require('./member');
+
+//=========================================
+//----- getArticleListPagination() --------
+//=========================================
+var getArticleListPagination = async function (memID, artiListNum) {
+    var articleList = [];
+    var tag ;
+    var isCollection  ;
+    var isLike ;
+    var imgs ;
+    var result = [];
+    var articleSum;
+    // -----------  取得文章清單 --------------
+    await sql(`SELECT "T2".*,
+                      "M"."memName" 
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "articleListDataView" AS "A"
+                            LEFT JOIN "image" AS "I"
+                                ON "A"."artiNum" = "I"."artiNum"
+                        WHERE "I"."artiMessNum" IS NULL	) AS "T1"
+                    WHERE "T1"."Rank" = '1'
+                    ORDER BY "artiNum" DESC
+                    LIMIT 10 
+                    OFFSET $1 ) AS "T2"
+                        INNER JOIN "member" "M"
+                            ON "M"."memID" = "T2"."memID"`, [(artiListNum-1) * 10])
+        .then((data) => {
+            articleList = data.rows;
+        }, (error) => {
+            articleList = undefined;
+        });
+
+    // await sql('SELECT"articleListDataView".*, "member"."memName"'+
+    //          ' FROM "articleListDataView"' +
+    //          ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"'+
+    //          ' ORDER BY "articleListDataView"."artiNum" DESC'+
+    //          ' LIMIT 10' +
+    //          ' OFFSET $1', [(artiListNum-1) * 10])
+    //     .then((data) => {
+    //         articleList = data.rows;
+    //     }, (error) => {
+    //         articleList = undefined;
+    //     });
+    
+    await sql('SELECT COUNT(*) FROM "articleListDataView"')
+    .then((data) => {
+        articleSum = data.rows;
+    }, (error) => {
+        articleSum = undefined;
+    })
+
+    // ----------- 取得tag -----------
+    await sql('SELECT * FROM "articleTagView"')
+        .then((data) => {
+            tag = data.rows;
+        }, (error) => {
+            tag = undefined;
+        });
+
+    // ----------- 判斷是否被使用者按愛心 -----------
+    await sql('SELECT "memID","artiNum" FROM "articleLike" WHERE "memID" = $1 ', [memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isLike = undefined;
+            } else {
+                isLike = data.rows;
+            }
+        }, (error) => {
+            isLike = undefined;
+        });
+
+    // ----------- 判斷是否被使用者收藏 -----------
+    await sql('SELECT "memID" , "artiNum" FROM "memberCollection" WHERE "memID" = $1', [memID])
+        .then((data) => {
+            if (data.rows == null || data.rows == '') {
+                isCollection = undefined;
+            } else {
+                isCollection = data.rows;
+            }
+        }, (error) => {
+            isCollection = undefined;
+        });
+
+    //取得照片
+    // articleList.map((item) => {
+    //     pageImage.push(item.artiNum)
+    // })
+
+    // await sql('SELECT "artiNum" , "imgName" ' +
+    //           ' FROM "image"'+
+    //           ' WHERE "artiNum" = ANY($1::INT[]) AND "artiMessNum" IS NULL'+
+    //           ' ORDER BY "imgNum"', [pageImage])
+    //     .then((data) => {
+    //         if (data.rows == null || data.rows == '') {
+    //             imgs = undefined;
+    //         } else {
+    //             console.log(data)
+    //             imgs = data.rows;
+    //         }
+    //     }, (error) => {
+    //         imgs = undefined;
+    //         console.log(error)
+    //     });
+
+    result[0] = articleList; 
+    result[1] = tag;
+    result[2] = isLike;
+    result[3] = imgs;
+    result[4] = isCollection;
+    result[5] = [memID];
+    result[6] = articleSum;
+    result[7] = [artiListNum];
+
+    return result;
+}
 
 //=========================================
 //---------  getArticleList() -------------
@@ -16,7 +133,10 @@ var getArticleList = async function (memID) {
     var result = [];
 
     // -----------  取得文章清單 --------------
-    await sql('SELECT * FROM "articleListDataView"')
+    await sql('SELECT"articleListDataView".*, "member"."memName"'+
+             ' FROM "articleListDataView"' +
+             ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"'+
+             ' ORDER BY "articleListDataView"."artiNum" DESC')
         .then((data) => {
             articleList = data.rows;
         }, (error) => {
@@ -56,7 +176,7 @@ var getArticleList = async function (memID) {
         });
 
     //取得照片
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiMessNum" IS NULL')
+    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiMessNum" IS NULL ORDER BY "imgNum"')
         .then((data) => {
             if (data.rows == null || data.rows == '') {
                 imgs = undefined;
@@ -93,7 +213,10 @@ var getOneArticle = async function (artiNum, memID) {
     var guessArticle = undefined ; //取得猜測使用者可能喜歡的文章
 
     // -----------  取得單一文章 --------------
-    await sql('SELECT * FROM "articleListDataView" WHERE "artiNum" = $1', [artiNum])
+    await sql('SELECT "articleListDataView".*, "member"."memName" ' +
+              'FROM "articleListDataView" ' +
+              'INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID" ' +
+              'WHERE "artiNum" = $1', [artiNum])
         .then((data) => {
             if (data.rows.length > 0) {
                 oneArticle = data.rows;
@@ -109,15 +232,19 @@ var getOneArticle = async function (artiNum, memID) {
                 ' ,to_char("Mess"."artiMessDateTime",\'YYYY-MM-DD\') AS "artiMessDateTime" '+
                 ' ,"Mess"."artiMessCont" '+
                 ' ,count("MessLike"."artiMessNum") AS "likeCount" '+
+                ',"member"."memName"' +
               ' FROM "articleMessage" AS "Mess" '+
                     ' LEFT JOIN "articleMessageLike" AS "MessLike" '+
                         ' ON "Mess"."artiMessNum" = "MessLike"."artiMessNum" '+
+                    'INNER JOIN "member"' +
+                    'ON "member"."memID" = "Mess"."memID"' +
               ' WHERE "Mess"."artiNum" = $1 '+
               ' GROUP BY "Mess"."artiMessNum" '+
                     ' ,"Mess"."memID" '+
                     ' ,"Mess"."artiMessDateTime" '+
-                    ' ,"Mess"."artiMessCont" '+
-             ' ORDER BY "artiMessDateTime" ', [artiNum])
+                    ' ,"Mess"."artiMessCont" ' +
+                    ' ,"member"."memName" ' +
+             ' ORDER BY "artiMessNum" ', [artiNum])
         .then((data) => {
             oneArtiMessage = data.rows;
         }, (error) => {
@@ -177,7 +304,10 @@ var getOneArticle = async function (artiNum, memID) {
         });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiNum" = $1 AND "artiMessNum" IS NULL',[artiNum])
+    await sql('SELECT "artiNum" , "imgName" '+
+             ' FROM "image" '+
+             ' WHERE "artiNum" = $1 AND "artiMessNum" IS NULL'+
+             ' ORDER BY "imgNum"',[artiNum])
         .then((data) => {
             if (!data.rows) {
                 imgs = undefined;
@@ -189,19 +319,30 @@ var getOneArticle = async function (artiNum, memID) {
         });
 
     // ----------- 根據該文章的tag去猜測使用者可能喜歡的文章 -----------
-    await sql('SELECT * '+
-                ' FROM "article" '+
-                ' WHERE "artiNum" '+
-                    ' IN(SELECT "A"."artiNum" '+
-                    ' FROM (SELECT "artiNum" ,count(*) '+
-                            ' FROM "tagLinkArticle" '+
-                            ' WHERE "tagNum" '+
-                                ' IN (SELECT "tagNum" '+
-                                    ' FROM "tagLinkArticle" '+
-                                    ' WHERE "artiNum" = $1) AND "artiNum" != $1 '+
-                            ' GROUP BY "artiNum" '+
-                            ' ORDER BY "count" DESC , "artiNum" DESC '+
-                            ' LIMIT 3) AS "A")', [artiNum])
+    await sql('SELECT * '+ 
+             ' FROM "article" '+
+             ' WHERE "artiNum" '+ 
+                ' IN(SELECT "A"."artiNum" '+
+                   ' FROM(SELECT "artiNum" , count("artiNum") '+
+                        ' FROM "tagLinkArticle" '+
+                        ' WHERE "tagNum" '+ 
+                            ' IN(SELECT "tagNum" '+
+                                ' FROM "tag" '+
+                                ' WHERE "tagName"  '+
+                                    ' IN(SELECT "tagName" '+
+                                        ' FROM "tag" '+
+                                        ' WHERE "tagNum" '+
+                                            ' IN (SELECT "tagNum" '+ 
+                                                ' FROM "tagLinkArticle" '+ 
+                                                ' WHERE "artiNum" = $1 ) '+
+                                        ' ) '+
+                                ' ) AND "artiNum" != $1 '+
+                        ' GROUP BY "artiNum" '+
+                        ' ORDER BY "count" DESC ,"artiNum" DESC '+
+                        ' LiMIT 3 '+
+                        ' ) AS "A" '+
+                    ') '+
+            ' ORDER BY "artiNum" DESC', [artiNum])
         .then((data) => {
             if (data.rowCount <= 0) {
                 guessArticle = undefined ;
@@ -209,13 +350,14 @@ var getOneArticle = async function (artiNum, memID) {
                 guessArticle = data.rows;
             }   
         });
-        
+
     // ----------- 如果tag沒任何關聯 則隨機取三篇文章 -----------
     if(guessArticle == undefined){
         await sql('SELECT * '+
             ' FROM "article" '+
+            ' WHERE "artiNum" != $1 '+
             ' ORDER BY random() '+
-            ' LIMIT 3') 
+            ' LIMIT 3',[artiNum]) 
         .then((data) => {
                 if (!data.rows) {
                     guessArticle = undefined ;
@@ -224,9 +366,44 @@ var getOneArticle = async function (artiNum, memID) {
                     guessArticle = data.rows;
                 }   
         });
+    }else if(guessArticle.length < 3 ) { //  如果tag關聯數量小於三篇文章 
+        if(guessArticle.length == 1 ){ //如果只有一篇
+            await sql('SELECT * '+
+                    ' FROM "article" '+
+                    ' WHERE "artiNum" != $1 '+
+                    ' ORDER BY random() '+
+                    ' LIMIT 2',[guessArticle[0].artiNum]) 
+            .then((data) => {
+                    if (!data.rows) {
+                        guessArticle = undefined ;
+                    } else {
+                        for(var i = 0 ; i < data.rows.length ; i++){
+                            guessArticle.push(data.rows[i]);
+                        }
+                    }   
+            });
+        }else if (guessArticle.length == 2 ){  //如果有兩篇
+            await sql('SELECT * '+
+                     ' FROM "article" '+
+                     ' WHERE "artiNum" != $1 AND "artiNum" != $2 '+
+                     ' ORDER BY random() '+
+                     ' LIMIT 1',[guessArticle[0].artiNum ,guessArticle[1].artiNum]) 
+            .then((data) => {
+                    if (!data.rows) {
+                        guessArticle = undefined ;
+                    } else {
+                        guessArticle.push(data.rows[0]);
+                    }   
+            });
+        }
+        
     }
+
     //取得照片
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiNum" = $1 AND  "artiMessNum" IS NOT NULL', [artiNum])
+    await sql('SELECT "artiNum" , "imgName" '+
+        ' FROM "image" '+ 
+        ' WHERE "artiNum" = $1 AND  "artiMessNum" IS NOT NULL'+
+        ' ORDER BY "imgNum"', [artiNum])
         .then((data) => {
             if (!data.rows) {
                 replyImgs = undefined;
@@ -276,7 +453,10 @@ var getOneReply = async function (artiMessNum, memID) {
     });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "artiMessNum" , "imgName" FROM "image" WHERE "artiMessNum" = $1 ',[artiMessNum])
+    await sql('SELECT "artiMessNum" , "imgName" '+
+             ' FROM "image" '+
+             ' WHERE "artiMessNum" = $1 '+
+             ' ORDER BY "imgNum"',[artiMessNum])
         .then((data) => {
             if (!data.rows) {
                 replyImgs = undefined;
@@ -298,25 +478,52 @@ var getOneReply = async function (artiMessNum, memID) {
 //=========================================
 //---------  getArticleClassList() --------
 //=========================================
-var getArticleClassList = async function (articleClass, memID) {
+var getArticleClassList = async function (articleClass, memID, artiListNum) {
     var articleList = [];
     var tag = [];
     var isCollection = [];
     var isLike = [];
     var imgs = [] ; 
     var result = [] ; 
+    var articleSum;
+
     // -----------  取得分類文章 --------------
-    await sql('SELECT * FROM "articleListDataView" WHERE "artiClass" = $1', [articleClass])
+    await sql(`SELECT "T2".*, "M"."memName" 
+                FROM(
+                SELECT *
+                FROM( 
+                    SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                    FROM "articleListDataView" AS "A"
+                    LEFT JOIN "image" AS "I"
+                        ON "A"."artiNum" = "I"."artiNum"
+                    WHERE "I"."artiMessNum" IS NULL ) AS "T1"
+                WHERE "T1"."Rank" = '1' AND "artiClass" = $1
+                ORDER BY "artiNum" DESC
+                LIMIT 10 
+                OFFSET $2 ) AS "T2"
+                INNER JOIN "member" "M"
+                ON "M"."memID" = "T2"."memID"`, [articleClass, (artiListNum-1) * 10])
         .then((data) => {
+            console.log(data,'data')
             if (!data.rows) {
                 articleList = undefined;
             } else {
                 articleList = data.rows;
+                console.log('articleList', articleList)
             }
         }, (error) => {
+            console.log(error)
             articleList = null;
         });
 
+    await sql('SELECT COUNT(*) ' +
+              'FROM "articleListDataView"' +
+              'WHERE "artiClass" = $1' , [articleClass])
+    .then((data) => {
+        articleSum = data.rows;
+    }, (error) => {
+        articleSum = undefined;
+    })
     // ----------- 取得 tag -----------
     await sql('SELECT * '+
              ' FROM "articleTagView" '+
@@ -359,23 +566,28 @@ var getArticleClassList = async function (articleClass, memID) {
         });
 
     // ----------- 取得照片 ----------- 
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiMessNum" IS NULL')
-        .then((data) => {
-            if (data.rows == null || data.rows == '') {
-                imgs = undefined;
-            } else {
-                imgs = data.rows;
-            }
-        }, (error) => {
-            imgs = undefined;
-        });
+    // await sql('SELECT "artiNum" , "imgName" '+
+    // ' FROM "image" '+
+    // ' WHERE "artiMessNum" IS NULL '+
+    // ' ORDER BY "imgNum"')
+    //     .then((data) => {
+    //         if (data.rows == null || data.rows == '') {
+    //             imgs = undefined;
+    //         } else {
+    //             imgs = data.rows;
+    //         }
+    //     }, (error) => {
+    //         imgs = undefined;
+    //     });
 
     result[0] = articleList ;
     result[1] = tag ; 
     result[2] = isCollection ;
     result[3] = isLike ;
-    result[4] = imgs ;
+    // result[4] = imgs ;
     result[5] = [memID] ;
+    result[6] = articleSum;
+    result[7] = [artiListNum];
 
     return result ; 
 }
@@ -481,5 +693,5 @@ module.exports = {
     getArticleList, getOneArticle,
     getArticleClassList,
     getArtiLikeCount, getRecomLikeCount,
-    getArtiMessLikeCount, getRecomMessLikeCount, getOneReply
+    getArtiMessLikeCount, getRecomMessLikeCount, getOneReply, getArticleListPagination
 };

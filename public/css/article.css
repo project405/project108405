@@ -130,7 +130,7 @@ button.report {
 button.like{
     outline: none !important;
     box-shadow: none !important;
-    margin-right: 1em !important;
+    margin-right: 0.5em !important;
 }
 /* ------------------- */
 
@@ -139,7 +139,11 @@ button.like{
 
 
 /* ------------------- */
-
+.card-body {
+    max-height: 120px !important;    
+    -webkit-line-clamp: 7 !important; 
+    overflow: hidden !important;
+}
 @media (max-width: 1199px) {
     div.post {
         margin-top: 2em;
@@ -239,11 +243,12 @@ div.tagDiv {
 /* hr */
 
 hr.separate {
-    opacity: 0.75;
-    width: 70%;
-    background-color: #eee;
-    height: 1.5px;
-    border: none;
+    margin-top: 0.5em;
+    /* opacity: 0.75; */
+    width: 50%;
+    background-color: rgb(125, 125, 125, 0.65);
+    border-radius: 50%;
+    height: 1px;
     color: #d4d4d4;
 }
 
@@ -285,6 +290,7 @@ div.replyInput {
     border-radius: 8px;
     caret-color: #2D4F41;
     cursor: text;
+    text-align: left !important;
 }
 
 .input:empty::before {

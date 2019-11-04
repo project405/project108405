@@ -44,12 +44,11 @@
                     <!-- list -->
                     <% for(var i=0; i<items[0].length; i++) {%>
                     <div class="card shadow list "  style="cursor:pointer;">
-
                         <div class="card-body " onclick=" location.href='/article/<%= items[0][i].artiNum %>'">
                             <div class="poster">
                                 <div class="name d-flex justify-content-between">
                                     <div style="word-break:break-all">
-                                        <a class="floorTag"><%= items[0][i].memID %></a>
+                                        <a class="floorTag"><%= items[0][i].memName %></a>
                                         <a class="next"></a>
                                         <a class="dateTime">於 <%= items[0][i].artiDateTime %>發表</a>
                                     </div>
@@ -80,7 +79,7 @@
                                     <% for(var j = 0 ; j<items[3].length ; j++) { %>
                                         <% if (items[0][i].artiNum == items[3][j].artiNum){ %>
                                             <div class="wrapperCard card-img-top col-lg-3"
-                                                style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
+                                                style="background-image: url( '<%= items[3][j].imgName %>'); ">
                                             </div>
                                             <% break %> <!-- 取得一張照片就結束 -->
                                         <% } %>
@@ -195,113 +194,7 @@
                                 document.getElementById("unLogIn" + "<%= items[0][i].artiNum %>").style.display = "none";
                             </script>
                             <% } %>
-                            <!-- 收藏 ajax script -->
-                            <script>
-                                //新增收藏
-                                function addColle(artiNum) {
-                                    collection(artiNum);
-                                    $.ajax({
-                                        url: '/addCollection',
-                                        type: 'POST',
-                                        dataType: 'JSON',
-                                        data: { "likeType": "article", "artiNum": artiNum },
-                                        success: function (res) {
-                                        },
-                                        error: function (res) {
-                                            console.log("失敗", JSON.stringify(res));
-                                        }
-                                    });
-                                };
-                                //刪除收藏
-                                function delColle(artiNum) {
-                                    cancelCollection(artiNum);
-                                    $.ajax({
-                                        url: '/delCollection',
-                                        type: 'POST',
-                                        dataType: 'JSON',
-                                        data: { "likeType": "article", "artiNum": artiNum },
-                                        success: function (res) {
-                                        },
-                                        error: function (res) {
-                                            console.log("失敗", JSON.stringify(res));
-                                        }
-                                    });
-                                };
-                                //點收藏後改變屬性
-                                function collection(artiNum) {
-                                    document.getElementById("delColle" + artiNum).style.display = "inline";
-                                    document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
-                                    document.getElementById("addColle" + artiNum).style.display = "none";
-                                }
-                                //取消收藏後改變屬性
-                                function cancelCollection(artiNum) {
-                                    document.getElementById("addColle" + artiNum).style.display = "inline";
-                                    document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
-                                    document.getElementById("delColle" + artiNum).style.display = "none";
-                                }
-                            </script>
-                            <!-- 愛心 ajax script -->
-                            <script>
-                                //新增愛心
-                                function addLike(artiNum) {
-                                    $.ajax({
-                                        url: '/addLike',
-                                        type: 'POST',
-                                        dataType: 'text',
-                                        data: { "likeType": "article", "artiNum": artiNum },
-                                        success: function (res) {
-                                            likeCount(artiNum);
-                                            like(artiNum);
-                                        },
-                                        error: function (res) {
-                                            console.log(res);
-                                        }
-                                    });
-                                };
-                                //刪除愛心
-                                function delLike(artiNum) {
-                                    $.ajax({
-                                        url: '/delLike',
-                                        type: 'POST',
-                                        dataType: 'text',
-                                        data: { "likeType": "article", "artiNum": artiNum },
-                                        success: function (res) {
-                                            likeCount(artiNum);
-                                            cancelLike(artiNum);
-                                        },
-                                        error: function (res) {
-                                            console.log("刪除失敗", JSON.stringify(res));
-                                        }
-                                    });
-                                };
-                                //點愛心後改變屬性
-                                function like(artiNum) {
-                                    document.getElementById("delLike" + artiNum).style.display = "inline";
-                                    document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
-                                    document.getElementById("addLike" + artiNum).style.display = "none";
-                                }
-                                //取消愛心後改變屬性
-                                function cancelLike(artiNum) {
-                                    document.getElementById("addLike" + artiNum).style.display = "inline";
-                                    document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
-                                    document.getElementById("delLike" + artiNum).style.display = "none";
-                                }
-                                function likeCount(artiNum) {
-                                    $.ajax({
-                                        url: '/likeCount',
-                                        type: 'POST',
-                                        dataType: 'JSON',
-                                        data: { "likeType": "article", "artiNum": artiNum },
-                                        success: function (res) {
-                                            document.getElementById("addLikeCount" + artiNum).innerHTML = JSON.stringify(res);
-                                            document.getElementById("delLikeCount" + artiNum).innerHTML = JSON.stringify(res);
-                                        },
-                                        error: function (res) {
-                                            console.log(JSON.stringify(res));
-                                        }
-                                    });
-                                }
-                            </script>
+                           
                         </div>
                         <!-- info結束 -->
 
@@ -338,8 +231,9 @@
                     <% for(var j = 0 ; j<items[7].length ; j++ ) { %>
                         <% if(items[6][i].recomNum == items[7][j].recomNum){ %>
                             <div class="wrapper col-12  col-lg-2"
-                            style="background-image:url('/imgs/recommend/<%= items[7][j].imgName %>');">
+                            style="background-image:url('<%= items[7][j].imgName %>');">
                             <% isImg = true %>
+                            <% break ;%>
                         <% } %>
                     <% } %>
                 <% } %>
@@ -387,6 +281,121 @@
         crossorigin="anonymous"></script>
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
+     <!-- 收藏 ajax script -->
+     <script>
+            $('button').click(function() {
+            if ($(this).children('.fa-gratipay').length > 0) {
+                $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
+                setTimeout(() => {
+                    $('button').attr('disabled', false)
+                }, 1000)
+            }
+        })
+            //新增收藏
+            function addColle(artiNum) {
+                collection(artiNum);
+                $.ajax({
+                    url: '/addCollection',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "article", "artiNum": artiNum },
+                    success: function (res) {
+                    },
+                    error: function (res) {
+                        console.log("失敗", JSON.stringify(res));
+                    }
+                });
+            };
+            //刪除收藏
+            function delColle(artiNum) {
+                cancelCollection(artiNum);
+                $.ajax({
+                    url: '/delCollection',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "article", "artiNum": artiNum },
+                    success: function (res) {
+                    },
+                    error: function (res) {
+                        console.log("失敗", JSON.stringify(res));
+                    }
+                });
+            };
+            //點收藏後改變屬性
+            function collection(artiNum) {
+                document.getElementById("delColle" + artiNum).style.display = "inline";
+                document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                document.getElementById("addColle" + artiNum).style.display = "none";
+            }
+            //取消收藏後改變屬性
+            function cancelCollection(artiNum) {
+                document.getElementById("addColle" + artiNum).style.display = "inline";
+                document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                document.getElementById("delColle" + artiNum).style.display = "none";
+            }
+        </script>
+        <!-- 愛心 ajax script -->
+        <script>
+            //新增愛心
+            function addLike(artiNum) {
+                $.ajax({
+                    url: '/addLike',
+                    type: 'POST',
+                    dataType: 'text',
+                    data: { "likeType": "article", "artiNum": artiNum },
+                    success: function (res) {
+                        likeCount(artiNum);
+                        like(artiNum);
+                    },
+                    error: function (res) {
+                        console.log(res);
+                    }
+                });
+            };
+            //刪除愛心
+            function delLike(artiNum) {
+                $.ajax({
+                    url: '/delLike',
+                    type: 'POST',
+                    dataType: 'text',
+                    data: { "likeType": "article", "artiNum": artiNum },
+                    success: function (res) {
+                        likeCount(artiNum);
+                        cancelLike(artiNum);
+                    },
+                    error: function (res) {
+                        console.log("刪除失敗", JSON.stringify(res));
+                    }
+                });
+            };
+            //點愛心後改變屬性
+            function like(artiNum) {
+                document.getElementById("delLike" + artiNum).style.display = "inline";
+                document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                document.getElementById("addLike" + artiNum).style.display = "none";
+            }
+            //取消愛心後改變屬性
+            function cancelLike(artiNum) {
+                document.getElementById("addLike" + artiNum).style.display = "inline";
+                document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                document.getElementById("delLike" + artiNum).style.display = "none";
+            }
+            function likeCount(artiNum) {
+                $.ajax({
+                    url: '/likeCount',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "article", "artiNum": artiNum },
+                    success: function (res) {
+                        document.getElementById("addLikeCount" + artiNum).innerHTML = JSON.stringify(res);
+                        document.getElementById("delLikeCount" + artiNum).innerHTML = JSON.stringify(res);
+                    },
+                    error: function (res) {
+                        console.log(JSON.stringify(res));
+                    }
+                });
+            }
+        </script>
 </body>
 
 </html>

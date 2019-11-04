@@ -34,7 +34,7 @@ var getIndexData = async function (memID) {
     var result = [];
 
     // -----------  每週推薦 --------------
-    await sql('SELECT * FROM "recommend"')
+    await sql('SELECT * FROM "recommend" ORDER BY "recomNum" DESC')
         .then((data) => {
             // 將每周推薦的類別改為中文
             for (let i = 0; i < data.rows.length; i++) {
@@ -70,7 +70,10 @@ var getIndexData = async function (memID) {
         }
     }
     // -----------  熱門文章 --------------
-    await sql('SELECT * FROM "articleListDataView" ORDER BY "likeCount" DESC , "artiDateTime" DESC LIMIT 3')
+    await sql('SELECT "articleListDataView".*, "member"."memName" ' + 
+              'FROM "articleListDataView" '+
+              'INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"' +
+              'ORDER BY "likeCount" DESC , "artiDateTime" DESC LIMIT 3')
         .then((data) => {
             if (!data.rows) {
                 hotArticle = undefined;
@@ -94,7 +97,7 @@ var getIndexData = async function (memID) {
         });
 
     //----------- 取得文章照片 ----------- 
-    await sql('SELECT "artiNum" , "imgName" FROM "image"')
+    await sql('SELECT "artiNum" , "imgName" FROM "image" ORDER BY "imgNum" ')
         .then((data) => {
             if (!data.rows) {
                 articleImgs = undefined;
@@ -106,7 +109,7 @@ var getIndexData = async function (memID) {
         });
     
     //----------- 取得推薦照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image"')
+    await sql('SELECT "recomNum" , "imgName" FROM "image" ORDER BY "imgNum"')
         .then((data) => {
             if (!data.rows) {
                 recommendImgs = undefined;
@@ -118,15 +121,15 @@ var getIndexData = async function (memID) {
         });
 
     //----------- 正向文章 ----------- 
-    await sql('SELECT * '+
-             ' FROM( '+
+    await sql('SELECT * '+ 
+            ' FROM( '+
                 ' SELECT * '+
                 ' FROM "article" '+
-                ' WHERE "analyzeScore" > 0 '+
+                ' WHERE "score2" >= 20 '+
                 ' ORDER BY "positiveWords" DESC, "analyzeScore" DESC '+
                 ' LIMIT 5) AS "A" '+
-             ' ORDER BY random() '+
-             ' LIMIT 1 ')
+            ' ORDER BY random() '+
+            ' LIMIT 1 ')
     .then((data) => {
         if (!data.rows) {
             positiveArticle = undefined;
@@ -139,14 +142,14 @@ var getIndexData = async function (memID) {
 
     //----------- 負向文章 ----------- 
     await sql('SELECT * '+
-             ' FROM( '+
-                 ' SELECT * '+
-                 ' FROM "article" '+
-                 ' WHERE "analyzeScore" < 0 '+
-                 ' ORDER BY "negativeWords" DESC, "analyzeScore" DESC '+
-                 ' LIMIT 5) AS "A" '+
-             ' ORDER BY random() '+
-             ' LIMIT 1 ')
+            ' FROM( '+
+                ' SELECT * '+
+                ' FROM "article" '+
+                ' WHERE "score2" <= -15 '+
+                ' ORDER BY "negativeWords" DESC, "analyzeScore" DESC '+
+                ' LIMIT 5) AS "A" '+
+            ' ORDER BY random() '+
+            ' LIMIT 1 ')
     .then((data) => {
         if (!data.rows) {
             negativeArticle = undefined;
@@ -158,32 +161,40 @@ var getIndexData = async function (memID) {
     });
 
     //----------- 正向照片 ----------- 
-    await sql('SELECT "imgName" '+
-             ' FROM "image" '+
-             ' WHERE "artiNum" = $1',[positiveArticle[0].artiNum])
-    .then((data) => {
-        if (!data.rows) {
+    if(positiveArticle.length != 0 ){
+        await sql('SELECT "imgName" '+
+            ' FROM "image" '+
+            ' WHERE "artiNum" = $1 '+
+            ' ORDER BY "imgNum" ',[positiveArticle[0].artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                positiveImg = undefined;
+            } else {
+                positiveImg = data.rows;
+            }
+        }, (error) => {
             positiveImg = undefined;
-        } else {
-            positiveImg = data.rows;
-        }
-    }, (error) => {
-        positiveImg = undefined;
-    });
+        });
+    }
+    
 
     //----------- 負向照片 ----------- 
-    await sql('SELECT "imgName" '+
-        ' FROM "image" '+
-        ' WHERE "artiNum" = $1',[negativeArticle[0].artiNum])
-    .then((data) => {
-        if (!data.rows) {
+    if(negativeArticle.length != 0 ){
+        await sql('SELECT "imgName" '+
+            ' FROM "image" '+
+            ' WHERE "artiNum" = $1 '+
+            ' ORDER BY "imgNum"',[negativeArticle[0].artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                negativeImg = undefined;
+            } else {
+                negativeImg = data.rows;
+            }
+        }, (error) => {
             negativeImg = undefined;
-        } else {
-            negativeImg = data.rows;
-        }
-    }, (error) => {
-        negativeImg = undefined;
-    });
+        });
+    }
+    
 
     // ----------- 計算文章class的數量-----------
     await sql('SELECT "artiClass" AS "class" , count("artiClass") '+
@@ -222,13 +233,12 @@ var getIndexData = async function (memID) {
     });
 
     //依照亂數取文章或推薦
-    r = Math.floor(Math.random() * 10) + 1
+    r = Math.floor(Math.random() * 10) + 1;
 
     //如果都沒對文章或推薦按過愛心
     if(artiClassCount.length == 0 && recomClassCount.length == 0){
         var classRandom = Math.floor(Math.random() * 3) ;
         byClassData = await byClassGetData(classRandom,r ) ; 
-
     }else{
         //加總class按讚次數
         await sumClass(classCount, artiClassCount) ;
@@ -240,10 +250,6 @@ var getIndexData = async function (memID) {
         //class次數最多的 以亂數的方式去判斷說要取文章 還是 推薦
         byClassData = await byClassGetData(classCount[0][0],r ) ; 
     }
-    
-  
-
-    console.log("byClassData",byClassData);
 
     result[0] = fourRecommend;
     result[1] = hotArticle;
@@ -339,7 +345,6 @@ async function byClassGetData(index, r){
         });
 
     }
-
     return result ; 
 }
 
@@ -363,9 +368,12 @@ var getWebSearch = async function (searchParams, memID) {
     //======================================
 
     // -----------  取得文章清單 -------------
-    await sql('SELECT * '+
-              ' FROM "articleListDataView" '+
-              ' WHERE "artiHead" LIKE $1 or "artiCont" LIKE $1  or "artiClass" LIKE $1 ',['%' + searchParams + '%'])
+    await sql('SELECT"articleListDataView".*, "member"."memName" '+
+            ' FROM "articleListDataView" '+
+                ' INNER JOIN "member" '+ 
+                    ' ON "member"."memID" = "articleListDataView"."memID" '+
+            ' WHERE "artiHead" LIKE $1 or "artiCont" LIKE $1  or "artiClass" LIKE $1 '+ 
+            ' ORDER BY "articleListDataView"."artiNum" DESC',['%' + searchParams + '%'])
         .then((data) => {
             articleList = data.rows;
         }, (error) => {

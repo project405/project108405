@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const notify = require('./utility/notify');
+const moment = require('moment');
 /* GET home page. */
 router.get('/', function (req, res, next) {
 	var memID;
@@ -23,5 +24,29 @@ router.get('/', function (req, res, next) {
 		}
 	})
 });
+
+router.post('/', function(req, res, next){
+	var alertMessage = [] ;
+	var dateTime = moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"); 
+	var recomHead = JSON.parse(req.body.recom);
+	var memID = JSON.parse(req.body.member);
+	var month = parseInt(moment(Date.now()).format("MM"))-1; 
+	
+	req.body.recom.replace = req.body.recom.replace("\"","") ;
+	req.body.recom.replace = req.body.recom.replace("]","") ;
+	req.body.recom.replace = req.body.recom.replace("[","") ;
+
+	for(var i = 0 ; i < recomHead.length ; i++){
+		alertMessage.push("恭喜您" + month + "月在官方推薦【" + recomHead[i] + "】文章底下的留言，受到大家的喜愛，我們將寄送精美的小禮物給您");
+	} 
+
+	notify.insertMessage(memID, alertMessage, dateTime ).then(data => {
+		if (data == 0) {
+			res.redirect('error');  //導向錯誤頁面
+		} else {
+			res.send("寄出通知成功");
+		}
+	})
+})
 
 module.exports = router;

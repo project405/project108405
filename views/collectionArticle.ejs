@@ -36,15 +36,15 @@
             </center>
             <div class="d-flex justify-content-center" style="margin-bottom: 1.5em">
                 <button type="button " class="btn btn-secondary footer"
-                    onclick="location.href='/collection/article/movie'">電影類</button>
+                    onclick="location.href='/collection/article/movie/1'">電影類</button>
                 <button type="button " class="btn btn-secondary footer"
-                    onclick="location.href='/collection/article/music'">音樂類</button>
+                    onclick="location.href='/collection/article/music/1'">音樂類</button>
                 <button type="button " class="btn btn-secondary footer"
-                    onclick="location.href='/collection/article/book'">書籍類</button>
+                    onclick="location.href='/collection/article/book/1'">書籍類</button>
                 <button type="button " class="btn btn-secondary footer"
-                    onclick="location.href='/collection/article/exhibition'">展覽類</button>
+                    onclick="location.href='/collection/article/exhibition/1'">展覽類</button>
                 <button type="button " class="btn btn-secondary footer"
-                    onclick="location.href='/collection/article'">全部</button>
+                    onclick="location.href='/collection/article/1'">全部</button>
             </div>
 
             <div class="row d-flex justify-content-center no-gutters">
@@ -55,25 +55,19 @@
                         <div class="card shadow list " style="cursor:pointer; ">
                             <div class="card-body "
                                 onclick="location.href='/collection/article/one/<%= collData[0][i].artiNum %>'">
-                                <div class="poster">
-                                    <div class="name d-flex justify-content-between">
+                                <div class="poster d-flex justify-content-between">
+                                    <div class="name">
                                         <div style="word-break:break-all">
-                                            <a class="name"> <%= collData[0][i].memID %> </a>
+                                            <a class="name"> <%= collData[0][i].memName %> </a>
                                             <a class="next"></a>
                                             <a class="dateTime"> 於 <%= collData[0][i].artiDateTime %>發表</a>
                                         </div>
-                                        <!-- <div class="dropdown ml-auto">
-                                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-h"></i>     
-                                               </button>
-                                                <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
-                                                  <a class="dropdown-item" href="#">編輯</a>
-                                                  <a class="dropdown-item" href="#">刪除</a>
-                                                </div>
-                                        </div> -->
                                     </div>
-                                    <hr style="margin-top: 0.5em">
+                                    <div class="ml-auto">
+                                        <a class="itemClass"><%= collData[0][i].artiClass %></a>
+                                    </div>
                                 </div>
+                                <hr style="margin-top: 0.5em">
                                 <div class="row seperate">
                                     <div class="col-sm-9 articleContent">
                                         <h3 class="card-title "><%= collData[0][i].artiHead %>
@@ -95,16 +89,9 @@
                                     </div>
 
                                     <!-- imgs -->
-                                    <% if(collData[3] != undefined) { %>
-                                        <% for(var j = 0 ; j<collData[3].length ; j++ ) {%>
-                                            <% if(collData[3][j].artiNum == collData[0][i].artiNum){%>
-                                                <div class="wrapperCard card-img-top col-lg-3"
-                                                    style="background-image: url( '/userImg/<%= collData[3][j].imgName %>'); ">
-                                                </div>
-                                                <% break %>
-                                            <% } %>
-                                        <% } %>
-                                    <% } %>
+                                    <div class="wrapperCard card-img-top col-lg-3"
+                                        style="background-image: url( '<%= collData[0][i].imgName %>'); ">
+                                    </div>
                                 </div>
                             </div>
 
@@ -158,7 +145,7 @@
                                 <% } %>
 
                                 <!-- 留言數量按鈕 -->
-                                <button type="button" class="btn postInfo"><i
+                                <button type="button" class="btn postInfo" onclick="location.href='/collection/article/one/<%= collData[0][i].artiNum %>'"><i
                                         class="fas fa-comment-dots"></i><a><%= collData[0][i].messCount %></a></button>
 
                                 <!-- 收藏按鈕 -->
@@ -179,118 +166,6 @@
                                     document.getElementById("unLogIn" + "<%= collData[0][i].artiNum %>").style.display = "none";
                                 </script>
 
-                                <!-- 收藏 ajax script -->
-                                <script>
-                                    //新增收藏
-                                    function addColle(artiNum) {
-                                        collection(artiNum);
-                                        $.ajax({
-                                            url: '/addCollection',
-                                            type: 'POST',
-                                            dataType: 'JSON',
-                                            data: { "likeType": "article", "artiNum": artiNum },
-                                            success: function (res) {
-                                            },
-                                            error: function (res) {
-                                                console.log("失敗", JSON.stringify(res));
-                                            }
-                                        });
-                                    };
-                                    //刪除收藏
-                                    function delColle(artiNum) {
-                                        cancelCollection(artiNum);
-                                        $.ajax({
-                                            url: '/delCollection',
-                                            type: 'POST',
-                                            dataType: 'JSON',
-                                            data: { "likeType": "article", "artiNum": artiNum },
-                                            success: function (res) {
-                                            },
-                                            error: function (res) {
-                                                console.log("失敗", JSON.stringify(res));
-                                            }
-                                        });
-                                    };
-                                    //點收藏後改變屬性
-                                    function collection(artiNum) {
-                                        document.getElementById("delColle" + artiNum).style.display = "inline";
-                                        document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
-                                        document.getElementById("addColle" + artiNum).style.display = "none";
-                                    }
-                                    //取消收藏後改變屬性
-                                    function cancelCollection(artiNum) {
-                                        document.getElementById("addColle" + artiNum).style.display = "inline";
-                                        document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
-                                        document.getElementById("delColle" + artiNum).style.display = "none";
-                                    }
-
-                                </script>
-                                <!-- 愛心 ajax script -->
-                                <script>
-                                    //新增愛心
-                                    function addLike(artiNum) {
-                                        $.ajax({
-                                            url: '/addLike',
-                                            type: 'POST',
-                                            dataType: 'text',
-                                            data: { "likeType": "article", "artiNum": artiNum },
-                                            success: function (res) {
-                                                likeCount(artiNum);
-                                                like(artiNum);
-                                            },
-                                            error: function (res) {
-                                                console.log("失敗", res);
-
-                                            }
-                                        });
-
-                                    };
-                                    //刪除愛心
-                                    function delLike(artiNum) {
-                                        $.ajax({
-                                            url: '/delLike',
-                                            type: 'POST',
-                                            dataType: 'text',
-                                            data: { "likeType": "article", "artiNum": artiNum },
-                                            success: function (res) {
-                                                likeCount(artiNum);
-                                                cancelLike(artiNum);
-                                            },
-                                            error: function (res) {
-                                                console.log("刪除失敗", JSON.stringify(res));
-                                            }
-                                        });
-
-                                    };
-                                    //點愛心後改變屬性
-                                    function like(artiNum) {
-                                        document.getElementById("delLike" + artiNum).style.display = "inline";
-                                        document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
-                                        document.getElementById("addLike" + artiNum).style.display = "none";
-                                    }
-                                    //取消愛心後改變屬性
-                                    function cancelLike(artiNum) {
-                                        document.getElementById("addLike" + artiNum).style.display = "inline";
-                                        document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
-                                        document.getElementById("delLike" + artiNum).style.display = "none";
-                                    }
-                                    function likeCount(artiNum) {
-                                        $.ajax({
-                                            url: '/likeCount',
-                                            type: 'POST',
-                                            dataType: 'JSON',
-                                            data: { "likeType": "article", "artiNum": artiNum },
-                                            success: function (res) {
-                                                document.getElementById("addLikeCount" + artiNum).innerHTML = JSON.stringify(res);
-                                                document.getElementById("delLikeCount" + artiNum).innerHTML = JSON.stringify(res);
-                                            },
-                                            error: function (res) {
-                                                console.log("失敗", JSON.stringify(res));
-                                            }
-
-                                        });
-                                    }
-                                </script>
                             </div>
                             <!-- info結束 -->
 
@@ -302,6 +177,19 @@
                 </div>
             </div>
         </div>
+        <nav aria-label="Page navigation example" style="margin-bottom: 4em;">
+                <ul class="pagination justify-content-center">
+                  <li class="page-item previous">
+                    <a class="page-link" href="#/" onclick="location.href=`/collection/article/${pagePrevious}`" tabindex="-1" aria-disabled="true"><i class="fas fa-chevron-left"></i></a>
+                  </li>
+                  <% for(var j = 1 ; j <= collData[5][0].count; j++) {%>
+                    <li class="page-item"><a class="page-link" href="/collection/article/<%=j%>"><%=j%></a></li>
+                  <% } %>
+                  <li class="page-item next">
+                    <a class="page-link" href="#/" onclick="location.href=`/collection/article/${pageNext}`"><i class="fas fa-chevron-right"></i></a>
+                  </li>
+                </ul>
+              </nav>
     </section>
     <!-- 文章列表區塊結束 -->
 
@@ -322,8 +210,150 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/navbar.js"></script>
+    <!-- 收藏 ajax script -->
+    <script>
+        var pagePrevious = parseInt('<%= collData[6][0]%>')-1
+        var pageNext = parseInt('<%= collData[6][0]%>')+1
+        if (pagePrevious == 0) {
+             $('.previous').addClass('disabled')
+        } else {
+            $('.previous').remove('disabled')
+        }
+        if ('<%= collData[5][0].count %>' == '<%= collData[6][0]%>') {
+            $('.next').addClass('disabled')
+        } else {
+            $('.next').remove('disabled')
+        }
+        Array.from($('.pagination').find('.page-link')).map((item) => {
+            if (item.innerText == '<%= collData[6][0]%>') {
+                item.parentElement.classList.add('disabled')
+                item.style.fontWeight = 'bolder'
+            }
+        })
+        Array.from($('.page-link').parent('li.disabled')).map((item) => {
+            item.children[0].style.color = "#d9d9d9"
+        })
+        $('button').click(function() {
+            if ($(this).children('.fa-gratipay').length > 0) {
+                $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
+                setTimeout(() => {
+                    $('button').attr('disabled', false)
+                }, 1000)
+            }
+        })
+            //新增收藏
+            function addColle(artiNum) {
+                collection(artiNum);
+                $.ajax({
+                    url: '/addCollection',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "article", "artiNum": artiNum },
+                    success: function (res) {
+                    },
+                    error: function (res) {
+                        console.log("失敗", JSON.stringify(res));
+                    }
+                });
+            };
+            //刪除收藏
+            function delColle(artiNum) {
+                cancelCollection(artiNum);
+                $.ajax({
+                    url: '/delCollection',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "article", "artiNum": artiNum },
+                    success: function (res) {
+                    },
+                    error: function (res) {
+                        console.log("失敗", JSON.stringify(res));
+                    }
+                });
+            };
+            //點收藏後改變屬性
+            function collection(artiNum) {
+                document.getElementById("delColle" + artiNum).style.display = "inline";
+                document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                document.getElementById("addColle" + artiNum).style.display = "none";
+            }
+            //取消收藏後改變屬性
+            function cancelCollection(artiNum) {
+                document.getElementById("addColle" + artiNum).style.display = "inline";
+                document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                document.getElementById("delColle" + artiNum).style.display = "none";
+            }
+
+        </script>
+        <!-- 愛心 ajax script -->
+        <script>
+            //新增愛心
+            function addLike(artiNum) {
+                $.ajax({
+                    url: '/addLike',
+                    type: 'POST',
+                    dataType: 'text',
+                    data: { "likeType": "article", "artiNum": artiNum },
+                    success: function (res) {
+                        likeCount(artiNum);
+                        like(artiNum);
+                    },
+                    error: function (res) {
+                        console.log("失敗", res);
+
+                    }
+                });
+
+            };
+            //刪除愛心
+            function delLike(artiNum) {
+                $.ajax({
+                    url: '/delLike',
+                    type: 'POST',
+                    dataType: 'text',
+                    data: { "likeType": "article", "artiNum": artiNum },
+                    success: function (res) {
+                        likeCount(artiNum);
+                        cancelLike(artiNum);
+                    },
+                    error: function (res) {
+                        console.log("刪除失敗", JSON.stringify(res));
+                    }
+                });
+
+            };
+            //點愛心後改變屬性
+            function like(artiNum) {
+                document.getElementById("delLike" + artiNum).style.display = "inline";
+                document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                document.getElementById("addLike" + artiNum).style.display = "none";
+            }
+            //取消愛心後改變屬性
+            function cancelLike(artiNum) {
+                document.getElementById("addLike" + artiNum).style.display = "inline";
+                document.getElementById("LikeUnLogIn" + artiNum).style.display = "none";
+                document.getElementById("delLike" + artiNum).style.display = "none";
+            }
+            function likeCount(artiNum) {
+                $.ajax({
+                    url: '/likeCount',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: { "likeType": "article", "artiNum": artiNum },
+                    success: function (res) {
+                        document.getElementById("addLikeCount" + artiNum).innerHTML = JSON.stringify(res);
+                        document.getElementById("delLikeCount" + artiNum).innerHTML = JSON.stringify(res);
+                    },
+                    error: function (res) {
+                        console.log("失敗", JSON.stringify(res));
+                    }
+
+                });
+            }
+        </script>
 </body>
 
 </html>

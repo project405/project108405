@@ -44,6 +44,7 @@ var addLikeRouter = require('./routes/member/addLike');
 var delLikeRouter = require('./routes/member/delLike');
 var reportRouter = require('./routes/member/report');
 var replyPostRouter = require('./routes/member/replyPost');
+var bestReplyRouter = require('./routes/member/bestReply')
 
 // ---------------  four Class -------------------
 var myMovieArticleRouter = require('./routes/member/myMovieArticle');
@@ -120,8 +121,9 @@ passport.use(
     new GoogleStrategy({
         clientID: '535503110825-vsqohis8p2itidvaqii3akbmha3kluie.apps.googleusercontent.com', 
         clientSecret: 'vx7elBl3NGlZcnNPFV3QNH7l',
-        callbackURL: "https://project108405.herokuapp.com/auth/google/callback" 
+        callbackURL: "http://localhost:3000/auth/google/callback" 
     },
+    // https://project108405.herokuapp.com/auth/google/callback
     function(accessToken, refreshToken, profile, done) {
         if (profile) {
             return done(null, profile);
@@ -161,7 +163,7 @@ app.use('/article', articleRouter);
 app.use('/editArticle', editArticleRouter);
 app.use('/editReply', editReplyRouter);
 app.use('/articleList', articleListRouter);
-app.use('/articleList/post', postRouter);
+app.use('/post', postRouter);
 app.use('/article/post', articlePostRouter);
 app.use('/article/reply', replyPostRouter);
 app.use('/addCollection', addCollectionRouter);
@@ -189,6 +191,7 @@ app.use('/notify', notifyRouter);
 app.use('/addLike', addLikeRouter);
 app.use('/delLike', delLikeRouter);
 app.use('/report', reportRouter);
+app.use('/bestReply', bestReplyRouter);
 
 // -------------- four Class use----------------
 app.use('/articleManage/movie', myMovieArticleRouter);
@@ -258,9 +261,14 @@ app.get('/auth/google/callback',
     });
 
 app.get('/user/logout', function(req, res){    
-    req.logout();        //將使用者資料從session移除
-    req.session.memID = undefined ;
-    res.redirect('/');   //導向登出頁面
+    if(req.session.passport != undefined){
+        req.logout();
+        req.session.passport = undefined ; 
+    }else {
+        req.session.memID = undefined ; 
+    }
+  
+    res.redirect('/logIn');   //導向登出頁面
 });    
 
 

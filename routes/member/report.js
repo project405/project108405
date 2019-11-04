@@ -8,9 +8,6 @@ router.post('/', function (req, res, next) {
     var reportData =[] ; 
 
     //判斷是使用哪種方式登入
-    // if (req.session.memID == undefined && req.session.passport == undefined) {
-    //     res.render('login');
-    // } else 
     if (req.session.memID != undefined && req.session.passport == undefined) {
         memID = req.session.memID;
     } else if (req.session.memID == undefined && req.session.passport != undefined) {
@@ -20,24 +17,41 @@ router.post('/', function (req, res, next) {
     
     //判斷是哪一個檢舉
     if(req.body.artiNum != undefined){
+        if (req.session.memID == undefined && req.session.passport == undefined) {
+            res.render('login');
+        } 
         reportData["artiNum"] = req.body.artiNum;
     }else if (req.body.artiMessNum != undefined){
+        if (req.session.memID == undefined && req.session.passport == undefined) {
+            res.render('login');
+        }
         reportData["artiMessNum"] = req.body.artiMessNum;
     }else if (req.body.recomMessNum != undefined){
+        if (req.session.memID == undefined && req.session.passport == undefined) {
+            res.render('login');
+        }
         reportData["recomMessNum"] = req.body.recomMessNum;
     }
 
     //檢舉內容
     reportData["reportReason"] = req.body.reportReason;
 
+    if(req.body.reportReason == "" || req.body.reportReason.trim() == ""){
+        if(req.body.artiNum != undefined || req.body.artiMessNum != undefined || req.body.recomMessNum != undefined){
+            res.send("內容不可為空！");
+        }else{
+            res.send('<head><meta charset="utf-8"/> </head> <script> alert("內容不可為空！");  window.history.back();</script>');
+        }
+      
+    }
     member.report(memID, reportData.artiNum, reportData.artiMessNum, reportData.recomMessNum, reportData.reportReason)
         .then(data => {
             if (data == 1) {
                 if(req.body.artiNum != undefined || req.body.artiMessNum != undefined || req.body.recomMessNum != undefined){
-                    res.send("舉報成功");
+                    res.send("申報成功");
                 }else{
                     // res.write('<head><meta charset="utf-8"/></head>');
-                    res.send('<head><meta charset="utf-8"/> </head> <script> alert("舉報成功！");  window.history.back();</script>');
+                    res.send('<head><meta charset="utf-8"/> </head> <script> alert("申報成功!");  window.history.back();</script>');
                 }
             } else {
                 res.render('error');

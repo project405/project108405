@@ -50,7 +50,7 @@ function checkPasswordValidateForm() {
 
 
     if (checkPassword != password) {
-        document.getElementById("checkPasswordAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 確認密碼與密碼不相同';
+        document.getElementById("checkPasswordAlarm").innerHTML = '<i class="fas fa-exclamation-circle alarm"></i> 密碼欄位與確認密碼欄位不相同';
         return check[3] = false;
 
     } else {

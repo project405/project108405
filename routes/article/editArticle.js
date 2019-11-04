@@ -29,7 +29,7 @@ router.get('/:artiNum', async function (req, res, next) {
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].artiCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[6].length; j++) {
-                    data[0][i].artiCont = data[0][i].artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top original'><img src='/userImg/" + data[6][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    data[0][i].artiCont = data[0][i].artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top original'><img src='" + data[6][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 }
             }
         }

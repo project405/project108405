@@ -15,7 +15,6 @@ router.get('/', function(req, res, next) {
   }
 	
 	member.checkAuthority(memID).then(data => {
-    console.log(data)
 		if (data == 'boss') {
       res.render('recommendPost');
 		} else {

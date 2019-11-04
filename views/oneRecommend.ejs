@@ -30,14 +30,13 @@
         <div class="row justify-content-center">
             <div class="col-lg-8 content shadow">
                 <div class="info d-flex">
-                    <div><a class="floorTag">樓主</a></div>
-                    <div>
-                        <a>富心漢👨🏿‍🔧</a>
+                    <div><a class="floorTag">管理員</a></div>
+                    <div><a>文藝青年</a>
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[0][0].recomDateTime %>發佈</a>
                     </div>
                     <% if(items[7] && items[7] == 'boss') {%>
-                    <div class="dropdown ml-auto">
+                    <div class="dropdown ml-auto" style="margin-bottom: -0.5em">
                         <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-h"></i>
@@ -51,7 +50,6 @@
                     <% } %>
                 </div>
                 <hr style="margin-top: 0.5em" />
-
                 <h5><%= items[0][0].recomHead %></h5>
                 <hr />
 
@@ -163,7 +161,7 @@
         </div>
 
         <center>
-            <h1>文章留言</h1>
+            <h4>文章留言</h4>
             <hr class="separate">
         </center>
 
@@ -177,7 +175,7 @@
                     <!-- info -->
                     <div class="info d-flex justify-content-between">
                         <div><a class="floorTag"><%= i+1 %> 樓</a></div>
-                        <div><a class="name"><%= items[1][i].memID %></a>
+                        <div><a class="name"><%= items[1][i].memName %></a>
                             <a class="next"></a>
                             <a class="dateTime">於<%= items[1][i].recomMessDateTime %>留言</a>
                         </div>
@@ -243,11 +241,10 @@
                     <% } %>
                     <% } %>
                     <!-- info結束 -->
-
                     <p class="content"> <%- items[1][i].recomMessCont %> </p>
                     <hr>
                     <% if(items[8][0] != items[1][i].memID) {%>
-                    <button type="button" class="btn report" id="postReport" data-toggle="modal"
+                    <button type="button" class="btn report postReport" id="postReport" data-toggle="modal"
                         data-target="#recomMessReportPost">檢舉</button>
                     <% } else { %>
                     <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
@@ -307,7 +304,7 @@
                 </label>
 
                 <button type="submit" class="btn btn-danger float-right submitReplyButton col-lg-2"
-                    onclick=<%= "submitReply(" + items[0][0].recomNum + ")" %>>提交回覆</button>
+                    onclick=<%= "submitReply(" + items[0][0].recomNum + ")" %>>提交</button>
             </div>
         </div>
         <!-- replying end -->
@@ -317,11 +314,20 @@
         <i class="fa fa-angle-up"></i>
     </a>
 
-    <div class="spinner-border" role="status"
-        style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
-        <span class="sr-only">Loading...</span>
-    </div>
-
+    <!-- <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+    </div> -->
+    <div class='coverContainer'>
+            <div class='loader'>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--dot'></div>
+                <div class='loader--text'></div>
+            </div>
+        </div>
 
 
     <!-- Optional JavaScript -->
@@ -339,8 +345,15 @@
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/post.js "></script>
     <script src="/javascripts/navbar.js"></script>
+    <script src="/javascripts/imageCompression.js"></script>
     <script>
         var member = '<%=items[8][0]%>'
+        $('.postReport').click(() => {
+            if (!member) {
+                alert('請進行登入再檢舉')
+                location.replace("/logIn");
+            }
+        })
         $('#replyInput').click(() => {
             if (!member) {
                 alert('請進行登入再留言！')
@@ -349,29 +362,32 @@
             }
         })
         Array.from($('.liContainer').find('li > a')).map((item) => {
-            item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0, 15)}...` : item.innerText
+            item.innerText = item.innerText.length > 20 ? `${item.innerText.substring(0, 20)}...` : item.innerText
         })
-        var imgs = [];
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
-        $('#file-selector').change(function (event) {
-            let timeStamp = new Date().getTime()
+        $('#file-selector').change(function(event) {
             var file = $("#file-selector")[0];  //取得檔案
             //如果有檔案就要加入formData
             if (file.files.length) {
                 Object.keys(file.files).map((img, index) => {
-                    file.files[img].timeStamp = `${timeStamp}${index}`
-                    imgs.push(file.files[img])
                     // 解析檔案
                     var item = file.files[img]
                     var reader = new FileReader();
-                    reader.onload = (function (item) {
-                        return function (event) {
-                            var src = event.target.result // 圖片的編碼 , 格式為base64
-                            var title = escape(file.name);
-                            var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
-                            $('#replyInput').append('<div id="replyInput">' + img + '</div>');
-                        };
+                    reader.onload = (function(item) {
+                        return async function(event) {
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function(size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function(strDataURI) {
+                                    var title = escape(file.name);
+                                    var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
+                                    $('#replyInput').append(img);
+                                }, (e) => {
+                                    console.log(e)
+                                    })
+                                })
+                            };
                     })(file);
                     reader.readAsDataURL(item);
                 })
@@ -379,21 +395,19 @@
             }
         });
         function submitReply(artiNum) {
+            var templateCont = document.getElementById('replyInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+            if (templateCont == '') {
+                alert('請輸入回覆內容！')
+                return;
+            }
             $('.submitReplyButton').addClass('disabled')
             $('.submitReplyButton').attr('disabled', true)
             $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
 
-            var imgKey = []
-            if ($("#replyInput").find("#replyInput > img")) {
-                Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
-                    imgKey.push(img.getAttribute('key'))
-                })
-                imgs.map((img) => {
-                    if (imgKey.indexOf(img.timeStamp) >= 0) {
-                        formData.append('userImg', img);
-                    }
-                })
-                Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
+            if ($("#replyInput").find("img")) {
+                Array.from($("#replyInput").find("img")).map((img) => {
+                    formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
             }
@@ -416,10 +430,12 @@
                     var positiveWords = analyzeRes.analyze[1]
                     var negativeWords = analyzeRes.analyze[2]
                     var swearWords = analyzeRes.analyze[3]
+                    var score2 = analyzeRes.analyze[4]
                     formData.append('analyzeScore', analyzeScore);
                     formData.append('positiveWords', positiveWords);
                     formData.append('negativeWords', negativeWords);
                     formData.append('swearWords', swearWords);
+                    formData.append('score2', score2);
                     $.ajax({
                         url: '/recommend/reply',
                         type: 'POST',
@@ -497,6 +513,14 @@
 
     <!-- 推薦文章愛心 ajax script -->
     <script>
+        $('button').click(function() {
+            if ($(this).children('.fa-gratipay').length > 0) {
+                $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
+                setTimeout(() => {
+                    $('button').attr('disabled', false)
+                }, 1000)
+            }
+        })
         //新增愛心
         function addLike(recomNum) {
             $.ajax({
@@ -626,18 +650,40 @@
                 }
             });
         }
+            // delRecommend
+        function delRecommend(recomNum) {
+            $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
+
+            $.ajax({
+            url: '/addLike',
+            type: 'POST',
+            data: { "recomNum": recomNum, "delRecommend": true },
+            success: function (res) {
+                alert('刪除成功！')
+                location.replace("/recommendList/1");
+            },
+            error: function (res) {
+                alert('刪除失敗！')
+            }
+        });
+        }
         // delReply
         function deleteReply(artiMessNum, memID) {
             $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
+
             $.ajax({
                 url: '/addLike',
                 type: 'POST',
-                data: { "RecomMessNum": artiMessNum, "memID": memID, "deleteRecommendReply": true },
+                data: { "recomMessNum": artiMessNum, "memID": memID, "deleteRecommendReply": true },
                 success: function (res) {
+                    alert('刪除成功！')
                     location.reload();
                 },
                 error: function (res) {
                     console.log('刪除失敗');
+                    alert('刪除失敗！')
                 }
             });
         }
@@ -645,14 +691,17 @@
     <script>
         //推薦留言檢舉ajax
         function ftn_messReport(a) {
+            $('#messReport').attr('disabled',true)
             $.ajax({
                 url: "/report",
                 type: 'POST',
                 dataType: 'TEXT',
                 data: { "recomMessNum": a, "reportReason": $("#messReportReason").val() },
                 success: function (res) {
-                    alert(res);
-                    location.reload();
+                    alert('檢舉成功！')
+                    $('#messReport').attr('disabled',false)
+                    $("#messReportReason").val("");
+                    $("#recomMessReportPost").modal('hide')
                 },
                 error: function (res) {
                     console.log("失敗", res);

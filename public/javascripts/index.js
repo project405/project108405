@@ -33,6 +33,7 @@ $(document).ready(function() {
 
         }
          $('#positiveSection').css('display', 'block')
+         $('.defaultAlarm').css('display', 'none')
        }
     )
     $('#negativeButton').click(() => {
@@ -45,27 +46,28 @@ $(document).ready(function() {
 
         }
          $('#negativeSection').css('display', 'block')
+         $('.defaultAlarm').css('display', 'none')
        }
     )
     $('#sentimentSection').hover(() => {
         $('#sentimentSection').css('width','75px')
         $('#sentimentSection').css('height','75px')
-        $('#sentimentSection > img').css('transform','rotate(180deg)')
-        $('#sentimentSection > img').css('-ms-transform','rotate(180deg)')
-        $('#sentimentSection > img').css('-moz-transform','rotate(180deg)')
-        $('#sentimentSection > img').css('-webkit-transform','rotate(180deg)')
-        $('#sentimentSection > img').css('-o-transform','rotate(180deg)')
+        // $('#sentimentSection > img').css('transform','rotate(180deg)')
+        // $('#sentimentSection > img').css('-ms-transform','rotate(180deg)')
+        // $('#sentimentSection > img').css('-moz-transform','rotate(180deg)')
+        // $('#sentimentSection > img').css('-webkit-transform','rotate(180deg)')
+        // $('#sentimentSection > img').css('-o-transform','rotate(180deg)')
         $('#sentimentSectionHover').css('visibility','visible')
         $('#sentimentSectionHover').css('transition','visibility 0.8s, opacity 0.5s linear')
     })
     $('#sentimentSection').mouseleave(() => {
         $('#sentimentSection').css('width','50px')
         $('#sentimentSection').css('height','50px')
-        $('#sentimentSection > img').css('transform','rotate(360deg)')
-        $('#sentimentSection > img').css('-ms-transform','rotate(360deg)')
-        $('#sentimentSection > img').css('-moz-transform','rotate(360deg)')
-        $('#sentimentSection > img').css('-webkit-transform','rotate(360deg)')
-        $('#sentimentSection > img').css('-o-transform','rotate(360deg)')
+        // $('#sentimentSection > img').css('transform','rotate(360deg)')
+        // $('#sentimentSection > img').css('-ms-transform','rotate(360deg)')
+        // $('#sentimentSection > img').css('-moz-transform','rotate(360deg)')
+        // $('#sentimentSection > img').css('-webkit-transform','rotate(360deg)')
+        // $('#sentimentSection > img').css('-o-transform','rotate(360deg)')
         $('#sentimentSectionHover').css('visibility','hidden')
         $('#sentimentSectionHover').css('transition','visibility 0.2s, opacity 0.5s linear')
     })

@@ -48,6 +48,7 @@ CREATE TABLE "public"."article" (
 	"positiveWords" float4,
 	"negativeWords" float4,
 	"swearWords" int4,
+	"score2" float4,
 	FOREIGN KEY("memID") REFERENCES member("memID")ON DELETE RESTRICT  ON UPDATE RESTRICT 
 );
 
@@ -86,6 +87,7 @@ CREATE TABLE "public"."articleMessage" (
 	"positiveWords" float4,
 	"negativeWords" float4,
 	"swearWords" int4,
+	"score2" float4,
 	FOREIGN KEY("memID") REFERENCES "member"("memID")ON DELETE RESTRICT  ON UPDATE RESTRICT ,
 	FOREIGN KEY("artiNum") REFERENCES "article"("artiNum")ON DELETE CASCADE  ON UPDATE RESTRICT 
 );
@@ -118,10 +120,10 @@ CREATE TABLE "public"."recommend" (
 	"recomHead" varchar(100) COLLATE "pg_catalog"."default" ,
 	"recomCont" text , 
 	"recomClass" varchar(10),
-	"subNum" int4,
 	"analyzeScore" float4,
 	"positiveWords" int4,
-	"negativeWords" int4
+	"negativeWords" int4,
+	"score2" float4
 );
 	ALTER TABLE "public"."recommend" ADD CONSTRAINT "recommend_pkey" PRIMARY KEY ("recomNum");
 
@@ -156,6 +158,7 @@ CREATE TABLE "public"."recommendMessage" (
 	"positiveWords" float4,
 	"negativeWords" float4,
 	"swearWords" int4,
+	"score2" float4,
 	FOREIGN KEY("memID") REFERENCES "member"("memID")ON DELETE RESTRICT  ON UPDATE RESTRICT ,
 	FOREIGN KEY("recomNum") REFERENCES "recommend"("recomNum")ON DELETE CASCADE  ON UPDATE RESTRICT 
 	

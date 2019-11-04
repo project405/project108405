@@ -9,7 +9,14 @@ body {
     text-align: justify;
     text-justify: inter-ideograph;
 }
-
+p {
+    word-break: break-all !important;
+    overflow: hidden !important;
+}
+div.articleContent {
+    word-break: break-all !important;
+    overflow: hidden !important;
+}
 .banner {
     margin-bottom: 4em;
     /* opacity: 0.6; */
@@ -103,18 +110,24 @@ div.article {
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-category {
     font-family: 'Noto Serif TC', "Arial", "Segoe UI", "Roboto", "Helvetica Neue";
-    font-size: 1.5em;
+    font-size: 1.1em;
     font-weight: 600;
 }
-
+.project-category p {
+    margin-top: 0.1em;
+    margin-bottom: 0.3em;
+}
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name p.title {
     font-size: 1.25em;
     text-align: center;
     font-weight: bold;
+    font-size: 1em;
+    margin-bottom: 0.25rem;
+    padding: 0 1em;
 }
 
 #portfolio p.content {
-    font-size: 1em !important;
+    font-size: 0.75em !important;
     padding: 0em 1.25em 0.5em 1.25em;
     text-align: justify;
 }

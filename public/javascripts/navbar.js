@@ -18,26 +18,20 @@ $(document).ready(() => {
                     <div class="collapse navbar-collapse" id="navbarNav">\
                         <ul class="navbar-nav ml-auto">\
                             <div class="searchSection">\
-                                <input type="text" class="navSearch" id="input_search" />\
+                                <input type="text" class="navSearch" id="input_search" placeholder="搜尋"/>\
                                 <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
                             <li class="nav-item">\
-                                <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
+                                <a class="nav-link" href="/recommendList/1">\
+                                官方推薦</a>\
                             </li>\
                             <li class="nav-item">\
-                                <a class="nav-link" href="/recommendlist">\
-                                推薦</a>\
-                            </li>\
-                            <li class="nav-item">\
-                                <a class="nav-link" href="/articleList">\
+                                <a class="nav-link" href="/articleList/1">\
                                     討論區</a>\
                             </li>\
                             <li class="nav-item">\
-                            <a class="nav-link" href="/articleList/post">\
+                            <a class="nav-link" href="/post">\
                             <i class="fas fa-pen"></i>&nbsp;發文</a>\
-                            </li>\
-                            <li class="nav-item">\
-                                <a class="nav-link" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/logIn">登入</a>\
@@ -73,13 +67,13 @@ $(document).ready(() => {
                 <div class="modal-dialog modal-dialog-centered" role="document">\
                     <div class="modal-content">\
                         <div class="modal-header">\
-                            <h5 class="modal-title" id="exampleModalCenterTitle">關於我們</h5>\
+                            <h5 class="modal-title" id="exampleModalCenterTitle">小幫手</h5>\
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
                                 <span aria-hidden="true">&times;</span>\
                               </button>\
                         </div>\
-                        <div class="modal-body" style="padding:1em;">\
-                            我們每週五會推薦給大家四種不一樣的藝文創作，分別為電影、音樂、展覽、書籍類型，希望大家可以好好享受藝文作品所帶來的感動。 </div>\
+                        <div class="modal-body" style="padding:0em;">\
+                        <img src="imgs/icon/aboutUS.png" alt="" style="width: 100%;"></div>\
                     </div>\
                 </div>\
             </div>\ '
@@ -97,30 +91,30 @@ $(document).ready(() => {
                     <div class="collapse navbar-collapse" id="navbarNav">\
                         <ul class="navbar-nav ml-auto">\
                             <div class="searchSection">\
-                                <input type="text" class="navSearch" id="input_search" />\
+                                <input type="text" class="navSearch" id="input_search" placeholder="搜尋"/>\
                                 <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
+                            <li class="nav-item dropdown">\
+                            <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+                                管理者選項\
+                            </a>\
+                            <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
+                                <a class="dropdown-item" href="#/" onclick="reply()">Line推播</a>\
+                                <a class="dropdown-item" href="/recommend/post/page">新增推薦</a>\
+                                <a class="dropdown-item" href="#/" onclick="bestReply()">選出最佳留言</a>\
+                            </div>\
+                        </li>\
+                        <li class="nav-item">\
                             <li class="nav-item">\
-                                <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
+                                <a class="nav-link" href="/recommendList/1">\
+                                官方推薦</a>\
                             </li>\
                             <li class="nav-item">\
-                            <a class="nav-link" href="#/" onclick="reply()">\
-                            Line推播</a>\
-                          </li>\
-                            <li class="nav-item">\
-                                <a class="nav-link" href="/recommend/post/page">\
-                                新增推薦</a>\
-                            </li>\
-                            <li class="nav-item">\
-                                <a class="nav-link" href="/recommendlist">\
-                                推薦</a>\
-                            </li>\
-                            <li class="nav-item">\
-                                <a class="nav-link" href="/articleList">\
+                                <a class="nav-link" href="/articleList/1">\
                                     討論區</a>\
                             </li>\
                             <li class="nav-item">\
-                            <a class="nav-link" href="/articleList/post">\
+                            <a class="nav-link" href="/post">\
                             <i class="fas fa-pen"></i>&nbsp;發文</a>\
                             </li>\
                             <li class="nav-item dropdown">\
@@ -129,10 +123,11 @@ $(document).ready(() => {
                                 </a>\
                                 <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
                                     <a class="dropdown-item" href="/notify"><i class="fas fa-bell" style="color:white;"></i></a>\
-                                    <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>\
-                                    <a class="dropdown-item" href="/collection/article">文章收藏</a>\
-                                    <a class="dropdown-item" href="/member/articleManage">文章管理</a>\
+                                    <a class="dropdown-item" href="/collection/recommend/1">推薦收藏</a>\
+                                    <a class="dropdown-item" href="/collection/article/1">文章收藏</a>\
+                                    <a class="dropdown-item" href="/member/articleManage/1">文章管理</a>\
                                     <a class="dropdown-item" href="/member/memberManage">會員資料修改</a>\
+                                    <a class="dropdown-item" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
                                     <a class="dropdown-item" href="/user/logout">登出</a>\
                                 </div>\
                             </li>\
@@ -160,30 +155,61 @@ $(document).ready(() => {
                         </form>\
                     </div>\
                 </div>\
-            </div>\
-            <div class="modal fade" id="aboutUsDiv" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">\
-                <div class="modal-dialog modal-dialog-centered" role="document">\
-                    <div class="modal-content">\
-                        <div class="modal-header">\
-                            <h5 class="modal-title" id="exampleModalCenterTitle">關於我們</h5>\
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
-                                <span aria-hidden="true">&times;</span>\
-                              </button>\
-                        </div>\
-                        <div class="modal-body" style="padding:1em;">\
-                            我們每週五會推薦給大家四種不一樣的藝文創作，分別為電影、音樂、展覽、書籍類型，希望大家可以好好享受藝文作品所帶來的感動。 </div>\
-                    </div>\
-                </div>\
             </div>\ '
             reply = () => {
                 $.post('https://project-108405-test.herokuapp.com/webhook', () => {
                 }) 
                 .done (() => {
-                    alert('推播成功！');
+                    swal('推播成功！');
                 })
                 .fail(() => {
-                    alert('推播失敗！');
+                    swal('推播失敗！');
                 })
+            };
+            bestReply = () => {
+                $.post('/bestReply', () => {
+                     
+                }).done((res) =>{
+                    var str = "上月最佳留言 \n";
+                    for (var i = 0 ; i < res[1].length ; i++){
+                        str += "留言編號:" + res[1][i].recomMessNum + "  使用者帳號為:" + res[1][i].memID + '\n' ; 
+                    }
+
+                    if(confirm(str)){
+                        var recomHead = [] ; 
+                        var memID = [] ; 
+                        var result = [] ; 
+                        for(var i = 0 ; i < res[0].length ; i++){
+                            console.log(res[0][i].recomHead);
+                            recomHead.push(res[0][i].recomHead);
+                        }
+
+                        for(var i = 0 ; i < res[1].length ; i++){
+                            console.log(res[1][i].memID);
+                            memID.push(res[1][i].memID);
+                        }
+                        result[0] = recomHead ;
+                        result[1] = memID ; 
+
+                        $.ajax({
+                            url: "/notify",
+                            type: 'POST',
+                            dataType: 'TEXT',
+                            data: {"recom" : JSON.stringify(recomHead), "member" : JSON.stringify(memID)},
+                            success: function (res) {
+                                swal(res); 
+                            },
+                            error: function (res) {
+                                console.log("失敗", res);
+                            }
+                         }); 
+                        
+                    }else{
+                        alert("取消寄出");
+                    };
+                })
+
+
             };
                 //如果有登入可是沒推薦權限
             } else if (data[0] && !data[1]) {
@@ -199,26 +225,20 @@ $(document).ready(() => {
                 <div class="collapse navbar-collapse" id="navbarNav">\
                     <ul class="navbar-nav ml-auto">\
                         <div class="searchSection">\
-                            <input type="text" class="navSearch" id="input_search" />\
+                            <input type="text" class="navSearch" id="input_search" placeholder="搜尋"/>\
                             <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                         </div>\
                         <li class="nav-item">\
-                            <a class="nav-link " href="/">首頁<span class="sr-only">(current)</span></a>\
+                            <a class="nav-link" href="/recommendList/1">\
+                            官方推薦</a>\
                         </li>\
                         <li class="nav-item">\
-                            <a class="nav-link" href="/recommendlist">\
-                            推薦</a>\
-                        </li>\
-                        <li class="nav-item">\
-                            <a class="nav-link" href="/articleList">\
+                            <a class="nav-link" href="/articleList/1">\
                                 討論區</a>\
                         </li>\
                         <li class="nav-item">\
-                        <a class="nav-link" href="/articleList/post">\
+                        <a class="nav-link" href="/post">\
                         <i class="fas fa-pen"></i>&nbsp;發文</a>\
-                        </li>\
-                        <li class="nav-item">\
-                            <a class="nav-link" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
                         </li>\
                         <li class="nav-item dropdown">\
                             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
@@ -226,10 +246,11 @@ $(document).ready(() => {
                             </a>\
                             <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
                                 <a class="nav-link" href="/notify"><i class="fas fa-bell" style="color:white;"></i></a>\
-                                <a class="dropdown-item" href="/collection/recommend">推薦收藏</a>\
-                                <a class="dropdown-item" href="/collection/article">文章收藏</a>\
-                                <a class="dropdown-item" href="/member/articleManage">文章管理</a>\
+                                <a class="dropdown-item" href="/collection/recommend/1">推薦收藏</a>\
+                                <a class="dropdown-item" href="/collection/article/1">文章收藏</a>\
+                                <a class="dropdown-item" href="/member/articleManage/1">文章管理</a>\
                                 <a class="dropdown-item" href="/member/memberManage">會員資料修改</a>\
+                                <a class="dropdown-item" id="navReport" style="cursor:pointer;" data-toggle="modal" data-target="#report">申報</a>\
                                 <a class="dropdown-item" href="/user/logout">登出</a>\
                             </div>\
                         </li>\
@@ -264,13 +285,13 @@ $(document).ready(() => {
             <div class="modal-dialog modal-dialog-centered" role="document">\
                 <div class="modal-content">\
                     <div class="modal-header">\
-                        <h5 class="modal-title" id="exampleModalCenterTitle">關於我們</h5>\
+                        <h5 class="modal-title" id="exampleModalCenterTitle">小幫手</h5>\
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">\
                             <span aria-hidden="true">&times;</span>\
                           </button>\
                     </div>\
-                    <div class="modal-body" style="padding:1em;">\
-                        我們每週五會推薦給大家四種不一樣的藝文創作，分別為電影、音樂、展覽、書籍類型，希望大家可以好好享受藝文作品所帶來的感動。 </div>\
+                    <div class="modal-body" style="padding:0em;">\
+                        <img src="imgs/icon/aboutUS.png" alt="" style="width: 100%;"> </div>\
                 </div>\
             </div>\
         </div>\ '

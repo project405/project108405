@@ -21,7 +21,6 @@ $(document).ready(function () {
     c = currentScrollTop;
     });
 
-    
 
     $("#tagInput").focus(function () {
         $("div.tag").css("box-shadow", "0 5px 15px rgba(0, 0, 0, 0.3)");
@@ -31,6 +30,10 @@ $(document).ready(function () {
     $("#tagInput").blur(function () {
         $("div.tag").css("box-shadow", "none");
     });
+    
+    Array.from($('.fourRecommend')).map((item) => {
+        item.innerText = item.innerText.length > 150 ? `${item.innerText.substr(0,150)}...` : item.innerText
+    })
 
     $(".wrapText").each(function () {
 
@@ -41,9 +44,18 @@ $(document).ready(function () {
             str = str.replace("\\:imgLocation",'')
         }
         //截取内容75字
-        var subStr = str.substring(0, 75);
+        var subStr = str.substring(0, 40);
         //如果長度大於75就添加省略號否則就填空
-        var data = subStr + (str.length > 75 ? '...' : '');
+        var data = subStr + (str.length > 40 ? '...' : '');
+        $(this).html(data);
+    });
+    $(".limitLine").each(function () {
+        //取得內容
+        var str = $(this).html();
+        //截取内容75字
+        var subStr = str.substring(0, 150);
+        //如果長度大於75就添加省略號否則就填空
+        var data = subStr + (str.length > 150 ? '...' : '');
         $(this).html(data);
     });
     $(".wrapBigHotSectionText").each(function () {

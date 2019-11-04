@@ -56,15 +56,15 @@
             <% for(var j = 0 ; j<items[4].length ; j++ ) { %>
                 <% if(items[0][i].recomNum == items[4][j].recomNum){ %>
                     <div class="wrapper col-12  col-lg-4" 
-                        style="background-image: url('imgs/recommend/<%= items[4][j].imgName%>');"
-                        onclick="location.href='/recommendList'" data-aos="fade-right">
+                        style="background-image: url('<%= items[4][j].imgName%>');"
+                        onclick="location.href='/oneRecommend/<%= items[0][i].recomNum %>'" data-aos="fade-right">
                     <% isImg = true %>
                     <% break ; %>
                 <% } %>
             <% } %>
              <!-- 如果沒抓到半張圖片 -->
             <% if(isImg == false) { %>
-                <div class="wrapper col-12  col-lg-4" onclick="location.href='/recommendList'" data-aos="fade-right" > 
+                <div class="wrapper col-12  col-lg-4" onclick="location.href='/oneRecommend/<%= items[0][i].recomNum %>'" data-aos="fade-right" > 
             <% } %>
             
                 <a class="portfolio-box" href="/oneRecommend/<%= items[0][i].recomNum %>">
@@ -75,7 +75,7 @@
                         <div class="project-name">
                             <p class="title"><%= items[0][i].recomHead %></p>
                             </p>
-                            <p class="content wrapText"><%- items[0][i].recomCont %>
+                            <p class="content fourRecommend"><%- items[0][i].recomCont %>
                             </p>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                             </div>
 
                             <p class="poster">
-                                <%= items[1][0].memID %> 於 <%= items[1][0].artiDateTime %>發佈
+                                <%= items[1][0].memName %> 於 <%= items[1][0].artiDateTime %>發佈
                             </p>
                             
                             <!-- tag -->
@@ -132,8 +132,9 @@
                             <% for(var j = 0 ; j < items[3].length ; j++) { %>
                                 <% if (items[1][0].artiNum == items[3][j].artiNum){ %>
                                     <div class="wrapperCardbig card-img-bottom"
-                                        style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
+                                        style="background-image: url( '<%= items[3][j].imgName %>'); ">
                                     </div>
+                                    <% break ;%>
                                 <% } %>
                             <% } %>
                         <% } %>
@@ -152,7 +153,7 @@
                                 </p>
                             </div>
                             <p class="poster">
-                                <%= items[1][1].memID %> 於 <%= items[1][1].artiDateTime %> 發佈
+                                <%= items[1][1].memName %> 於 <%= items[1][1].artiDateTime %> 發佈
                             </p>
 
                             <!-- tag -->
@@ -172,8 +173,9 @@
                             <% for(var j = 0 ; j < items[3].length ; j++) { %>
                                 <% if (items[1][1].artiNum == items[3][j].artiNum){ %>
                                     <div class="wrapperCardSmall card-img-bottom"
-                                        style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
+                                        style="background-image: url( '<%= items[3][j].imgName %>'); ">
                                     </div>
+                                    <% break ;%>
                                 <% } %>
                             <% } %>
                         <% } %>
@@ -193,9 +195,9 @@
                                 </p>
                             </div>
 
-                            <a class="poster">
-                                <%= items[1][2].memID %> 於 <%= items[1][2].artiDateTime %> 發佈
-                            </a>
+                            <p class="poster">
+                                <%= items[1][2].memName %> 於 <%= items[1][2].artiDateTime %> 發佈
+                            </p>
 
                             <!-- tag -->
                             <div class="tagDiv">
@@ -214,7 +216,7 @@
                             <% for(var j = 0 ; j < items[3].length ; j++) { %>
                                 <% if (items[1][2].artiNum == items[3][j].artiNum){ %>
                                     <div class="wrapperCardSmall card-img-bottom"
-                                        style="background-image: url( '/userImg/<%= items[3][j].imgName %>'); ">
+                                        style="background-image: url( '<%= items[3][j].imgName %>'); ">
                                     </div>
                                     <% break %>
                                 <% } %>
@@ -232,7 +234,7 @@
             </div>
 
             <div class="col-12 goArticleList">
-                <button type="button" class="btn goArticle" onclick="location.href='/articleList'">
+                <button type="button" class="btn goArticle" onclick="location.href='/articleList/1'">
                     <h5>前往討論區看更多 <i class="fas fa-arrow-alt-circle-right"></i></h5>
                 </button>
 
@@ -247,19 +249,19 @@
     <div class="container-fluid footer d-flex justify-content-center row">
         <div class="col-lg-2"></div>
         <div class="col-lg-4 aboutUs">
-            <h6>關於我們：</h6>
+            <h5>關於我們：</h5>
             <p>我們身處在一個資料越來越多、意義越來越少的世代，源源不絕的資訊不僅讓人失去學習的熱忱，也錯過了許多生命中原有的樂趣。文藝富心彙整藝文相關資訊與提供討論的空間，讓使用者能在幾分鐘之內得到完善的資訊，也提供一個安靜的角落給使用者喘息休憩。
             </p>
-            <h6>聯絡我們：</h6>
+            <h5>聯絡我們：</h5>
             <p>LiteraryArts@gmail.com</p>
 
         </div>
 
         <div class="col-lg-4 aboutUs">
-            <h6>常見問題：</h6>
+            <h5>常見問題：</h5>
             <p>獎勵機制：在推薦底下的留言，我們會透過點擊次數以及愛心次數來篩選出最佳留言，將會寄送精美小獎品給最佳留言者。</p>
             <p>申報機制：只要對於我們的系統有任何建議，都可以透過申報通知系統管理員，讓文藝富心團隊能夠改進，提供給使用者更好的環境</p>
-            <h6>文藝富心官方Line：<a href="https://line.me/R/ti/p/%40240qtneo"><img src="imgs/icon/lineIcon.png" alt="" style="height: 50px;"></a></h6>
+            <h5>文藝富心官方Line：<a href="https://line.me/R/ti/p/%40240qtneo"><img src="imgs/icon/lineIcon.png" alt="" style="height: 50px;"></a></h5>
         
         </div>
         <div class="col-lg-2">
@@ -272,10 +274,10 @@
         <i class="fa fa-angle-up"></i>
     </a>
 
-    <a id="sentimentSectionHover" style="visibility: hidden;">心情專區</a>
+    <a id="sentimentSectionHover" style="visibility: hidden;">情緒專區</a>
     <a href="#" id="sentimentSection" data-toggle="modal" data-target="#sentimentSectionContainer">
         <!-- <i class="fas fa-kiss "></i> -->
-        <img style="width:75%" src="../imgs/icon/bulb.png" alt="">
+        <img style="width:50%" src="../imgs/icon/bulb.png" alt="">
     </a>
 
     <!-- Modal -->
@@ -283,7 +285,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="exampleModalScrollableTitle">心情專區</h4>
+              <h4 class="modal-title" id="exampleModalScrollableTitle">情緒專區</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -303,18 +305,26 @@
                 </div>
                <!-- 正向文章 -->
                <div class="sentimentContent">
+                  <div class="defaultAlarm" style="text-align: center;"> 
+                    <br>
+                    <h4>點選上方兩類詞彙，你會有不一樣的發現哦！ʕ •ᴥ•ʔ</h4>
+                  </div>
                   <div id="positiveSection" style="display: none; word-wrap:break-word; overflow: hidden;">
-                        <h5> <%- items[6][0].artiHead %></h5>
-                        <%- items[6][0].artiCont %> 
-                        <hr>
-                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[6][0].artiNum %>'">進入文章查看更多</button>
+                        <% if(items[6].length > 0 ) { %>
+                            <h5> <%- items[6][0].artiHead %></h5>
+                            <%- items[6][0].artiCont %> 
+                            <hr>
+                            <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[6][0].artiNum %>'">進入文章查看更多</button>
+                        <% } %>
                     </div>
                     <!-- 負向文章 -->
                     <div id="negativeSection" style="display: none">
-                        <h5> <%- items[7][0].artiHead %></h5>
-                        <%- items[7][0].artiCont %>
-                        <hr>
-                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[7][0].artiNum %>'">進入文章查看更多</button>
+                        <% if(items[7].length > 0 ) { %>
+                            <h5> <%- items[7][0].artiHead %></h5>
+                            <%- items[7][0].artiCont %>
+                            <hr>
+                            <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[7][0].artiNum %>'">進入文章查看更多</button>
+                        <% } %>
                   </div>
                </div>
             </div>
@@ -376,6 +386,8 @@
         crossorigin="anonymous"></script>
     <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
     <script src="/javascripts/aos.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/index.js"></script>
     <script src="/javascripts/navbar.js"></script>

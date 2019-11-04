@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var crypto = require('crypto');
+const secret = "project108405"
 
 const member = require('../utility/member');
 const signUp = require('../utility/signUp');
@@ -31,6 +33,7 @@ router.post('/', function (req, res, next) {
     var checkMail;
     var originalMail;//目前使用者原本的Mail
     var memID = req.session.memID;
+
     var memberData = {
         "memID": memID,
         "memPass": req.body.memPass,
@@ -40,6 +43,7 @@ router.post('/', function (req, res, next) {
         "memAddr": req.body.memAddr,
         "memGender": req.body.memGender
     };
+
     signUp.checkMail(memberData.memMail).then(data => {
         checkMail = data[0];
     })
@@ -51,13 +55,18 @@ router.post('/', function (req, res, next) {
         if (memberData.memPass == "" || memberData.memCheckPass == "" || memberData.memMail == "" || memberData.memBirth == "" || memberData.memGender == "") {
             res.end('<script> alert("輸入的資料不可為空"); history.back();</script>');
         } else if (memberData.memPass != memberData.memCheckPass) {
-            res.end('<script> alert("輸入的密碼與確認密碼不正確，請重新輸入"); history.back();</script>');
+            res.end('<script> alert("輸入的密碼與確認密不正確，請重新輸入"); history.back();</script>');
         } else if (memberData.memMail.search(emailRule) == -1) {
             res.end('<script> alert("非法的email，請重新輸入。"); history.back();</script>');
         } else if (checkMail && originalMail != memberData.memMail) {
             res.end('<script> alert("此Email已經被註冊過囉！請重新輸入。"); history.back();</script>');
         } else {
-            member.modifyMember(memberData.memPass, memberData.memBirth, memberData.memMail, memberData.memGender, memberData.memAddr, memberData.memID).
+            //密碼加密
+            var hmac = crypto.createHmac("sha256",secret);
+            var pwd = hmac.update(memberData.memPass);
+            var cryptoPWD = pwd.digest("hex");
+
+            member.modifyMember(cryptoPWD, memberData.memBirth, memberData.memMail, memberData.memGender, memberData.memAddr, memberData.memID).
                 then(data => {
                     if (data == 1) {
                         res.end('<script> alert("修改成功！");location.replace("/");</script>');

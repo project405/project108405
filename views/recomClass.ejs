@@ -36,14 +36,14 @@
 
     <div class="d-flex justify-content-center" style="margin-bottom:1.5em;">
         <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/movie'">電影類</button>
+            onclick="location.href='/recommendList/movie/1'">電影類</button>
         <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/music'">音樂類</button>
+            onclick="location.href='/recommendList/music/1'">音樂類</button>
         <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/book'">書籍類</button>
+            onclick="location.href='/recommendList/book/1'">書籍類</button>
         <button type="button" class="btn btn-secondary footer"
-            onclick="location.href='/recommendList/exhibition'">展覽類</button>
-        <button type="button" class="btn btn-secondary footer" onclick="location.href='/recommendList'">全部</button>
+            onclick="location.href='/recommendList/exhibition/1'">展覽類</button>
+        <button type="button" class="btn btn-secondary footer" onclick="location.href='/recommendList/1'">全部</button>
     </div>
 
     <!-- Portfolio Section -->
@@ -53,45 +53,74 @@
             <!-- 推薦開始 -->
             <% for(var i = 0 ; i<recom[0].length ; i++){ %>
 
-            <% isImg = false %>
-            <!-- 如果有抓到圖片 -->
-            <% if(recom[3] != undefined) { %>
-                <% for(var j = 0 ; j<recom[3].length ; j++ ) { %>
-                    <% if(recom[0][i].recomNum == recom[3][j].recomNum){ %>
-                        <div class="wrapper col-12  col-lg-2" 
-                        style="background-image: url('/imgs/recommend/<%= recom[3][j].imgName %>');">
-                        <% isImg = true %>
-                        <% break ;%>
-                    <% } %>
-                <% } %>
+        <!-- 如果有抓到圖片 -->
+            <% if(recom[0][i].imgName) { %>
+                <div class="wrapper col-12  col-lg-2" 
+                style="background-image: url('<%= recom[0][i].imgName %>');">
             <% } %>
             <!-- 如果沒抓到半張圖片 -->
-            <% if(isImg == false) { %>
-                <div class="wrapper col-12  col-lg-2">
+            <% if(!recom[0][i].imgName) { %>
+                <div class="wrapper col-12 col-lg-2">
             <% } %>
-                <a class="portfolio-box" href="/oneRecommend/<%= recom[0][i].recomNum %>">
-                    <div class="portfolio-box-caption">
-                        <div class="project-category text-white-50">
-                            <p><%= recom[0][i].recomClass %> </p>
+                    <a class="portfolio-box" href="/oneRecommend/<%= recom[0][i].recomNum %>">
+                        <div class="portfolio-box-caption">
+                            <div class="project-category text-white-50">
+                                <p><%= recom[0][i].recomClass %> </p>
+                            </div>
+                            <div class="project-name">
+                                <p class="title"><%= recom[0][i].recomHead %> </p>
+                                <p class="content wrapText"><%- recom[0][i].recomCont %>
+                                </p>
+                            </div>
                         </div>
-                        <div class="project-name">
-                            <p class="title"><%= recom[0][i].recomHead %> </p>
-                            <p class="content wrapText"><%- recom[0][i].recomCont %>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
             <% if( (i+1) % 4 == 0){ %>
             <div class="w-100"></div>
             <% } %>
             <% } %>
             <!-- 推薦結束 -->
         </div>
+        <nav aria-label="Page navigation example" style="margin-bottom: 4em;">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item previous">
+                    <a class="page-link" href="#/" onclick="location.href=`${pagePrevious}`" tabindex="-1" aria-disabled="true"><i class="fas fa-chevron-left"></i></a>
+                    </li>
+                    <% for(var j = 1 ; j <= recom[4][0].count ; j++) {%>
+                    <li class="page-item"><a class="page-link" href="<%=j%>"><%=j%></a></li>
+                    <% } %>
+                    <li class="page-item next">
+                    <a class="page-link" href="#/" onclick="location.href=`${pageNext}`"><i class="fas fa-chevron-right"></i></a>
+                    </li>
+                </ul>
+            </nav>
     </section>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        var pagePrevious = parseInt('<%= recom[5][0]%>')-1
+        var pageNext = parseInt('<%= recom[5][0]%>')+1
+        if (pagePrevious == 0) {
+             $('.previous').addClass('disabled')
+        } else {
+            $('.previous').remove('disabled')
+        }
+        if ('<%= recom[4][0].count%>' == '<%= recom[5][0]%>') {
+            $('.next').addClass('disabled')
+        } else {
+            $('.next').remove('disabled')
+        }
+        Array.from($('.pagination').find('.page-link')).map((item) => {
+            if (item.innerText == '<%= recom[5][0]%>') {
+                item.parentElement.classList.add('disabled')
+                item.style.fontWeight = 'bolder'
+            }
+        })
+        Array.from($('.page-link').parent('li.disabled')).map((item) => {
+            item.children[0].style.color = "#d9d9d9"
+        })
+    </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -102,6 +131,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/navbar.js"></script>

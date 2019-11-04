@@ -606,7 +606,7 @@ div.searchSection {
     text-align: center;
     float: center;
     overflow: hidden;
-    width: 18em;
+    width: 13em;
     margin-left: auto;
     margin-right: auto;
 }
@@ -622,7 +622,7 @@ input.navSearch {
     box-sizing: border-box;
     /* 使元素的寬度包括padding margin, border*/
     -moz-box-sizing: border-box;
-    width: 15em;
+    width: 10em;
 }
 
 input.navSearch:focus,
@@ -645,4 +645,12 @@ button.navSearch:focus {
     background-color: #678878 !important;
     box-shadow: none;
     outline: none;
+}
+
+.swal-button {
+    background-color: rgb(177, 187, 171);
+    border: solid 1px rgb(177, 187, 171) !important;
+}
+.swal-button:hover {
+    background-color: rgb(101, 108, 97) !important;
 }

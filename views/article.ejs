@@ -34,12 +34,12 @@
             <div class="col-lg-8 content shadow">
                 <div class="info d-flex">
                     <div><a class="floorTag">樓主</a></div>
-                        <div><a><%= items[0][0].memID %></a>
+                        <div><a><%= items[0][0].memName %></a>
                             <a class="next"></a>
                             <a class="dateTime">於<%= items[0][0].artiDateTime %>發佈</a>
                         </div>
                     <% if(items[7][0] == items[0][0].memID) {%>
-                        <div class="dropdown ml-auto">
+                        <div class="dropdown ml-auto" style="margin-bottom: -0.5em">
                                 <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-ellipsis-h"></i>     
                             </button>
@@ -50,8 +50,7 @@
                         </div>
                     <% } %>
                 </div>
-                <hr  style="margin-top: 0.5em"/>
-
+                <hr style="margin-top: 0.5em"/>
                 <h5><%= items[0][0].artiHead %></h5>
                 <hr />
 
@@ -76,7 +75,7 @@
                         onclick=<%= "delLike(" + items[0][0].artiNum + ")" %>><i class="fab fa-gratipay" style="color:#c93737"></i><a
                             id="delLikeCount"><%= items[0][0].likeCount %> </a></button>
                     <!-- 如果沒登入 -->
-                    <% if(items[7][0] == undefined) {%>
+                    <% if(items[7][0] == undefined) { %>
                     <script type="text/javascript">
                         document.getElementById("LikeUnLogIn").style.display = "inline";
                         document.getElementById("addLike").style.display = "none";
@@ -131,7 +130,7 @@
                     </script>
 
                     <!-- 如果有登入及沒按過收藏 -->
-                    <% }else if(items[3][0] == undefined && items[7][0] != undefined ) {%>
+                    <% } else if(items[3][0] == undefined && items[7][0] != undefined ) {%>
                     <script type="text/javascript">
                         document.getElementById("addColle").style.display = "inline";
                         document.getElementById("unLogIn").style.display = "none";
@@ -146,9 +145,9 @@
                     </script>
                     <% } %>
 
-                    
-                    <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiReportPost">檢舉</button>
-
+                    <% if(items[7][0] != items[0][0].memID) {%>
+                        <button type="button" class="btn report postReport" id="postReport" data-toggle="modal" data-target="#artiReportPost">檢舉</button>
+                    <% } %>
                 </div>
 
                 <!-- info結束 -->
@@ -169,7 +168,7 @@
         </div>
         
         <center>
-            <h1>文章留言</h1>
+            <h4>文章留言</h4>
             <hr class="separate">
         </center>
 
@@ -183,7 +182,7 @@
                     <!-- info -->
                     <div class="info d-flex justify-content-between">
                         <div><a class="floorTag"><%= i+1 %> 樓</a></div>
-                        <div><a class="name"><%= items[1][i].memID %></a>
+                        <div><a class="name"><%= items[1][i].memName %></a>
                             <a class="next"></a>
                             <a class="dateTime">於<%= items[1][i].artiMessDateTime %>留言</a>
                         </div>
@@ -210,7 +209,7 @@
                                     <%= items[1][i].likeCount %>
                                 </a>
                             </button>
-                    </div>
+                        </div>
                     </div>
                     <hr class="smallMagin">
 
@@ -258,7 +257,7 @@
                 </div>
                 <hr>
                 <% if(items[7][0] != items[1][i].memID) {%>
-                <button type="button" class="btn report" data-toggle="modal" data-target="#artiMessReportPost">檢舉</button>
+                <button type="button" class="btn report replyReport" data-toggle="modal" data-target="#artiMessReportPost">檢舉</button>
                  <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
                  <%} else { %>
                 <div class="dropdown ml-auto float-right dropup">
@@ -311,7 +310,7 @@
                 </label>
 
                 <button type="submit" class="btn btn-danger float-right submitReplyButton col-lg-2 shadow-none"
-                onclick=<%= "submitReply(" + items[0][0].artiNum + ")" %>>提交回覆</button>
+                onclick=<%= "submitReply(" + items[0][0].artiNum + ")" %>>提交</button>
             </div>
         </div>
         <!-- replying end -->
@@ -346,13 +345,19 @@
        <script>
             //文章檢舉ajax
             $("#artiReport").click(function() {
+              $('#artiReport').attr('disabled',true)
               $.ajax({
                  url: "/report",
                  type: 'POST',
                  dataType: 'TEXT',
                  data: { "artiNum" : "<%= items[0][0].artiNum %>" , "reportReason" : $("#reportReason").val()},
                  success: function (res) {
-                     alert(res);
+                     alert('檢舉成功');
+                     if(res == "申報成功"){
+                        $('#reportReason').val("")
+                        $('#artiReport').attr('disabled',false)
+                        $("#artiReportPost").modal('hide')
+                     }
                  },
                  error: function (res) {
                      console.log("失敗", res);
@@ -362,14 +367,19 @@
 
             //文章留言檢舉ajax
             function ftn_messReport(a){
+                $('#artiMessReport').attr('disabled',true)
                 $.ajax({
                 url: "/report",
                 type: 'POST',
                 dataType: 'TEXT',
                 data: { "artiMessNum" : a , "reportReason" : $("#messReportReason").val()},
                 success: function (res) {
-                    alert(res);
-                    location.reload();
+                    alert('檢舉成功');
+                    if(res == "申報成功"){
+                        $("#messReportReason").val('')
+                        $('#artiMessReport').attr('disabled',false)
+                        $('#artiMessReportPost').modal('hide')
+                    }
                 },
                 error: function (res) {
                     console.log("失敗", res);
@@ -380,10 +390,23 @@
         </script>
             
     </div>
-    <div class="spinner-border" role="status" style="position: fixed; top: 45%; left: 50%; margin-left:-20px; display: none;">
+    <!-- <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
-     </div>
-
+    </div> -->
+    <!-- <div class="coverContainer">
+    </div> -->
+    <div class='coverContainer'>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
+        </div>
+    </div>
+          
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
@@ -398,19 +421,25 @@
         crossorigin="anonymous "></script>
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
+    <script src="/javascripts/imageCompression.js"></script>
     <script>
         var member = '<%=items[7][0]%>'
+        $('.postReport,.replyReport').click(() => {
+            if (!member) {
+                alert('請進行登入再檢舉！')
+                location.replace("/logIn");
+            }
+        })
         $('#replyInput').click(() => {
             if (!member) {
                 alert('請進行登入再留言！')
                 location.replace("/logIn");
-
             }
         })
         Array.from($('.liContainer').find('li > a')).map((item) => {
-            item.innerText = item.innerText.length > 15 ? `${item.innerText.substring(0,15)}...` : item.innerText
+            item.innerText = item.innerText.length > 20 ? `${item.innerText.substring(0,20)}...` : item.innerText
         })
-        var imgs = [];
+
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
         $('#file-selector').change(function(event) {
@@ -419,18 +448,23 @@
             //如果有檔案就要加入formData
             if (file.files.length) {
                 Object.keys(file.files).map((img, index) => {
-                    file.files[img].timeStamp = `${timeStamp}${index}`
-                    imgs.push(file.files[img])
                     // 解析檔案
                     var item = file.files[img]
                     var reader = new FileReader();
                     reader.onload = (function(item) {
-                        return function(event) {
-                            var src = event.target.result // 圖片的編碼 , 格式為base64
-                            var title = escape(file.name);
-                            var img = '<img class="upload-img" src="' + src + '" title="' + title + '" key="' + `${timeStamp}${index}` + '"/> ';
-                            $('#replyInput').append('<div id="replyInput">' + img + '</div>');
-                        };
+                        return async function(event) {
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function(size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function(strDataURI) {
+                                    var title = escape(file.name);
+                                    var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
+                                    $('#replyInput').append(img);
+                                }, (e) => {
+                                    console.log(e)
+                                    })
+                                })
+                            };
                     })(file);
                     reader.readAsDataURL(item);
                 })
@@ -438,21 +472,19 @@
             }
         });
         function submitReply(artiNum) {
+            var templateCont = document.getElementById('replyInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+            if (templateCont == '') {
+                alert('請輸入回覆內容！')
+                return;
+            }
             $('.submitReplyButton').addClass('disabled')
             $('.submitReplyButton').attr('disabled', true)
             $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
 
-            var imgKey = []
-            if ($("#replyInput").find("#replyInput > img")) {
-                Array.from($("#replyInput").find("#replyInput > img")).map((img) => {
-                    imgKey.push(img.getAttribute('key'))
-                })
-                imgs.map((img) => {
-                    if (imgKey.indexOf(img.timeStamp) >= 0) {
-                        formData.append('userImg', img);
-                    }
-                })
-                Array.from($("#replyInput").find("#replyInput > img")).forEach((img) => {
+            if ($("#replyInput").find("img")) {
+                Array.from($("#replyInput").find("img")).map((img) => {
+                    formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
             }
@@ -475,10 +507,12 @@
                     var positiveWords = analyzeRes.analyze[1]
                     var negativeWords = analyzeRes.analyze[2]
                     var swearWords = analyzeRes.analyze[3]
+                    var score2 = analyzeRes.analyze[4]
                     formData.append('analyzeScore', analyzeScore);
                     formData.append('positiveWords', positiveWords);
                     formData.append('negativeWords', negativeWords);
                     formData.append('swearWords', swearWords);
+                    formData.append('score2', score2);
                     $.ajax({
                         url: '/article/reply',
                         type: 'POST',
@@ -512,6 +546,14 @@
 
     <!-- 收藏 ajax script  -->
     <script>
+        $('button').click(function() {
+            if ($(this).children('.fa-gratipay').length > 0) {
+                $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
+                setTimeout(() => {
+                    $('button').attr('disabled', false)
+                }, 1000)
+            }
+        })
             //新增收藏
             function addColle(artiNum) {
                 collection();
@@ -690,30 +732,34 @@
             // delArticle
             function delArticle(artiNum) {
                     $('.spinner-border').css('display', 'block')
+                    $('.coverContainer').css('display', 'block')
                     $.ajax({
                     url: '/addLike',
                     type: 'POST',
                     data: { "artiNum": artiNum, "memID": '<%= items[0][0].memID %>', "delArticle": true },
                     success: function (res) {
-                        location.replace("/articleList");
+                        alert('刪除成功！')
+                        location.replace("/articleList/1");
                     },
                     error: function (res) {
-                        console.log('刪除失敗');
+                        alert('刪除失敗！')
                     }
                 });
             }
             // delReply
             function deleteReply(artiMessNum, memID) {
                     $('.spinner-border').css('display', 'block')
+                    $('.coverContainer').css('display', 'block')
                     $.ajax({
                     url: '/addLike',
                     type: 'POST',
                     data: { "artiMessNum": artiMessNum, "memID": memID, "deleteReply": true },
                     success: function (res) {
+                        alert('刪除成功！')
                         location.reload();
                     },
                     error: function (res) {
-                        console.log('刪除失敗');
+                        alert('刪除失敗！')
                     }
                 });
             }
