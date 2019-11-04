@@ -72,6 +72,14 @@ $(document).ready(function () {
         var data = subStr + (str.length > 200 ? '...' : '');
         $(this).html(data);
     });
+    $(".project-name > .title").each(function () {
+
+        //取得內容
+        var str = $(this).html();
+        var subStr = str.substring(0, 11);
+        var data = subStr + (str.length > 11 ? '...' : '');
+        $(this).html(data);
+    });
 
     /* 按下GoTop按鈕時的事件 */
     $('#gotop').click(function () {

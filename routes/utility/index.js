@@ -362,7 +362,7 @@ var getWebSearch = async function (searchParams, memID) {
     //======================================
 
     // -----------  取得文章清單 -------------
-    await sql(`	SELECT "T2".*
+    await sql(`	SELECT "T2".*, "M"."memName" 
                 FROM(
                     SELECT *
                     FROM( 
@@ -372,7 +372,9 @@ var getWebSearch = async function (searchParams, memID) {
                             ON "A"."artiNum" = "I"."artiNum"
                         WHERE "I"."artiMessNum" IS NULL)  AS "T1"
                 WHERE "T1"."Rank" = '1' AND ("artiHead" LIKE $1 or "artiCont" LIKE $1 or "artiClass" LIKE $1 ) 
-                ORDER BY "artiNum" DESC) AS "T2"`,['%' + searchParams + '%'])
+                ORDER BY "artiNum" DESC) AS "T2"
+                INNER JOIN "member" "M"
+                ON "M"."memID" = "T2"."memID"`,['%' + searchParams + '%'])
         .then((data) => {
             articleList = data.rows;
         }, (error) => {
