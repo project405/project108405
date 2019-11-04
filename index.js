@@ -501,10 +501,9 @@ bot.on('message', function(event) {
             let recommendNum = []  
             let recommendHead = []  
             let recommendDateTime = []  
-            var recommendImg;
+            var recommendImg = [];
             //順序為電影、展覽、書籍、音樂
             data[0].forEach(item => {
-                // console.log(item.imgName)
                 recommendNum.push(item.recomNum);
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
@@ -512,15 +511,17 @@ bot.on('message', function(event) {
                 if(item.imgName){
                     var img = item.imgName.replace('data:image/jpeg;base64,', '');
                     linePush.Imgur(img).then(ThirdData => {
-                        console.log('ThirdData',ThirdData)
-                        // recommendImg.push(ThirdData)
-                        recommendImg = ThirdData;
+                        // console.log('ThirdData',ThirdData)
+                        recommendImg.push(ThirdData)
+                        // recommendImg = ThirdData;
                     })  
                 }else{
-                    recommendImg = 'https://i.imgur.com/oNykVvA.jpg';
+                    recommendImg.push('https://i.imgur.com/oNykVvA.jpg')
+                    // recommendImg = 'https://i.imgur.com/oNykVvA.jpg';
                 }
                 //-------------
             });
+
             console.log('recommendNum',recommendNum)
             console.log('recommendHead',recommendHead)
             console.log('recommendDateTime',recommendDateTime)
