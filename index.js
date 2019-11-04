@@ -526,7 +526,7 @@ bot.on('message', function(event) {
                 //         recommendImg.push('https://i.imgur.com/oNykVvA.jpg') 
                 //     }
                 // }) 
-                asyncRunFail().then(string => {
+                this.asyncRunFail().then(string => {
                     console.log('string@@@@@@@@@',string);
                   }).catch(response => {
                     console.log(response);
