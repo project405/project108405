@@ -60,7 +60,7 @@ bot.on('postback', function(event) {
             };
             
             
-            if (data == 'movie' ||data == 'music' ||data == 'book' || data =='exhibition'){
+            if (data == '電影' ||data == '音樂' ||data == '書籍' || data =='展覽'){
                
                 //---------------進到四大推薦---------------
                 // recommend.getFourRecomClassList().then(d =>{
@@ -74,7 +74,7 @@ bot.on('postback', function(event) {
                             recommendNum.push(item.recomNum);
                         });
                     
-                    if (data == 'movie'){
+                    if (data == '電影'){
                         return event.reply([
                             {
                                 "type": "template",
@@ -92,7 +92,7 @@ bot.on('postback', function(event) {
                                 }
                             }
                         ]);		
-                    }else if(data == 'exhibition'){
+                    }else if(data == '展覽'){
                         return event.reply([
                             {
                                 "type": "template",
@@ -111,7 +111,7 @@ bot.on('postback', function(event) {
                             }
                         ]);	
                         	
-                    }else if(data == 'book'){
+                    }else if(data == '書籍'){
                         return event.reply([
                             {
                                 "type": "template",
@@ -129,7 +129,7 @@ bot.on('postback', function(event) {
                                 }
                             }
                         ]);		
-                    }else if(data == 'music'){
+                    }else if(data == '音樂'){
                         return event.reply([
                             {
                                 "type": "template",
