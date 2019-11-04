@@ -541,12 +541,19 @@ bot.on('message', function(event) {
                 if(item.imgName){
                     var img = item.imgName.replace('data:image/jpeg;base64,', '');
                     await linePush.Imgur(img).then((imgurData) => {
-                        console.log('imgurData@@@@@@',imgurData)
                         recommendImg.push(imgurData);
                     })  
+
                 }else{
                     recommendImg.push('https://i.imgur.com/oNykVvA.jpg')
                 }
+                var secondCheck = setInterval(() => {
+                    if (recommendImg.length == 4) {
+                        console.log(recommendImg)
+                        clearInterval(secondCheck);
+
+                    }
+                }, 1000)
                 //-------------
             });
 
