@@ -340,57 +340,58 @@ bot.on('postback', function(event) {
                 })    
 
                     
-            }else{
-                login.userJudgeBind(userId).then(userID =>{
-                    console.log('userID!!!!!!!',userID)
-                    if(userID.length !== 0){                         
-                        if(userID[0].lineID == userId){
-                            console.log('data!!!!!!!!!!!!!!!!',data)
-                            collection.addLineColleRecommend(userID[0].memID, parseInt(data)).then(b =>{
-                                console.log(b)
-                                if(b == 0){
-                                    event.reply({
-                                        "type": "template",
-                                        "altText": "已重複收藏 ❌ ",
-                                        "template": {
-                                          "type": "buttons",
-                                          "text": '          '+userName+' 已重複收藏 ❌ ',
-                                          "actions": [
-                                            {
-                                              "type": "uri",
-                                              "label": " 👀 查看所有收藏",
-                                              "uri": `https://project108405.herokuapp.com/collection/recommend/`
-                                            //   "uri": `https://8d9dfb88.ngrok.io/collection/recommend/1`
-                                            }
-                                          ]
-                                        }
-                                    })
-                                }else{
-                                    event.reply({
-                                        "type": "template",
-                                        "altText": "已收藏成功 😍",
-                                        "template": {
-                                          "type": "buttons",
-                                          "text": '          '+userName+' 已收藏成功 😍 ',
-                                          "actions": [
-                                            {
-                                              "type": "uri",
-                                              "label": " 👀 查看所有收藏",
-                                              "uri": `https://project108405.herokuapp.com/collection/recommend/1`
-                                            }
-                                          ]
-                                        }
-                                    })
+            }
+            // else{
+            //     login.userJudgeBind(userId).then(userID =>{
+            //         console.log('userID!!!!!!!',userID)
+            //         if(userID.length !== 0){                         
+            //             if(userID[0].lineID == userId){
+            //                 console.log('data!!!!!!!!!!!!!!!!',data)
+            //                 collection.addLineColleRecommend(userID[0].memID, parseInt(data)).then(b =>{
+            //                     console.log(b)
+            //                     if(b == 0){
+            //                         event.reply({
+            //                             "type": "template",
+            //                             "altText": "已重複收藏 ❌ ",
+            //                             "template": {
+            //                               "type": "buttons",
+            //                               "text": '          '+userName+' 已重複收藏 ❌ ',
+            //                               "actions": [
+            //                                 {
+            //                                   "type": "uri",
+            //                                   "label": " 👀 查看所有收藏",
+            //                                   "uri": `https://project108405.herokuapp.com/collection/recommend/`
+            //                                 //   "uri": `https://8d9dfb88.ngrok.io/collection/recommend/1`
+            //                                 }
+            //                               ]
+            //                             }
+            //                         })
+            //                     }else{
+            //                         event.reply({
+            //                             "type": "template",
+            //                             "altText": "已收藏成功 😍",
+            //                             "template": {
+            //                               "type": "buttons",
+            //                               "text": '          '+userName+' 已收藏成功 😍 ',
+            //                               "actions": [
+            //                                 {
+            //                                   "type": "uri",
+            //                                   "label": " 👀 查看所有收藏",
+            //                                   "uri": `https://project108405.herokuapp.com/collection/recommend/1`
+            //                                 }
+            //                               ]
+            //                             }
+            //                         })
                                     
-                                }
-                            })                            
-                        }
+            //                     }
+            //                 })                            
+            //             }
                         
-                    }else{
-                        event.reply(myLineTemplate)
-                    }
-                })  
-            }         
+            //         }else{
+            //             event.reply(myLineTemplate)
+            //         }
+            //     })  
+            // }         
     });    
 });
 
