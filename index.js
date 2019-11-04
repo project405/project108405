@@ -504,24 +504,28 @@ bot.on('message', function(event) {
             let recommendImg = []  
             //順序為電影、展覽、書籍、音樂
             data[0].forEach(item => {
-                console.log(item.imgName)
+                // console.log(item.imgName)
                 recommendNum.push(item.recomNum);
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
-                // linePush.recomImg(item.recomNum).then(SecondData =>{
-                //     // console.log('SecondData[0].imgName',SecondData[0].imgName)
-                //     if(SecondData.length > 0){
-                //         var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                //         // recommendImg.push(SecondData)
-                //         linePush.Imgur(img).then(ThirdData =>{
-                //             console.log('ThirdData',ThirdData)
-                //             recommendImg.push(ThirdData)
-                //         }) 
-                //     }else{
-                //         recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg') 
-                //     }
-                //     console.log()
-                // }) 
+                linePush.recomImg(item.recomNum).then(SecondData =>{
+                    // console.log('SecondData[0].imgName',SecondData[0].imgName)
+                    if(SecondData.length > 0){
+                        if(SecondData[0].imgName.match('data:image/jpeg;base64,') != null){
+                            var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                            // recommendImg.push(SecondData)
+                            linePush.Imgur(img).then(ThirdData =>{
+                                console.log('ThirdData',ThirdData)
+                                recommendImg.push(ThirdData)
+                            }) 
+                        }
+                        recommendImg.push(SecondData[0].imgName)
+                        
+                    }else{
+                        recommendImg.push('https://i.imgur.com/oNykVvA.jpg') 
+                    }
+                    console.log()
+                }) 
             });
 
             console.log('recommendNum',recommendNum)
