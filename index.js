@@ -252,6 +252,7 @@ bot.on('postback', function(event) {
                                 var imgur = imgurGetBadMood(GetBadMoodImg)
                                 imgur.then(function(imgurData){
                                     setTimeout(() => {
+                                        console.log('近來了！！！')
                                         // resolve(imgurData);
                                         badMoodRecommendImg = imgurData;                  
                                     },1000)
