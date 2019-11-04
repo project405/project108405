@@ -509,31 +509,36 @@ bot.on('message', function(event) {
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
                 //-------------
-                linePush.recomImg(item.recomNum).then(SecondData =>{
-                    // console.log('SecondData[0].imgName',SecondData[0].imgName)
-                    if(SecondData.length > 0){
+                linePush.Imgur(img).then(function(ThirdData) {
+                    console.log('ThirdData',ThirdData)
+                    // recommendImg.push(ThirdData)
+                    recommendImg = ThirdData;
+                })  
+                // linePush.recomImg(item.recomNum).then(SecondData =>{
+                //     // console.log('SecondData[0].imgName',SecondData[0].imgName)
+                //     if(SecondData.length > 0){
                         
-                        if(SecondData[0].imgName.match('data:image/jpeg;base64,') != null){
-                            var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                            // recommendImg.push(SecondData)
-                            // linePush.Imgur(img).then(ThirdData =>{
-                            //     console.log('ThirdData',ThirdData)
-                            //     recommendImg.push(ThirdData)
-                            // })
-                            linePush.Imgur(img).then(function(ThirdData) {
-                                console.log('ThirdData',ThirdData)
-                                // recommendImg.push(ThirdData)
-                                recommendImg = ThirdData;
-                            }) 
-                        }
-                        // recommendImg.push(SecondData[0].imgName)
-                        recommendImg = SecondData[0].imgName;
+                //         if(SecondData[0].imgName.match('data:image/jpeg;base64,') != null){
+                //             var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                //             // recommendImg.push(SecondData)
+                //             // linePush.Imgur(img).then(ThirdData =>{
+                //             //     console.log('ThirdData',ThirdData)
+                //             //     recommendImg.push(ThirdData)
+                //             // })
+                //             linePush.Imgur(img).then(function(ThirdData) {
+                //                 console.log('ThirdData',ThirdData)
+                //                 // recommendImg.push(ThirdData)
+                //                 recommendImg = ThirdData;
+                //             }) 
+                //         }
+                //         // recommendImg.push(SecondData[0].imgName)
+                //         recommendImg = SecondData[0].imgName;
                         
-                    }else{
-                        // recommendImg.push('https://i.imgur.com/oNykVvA.jpg') 
-                        recommendImg = 'https://i.imgur.com/oNykVvA.jpg';
-                    }
-                }) 
+                //     }else{
+                //         // recommendImg.push('https://i.imgur.com/oNykVvA.jpg') 
+                //         recommendImg = 'https://i.imgur.com/oNykVvA.jpg';
+                //     }
+                // }) 
                 //-------------
             });
             console.log('recommendNum',recommendNum)

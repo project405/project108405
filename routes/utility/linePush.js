@@ -135,19 +135,23 @@ var artiImg = async function (artiNum) {
 //-------- 圖片解碼base64 --------
 //==============================        
 var Imgur = async function (img) {
-            const url = 'https://api.imgur.com/3/image',
-                request = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                      "Content-Type": "application/json", 
-                      "Authorization": 'Client-ID 8b8755d8a1c4ace',
-                    },
-                    dataType:"json" ,
-                    body: img
-                    
-                }).catch(error => console.error('Error:', error));
-        const response = await request.json();
-        return response.data.link;
+        if(img.match('data:image/jpeg;base64,') != null){
+                const url = 'https://api.imgur.com/3/image',
+                    request = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                        "Content-Type": "application/json", 
+                        "Authorization": 'Client-ID 8b8755d8a1c4ace',
+                        },
+                        dataType:"json" ,
+                        body: img
+                        
+                    }).catch(error => console.error('Error:', error));
+            const response = await request.json();
+            return response.data.link;
+        }else{
+            return img;
+        }
 };
         
 
