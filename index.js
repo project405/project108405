@@ -526,19 +526,21 @@ bot.on('message', function(event) {
         index.getIndexData().then(function(data) {  
             
             let recommendNum = []  
+            let recommendClass = []  
             let recommendHead = []  
             let recommendDateTime = []  
             let recommendImg = [];
             
             data[0].forEach(async(item) => {
-                console.log(item.recomClass)
+                
                 recommendNum.push(item.recomNum);
+                recommendClass.push(item.recomClass);
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
                 //-------------
                 if(item.imgName){
                     var img = item.imgName.replace('data:image/jpeg;base64,', '');
-                    await linePush.Imgur(img).then(async function (imgurData) {
+                    await linePush.Imgur(img).then((imgurData) => {
                         console.log('imgurData@@@@@@',imgurData)
                         recommendImg.push(imgurData);
                     })  
@@ -549,6 +551,7 @@ bot.on('message', function(event) {
             });
 
             console.log('recommendNum',recommendNum)
+            console.log('recommendClass',recommendClass)
             console.log('recommendHead',recommendHead)
             console.log('recommendDateTime',recommendDateTime)
             console.log('recommendImg',recommendImg)
