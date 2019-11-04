@@ -561,7 +561,7 @@ bot.on('message', function(event) {
             console.log('recommendClass',recommendClass)
             console.log('recommendHead',recommendHead)
             console.log('recommendDateTime',recommendDateTime)
-            console.log('recommendImg',recommendImg)
+            // console.log('recommendImg',recommendImg)
                 // event.reply({
                 //     "type": "template",
                 //     "altText": " 👋 本週新推薦",
