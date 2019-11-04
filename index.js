@@ -530,7 +530,7 @@ bot.on('message', function(event) {
             let recommendDateTime = []  
             let recommendImg = [];
             
-            data[0].forEach(item => {
+            data[0].forEach(async(item) => {
                 console.log(item.recomClass)
                 recommendNum.push(item.recomNum);
                 recommendHead.push(item.recomHead);
@@ -538,7 +538,7 @@ bot.on('message', function(event) {
                 //-------------
                 if(item.imgName){
                     var img = item.imgName.replace('data:image/jpeg;base64,', '');
-                    linePush.Imgur(img).then((imgurData) => {
+                    await linePush.Imgur(img).then((imgurData) => {
                         console.log('imgurData@@@@@@',imgurData)
                         recommendImg.push(imgurData);
                     })  
