@@ -94,62 +94,6 @@ bot.on('postback', function(event) {
                                     }
                                 ]);		
                             }
-                            // else if(data == '展覽'){
-                            //     return event.reply([
-                            //         {
-                            //             "type": "template",
-                            //             "altText": "精選展覽",
-                            //             "template": {
-                            //               "type": "buttons",
-                            //               "text": recommendCont[1],
-                            //               "actions": [
-                            //                 {
-                            //                   "type": "uri",
-                            //                   "label": " 👀 至文藝富心官網觀看",
-                            //                   "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[1]}`
-                            //                 }
-                            //               ]
-                            //             }
-                            //         }
-                            //     ]);	
-                                    
-                            // }else if(data == '書籍'){
-                            //     return event.reply([
-                            //         {
-                            //             "type": "template",
-                            //             "altText": "精選書籍",
-                            //             "template": {
-                            //               "type": "buttons",
-                            //               "text": recommendCont[2],
-                            //               "actions": [
-                            //                 {
-                            //                   "type": "uri",
-                            //                   "label": " 👀 至文藝富心官網觀看",
-                            //                   "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[2]}`
-                            //                 }
-                            //               ]
-                            //             }
-                            //         }
-                            //     ]);		
-                            // }else if(data == '音樂'){
-                            //     return event.reply([
-                            //         {
-                            //             "type": "template",
-                            //             "altText": "精選音樂",
-                            //             "template": {
-                            //               "type": "buttons",
-                            //               "text": recommendCont[3],
-                            //               "actions": [
-                            //                 {
-                            //                   "type": "uri",
-                            //                   "label": " 👀 至文藝富心官網觀看",
-                            //                   "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[3]}`
-                            //                 }
-                            //               ]
-                            //             }
-                            //         }
-                            //     ]);	
-                            // }   
                         });
                     });
             }else if (data.match("article")){
@@ -658,7 +602,7 @@ bot.on('message', function(event) {
                         });
                         clearInterval(secondCheck);
                     }  
-                }, 1000)
+                }, 250)
                 //-------------
             });
 
