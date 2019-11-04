@@ -61,41 +61,90 @@ bot.on('postback', function(event) {
             
             
             if (data == '電影' ||data == '音樂' ||data == '書籍' || data =='展覽'){
-               
                 //---------------進到四大推薦---------------
-                // recommend.getFourRecomClassList().then(d =>{
-                    index.getIndexData().then(d => {  
-                        
-                        let recommendCont = [];
-                        let recommendNum = [];
-                        let recommendClass = [];
-                        d[0].forEach(item => {
-                            item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
-                            item.recomCont = item.recomCont.length>75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
-                            recommendCont.push(item.recomCont);
-                            recommendNum.push(item.recomNum);
-                            recommendClass.push(item.recomClass);
-                            if (data == item.recomClass){
-                                return event.reply([
-                                    {
+                index.getIndexData().then(d => {  
+                    
+                    let recommendCont = [];
+                    let recommendNum = [];
+                    let recommendClass = [];
+                    d[0].forEach(item => {
+                        item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
+                        item.recomCont = item.recomCont.length>75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
+                        recommendCont.push(item.recomCont);
+                        recommendNum.push(item.recomNum);
+                        recommendClass.push(item.recomClass);
+                        if (data == item.recomClass){
+                            return event.reply([
+                                {
+                                    "type": "template",
+                                    "altText": `精選${item.recomClass}`,
+                                    "template": {
+                                        "type": "buttons",
+                                        "text": item.recomCont,
+                                        "actions": [
+                                        {
+                                            "type": "uri",
+                                            "label": " 👀 至文藝富心官網觀看",
+                                            "uri": `https://project108405.herokuapp.com/oneRecommend/${item.recomNum}`
+                                        }
+                                        ]
+                                    }
+                                }
+                            ]);		
+                        }
+                    });
+                });
+            }else if(data.match('add')){
+                login.userJudgeBind(userId).then(userID =>{
+                    console.log('userID!!!!!!!',userID)
+                    if(userID.length !== 0){                         
+                        if(userID[0].lineID == userId){
+                            data = data.replace('add','')
+                            console.log('data!!!!!!!!!!!!!!!!',data)
+                            collection.addLineColleRecommend(userID[0].memID, parseInt(data)).then(b =>{
+                                console.log(b)
+                                if(b == 0){
+                                    event.reply({
                                         "type": "template",
-                                        "altText": `精選${item.recomClass}`,
+                                        "altText": "已重複收藏 ❌ ",
                                         "template": {
                                           "type": "buttons",
-                                          "text": item.recomCont,
+                                          "text": '          '+userName+' 已重複收藏 ❌ ',
                                           "actions": [
                                             {
                                               "type": "uri",
-                                              "label": " 👀 至文藝富心官網觀看",
-                                              "uri": `https://project108405.herokuapp.com/oneRecommend/${item.recomNum}`
+                                              "label": " 👀 查看所有收藏",
+                                              "uri": `https://project108405.herokuapp.com/collection/recommend/`
+                                            //   "uri": `https://8d9dfb88.ngrok.io/collection/recommend/1`
                                             }
                                           ]
                                         }
-                                    }
-                                ]);		
-                            }
-                        });
-                    });
+                                    })
+                                }else{
+                                    event.reply({
+                                        "type": "template",
+                                        "altText": "已收藏成功 😍",
+                                        "template": {
+                                          "type": "buttons",
+                                          "text": '          '+userName+' 已收藏成功 😍 ',
+                                          "actions": [
+                                            {
+                                              "type": "uri",
+                                              "label": " 👀 查看所有收藏",
+                                              "uri": `https://project108405.herokuapp.com/collection/recommend/1`
+                                            }
+                                          ]
+                                        }
+                                    })
+                                    
+                                }
+                            })                            
+                        }
+                        
+                    }else{
+                        event.reply(myLineTemplate)
+                    }
+                }) 
             }else if (data.match("article")){
                 login.userJudgeBind(userId).then(d =>{
                     if(d.length !== 0){                         
@@ -138,7 +187,6 @@ bot.on('postback', function(event) {
                 })
             }else if (data == 'dislike'){
                 event.reply('文藝富心又更加了解你了')
-
             }else if(data == 'Goodmood'){
                 mood.getMood().then((data) => {
                     console.log('data',data[1])
@@ -522,7 +570,7 @@ bot.on('message', function(event) {
                                                     
                                                     "type": "postback",
                                                     "label": "新增至我的收藏",
-                                                    "data": recommendNum[0]
+                                                    "data": `add${recommendNum[0]}`
                                                 }
                                             ]
                                         }
@@ -545,7 +593,7 @@ bot.on('message', function(event) {
                                         
                                                 "type": "postback",
                                                 "label": "新增至我的收藏",
-                                                "data": recommendNum[1]
+                                                "data": `add${recommendNum[1]}`
                                             }
                                         ]   
                                     },
@@ -568,7 +616,7 @@ bot.on('message', function(event) {
                                             
                                                 "type": "postback",
                                                 "label": "新增至我的收藏",
-                                                "data": recommendNum[2]
+                                                "data": `add${recommendNum[2]}`
                                             }
                                         ]
                                     },
@@ -591,7 +639,7 @@ bot.on('message', function(event) {
                                             
                                                 "type": "postback",
                                                 "label": "新增至我的收藏",
-                                                "data": recommendNum[3]
+                                                "data": `add${recommendNum[3]}`
                                             }
                                         ]
                                     }
