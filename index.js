@@ -509,11 +509,16 @@ bot.on('message', function(event) {
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
                 //-------------
-                linePush.Imgur(img).then(function(ThirdData) {
-                    console.log('ThirdData',ThirdData)
-                    // recommendImg.push(ThirdData)
-                    recommendImg = ThirdData;
-                })  
+                if(item.imgName){
+                    var img = item.imgName.replace('data:image/jpeg;base64,', '');
+
+                    linePush.Imgur(img).then(function(ThirdData) {
+                        console.log('ThirdData',ThirdData)
+                        // recommendImg.push(ThirdData)
+                        recommendImg = ThirdData;
+                    })  
+                }
+                
                 // linePush.recomImg(item.recomNum).then(SecondData =>{
                 //     // console.log('SecondData[0].imgName',SecondData[0].imgName)
                 //     if(SecondData.length > 0){
