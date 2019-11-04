@@ -496,13 +496,24 @@ bot.on('message', function(event) {
 
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
+
+        function promiseGetRecommend(imgName) {
+            var test;
+            return new Promise(function(resolve, reject){
+                var img = imgName.replace('data:image/jpeg;base64,', '');
+                    linePush.Imgur(img).then(imgurData => {
+                        test = imgurData;
+                    }) 
+                resolve(test);                  
+            }) 
+        }
         index.getIndexData().then(data => {  
             
             let recommendNum = []  
             let recommendHead = []  
             let recommendDateTime = []  
             let recommendImg = [];
-            //順序為電影、展覽、書籍、音樂
+            
             data[0].forEach(item => {
                 console.log(item.recomClass)
                 recommendNum.push(item.recomNum);
@@ -510,18 +521,20 @@ bot.on('message', function(event) {
                 recommendDateTime.push(item.recomDateTime);
                 //-------------
                 if(item.imgName){
-                    var img = item.imgName.replace('data:image/jpeg;base64,', '');
-                    linePush.Imgur(img).then(ThirdData => {
-                        // console.log('ThirdData',ThirdData)
-                        recommendImg.push(ThirdData)
-                        // recommendImg = ThirdData;
-                    })  
+                    var imgur = promiseGetRecommend(item.imgName)
+                    imgur.then(function(imgurData){
+                        console.log(imgurData)
+                    })
+                    // var img = item.imgName.replace('data:image/jpeg;base64,', '');
+                    // linePush.Imgur(img).then(imgurData => {
+                    //     recommendImg.push(imgurData);
+                    // })  
                 }else{
                     recommendImg.push('https://i.imgur.com/oNykVvA.jpg')
-                    // recommendImg = 'https://i.imgur.com/oNykVvA.jpg';
                 }
                 //-------------
             });
+
             console.log('recommendNum',recommendNum)
             console.log('recommendHead',recommendHead)
             console.log('recommendDateTime',recommendDateTime)
