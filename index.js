@@ -511,39 +511,14 @@ bot.on('message', function(event) {
                 //-------------
                 if(item.imgName){
                     var img = item.imgName.replace('data:image/jpeg;base64,', '');
-
-                    linePush.Imgur(img).then(function(ThirdData) {
+                    linePush.Imgur(img).then(ThirdData => {
                         console.log('ThirdData',ThirdData)
                         // recommendImg.push(ThirdData)
                         recommendImg = ThirdData;
                     })  
+                }else{
+                    recommendImg = 'https://i.imgur.com/oNykVvA.jpg';
                 }
-                
-                // linePush.recomImg(item.recomNum).then(SecondData =>{
-                //     // console.log('SecondData[0].imgName',SecondData[0].imgName)
-                //     if(SecondData.length > 0){
-                        
-                //         if(SecondData[0].imgName.match('data:image/jpeg;base64,') != null){
-                //             var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                //             // recommendImg.push(SecondData)
-                //             // linePush.Imgur(img).then(ThirdData =>{
-                //             //     console.log('ThirdData',ThirdData)
-                //             //     recommendImg.push(ThirdData)
-                //             // })
-                //             linePush.Imgur(img).then(function(ThirdData) {
-                //                 console.log('ThirdData',ThirdData)
-                //                 // recommendImg.push(ThirdData)
-                //                 recommendImg = ThirdData;
-                //             }) 
-                //         }
-                //         // recommendImg.push(SecondData[0].imgName)
-                //         recommendImg = SecondData[0].imgName;
-                        
-                //     }else{
-                //         // recommendImg.push('https://i.imgur.com/oNykVvA.jpg') 
-                //         recommendImg = 'https://i.imgur.com/oNykVvA.jpg';
-                //     }
-                // }) 
                 //-------------
             });
             console.log('recommendNum',recommendNum)
