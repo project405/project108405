@@ -291,6 +291,7 @@ div.article {
     font-size: 0.6em !important;
     padding: 0em 1.25em 0.5em 1.25em;
     text-align: justify;
+    color: rgb(233, 233, 233);
 }
 
 @media (max-width: 576px) {
