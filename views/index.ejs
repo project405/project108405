@@ -249,19 +249,19 @@
     <div class="container-fluid footer d-flex justify-content-center row">
         <div class="col-lg-2"></div>
         <div class="col-lg-4 aboutUs">
-            <h6>關於我們：</h6>
+            <h5>關於我們：</h5>
             <p>我們身處在一個資料越來越多、意義越來越少的世代，源源不絕的資訊不僅讓人失去學習的熱忱，也錯過了許多生命中原有的樂趣。文藝富心彙整藝文相關資訊與提供討論的空間，讓使用者能在幾分鐘之內得到完善的資訊，也提供一個安靜的角落給使用者喘息休憩。
             </p>
-            <h6>聯絡我們：</h6>
+            <h5>聯絡我們：</h5>
             <p>LiteraryArts@gmail.com</p>
 
         </div>
 
         <div class="col-lg-4 aboutUs">
-            <h6>常見問題：</h6>
+            <h5>常見問題：</h5>
             <p>獎勵機制：在推薦底下的留言，我們會透過點擊次數以及愛心次數來篩選出最佳留言，將會寄送精美小獎品給最佳留言者。</p>
             <p>申報機制：只要對於我們的系統有任何建議，都可以透過申報通知系統管理員，讓文藝富心團隊能夠改進，提供給使用者更好的環境</p>
-            <h6>文藝富心官方Line：<a href="https://line.me/R/ti/p/%40240qtneo"><img src="imgs/icon/lineIcon.png" alt="" style="height: 50px;"></a></h6>
+            <h5>文藝富心官方Line：<a href="https://line.me/R/ti/p/%40240qtneo"><img src="imgs/icon/lineIcon.png" alt="" style="height: 50px;"></a></h5>
         
         </div>
         <div class="col-lg-2">
@@ -277,7 +277,7 @@
     <a id="sentimentSectionHover" style="visibility: hidden;">情緒專區</a>
     <a href="#" id="sentimentSection" data-toggle="modal" data-target="#sentimentSectionContainer">
         <!-- <i class="fas fa-kiss "></i> -->
-        <img style="width:75%" src="../imgs/icon/bulb.png" alt="">
+        <img style="width:50%" src="../imgs/icon/bulb.png" alt="">
     </a>
 
     <!-- Modal -->
@@ -305,6 +305,10 @@
                 </div>
                <!-- 正向文章 -->
                <div class="sentimentContent">
+                  <div class="defaultAlarm" style="text-align: center;"> 
+                    <br>
+                    <h4>點選上方兩類詞彙，你會有不一樣的發現哦！ʕ •ᴥ•ʔ</h4>
+                  </div>
                   <div id="positiveSection" style="display: none; word-wrap:break-word; overflow: hidden;">
                         <% if(items[6].length > 0 ) { %>
                             <h5> <%- items[6][0].artiHead %></h5>

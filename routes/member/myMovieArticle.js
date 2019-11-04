@@ -17,13 +17,25 @@ router.get('/:artiPage', function (req, res, next) {
     }
     
     member.getMyArticleClassList('movie', memID, artiPage).then(data => {
-        console.log(data[6][0].count)
         data[6][0].count = Math.ceil(data[6][0].count / 10) 
         data[6][0].count = data[6][0].count == 0 ? 1 : data[6][0].count
-        //將照片字串取代為空
-        for (var i = 0; i < data[0].length; i++) {
-            data[0][i].artiCont = data[0][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ");     
-        }
+        data[0].map((item) => {
+            item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ");
+            switch(item.artiClass) {
+                case 'book':
+                    item.artiClass = '書籍'
+                    break;
+                case 'movie':
+                    item.artiClass = '電影'
+                    break;
+                case 'music':
+                    item.artiClass = '音樂'
+                    break;
+                case 'exhibition':
+                    item.artiClass = '展覽'
+                    break;
+            }
+        })
 
         if (data == null) {
             res.render('error');

@@ -92,31 +92,22 @@ var getArticleListPagination = async function (memID, artiListNum) {
     // articleList.map((item) => {
     //     pageImage.push(item.artiNum)
     // })
-    await sql(`SELECT "A".*
-               FROM(SELECT  "imgNum","memID","artiNum","imgName" ,ROW_NUMBER() OVER(PARTITION BY "artiNum" ORDER BY "imgNum") as "Rank"
-                    FROM "image"
-                    WHERE "artiNum" 
-                        IN( SELECT "artiNum" 
-                            FROM "image" 
-                            WHERE "artiNum" IS NOT NULL AND "artiMessNum" IS NULL
-                            ORDER BY "artiNum" DESC 
-                            LIMIT 10 
-                            OFFSET $1) 
-                    ORDER BY "imgNum"
-                    WHERE "I"."artiMessNum" IS NULL	) AS "A" 
-                WHERE "A"."Rank" = 1 
-                ORDER BY "artiNum" DESC `, [(artiListNum-1) * 10])
-        .then((data) => {
-            if (data.rows == null || data.rows == '') {
-                imgs = undefined;
-            } else {
-                console.log(data)
-                imgs = data.rows;
-            }
-        }, (error) => {
-            imgs = undefined;
-            console.log(error)
-        });
+
+    // await sql('SELECT "artiNum" , "imgName" ' +
+    //           ' FROM "image"'+
+    //           ' WHERE "artiNum" = ANY($1::INT[]) AND "artiMessNum" IS NULL'+
+    //           ' ORDER BY "imgNum"', [pageImage])
+    //     .then((data) => {
+    //         if (data.rows == null || data.rows == '') {
+    //             imgs = undefined;
+    //         } else {
+    //             console.log(data)
+    //             imgs = data.rows;
+    //         }
+    //     }, (error) => {
+    //         imgs = undefined;
+    //         console.log(error)
+    //     });
 
     result[0] = articleList; 
     result[1] = tag;
@@ -488,7 +479,6 @@ var getOneReply = async function (artiMessNum, memID) {
 //---------  getArticleClassList() --------
 //=========================================
 var getArticleClassList = async function (articleClass, memID, artiListNum) {
-    console.log(artiListNum)
     var articleList = [];
     var tag = [];
     var isCollection = [];
@@ -496,14 +486,23 @@ var getArticleClassList = async function (articleClass, memID, artiListNum) {
     var imgs = [] ; 
     var result = [] ; 
     var articleSum;
+
     // -----------  取得分類文章 --------------
-    await sql('SELECT "articleListDataView".*, "member"."memName" ' +
-              ' FROM "articleListDataView" '+
-              ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"' +
-              ' WHERE "artiClass" = $1' +
-              ' ORDER BY "articleListDataView"."artiNum" DESC' +
-              ' LIMIT 10' +
-              ' OFFSET $2', [articleClass, (artiListNum-1) * 10])
+    await sql(`SELECT "T2".*, "M"."memName" 
+                FROM(
+                SELECT *
+                FROM( 
+                    SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                    FROM "articleListDataView" AS "A"
+                    LEFT JOIN "image" AS "I"
+                        ON "A"."artiNum" = "I"."artiNum"
+                    WHERE "I"."artiMessNum" IS NULL ) AS "T1"
+                WHERE "T1"."Rank" = '1' AND "artiClass" = $1
+                ORDER BY "artiNum" DESC
+                LIMIT 10 
+                OFFSET $2 ) AS "T2"
+                INNER JOIN "member" "M"
+                ON "M"."memID" = "T2"."memID"`, [articleClass, (artiListNum-1) * 10])
         .then((data) => {
             console.log(data,'data')
             if (!data.rows) {
@@ -567,25 +566,25 @@ var getArticleClassList = async function (articleClass, memID, artiListNum) {
         });
 
     // ----------- 取得照片 ----------- 
-    await sql('SELECT "artiNum" , "imgName" '+
-    ' FROM "image" '+
-    ' WHERE "artiMessNum" IS NULL '+
-    ' ORDER BY "imgNum"')
-        .then((data) => {
-            if (data.rows == null || data.rows == '') {
-                imgs = undefined;
-            } else {
-                imgs = data.rows;
-            }
-        }, (error) => {
-            imgs = undefined;
-        });
+    // await sql('SELECT "artiNum" , "imgName" '+
+    // ' FROM "image" '+
+    // ' WHERE "artiMessNum" IS NULL '+
+    // ' ORDER BY "imgNum"')
+    //     .then((data) => {
+    //         if (data.rows == null || data.rows == '') {
+    //             imgs = undefined;
+    //         } else {
+    //             imgs = data.rows;
+    //         }
+    //     }, (error) => {
+    //         imgs = undefined;
+    //     });
 
     result[0] = articleList ;
     result[1] = tag ; 
     result[2] = isCollection ;
     result[3] = isLike ;
-    result[4] = imgs ;
+    // result[4] = imgs ;
     result[5] = [memID] ;
     result[6] = articleSum;
     result[7] = [artiListNum];

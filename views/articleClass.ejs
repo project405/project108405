@@ -53,25 +53,19 @@
                     <% for(var i=0; i<items[0].length; i++) {%>
                     <div class="card shadow list" style="cursor:pointer; ">
                         <div class="card-body" onclick="location.href='/article/<%= items[0][i].artiNum %>' ">
-                            <div class="poster">
-                                <div class="name d-flex justify-content-between">
+                            <div class="poster d-flex justify-content-between">
+                                <div class="name">
                                     <div style="word-break:break-all">
                                         <a class="floorTag"><%= items[0][i].memName %></a>
                                         <a class="next"></a>
                                         <a class="dateTime">於 <%= items[0][i].artiDateTime %>發表</a>
                                     </div>
-                                    <!-- <div class="dropdown ml-auto">
-                                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-h"></i>     
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
-                                            <a class="dropdown-item" href="#">編輯</a>
-                                            <a class="dropdown-item" href="#">刪除</a>
-                                        </div>
-                                    </div> -->
                                 </div>
-                                <hr style="margin-top: 0.5em">
+                                <div class="ml-auto">
+                                    <a class="itemClass"><%= items[0][i].artiClass %></a>
+                                </div>
                             </div>
+                            <hr style="margin-top: 0.5em">
                             <div class="row seperate">
                                 <div class="col-sm-9 articleContent">
                                     <h3 class="card-title "><%- items[0][i].artiHead %>
@@ -89,16 +83,9 @@
                                 </div>
 
                                 <!-- imgs  -->
-                                <% if(items[4] != undefined) { %>
-                                    <% for(var j = 0 ; j<items[4].length ; j++) { %>
-                                        <% if (items[0][i].artiNum == items[4][j].artiNum){ %>
-                                            <div class="wrapperCard card-img-top col-lg-3"
-                                                style="background-image: url( '<%= items[4][j].imgName %>'); ">
-                                            </div>
-                                            <% break %> <!-- 取得一張照片就結束 -->
-                                        <% } %>
-                                    <% } %>
-                                <% } %>
+                                <div class="wrapperCard card-img-top col-lg-3"
+                                    style="background-image: url( '<%= items[0][i].imgName %>'); ">
+                                </div>
                             </div>
                         </div>
                         <!-- info -->
@@ -215,7 +202,6 @@
                     <!-- listEnd -->
                 </div>
             </div>
-        </div>
         <nav aria-label="Page navigation example" style="margin-bottom: 4em;">
             <ul class="pagination justify-content-center">
                 <li class="page-item previous">

@@ -27,7 +27,8 @@ function drawToCanvas(imgData, originWidth, originHeight) {
         img.src = imgData;
         img.onload = function(){ //必須onload之後再畫
             ctx.drawImage(img, 0, 0, originWidth, originHeight);
-            strDataURI = canvas.toDataURL('image/jpeg', 0.75);//獲取canvas base64資料
+            strDataURI = canvas.toDataURL('image/jpeg', 0.5);//獲取canvas base64資料
+            console.log(strDataURI)
             resolve(strDataURI)
         }
     })

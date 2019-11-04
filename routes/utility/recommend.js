@@ -16,11 +16,19 @@ var getRecommendList = async function (memID, recomPage) {
     var recommendSum;
     console.log(recomPage,recomPage,recomPage,recomPage,recomPage)
     // -----------  取得推薦清單 --------------
-    await sql('SELECT * ' +
-              'FROM "recommendListDataView"' +
-              'ORDER BY "recommendListDataView"."recomNum" DESC' +
-              ' LIMIT 8' +
-              ' OFFSET $1', [(recomPage-1) * 8])
+    await sql(`SELECT "T2".*
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."recomNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "recommendListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                                        ON "A"."recomNum" = "I"."recomNum"
+                        WHERE "I"."recomMessNum" IS NULL)  AS "T1"
+                    WHERE "T1"."Rank" = '1'
+                    ORDER BY "recomNum" DESC
+                    LIMIT 8
+                    OFFSET $1 ) AS "T2"`, [(recomPage-1) * 8])
         .then((data) => {
             console.log(data)
             if (data.rows != undefined) {
@@ -52,24 +60,24 @@ var getRecommendList = async function (memID, recomPage) {
     })
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" '+
-            ' FROM "image" '+
-            ' WHERE "recomMessNum" IS NULL '+
-            ' ORDER BY "imgNum" ')
-    .then((data) => {
-        if (!data.rows) {
-            imgs = undefined;
-        } else {
-            imgs = data.rows;
-        }
-    }, (error) => {
-        console.log(error)
-        imgs = undefined;
-    });
+    // await sql('SELECT "recomNum" , "imgName" '+
+    //         ' FROM "image" '+
+    //         ' WHERE "recomMessNum" IS NULL '+
+    //         ' ORDER BY "imgNum" ')
+    // .then((data) => {
+    //     if (!data.rows) {
+    //         imgs = undefined;
+    //     } else {
+    //         imgs = data.rows;
+    //     }
+    // }, (error) => {
+    //     console.log(error)
+    //     imgs = undefined;
+    // });
     result[0] = recommendList;
     result[1] = [memID];
     result[2] = checkAuthority;
-    result[3] = imgs ;
+    // result[3] = imgs ;
     result[4] = recommendSum ;
     result[5] = [recomPage] ;
     return result;
@@ -216,20 +224,32 @@ var getOneRecommend = async function (recomNum, memID) {
         console.log(error)
     });
 
+    
     // ----------- 根據該文章的tag去猜測使用者可能喜歡的文章 -----------
-    await sql('SELECT * '+
-                ' FROM "recommend" '+
-                ' WHERE "recomNum" '+
-                    ' IN(SELECT "A"."recomNum" '+
-                    ' FROM (SELECT "recomNum" ,count(*) '+
-                            ' FROM "tagLinkArticle" '+
-                            ' WHERE "tagNum" '+
-                                ' IN (SELECT "tagNum" '+
-                                    ' FROM "tagLinkArticle" '+
-                                    ' WHERE "recomNum" = $1) AND "recomNum" != $1 '+
-                            ' GROUP BY "recomNum" '+
-                            ' ORDER BY "count" DESC , "recomNum" DESC '+
-                            ' LIMIT 3) AS "A")', [recomNum])
+    await sql('SELECT * '+ 
+              ' FROM "recommend" '+
+              ' WHERE "recomNum" '+ 
+              ' IN(SELECT "A"."recomNum" '+
+                ' FROM(SELECT "recomNum" , count("recomNum") '+
+                    ' FROM "tagLinkArticle" '+
+                    ' WHERE "tagNum" '+ 
+                        ' IN(SELECT "tagNum" '+
+                            ' FROM "tag" '+
+                            ' WHERE "tagName"  '+
+                                ' IN(SELECT "tagName" '+
+                                    ' FROM "tag" '+
+                                    ' WHERE "tagNum" '+
+                                        ' IN (SELECT "tagNum" '+ 
+                                            ' FROM "tagLinkArticle" '+ 
+                                            ' WHERE "recomNum" = $1 ) '+
+                                    ' ) '+
+                            ' ) AND "recomNum" != $1 '+
+                    ' GROUP BY "recomNum" '+
+                    ' ORDER BY "count" DESC ,"recomNum" DESC '+
+                    ' LiMIT 3 '+
+                    ' ) AS "A" '+
+                ') '+
+        ' ORDER BY "recomNum" DESC', [recomNum])
         .then((data) => {
             if (data.rowCount <= 0) {
                 guessRecommend = undefined ;
@@ -333,12 +353,19 @@ var getRecomClassList = async function (recomClass, memID, recomPage) {
     var recomSum;
 
     // -----------  取得文章清單 --------------
-    await sql('SELECT *' +
-              'FROM "recommendListDataView"'+
-              'WHERE "recomClass" = $1' + 
-              'ORDER BY "recommendListDataView"."recomNum" DESC' +
-              ' LIMIT 8' +
-              ' OFFSET $2', [recomClass, (recomPage-1)*8])
+    await sql(`SELECT "T2".*
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."recomNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "recommendListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                                        ON "A"."recomNum" = "I"."recomNum"
+                        WHERE "I"."recomMessNum" IS NULL)  AS "T1"
+                    WHERE "T1"."Rank" = '1' AND "recomClass" = $1
+                    ORDER BY "recomNum" DESC
+                    LIMIT 8
+                    OFFSET $2 ) AS "T2"`, [recomClass, (recomPage-1)*8])
         .then((data) => {
           if(!data.rows){
             recommendData = undefined ;
@@ -367,24 +394,24 @@ var getRecomClassList = async function (recomClass, memID, recomPage) {
         }
     })
 
-    //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" '+
-             ' FROM "image" '+
-             ' ORDER BY "imgNum"')
-    .then((data) => {
-        if (!data.rows) {
-            imgs = undefined;
-        } else {
-            imgs = data.rows;
-        }
-    }, (error) => {
-        imgs = undefined;
-    });
+    // //----------- 取得照片 ----------- 
+    // await sql('SELECT "recomNum" , "imgName" '+
+    //          ' FROM "image" '+
+    //          ' ORDER BY "imgNum"')
+    // .then((data) => {
+    //     if (!data.rows) {
+    //         imgs = undefined;
+    //     } else {
+    //         imgs = data.rows;
+    //     }
+    // }, (error) => {
+    //     imgs = undefined;
+    // });
 
     result[0] = recommendData;
     result[1] = [memID];
     result[2] = checkAuthority;
-    result[3] = imgs ; 
+    // result[3] = imgs ; 
     result[4] = recomSum;
     result[5] = [recomPage];
 

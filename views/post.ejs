@@ -137,11 +137,11 @@
                 // document.onmousemove = function(e) {
                 //     console.log(e)
                 // }
-                $(document).on("focus","#postInput",function(){  
-                    setTimeout(() => {
+                $(document).on("focus","#postInput",() => {  
+                    setTimeout(function() {
                         console.log($('.br:last-child'))
-                        $('.br').focus()
-                    },0) 
+                        // $('.br:last-child').focus()
+                    },20) 
                 });
             }
         });

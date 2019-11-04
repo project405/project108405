@@ -14,22 +14,21 @@ var getCollRecommend = async function (memID, recompage) {
     var result = [];
     var collSum;
     //---------  取得收藏推薦內容 -------------
-    await sql('SELECT "m"."recomNum" '+
-                    ' ,to_char("recomDateTime",\'YYYY-MM-DD\') AS "recomDateTime" '+ 
-                    ' ,"recomHead" '+ 
-                    ' ,"recomCont" '+ 
-                    ' ,CASE WHEN "recomClass" = \'movie\' THEN \'電影\' '+ 
-                    ' WHEN "recomClass" = \'music\' THEN \'音樂\' '+ 
-                    ' WHEN "recomClass" = \'book\' THEN \'書籍\' '+ 
-                    ' WHEN "recomClass" = \'exhibition\' THEN \'展覽\' '+ 
-                    ' END AS "recomClass" '+ 
-            ' FROM "memberCollection" AS "m" '+
-            ' INNER JOIN "recommend" AS "r" '+
-            ' ON "m"."recomNum" = "r"."recomNum" '+
-            ' WHERE "memID" = $1 '+ 
-            ' ORDER BY "collDateTime"	DESC '+
-            ' LIMIT 8 '+
-            ' OFFSET $2', [memID, (recompage-1)*8])
+    await sql(`SELECT "T2".*
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", "C"."collDateTime", ROW_NUMBER() OVER(PARTITION BY "A"."recomNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "recommendListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                                ON "A"."recomNum" = "I"."recomNum"
+                        INNER JOIN "memberCollection" AS "C"
+                                ON "A"."recomNum" = "C"."recomNum"
+                        WHERE "I"."recomMessNum" IS NULL AND "C"."memID" = $1) AS "T1"
+                    WHERE "T1"."Rank" = '1'
+                    ORDER BY "T1"."collDateTime" DESC
+                    LIMIT 8
+                    OFFSET $2 ) AS "T2"`, [memID, (recompage-1)*8])
         .then((data) => {
             if (!data.rows){
                 recommendList = undefined ;
@@ -54,28 +53,28 @@ var getCollRecommend = async function (memID, recompage) {
         })
 
     // --------- 取得照片 --------- 
-    await sql('SELECT "recomNum","imgName" '+
-              ' FROM "image" '+
-              ' WHERE "recomNum" '+
-                    ' IN (SELECT "recomNum" '+
-                        ' FROM "memberCollection" '+
-                        ' WHERE "memID" = $1 )'+
-              ' ORDER BY "imgNum"', [memID])
-        .then((data) => {
-            if (!data.rows){
-                imgs = undefined ;
-            }else{
-                imgs = data.rows;
-            }
+    // await sql('SELECT "recomNum","imgName" '+
+    //           ' FROM "image" '+
+    //           ' WHERE "recomNum" '+
+    //                 ' IN (SELECT "recomNum" '+
+    //                     ' FROM "memberCollection" '+
+    //                     ' WHERE "memID" = $1 )'+
+    //           ' ORDER BY "imgNum"', [memID])
+    //     .then((data) => {
+    //         if (!data.rows){
+    //             imgs = undefined ;
+    //         }else{
+    //             imgs = data.rows;
+    //         }
            
-        }, (error) => {
-            imgs = undefined ;
-        });
+    //     }, (error) => {
+    //         imgs = undefined ;
+    //     });
 
     result[0] = recommendList ; 
     result[1] = [memID] ;
     // result[2] = checkAuthority ;
-    result[3] = imgs;
+    // result[3] = imgs;
     result[4] = collSum;
     result[5] = [recompage];
 
@@ -244,18 +243,24 @@ var getCollArticle = async function (memID, collpage) {
     var result = [];
     var collSum;
 
-    console.log(memID, collpage)
     //---------  取得每個會員收藏的文章內容 -------------
-    await sql('SELECT "a".*, "mem"."memName" '+
-            ' FROM "memberCollection"  AS "m" '+
-            ' INNER JOIN "articleListDataView" AS "a" '+
-                ' ON "m"."artiNum" = "a"."artiNum" '+
-            ' INNER JOIN "member" AS "mem" '+
-                ' ON "mem"."memID" = "a"."memID" '+
-            ' WHERE "m"."memID" = $1 '+
-            ' ORDER BY	"collDateTime" DESC '+
-            ' LIMIT 10 '+
-            ' OFFSET $2',  [memID, (collpage-1)*10 ])
+    await sql(`SELECT "T2".*, "M"."memName"
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", "C"."collDateTime", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "articleListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                                ON "A"."artiNum" = "I"."artiNum"
+                        INNER JOIN "memberCollection" AS "C"
+                                ON "A"."artiNum" = "C"."artiNum"
+                        WHERE "I"."artiMessNum" IS NULL AND "C"."memID" = $1) AS "T1"
+                    WHERE "T1"."Rank" = '1'
+                    ORDER BY "T1"."collDateTime" DESC
+                    LIMIT 10 
+                    OFFSET $2 ) AS "T2"
+                    INNER JOIN "member" "M"
+                    ON "M"."memID" = "T2"."memID"`,  [memID, (collpage-1)*10 ])
         .then((data) => {
             if(!data.rows){
                 colleArticle = undefined ; 
@@ -311,27 +316,27 @@ var getCollArticle = async function (memID, collpage) {
         });
 
     // ----------- 取得照片 -----------
-    await sql('SELECT "artiNum" , "imgName" '+ 
-             ' FROM "image" '+
-             ' WHERE "artiNum" '+
-                ' IN(SELECT "artiNum" '+
-                   ' FROM "memberCollection" '+
-                   ' WHERE "memID" = $1)'+
-            ' ORDER BY "imgNum"' , [memID])
-        .then((data) => {
-            if (!data.rows) {
-                imgs = undefined ; 
-            }else {
-                imgs = data.rows;
-            }
-        }, (error) => {
-            imgs = undefined ; 
-        });
+    // await sql('SELECT "artiNum" , "imgName" '+ 
+    //          ' FROM "image" '+
+    //          ' WHERE "artiNum" '+
+    //             ' IN(SELECT "artiNum" '+
+    //                ' FROM "memberCollection" '+
+    //                ' WHERE "memID" = $1)'+
+    //         ' ORDER BY "imgNum"' , [memID])
+    //     .then((data) => {
+    //         if (!data.rows) {
+    //             imgs = undefined ; 
+    //         }else {
+    //             imgs = data.rows;
+    //         }
+    //     }, (error) => {
+    //         imgs = undefined ; 
+    //     });
 
     result[0] = colleArticle;
     result[1] = tag;
     result[2] = isLike;
-    result[3] = imgs;
+    // result[3] = imgs;
     result[4] = [memID];
     result[5] = collSum;
     result[6] = [collpage];
@@ -349,14 +354,21 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
     var collSum;
     console.log(memID, recomClass, recompage)
     //--------- 根據分類取得會員收藏的推薦內容 ---------
-    await sql('SELECT "r".* '+ 
-             ' FROM "memberCollection" AS "m" '+
-                 ' INNER JOIN "recommendListDataView" AS "r" '+
-                     ' ON "m"."recomNum" = "r"."recomNum" '+
-             ' WHERE "m"."memID" = $1 AND "r"."recomClass" = $2 '+
-             ' ORDER BY "collDateTime" DESC'+
-             ' LIMIT 8' +
-             ' OFFSET $3 ' , [memID, recomClass, (recompage-1)*8])
+    await sql(`SELECT "T2".*
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", "C"."collDateTime", ROW_NUMBER() OVER(PARTITION BY "A"."recomNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "recommendListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                                ON "A"."recomNum" = "I"."recomNum"
+                        INNER JOIN "memberCollection" AS "C"
+                                ON "A"."recomNum" = "C"."recomNum"
+                        WHERE "I"."recomMessNum" IS NULL AND "C"."memID" = $1 AND "A"."recomClass" = $2) AS "T1"
+                    WHERE "T1"."Rank" = '1'
+                    ORDER BY "T1"."collDateTime" DESC
+                    LIMIT 8
+                    OFFSET $3 ) AS "T2"` , [memID, recomClass, (recompage-1)*8])
         .then((data) => {
             if(!data.rows){
                 recommendList = undefined ; 
@@ -381,26 +393,26 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
         console.log(error)
     })
     // --------- 取得照片 --------- 
-    await sql('SELECT "recomNum" , "imgName" '+
-             ' FROM "image"  '+
-             ' WHERE "recomNum" '+
-                'IN(SELECT "recomNum" '+
-                    ' FROM "memberCollection" '+
-                    ' WHERE "memID" = $1)'+
-            ' ORDER BY "imgNum"', [memID])
-        .then((data) => {
-            if (!data.rows){
-                imgs = undefined ;
-            }else{
-                imgs = data.rows;
-            }
+    // await sql('SELECT "recomNum" , "imgName" '+
+    //          ' FROM "image"  '+
+    //          ' WHERE "recomNum" '+
+    //             'IN(SELECT "recomNum" '+
+    //                 ' FROM "memberCollection" '+
+    //                 ' WHERE "memID" = $1)'+
+    //         ' ORDER BY "imgNum"', [memID])
+    //     .then((data) => {
+    //         if (!data.rows){
+    //             imgs = undefined ;
+    //         }else{
+    //             imgs = data.rows;
+    //         }
         
-        }, (error) => {
-            imgs = undefined ;
-        });
+    //     }, (error) => {
+    //         imgs = undefined ;
+    //     });
 
     result[0] = recommendList ; 
-    result[1] = imgs ;
+    // result[1] = imgs ;
     // result[2] = checkAuthority ;
     result[3] = [memID];
     result[4] = collSum;
@@ -421,16 +433,23 @@ var getCollArtiClassList = async function (memID, artiClass, collpage) {
     var result = [];
     var collSum;
     //--------- 根據分類取得會員收藏的文章內容 ---------
-    await sql('SELECT "a".*, "mem"."memName" '+
-             ' FROM "memberCollection"  AS "m" '+
-                 ' INNER JOIN "articleListDataView" AS "a" '+
-                     ' ON "m"."artiNum" = "a"."artiNum" '+
-                 ' INNER JOIN "member" AS "mem" '+
-                     ' ON "mem"."memID" = "a"."memID" '+
-             ' WHERE "m"."memID" = $1 AND "a"."artiClass" = $2 '+
-             ' ORDER BY	"collDateTime" DESC'+
-             ' LIMIT 10' +
-             ' OFFSET $3' , [memID, artiClass, (collpage-1)* 10])
+    await sql(`SELECT "T2".*, "M"."memName"
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", "C"."collDateTime", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "articleListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                                ON "A"."artiNum" = "I"."artiNum"
+                        INNER JOIN "memberCollection" AS "C"
+                                ON "A"."artiNum" = "C"."artiNum"
+                        WHERE "I"."artiMessNum" IS NULL AND "C"."memID" = $1 AND "A"."artiClass" = $2)  AS "T1"
+                    WHERE "T1"."Rank" = '1'
+                    ORDER BY "T1"."collDateTime" DESC
+                    LIMIT 10 
+                    OFFSET $3 ) AS "T2"
+                    INNER JOIN "member" "M"
+                    ON "M"."memID" = "T2"."memID"` , [memID, artiClass, (collpage-1)* 10])
         .then((data) => {
             if(!data.rows){
                 articleList = undefined ; 
@@ -473,23 +492,23 @@ var getCollArtiClassList = async function (memID, artiClass, collpage) {
         });
 
     // --------- 取得照片 --------- 
-    await sql('SELECT "artiNum" , "imgName" '+
-                ' FROM "image"  '+
-                ' WHERE "artiNum" '+
-                    'IN(SELECT "artiNum" '+
-                      ' FROM "memberCollection" '+
-                      ' WHERE "memID" = $1)'+
-             ' ORDER BY "imgNum" ', [memID])
-        .then((data) => {
-        if (!data.rows){
-            imgs = undefined ;
-        }else{
-            imgs = data.rows;
-        }
+    // await sql('SELECT "artiNum" , "imgName" '+
+    //             ' FROM "image"  '+
+    //             ' WHERE "artiNum" '+
+    //                 'IN(SELECT "artiNum" '+
+    //                   ' FROM "memberCollection" '+
+    //                   ' WHERE "memID" = $1)'+
+    //          ' ORDER BY "imgNum" ', [memID])
+    //     .then((data) => {
+    //     if (!data.rows){
+    //         imgs = undefined ;
+    //     }else{
+    //         imgs = data.rows;
+    //     }
 
-        }, (error) => {
-            imgs = undefined ;
-        });
+    //     }, (error) => {
+    //         imgs = undefined ;
+    //     });
 
     // --------- 判斷是否被使用者按愛心 ---------
     await sql('SELECT "artiNum" '+
@@ -510,7 +529,7 @@ var getCollArtiClassList = async function (memID, artiClass, collpage) {
 
     result[0] = articleList ; 
     result[1] = tag ; 
-    result[2] = imgs ;
+    // result[2] = imgs ;
     result[3] = isLike ; 
     // result[4] = checkAuthority ;
     result[5] = [memID];
