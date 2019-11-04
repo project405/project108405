@@ -31,7 +31,7 @@ router.post('/', function (req, res, next) {
                 },error => {
                     console.log(error)
                 })
-                res.render('/');   //導向使用者管理頁面
+                res.redirect('/');   //導向使用者管理頁面
             }
         })
     } else {

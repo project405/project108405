@@ -7,8 +7,6 @@ const sql = require('./asyncDB');
 //----- getArticleListPagination() --------
 //=========================================
 var getArticleListPagination = async function (memID, artiListNum) {
-    // const navSegments =  15;
-    // const startPage = Math.floor((artiListNum-1) / navSegments) * navSegments + 1;  //計算導覽列的起始頁數
     var articleList = [];
     var tag ;
     var isCollection  ;
@@ -16,19 +14,40 @@ var getArticleListPagination = async function (memID, artiListNum) {
     var imgs ;
     var result = [];
     var articleSum;
-    var pageImage = [];
     // -----------  取得文章清單 --------------
-    await sql('SELECT"articleListDataView".*, "member"."memName"'+
-             ' FROM "articleListDataView"' +
-             ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"'+
-             ' ORDER BY "articleListDataView"."artiNum" DESC'+
-             ' LIMIT 10' +
-             ' OFFSET $1', [(artiListNum-1) * 10])
+    await sql(`SELECT "T2".*,
+                      "M"."memName" 
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "articleListDataView" AS "A"
+                            LEFT JOIN "image" AS "I"
+                                ON "A"."artiNum" = "I"."artiNum"
+                        WHERE "I"."artiMessNum" IS NULL	) AS "T1"
+                    WHERE "T1"."Rank" = '1'
+                    ORDER BY "artiNum" DESC
+                    LIMIT 10 
+                    OFFSET $1 ) AS "T2"
+                        INNER JOIN "member" "M"
+                            ON "M"."memID" = "T2"."memID"`, [(artiListNum-1) * 10])
         .then((data) => {
             articleList = data.rows;
         }, (error) => {
             articleList = undefined;
         });
+
+    // await sql('SELECT"articleListDataView".*, "member"."memName"'+
+    //          ' FROM "articleListDataView"' +
+    //          ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"'+
+    //          ' ORDER BY "articleListDataView"."artiNum" DESC'+
+    //          ' LIMIT 10' +
+    //          ' OFFSET $1', [(artiListNum-1) * 10])
+    //     .then((data) => {
+    //         articleList = data.rows;
+    //     }, (error) => {
+    //         articleList = undefined;
+    //     });
     
     await sql('SELECT COUNT(*) FROM "articleListDataView"')
     .then((data) => {
@@ -70,14 +89,23 @@ var getArticleListPagination = async function (memID, artiListNum) {
         });
 
     //取得照片
-    articleList.map((item) => {
-        pageImage.push(item.artiNum)
-    })
-
-    await sql('SELECT "artiNum" , "imgName" ' +
-              ' FROM "image"'+
-              ' WHERE "artiNum" = ANY($1::INT[]) AND "artiMessNum" IS NULL'+
-              ' ORDER BY "imgNum"', [pageImage])
+    // articleList.map((item) => {
+    //     pageImage.push(item.artiNum)
+    // })
+    await sql(`SELECT "A".*
+               FROM(SELECT  "imgNum","memID","artiNum","imgName" ,ROW_NUMBER() OVER(PARTITION BY "artiNum" ORDER BY "imgNum") as "Rank"
+                    FROM "image"
+                    WHERE "artiNum" 
+                        IN( SELECT "artiNum" 
+                            FROM "image" 
+                            WHERE "artiNum" IS NOT NULL AND "artiMessNum" IS NULL
+                            ORDER BY "artiNum" DESC 
+                            LIMIT 10 
+                            OFFSET $1) 
+                    ORDER BY "imgNum"
+                    WHERE "I"."artiMessNum" IS NULL	) AS "A" 
+                WHERE "A"."Rank" = 1 
+                ORDER BY "artiNum" DESC `, [(artiListNum-1) * 10])
         .then((data) => {
             if (data.rows == null || data.rows == '') {
                 imgs = undefined;
