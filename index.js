@@ -68,87 +68,90 @@ bot.on('postback', function(event) {
                         
                         let recommendCont = [];
                         let recommendNum = [];
+                        let recommendClass = [];
                         d[0].forEach(item => {
+                            item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
                             item.recomCont = item.recomCont.length>75 ? `${item.recomCont.substr(0,75)}...` : item.recomCont
                             recommendCont.push(item.recomCont);
                             recommendNum.push(item.recomNum);
+                            recommendClass.push(item.recomClass);
+                            if (data == item.recomClass){
+                                return event.reply([
+                                    {
+                                        "type": "template",
+                                        "altText": `精選${item.recomClass}`,
+                                        "template": {
+                                          "type": "buttons",
+                                          "text": item.recomCont,
+                                          "actions": [
+                                            {
+                                              "type": "uri",
+                                              "label": " 👀 至文藝富心官網觀看",
+                                              "uri": `https://project108405.herokuapp.com/oneRecommend/${item.recomNum}`
+                                            }
+                                          ]
+                                        }
+                                    }
+                                ]);		
+                            }
+                            // else if(data == '展覽'){
+                            //     return event.reply([
+                            //         {
+                            //             "type": "template",
+                            //             "altText": "精選展覽",
+                            //             "template": {
+                            //               "type": "buttons",
+                            //               "text": recommendCont[1],
+                            //               "actions": [
+                            //                 {
+                            //                   "type": "uri",
+                            //                   "label": " 👀 至文藝富心官網觀看",
+                            //                   "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[1]}`
+                            //                 }
+                            //               ]
+                            //             }
+                            //         }
+                            //     ]);	
+                                    
+                            // }else if(data == '書籍'){
+                            //     return event.reply([
+                            //         {
+                            //             "type": "template",
+                            //             "altText": "精選書籍",
+                            //             "template": {
+                            //               "type": "buttons",
+                            //               "text": recommendCont[2],
+                            //               "actions": [
+                            //                 {
+                            //                   "type": "uri",
+                            //                   "label": " 👀 至文藝富心官網觀看",
+                            //                   "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[2]}`
+                            //                 }
+                            //               ]
+                            //             }
+                            //         }
+                            //     ]);		
+                            // }else if(data == '音樂'){
+                            //     return event.reply([
+                            //         {
+                            //             "type": "template",
+                            //             "altText": "精選音樂",
+                            //             "template": {
+                            //               "type": "buttons",
+                            //               "text": recommendCont[3],
+                            //               "actions": [
+                            //                 {
+                            //                   "type": "uri",
+                            //                   "label": " 👀 至文藝富心官網觀看",
+                            //                   "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[3]}`
+                            //                 }
+                            //               ]
+                            //             }
+                            //         }
+                            //     ]);	
+                            // }   
                         });
-                    
-                    if (data == '電影'){
-                        return event.reply([
-                            {
-                                "type": "template",
-                                "altText": "精選電影",
-                                "template": {
-                                  "type": "buttons",
-                                  "text": recommendCont[0],
-                                  "actions": [
-                                    {
-                                      "type": "uri",
-                                      "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[0]}`
-                                    }
-                                  ]
-                                }
-                            }
-                        ]);		
-                    }else if(data == '展覽'){
-                        return event.reply([
-                            {
-                                "type": "template",
-                                "altText": "精選展覽",
-                                "template": {
-                                  "type": "buttons",
-                                  "text": recommendCont[1],
-                                  "actions": [
-                                    {
-                                      "type": "uri",
-                                      "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[1]}`
-                                    }
-                                  ]
-                                }
-                            }
-                        ]);	
-                        	
-                    }else if(data == '書籍'){
-                        return event.reply([
-                            {
-                                "type": "template",
-                                "altText": "精選書籍",
-                                "template": {
-                                  "type": "buttons",
-                                  "text": recommendCont[2],
-                                  "actions": [
-                                    {
-                                      "type": "uri",
-                                      "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[2]}`
-                                    }
-                                  ]
-                                }
-                            }
-                        ]);		
-                    }else if(data == '音樂'){
-                        return event.reply([
-                            {
-                                "type": "template",
-                                "altText": "精選音樂",
-                                "template": {
-                                  "type": "buttons",
-                                  "text": recommendCont[3],
-                                  "actions": [
-                                    {
-                                      "type": "uri",
-                                      "label": " 👀 至文藝富心官網觀看",
-                                      "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[3]}`
-                                    }
-                                  ]
-                                }
-                            }
-                        ]);	
-                    }    
-                });
+                    });
             }else if (data.match("article")){
                 login.userJudgeBind(userId).then(d =>{
                     if(d.length !== 0){                         
