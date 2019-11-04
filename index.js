@@ -497,40 +497,37 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         index.getIndexData().then(data => {  
-            console.log('data!!!!!!!!!!!',data[0].recomNum)
-            console.log('data!!!!!!!!!!!',data[0].recomHead)
-            console.log('data!!!!!!!!!!!',data[0].imgName)
-            console.log('data!!!!!!!!!!!',data[0].recommendDateTime)
-            // let recommendNum = []  
-            // let recommendHead = []  
-            // let recommendDateTime = []  
-            // let recommendImg = []  
-            // //順序為電影、展覽、書籍、音樂
-            // data[0].forEach(item => {
+          
+            let recommendNum = []  
+            let recommendHead = []  
+            let recommendDateTime = []  
+            let recommendImg = []  
+            //順序為電影、展覽、書籍、音樂
+            data[0].forEach(item => {
                 
-            //     recommendNum.push(item.recomNum);
-            //     recommendHead.push(item.recomHead);
-            //     recommendDateTime.push(item.recomDateTime);
-            //     linePush.recomImg(item.recomNum).then(SecondData =>{
-            //         // console.log('SecondData[0].imgName',SecondData[0].imgName)
-            //         if(SecondData.length > 0){
-            //             var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
-            //             // recommendImg.push(SecondData)
-            //             linePush.Imgur(img).then(ThirdData =>{
-            //                 console.log('ThirdData',ThirdData)
-            //                 recommendImg.push(ThirdData)
-            //             }) 
-            //         }else{
-            //             recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg') 
-            //         }
-            //         console.log()
-            //     }) 
-            // });
+                recommendNum.push(item.recomNum);
+                recommendHead.push(item.recomHead);
+                recommendDateTime.push(item.recomDateTime);
+                linePush.recomImg(item.recomNum).then(SecondData =>{
+                    // console.log('SecondData[0].imgName',SecondData[0].imgName)
+                    if(SecondData.length > 0){
+                        var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                        // recommendImg.push(SecondData)
+                        linePush.Imgur(img).then(ThirdData =>{
+                            console.log('ThirdData',ThirdData)
+                            recommendImg.push(ThirdData)
+                        }) 
+                    }else{
+                        recommendImg.push('https://project108405.herokuapp.com/imgs/recommend/movie1.jpg') 
+                    }
+                    console.log()
+                }) 
+            });
 
-            // console.log('recommendNum',recommendNum)
-            // console.log('recommendHead',recommendHead)
-            // console.log('recommendDateTime',recommendDateTime)
-            // console.log('recommendImg',recommendImg)
+            console.log('recommendNum',recommendNum)
+            console.log('recommendHead',recommendHead)
+            console.log('recommendDateTime',recommendDateTime)
+            console.log('recommendImg',recommendImg)
             
 
 
