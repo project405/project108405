@@ -523,7 +523,7 @@ bot.on('message', function(event) {
         //     }) 
         // }
 
-        index.getIndexData().then(data => {  
+        index.getIndexData().then(function(data) {  
             
             let recommendNum = []  
             let recommendHead = []  
