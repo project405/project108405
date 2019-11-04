@@ -537,7 +537,7 @@ bot.on('message', function(event) {
             });
 
             const asyncRunFail = async () => {
-                let recommendImg = [];
+                var abc;
                 await linePush.recomImg(item.recomNum).then(SecondData =>{
                     // console.log('SecondData[0].imgName',SecondData[0].imgName)
                     if(SecondData.length > 0){
@@ -546,16 +546,19 @@ bot.on('message', function(event) {
                             // recommendImg.push(SecondData)
                             linePush.Imgur(img).then(ThirdData =>{
                                 console.log('ThirdData',ThirdData)
-                                recommendImg.push(ThirdData)
+                                // recommendImg.push(ThirdData)
+                                abc = ThirdData;
                             }) 
                         }
-                        recommendImg.push(SecondData[0].imgName)
+                        // recommendImg.push(SecondData[0].imgName)
+                        abc = SecondData[0].imgName;
                         
                     }else{
-                        recommendImg.push('https://i.imgur.com/oNykVvA.jpg') 
+                        // recommendImg.push('https://i.imgur.com/oNykVvA.jpg') 
+                        abc = 'https://i.imgur.com/oNykVvA.jpg';
                     }
                 }) 
-                return recommendImg
+                return abc
               }
               
 
