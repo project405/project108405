@@ -497,7 +497,10 @@ bot.on('message', function(event) {
     //-----------本週推薦-----------
 	if(text == '本週推薦'){
         index.getIndexData().then(data => {  
-            console.log('data!!!!!!!!!!!',data[0])
+            console.log('data!!!!!!!!!!!',data[0].recomNum)
+            console.log('data!!!!!!!!!!!',data[0].recomHead)
+            console.log('data!!!!!!!!!!!',data[0].imgName)
+            console.log('data!!!!!!!!!!!',data[0].recommendDateTime)
             // let recommendNum = []  
             // let recommendHead = []  
             // let recommendDateTime = []  
