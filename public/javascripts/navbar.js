@@ -302,5 +302,11 @@ $(document).ready(() => {
 
 function byParamSearch(){
     var params = $("#input_search").val() ;  
+    var checkParams = params.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+    if (checkParams == '') {
+        return;
+    }
     location.href='/search/' + params ;
+    
 }
+

@@ -362,12 +362,17 @@ var getWebSearch = async function (searchParams, memID) {
     //======================================
 
     // -----------  取得文章清單 -------------
-    await sql('SELECT"articleListDataView".*, "member"."memName" '+
-            ' FROM "articleListDataView" '+
-                ' INNER JOIN "member" '+ 
-                    ' ON "member"."memID" = "articleListDataView"."memID" '+
-            ' WHERE "artiHead" LIKE $1 or "artiCont" LIKE $1  or "artiClass" LIKE $1 '+ 
-            ' ORDER BY "articleListDataView"."artiNum" DESC',['%' + searchParams + '%'])
+    await sql(`	SELECT "T2".*
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "articleListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                            ON "A"."artiNum" = "I"."artiNum"
+                        WHERE "I"."artiMessNum" IS NULL)  AS "T1"
+                WHERE "T1"."Rank" = '1' AND ("artiHead" LIKE $1 or "artiCont" LIKE $1 or "artiClass" LIKE $1 ) 
+                ORDER BY "artiNum" DESC) AS "T2"`,['%' + searchParams + '%'])
         .then((data) => {
             articleList = data.rows;
         }, (error) => {
@@ -413,25 +418,33 @@ var getWebSearch = async function (searchParams, memID) {
         });
 
     //取得第一張照片
-    await sql('SELECT "artiNum" , "imgName" FROM "image"  WHERE "artiMessNum" IS NULL')
-        .then((data) => {
-            if (data.rows == null || data.rows == '') {
-                artiImgs = undefined;
-            } else {
-                artiImgs = data.rows;
-            }
-        }, (error) => {
-            artiImgs = undefined;
-        });
+    // await sql('SELECT "artiNum" , "imgName" FROM "image"  WHERE "artiMessNum" IS NULL')
+    //     .then((data) => {
+    //         if (data.rows == null || data.rows == '') {
+    //             artiImgs = undefined;
+    //         } else {
+    //             artiImgs = data.rows;
+    //         }
+    //     }, (error) => {
+    //         artiImgs = undefined;
+    //     });
 
     //======================================
     //------------- 搜尋推薦 ---------------
     //======================================
 
     // -----------  取得推薦清單 --------------
-    await sql('SELECT * '+
-             ' FROM "recommendListDataView" '+
-             ' WHERE "recomHead" LIKE $1 or "recomCont" LIKE $1 or "recomClass" LIKE $1 '
+    await sql(`	SELECT "T2".*
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."recomNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "recommendListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                            ON "A"."recomNum" = "I"."recomNum"
+                        WHERE "I"."recomMessNum" IS NULL)  AS "T1"
+                WHERE "T1"."Rank" = '1' AND ("recomHead" LIKE $1 or "recomCont" LIKE $1 or "recomClass" LIKE $1 ) 
+                ORDER BY "recomNum" DESC ) AS "T2"`
              ,['%' + searchParams + '%'])
         .then((data) => {
             if (data.rows != undefined) {
@@ -444,28 +457,28 @@ var getWebSearch = async function (searchParams, memID) {
         });
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image" ')
-    .then((data) => {
-        if (!data.rows) {
-            recomImgs = undefined;
-        } else {
-            recomImgs = data.rows;
-        }
-    }, (error) => {
-        recomImgs = undefined;
-    });
+    // await sql('SELECT "recomNum" , "imgName" FROM "image" ')
+    // .then((data) => {
+    //     if (!data.rows) {
+    //         recomImgs = undefined;
+    //     } else {
+    //         recomImgs = data.rows;
+    //     }
+    // }, (error) => {
+    //     recomImgs = undefined;
+    // });
 
     //文章
     result[0] = articleList;
     result[1] = tag;
     result[2] = isLike ; 
-    result[3] = artiImgs ;
+    // result[3] = artiImgs ;
     result[4] = isCollection;
     result[5] = [memID];
 
     //推薦
     result[6] = recommendList ; 
-    result[7] = recomImgs ; 
+    // result[7] = recomImgs ; 
 
     return result;
 }

@@ -47,10 +47,13 @@
                         <div class="card-body " onclick=" location.href='/article/<%= items[0][i].artiNum %>'">
                             <div class="poster">
                                 <div class="name d-flex justify-content-between">
-                                    <div style="word-break:break-all">
+                                    <div style="white-space:nowrap">
                                         <a class="floorTag"><%= items[0][i].memName %></a>
                                         <a class="next"></a>
-                                        <a class="dateTime">於 <%= items[0][i].artiDateTime %>發表</a>
+                                        <a class="dateTime">於 <%= items[0][i].artiDateTime %>發佈</a>
+                                    </div>
+                                    <div class="ml-auto">
+                                        <a class="itemClass"><%= items[0][i].artiClass %></a>
                                     </div>
                                 </div>
                                 <hr style="margin-top: 0.5em">
@@ -75,16 +78,9 @@
                                 </div>
                                 
                                 <!-- imgs  -->
-                                <% if(items[3] != undefined) { %>
-                                    <% for(var j = 0 ; j<items[3].length ; j++) { %>
-                                        <% if (items[0][i].artiNum == items[3][j].artiNum){ %>
-                                            <div class="wrapperCard card-img-top col-lg-3"
-                                                style="background-image: url( '<%= items[3][j].imgName %>'); ">
-                                            </div>
-                                            <% break %> <!-- 取得一張照片就結束 -->
-                                        <% } %>
-                                    <% } %>
-                                <% } %>
+                                <div class="wrapperCard card-img-top col-lg-3"
+                                    style="background-image: url( '<%= items[0][i].imgName %>'); ">
+                                </div>
                             </div>
                         </div>
 
@@ -225,20 +221,12 @@
         <div class="row d-flex no-gutters container-fluid justify-content-center align-items-center recommend">
             <!-- 推薦開始 -->
             <% for(var i = 0 ; i<items[6].length ; i++){ %>
-                <% isImg = false %>
                 <!-- 如果有抓到圖片 -->
-                <% if(items[7] != undefined) { %>
-                    <% for(var j = 0 ; j<items[7].length ; j++ ) { %>
-                        <% if(items[6][i].recomNum == items[7][j].recomNum){ %>
-                            <div class="wrapper col-12  col-lg-2"
-                            style="background-image:url('<%= items[7][j].imgName %>');">
-                            <% isImg = true %>
-                            <% break ;%>
-                        <% } %>
-                    <% } %>
-                <% } %>
+            <% if(recom[6][i].imgName) { %>
+                <div class="wrapper col-12  col-lg-2"
+                style="background-image:url('<%= items[6][i].imgName %>');">
             <!-- 如果沒抓到半張圖片 -->
-            <% if(isImg == false) { %>
+            <% } else { %>
                 <div class="wrapper col-12  col-lg-2">
             <% } %>
 
