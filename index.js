@@ -508,7 +508,36 @@ bot.on('message', function(event) {
                 recommendNum.push(item.recomNum);
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
-                linePush.recomImg(item.recomNum).then(SecondData =>{
+                //-------------
+                // linePush.recomImg(item.recomNum).then(SecondData =>{
+                //     // console.log('SecondData[0].imgName',SecondData[0].imgName)
+                //     if(SecondData.length > 0){
+                //         if(SecondData[0].imgName.match('data:image/jpeg;base64,') != null){
+                //             var img = SecondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                //             // recommendImg.push(SecondData)
+                //             linePush.Imgur(img).then(ThirdData =>{
+                //                 console.log('ThirdData',ThirdData)
+                //                 recommendImg.push(ThirdData)
+                //             }) 
+                //         }
+                //         recommendImg.push(SecondData[0].imgName)
+                        
+                //     }else{
+                //         recommendImg.push('https://i.imgur.com/oNykVvA.jpg') 
+                //     }
+                // }) 
+                asyncRunFail().then(string => {
+                    console.log('string@@@@@@@@@',string);
+                  }).catch(response => {
+                    console.log(response);
+                    // 小明 跌倒失敗(rejected)
+                  })
+    
+                //-------------
+            });
+
+            const asyncRunFail = async () => {
+                await linePush.recomImg(item.recomNum).then(SecondData =>{
                     // console.log('SecondData[0].imgName',SecondData[0].imgName)
                     if(SecondData.length > 0){
                         if(SecondData[0].imgName.match('data:image/jpeg;base64,') != null){
@@ -524,18 +553,15 @@ bot.on('message', function(event) {
                     }else{
                         recommendImg.push('https://i.imgur.com/oNykVvA.jpg') 
                     }
-                    console.log()
                 }) 
-            });
+                return recommendImg
+              }
+              
 
             console.log('recommendNum',recommendNum)
             console.log('recommendHead',recommendHead)
             console.log('recommendDateTime',recommendDateTime)
             console.log('recommendImg',recommendImg)
-            
-
-
-
                 // event.reply({
                 //     "type": "template",
                 //     "altText": " 👋 本週新推薦",
