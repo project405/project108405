@@ -42,7 +42,7 @@ var getIndexData = async function (memID) {
                     ' ORDER BY "recomNum" ) AS "B" '+
              ' WHERE "B"."R" = \'1\' ')
         .then((data) => {
-            console.log(data.rows) ; 
+            
             // 將每周推薦的類別改為中文
             for (let i = 0; i < data.rows.length; i++) {
                 if (data.rows[i].recomClass == 'movie') {
