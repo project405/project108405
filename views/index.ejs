@@ -51,7 +51,7 @@
             <!-- 推薦 -->
             <% for(var i = 0 ; i<items[0].length ; i ++) { %>
                 <div class="wrapper col-12  col-lg-4" 
-                    style="background-image: url('<%= items[0]][i].imgName%>');"
+                    style="background-image: url('<%= items[0][i].imgName%>');"
                     onclick="location.href='/oneRecommend/<%= items[0][i].recomNum %>'" data-aos="fade-right">
 
                 <a class="portfolio-box" href="/oneRecommend/<%= items[0][i].recomNum %>">
