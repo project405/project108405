@@ -74,7 +74,6 @@
                         </div>
                         <div class="project-name">
                             <p class="title"><%= items[0][i].recomHead %></p>
-                            </p>
                             <p class="content fourRecommend"><%- items[0][i].recomCont %>
                             </p>
                         </div>
@@ -189,9 +188,8 @@
                         <div class="card-body">
                             <h3 class="card-title"><%= items[1][2].artiHead %>
                             </h3>
-                            <div class="wrapText">
-                                <p class="card-text">
-                                    <%- items[1][2].artiCont %>
+                            <div>
+                                <p class="card-text wrapText"><%- items[1][2].artiCont %>
                                 </p>
                             </div>
 
@@ -277,7 +275,7 @@
     <a id="sentimentSectionHover" style="visibility: hidden;">情緒專區</a>
     <a href="#" id="sentimentSection" data-toggle="modal" data-target="#sentimentSectionContainer">
         <!-- <i class="fas fa-kiss "></i> -->
-        <img style="width:50%" src="../imgs/icon/bulb.png" alt="">
+        <img style="width:75%" src="../imgs/icon/bulb.png" alt="">
     </a>
 
     <!-- Modal -->

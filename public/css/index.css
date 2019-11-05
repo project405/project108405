@@ -110,7 +110,7 @@ div.article {
 
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-category {
     font-family: 'Noto Serif TC', "Arial", "Segoe UI", "Roboto", "Helvetica Neue";
-    font-size: 1.1em;
+    font-size: 1.25em;
     font-weight: 600;
 }
 .project-category p {
@@ -118,7 +118,7 @@ div.article {
     margin-bottom: 0.3em;
 }
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name p.title {
-    font-size: 1.25em;
+    font-size: 1.1em;
     text-align: center;
     font-weight: bold;
     font-size: 1em;
@@ -127,9 +127,11 @@ div.article {
 }
 
 #portfolio p.content {
-    font-size: 0.75em !important;
+    font-size: 0.85em !important;
     padding: 0em 1.25em 0.5em 1.25em;
     text-align: justify;
+    color: rgb(233, 233, 233);
+
 }
 
 #portfolio .container-fluid .portfolio-box:hover .portfolio-box-caption {
@@ -199,11 +201,6 @@ div.hotArticle {
     overflow: hidden !important;
     -webkit-box-orient: vertical !important;
 } */
-.wrapText {
-    max-height: 80px !important;    
-    -webkit-line-clamp: 7 !important; 
-    overflow: hidden !important;
-}
 .wrapperCardbig {
     width: 100%;
     height: 310pt;

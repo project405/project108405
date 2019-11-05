@@ -73,7 +73,7 @@ $(document).ready(() => {
                               </button>\
                         </div>\
                         <div class="modal-body" style="padding:0em;">\
-                        <img src="imgs/icon/aboutUS.png" alt="" style="width: 100%;"></div>\
+                        <img src="/imgs/icon/aboutUS.png" alt="" style="width: 100%;"></div>\
                     </div>\
                 </div>\
             </div>\ '
@@ -291,7 +291,7 @@ $(document).ready(() => {
                           </button>\
                     </div>\
                     <div class="modal-body" style="padding:0em;">\
-                        <img src="imgs/icon/aboutUS.png" alt="" style="width: 100%;"> </div>\
+                        <img src="/imgs/icon/aboutUS.png" alt="" style="width: 100%;"> </div>\
                 </div>\
             </div>\
         </div>\ '
@@ -302,5 +302,11 @@ $(document).ready(() => {
 
 function byParamSearch(){
     var params = $("#input_search").val() ;  
+    var checkParams = params.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+    if (checkParams == '') {
+        return;
+    }
     location.href='/search/' + params ;
+    
 }
+

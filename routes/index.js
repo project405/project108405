@@ -19,17 +19,12 @@ router.get('/', function (req, res, next) {
         
         if (data[0] != undefined) {
             data[0].map((item) => {
-                item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ');
-                item.recomCont = item.recomCont.replace(/\\:imgLocation/g, " ");
+                item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ");
             })
 
             //熱門文章 圖片標籤取代為空字串
             for (var i = 0; i < data[1].length; i++) {
-                if (data[1][i].artiCont.match("\\:imgLocation") != null) {
-                    data[1][i].artiCont = data[1][i].artiCont.replace(/\\:imgLocation/g, " ");
-                }
-                data[1][i].artiCont = data[1][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ');
-                
+                data[1][i].artiCont = data[1][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " "); 
             }
         }
 
