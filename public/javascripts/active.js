@@ -44,7 +44,7 @@ $(document).ready(function () {
     $(".limitLine").each(function () {
         var str = $(this).html().trim();
         var subStr = str.substring(0, 150);
-        var data = subStr + (str.length > 150 ? '...' : '');
+        var data = subStr + (str.length > 50 ? '...' : '');
         $(this).html(data);
     });
     $(".wrapBigHotSectionText").each(function () {
