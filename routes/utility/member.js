@@ -69,7 +69,7 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
     //新增tag 
     if(tag.length != 0){
         for (var i = 0; i < tag.length; i++) {
-            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i].trim()])
                 .then((data) => {
                     if (!data.rows) {
                         tagNum = undefined;
