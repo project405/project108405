@@ -9,11 +9,6 @@ const member = require('./member');
 //=========================================
 var getIndexData = async function (memID) {
     var weekRecommend = [];
-    var fourRecommend = [];
-    var movie = true; //判斷是否找過 (只取一篇)
-    var book = true; 
-    var music = true;
-    var exhibition = true;
     var hotArticle = [];  //存放前三名熱門文章
     var articleImgs = [] ;
     var recommendImgs = [];
@@ -34,8 +29,20 @@ var getIndexData = async function (memID) {
     var result = [];
 
     // -----------  每週推薦 --------------
-    await sql('SELECT * FROM "recommend" ORDER BY "recomNum" DESC')
+    await sql('SELECT * '+
+             ' FROM( '+
+                    ' SELECT "A".*, "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."recomNum" ORDER BY "imgDateTime" DESC ) AS "R" '+
+                    ' FROM(  '+
+                        ' SELECT *, ROW_NUMBER() OVER(PARTITION BY "recomClass" ORDER BY "recomDateTime" DESC ) AS "Rank" '+
+                        ' FROM "recommend" '+
+                        ' ORDER BY "recomDateTime" DESC ) AS "A" '+
+                    ' LEFT JOIN  "image" AS "I" '+
+                        ' ON "A"."recomNum" = "I"."recomNum" '+
+                    ' WHERE "Rank" = \'1\' AND "I"."recomMessNum" IS NULL '+
+                    ' ORDER BY "recomNum" ) AS "B" '+
+             ' WHERE "B"."R" = \'1\' ')
         .then((data) => {
+            
             // 將每周推薦的類別改為中文
             for (let i = 0; i < data.rows.length; i++) {
                 if (data.rows[i].recomClass == 'movie') {
@@ -53,22 +60,6 @@ var getIndexData = async function (memID) {
             weekRecommend = null;
         })
 
-    // 只各取一篇出來
-    for (var i = 0; i < weekRecommend.length; i++) {
-        if (weekRecommend[i].recomClass == '電影' && movie) {
-            fourRecommend.push(weekRecommend[i]);
-            movie = false;
-        } else if (weekRecommend[i].recomClass == '音樂' && music) {
-            fourRecommend.push(weekRecommend[i]);
-            music = false;
-        } else if (weekRecommend[i].recomClass == '書籍' && book) {
-            fourRecommend.push(weekRecommend[i]);
-            book = false;
-        } else if (weekRecommend[i].recomClass == '展覽' && exhibition) {
-            fourRecommend.push(weekRecommend[i]);
-            exhibition = false;
-        }
-    }
     // -----------  熱門文章 --------------
     await sql('SELECT "articleListDataView".*, "member"."memName" ' + 
               'FROM "articleListDataView" '+
@@ -251,7 +242,7 @@ var getIndexData = async function (memID) {
         byClassData = await byClassGetData(classCount[0][0],r ) ; 
     }
 
-    result[0] = fourRecommend;
+    result[0] = weekRecommend;
     result[1] = hotArticle;
     result[2] = [memID];
     result[3] = articleImgs;
