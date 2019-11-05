@@ -52,6 +52,14 @@ div.article {
     border: 3px solid #fff;
     /* text-align: left !important; */
 }
+@media (max-width: 991px) {
+    div.wrapperCard {
+        width: 100% !important;
+        display: block;
+        height: 6em !important;
+        background-position: center center;
+    }
+}
 
 p.poster {
     text-align: right;
@@ -261,24 +269,29 @@ div.article {
     transition: opacity 0.5s ease;
     text-align: center;
 }
-
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-category {
     font-family: 'Noto Serif TC', "Merriweather Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 1.25em;
+    font-size: 0.85em;
     font-weight: 300;
     text-transform: uppercase;
 }
 
+.project-category p {
+    margin-top: 0.1em;
+    margin-bottom: 0.3em;
+}
 #portfolio .container-fluid .portfolio-box .portfolio-box-caption .project-name p.title {
-    font-size: 1em;
+    font-size: 0.75em;
     text-align: center;
     font-weight: bold;
+    padding: 0 1em;
 }
 
 #portfolio p.content {
-    font-size: 0.75em !important;
+    font-size: 0.6em !important;
     padding: 0em 1.25em 0.5em 1.25em;
     text-align: justify;
+    color: rgb(233, 233, 233);
 }
 
 @media (max-width: 576px) {

@@ -14,14 +14,23 @@ router.get('/:searchParam', function (req, res, next) {
   }
 
   index.getWebSearch(req.params.searchParam, memID).then(data => {
-    if (data[0] != undefined) {
-      for (var i = 0; i < data[0].length; i++) {
-          if (data[0][i].artiCont.match("\\:imgLocation") != null) {
-              data[0][i].artiCont = data[0][i].artiCont.replace(/\\:imgLocation/g, " ");
-          }
-          data[0][i].artiCont = data[0][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ')
-      }
-    }
+    data[0].map((item) => {
+        item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ");
+        switch(item.artiClass) {
+            case 'book':
+                item.artiClass = '書籍'
+                break;
+            case 'movie':
+                item.artiClass = '電影'
+                break;
+            case 'music':
+                item.artiClass = '音樂'
+                break;
+            case 'exhibition':
+                item.artiClass = '展覽'
+                break;
+        }
+    })
     res.render('search', { items: data });
   })
 

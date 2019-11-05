@@ -109,12 +109,14 @@ div.article {
     text-align: center;
     font-weight: bold;
     padding: 0 1em;
+    margin-bottom: 0.2em;
 }
 
 #portfolio p.content {
-    font-size: 0.6em !important;
-    padding: 0em 1.25em 0.5em 1.25em;
+    font-size: 0.5em !important;
+    padding: 0em 1em 0.5em 1em;
     text-align: justify;
+    color: rgb(233, 233, 233);
 }
 
 
