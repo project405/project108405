@@ -544,40 +544,43 @@
         }
     // delRecommend
     function delRecommend(recomNum) {
-        $('.spinner-border').css('display', 'block')
-        $('.coverContainer').css('display', 'block')
+        if (confirm('管理者確定要刪除推薦嗎？')) {
+            $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
 
-        $.ajax({
-        url: '/addLike',
-        type: 'POST',
-        data: { "recomNum": recomNum, "delRecommend": true },
-        success: function (res) {
-            alert('刪除成功！')
-            location.replace("/recommendList/1");
-        },
-        error: function (res) {
-            alert('刪除失敗！')
+            $.ajax({
+            url: '/addLike',
+            type: 'POST',
+            data: { "recomNum": recomNum, "delRecommend": true },
+            success: function (res) {
+                alert('刪除成功！')
+                location.replace("/recommendList/1");
+            },
+            error: function (res) {
+                alert('刪除失敗！')
+            }
+            });
         }
-    });
     }
     // delReply
     function deleteReply(artiMessNum, memID) {
-        $('.spinner-border').css('display', 'block')
-        $('.coverContainer').css('display', 'block')
-
-        $.ajax({
-            url: '/addLike',
-            type: 'POST',
-            data: { "recomMessNum": artiMessNum, "memID": memID, "deleteRecommendReply": true },
-            success: function (res) {
-                alert('刪除成功！')
-                location.reload();
-            },
-            error: function (res) {
-                console.log('刪除失敗');
-                alert('刪除失敗！')
-            }
-        });
+        if (confirm('您真的要刪除留言嗎？')) {
+            $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
+            $.ajax({
+                url: '/addLike',
+                type: 'POST',
+                data: { "recomMessNum": artiMessNum, "memID": memID, "deleteRecommendReply": true },
+                success: function (res) {
+                    alert('刪除成功！')
+                    location.reload();
+                },
+                error: function (res) {
+                    console.log('刪除失敗');
+                    alert('刪除失敗！')
+                }
+            });
+        }
     }
     </script>
     <script src="/javascripts/imageCompression.js"></script>

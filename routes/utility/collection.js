@@ -94,6 +94,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     var imgs = [] ;
     var result = [];
     var replyImgs = []
+    var checkAuthority;
     
 
     // -----------  取得單一文章 --------------
@@ -138,6 +139,16 @@ var getOneColleRecommend = async function (recomNum, memID) {
             oneRecomMessage = undefined ;
         });
 
+    await sql('SELECT "memAuthority" FROM "member" where "memID" = $1 ', [memID])
+        .then((data) => {
+            if (!data.rows[0]) {
+                checkAuthority = undefined;
+            } else {
+                checkAuthority = data.rows[0].memAuthority;
+            }
+        }, (error) => {
+            console.log(error)
+        });
     // -----------  取得tag --------------
     await sql('SELECT "tagName" FROM "recommendTagView" WHERE "recomNum" = $1', [recomNum])
         .then((data) => {
@@ -226,7 +237,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     result[4] = isLike;
     result[5] = isCollection;
     result[6] = isMessLike;
-    // result[7] = checkAuthority;
+    result[7] = checkAuthority;
     result[8] = [memID];
     result[9] = replyImgs;
     

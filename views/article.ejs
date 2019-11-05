@@ -731,6 +731,7 @@
             }
             // delArticle
             function delArticle(artiNum) {
+                if (confirm('您真的要刪除文章嗎？')) {
                     $('.spinner-border').css('display', 'block')
                     $('.coverContainer').css('display', 'block')
                     $.ajax({
@@ -745,9 +746,11 @@
                         alert('刪除失敗！')
                     }
                 });
+                }
             }
             // delReply
             function deleteReply(artiMessNum, memID) {
+                if (confirm('您真的要刪除留言嗎？')) {
                     $('.spinner-border').css('display', 'block')
                     $('.coverContainer').css('display', 'block')
                     $.ajax({
@@ -763,6 +766,7 @@
                     }
                 });
             }
+        }
             
     </script>
 </body>
