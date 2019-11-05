@@ -43,8 +43,8 @@ $(document).ready(function () {
     });
     $(".limitLine").each(function () {
         var str = $(this).html().trim();
-        var subStr = str.substring(0, 150);
-        var data = subStr + (str.length > 50 ? '...' : '');
+        var subStr = str.substring(0, 75);
+        var data = subStr + (str.length > 75 ? '...' : '');
         $(this).html(data);
     });
     $(".wrapBigHotSectionText").each(function () {
