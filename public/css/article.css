@@ -168,6 +168,9 @@ div.nameTime {
 p.content {
     color: rgb(73, 73, 73);
 }
+div.content {
+    word-break: break-all;
+}
 
 
 div.likeContainer{

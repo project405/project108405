@@ -214,8 +214,3 @@ button.postButton:hover {
     }
 }
 
-/* 限制行數 */
-
-.limitLine {
-    overflow: hidden;
-}
