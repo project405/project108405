@@ -417,6 +417,7 @@ bot.on('message', function(event) {
         index.getIndexData().then(data => {
              
             console.log(data[1])
+            let hotArticleNum = []  
             let hotArticleHead = []  
             let hotArticleCont = []  
             let hotArticleDateTime = []  
@@ -425,59 +426,74 @@ bot.on('message', function(event) {
             data[1].forEach(async(item, index) =>{
                 item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
                 item.artiCont = item.artiCont.length>35 ? `${item.artiCont.substr(0,34)}...` : item.artiCont
+                hotArticleNum.push(item.artiNum)
                 hotArticleHead.push(item.artiHead)
                 hotArticleCont.push(item.artiCont)
                 hotArticleDateTime.push(item.artiDateTime)
-                
-            })
-            
-            event.reply(
-                {
-                "type": "template",
-                "altText": "熱門文章",
-                "template": {
-                    "type": "carousel",
-                    "columns": [
-                        {
-                            "title": "【" + data[1][0].artiHead + "】" ,
-                            "text":'時間：' + data[1][0].artiDateTime  + '\n' + data[1][0].artiCont ,
-                            "actions": [
-                                
-                                {
-                                    "type": "uri",
-                                    "label": " 👀 至文藝富心官網觀看",
-                                    "uri": `https://project108405.herokuapp.com/article/${data[1][0].artiNum}`
-                                }
-                            ]
-                        },
-                        {
-                            "title": "【" + data[1][1].artiHead + "】" ,
-                            "text":'時間：' + data[1][1].artiDateTime  + '\n'+  data[1][1].artiCont,
-                            "actions": [
-                                
-                                {
-                                    "type": "uri",
-                                    "label": " 👀 至文藝富心官網觀看",
-                                    "uri": `https://project108405.herokuapp.com/article/${data[1][1].artiNum}`
-                                }
-                            ]
-                        },
-                        {
-                            "title": "【" + data[1][2].artiHead + "】" ,
-                            "text":'時間：' + data[1][2].artiDateTime  + '\n'+ data[1][2].artiCont,
-                            "actions": [
-                                
-                                {
-                                    "type": "uri",
-                                    "label": " 👀 至文藝富心官網觀看",
-                                    "uri": `https://project108405.herokuapp.com/article/${data[1][2].artiNum}`
-                                }
-                            ]
-                        }      
-                    ]
+                 //-------------
+                if(item.imgName){
+                    var img = item.imgName.replace('data:image/jpeg;base64,', '');
+                    await linePush.Imgur(img).then((imgurData) => {
+                        hotArticleImg.splice(index,0,imgurData);
+                    })  
+
+                }else{
+                    hotArticleImg.splice(index,0,'https://i.imgur.com/oNykVvA.jpg');
                 }
-            });
-           
+                var secondCheck = setInterval(() => {
+                    if (hotArticleImg.length == 3) {
+                        console.log(hotArticleImg);
+                        
+                        event.reply(
+                            {
+                            "type": "template",
+                            "altText": "熱門文章",
+                            "template": {
+                                "type": "carousel",
+                                "columns": [
+                                    {
+                                        "title": "【" + hotArticleHead[0] + "】" ,
+                                        "text":'時間：' + hotArticleDateTime[0]  + '\n' + hotArticleCont[0] ,
+                                        "actions": [
+                                            
+                                            {
+                                                "type": "uri",
+                                                "label": " 👀 至文藝富心官網觀看",
+                                                "uri": `https://project108405.herokuapp.com/article/${hotArticleNum[0]}`
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "title": "【" + hotArticleHead[1] + "】" ,
+                                        "text":'時間：' + hotArticleDateTime[1]  + '\n'+  hotArticleCont[1],
+                                        "actions": [
+                                            
+                                            {
+                                                "type": "uri",
+                                                "label": " 👀 至文藝富心官網觀看",
+                                                "uri": `https://project108405.herokuapp.com/article/${hotArticleNum[1]}`
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "title": "【" + hotArticleHead[2] + "】" ,
+                                        "text":'時間：' + hotArticleDateTime[2]  + '\n'+ hotArticleCont[2],
+                                        "actions": [
+                                            
+                                            {
+                                                "type": "uri",
+                                                "label": " 👀 至文藝富心官網觀看",
+                                                "uri": `https://project108405.herokuapp.com/article/${hotArticleNum[2]}`
+                                            }
+                                        ]
+                                    }      
+                                ]
+                            }
+                        });
+                        clearInterval(secondCheck);
+                    }  
+                }, 250)
+            })
 
         })
     };
