@@ -435,8 +435,7 @@ bot.on('message', function(event) {
                     var img = item.imgName.replace('data:image/jpeg;base64,', '');
                     await linePush.Imgur(img).then((imgurData) => {
                         hotArticleImg.splice(index,0,imgurData);
-                    })  
-
+                    }) 
                 }else{
                     hotArticleImg.splice(index,0,'https://i.imgur.com/oNykVvA.jpg');
                 }
@@ -452,7 +451,7 @@ bot.on('message', function(event) {
                                     {
                                             "thumbnailImageUrl": hotArticleImg[0],
                                             "title": "【" + hotArticleHead[0] + "】" ,
-                                            "text": DateTimeFormat(hotArticleDateTime[0]),
+                                            "text": `${DateTimeFormat(hotArticleDateTime[0])}\n${hotArticleCont[0]}`,
                                             "defaultAction": {
                                                 "type": "uri",
                                                 "label": "知道更多",
@@ -469,7 +468,7 @@ bot.on('message', function(event) {
                                     ,{
                                     "thumbnailImageUrl": hotArticleImg[1],
                                     "title":"【" + hotArticleHead[1] + "】" ,
-                                    "text": DateTimeFormat(hotArticleDateTime[1]),
+                                    "text": `${DateTimeFormat(hotArticleDateTime[1])}\n${hotArticleCont[1]}`,
                                     "defaultAction": {
                                         "type": "uri",
                                         "label": "知道更多",
@@ -486,7 +485,7 @@ bot.on('message', function(event) {
                                     {
                                         "thumbnailImageUrl": hotArticleImg[2],
                                         "title":"【" + hotArticleHead[2] + "】" ,
-                                        "text": DateTimeFormat(hotArticleDateTime[2]),
+                                        "text": `${DateTimeFormat(hotArticleDateTime[2])}\n${hotArticleCont[2]}`,
                                         "defaultAction": {
                                             "type": "uri",
                                             "label": "知道更多",
