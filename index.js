@@ -443,16 +443,15 @@ bot.on('message', function(event) {
                 var secondCheck = setInterval(() => {
                     if (hotArticleImg.length == 3) {
                         console.log(hotArticleImg);
-                        
                         event.reply({
                             "type": "template",
                             "altText": " 👋 熱門文章",
                             "template": {
                                 "type": "carousel",
                                 "columns": [
-                                        {
+                                    {
                                             "thumbnailImageUrl": hotArticleImg[0],
-                                            "title": "【" + rhotArticleHead[0] + "】" ,
+                                            "title": "【" + hotArticleHead[0] + "】" ,
                                             "text": DateTimeFormat(hotArticleDateTime[0]),
                                             "defaultAction": {
                                                 "type": "uri",
@@ -469,11 +468,11 @@ bot.on('message', function(event) {
                                         }
                                     ,{
                                     "thumbnailImageUrl": hotArticleImg[1],
-                                    "title":"【" + rhotArticleHead[1] + "】" ,
+                                    "title":"【" + hotArticleHead[1] + "】" ,
                                     "text": DateTimeFormat(hotArticleDateTime[1]),
                                     "defaultAction": {
                                         "type": "uri",
-                                        "label": "詳細資料",
+                                        "label": "知道更多",
                                         "uri": `https://project108405.herokuapp.com/article/${hotArticleNum[1]}`
                                     },
                                     "actions": [
@@ -486,11 +485,11 @@ bot.on('message', function(event) {
                                     },
                                     {
                                         "thumbnailImageUrl": hotArticleImg[2],
-                                        "title":"【" + rhotArticleHead[2] + "】" ,
+                                        "title":"【" + hotArticleHead[2] + "】" ,
                                         "text": DateTimeFormat(hotArticleDateTime[2]),
                                         "defaultAction": {
                                             "type": "uri",
-                                            "label": "詳細資料",
+                                            "label": "知道更多",
                                             "uri": `https://project108405.herokuapp.com/article/${hotArticleNum[2]}`
                                         },
                                         "actions": [
