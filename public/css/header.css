@@ -742,7 +742,7 @@ a.itemClass:after {
 }
 
 
-.wrapText, .limitLine {
+.wrapText, .limitLine, .content {
     word-break: break-all !important;
     overflow: hidden !important;
 }
