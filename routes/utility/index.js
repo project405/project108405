@@ -70,23 +70,27 @@ var getIndexData = async function (memID) {
         }
     }
     // -----------  熱門文章 --------------
-    await sql(`SELECT * FROM 
-                (SELECT "artiNum" , 
-                            "memID" , 
-                            "artiDateTime", 
-                            "artiHead", 
-                            "artiCont", 
-                            "artiClass", 
-                            "likeCount", 
-                            "messCount", 
-                            RANK () OVER (ORDER BY  "likeCount" DESC) AS "likeRank" 
-                        FROM "articleListDataView" AS "data" 
-                        ) AS "A" 
-                        LEFT JOIN  "image" AS "I"
-                        ON "A"."artiNum" = "I"."artiNum"
-            WHERE "A"."likeRank" <= 5 
-            ORDER BY RANDOM() 
-            LIMIT 3`) 
+    await sql(`SELECT "B".* 
+                FROM( 
+                    SELECT "A".*, "I"."imgName", ROW_NUMBER() OVER (PARTITION BY "I"."artiNum" ORDER BY  "I"."imgDateTime" DESC) AS "Rank" 
+                    FROM 
+                        (SELECT "artiNum" , 
+                                    "memID" , 
+                                    "artiDateTime", 
+                                    "artiHead", 
+                                    "artiCont", 
+                                    "artiClass", 
+                                    "likeCount", 
+                                    "messCount", 
+                                    RANK () OVER (ORDER BY  "likeCount" DESC) AS "likeRank" 
+                                FROM "articleListDataView" AS "data" 
+                                ) AS "A" 
+                                LEFT JOIN  "image" AS "I"
+                                ON "A"."artiNum" = "I"."artiNum"
+                    WHERE "A"."likeRank" <= '5' AND "I"."artiMessNum" IS NULL ) AS "B"
+                WHERE "Rank" = '1'
+                ORDER BY RANDOM() 
+                LIMIT 3`) 
         .then((data) => {
             
             if (!data.rows) {

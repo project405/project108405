@@ -409,16 +409,19 @@ bot.on('message', function(event) {
     //使用者傳來的文字
     const text = event.message.text;
     
-    //存放本週推薦類別
-    let msgs = ['電影','展覽','書籍','音樂'];
    //------------------------------------------------
    //------------------顯示熱門文章--------------------
    //------------------------------------------------
    
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
+             
             console.log(data[1])
-            data[1].forEach(item =>{
+            let hotArticleHead = []  
+            let hotArticleDateTime = []  
+            let hotArticleImg = [];
+            
+            data[1].forEach(async(item, index) =>{
                 item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
                 item.artiCont = item.artiCont.length>35 ? `${item.artiCont.substr(0,34)}...` : item.artiCont
             })
