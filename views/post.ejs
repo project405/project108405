@@ -154,6 +154,9 @@
             } else if (templateCont == '') {
                 alert('請輸入內文')
                 return;
+            } else if (templateHead.length > 40) {
+                alert('標題不得超過40字元！')
+                return;
             }
             $('.postButton').addClass('disabled')
             $('.postButton').attr('disabled', true)
