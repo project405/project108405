@@ -282,6 +282,7 @@ bot.on('postback', function(event) {
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     let badMoodRecommend = [];
                     let badMoodRecommendImg = [];
+                    
                     // promiseGetBadMood(data[0].imgName).then(function(imgName){
                         if(data[0].artiNum !=  undefined){
                             
@@ -338,7 +339,45 @@ bot.on('postback', function(event) {
                             badMoodRecommend.push('oneRecommend/'+data[0].recomNum)
                             badMoodRecommend.push(data[0].recomHead)
                             badMoodRecommend.push(data[0].recomCont)
-    
+                            if(data[0].imgName){
+                                var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
+                                await linePush.Imgur(img).then((imgurData) => {
+                                    badMoodRecommendImg.push(imgurData);
+                                }) 
+                            }else{
+                                badMoodRecommendImg.push('https://i.imgur.com/oNykVvA.jpg');
+                            }
+                            var secondCheck = setInterval(() => {
+                                if (badMoodRecommendImg.length == 1) {
+                                    console.log(badMoodRecommendImg);
+                                    event.reply({
+                                        "type": "template",
+                                        "altText": " 體會，每一種情緒 ",
+                                        "template": {
+                                        "type": "buttons",
+                                        "imageAspectRatio": "rectangle",
+                                        "imageSize": "contain",
+                                        "thumbnailImageUrl": badMoodRecommendImg[0],
+                                        "imageBackgroundColor": '#ffffff',
+                                        "title":  "【" + badMoodRecommend[1] + "】",
+                                        "text":  badMoodRecommend[2],
+                                        "defaultAction": {
+                                            "type": "message",
+                                            "label": "點到圖片或標題",
+                                            "text": "0"
+                                        },
+                                        "actions": [
+                                            {
+                                                "type": "uri",
+                                                "label": " 👀 至文藝富心官網觀看",
+                                                "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
+                                            }
+                                        ]
+                                        }
+                                    });
+                                    clearInterval(secondCheck);
+                                }  
+                            }, 250)
                         }
                         
                             // console.log('badMoodRecommendImg',imgName)
