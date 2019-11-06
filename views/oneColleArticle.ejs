@@ -34,7 +34,7 @@
             <div class="col-lg-8 content shadow">
                 <div class="info d-flex">
                     <div><a class="floorTag">樓主</a></div>
-                    <div style="white-space:nowrap"><a><%= items[0][0].memName %></a>
+                    <div style="white-space:nowrap !important"><a><%= items[0][0].memName %></a>
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[0][0].artiDateTime %>發佈</a>
                     </div>
@@ -174,7 +174,7 @@
                     <!-- info -->
                     <div class="info d-flex">
                         <div><a class="floorTag"><%= i+1 %> 樓</a></div>
-                        <div style="white-space:nowrap"><a class="name"><%= items[1][i].memName %></a>
+                        <div style="white-space:nowrap !important"><a class="name"><%= items[1][i].memName %></a>
                             <a class="next"></a>
                             <a class="dateTime">於<%= items[1][i].artiMessDateTime %>留言</a>
                         </div>
@@ -412,9 +412,7 @@
     <script src="/javascripts/imageCompression.js"></script>
 
     <script>
-        Array.from($('.liContainer').find('li > a')).map((item) => {
-            item.innerText = item.innerText.length > 20 ? `${item.innerText.substring(0,20)}...` : item.innerText
-        })
+    
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
         $('#file-selector').change(function(event) {
@@ -703,6 +701,7 @@
 
          // delArticle
          function delArticle(artiNum) {
+            if (confirm('您真的要刪除文章嗎？')) {
                     $('.spinner-border').css('display', 'block')
                     $('.coverContainer').css('display', 'block')
 
@@ -719,11 +718,12 @@
                     }
                 });
             }
+        }
                         // delReply
             function deleteReply(artiMessNum, memID) {
+                if (confirm('您真的要刪除留言嗎？')) {
                     $('.spinner-border').css('display', 'block')
                     $('.coverContainer').css('display', 'block')
-
                     $.ajax({
                     url: '/addLike',
                     type: 'POST',
@@ -737,6 +737,7 @@
                     }
                 });
             }
+        }
     </script>
 </body>
 

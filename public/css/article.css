@@ -74,8 +74,9 @@ div.preferLi {
 ul.liContainer {
     list-style: none;
     display: inline-block;
-    margin: 0;
+    margin: 1em;
     padding: 0;
+    text-indent: -1em;
 }
 /* ul.liContainer> li {
     cursor: pointer;
@@ -167,6 +168,9 @@ div.nameTime {
 
 p.content {
     color: rgb(73, 73, 73);
+}
+div.content {
+    word-break: break-all;
 }
 
 
