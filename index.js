@@ -444,50 +444,66 @@ bot.on('message', function(event) {
                     if (hotArticleImg.length == 3) {
                         console.log(hotArticleImg);
                         
-                        event.reply(
-                            {
+                        event.reply({
                             "type": "template",
-                            "altText": "熱門文章",
+                            "altText": " 👋 熱門文章",
                             "template": {
                                 "type": "carousel",
                                 "columns": [
-                                    {
-                                        "title": "【" + hotArticleHead[0] + "】" ,
-                                        "text":'時間：' + hotArticleDateTime[0]  + '\n' + hotArticleCont[0] ,
-                                        "actions": [
-                                            
-                                            {
+                                        {
+                                            "thumbnailImageUrl": hotArticleImg[0],
+                                            "title": "【" + rhotArticleHead[0] + "】" ,
+                                            "text": DateTimeFormat(hotArticleDateTime[0]),
+                                            "defaultAction": {
+                                                "type": "uri",
+                                                "label": "知道更多",
+                                                "uri": `https://project108405.herokuapp.com/article/${hotArticleNum[0]}`
+                                            },
+                                            "actions": [
+                                               {
                                                 "type": "uri",
                                                 "label": " 👀 至文藝富心官網觀看",
                                                 "uri": `https://project108405.herokuapp.com/article/${hotArticleNum[0]}`
-                                            }
-                                        ]
+                                                } 
+                                            ]
+                                        }
+                                    ,{
+                                    "thumbnailImageUrl": hotArticleImg[1],
+                                    "title":"【" + rhotArticleHead[1] + "】" ,
+                                    "text": DateTimeFormat(hotArticleDateTime[1]),
+                                    "defaultAction": {
+                                        "type": "uri",
+                                        "label": "詳細資料",
+                                        "uri": `https://project108405.herokuapp.com/article/${hotArticleNum[1]}`
                                     },
-                                    {
-                                        "title": "【" + hotArticleHead[1] + "】" ,
-                                        "text":'時間：' + hotArticleDateTime[1]  + '\n'+  hotArticleCont[1],
-                                        "actions": [
-                                            
+                                    "actions": [
                                             {
                                                 "type": "uri",
                                                 "label": " 👀 至文藝富心官網觀看",
                                                 "uri": `https://project108405.herokuapp.com/article/${hotArticleNum[1]}`
                                             }
-                                        ]
+                                        ]   
                                     },
                                     {
-                                        "title": "【" + hotArticleHead[2] + "】" ,
-                                        "text":'時間：' + hotArticleDateTime[2]  + '\n'+ hotArticleCont[2],
+                                        "thumbnailImageUrl": hotArticleImg[2],
+                                        "title":"【" + rhotArticleHead[2] + "】" ,
+                                        "text": DateTimeFormat(hotArticleDateTime[2]),
+                                        "defaultAction": {
+                                            "type": "uri",
+                                            "label": "詳細資料",
+                                            "uri": `https://project108405.herokuapp.com/article/${hotArticleNum[2]}`
+                                        },
                                         "actions": [
-                                            
                                             {
                                                 "type": "uri",
                                                 "label": " 👀 至文藝富心官網觀看",
                                                 "uri": `https://project108405.herokuapp.com/article/${hotArticleNum[2]}`
                                             }
                                         ]
-                                    }      
-                                ]
+                                    }
+                                ],
+                                "imageAspectRatio": "rectangle",
+                                "imageSize": "cover"
                             }
                         });
                         clearInterval(secondCheck);
