@@ -585,9 +585,6 @@
     </script>
     <script src="/javascripts/imageCompression.js"></script>
     <script>
-        Array.from($('.liContainer').find('li > a')).map((item) => {
-            item.innerText = item.innerText.length > 20 ? `${item.innerText.substring(0,20)}...` : item.innerText
-        })
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
         $('#file-selector').change(function(event) {
