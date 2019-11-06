@@ -294,10 +294,10 @@ bot.on('postback', function(event) {
                             if(data[0].imgName){
                                 var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
                                 linePush.Imgur(img).then((imgurData) => {
-                                    badMoodRecommendImg.splice(0,0,imgurData);
+                                    badMoodRecommendImg.push(imgurData);
                                 }) 
                             }else{
-                                badMoodRecommendImg.splice(0,0,'https://i.imgur.com/oNykVvA.jpg');
+                                badMoodRecommendImg.push('https://i.imgur.com/oNykVvA.jpg');
                             }
                             var secondCheck = setInterval(() => {
                                 if (badMoodRecommendImg.length == 1) {
