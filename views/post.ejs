@@ -124,7 +124,6 @@
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
                                     $('#postInput').append(img);
-                                    $('#postInput').append('<div class="br"><br></div>').focus()
                                 }, (e) => {
                                     console.log(e)
                                     })
@@ -154,6 +153,9 @@
                 return;
             } else if (templateCont == '') {
                 alert('請輸入內文')
+                return;
+            } else if (templateHead.length > 40) {
+                alert('標題不得超過40字元！')
                 return;
             }
             $('.postButton').addClass('disabled')
