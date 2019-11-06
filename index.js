@@ -418,12 +418,17 @@ bot.on('message', function(event) {
              
             console.log(data[1])
             let hotArticleHead = []  
+            let hotArticleCont = []  
             let hotArticleDateTime = []  
             let hotArticleImg = [];
             
             data[1].forEach(async(item, index) =>{
                 item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
                 item.artiCont = item.artiCont.length>35 ? `${item.artiCont.substr(0,34)}...` : item.artiCont
+                hotArticleHead.push(item.artiHead)
+                hotArticleCont.push(item.artiCont)
+                hotArticleDateTime.push(item.artiDateTime)
+                
             })
             
             event.reply(
