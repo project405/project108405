@@ -275,14 +275,14 @@ bot.on('postback', function(event) {
                 //     })
                 // }
 
-                await mood.getMood().then((data) => {
+                mood.getMood().then((data) => {
                     console.log('data[0]',data[0])
                     console.log('data[0].imgName',data[0].imgName)
                     // console.log('data.analyzeScore',data[0].analyzeScore)
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
                     let badMoodRecommend = [];
                     let badMoodRecommendImg = [];
-                    
+
                     // promiseGetBadMood(data[0].imgName).then(function(imgName){
                         if(data[0].artiNum !=  undefined){
                             
