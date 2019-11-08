@@ -14,7 +14,6 @@ var getRecommendList = async function (memID, recomPage) {
     var imgs = [] ; 
     var result = [];
     var recommendSum;
-    console.log(recomPage,recomPage,recomPage,recomPage,recomPage)
     // -----------  取得推薦清單 --------------
     await sql(`SELECT "T2".*
                 FROM(

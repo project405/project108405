@@ -18,9 +18,6 @@ router.get('/:artiNum', async function (req, res, next) {
     }
     article.getOneArticle(artiNum, memID).then(data => {
         // 將字串替換成圖片
-        data[8].map((item) => {
-            console.log('item.artiHead', item.artiHead)
-        })
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].artiCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[6].length; j++) {
