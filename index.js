@@ -52,8 +52,8 @@ bot.on('postback', function(event) {
                     actions: [{
                         type:"uri",
                         label:" 👣 至文藝富心官網登入",
-                        uri:"line://app/1594135622-705e8pDP"   
-                        // uri: "line://app/1594135622-82v9mEZq"
+                        // uri:"line://app/1594135622-705e8pDP"   
+                        uri: "line://app/1594135622-82v9mEZq"
 
                     }]
                 }
