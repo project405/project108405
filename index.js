@@ -52,8 +52,8 @@ bot.on('postback', function(event) {
                     actions: [{
                         type:"uri",
                         label:" 👣 至文藝富心官網登入",
-                        // uri:"line://app/1594135622-705e8pDP"   
-                        uri: "line://app/1594135622-82v9mEZq"
+                        uri:"line://app/1594135622-705e8pDP"   
+                        // uri: "line://app/1594135622-82v9mEZq"
 
                     }]
                 }
@@ -510,7 +510,7 @@ bot.on('message', function(event) {
             data[1].forEach(async(item, index) =>{
                 item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
                 item.artiCont = item.artiCont.length>35 ? `${item.artiCont.substr(0,34)}...` : item.artiCont
-                item.artiHead = item.artiHead.length>15 ? `${item.artiHead.substr(0,14)}...` : item.artiHead
+                item.artiHead = item.artiHead.length>25 ? `${item.artiHead.substr(0,24)}...` : item.artiHead
                 hotArticleNum.push(item.artiNum)
                 hotArticleHead.push(item.artiHead)
                 hotArticleCont.push(item.artiCont)
