@@ -198,7 +198,7 @@ bot.on('postback', function(event) {
                     if(data[1].artiNum !=  undefined){
                        
                         data[1].artiCont = data[1].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
-                        data[1].artiHead = data[1].artiHead.length>15 ? `${data[1].artiHead.substr(0,14)}...` : data[1].artiHead
+                        data[1].artiHead = data[1].artiHead.length>25 ? `${data[1].artiHead.substr(0,24)}...` : data[1].artiHead
                         data[1].artiCont = data[1].artiCont.length>50 ? `${data[1].artiCont.substr(0,45)}...` : data[1].artiCont
                         goodMoodRecommend.push('article/'+data[1].artiNum)
                         goodMoodRecommend.push(data[1].artiHead)
@@ -251,7 +251,7 @@ bot.on('postback', function(event) {
                     }else{
                         
                         data[1].recomCont = data[1].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
-                        data[1].recomHead = data[1].recomHead.length>15 ? `${data[1].recomHead.substr(0,14)}...` : data[1].recomHead
+                        data[1].recomHead = data[1].recomHead.length>25 ? `${data[1].recomHead.substr(0,24)}...` : data[1].recomHead
                         data[1].recomCont = data[1].recomCont.length>51 ? `${data[1].recomCont.substr(0,45)}...` : data[1].recomCont
                         goodMoodRecommend.push('oneRecommend/'+data[1].recomNum)
                         goodMoodRecommend.push(data[1].recomHead)
@@ -317,7 +317,7 @@ bot.on('postback', function(event) {
                         if(data[0].artiNum !=  undefined){
                             
                             data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
-                            data[0].artiHead = data[0].artiHead.length>15 ? `${data[0].artiHead.substr(0,14)}...` : data[0].artiHead
+                            data[0].artiHead = data[0].artiHead.length>25 ? `${data[0].artiHead.substr(0,24)}...` : data[0].artiHead
                             data[0].artiCont = data[0].artiCont.length>50 ? `${data[0].artiCont.substr(0,45)}...` : data[0].artiCont
                             badMoodRecommend.push('article/'+data[0].artiNum)
                             badMoodRecommend.push(data[0].artiHead)
@@ -369,7 +369,7 @@ bot.on('postback', function(event) {
                         }else{
                             
                             data[0].recomCont = data[0].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
-                            data[0].recomHead = data[0].recomHead.length>15 ? `${data[0].recomHead.substr(0,14)}...` : data[0].recomHead
+                            data[0].recomHead = data[0].recomHead.length>25 ? `${data[0].recomHead.substr(0,24)}...` : data[0].recomHead
                             data[0].recomCont = data[0].recomCont.length>50 ? `${data[0].recomCont.substr(0,45)}...` : data[0].recomCont
                             badMoodRecommend.push('oneRecommend/'+data[0].recomNum)
                             badMoodRecommend.push(data[0].recomHead)
@@ -510,7 +510,7 @@ bot.on('message', function(event) {
             data[1].forEach(async(item, index) =>{
                 item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
                 item.artiCont = item.artiCont.length>35 ? `${item.artiCont.substr(0,34)}...` : item.artiCont
-                item.artiHead = item.artiHead.length>10 ? `${item.artiHead.substr(0,9)}...` : item.artiHead
+                item.artiHead = item.artiHead.length>15 ? `${item.artiHead.substr(0,14)}...` : item.artiHead
                 hotArticleNum.push(item.artiNum)
                 hotArticleHead.push(item.artiHead)
                 hotArticleCont.push(item.artiCont)
