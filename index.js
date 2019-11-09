@@ -225,7 +225,7 @@ bot.on('postback', function(event) {
                                     "template": {
                                     "type": "buttons",
                                     "imageAspectRatio": "rectangle",
-                                    "imageSize": "contain",
+                                    "imageSize": "cover",
                                     "thumbnailImageUrl": goodMoodRecommendImg[0],
                                     "imageBackgroundColor": '#ffffff',
                                     "title":  "【" + goodMoodRecommend[1] + "】",
@@ -278,7 +278,7 @@ bot.on('postback', function(event) {
                                     "template": {
                                     "type": "buttons",
                                     "imageAspectRatio": "rectangle",
-                                    "imageSize": "contain",
+                                    "imageSize": "cover",
                                     "thumbnailImageUrl": goodMoodRecommendImg[0],
                                     "imageBackgroundColor": '#ffffff',
                                     "title":  "【" + goodMoodRecommend[1] + "】",
@@ -367,7 +367,7 @@ bot.on('postback', function(event) {
                                         "template": {
                                         "type": "buttons",
                                         "imageAspectRatio": "rectangle",
-                                        "imageSize": "contain",
+                                        "imageSize": "cover",
                                         "thumbnailImageUrl": badMoodRecommendImg[0],
                                         "imageBackgroundColor": '#ffffff',
                                         "title":  "【" + badMoodRecommend[1] + "】",
@@ -419,7 +419,7 @@ bot.on('postback', function(event) {
                                         "template": {
                                         "type": "buttons",
                                         "imageAspectRatio": "rectangle",
-                                        "imageSize": "contain",
+                                        "imageSize": "cover",
                                         "thumbnailImageUrl": badMoodRecommendImg[0],
                                         "imageBackgroundColor": '#ffffff',
                                         "title":  "【" + badMoodRecommend[1] + "】",
@@ -442,6 +442,7 @@ bot.on('postback', function(event) {
                                 }  
                             }, 250)
                         }
+                        
                         
                             // console.log('badMoodRecommendImg',imgName)
                             // console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
