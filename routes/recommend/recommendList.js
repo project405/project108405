@@ -7,7 +7,6 @@ const recommendList = require('../utility/recommend');
 router.get('/:recomListNum', function (req, res, next) {
     var recomListNum = req.params.recomListNum;   //取出參數
     var memID;
-    console.log(recomListNum)
     //判斷是使用哪種方式登入
     if (req.session.memID != undefined && req.session.passport == undefined) {
         memID = req.session.memID;

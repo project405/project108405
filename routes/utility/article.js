@@ -504,12 +504,10 @@ var getArticleClassList = async function (articleClass, memID, artiListNum) {
                 INNER JOIN "member" "M"
                 ON "M"."memID" = "T2"."memID"`, [articleClass, (artiListNum-1) * 10])
         .then((data) => {
-            console.log(data,'data')
             if (!data.rows) {
                 articleList = undefined;
             } else {
                 articleList = data.rows;
-                console.log('articleList', articleList)
             }
         }, (error) => {
             console.log(error)

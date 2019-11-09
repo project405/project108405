@@ -42,7 +42,7 @@ router.get('/', function (req, res, next) {
         if (data[10][0].recomNum != undefined) {
             if (data[10][0].recomCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[4].length; j++) {
-                    data[10][0].recomCont = data[10][0].recomCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[4][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    data[10][0].recomCont = data[10][0].recomCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[4][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 }
             }
         }

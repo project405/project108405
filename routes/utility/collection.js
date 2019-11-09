@@ -363,7 +363,6 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
     var imgs = [] ;
     var result = [];
     var collSum;
-    console.log(memID, recomClass, recompage)
     //--------- 根據分類取得會員收藏的推薦內容 ---------
     await sql(`SELECT "T2".*
                 FROM(
@@ -398,7 +397,6 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
             ' AND "recomView"."recomClass" = $1', [recomClass, memID])
     .then((data) => {
         collSum = data.rows;
-        console.log(collSum)
     }, (error) => {
         collSum = undefined;
         console.log(error)

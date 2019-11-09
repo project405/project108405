@@ -53,17 +53,6 @@
             <!-- <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
             </div> -->
-            <div class='coverContainer'>
-                    <div class='loader'>
-                        <div class='loader--dot'></div>
-                        <div class='loader--dot'></div>
-                        <div class='loader--dot'></div>
-                        <div class='loader--dot'></div>
-                        <div class='loader--dot'></div>
-                        <div class='loader--dot'></div>
-                        <div class='loader--text'></div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -72,6 +61,17 @@
         <i class="fa fa-angle-up"></i>
     </a>
 
+    <div class='coverContainer'>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
+        </div>
+    </div>
 
     <script>
         var tagArray = []
@@ -165,20 +165,14 @@
                 data: { 'artiCont': `${replyCont}` },
                 success: function (res) {
                     var analyzeRes = JSON.parse(res)
-                    var analyzeScore = analyzeRes.analyze[0]
-                    var positiveWords = analyzeRes.analyze[1]
-                    var negativeWords = analyzeRes.analyze[2]
-                    var swearWords = analyzeRes.analyze[3]
-                    var score2 = analyzeRes.analyze[4]
-                    console.log(score2)
-                    formData.append('analyzeScore', analyzeScore);
-                    formData.append('positiveWords', positiveWords);
-                    formData.append('negativeWords', negativeWords);
-                    formData.append('swearWords', swearWords);
+                    formData.append('analyzeScore', analyzeRes.analyze[0]);
+                    formData.append('positiveWords', analyzeRes.analyze[1]);
+                    formData.append('negativeWords', analyzeRes.analyze[2]);
+                    formData.append('swearWords', analyzeRes.analyze[3]);
+                    formData.append('score2', analyzeRes.analyze[4]);
                     formData.append('artiNum', artiNum);
                     formData.append('artiMessNum', artiMessNum);
                     formData.append('editReply', true);
-                    formData.append('score2', score2);
                     $.ajax({
                         url: '/recommend/reply',
                         type: 'POST',
