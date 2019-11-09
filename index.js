@@ -301,29 +301,6 @@ bot.on('postback', function(event) {
                             }  
                         }, 250)
                     }
-
-                    // console.log('good!!!!!!!!!!!!!!!!!',goodMoodRecommend)
-                    // event.reply({
-                    //     "type": "template",
-                    //     "altText": " 體會，每一種情緒 ",
-                    //     "template": {
-                    //         "type": "carousel",
-                    //         "columns": [
-                    //             {
-                    //                 "title": "【" + goodMoodRecommend[1] + "】" ,
-                    //                 "text": goodMoodRecommend[2] ,
-                    //                 "actions": [
-                    //                     {
-                    //                         "type": "uri",
-                    //                         "label": " 👀 至文藝富心官網觀看",
-                    //                         "uri": `https://project108405.herokuapp.com/${goodMoodRecommend[0]}`
-                                            
-                    //                     }
-                    //                 ]
-                    //             }
-                    //         ]
-                    //     }
-                    // });
                 })
                 
             }else if(data == 'Badmood'){
@@ -442,40 +419,6 @@ bot.on('postback', function(event) {
                                 }  
                             }, 250)
                         }
-                        
-                        
-                            // console.log('badMoodRecommendImg',imgName)
-                            // console.log('bad!!!!!!!!!!!!!!!!!',badMoodRecommend)
-                            // event.reply(
-                            //     {
-                            //         "type": "template",
-                            //         "altText": " 體會，每一種情緒 ",
-                            //         "template": {
-                            //         "type": "buttons",
-                            //         "imageAspectRatio": "rectangle",
-                            //         "imageSize": "contain",
-                            //         "thumbnailImageUrl": imgName,
-                            //         "imageBackgroundColor": '#ffffff',
-                            //         "title":  "【" + badMoodRecommend[1] + "】",
-                            //         "text":  badMoodRecommend[2],
-                            //         "defaultAction": {
-                            //             "type": "message",
-                            //             "label": "點到圖片或標題",
-                            //             "text": "0"
-                            //         },
-                            //         "actions": [
-                            //             {
-                            //                 "type": "uri",
-                            //                 "label": " 👀 至文藝富心官網觀看",
-                            //                 "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
-                            //             }
-                            //         ]
-                            //         }
-                            //     }    
-                            // );
-                       
-                    
-                    // })
                     
                 })    
 
@@ -681,7 +624,7 @@ bot.on('message', function(event) {
             let recommendImg = [];
             
             data[0].forEach(async(item, index) => {
-                
+                item.recomHead = item.recomHead.length>10 ? `${item.recomHead.substr(0,9)}...` : item.recomHead
                 recommendNum.push(item.recomNum);
                 recommendClass.push(item.recomClass);
                 recommendHead.push(item.recomHead);
