@@ -78,13 +78,14 @@ var getMood = async function () {
     if (negativeChoose == 0) {
         await sql(`SELECT * 
                     FROM( 
-                        SELECT "recommend".*, "image"."imgName" 
+                        SELECT "recommend".*, "image"."imgName" , ROW_NUMBER() OVER (PARTITION BY "image"."recomNum" ORDER BY  "image"."imgDateTime" DESC) AS "Rank"  
                         FROM "recommend" 
-                            LEFT JOIN "image"
-                            ON "image"."recomNum" = "recommend"."recomNum"
+                                LEFT JOIN "image"
+                                ON "image"."recomNum" = "recommend"."recomNum"
                         WHERE "score2" <= -15 
                         ORDER BY "negativeWords" DESC, "analyzeScore" DESC 
                         LIMIT 5) AS "A" 
+                        WHERE "Rank" = '1'
                     ORDER BY random() 
                     LIMIT 1`)
         .then((data) => {
@@ -101,15 +102,16 @@ var getMood = async function () {
     } else {
         await sql(`SELECT * 
                     FROM( 
-                        SELECT "article".*, "image"."imgName"
+                        SELECT "article".*, "image"."imgName" , ROW_NUMBER() OVER (PARTITION BY "image"."artiNum" ORDER BY  "image"."imgDateTime" DESC) AS "Rank"  
                         FROM "article" 
-                            LEFT JOIN "image"
-                            ON "image"."artiNum" = "article"."artiNum"
+                                LEFT JOIN "image"
+                                ON "image"."artiNum" = "article"."artiNum"
                         WHERE "score2" <= -15 		
                         ORDER BY "negativeWords" DESC, "analyzeScore" DESC 
                         LIMIT 5) AS "A" 
+                    WHERE "Rank" = '1'
                     ORDER BY random() 
-                    LIMIT 1 `)
+                    LIMIT 1`)
         .then((data) => {
             if (data.rows != undefined) {
                 negativearti = data.rows
@@ -125,13 +127,14 @@ var getMood = async function () {
     if (positiveChoose == 0) {
         await sql(`SELECT *  
                     FROM( 
-                        SELECT "recommend".*, "image"."imgName" 
-                        FROM "recommend" 
-                            LEFT JOIN "image"
-                            ON "image"."recomNum" = "recommend"."recomNum"
-                        WHERE "score2" >= 20 
-                        ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
-                        LIMIT 5) AS "A" 
+                            SELECT "recommend".*, "image"."imgName" ,ROW_NUMBER() OVER (PARTITION BY "image"."recomNum" ORDER BY  "image"."imgDateTime" DESC) AS "Rank"  
+                            FROM "recommend" 
+                                    LEFT JOIN "image"
+                                    ON "image"."recomNum" = "recommend"."recomNum"
+                            WHERE "score2" >= 20 
+                            ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
+                            LIMIT 5) AS "A" 
+                        WHERE "Rank" = '1'
                     ORDER BY random() 
                     LIMIT 1 `)
         .then((data) => {
@@ -148,13 +151,14 @@ var getMood = async function () {
     } else {
         await sql(`SELECT *  
                     FROM( 
-                        SELECT "article".*, "image"."imgName"
-                        FROM "article" 
-                            LEFT JOIN "image"
-                            ON "image"."artiNum" = "article"."artiNum"
-                        WHERE "score2" >= 20 
-                        ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
-                        LIMIT 5) AS "A" 
+                            SELECT "article".*, "image"."imgName" , ROW_NUMBER() OVER (PARTITION BY "image"."artiNum" ORDER BY  "image"."imgDateTime" DESC) AS "Rank"  
+                            FROM "article" 
+                                    LEFT JOIN "image"
+                                    ON "image"."artiNum" = "article"."artiNum"
+                            WHERE "score2" >= 20 
+                            ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
+                            LIMIT 5) AS "A" 
+                        WHERE "Rank" = '1'
                     ORDER BY random() 
                     LIMIT 1 `)
         .then((data) => {
