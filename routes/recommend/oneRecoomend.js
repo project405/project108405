@@ -3,6 +3,7 @@ var router = express.Router();
 
 const recommend = require('../utility/recommend');
 
+//接收GET請求
 router.get('/:recomNum', async function (req, res, next) {
     var recomNum = req.params.recomNum;   //取出參數
     var memID;

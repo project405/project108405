@@ -56,7 +56,7 @@
                         <div class="card-body " onclick="location.href='/article/<%= myArtiClass[0][i].artiNum %>'">
                             <div class="poster d-flex justify-content-between">
                                 <div class="name">
-                                    <div style="white-space:nowrap">
+                                    <div style="white-space:nowrap !important">
                                         <a class="name"><%= myArtiClass[0][i].memName %></a>
                                         <a class="next"></a>
                                         <a class="dateTime"> 於 <%= myArtiClass[0][i].artiDateTime %>發佈</a>             
@@ -342,7 +342,6 @@
                     dataType: 'JSON',
                     data: { "likeType": "article", "artiNum": artiNum },
                     success: function (res) {
-                        console.log(JSON.stringify(res));
                         document.getElementById("addLikeCount" + artiNum).innerHTML = JSON.stringify(res);
                         document.getElementById("delLikeCount" + artiNum).innerHTML = JSON.stringify(res);
                     },

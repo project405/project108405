@@ -52,25 +52,6 @@ var getCollRecommend = async function (memID, recompage) {
             console.log(error)
         })
 
-    // --------- 取得照片 --------- 
-    // await sql('SELECT "recomNum","imgName" '+
-    //           ' FROM "image" '+
-    //           ' WHERE "recomNum" '+
-    //                 ' IN (SELECT "recomNum" '+
-    //                     ' FROM "memberCollection" '+
-    //                     ' WHERE "memID" = $1 )'+
-    //           ' ORDER BY "imgNum"', [memID])
-    //     .then((data) => {
-    //         if (!data.rows){
-    //             imgs = undefined ;
-    //         }else{
-    //             imgs = data.rows;
-    //         }
-           
-    //     }, (error) => {
-    //         imgs = undefined ;
-    //     });
-
     result[0] = recommendList ; 
     result[1] = [memID] ;
     // result[2] = checkAuthority ;
@@ -94,6 +75,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     var imgs = [] ;
     var result = [];
     var replyImgs = []
+    var checkAuthority;
     
 
     // -----------  取得單一文章 --------------
@@ -138,6 +120,16 @@ var getOneColleRecommend = async function (recomNum, memID) {
             oneRecomMessage = undefined ;
         });
 
+    await sql('SELECT "memAuthority" FROM "member" where "memID" = $1 ', [memID])
+        .then((data) => {
+            if (!data.rows[0]) {
+                checkAuthority = undefined;
+            } else {
+                checkAuthority = data.rows[0].memAuthority;
+            }
+        }, (error) => {
+            console.log(error)
+        });
     // -----------  取得tag --------------
     await sql('SELECT "tagName" FROM "recommendTagView" WHERE "recomNum" = $1', [recomNum])
         .then((data) => {
@@ -226,7 +218,7 @@ var getOneColleRecommend = async function (recomNum, memID) {
     result[4] = isLike;
     result[5] = isCollection;
     result[6] = isMessLike;
-    // result[7] = checkAuthority;
+    result[7] = checkAuthority;
     result[8] = [memID];
     result[9] = replyImgs;
     
@@ -352,7 +344,6 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
     var imgs = [] ;
     var result = [];
     var collSum;
-    console.log(memID, recomClass, recompage)
     //--------- 根據分類取得會員收藏的推薦內容 ---------
     await sql(`SELECT "T2".*
                 FROM(
@@ -387,29 +378,10 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
             ' AND "recomView"."recomClass" = $1', [recomClass, memID])
     .then((data) => {
         collSum = data.rows;
-        console.log(collSum)
     }, (error) => {
         collSum = undefined;
         console.log(error)
     })
-    // --------- 取得照片 --------- 
-    // await sql('SELECT "recomNum" , "imgName" '+
-    //          ' FROM "image"  '+
-    //          ' WHERE "recomNum" '+
-    //             'IN(SELECT "recomNum" '+
-    //                 ' FROM "memberCollection" '+
-    //                 ' WHERE "memID" = $1)'+
-    //         ' ORDER BY "imgNum"', [memID])
-    //     .then((data) => {
-    //         if (!data.rows){
-    //             imgs = undefined ;
-    //         }else{
-    //             imgs = data.rows;
-    //         }
-        
-    //     }, (error) => {
-    //         imgs = undefined ;
-    //     });
 
     result[0] = recommendList ; 
     // result[1] = imgs ;
@@ -490,25 +462,6 @@ var getCollArtiClassList = async function (memID, artiClass, collpage) {
         }, (error) => {
             tag = undefined ;
         });
-
-    // --------- 取得照片 --------- 
-    // await sql('SELECT "artiNum" , "imgName" '+
-    //             ' FROM "image"  '+
-    //             ' WHERE "artiNum" '+
-    //                 'IN(SELECT "artiNum" '+
-    //                   ' FROM "memberCollection" '+
-    //                   ' WHERE "memID" = $1)'+
-    //          ' ORDER BY "imgNum" ', [memID])
-    //     .then((data) => {
-    //     if (!data.rows){
-    //         imgs = undefined ;
-    //     }else{
-    //         imgs = data.rows;
-    //     }
-
-    //     }, (error) => {
-    //         imgs = undefined ;
-    //     });
 
     // --------- 判斷是否被使用者按愛心 ---------
     await sql('SELECT "artiNum" '+

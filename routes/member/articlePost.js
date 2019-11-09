@@ -13,7 +13,7 @@ var upload = multer({
 })
 
 
-//post請求
+//接收POST請求
 router.post('/', upload.array('userImg', 100), function (req, res, next) {
     var memID;
     var artiHead = req.body.artiHead;
@@ -27,8 +27,6 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
     var postDateTime = moment(Date().now).format("YYYY-MM-DD HH:mm:ss");
     var tagData = [];
     var imgData = [];
-    console.log("近來後端了");
-    // console.log('articlepostData!@@@@@@@@@@@@@@@@@@@@@@@@', memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.score2)
     //將所有換行符號替代成<br> 
     artiCont = artiCont.replace(/\n/g, "<br>");
 
@@ -78,6 +76,5 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
     }
 
 });
-
 
 module.exports = router;

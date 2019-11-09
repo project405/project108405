@@ -160,10 +160,10 @@ $(document).ready(() => {
                 $.post('https://project-108405-test.herokuapp.com/webhook', () => {
                 }) 
                 .done (() => {
-                    swal('推播成功！');
+                    alert('推播成功！');
                 })
                 .fail(() => {
-                    swal('推播失敗！');
+                    alert('推播失敗！');
                 })
             };
             bestReply = () => {
@@ -180,12 +180,10 @@ $(document).ready(() => {
                         var memID = [] ; 
                         var result = [] ; 
                         for(var i = 0 ; i < res[0].length ; i++){
-                            console.log(res[0][i].recomHead);
                             recomHead.push(res[0][i].recomHead);
                         }
 
                         for(var i = 0 ; i < res[1].length ; i++){
-                            console.log(res[1][i].memID);
                             memID.push(res[1][i].memID);
                         }
                         result[0] = recomHead ;
@@ -197,7 +195,7 @@ $(document).ready(() => {
                             dataType: 'TEXT',
                             data: {"recom" : JSON.stringify(recomHead), "member" : JSON.stringify(memID)},
                             success: function (res) {
-                                swal(res); 
+                                alert(res); 
                             },
                             error: function (res) {
                                 console.log("失敗", res);

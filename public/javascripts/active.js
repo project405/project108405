@@ -25,6 +25,12 @@ $(document).ready(function () {
         $("div.tag").css("box-shadow", "none");
     });
     
+    if ($(window).width() <= 414) {
+        Array.from($('.liContainer').find('li > a')).map((item) => {
+            item.innerText = item.innerText.length > 20 ? `${item.innerText.substring(0,20)}...` : item.innerText
+        })
+    }
+
     Array.from($('.fourRecommend')).map((item) => {
         item.innerText = item.innerText.length > 150 ? `${item.innerText.substr(0,150)}...` : item.innerText
     })
@@ -43,8 +49,8 @@ $(document).ready(function () {
     });
     $(".limitLine").each(function () {
         var str = $(this).html().trim();
-        var subStr = str.substring(0, 150);
-        var data = subStr + (str.length > 50 ? '...' : '');
+        var subStr = str.substring(0, 75);
+        var data = subStr + (str.length > 75 ? '...' : '');
         $(this).html(data);
     });
     $(".wrapBigHotSectionText").each(function () {

@@ -242,7 +242,7 @@ var getIndexData = async function (memID) {
         byClassData = await byClassGetData(classCount[0][0],r ) ; 
     }
 
-    result[0] = weekRecommend ; 
+    result[0] = weekRecommend;
     result[1] = hotArticle;
     result[2] = [memID];
     result[3] = articleImgs;
