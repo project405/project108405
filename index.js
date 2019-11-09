@@ -626,11 +626,14 @@ bot.on('message', function(event) {
                 recommendDateTime.push(item.recomDateTime);
                 //-------------
                 if(item.imgName){
-                    var img = item.imgName.replace('data:image/jpeg;base64,', '');
-                    await linePush.Imgur(img).then((imgurData) => {
-                        recommendImg.splice(index,0,imgurData);
-                    })  
-
+                    if(item.imgName.match('data:image/jpeg;base64,')){
+                        var img = item.imgName.replace('data:image/jpeg;base64,', '');
+                        await linePush.Imgur(img).then((imgurData) => {
+                            recommendImg.splice(index,0,imgurData);
+                        })  
+                    }else{
+                        recommendImg.splice(index,0,item.imgName);
+                    }
                 }else{
                     recommendImg.splice(index,0,'https://i.imgur.com/oNykVvA.jpg');
                 }
