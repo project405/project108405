@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+
 //增加引用函式
 const index = require('./utility/index');
 
@@ -72,6 +73,5 @@ router.get('/', function (req, res, next) {
         }
     })
 });
-
 
 module.exports = router;

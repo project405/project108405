@@ -416,18 +416,6 @@ var getWebSearch = async function (searchParams, memID) {
             isCollection = undefined ; 
         });
 
-    //取得第一張照片
-    // await sql('SELECT "artiNum" , "imgName" FROM "image"  WHERE "artiMessNum" IS NULL')
-    //     .then((data) => {
-    //         if (data.rows == null || data.rows == '') {
-    //             artiImgs = undefined;
-    //         } else {
-    //             artiImgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         artiImgs = undefined;
-    //     });
-
     //======================================
     //------------- 搜尋推薦 ---------------
     //======================================
@@ -454,18 +442,6 @@ var getWebSearch = async function (searchParams, memID) {
         }, (error) => {
             recommendList = undefined;
         });
-
-    //----------- 取得照片 ----------- 
-    // await sql('SELECT "recomNum" , "imgName" FROM "image" ')
-    // .then((data) => {
-    //     if (!data.rows) {
-    //         recomImgs = undefined;
-    //     } else {
-    //         recomImgs = data.rows;
-    //     }
-    // }, (error) => {
-    //     recomImgs = undefined;
-    // });
 
     //文章
     result[0] = articleList;

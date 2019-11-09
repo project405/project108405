@@ -37,18 +37,6 @@ var getArticleListPagination = async function (memID, artiListNum) {
             articleList = undefined;
         });
 
-    // await sql('SELECT"articleListDataView".*, "member"."memName"'+
-    //          ' FROM "articleListDataView"' +
-    //          ' INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"'+
-    //          ' ORDER BY "articleListDataView"."artiNum" DESC'+
-    //          ' LIMIT 10' +
-    //          ' OFFSET $1', [(artiListNum-1) * 10])
-    //     .then((data) => {
-    //         articleList = data.rows;
-    //     }, (error) => {
-    //         articleList = undefined;
-    //     });
-    
     await sql('SELECT COUNT(*) FROM "articleListDataView"')
     .then((data) => {
         articleSum = data.rows;
@@ -541,21 +529,6 @@ var getArticleClassList = async function (articleClass, memID, artiListNum) {
         }, (error) => {
             isLike = undefined;
         });
-
-    // ----------- 取得照片 ----------- 
-    // await sql('SELECT "artiNum" , "imgName" '+
-    // ' FROM "image" '+
-    // ' WHERE "artiMessNum" IS NULL '+
-    // ' ORDER BY "imgNum"')
-    //     .then((data) => {
-    //         if (data.rows == null || data.rows == '') {
-    //             imgs = undefined;
-    //         } else {
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined;
-    //     });
 
     result[0] = articleList ;
     result[1] = tag ; 

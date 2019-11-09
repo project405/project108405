@@ -646,24 +646,6 @@ var myArticle = async function (memID, artiPage) {
             isLike = undefined;
         });
 
-    // ----------- 取得照片 -----------
-    // await sql('SELECT "artiNum" , "imgName" ' +
-    //          ' FROM "image" ' +
-    //          ' WHERE "artiNum" ' +
-    //             ' IN(SELECT "artiNum" ' +
-    //                ' FROM "articleListDataView" ' +
-    //                ' WHERE "memID" = $1) '+
-    //          'ORDER BY "imgNum"', [memID])
-    //     .then((data) => {
-    //         if (!data.rows) {
-    //             imgs = undefined;
-    //         } else {
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined;
-    //     });
-
     result[0] = articleList;
     result[1] = tag;
     // result[2] = imgs;
@@ -802,18 +784,6 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
         }, (error) => {
             isLike.push('0');
         });
-
-    // ----------- 取得照片 -----------
-    // await sql('SELECT "artiNum" , "imgName" FROM "image" ORDER BY "imgNum"')
-    //     .then((data) => {
-    //         if (!data.rows) {
-    //             imgs = undefined;
-    //         } else {
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined;
-    //     });
 
     result[0] = articleList;
     result[1] = tag;

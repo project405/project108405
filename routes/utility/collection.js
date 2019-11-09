@@ -307,24 +307,6 @@ var getCollArticle = async function (memID, collpage) {
             isLike = undefined ; 
         });
 
-    // ----------- 取得照片 -----------
-    // await sql('SELECT "artiNum" , "imgName" '+ 
-    //          ' FROM "image" '+
-    //          ' WHERE "artiNum" '+
-    //             ' IN(SELECT "artiNum" '+
-    //                ' FROM "memberCollection" '+
-    //                ' WHERE "memID" = $1)'+
-    //         ' ORDER BY "imgNum"' , [memID])
-    //     .then((data) => {
-    //         if (!data.rows) {
-    //             imgs = undefined ; 
-    //         }else {
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined ; 
-    //     });
-
     result[0] = colleArticle;
     result[1] = tag;
     result[2] = isLike;
