@@ -293,11 +293,15 @@ bot.on('postback', function(event) {
                             badMoodRecommend.push(data[0].artiHead)
                             badMoodRecommend.push(data[0].artiCont)
                             if(data[0].imgName){
-                                var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
-                                linePush.Imgur(img).then((imgurData) => {
-                                    console.log('imgurData!!!!!!!!',imgurData)
-                                    badMoodRecommendImg.push(imgurData);
-                                }) 
+                                if(data[0].imgName.match('data:image/jpeg;base64,')){
+                                    var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
+                                    linePush.Imgur(img).then((imgurData) => {
+                                        console.log('imgurData!!!!!!!!',imgurData)
+                                        badMoodRecommendImg.push(imgurData);
+                                    }) 
+                                }else{
+                                    badMoodRecommendImg.push(data[0].imgName);
+                                } 
                             }else{
                                 badMoodRecommendImg.push('https://i.imgur.com/oNykVvA.jpg');
                             }
@@ -341,11 +345,15 @@ bot.on('postback', function(event) {
                             badMoodRecommend.push(data[0].recomHead)
                             badMoodRecommend.push(data[0].recomCont)
                             if(data[0].imgName){
-                                var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
-                                linePush.Imgur(img).then((imgurData) => {
-                                    console.log('imgurData!!!!!!!!',imgurData)
-                                    badMoodRecommendImg.push(imgurData);
-                                }) 
+                                if(data[0].imgName.match('data:image/jpeg;base64,')){
+                                    var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
+                                    linePush.Imgur(img).then((imgurData) => {
+                                        console.log('imgurData!!!!!!!!',imgurData)
+                                        badMoodRecommendImg.push(imgurData);
+                                    }) 
+                                }else{
+                                    badMoodRecommendImg.push(data[0].imgName);
+                                }
                             }else{
                                 badMoodRecommendImg.push('https://i.imgur.com/oNykVvA.jpg');
                             }
