@@ -495,7 +495,7 @@ bot.on('message', function(event) {
     if (text == "熱門文章") {
         index.getIndexData().then(data => {
              
-            console.log(data[1])
+            // console.log(data[1])
             let hotArticleNum = []  
             let hotArticleHead = []  
             let hotArticleCont = []  
@@ -523,6 +523,7 @@ bot.on('message', function(event) {
                         hotArticleImg.splice(index,0,item.imgName);    
                     }
                 }else{
+                    console.log(item.artiHead)
                     hotArticleImg.splice(index,0,'https://i.imgur.com/oNykVvA.jpg');
                 }
                 var secondCheck = setInterval(() => {
