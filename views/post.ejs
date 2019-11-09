@@ -185,7 +185,7 @@
                 tag.push(element.innerText);
             }, this);
             formData.append('tag', tag);
-            console.log(formData.getAll('base64Index'));
+            
             await $.ajax({
                 url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                 type: 'POST',

@@ -29,7 +29,6 @@ var getRecommendList = async function (memID, recomPage) {
                     LIMIT 8
                     OFFSET $1 ) AS "T2"`, [(recomPage-1) * 8])
         .then((data) => {
-            console.log(data)
             if (data.rows != undefined) {
                 recommendList = data.rows
             } else {
@@ -58,21 +57,6 @@ var getRecommendList = async function (memID, recomPage) {
         }
     })
 
-    //----------- 取得照片 ----------- 
-    // await sql('SELECT "recomNum" , "imgName" '+
-    //         ' FROM "image" '+
-    //         ' WHERE "recomMessNum" IS NULL '+
-    //         ' ORDER BY "imgNum" ')
-    // .then((data) => {
-    //     if (!data.rows) {
-    //         imgs = undefined;
-    //     } else {
-    //         imgs = data.rows;
-    //     }
-    // }, (error) => {
-    //     console.log(error)
-    //     imgs = undefined;
-    // });
     result[0] = recommendList;
     result[1] = [memID];
     result[2] = checkAuthority;

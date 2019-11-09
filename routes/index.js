@@ -15,8 +15,6 @@ router.get('/', function (req, res, next) {
     }
     
     index.getIndexData(memID).then(data => { 
-        console.log(data[7]);
-        
         if (data[0] != undefined) {
             data[0].map((item) => {
                 item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ");

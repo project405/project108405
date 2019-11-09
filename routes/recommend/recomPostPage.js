@@ -18,7 +18,6 @@ router.get('/', function(req, res, next) {
 		if (data == 'boss') {
       res.render('recommendPost');
 		} else {
-			console.log("無取得帳號權限資料");
 			res.render("login");
 		}
 	})

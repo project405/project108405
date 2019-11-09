@@ -342,7 +342,6 @@
                     dataType: 'JSON',
                     data: { "likeType": "article", "artiNum": artiNum },
                     success: function (res) {
-                        console.log(JSON.stringify(res));
                         document.getElementById("addLikeCount" + artiNum).innerHTML = JSON.stringify(res);
                         document.getElementById("delLikeCount" + artiNum).innerHTML = JSON.stringify(res);
                     },

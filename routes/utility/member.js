@@ -206,7 +206,6 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
     // 刪除舊tag連結
     await sql ('DELETE FROM "tagLinkArticle" WHERE "recomNum" = $1',[recomNum])
     .then((data)=> {
-        console.log(data)
     },(e) => {
         console.error(e)
     }) 
@@ -320,7 +319,6 @@ var deleteArticle = async function (artiNum) {
 //================================
 var deleteRecommend = async function (recomNum) {
     var result = 0;
-    console.log(recomNum)
     await sql ('DELETE FROM "recommend" WHERE "recomNum" = $1',[recomNum])
         .then((data)=> {
             result = 1
@@ -477,7 +475,6 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
 //-------- recommendReplyPost() --
 //================================
 var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMessDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, score2) {
-    console.log(recomNum, memID, recomMessCont, recomMessDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, score2)
     var recomMessNum;
     var result = 0;
     if (typeof(imgData) == 'string') {
@@ -718,7 +715,6 @@ var getOriginalMail = async function (memID) {
 //----- getMyArticleClassList() -----
 //===================================
 var getMyArticleClassList = async function (artiClass, memID, artiPage) {
-    console.log(artiClass, memID, artiPage)
     var articleList = [];
     var tag = [];
     var isCollection = [];
@@ -1058,7 +1054,7 @@ var getBestReply = async function (month,memID) {
             }, (error) => {
                 recomNum = null;
             });
-    console.log(recomNum);
+            
     result[0] = recommendData ;
     result[1] = recomNum ; 
 

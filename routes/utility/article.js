@@ -88,27 +88,6 @@ var getArticleListPagination = async function (memID, artiListNum) {
             isCollection = undefined;
         });
 
-    //取得照片
-    // articleList.map((item) => {
-    //     pageImage.push(item.artiNum)
-    // })
-
-    // await sql('SELECT "artiNum" , "imgName" ' +
-    //           ' FROM "image"'+
-    //           ' WHERE "artiNum" = ANY($1::INT[]) AND "artiMessNum" IS NULL'+
-    //           ' ORDER BY "imgNum"', [pageImage])
-    //     .then((data) => {
-    //         if (data.rows == null || data.rows == '') {
-    //             imgs = undefined;
-    //         } else {
-    //             console.log(data)
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined;
-    //         console.log(error)
-    //     });
-
     result[0] = articleList; 
     result[1] = tag;
     result[2] = isLike;

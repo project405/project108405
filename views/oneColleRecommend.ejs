@@ -576,7 +576,6 @@
                     location.reload();
                 },
                 error: function (res) {
-                    console.log('刪除失敗');
                     alert('刪除失敗！')
                 }
             });
@@ -667,11 +666,11 @@
                                 alert(res);
                                 location.reload();
                             } else {
-                                alert('哎呀，出現錯誤')
+                                alert('留言失敗')
                             }
                         },
                         error: function (res) {
-                            console.log("哎呀，出現錯誤", res);
+                            console.log("失敗", res);
                         }
                     });
                 },

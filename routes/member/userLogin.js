@@ -27,7 +27,6 @@ router.post('/', function (req, res, next) {
                 req.session.memID = d.memID;
                 req.session.memPass = d.memPass;
                 login.addLineID(memID, lineID).then(data => {
-                    console.log('success')
                 },error => {
                     console.log(error)
                 })
