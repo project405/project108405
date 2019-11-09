@@ -192,7 +192,8 @@ bot.on('postback', function(event) {
                     console.log('data',data[1])
                     // console.log('data.analyzeScore',data[1].analyzeScore)                    
                     // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[1].score2)                    
-                    var goodMoodRecommend = [];
+                    let goodMoodRecommend = [];
+                    let goodMoodRecommendImg = [];
 
                     if(data[1].artiNum !=  undefined){
                        
@@ -238,43 +239,7 @@ bot.on('postback', function(event) {
                 })
                 
             }else if(data == 'Badmood'){
-                // function promiseGetBadMood(GetBadMoodImg) {
-                //     return new Promise(function(resolve, reject){
-                //         var badMoodRecommendImg ;
-                //         if(GetBadMoodImg){
-                //             if(GetBadMoodImg.match('data:image/jpeg;base64')){
-                //                 console.log('11111')
-                //                 var imgur = imgurGetBadMood(GetBadMoodImg)
-                //                 imgur.then(function(imgurData){
-                //                     setTimeout(() => {
-                //                         console.log('近來了！！！')
-                //                         // resolve(imgurData);
-                //                         badMoodRecommendImg = imgurData;                  
-                //                     },1000)
-                //                 })
-                //             }else{
-                //                 console.log('有圖片但不是base64')
-                //                 badMoodRecommendImg = GetBadMoodImg;
-                //             }
-                //         }else{
-                //             console.log('沒有圖片的')
-                //             badMoodRecommendImg = 'https://i.imgur.com/oNykVvA.jpg';
-                //         }
-                //         resolve(badMoodRecommendImg)                  
-                //     }) 
-                // }
-
-                // function imgurGetBadMood(GetBadMoodImg) {
-                //     return new Promise(function(resolve, reject){
-                //         var img = GetBadMoodImg.replace('data:image/jpeg;base64,', '');
-                //         linePush.Imgur(img).then((imgData) =>{
-                //             console.log('成功轉換base64')  
-                //             resolve(imgData)
-                //         })
-                        
-                //     })
-                // }
-
+                
                 mood.getMood().then((data) => {
                     console.log('data[0]',data[0])
                     console.log('data[0].imgName',data[0].imgName)
@@ -320,9 +285,9 @@ bot.on('postback', function(event) {
                                         "title":  "【" + badMoodRecommend[1] + "】",
                                         "text":  badMoodRecommend[2],
                                         "defaultAction": {
-                                            "type": "message",
-                                            "label": "點到圖片或標題",
-                                            "text": "0"
+                                            "type": "uri",
+                                            "label": " 👀 至文藝富心官網觀看",
+                                            "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
                                         },
                                         "actions": [
                                             {
@@ -371,10 +336,10 @@ bot.on('postback', function(event) {
                                         "imageBackgroundColor": '#ffffff',
                                         "title":  "【" + badMoodRecommend[1] + "】",
                                         "text":  badMoodRecommend[2],
-                                        "defaultAction": {
-                                            "type": "message",
-                                            "label": "點到圖片或標題",
-                                            "text": "0"
+                                        "defaultAction":{
+                                            "type": "uri",
+                                            "label": " 👀 至文藝富心官網觀看",
+                                            "uri":`https://project108405.herokuapp.com/${badMoodRecommend[0]}`
                                         },
                                         "actions": [
                                             {
