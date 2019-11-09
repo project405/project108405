@@ -229,7 +229,6 @@ app.post('/webhook',  function (req, res) {
                         'Authorization': 'Bearer R8lcHnPCuZUl1bN572jcpz1z17xTC0nmXBuGBzDbBpsvPXd8uLhbJxsYw0xKzlqJuEOUmPkMg4R50tsO/HS3xer18+xRNAK27JyiS1Maj+v2MefUSMQpz1hxfyFMBCKdk5bAmsRhBbM3nEVtsJjCxgdB04t89/1O/w1cDnyilFU='
                         // ----------測試line03
                         // 'Authorization': 'Bearer sNG39VZmWkxEenq69AMr9p5efUTvBgarZEAbZrwLBeYH9n9U/23n9F9NCHdgjig/n/bnvrJXzfg/gDJ+9S53WbREjrSak4stPMhPJsXnqIN0Q3AwM5+dsQgz9ApIyNWC90QTjDvvn64eI00q/bdkoQdB04t89/1O/w1cDnyilFU='
-                        
                         // ----------正式line
                         // 'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
                     },
@@ -240,36 +239,7 @@ app.post('/webhook',  function (req, res) {
                         // to: allUserLineID,
                         to: item,
                             messages: [
-                                // {
-                                //     "type": "template",
-                                //     "altText": "This is a buttons template",
-                                //     "template": {
-                                //         "type": "buttons",
-                                //         "thumbnailImageUrl": "https://i.imgur.com/O9syBO0.jpg",
-                                //         "imageAspectRatio": "rectangle",
-                                //         "imageSize": "cover",
-                                //         "imageBackgroundColor": "#FFFFFF",
-                                //         "title": "recommend post test score2",
-                                //         "text": "零鎮親說發推薦有問題我來試試看",
-                                //         "defaultAction": {
-                                //             "type": "uri",
-                                //             "label": "View detail",
-                                //             "uri": "http://example.com/page/123"
-                                //         },
-                                //         "actions": [
-                                //             {
-                                //               "type": "postback",
-                                //               "label": "Buy",
-                                //               "data": "action=buy&itemid=123"
-                                //             },
-                                //             {
-                                //               "type": "postback",
-                                //               "label": "Add to cart",
-                                //               "data": "action=add&itemid=123"
-                                //             }
-                                //         ]
-                                //     }
-                                // }
+                               
                                 {
                                     "type": "template",
                                     "altText": "相信你會喜歡😎",
