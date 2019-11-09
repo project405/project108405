@@ -15,21 +15,14 @@ router.get('/', function (req, res, next) {
     }
     
     index.getIndexData(memID).then(data => { 
-        console.log(data[7]);
-        
         if (data[0] != undefined) {
             data[0].map((item) => {
-                item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ');
-                item.recomCont = item.recomCont.replace(/\\:imgLocation/g, " ");
+                item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ");
             })
 
             //熱門文章 圖片標籤取代為空字串
             for (var i = 0; i < data[1].length; i++) {
-                if (data[1][i].artiCont.match("\\:imgLocation") != null) {
-                    data[1][i].artiCont = data[1][i].artiCont.replace(/\\:imgLocation/g, " ");
-                }
-                data[1][i].artiCont = data[1][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ');
-                
+                data[1][i].artiCont = data[1][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " "); 
             }
         }
 
@@ -38,7 +31,7 @@ router.get('/', function (req, res, next) {
         if (data[10][0].artiNum != undefined) {
             if (data[10][0].artiCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[3].length; j++) {
-                    data[10][0].artiCont = data[10][0].artiCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[3][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    data[10][0].artiCont = data[10][0].artiCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[3][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 }
             }
         }
@@ -47,7 +40,7 @@ router.get('/', function (req, res, next) {
         if (data[10][0].recomNum != undefined) {
             if (data[10][0].recomCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[4].length; j++) {
-                    data[10][0].recomCont = data[10][0].recomCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[4][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    data[10][0].recomCont = data[10][0].recomCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[4][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 }
             }
         }

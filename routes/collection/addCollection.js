@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 const collection = require('../utility/collection');
-//接收GET請求
 
+//接收POST請求
 router.post('/', function (req, res, next) {
     var memID;
 

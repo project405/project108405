@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="/javascripts/navbar.js"></script>
 
 
     <link href="/css/header.css" rel="stylesheet" type="text/css" />
@@ -58,10 +59,10 @@
                         <div class="card-body " onclick=" location.href='/article/<%= items[0][i].artiNum %>'">
                             <div class="poster d-flex justify-content-between">
                                 <div class="name">
-                                    <div style="word-break:break-all">
+                                    <div style="white-space:nowrap !important">
                                         <a class="floorTag"><%= items[0][i].memName %></a>
                                         <a class="next"></a>
-                                        <a class="dateTime">於 <%= items[0][i].artiDateTime %>發表</a>
+                                        <a class="dateTime">於 <%= items[0][i].artiDateTime %>發佈</a>
                                     </div>
                                 </div>
                                 <div class="ml-auto">
@@ -221,6 +222,7 @@
                   </li>
                 </ul>
               </nav>
+        </div>
     </section>
 
     <!-- 文章列表區塊結束 -->
@@ -244,7 +246,6 @@
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/javascripts/active.js"></script>
-    <script src="/javascripts/navbar.js"></script>
       <!-- 收藏 ajax script -->
       <script>
         var pagePrevious = parseInt('<%= items[7][0]%>')-1

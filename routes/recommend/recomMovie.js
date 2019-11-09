@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const recommend = require('../utility/recommend');
+
 //接收GET請求
 router.get('/:recomListNum', function (req, res, next) {
     var recomListNum = req.params.recomListNum;   //取出參數
@@ -31,7 +32,5 @@ router.get('/:recomListNum', function (req, res, next) {
     })
 
 });
-
-
 
 module.exports = router;

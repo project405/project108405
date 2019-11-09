@@ -9,11 +9,6 @@ const member = require('./member');
 //=========================================
 var getIndexData = async function (memID) {
     var weekRecommend = [];
-    var fourRecommend = [];
-    var movie = true; //判斷是否找過 (只取一篇)
-    var book = true; 
-    var music = true;
-    var exhibition = true;
     var hotArticle = [];  //存放前三名熱門文章
     var articleImgs = [] ;
     var recommendImgs = [];
@@ -34,8 +29,20 @@ var getIndexData = async function (memID) {
     var result = [];
 
     // -----------  每週推薦 --------------
-    await sql('SELECT * FROM "recommend" ORDER BY "recomNum" DESC')
+    await sql('SELECT * '+
+             ' FROM( '+
+                    ' SELECT "A".*, "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."recomNum" ORDER BY "imgDateTime" DESC ) AS "R" '+
+                    ' FROM(  '+
+                        ' SELECT *, ROW_NUMBER() OVER(PARTITION BY "recomClass" ORDER BY "recomDateTime" DESC ) AS "Rank" '+
+                        ' FROM "recommend" '+
+                        ' ORDER BY "recomDateTime" DESC ) AS "A" '+
+                    ' LEFT JOIN  "image" AS "I" '+
+                        ' ON "A"."recomNum" = "I"."recomNum" '+
+                    ' WHERE "Rank" = \'1\' AND "I"."recomMessNum" IS NULL '+
+                    ' ORDER BY "recomNum" ) AS "B" '+
+             ' WHERE "B"."R" = \'1\' ')
         .then((data) => {
+            
             // 將每周推薦的類別改為中文
             for (let i = 0; i < data.rows.length; i++) {
                 if (data.rows[i].recomClass == 'movie') {
@@ -53,22 +60,6 @@ var getIndexData = async function (memID) {
             weekRecommend = null;
         })
 
-    // 只各取一篇出來
-    for (var i = 0; i < weekRecommend.length; i++) {
-        if (weekRecommend[i].recomClass == '電影' && movie) {
-            fourRecommend.push(weekRecommend[i]);
-            movie = false;
-        } else if (weekRecommend[i].recomClass == '音樂' && music) {
-            fourRecommend.push(weekRecommend[i]);
-            music = false;
-        } else if (weekRecommend[i].recomClass == '書籍' && book) {
-            fourRecommend.push(weekRecommend[i]);
-            book = false;
-        } else if (weekRecommend[i].recomClass == '展覽' && exhibition) {
-            fourRecommend.push(weekRecommend[i]);
-            exhibition = false;
-        }
-    }
     // -----------  熱門文章 --------------
     await sql('SELECT "articleListDataView".*, "member"."memName" ' + 
               'FROM "articleListDataView" '+
@@ -251,7 +242,7 @@ var getIndexData = async function (memID) {
         byClassData = await byClassGetData(classCount[0][0],r ) ; 
     }
 
-    result[0] = fourRecommend;
+    result[0] = weekRecommend;
     result[1] = hotArticle;
     result[2] = [memID];
     result[3] = articleImgs;
@@ -368,12 +359,19 @@ var getWebSearch = async function (searchParams, memID) {
     //======================================
 
     // -----------  取得文章清單 -------------
-    await sql('SELECT"articleListDataView".*, "member"."memName" '+
-            ' FROM "articleListDataView" '+
-                ' INNER JOIN "member" '+ 
-                    ' ON "member"."memID" = "articleListDataView"."memID" '+
-            ' WHERE "artiHead" LIKE $1 or "artiCont" LIKE $1  or "artiClass" LIKE $1 '+ 
-            ' ORDER BY "articleListDataView"."artiNum" DESC',['%' + searchParams + '%'])
+    await sql(`	SELECT "T2".*, "M"."memName" 
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "articleListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                            ON "A"."artiNum" = "I"."artiNum"
+                        WHERE "I"."artiMessNum" IS NULL)  AS "T1"
+                WHERE "T1"."Rank" = '1' AND ("artiHead" LIKE $1 or "artiCont" LIKE $1 or "artiClass" LIKE $1 ) 
+                ORDER BY "artiNum" DESC) AS "T2"
+                INNER JOIN "member" "M"
+                ON "M"."memID" = "T2"."memID"`,['%' + searchParams + '%'])
         .then((data) => {
             articleList = data.rows;
         }, (error) => {
@@ -419,25 +417,33 @@ var getWebSearch = async function (searchParams, memID) {
         });
 
     //取得第一張照片
-    await sql('SELECT "artiNum" , "imgName" FROM "image"  WHERE "artiMessNum" IS NULL')
-        .then((data) => {
-            if (data.rows == null || data.rows == '') {
-                artiImgs = undefined;
-            } else {
-                artiImgs = data.rows;
-            }
-        }, (error) => {
-            artiImgs = undefined;
-        });
+    // await sql('SELECT "artiNum" , "imgName" FROM "image"  WHERE "artiMessNum" IS NULL')
+    //     .then((data) => {
+    //         if (data.rows == null || data.rows == '') {
+    //             artiImgs = undefined;
+    //         } else {
+    //             artiImgs = data.rows;
+    //         }
+    //     }, (error) => {
+    //         artiImgs = undefined;
+    //     });
 
     //======================================
     //------------- 搜尋推薦 ---------------
     //======================================
 
     // -----------  取得推薦清單 --------------
-    await sql('SELECT * '+
-             ' FROM "recommendListDataView" '+
-             ' WHERE "recomHead" LIKE $1 or "recomCont" LIKE $1 or "recomClass" LIKE $1 '
+    await sql(`	SELECT "T2".*
+                FROM(
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."recomNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "recommendListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                            ON "A"."recomNum" = "I"."recomNum"
+                        WHERE "I"."recomMessNum" IS NULL)  AS "T1"
+                WHERE "T1"."Rank" = '1' AND ("recomHead" LIKE $1 or "recomCont" LIKE $1 or "recomClass" LIKE $1 ) 
+                ORDER BY "recomNum" DESC ) AS "T2"`
              ,['%' + searchParams + '%'])
         .then((data) => {
             if (data.rows != undefined) {
@@ -450,28 +456,28 @@ var getWebSearch = async function (searchParams, memID) {
         });
 
     //----------- 取得照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image" ')
-    .then((data) => {
-        if (!data.rows) {
-            recomImgs = undefined;
-        } else {
-            recomImgs = data.rows;
-        }
-    }, (error) => {
-        recomImgs = undefined;
-    });
+    // await sql('SELECT "recomNum" , "imgName" FROM "image" ')
+    // .then((data) => {
+    //     if (!data.rows) {
+    //         recomImgs = undefined;
+    //     } else {
+    //         recomImgs = data.rows;
+    //     }
+    // }, (error) => {
+    //     recomImgs = undefined;
+    // });
 
     //文章
     result[0] = articleList;
     result[1] = tag;
     result[2] = isLike ; 
-    result[3] = artiImgs ;
+    // result[3] = artiImgs ;
     result[4] = isCollection;
     result[5] = [memID];
 
     //推薦
     result[6] = recommendList ; 
-    result[7] = recomImgs ; 
+    // result[7] = recomImgs ; 
 
     return result;
 }

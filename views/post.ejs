@@ -124,7 +124,6 @@
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
                                     $('#postInput').append(img);
-                                    $('#postInput').append('<div class="br"><br></div>').focus()
                                 }, (e) => {
                                     console.log(e)
                                     })
@@ -139,7 +138,6 @@
                 // }
                 $(document).on("focus","#postInput",() => {  
                     setTimeout(function() {
-                        console.log($('.br:last-child'))
                         // $('.br:last-child').focus()
                     },20) 
                 });
@@ -154,6 +152,9 @@
                 return;
             } else if (templateCont == '') {
                 alert('請輸入內文')
+                return;
+            } else if (templateHead.length > 40) {
+                alert('標題不得超過40字元！')
                 return;
             }
             $('.postButton').addClass('disabled')
@@ -184,7 +185,7 @@
                 tag.push(element.innerText);
             }, this);
             formData.append('tag', tag);
-            console.log(formData.getAll('base64Index'));
+            
             await $.ajax({
                 url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                 type: 'POST',
@@ -192,16 +193,11 @@
                 data: { 'artiCont': `${artiCont}` },
                 success: function (res) {
                     var analyzeRes = JSON.parse(res)
-                    var analyzeScore = analyzeRes.analyze[0]
-                    var positiveWords = analyzeRes.analyze[1]
-                    var negativeWords = analyzeRes.analyze[2]
-                    var swearWords = analyzeRes.analyze[3]
-                    var score2 = analyzeRes.analyze[4]
-                    formData.append('analyzeScore', analyzeScore);
-                    formData.append('positiveWords', positiveWords);
-                    formData.append('negativeWords', negativeWords);
-                    formData.append('swearWords', swearWords);
-                    formData.append('score2', score2);
+                    formData.append('analyzeScore', analyzeRes.analyze[0]);
+                    formData.append('positiveWords', analyzeRes.analyze[1]);
+                    formData.append('negativeWords', analyzeRes.analyze[2]);
+                    formData.append('swearWords', analyzeRes.analyze[3]);
+                    formData.append('score2', analyzeRes.analyze[4]);
                     $.ajax({
                         url: '/article/post',
                         type: 'POST',

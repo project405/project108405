@@ -3,6 +3,7 @@ var router = express.Router();
 
 const member = require('../utility/member');
 
+//接收POST請求
 router.post('/', function (req, res, next) {
     var memID;
     var reportData =[] ; 

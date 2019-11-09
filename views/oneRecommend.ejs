@@ -31,7 +31,7 @@
             <div class="col-lg-8 content shadow">
                 <div class="info d-flex">
                     <div><a class="floorTag">管理員</a></div>
-                    <div><a>文藝青年</a>
+                    <div style="white-space:nowrap !important"><a>文藝青年</a>
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[0][0].recomDateTime %>發佈</a>
                     </div>
@@ -175,7 +175,7 @@
                     <!-- info -->
                     <div class="info d-flex justify-content-between">
                         <div><a class="floorTag"><%= i+1 %> 樓</a></div>
-                        <div><a class="name"><%= items[1][i].memName %></a>
+                        <div style="white-space:nowrap !important"><a class="name"><%= items[1][i].memName %></a>
                             <a class="next"></a>
                             <a class="dateTime">於<%= items[1][i].recomMessDateTime %>留言</a>
                         </div>
@@ -361,9 +361,7 @@
 
             }
         })
-        Array.from($('.liContainer').find('li > a')).map((item) => {
-            item.innerText = item.innerText.length > 20 ? `${item.innerText.substring(0, 20)}...` : item.innerText
-        })
+
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
         $('#file-selector').change(function(event) {
@@ -426,16 +424,11 @@
                 data: { 'artiCont': `${replyCont}` },
                 success: function (res) {
                     var analyzeRes = JSON.parse(res)
-                    var analyzeScore = analyzeRes.analyze[0]
-                    var positiveWords = analyzeRes.analyze[1]
-                    var negativeWords = analyzeRes.analyze[2]
-                    var swearWords = analyzeRes.analyze[3]
-                    var score2 = analyzeRes.analyze[4]
-                    formData.append('analyzeScore', analyzeScore);
-                    formData.append('positiveWords', positiveWords);
-                    formData.append('negativeWords', negativeWords);
-                    formData.append('swearWords', swearWords);
-                    formData.append('score2', score2);
+                    formData.append('analyzeScore', analyzeRes.analyze[0]);
+                    formData.append('positiveWords', analyzeRes.analyze[1]);
+                    formData.append('negativeWords', analyzeRes.analyze[2]);
+                    formData.append('swearWords', analyzeRes.analyze[3]);
+                    formData.append('score2', analyzeRes.analyze[4]);
                     $.ajax({
                         url: '/recommend/reply',
                         type: 'POST',
@@ -451,11 +444,11 @@
                                 alert(res);
                                 location.reload();
                             } else {
-                                alert('哎呀，出現錯誤')
+                                alert('留言失敗')
                             }
                         },
                         error: function (res) {
-                            console.log("哎呀，出現錯誤", res);
+                            console.log("失敗", res);
                         }
                     });
                 },
@@ -652,40 +645,43 @@
         }
             // delRecommend
         function delRecommend(recomNum) {
-            $('.spinner-border').css('display', 'block')
-            $('.coverContainer').css('display', 'block')
+            if (confirm('管理者確定要刪除推薦嗎？')) {
+                $('.spinner-border').css('display', 'block')
+                $('.coverContainer').css('display', 'block')
 
-            $.ajax({
-            url: '/addLike',
-            type: 'POST',
-            data: { "recomNum": recomNum, "delRecommend": true },
-            success: function (res) {
-                alert('刪除成功！')
-                location.replace("/recommendList/1");
-            },
-            error: function (res) {
-                alert('刪除失敗！')
-            }
-        });
-        }
-        // delReply
-        function deleteReply(artiMessNum, memID) {
-            $('.spinner-border').css('display', 'block')
-            $('.coverContainer').css('display', 'block')
-
-            $.ajax({
+                $.ajax({
                 url: '/addLike',
                 type: 'POST',
-                data: { "recomMessNum": artiMessNum, "memID": memID, "deleteRecommendReply": true },
+                data: { "recomNum": recomNum, "delRecommend": true },
                 success: function (res) {
                     alert('刪除成功！')
-                    location.reload();
+                    location.replace("/recommendList/1");
                 },
                 error: function (res) {
-                    console.log('刪除失敗');
                     alert('刪除失敗！')
                 }
             });
+            }
+        }
+        // delReply
+        function deleteReply(artiMessNum, memID) {
+            if (confirm('您真的要刪除留言嗎？')) {
+                $('.spinner-border').css('display', 'block')
+                $('.coverContainer').css('display', 'block')
+                $.ajax({
+                    url: '/addLike',
+                    type: 'POST',
+                    data: { "recomMessNum": artiMessNum, "memID": memID, "deleteRecommendReply": true },
+                    success: function (res) {
+                        alert('刪除成功！')
+                        location.reload();
+                    },
+                    error: function (res) {
+                        console.log('刪除失敗');
+                        alert('刪除失敗！')
+                    }
+                });
+            }
         }
     </script>
     <script>

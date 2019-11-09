@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const member = require('../../routes/utility/member');
 
-//get
+//接收GET請求
 router.get('/', function(req, res, next) {
   var memID;
 	//判斷是使用哪種方式登入
@@ -18,7 +18,6 @@ router.get('/', function(req, res, next) {
 		if (data == 'boss') {
       res.render('recommendPost');
 		} else {
-			console.log("無取得帳號權限資料");
 			res.render("login");
 		}
 	})

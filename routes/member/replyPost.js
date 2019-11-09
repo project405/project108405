@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-const fs = require('fs');
 const moment = require('moment');
 const multer = require('multer');
 const member = require('../utility/member');
@@ -11,7 +10,8 @@ var isRender = true; //判斷頁面是否有回傳過
 var upload = multer({
     storage: undefined
 })
-//post請求
+
+//接收POST請求
 router.post('/', upload.array('userImg', 100), function (req, res, next) {
     var memID;
 
@@ -71,6 +71,5 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
     }
 
 });
-
 
 module.exports = router;

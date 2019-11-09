@@ -30,7 +30,6 @@ var insertMessage = async function(memID, message, dateTime){
         await sql('INSERT INTO "memberMessage" ("memID","memMessCont","memMessDateTime") VALUES ($1,$2,$3)'
             , [memID[i], message[i], dateTime ])
         .then((data) => {
-            console.log(data);
             result = 1 ; 
         }, (error) => {
             result = 0 ; 
