@@ -4,6 +4,7 @@ var router = express.Router();
 const member = require('../utility/member');
 const recommend = require('../utility/recommend');
 
+//接收POST請求
 router.post('/', function (req, res, next) {
     var memID;
 
@@ -106,6 +107,5 @@ router.post('/', function (req, res, next) {
         })
     }
 });
-
 
 module.exports = router;

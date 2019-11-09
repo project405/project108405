@@ -13,7 +13,7 @@ var upload = multer({
     storage: undefined
 })
 
-//post請求
+//接收POST請求
 router.post('/', upload.array('userImg', 100), function (req, res, next) {
   var memID;
   var recomHead = req.body.recomHead;
@@ -75,6 +75,5 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
   }
 
 });
-
 
 module.exports = router;

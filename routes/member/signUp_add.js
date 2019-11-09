@@ -5,6 +5,7 @@ var crypto = require('crypto');
 //增加引用函式
 const signUp = require('../utility/signUp');
 const secret = "project108405"
+
 //接收POST請求
 router.post('/', function (req, res, next) {
     res.write('<head><meta charset="utf-8"/></head>');

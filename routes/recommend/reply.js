@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-const fs = require('fs');
 const moment = require('moment');
 const multer = require('multer');
 const member = require('../utility/member');
@@ -11,8 +10,7 @@ var upload = multer({
     storage: undefined
 })
 
-
-//post請求
+//接收POST請求
 router.post('/', upload.array('userImg', 100), function (req, res, next) {
     var memID ;
     //判斷是使用哪種方式登入
@@ -67,6 +65,5 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
     }
 
 });
-
 
 module.exports = router;
