@@ -511,9 +511,12 @@ bot.on('message', function(event) {
                 hotArticleDateTime.push(item.artiDateTime)
                  //-------------
                 if(item.imgName){
+                    console.log(item.artiHead)
+                    
                     if(item.imgName.match('data:image/jpeg;base64,')){
                         var img = item.imgName.replace('data:image/jpeg;base64,', '');
                         await linePush.Imgur(img).then((imgurData) => {
+                            
                             hotArticleImg.splice(index,0,imgurData);
                         }) 
                     }else{
