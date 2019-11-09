@@ -203,39 +203,127 @@ bot.on('postback', function(event) {
                         goodMoodRecommend.push('article/'+data[1].artiNum)
                         goodMoodRecommend.push(data[1].artiHead)
                         goodMoodRecommend.push(data[1].artiCont)
-                        
-                    }else{
-                        
-                        data[1].recomCont = data[1].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
-                        data[1].recomHead = data[1].recomHead.length>30 ? `${data[1].recomHead.substr(0,25)}...` : data[1].recomHead
-                        data[1].recomCont = data[1].recomCont.length>50 ? `${data[1].recomCont.substr(0,45)}...` : data[1].recomCont
-                        goodMoodRecommend.push('oneRecommend/'+data[1].recomNum)
-                        goodMoodRecommend.push(data[1].recomHead)
-                        goodMoodRecommend.push(data[1].recomCont)
-                    }
-
-                    console.log('good!!!!!!!!!!!!!!!!!',goodMoodRecommend)
-                    event.reply({
-                        "type": "template",
-                        "altText": " 體會，每一種情緒 ",
-                        "template": {
-                            "type": "carousel",
-                            "columns": [
-                                {
-                                    "title": "【" + goodMoodRecommend[1] + "】" ,
-                                    "text": goodMoodRecommend[2] ,
+                        if(data[1].imgName){
+                            if(data[1].imgName.match('data:image/jpeg;base64,')){
+                                var img = data[1].imgName.replace('data:image/jpeg;base64,', '');
+                                linePush.Imgur(img).then((imgurData) => {
+                                    console.log('imgurData!!!!!!!!',imgurData)
+                                    goodMoodRecommendImg.push(imgurData);
+                                }) 
+                            }else{
+                                goodMoodRecommendImg.push(data[1].imgName);
+                            }
+                        }else{
+                            goodMoodRecommendImg.push('https://i.imgur.com/oNykVvA.jpg');
+                        }
+                        var secondCheck = setInterval(() => {
+                            if (goodMoodRecommendImg.length == 1) {
+                                console.log(goodMoodRecommendImg);
+                                event.reply({
+                                    "type": "template",
+                                    "altText": " 體會，每一種情緒 ",
+                                    "template": {
+                                    "type": "buttons",
+                                    "imageAspectRatio": "rectangle",
+                                    "imageSize": "contain",
+                                    "thumbnailImageUrl": goodMoodRecommendImg[0],
+                                    "imageBackgroundColor": '#ffffff',
+                                    "title":  "【" + goodMoodRecommend[1] + "】",
+                                    "text":  goodMoodRecommend[2],
+                                    "defaultAction":{
+                                        "type": "uri",
+                                        "label": " 👀 至文藝富心官網觀看",
+                                        "uri":`https://project108405.herokuapp.com/${goodMoodRecommend[0]}`
+                                    },
                                     "actions": [
                                         {
                                             "type": "uri",
                                             "label": " 👀 至文藝富心官網觀看",
-                                            "uri": `https://project108405.herokuapp.com/${goodMoodRecommend[0]}`
-                                            
+                                            "uri":`https://project108405.herokuapp.com/${goodMoodRecommend[0]}`
                                         }
                                     ]
-                                }
-                            ]
+                                    }
+                                });
+                                clearInterval(secondCheck);
+                            }  
+                        }, 250)
+                        
+                    }else{
+                        
+                        data[1].recomCont = data[1].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
+                        data[1].recomHead = data[1].recomHead.length>31 ? `${data[1].recomHead.substr(0,25)}...` : data[1].recomHead
+                        data[1].recomCont = data[1].recomCont.length>51 ? `${data[1].recomCont.substr(0,45)}...` : data[1].recomCont
+                        goodMoodRecommend.push('oneRecommend/'+data[1].recomNum)
+                        goodMoodRecommend.push(data[1].recomHead)
+                        goodMoodRecommend.push(data[1].recomCont)
+                        if(data[1].imgName){
+                            if(data[1].imgName.match('data:image/jpeg;base64,')){
+                                var img = data[1].imgName.replace('data:image/jpeg;base64,', '');
+                                linePush.Imgur(img).then((imgurData) => {
+                                    console.log('imgurData!!!!!!!!',imgurData)
+                                    goodMoodRecommendImg.push(imgurData);
+                                }) 
+                            }else{
+                                goodMoodRecommendImg.push(data[1].imgName);
+                            }
+                        }else{
+                            goodMoodRecommendImg.push('https://i.imgur.com/oNykVvA.jpg');
                         }
-                    });
+                        var secondCheck = setInterval(() => {
+                            if (goodMoodRecommendImg.length == 1) {
+                                console.log(goodMoodRecommendImg);
+                                event.reply({
+                                    "type": "template",
+                                    "altText": " 體會，每一種情緒 ",
+                                    "template": {
+                                    "type": "buttons",
+                                    "imageAspectRatio": "rectangle",
+                                    "imageSize": "contain",
+                                    "thumbnailImageUrl": goodMoodRecommendImg[0],
+                                    "imageBackgroundColor": '#ffffff',
+                                    "title":  "【" + goodMoodRecommend[1] + "】",
+                                    "text":  goodMoodRecommend[2],
+                                    "defaultAction":{
+                                        "type": "uri",
+                                        "label": " 👀 至文藝富心官網觀看",
+                                        "uri":`https://project108405.herokuapp.com/${goodMoodRecommend[0]}`
+                                    },
+                                    "actions": [
+                                        {
+                                            "type": "uri",
+                                            "label": " 👀 至文藝富心官網觀看",
+                                            "uri":`https://project108405.herokuapp.com/${goodMoodRecommend[0]}`
+                                        }
+                                    ]
+                                    }
+                                });
+                                clearInterval(secondCheck);
+                            }  
+                        }, 250)
+                    }
+
+                    // console.log('good!!!!!!!!!!!!!!!!!',goodMoodRecommend)
+                    // event.reply({
+                    //     "type": "template",
+                    //     "altText": " 體會，每一種情緒 ",
+                    //     "template": {
+                    //         "type": "carousel",
+                    //         "columns": [
+                    //             {
+                    //                 "title": "【" + goodMoodRecommend[1] + "】" ,
+                    //                 "text": goodMoodRecommend[2] ,
+                    //                 "actions": [
+                    //                     {
+                    //                         "type": "uri",
+                    //                         "label": " 👀 至文藝富心官網觀看",
+                    //                         "uri": `https://project108405.herokuapp.com/${goodMoodRecommend[0]}`
+                                            
+                    //                     }
+                    //                 ]
+                    //             }
+                    //         ]
+                    //     }
+                    // });
                 })
                 
             }else if(data == 'Badmood'){
