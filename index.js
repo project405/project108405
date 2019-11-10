@@ -64,94 +64,115 @@ app.post('/webhook',  function (req, res) {
             
         LinePush.getIndexData(item).then(data =>{
             // linePushPhoto();
-            console.log('data[0]',data[0])
+            // console.log('data[0]',data[0])
             // console.log('artiNum@@@@@@@@@@',data[0].artiNum)
             // console.log('recomNum@@@@@@@@@@',data[0].recomNum)
-            var pushContent = [];
-            let pushImg = 0 ;
+            let pushClass = [];
+            let pushNum = [];
+            let pushHead = [];
+            let pushCont = [];
+            let pushImg = [] ;
             
             //data為文章
             if(data[0].recomHead == undefined){
-                //-------------------------------------------------------------------push-0.1.2
-                pushContent.push('article')
-                pushContent.push(data[0].artiNum)
-                pushContent.push(data[0].artiHead)
-                //處理文章內容
-                let articleCont = data[0].artiCont.replace(/<br>/ig, '') 
-                var a = articleCont.replace(/\\:imgLocation/ig, ' ');
-                if (a.length >= 50){
-                    //-------------------------------------------------------------------push-3
-                    pushContent.push(a.slice(0,51)+'...')
+                data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
+                data[0].artiCont = data[0].artiCont.length>50 ? `${data[0].artiCont.substr(0,51)}...` : data[0].artiCont
+
+                pushClass.push('article')
+                pushNum.push(data[0].artiNum)
+                pushHead.push(data[0].artiHead)
+                pushCont.push(data[0].artiCont)
+
+                if(data[0].imgName){
+                    if(data[0].imgName.match('data:image/jpeg;base64,') != null){
+                        var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
+                        LinePush.Imgur(img).then(imgurData => { 
+                            pushImg.push(imgurData);
+                        });
+                    }else{
+                        pushImg.push(data[0].imgName);
+                    }
                 }else{
-                    //-------------------------------------------------------------------push-3
-                    pushContent.push(a)
-                }
+                    pushImg.push('https://i.imgur.com/oNykVvA.jpg');
+                }   
+
+                linePushPhoto();
+
                 //有圖片
-                if (data[0].artiCont.match("\\:imgLocation") != null){
-                    console.log('文章～有進來圖片這區')
-                    // var pushImg = [];
-                    LinePush.artiImg(data[0].artiNum).then(secondData =>{
-                        var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                // if (data[0].artiCont.match("\\:imgLocation") != null){
+                //     console.log('文章～有進來圖片這區')
+                //     // var pushImg = [];
+                //     LinePush.artiImg(data[0].artiNum).then(secondData =>{
+                //         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                        
-                            LinePush.Imgur(img).then(thirdData => {  
-                                pushImg = thirdData;
-                                console.log('pushImg',pushImg)             
-                                // linePushPhoto(pushImg[0]);
-                                linePushPhoto();
+                //             LinePush.Imgur(img).then(thirdData => {  
+                //                 pushImg = thirdData;
+                //                 console.log('pushImg',pushImg)             
+                //                 // linePushPhoto(pushImg[0]);
+                //                 linePushPhoto();
                                 
-                            }).catch((err)=> {
-                                console.log(err)
-                            });
-                    }); 
+                //             }).catch((err)=> {
+                //                 console.log(err)
+                //             });
+                //     }); 
                 
-                }else{
+                // }else{
                     
-                    linePush();
-                }
+                //     linePush();
+                // }
             //data為推薦
             }else{
-                //-------------------------------------------------------------------push-0.1.2
-                pushContent.push('oneRecommend')
-                pushContent.push(data[0].recomNum)
-                pushContent.push(data[0].recomHead)
-                //處理推薦內容 
-                let recommendCont = data[0].recomCont.replace(/<br>/ig, '')
-                var a = recommendCont.replace(/\\:imgLocation/ig, ' ');
-                if (a.length >= 50){
-                    //-------------------------------------------------------------------push-3
-                    pushContent.push(a.slice(0,51)+'...')
-                }else{
-                    //-------------------------------------------------------------------push-3
-                    pushContent.push(a)
-                }
-                //有圖片
-                if (data[0].recomCont.match("\\:imgLocation") != null){
-                    // var pushImg = [];
+                data[0].recomCont = data[0].recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
+                data[0].recomCont = data[0].recomCont.length>50 ? `${data[0].recomCont.substr(0,51)}...` : data[0].recomCont
 
-                    // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
-                    LinePush.recomImg(data[0].recomNum).then(secondData =>{
-                        console.log('推薦～有進來圖片這區')
-                        
-                        var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
-                        
-                            LinePush.Imgur(img).then(thirdData => {  
-                                pushImg = thirdData;
-                                console.log('pushImg',pushImg)                     
-                                // linePushPhoto(pushImg[0]);
-                                linePushPhoto();
-                                
-                            }).catch((err)=> {
-                                console.log(err)
-                            });
-                      
-                    }); 
-                    
-                    
-                //沒圖片    
+                pushClass.push('oneRecommend')
+                pushNum.push(data[0].recomNum)
+                pushHead.push(data[0].recomHead)
+                pushCont.push(data[0].recomCont)
+
+                if(data[0].imgName){
+                    if(data[0].imgName.match('data:image/jpeg;base64,') != null){
+                        var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
+                        LinePush.Imgur(img).then(imgurData => { 
+                            pushImg.push(imgurData);
+                        });
+                    }else{
+                        pushImg.push(data[0].imgName);
+                    }
                 }else{
+                    pushImg.push('https://i.imgur.com/oNykVvA.jpg');
+                }  
+
+                linePushPhoto();
+                
+                //有圖片
+                // if (data[0].recomCont.match("\\:imgLocation") != null){
+                //     // var pushImg = [];
+
+                //     // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
+                //     LinePush.recomImg(data[0].recomNum).then(secondData =>{
+                //         console.log('推薦～有進來圖片這區')
+                        
+                //         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
+                        
+                //             LinePush.Imgur(img).then(thirdData => {  
+                //                 pushImg = thirdData;
+                //                 console.log('pushImg',pushImg)                     
+                //                 // linePushPhoto(pushImg[0]);
+                //                 linePushPhoto();
+                                
+                //             }).catch((err)=> {
+                //                 console.log(err)
+                //             });
+                      
+                //     }); 
                     
-                    linePush();
-                }
+                    
+                // //沒圖片    
+                // }else{
+                    
+                //     linePush();
+                // }
             }
              
             console.log(pushContent)
