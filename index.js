@@ -96,7 +96,12 @@ app.post('/webhook',  function (req, res) {
                 }   
                 
                 console.log('pushImg',pushImg)
-                linePushPhoto();
+                var secondCheck = setInterval(() => {
+                    if (pushImg.length == 1) {
+                        linePushPhoto();
+                        clearInterval(secondCheck);
+                    }  
+                }, 250)
 
             //data為推薦
             }else{
@@ -127,7 +132,13 @@ app.post('/webhook',  function (req, res) {
                     pushImg.push('https://i.imgur.com/oNykVvA.jpg');
                 }  
                 console.log('pushImg',pushImg)
-                linePushPhoto();
+                var secondCheck = setInterval(() => {
+                    if (pushImg.length == 1) {
+                        linePushPhoto();
+                        clearInterval(secondCheck);
+                    }  
+                }, 250)
+                
                 
             }
              
