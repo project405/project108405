@@ -664,7 +664,7 @@ bot.on('message', function(event) {
                     // console.log('1232132131')
                     // console.log(checkImg)
                     // console.log(checkImg.length)
-                    if(recommendImg.length == 4){
+                    if(checkImg.length == 4){
                         event.reply({
                             "type": "template",
                             "altText": " 👋 本週新推薦",
