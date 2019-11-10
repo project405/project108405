@@ -973,26 +973,25 @@ var getBestReply = async function (month,memID) {
     var result = [];
 
     //先找Like數max值，再撈出所有like數 = max 的所有留言編號 ，再根據所有留言編號找到推薦文章
-    await sql('SELECT * '+
-            ' FROM "recommend" '+
-            ' WHERE "recomNum"'+ 
-            ' IN ( '+
-                ' SELECT "recomNum" '+
-                ' FROM "recommendMessage" '+
-                ' WHERE "recomMessNum" '+
-                ' IN (SELECT "recomMessNum" '+
-                    ' FROM "recommendMessageLike" '+
-                    ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-                    ' GROUP BY "recomMessNum", "memID" '+
-                    ' HAVING COUNT("recomMessNum") '+ 
-                        ' IN( SELECT  COUNT("recomMessNum") '+
-                            ' FROM "recommendMessageLike" '+
-                            ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-                            ' GROUP BY "recomMessNum" ,"memID" '+
-                            ' ORDER BY "count" DESC '+
-                            ' LIMIT 1 ) '+
-                            ' ) '+
-                ')', [month])
+    await sql(`SELECT * 
+                FROM "recommend" 
+                WHERE "recomNum"
+                IN ( SELECT "recomNum" 
+                     FROM "recommendMessage" 
+                     WHERE "recomMessNum" 
+                     IN ( SELECT "recomMessNum"
+                          FROM "recommendMessageLike" 
+                          WHERE date_part('MONTH',"recomMessLikeDateTime") ='10'
+                          GROUP BY "recomMessNum"
+                          HAVING COUNT("recomMessNum") 
+                            IN( SELECT  COUNT("recomMessNum") 
+                                FROM "recommendMessageLike" 
+                                WHERE date_part('MONTH',"recomMessLikeDateTime") = '10'
+                                GROUP BY "recomMessNum"
+                                ORDER BY "count" DESC 
+                                LIMIT 1 ) 
+                        ) 
+                    )`, [month])
         .then((data) => {
             if (!data.rows) {
                 recommendData = undefined;
