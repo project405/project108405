@@ -981,15 +981,15 @@ var getBestReply = async function (month,memID) {
                      WHERE "recomMessNum" 
                      IN ( SELECT "recomMessNum"
                           FROM "recommendMessageLike" 
-                          WHERE date_part('MONTH',"recomMessLikeDateTime") ='10'
+                          WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
                           GROUP BY "recomMessNum"
                           HAVING COUNT("recomMessNum") 
-                            IN( SELECT  COUNT("recomMessNum") 
-                                FROM "recommendMessageLike" 
-                                WHERE date_part('MONTH',"recomMessLikeDateTime") = '10'
-                                GROUP BY "recomMessNum"
-                                ORDER BY "count" DESC 
-                                LIMIT 1 ) 
+                             IN( SELECT  COUNT("recomMessNum") 
+                                 FROM "recommendMessageLike" 
+                                 WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
+                                 GROUP BY "recomMessNum"
+                                 ORDER BY "count" DESC 
+                                 LIMIT 1 ) 
                         ) 
                     )`, [month])
         .then((data) => {
@@ -1003,17 +1003,22 @@ var getBestReply = async function (month,memID) {
         });
 
     //先找Like數max值，再撈出所有like數 = max 的所有留言編號 跟留言的人
-    await sql('SELECT "recomMessNum", "memID" '+
-            ' FROM "recommendMessageLike" '+
-            ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-            ' GROUP BY "recomMessNum", "memID" '+
-            ' HAVING COUNT("recomMessNum") '+ 
-                ' IN( SELECT  COUNT("recomMessNum") '+
-                    ' FROM "recommendMessageLike" '+
-                    ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-                    ' GROUP BY "recomMessNum"	,"memID" '+
-                    ' ORDER BY "count" DESC '+
-                    ' LIMIT 1 )',[month]) 
+    await sql(`SELECT "A".* , "M"."memID"
+                FROM(
+                    SELECT "recomMessNum"
+                    FROM "recommendMessageLike" 
+                    WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
+                    GROUP BY "recomMessNum"
+                    HAVING COUNT("recomMessNum") 
+                        IN( SELECT  COUNT("recomMessNum") 
+                            FROM "recommendMessageLike" 
+                            WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
+                            GROUP BY "recomMessNum"
+                            ORDER BY "count" DESC 
+                            LIMIT 1 ) 
+                    ) AS "A"
+                INNER JOIN "recommendMessage" AS "M"
+                    ON "A"."recomMessNum" = "M"."recomMessNum"`,[month]) 
             .then((data) => {
                 if (!data.rows) {
                     recomNum = undefined;
