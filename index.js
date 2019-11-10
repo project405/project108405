@@ -622,7 +622,7 @@ bot.on('message', function(event) {
             let recommendClass = []  
             let recommendHead = []  
             let recommendDateTime = []  
-            let recommendImg = [];
+            let recommendImg = [1,2,3,4];
             
             data[0].forEach(async(item, index) => {
                 item.recomHead = item.recomHead.length>10 ? `${item.recomHead.substr(0,9)}...` : item.recomHead
