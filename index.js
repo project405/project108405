@@ -53,14 +53,13 @@ app.post('/webhook',  function (req, res) {
         data.forEach(item => {
             if(item.lineID != ''){
                 allUserLineID.push(item.lineID);
-                
             }
         });
         
-        var p = allUserLineID.map(item => {
-            console.log('item!!', item)
+        var p = allUserLineID.map(user => {
+            console.log('user!!', user)
             
-        LinePush.getIndexData(item).then(data =>{
+        LinePush.getIndexData(user).then(data =>{
             let pushClass = [];
             let pushNum = [];
             let pushHead = [];
@@ -197,7 +196,7 @@ app.post('/webhook',  function (req, res) {
                     },
                     url: 'https://api.line.me/v2/bot/message/push',
                     body: JSON.stringify({
-                        to: item,
+                        to: user,
                         // to:'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                 {
