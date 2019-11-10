@@ -64,9 +64,9 @@ app.post('/webhook',  function (req, res) {
             
         LinePush.getIndexData(item).then(data =>{
             // linePushPhoto();
-
-            console.log('artiNum@@@@@@@@@@',data[0].artiNum)
-            console.log('recomNum@@@@@@@@@@',data[0].recomNum)
+            console.log('data[0]',data[0])
+            // console.log('artiNum@@@@@@@@@@',data[0].artiNum)
+            // console.log('recomNum@@@@@@@@@@',data[0].recomNum)
             var pushContent = [];
             let pushImg = 0 ;
             
@@ -131,6 +131,7 @@ app.post('/webhook',  function (req, res) {
                     // pushContent.push(recommendCont.replace(/\\:imgLocation/ig, ' ')); 
                     LinePush.recomImg(data[0].recomNum).then(secondData =>{
                         console.log('推薦～有進來圖片這區')
+                        
                         var img = secondData[0].imgName.replace('data:image/jpeg;base64,', '');
                         
                             LinePush.Imgur(img).then(thirdData => {  
