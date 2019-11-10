@@ -84,21 +84,24 @@ app.post('/webhook',  function (req, res) {
                             console.log('user!!', user)
                             console.log('1') 
                             pushImg.push(imgurData);
+                            console.log('pushImg',pushImg)
                         });
                     }else{
                         console.log('pushHead',pushHead) 
                         console.log('user!!', user)
                         console.log('2')
                         pushImg.push(data[0].imgName);
+                        console.log('pushImg',pushImg)
                     }
                 }else{
                     console.log('pushHead',pushHead) 
                     console.log('user!!', user)
                     console.log('3')
                     pushImg.push('https://i.imgur.com/oNykVvA.jpg');
+                    console.log('pushImg',pushImg)
                 }   
                 
-                console.log('pushImg',pushImg)
+               
                 var secondCheck = setInterval(() => {
                     if (pushImg.length == 1) {
                         linePushPhoto();
@@ -124,18 +127,21 @@ app.post('/webhook',  function (req, res) {
                             console.log('user!!', user)
                             console.log('1') 
                             pushImg.push(imgurData);
+                            console.log('pushImg',pushImg)
                         });
                     }else{
                         console.log('pushHead',pushHead) 
                         console.log('user!!', user)
                         console.log('2')
                         pushImg.push(data[0].imgName);
+                        console.log('pushImg',pushImg)
                     }
                 }else{
                     console.log('pushHead',pushHead) 
                     console.log('user!!', user)
                     console.log('3')
                     pushImg.push('https://i.imgur.com/oNykVvA.jpg');
+                    console.log('pushImg',pushImg)
                 }  
                 console.log('pushImg',pushImg)
                 var secondCheck = setInterval(() => {
