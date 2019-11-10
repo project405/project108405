@@ -35,15 +35,13 @@
 
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-lock"></span></span>
-                <input type="password" class="input-with-icon" id="password" name="memPass" value= <%= items[0].memPass %>
-                    onchange="passcheck()">
+                <input type="password" class="input-with-icon" id="password" name="memPass"  placeholder="密碼" onchange="passcheck()">
             </div>
             <p id="passwordAlarm"></p>
 
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-lock"></span></span>
-                <input type="password" class="input-with-icon" id="checkPassword" name="memCheckPass"
-                value= <%= items[0].memPass %> onchange="passcheck()">
+                <input type="password" class="input-with-icon" id="checkPassword" name="memCheckPass"  placeholder="確認密碼"  onchange="passcheck()">
             </div>
             <p id="checkPasswordAlarm"></p>
 
@@ -62,7 +60,7 @@
 
             <div class="input-icon-wrap">
                 <span class="input-icon"><span class="fas fa-home"></span></span>
-                <input type="text" class="input-with-icon" id="address" name="memAddr" value="<%= items[0].memAddr %>">
+                <input type="text" class="input-with-icon" id="address" name="memAddr"  placeholder="地址" value="<%= items[0].memAddr %>">
             </div>
 
             <div class="input-icon-wrap radio">

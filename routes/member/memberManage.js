@@ -44,11 +44,8 @@ router.post('/', function (req, res, next) {
         "memGender": req.body.memGender
     };
 
-    signUp.checkMail(memberData.memMail).then(data => {
-        checkMail = data[0];
-    })
-    member.getOriginalMail(memID).then(data => {
-        originalMail = data[0].memMail;
+    member.getRepeatMail(memID,memberData.memMail).then(data => {
+        originalMail = data[0];
     })
 
     setTimeout(function () {
@@ -58,7 +55,7 @@ router.post('/', function (req, res, next) {
             res.end('<script> alert("輸入的密碼與確認密不正確，請重新輸入"); history.back();</script>');
         } else if (memberData.memMail.search(emailRule) == -1) {
             res.end('<script> alert("非法的email，請重新輸入。"); history.back();</script>');
-        } else if (checkMail && originalMail != memberData.memMail) {
+        } else if (originalMail) {
             res.end('<script> alert("此Email已經被註冊過囉！請重新輸入。"); history.back();</script>');
         } else {
             //密碼加密

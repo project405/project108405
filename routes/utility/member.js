@@ -693,6 +693,23 @@ var getOriginalMail = async function (memID) {
     return result;
 }
 
+//================================
+//--------- getRepeatMail() ------
+//================================
+var getRepeatMail = async function (memID, memMail) {
+    var result;
+
+    // -----------  修改會員資料 --------------
+    await sql('SELECT "memMail" from "member" where "memID" != $1 AND "memMail" = $2', [memID, memMail])
+        .then((data) => {
+            result = data.rows;
+        }, (error) => {
+            result = 0;
+        });
+
+    return result;
+}
+
 //===================================
 //----- getMyArticleClassList() -----
 //===================================
@@ -1044,5 +1061,5 @@ module.exports = {
     addRecommendMessLike, delRecommendMessLike,
     report, checkAuthority, editArticle, deleteArticle, deleteRecommend, editReply, deleteReply, 
     memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
-    editRecommendReply, editRecommend, getBestReply
+    editRecommendReply, editRecommend, getBestReply, getRepeatMail
 };
