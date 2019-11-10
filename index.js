@@ -622,9 +622,8 @@ bot.on('message', function(event) {
             let recommendClass = []  
             let recommendHead = []  
             let recommendDateTime = []  
-            // let recommendImg = ['','','',''];
-            let recommendImg = [];
-            let replyToggle = false;
+            let recommendImg = ['','','',''];
+            let checkImg = [];
             
             data[0].forEach(async(item, index) => {
                 item.recomHead = item.recomHead.length>10 ? `${item.recomHead.substr(0,9)}...` : item.recomHead
@@ -633,20 +632,26 @@ bot.on('message', function(event) {
                 recommendHead.push(item.recomHead);
                 recommendDateTime.push(item.recomDateTime);
                 //-------------
-                if(item.imgName){
+                if(item.imgName != null ){
                     if(item.imgName.match('data:image/jpeg;base64,')){
                         var img = item.imgName.replace('data:image/jpeg;base64,', '');
                         await linePush.Imgur(img).then((imgurData) => {
                             console.log(index)
                             recommendImg.splice(index,0,imgurData);
+                            checkImg.push(true)
                         })  
                     }else{
                         recommendImg.splice(index,0,item.imgName);
+                        checkImg.push(true)
+
                     }
                 }else{
                     recommendImg.splice(index,0,'https://i.imgur.com/oNykVvA.jpg');
+                    checkImg.push(true)
+
                 }
                 var secondCheck = setInterval(() => {
+                    
                     // recommendImg.map((item) => {
                     //     console.log('error path')
 
@@ -656,7 +661,7 @@ bot.on('message', function(event) {
                     // })
                     // console.log('1232132131')
 
-                    if(recommendImg.length == 4){
+                    if(checkImg.length == 4){
                         event.reply({
                             "type": "template",
                             "altText": " 👋 本週新推薦",
