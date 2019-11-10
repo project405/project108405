@@ -623,6 +623,7 @@ bot.on('message', function(event) {
             let recommendHead = []  
             let recommendDateTime = []  
             let recommendImg = ['','','',''];
+            let replyToggle = false;
             
             data[0].forEach(async(item, index) => {
                 item.recomHead = item.recomHead.length>10 ? `${item.recomHead.substr(0,9)}...` : item.recomHead
@@ -646,115 +647,119 @@ bot.on('message', function(event) {
                 }
                 var secondCheck = setInterval(() => {
                     recommendImg.map((item) => {
-                        console.log(item)
                         if ( item == '') {
                             return
+                        
                         }
+                        replyToggle = true; 
                     })
-                    event.reply({
-                        "type": "template",
-                        "altText": " 👋 本週新推薦",
-                        "template": {
-                            "type": "carousel",
-                            "columns": [
+                    if(replyToggle == true){
+                        event.reply({
+                            "type": "template",
+                            "altText": " 👋 本週新推薦",
+                            "template": {
+                                "type": "carousel",
+                                "columns": [
+                                        {
+                                            "thumbnailImageUrl": recommendImg[0],
+                                            "title": "【" + recommendClass[0] + "】" + recommendHead[0],
+                                            "text": DateTimeFormat(recommendDateTime[0]),
+                                            "defaultAction": {
+                                                "type": "uri",
+                                                "label": "知道更多",
+                                                "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[0]}`
+                                            },
+                                            "actions": [
+                                                {
+                                                    "type": "postback",
+                                                    "label": "知道更多",
+                                                    "data": recommendClass[0]
+                                                },
+                                                {
+                                                    
+                                                    "type": "postback",
+                                                    "label": "新增至我的收藏",
+                                                    "data": `add${recommendNum[0]}`
+                                                }
+                                            ]
+                                        }
+                                    ,{
+                                    "thumbnailImageUrl": recommendImg[1],
+                                    "title":"【" + recommendClass[1] + "】" + recommendHead[1],
+                                    "text": DateTimeFormat(recommendDateTime[1]),
+                                    "defaultAction": {
+                                        "type": "uri",
+                                        "label": "詳細資料",
+                                        "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[1]}`
+                                    },
+                                    "actions": [
+                                            {
+                                                "type": "postback",
+                                                "label": "知道更多",
+                                                "data": recommendClass[1]
+                                            },
+                                            {
+                                        
+                                                "type": "postback",
+                                                "label": "新增至我的收藏",
+                                                "data": `add${recommendNum[1]}`
+                                            }
+                                        ]   
+                                    },
                                     {
-                                        "thumbnailImageUrl": recommendImg[0],
-                                        "title": "【" + recommendClass[0] + "】" + recommendHead[0],
-                                        "text": DateTimeFormat(recommendDateTime[0]),
+                                        "thumbnailImageUrl": recommendImg[2],
+                                        "title":"【" + recommendClass[2] + "】" + recommendHead[2],
+                                        "text": DateTimeFormat(recommendDateTime[2]),
                                         "defaultAction": {
                                             "type": "uri",
-                                            "label": "知道更多",
-                                            "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[0]}`
+                                            "label": "詳細資料",
+                                            "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[2]}`
                                         },
                                         "actions": [
                                             {
                                                 "type": "postback",
                                                 "label": "知道更多",
-                                                "data": recommendClass[0]
+                                                "data": recommendClass[2]
                                             },
                                             {
-                                                
+                                            
                                                 "type": "postback",
                                                 "label": "新增至我的收藏",
-                                                "data": `add${recommendNum[0]}`
+                                                "data": `add${recommendNum[2]}`
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "thumbnailImageUrl": recommendImg[3],
+                                        "title":"【" + recommendClass[3] + "】" + recommendHead[3],
+                                        "text": DateTimeFormat(recommendDateTime[3]),
+                                        "defaultAction": {
+                                            "type": "uri",
+                                            "label": "詳細資料",
+                                            "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[3]}`
+                                        },
+                                        "actions": [
+                                            {
+                                                "type": "postback",
+                                                "label": "知道更多",
+                                                "data": recommendClass[3]
+                                            },
+                                            {
+                                            
+                                                "type": "postback",
+                                                "label": "新增至我的收藏",
+                                                "data": `add${recommendNum[3]}`
                                             }
                                         ]
                                     }
-                                ,{
-                                "thumbnailImageUrl": recommendImg[1],
-                                "title":"【" + recommendClass[1] + "】" + recommendHead[1],
-                                "text": DateTimeFormat(recommendDateTime[1]),
-                                "defaultAction": {
-                                    "type": "uri",
-                                    "label": "詳細資料",
-                                    "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[1]}`
-                                },
-                                "actions": [
-                                        {
-                                            "type": "postback",
-                                            "label": "知道更多",
-                                            "data": recommendClass[1]
-                                        },
-                                        {
-                                    
-                                            "type": "postback",
-                                            "label": "新增至我的收藏",
-                                            "data": `add${recommendNum[1]}`
-                                        }
-                                    ]   
-                                },
-                                {
-                                    "thumbnailImageUrl": recommendImg[2],
-                                    "title":"【" + recommendClass[2] + "】" + recommendHead[2],
-                                    "text": DateTimeFormat(recommendDateTime[2]),
-                                    "defaultAction": {
-                                        "type": "uri",
-                                        "label": "詳細資料",
-                                        "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[2]}`
-                                    },
-                                    "actions": [
-                                        {
-                                            "type": "postback",
-                                            "label": "知道更多",
-                                            "data": recommendClass[2]
-                                        },
-                                        {
-                                        
-                                            "type": "postback",
-                                            "label": "新增至我的收藏",
-                                            "data": `add${recommendNum[2]}`
-                                        }
-                                    ]
-                                },
-                                {
-                                    "thumbnailImageUrl": recommendImg[3],
-                                    "title":"【" + recommendClass[3] + "】" + recommendHead[3],
-                                    "text": DateTimeFormat(recommendDateTime[3]),
-                                    "defaultAction": {
-                                        "type": "uri",
-                                        "label": "詳細資料",
-                                        "uri": `https://project108405.herokuapp.com/oneRecommend/${recommendNum[3]}`
-                                    },
-                                    "actions": [
-                                        {
-                                            "type": "postback",
-                                            "label": "知道更多",
-                                            "data": recommendClass[3]
-                                        },
-                                        {
-                                        
-                                            "type": "postback",
-                                            "label": "新增至我的收藏",
-                                            "data": `add${recommendNum[3]}`
-                                        }
-                                    ]
-                                }
-                            ],
-                            "imageAspectRatio": "rectangle",
-                            "imageSize": "cover"
-                        }
-                    });
-                    // clearInterval(secondCheck);
+                                ],
+                                "imageAspectRatio": "rectangle",
+                                "imageSize": "cover"
+                            }
+                        });
+                    }
+                    
+                    clearInterval(secondCheck);
                         
                 }, 1000)
                 //-------------
