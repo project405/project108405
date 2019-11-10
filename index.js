@@ -650,6 +650,8 @@ bot.on('message', function(event) {
                     checkImg.push(index)
 
                 }
+                clearInterval(secondCheck);
+ 
                 var secondCheck = setInterval(() => {
                     
                     // recommendImg.map((item) => {
