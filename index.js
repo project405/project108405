@@ -241,6 +241,9 @@ app.post('/webhook',  function (req, res) {
                     res.end(body);
                 });
             }
+
+            
+            
             //文章、推薦內容有圖片的推播樣式 
             function linePushPhoto(){
                 // console.log(url)
@@ -274,7 +277,7 @@ app.post('/webhook',  function (req, res) {
                                         {
                                           "type": "uri",
                                           "label": "▶️ 想看更多",
-                                          "uri": `https://project108405.herokuapp.com/${pushContent[0]}/${pushContent[1]}`
+                                          "uri": `https://project108405.herokuapp.com/${pushClass[0]}/${pushNum[0]}`
                                         }
                                       ]
                                     }
@@ -284,12 +287,12 @@ app.post('/webhook',  function (req, res) {
                                     altText: "相信你會喜歡😎",
                                     template: {
                                         type: "buttons",
-                                        thumbnailImageUrl: `${pushImg}`,
+                                        thumbnailImageUrl: `${pushImg[0]}`,
                                         imageAspectRatio: "rectangle",
                                         imageSize: "cover",
                                         imageBackgroundColor: "#FFFFFF",
-                                        title: `${pushContent[2]}`,
-                                        text: `${pushContent[3]}`,
+                                        title: `${pushHead[0]}`,
+                                        text: `${pushCont[0]}`,
                                         defaultAction: {
                                             "type": "uri",
                                             "label": "View detail",
@@ -299,7 +302,7 @@ app.post('/webhook',  function (req, res) {
                                             {  
                                                 "type":"postback",
                                                 "label":"我喜歡",
-                                                "data":`${pushContent[0]}`+`${pushContent[1]}`
+                                                "data":`${pushClass[0]}`+`${pushNum[0]}`
                                             },
                                             {  
                                                 "type":"postback",
