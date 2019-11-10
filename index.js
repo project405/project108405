@@ -622,7 +622,8 @@ bot.on('message', function(event) {
             let recommendClass = []  
             let recommendHead = []  
             let recommendDateTime = []  
-            let recommendImg = ['','','',''];
+            // let recommendImg = ['','','',''];
+            let recommendImg = [];
             let replyToggle = false;
             
             data[0].forEach(async(item, index) => {
@@ -646,15 +647,16 @@ bot.on('message', function(event) {
                     recommendImg.splice(index,0,'https://i.imgur.com/oNykVvA.jpg');
                 }
                 var secondCheck = setInterval(() => {
-                    recommendImg.map((item) => {
-                        console.log('error path')
+                    // recommendImg.map((item) => {
+                    //     console.log('error path')
 
-                        if ( item == '') {
-                            return
-                        }
-                    })
-                    console.log('1232132131')
-                    if(replyToggle){
+                    //     if ( item == '') {
+                    //         return
+                    //     }
+                    // })
+                    // console.log('1232132131')
+
+                    if(recommendImg.length == 4){
                         event.reply({
                             "type": "template",
                             "altText": " 👋 本週新推薦",
