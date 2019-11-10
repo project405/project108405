@@ -261,23 +261,6 @@ var Imgur = async function (img) {
 const response = await request.json();
 return response.data.link;
 };
-// var Imgur = async function (img) {
-//     return new Promise(async function(resolve, reject) {
-//         const url = 'https://api.imgur.com/3/image',
-//         request = await fetch(url, {
-//             method: 'POST',
-//             headers: {
-//                 "Content-Type": "application/json", 
-//                 "Authorization": 'Client-ID 8b8755d8a1c4ace',
-//             },
-//             dataType:"json" ,
-//             body: img
-            
-//         }).catch(error => console.error('Error:', error));
-//         const response = await request.json();
-//         resolve(response.data.link);
-//     })      
-// };
 
 
 //匯出
