@@ -79,16 +79,22 @@ app.post('/webhook',  function (req, res) {
                 if(data[0].imgName){
                     if(data[0].imgName.match('data:image/jpeg;base64,') != null){
                         var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
-                        LinePush.Imgur(img).then(imgurData => { 
+                        LinePush.Imgur(img).then(imgurData => {
+                            console.log('pushHead',pushHead) 
+                            console.log('1') 
                             pushImg.push(imgurData);
                         });
                     }else{
+                        console.log('pushHead',pushHead) 
+                        console.log('2')
                         pushImg.push(data[0].imgName);
                     }
                 }else{
+                    console.log('pushHead',pushHead) 
+                    console.log('3')
                     pushImg.push('https://i.imgur.com/oNykVvA.jpg');
                 }   
-                console.log('pushHead',pushHead)
+                
                 console.log('pushImg',pushImg)
                 linePushPhoto();
 
@@ -106,15 +112,20 @@ app.post('/webhook',  function (req, res) {
                     if(data[0].imgName.match('data:image/jpeg;base64,') != null){
                         var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(imgurData => { 
+                            console.log('pushHead',pushHead) 
+                            console.log('1') 
                             pushImg.push(imgurData);
                         });
                     }else{
+                        console.log('pushHead',pushHead) 
+                        console.log('2')
                         pushImg.push(data[0].imgName);
                     }
                 }else{
+                    console.log('pushHead',pushHead) 
+                    console.log('3')
                     pushImg.push('https://i.imgur.com/oNykVvA.jpg');
                 }  
-                console.log('pushHead',pushHead)
                 console.log('pushImg',pushImg)
                 linePushPhoto();
                 
