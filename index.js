@@ -647,13 +647,14 @@ bot.on('message', function(event) {
                 }
                 var secondCheck = setInterval(() => {
                     recommendImg.map((item) => {
+                        console.log('error path')
+
                         if ( item == '') {
                             return
                         }
-                        
                     })
-                    replyToggle = true; 
-                    if(replyToggle == true){
+                    console.log('1232132131')
+                    if(replyToggle){
                         event.reply({
                             "type": "template",
                             "altText": " 👋 本週新推薦",
