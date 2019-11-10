@@ -646,6 +646,7 @@ bot.on('message', function(event) {
                 }
                 var secondCheck = setInterval(() => {
                     recommendImg.map((item) => {
+                        console.log(item)
                         if ( item == '') {
                             return
                         }
