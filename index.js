@@ -101,7 +101,7 @@ app.post('/webhook',  function (req, res) {
                         linePushPhoto();
                         clearInterval(secondCheck);
                     }  
-                }, 250)
+                }, 1000)
 
             //data為推薦
             }else{
@@ -137,7 +137,7 @@ app.post('/webhook',  function (req, res) {
                         linePushPhoto();
                         clearInterval(secondCheck);
                     }  
-                }, 250)
+                }, 1000)
                 
                 
             }
