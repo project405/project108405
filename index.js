@@ -635,6 +635,7 @@ bot.on('message', function(event) {
                     if(item.imgName.match('data:image/jpeg;base64,')){
                         var img = item.imgName.replace('data:image/jpeg;base64,', '');
                         await linePush.Imgur(img).then((imgurData) => {
+                            console.log(index)
                             recommendImg.splice(index,0,imgurData);
                         })  
                     }else{
