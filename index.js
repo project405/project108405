@@ -174,7 +174,8 @@ app.post('/webhook',  function (req, res) {
                     body: JSON.stringify({
                         //to給資料庫有的使用者
                         // to: allUserLineID,
-                        to: item,
+                        // to: item,
+                        to:'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                 {
                                     "type": "template",
@@ -237,7 +238,8 @@ app.post('/webhook',  function (req, res) {
                     body: JSON.stringify({
                         //to給資料庫有的使用者
                         // to: allUserLineID,
-                        to: item,
+                        // to: item,
+                        to:'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                
                                 {
