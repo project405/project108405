@@ -57,7 +57,7 @@ app.post('/webhook',  function (req, res) {
         });
         
         var p = allUserLineID.map(user => {
-            console.log('user!!', user)
+            
             
         LinePush.getIndexData(user).then(data =>{
             let pushClass = [];
@@ -81,16 +81,19 @@ app.post('/webhook',  function (req, res) {
                         var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(imgurData => {
                             console.log('pushHead',pushHead) 
+                            console.log('user!!', user)
                             console.log('1') 
                             pushImg.push(imgurData);
                         });
                     }else{
                         console.log('pushHead',pushHead) 
+                        console.log('user!!', user)
                         console.log('2')
                         pushImg.push(data[0].imgName);
                     }
                 }else{
                     console.log('pushHead',pushHead) 
+                    console.log('user!!', user)
                     console.log('3')
                     pushImg.push('https://i.imgur.com/oNykVvA.jpg');
                 }   
@@ -118,16 +121,19 @@ app.post('/webhook',  function (req, res) {
                         var img = data[0].imgName.replace('data:image/jpeg;base64,', '');
                         LinePush.Imgur(img).then(imgurData => { 
                             console.log('pushHead',pushHead) 
+                            console.log('user!!', user)
                             console.log('1') 
                             pushImg.push(imgurData);
                         });
                     }else{
                         console.log('pushHead',pushHead) 
+                        console.log('user!!', user)
                         console.log('2')
                         pushImg.push(data[0].imgName);
                     }
                 }else{
                     console.log('pushHead',pushHead) 
+                    console.log('user!!', user)
                     console.log('3')
                     pushImg.push('https://i.imgur.com/oNykVvA.jpg');
                 }  
