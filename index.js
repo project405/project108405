@@ -662,9 +662,9 @@ bot.on('message', function(event) {
                     //     }
                     // })
                     // console.log('1232132131')
-                    console.log(checkImg)
-                    console.log(checkImg.length)
-                    // if(checkImg.length == 4){
+                    // console.log(checkImg)
+                    // console.log(checkImg.length)
+                    if(recommendImg.length == 4){
                         event.reply({
                             "type": "template",
                             "altText": " 👋 本週新推薦",
@@ -768,7 +768,7 @@ bot.on('message', function(event) {
                                 "imageSize": "cover"
                             }
                         });
-                    // }
+                    }
                     
                     clearInterval(secondCheck);
                         
