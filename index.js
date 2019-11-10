@@ -296,7 +296,7 @@ app.post('/webhook',  function (req, res) {
                                         defaultAction: {
                                             "type": "uri",
                                             "label": "View detail",
-                                            "uri": "http://example.com/page/123"
+                                            "uri": `https://project108405.herokuapp.com/${pushClass[0]}/${pushNum[0]}`
                                         },
                                         actions: [
                                             {  
