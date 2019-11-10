@@ -622,7 +622,7 @@ bot.on('message', function(event) {
             let recommendClass = []  
             let recommendHead = []  
             let recommendDateTime = []  
-            let recommendImg = ['','','',''];
+            let recommendImg = [];
             let checkImg = [];
             
             data[0].forEach(async(item, index) => {
