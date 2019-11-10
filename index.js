@@ -660,7 +660,7 @@ bot.on('message', function(event) {
                     //     }
                     // })
                     // console.log('1232132131')
-
+                    console.log(checkImg)
                     if(checkImg.length == 4){
                         event.reply({
                             "type": "template",
