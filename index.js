@@ -169,7 +169,7 @@ bot.on('postback', function(event) {
                 login.userJudgeBind(userId).then(d =>{
                     if(d.length !== 0){                         
                         if(d[0].lineID == userId){
-                            var spliceData = data.replace('recommend','')
+                            var spliceData = data.replace('oneRecommend','')
                             console.log('切割後的data!!!!!!!!',spliceData)
                             linePush.AddRecommendLike(userId,spliceData).then(data =>{
                                 console.log("外面的data!!!!!!!!!!",data)
