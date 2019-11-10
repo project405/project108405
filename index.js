@@ -88,7 +88,7 @@ app.post('/webhook',  function (req, res) {
                 }else{
                     pushImg.push('https://i.imgur.com/oNykVvA.jpg');
                 }   
-
+                console.log('pushHead',pushHead)
                 linePushPhoto();
 
             //data為推薦
@@ -113,7 +113,7 @@ app.post('/webhook',  function (req, res) {
                 }else{
                     pushImg.push('https://i.imgur.com/oNykVvA.jpg');
                 }  
-
+                console.log('pushHead',pushHead)
                 linePushPhoto();
                 
             }
