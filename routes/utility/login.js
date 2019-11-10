@@ -46,6 +46,7 @@ var userBind = async function(id, password, lineID){
     //回傳物件
     return result;
 }
+
 var addLineID = async function(memID, lineID){  
     var result;
     await sql('UPDATE "member" SET "lineID" = $2 WHERE "memID" = $1', [memID, lineID])

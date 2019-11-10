@@ -123,7 +123,8 @@ passport.use(
         clientSecret: 'vx7elBl3NGlZcnNPFV3QNH7l',
         callbackURL: "https://project108405.herokuapp.com/auth/google/callback" 
     },
-    
+    // http://localhost:3000/auth/google/callback
+    // https://project108405.herokuapp.com/auth/google/callback
     function(accessToken, refreshToken, profile, done) {
         if (profile) {
             return done(null, profile);
