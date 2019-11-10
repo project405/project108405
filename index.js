@@ -649,10 +649,10 @@ bot.on('message', function(event) {
                     recommendImg.map((item) => {
                         if ( item == '') {
                             return
-                        
                         }
-                        replyToggle = true; 
+                        
                     })
+                    replyToggle = true; 
                     if(replyToggle == true){
                         event.reply({
                             "type": "template",
