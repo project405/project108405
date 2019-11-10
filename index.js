@@ -754,7 +754,7 @@ bot.on('message', function(event) {
                             "imageSize": "cover"
                         }
                     });
-                    clearInterval(secondCheck);
+                    // clearInterval(secondCheck);
                         
                 }, 1000)
                 //-------------
