@@ -185,32 +185,21 @@ app.post('/webhook',  function (req, res) {
             //         res.end(body);
             //     });
             // }
-
-            
-            
             //文章、推薦內容有圖片的推播樣式 
             function linePushPhoto(){
                 // console.log(url)
                 request.post({
                     headers: {
                         'content-type' : 'application/json',
-                        //Authorization為Channel access token 
-                        // ----------測試line02
                         'Authorization': 'Bearer R8lcHnPCuZUl1bN572jcpz1z17xTC0nmXBuGBzDbBpsvPXd8uLhbJxsYw0xKzlqJuEOUmPkMg4R50tsO/HS3xer18+xRNAK27JyiS1Maj+v2MefUSMQpz1hxfyFMBCKdk5bAmsRhBbM3nEVtsJjCxgdB04t89/1O/w1cDnyilFU='
-                        // ----------測試line03
-                        // 'Authorization': 'Bearer sNG39VZmWkxEenq69AMr9p5efUTvBgarZEAbZrwLBeYH9n9U/23n9F9NCHdgjig/n/bnvrJXzfg/gDJ+9S53WbREjrSak4stPMhPJsXnqIN0Q3AwM5+dsQgz9ApIyNWC90QTjDvvn64eI00q/bdkoQdB04t89/1O/w1cDnyilFU='
                         // ----------正式line
                         // 'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
                     },
-                    // url: 'https://api.line.me/v2/bot/message/multicast',
                     url: 'https://api.line.me/v2/bot/message/push',
                     body: JSON.stringify({
-                        //to給資料庫有的使用者
-                        // to: allUserLineID,
-                        // to: item,
-                        to:'U2251202deb66b8a73da26e53c8399a13',
+                        to: item,
+                        // to:'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
-                               
                                 {
                                     "type": "template",
                                     "altText": "相信你會喜歡😎",
