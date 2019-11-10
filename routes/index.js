@@ -34,8 +34,7 @@ router.get('/', function (req, res, next) {
                 for (var j = 0; j < data[3].length; j++) {
                     if(data[3][j].artiNum == data[10][0].artiNum){
                         data[10][0].artiCont = data[10][0].artiCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[3][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
-                        console.log("文章近來囉");
-                        console.log(data[10][0].artiCont);                    }
+                    }
                 }
             }
         }
@@ -46,8 +45,6 @@ router.get('/', function (req, res, next) {
                 for (var j = 0; j < data[4].length; j++) {
                     if(data[4][j].recomNum == data[10][0].recomNum){
                         data[10][0].recomCont = data[10][0].recomCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[4][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
-                        console.log("推薦近來囉");
-                        console.log(data[10][0].recomCont);
                     }
                 }
             }
