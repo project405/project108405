@@ -53,10 +53,10 @@ app.post('/webhook',  function (req, res) {
         data.forEach(item => {
             if(item.lineID != ''){
                 allUserLineID.push(item.lineID);
-                console.log('allUserLineID',allUserLineID)
+                
             }
         });
-
+        
         var p = allUserLineID.map(item => {
             console.log('item!!', item)
             
