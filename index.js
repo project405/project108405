@@ -638,16 +638,16 @@ bot.on('message', function(event) {
                         await linePush.Imgur(img).then((imgurData) => {
                             console.log(index)
                             recommendImg.splice(index,0,imgurData);
-                            checkImg.push(true)
+                            checkImg.push(index)
                         })  
                     }else{
                         recommendImg.splice(index,0,item.imgName);
-                        checkImg.push(true)
+                        checkImg.push(index)
 
                     }
                 }else{
                     recommendImg.splice(index,0,'https://i.imgur.com/oNykVvA.jpg');
-                    checkImg.push(true)
+                    checkImg.push(index)
 
                 }
                 var secondCheck = setInterval(() => {
@@ -661,6 +661,7 @@ bot.on('message', function(event) {
                     // })
                     // console.log('1232132131')
                     console.log(checkImg)
+                    console.log(checkImg.length)
                     if(checkImg.length == 4){
                         event.reply({
                             "type": "template",
