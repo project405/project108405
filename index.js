@@ -505,7 +505,8 @@ bot.on('message', function(event) {
             let hotArticleHead = []  
             let hotArticleCont = []  
             let hotArticleDateTime = []  
-            let hotArticleImg = [];
+            let hotArticleImg = ['1','2','3'];
+            let checkImg = [];
             
             data[1].forEach(async(item, index) =>{
                 item.artiCont = item.artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, ' ');
@@ -523,18 +524,19 @@ bot.on('message', function(event) {
                         var img = item.imgName.replace('data:image/jpeg;base64,', '');
                         await linePush.Imgur(img).then((imgurData) => {
                             
-                            hotArticleImg.splice(index,0,imgurData);
+                            hotArticleImg.splice(index,1,imgurData);
+                            checkImg.push(index);
                         }) 
                     }else{
-                        hotArticleImg.splice(index,0,item.imgName);    
+                        hotArticleImg.splice(index,1,item.imgName);
+                        checkImg.push(index);    
                     }
                 }else{
-                    console.log(item.artiHead)
-                    hotArticleImg.splice(index,0,'https://i.imgur.com/oNykVvA.jpg');
+                    hotArticleImg.splice(index,2,'https://i.imgur.com/oNykVvA.jpg');
+                    checkImg.push(index);
                 }
                 var secondCheck = setInterval(() => {
-                    if (hotArticleImg.length == 3) {
-                        console.log(hotArticleImg);
+                    if (checkImg.length == 3) {
                         event.reply({
                             "type": "template",
                             "altText": " 👋 熱門文章",
@@ -653,17 +655,6 @@ bot.on('message', function(event) {
                 clearInterval(secondCheck);
  
                 var secondCheck = setInterval(() => {
-                    
-                    // recommendImg.map((item) => {
-                    //     console.log('error path')
-
-                    //     if ( item == '') {
-                    //         return
-                    //     }
-                    // })
-                    // console.log('1232132131')
-                    // console.log(checkImg)
-                    // console.log(checkImg.length)
                     if(checkImg.length == 4){
                         event.reply({
                             "type": "template",
