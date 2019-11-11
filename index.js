@@ -80,17 +80,17 @@ bot.on('postback', function(event) {
                                         "type": "buttons",
                                         "text": item.recomCont,
                                         "actions": [
-                                        {
-                                            "type": "uri",
-                                            "label": " 👀 至文藝富心官網觀看",
-                                            "uri": `https://project108405.herokuapp.com/oneRecommend/${item.recomNum}`
-                                        },
-                                        {
-                                            
-                                            "type": "postback",
-                                            "label": "新增至我的收藏",
-                                            "data": `add${recommendNum[0]}`
-                                        }
+                                            {
+                                                "type": "uri",
+                                                "label": " 👀 至文藝富心官網觀看",
+                                                "uri": `https://project108405.herokuapp.com/oneRecommend/${item.recomNum}`
+                                            },
+                                            {
+                                                
+                                                "type": "postback",
+                                                "label": "新增至我的收藏",
+                                                "data": `add${item.recomNum}`
+                                            }
                                         ]
                                     }
                                 }
