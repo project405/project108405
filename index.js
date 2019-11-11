@@ -84,6 +84,12 @@ bot.on('postback', function(event) {
                                             "type": "uri",
                                             "label": " 👀 至文藝富心官網觀看",
                                             "uri": `https://project108405.herokuapp.com/oneRecommend/${item.recomNum}`
+                                        },
+                                        {
+                                            
+                                            "type": "postback",
+                                            "label": "新增至我的收藏",
+                                            "data": `add${recommendNum[0]}`
                                         }
                                         ]
                                     }
@@ -673,12 +679,6 @@ bot.on('message', function(event) {
                                                     "type": "postback",
                                                     "label": "知道更多",
                                                     "data": recommendClass[0]
-                                                },
-                                                {
-                                                    
-                                                    "type": "postback",
-                                                    "label": "新增至我的收藏",
-                                                    "data": `add${recommendNum[0]}`
                                                 }
                                             ]
                                         }
