@@ -696,12 +696,6 @@ bot.on('message', function(event) {
                                                 "type": "postback",
                                                 "label": "知道更多",
                                                 "data": recommendClass[1]
-                                            },
-                                            {
-                                        
-                                                "type": "postback",
-                                                "label": "新增至我的收藏",
-                                                "data": `add${recommendNum[1]}`
                                             }
                                         ]   
                                     },
@@ -719,12 +713,6 @@ bot.on('message', function(event) {
                                                 "type": "postback",
                                                 "label": "知道更多",
                                                 "data": recommendClass[2]
-                                            },
-                                            {
-                                            
-                                                "type": "postback",
-                                                "label": "新增至我的收藏",
-                                                "data": `add${recommendNum[2]}`
                                             }
                                         ]
                                     },
@@ -742,12 +730,6 @@ bot.on('message', function(event) {
                                                 "type": "postback",
                                                 "label": "知道更多",
                                                 "data": recommendClass[3]
-                                            },
-                                            {
-                                            
-                                                "type": "postback",
-                                                "label": "新增至我的收藏",
-                                                "data": `add${recommendNum[3]}`
                                             }
                                         ]
                                     }
