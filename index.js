@@ -52,14 +52,12 @@ bot.on('postback', function(event) {
                     actions: [{
                         type:"uri",
                         label:" 👣 至文藝富心官網登入",
-                        uri:"line://app/1594135622-705e8pDP"   
-                        // uri: "line://app/1594135622-82v9mEZq"
+                        // uri:"line://app/1594135622-705e8pDP"   
+                        uri: "line://app/1594135622-82v9mEZq"
 
                     }]
                 }
             };
-            
-            
             if (data == '電影' ||data == '音樂' ||data == '書籍' || data =='展覽'){
                 //---------------進到四大推薦---------------
                 index.getIndexData().then(d => {  
@@ -304,7 +302,6 @@ bot.on('postback', function(event) {
                 })
                 
             }else if(data == 'Badmood'){
-                
                 mood.getMood().then((data) => {
                     console.log('data[0]',data[0])
                     console.log('data[0].imgName',data[0].imgName)
