@@ -637,16 +637,16 @@ bot.on('message', function(event) {
                         var img = item.imgName.replace('data:image/jpeg;base64,', '');
                         await linePush.Imgur(img).then((imgurData) => {
                             console.log(index)
-                            recommendImg.splice(index,0,imgurData);
+                            recommendImg.splice(index,1,imgurData);
                             checkImg.push(index)
                         })  
                     }else{
-                        recommendImg.splice(index,0,item.imgName);
+                        recommendImg.splice(index,1,item.imgName);
                         checkImg.push(index)
 
                     }
                 }else{
-                    recommendImg.splice(index,0,'https://i.imgur.com/oNykVvA.jpg');
+                    recommendImg.splice(index,1,'https://i.imgur.com/oNykVvA.jpg');
                     checkImg.push(index)
 
                 }
