@@ -30,7 +30,8 @@ var getArticleListPagination = async function (memID, artiListNum) {
                     LIMIT 10 
                     OFFSET $1 ) AS "T2"
                         INNER JOIN "member" "M"
-                            ON "M"."memID" = "T2"."memID"`, [(artiListNum-1) * 10])
+                            ON "M"."memID" = "T2"."memID"
+                    ORDER BY "artiNum" DESC`, [(artiListNum-1) * 10])
         .then((data) => {
             articleList = data.rows;
         }, (error) => {
@@ -469,7 +470,8 @@ var getArticleClassList = async function (articleClass, memID, artiListNum) {
                 LIMIT 10 
                 OFFSET $2 ) AS "T2"
                 INNER JOIN "member" "M"
-                ON "M"."memID" = "T2"."memID"`, [articleClass, (artiListNum-1) * 10])
+                    ON "M"."memID" = "T2"."memID"
+                ORDER BY "artiNum" DESC`, [articleClass, (artiListNum-1) * 10])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;
