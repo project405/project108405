@@ -87,7 +87,50 @@
             <!-- 推薦結束 -->
         </div>
     </section>
-
+    <div class="sentimentSection container-fluid d-flex justify-content-center">
+        <div class="row col-sm-8">
+            <div class="sentimentTitle col-lg-12">
+                <center>
+                    <h2>情緒專區</h2>
+                    <hr class="highlight">
+                </center>
+                <h6>「情緒，其實是一種能量，也是一種指引，<br/>
+                    當它向浪潮一般撲襲而來，你能做的就是任它流淌而過，<br/>
+                    只有感受過，你才得以在人生大海中繼續航行。」 ---- 留佩萱《療癒，從感受情緒開始》<br/>
+                    文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，<br/>
+                    我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。</h6>
+                <hr>
+            </div>
+            <div class="col-sm-6 no-gutters cardStyle">
+              <h5>燦爛、溫暖</h5>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight:bold;"><%- items[6][0].artiHead %></h5>
+                  <hr>
+                  <p class="card-text positive"><%- items[6][0].artiCont %> </p>
+                  <a href="/article/<%- items[6][0].artiNum %>" class="btn btn-light float-right">進入文章查看更多</a>
+                </div>
+                <div class="wrapperCardbig card-img-bottom"
+                    style="background-image: url('https://cfstatic.streetvoice.com/song_covers/Ch/ih/ChihSiou_/WosMnbpNdL5Qdtchi5NEDh.jpg?x-oss-process=image/resize,m_fill,h_380,w_380,limit_0/interlace,1/quality,q_85/format,jpg'); ">
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6 no-gutters cardStyle">
+            <h5>惆悵、漣漪</h5>
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title" style="font-weight:bold;"><%- items[7][0].artiHead %></h5>
+                  <hr>
+                  <p class="card-text negative"><%- items[7][0].artiCont %></p>
+                  <a href="/article/<%- items[7][0].artiNum %>" class="btn btn-light float-right">進入文章查看更多</a>
+                </div>
+                <div class="wrapperCardbig card-img-bottom"
+                    style="background-image: url('https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2019/10/15/99/6943563.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=1050'); ">
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
     <!-- 熱門文章區塊 -->
 
     <section id="hotArticle">
@@ -271,60 +314,6 @@
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
     </a>
-
-    <a id="sentimentSectionHover" style="visibility: hidden;">情緒專區</a>
-    <a href="#" id="sentimentSection" data-toggle="modal" data-target="#sentimentSectionContainer">
-        <!-- <i class="fas fa-kiss "></i> -->
-        <img style="width:75%" src="../imgs/icon/bulb.png" alt="">
-    </a>
-
-    <!-- Modal -->
-    <div class="modal fade" id="sentimentSectionContainer" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title" id="exampleModalScrollableTitle">情緒專區</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body" style="word-break: break-all;">
-                <div style="text-align: left">
-                    <h6>「情緒，其實是一種能量，也是一種指引，<br/>
-                        當它向浪潮一般撲襲而來，你能做的就是任它流淌而過，<br/>
-                        只有感受過，你才得以在人生大海中繼續航行。」 ---- 留佩萱《療癒，從感受情緒開始》<br/>
-                        文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，<br/>
-                        我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。</h6>
-                    <hr>
-                    <div style="text-align: center">
-                        <a href="#/" id="positiveButton" class="chooseSection">燦爛、溫暖</a>
-                        <a href="#/" id="negativeButton" class="chooseSection">惆悵、漣漪</a>
-                    </div>
-                </div>
-               <!-- 正向文章 -->
-               <div class="sentimentContent">
-                  <div class="defaultAlarm" style="text-align: center;"> 
-                    <br>
-                    <h4>點選上方兩類詞彙，你會有不一樣的發現哦！ʕ •ᴥ•ʔ</h4>
-                  </div>
-                  <div id="positiveSection" style="display: none; word-wrap:break-word; overflow: hidden;">
-                        <h4> <%- items[6][0].artiHead %></h4>
-                        <%- items[6][0].artiCont %> 
-                        <hr>
-                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[6][0].artiNum %>'">進入文章查看更多</button>
-                    </div>
-                    <!-- 負向文章 -->
-                    <div id="negativeSection" style="display: none">
-                        <h4> <%- items[7][0].artiHead %></h4>
-                        <%- items[7][0].artiCont %>
-                        <hr>
-                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[7][0].artiNum %>'">進入文章查看更多</button>
-                  </div>
-               </div>
-            </div>
-          </div>
-        </div>
-      </div>
       
       <div href="#" class="surpriseSection" style="cursor: pointer;"  data-toggle="modal" data-target="#surpriseSectionContainer">
           <a class="surpriseHoverText" style="display:none">看看有沒有你喜歡的</a>
