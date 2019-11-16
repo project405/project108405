@@ -1,14 +1,11 @@
 //----------------------------------------
 // 載入必要的模組
 //----------------------------------------
-// const fetch = require("node-fetch");
-// const cheerio = require('cheerio');
+
 const bodyParser = require('body-parser');
 var linebot = require('linebot');
 var express = require('express');
 const request = require('request');
-// var rp = require('request-promise');
-
 const app = express();
 var cors = require('cors')
 
@@ -57,8 +54,6 @@ app.post('/webhook',  function (req, res) {
         });
         
         var p = allUserLineID.map(user => {
-            
-            
         LinePush.getIndexData(user).then(data =>{
             let pushClass = [];
             let pushNum = [];
@@ -150,24 +145,18 @@ app.post('/webhook',  function (req, res) {
                         clearInterval(secondCheck);
                     }  
                 }, 1000)
-                
-                
             }
             
             //文章、推薦內容有圖片的推播樣式 
             function linePushPhoto(){
-                // console.log(url)
                 request.post({
                     headers: {
                         'content-type' : 'application/json',
-                        // 'Authorization': 'Bearer R8lcHnPCuZUl1bN572jcpz1z17xTC0nmXBuGBzDbBpsvPXd8uLhbJxsYw0xKzlqJuEOUmPkMg4R50tsO/HS3xer18+xRNAK27JyiS1Maj+v2MefUSMQpz1hxfyFMBCKdk5bAmsRhBbM3nEVtsJjCxgdB04t89/1O/w1cDnyilFU='
-                        // ----------正式line
                         'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
                     },
                     url: 'https://api.line.me/v2/bot/message/push',
                     body: JSON.stringify({
                         to: user,
-                        // to:'U2251202deb66b8a73da26e53c8399a13',
                             messages: [
                                 {
                                     "type": "template",
@@ -221,7 +210,6 @@ app.post('/webhook',  function (req, res) {
                 });
             }
         });
-        //---------------
         })
         
     });
