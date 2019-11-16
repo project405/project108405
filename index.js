@@ -3,20 +3,14 @@
 //----------------------------------------
 var linebot = require('linebot');
 var express = require('express');
-// var Promise = require('express-promise');
 
 //增加引用函式
-// const collection = require('./utility/collection');
 const index = require('./routes/utility/index');
 const login = require('./routes/utility/login');
 const collection = require('./routes/utility/collection');
 const recommend = require('./routes/utility/recommend');
 const mood = require('./routes/utility/mood');
 const linePush = require('./routes/utility/linePush');
-
-
-
-
 //----------------------------------------
 // 填入自己在Line Developers的channel值
 //----------------------------------------
@@ -25,8 +19,6 @@ var bot = linebot({
     channelSecret: 'c503bd8ed4d7b8e183333309ddd135fd',
     channelAccessToken: 'xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
 });
-
-      
 
 //========================================
 // 機器人接受回覆的處理
@@ -52,7 +44,6 @@ bot.on('postback', function(event) {
                     actions: [{
                         type:"uri",
                         label:" 👣 至文藝富心官網登入",
-                        // uri:"line://app/1594135622-705e8pDP"   
                         uri: "line://app/1594135622-82v9mEZq"
 
                     }]
@@ -119,7 +110,6 @@ bot.on('postback', function(event) {
                                               "type": "uri",
                                               "label": " 👀 查看所有收藏",
                                               "uri": `https://project108405.herokuapp.com/collection/recommend/1`
-                                            //   "uri": `https://8d9dfb88.ngrok.io/collection/recommend/1`
                                             }
                                           ]
                                         }
@@ -157,12 +147,7 @@ bot.on('postback', function(event) {
                             console.log('切割後的data!!!!!!!!',spliceData)
                             linePush.AddArticleLike(userId,spliceData).then(data =>{
                                 console.log(data)
-                                // if(data == 1){
-                                    // console.log('喜愛成功')
                                     event.reply('你的喜歡\n       是我們努力的動力...🌱')
-                                // }else{
-                                //     console.log('已點選過喜愛')
-                                // }
                             })
                         }
                     }else{
@@ -177,12 +162,9 @@ bot.on('postback', function(event) {
                             console.log('切割後的data!!!!!!!!',spliceData)
                             linePush.AddRecommendLike(userId,spliceData).then(data =>{
                                 console.log("外面的data!!!!!!!!!!",data)
-                                // if(data == 1){
-                                    // console.log('喜愛成功')
+                                
                                     event.reply('你的喜歡\n       是我們努力的動力...🌱')
-                                // }else{
-                                //     console.log('已重複按過囉')
-                                // }
+                               
                             })
                         }
                     }else{
@@ -193,9 +175,7 @@ bot.on('postback', function(event) {
                 event.reply('文藝富心又更加了解你了')
             }else if(data == 'Goodmood'){
                 mood.getMood().then((data) => {
-                    console.log('data',data[1])
-                    // console.log('data.analyzeScore',data[1].analyzeScore)                    
-                    // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[1].score2)                    
+                    console.log('data',data[1])                   
                     let goodMoodRecommend = [];
                     let goodMoodRecommendImg = [];
 
@@ -310,13 +290,9 @@ bot.on('postback', function(event) {
             }else if(data == 'Badmood'){
                 mood.getMood().then((data) => {
                     console.log('data[0]',data[0])
-                    console.log('data[0].imgName',data[0].imgName)
-                    // console.log('data.analyzeScore',data[0].analyzeScore)
-                    // console.log('@@@@@@@@@@@@@@@@@data.score2,',data[0].score2)                    
+                    console.log('data[0].imgName',data[0].imgName)               
                     let badMoodRecommend = [];
                     let badMoodRecommendImg = [];
-
-                    // promiseGetBadMood(data[0].imgName).then(function(imgName){
                         if(data[0].artiNum !=  undefined){
                             
                             data[0].artiCont = data[0].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/\\:imgLocation/g, ' ').replace(/<br>/g,' ');
@@ -423,65 +399,10 @@ bot.on('postback', function(event) {
                             }, 250)
                         }
                     
-                })    
-
-                    
+                })         
             }
-            // else{
-            //     login.userJudgeBind(userId).then(userID =>{
-            //         console.log('userID!!!!!!!',userID)
-            //         if(userID.length !== 0){                         
-            //             if(userID[0].lineID == userId){
-            //                 console.log('data!!!!!!!!!!!!!!!!',data)
-            //                 collection.addLineColleRecommend(userID[0].memID, parseInt(data)).then(b =>{
-            //                     console.log(b)
-            //                     if(b == 0){
-            //                         event.reply({
-            //                             "type": "template",
-            //                             "altText": "已重複收藏 ❌ ",
-            //                             "template": {
-            //                               "type": "buttons",
-            //                               "text": '          '+userName+' 已重複收藏 ❌ ',
-            //                               "actions": [
-            //                                 {
-            //                                   "type": "uri",
-            //                                   "label": " 👀 查看所有收藏",
-            //                                   "uri": `https://project108405.herokuapp.com/collection/recommend/`
-            //                                 //   "uri": `https://8d9dfb88.ngrok.io/collection/recommend/1`
-            //                                 }
-            //                               ]
-            //                             }
-            //                         })
-            //                     }else{
-            //                         event.reply({
-            //                             "type": "template",
-            //                             "altText": "已收藏成功 😍",
-            //                             "template": {
-            //                               "type": "buttons",
-            //                               "text": '          '+userName+' 已收藏成功 😍 ',
-            //                               "actions": [
-            //                                 {
-            //                                   "type": "uri",
-            //                                   "label": " 👀 查看所有收藏",
-            //                                   "uri": `https://project108405.herokuapp.com/collection/recommend/1`
-            //                                 }
-            //                               ]
-            //                             }
-            //                         })
-                                    
-            //                     }
-            //                 })                            
-            //             }
-                        
-            //         }else{
-            //             event.reply(myLineTemplate)
-            //         }
-            //     })  
-            // }         
     });    
 });
-
-
 
 //----------------成功
 //網址需連到heroku、圖片也是
@@ -739,31 +660,21 @@ bot.on('message', function(event) {
                             }
                         });
                     }
-                    
                     clearInterval(secondCheck);
-                        
                 }, 1000)
-                //-------------
             });
-
-            console.log('recommendNum',recommendNum)
-            console.log('recommendClass',recommendClass)
-            console.log('recommendHead',recommendHead)
-            console.log('recommendDateTime',recommendDateTime)
-            
         });
     }
     //-----------心情推薦-----------
     if (text == "情緒專區"){
             event.reply(
                 {
-                    "type": "text", // ①
-                    // "text": "情緒，其實是一種能量，\n也是一種指引，\n當它向浪潮一般撲襲而來，你能做的\n就是任它流淌而過，\n只有感受過，你才得以\n在人生大海中繼續航行。 \n---- 留佩萱\n《療癒，從感受情緒開始》\n========🕵️‍========\n文藝富心不將情緒分好壞，我們認為\n『每一種情緒都很重要』\n我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。",
+                    "type": "text", 
                     "text": "情緒，其實是一種能量，\n也是一種指引，\n只有感受過，你才得以\n在人生大海中繼續航行。 \n---- 留佩萱\n《療癒，從感受情緒開始》\n========🕵️‍========\n文藝富心不將情緒分好壞，我們認為\n『每一種情緒都很重要』\n我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。",
-                    "quickReply": { // ②
+                    "quickReply": { 
                       "items": [
                         {
-                          "type": "action", // ③
+                          "type": "action", 
                           "imageUrl": "https://i.imgur.com/WiHuD6g.png",
                           "action": {
                             "type": "postback",
@@ -783,63 +694,7 @@ bot.on('message', function(event) {
                       ]
                     }
                   }
-            //     {
-            //     "type": "template",
-            //     "altText": "文藝富心",
-            //     "template": {
-            //         "type": "carousel",
-            //         "columns": [
-            //             {
-            //               "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/QNd8AT.jpg",
-            //               "imageBackgroundColor": "#FFFFFF",
-            //               "title": "燦爛、溫暖",
-            //               "text": "微小的快樂，便足以支撐龐然荒涼的人生。文藝富心帶領你挖掘好心情。",
-            //               "defaultAction": {
-            //                   "type": "uri",
-            //                   "label": "詳細資料",
-            //                   "uri": "https://project108405.herokuapp.com/"
-            //               },
-            //               "actions": [
-            //                   {
-            //                       "type": "postback",
-            //                       "label": "推薦給我",
-            //                       "data": "Goodmood"
-            //                   },
-            //                   {
-            //                       "type": "uri",
-            //                       "label": "自行探索",
-            //                       "uri": "https://project108405.herokuapp.com/"
-            //                   }
-            //               ]
-            //             },
-            //             {    
-            //               "thumbnailImageUrl": "https://upload.cc/i1/2019/10/07/2EWOCG.jpg",
-            //               "imageBackgroundColor": "#000000",
-            //               "title": "惆悵、漣漪",
-            //               "text": "打擊與挫敗是成功的踏腳石而不是絆腳石。文藝富心陪你克服這道關卡。",
-            //               "defaultAction": {
-            //                   "type": "uri",
-            //                   "label": "詳細資料",
-            //                   "uri": "https://project108405.herokuapp.com/"
-            //               },
-            //               "actions": [
-            //                 {
-            //                     "type": "postback",
-            //                     "label": "推薦給我",
-            //                     "data": "Badmood"
-            //                 },
-            //                 {
-            //                     "type": "uri",
-            //                     "label": "自行探索",
-            //                     "uri": "https://project108405.herokuapp.com/"
-            //                 }
-            //               ]
-            //             }
-            //         ],
-            //         "imageAspectRatio": "rectangle",
-            //         "imageSize": "cover"
-            //     } 
-            // });
+           
             );
     
     }else if (text != "情緒專區" && text != "本週推薦" && text != "熱門文章"){
@@ -849,15 +704,9 @@ bot.on('message', function(event) {
                 "text": "我不是很了解你的意思\n請透過圖文選單與我們溝通👋"
             }            
         )
-
     }
-    console.log('使用者傳來的文字',text);
-
     });
 });
-
-//========================================
-
 
 //----------------------------------------
 // 建立一個網站應用程式app
@@ -866,8 +715,6 @@ bot.on('message', function(event) {
 const app = express();
 const linebotParser = bot.parser();
 app.post('/', linebotParser);
-
-
 
 //----------------------------------------
 // 可直接取用檔案的資料夾
