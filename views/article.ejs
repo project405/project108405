@@ -435,9 +435,16 @@
                 alert('請進行登入再留言！')
                 location.replace("/logIn");
             }
+            var el = document.querySelector('#replyInput');
+            var range = document.createRange();
+            var sel = window.getSelection();
+            if (sel.focusNode.previousElementSibling.className == 'upload-img' || sel.focusNode.nextElementSibling.className == 'upload-img') {
+                range.setStart(el.lastChild, 0);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
         })
-
-
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
         $('#file-selector').change(function(event) {
@@ -458,6 +465,14 @@
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
                                     $('#replyInput').append(img);
+                                    $('#replyInput').append('<span id="lastbr"></span><br /><br />');
+                                    var el = document.querySelector('#replyInput');
+                                    var range = document.createRange();
+                                    var sel = window.getSelection();
+                                    range.setStart(el.lastChild, 0);
+                                    range.collapse(true);
+                                    sel.removeAllRanges();
+                                    sel.addRange(range);
                                 }, (e) => {
                                     console.log(e)
                                     })
