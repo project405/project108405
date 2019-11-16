@@ -108,6 +108,7 @@
     <script src="/javascripts/imageCompression.js"></script>
     <script>
         $('#postInput').click(function () {
+            
             var el = document.querySelector('#postInput');
             var range = document.createRange();
             var sel = window.getSelection();
@@ -138,7 +139,7 @@
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
                                     $('#postInput').append(img);
-                                    $('#postInput').append('<br /><br /><span id="lastbr"></span>');
+                                    $('#postInput').append('<span id="lastbr"></span><br /><br />');
                                     var el = document.querySelector('#postInput');
                                     var range = document.createRange();
                                     var sel = window.getSelection();
@@ -202,7 +203,8 @@
             tagInput.forEach(function (element) {
                 tag.push(element.innerText);
             }, this);
-            formData.append('tag', tag);           
+            formData.append('tag', tag);
+           
             await $.ajax({
                 url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                 type: 'POST',
