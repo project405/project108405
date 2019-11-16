@@ -180,7 +180,7 @@
                 Array.from($("#postInput").find("img")).map(async (img) => {
                     console.log(img.nextElementSibling.tagName)
                     if (img.nextElementSibling.tagName == 'BR') {
-                        console.log('i get')
+                        img.nextElementSibling.remove()
                     }
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
@@ -202,7 +202,7 @@
             tagInput.forEach(function (element) {
                 tag.push(element.innerText);
             }, this);
-            formData.append('tag', tag);
+            formData.append('tag', tag);           
             await $.ajax({
                 url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                 type: 'POST',
