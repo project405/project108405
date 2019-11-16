@@ -118,6 +118,18 @@
     <script src="/javascripts/navbar.js"></script>
     <script src="/javascripts/imageCompression.js"></script>
     <script>
+        $('#postInput').click(function () {
+            var el = document.querySelector('#postInput');
+            var range = document.createRange();
+            var sel = window.getSelection();
+            console.log(sel)
+            if (sel.focusNode.previousElementSibling.className == 'upload-img' || sel.focusNode.nextElementSibling.className == 'upload-img') {
+                range.setStart(el.lastChild, 0);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        })
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
         $('#file-selector').change(function (event) {
@@ -137,6 +149,14 @@
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
                                     $('#postInput').append(img);
+                                    $('#postInput').append('<span id="lastbr"></span><br /><br />');
+                                    var el = document.querySelector('#postInput');
+                                    var range = document.createRange();
+                                    var sel = window.getSelection();
+                                    range.setStart(el.lastChild, 0);
+                                    range.collapse(true);
+                                    sel.removeAllRanges();
+                                    sel.addRange(range);
                                 }, (e) => {
                                     console.log(e)
                                 })
@@ -166,7 +186,7 @@
             $('.postButton').attr('disabled', true)
             $('.spinner-border').css('display', 'block')
             $('.coverContainer').css('display', 'block')
-            
+
             if ($("#postInput").find("img")) {
                 Array.from($("#postInput").find("img")).map((img) => {
                     formData.append('base64Index', img.getAttribute('src'));
