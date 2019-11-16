@@ -454,6 +454,7 @@
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
                                     $('#replyInput').append(img);
+                                    $('#replyInput').append('<span id="lastbr"></span><br /><br />');
                                     var el = document.querySelector('#replyInput');
                                     var range = document.createRange();
                                     var sel = window.getSelection();
