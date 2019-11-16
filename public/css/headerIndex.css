@@ -261,6 +261,19 @@ a.navTitle {
     text-align: center;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
+div.sentimentSection {
+    background-color: rgba(240, 240, 240, 0.877);
+    margin: 3em 0;
+    padding: 2em 0;
+    color: black;
+}
+div.sentimentTitle {
+    text-align: left !important;
+}
+div.cardStyle {
+    padding: 0.25em;
+    color: black;
+}
 #sentimentSection {
     padding: 5px;
     position: fixed;
@@ -287,7 +300,7 @@ a.navTitle {
 div.surpriseSection {
     position: fixed;
     z-index: 95;
-    bottom: 160px;
+    bottom: 80px;
     right: -45px;
     /* animation: shake 4s;
     animation-iteration-count: infinite; */
@@ -366,7 +379,7 @@ div.surpriseHeader {
     }
     div.surpriseSection {
         z-index: 95;
-        bottom: 120px;
+        bottom: 60px;
         right: -30px;
         /* animation: shake 4s;
         animation-iteration-count: infinite; */

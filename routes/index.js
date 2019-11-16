@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-
 //增加引用函式
 const index = require('./utility/index');
 
@@ -16,6 +15,7 @@ router.get('/', function (req, res, next) {
     }
     
     index.getIndexData(memID).then(data => { 
+        
         if (data[0] != undefined) {
             data[0].map((item) => {
                 item.recomCont = item.recomCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " ");
@@ -32,9 +32,7 @@ router.get('/', function (req, res, next) {
         if (data[10][0].artiNum != undefined) {
             if (data[10][0].artiCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[3].length; j++) {
-                    if(data[3][j].artiNum == data[10][0].artiNum){
-                        data[10][0].artiCont = data[10][0].artiCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[3][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
-                    }
+                    data[10][0].artiCont = data[10][0].artiCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[3][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 }
             }
         }
@@ -43,25 +41,23 @@ router.get('/', function (req, res, next) {
         if (data[10][0].recomNum != undefined) {
             if (data[10][0].recomCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[4].length; j++) {
-                    if(data[4][j].recomNum == data[10][0].recomNum){
-                        data[10][0].recomCont = data[10][0].recomCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[4][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
-                    }
+                    data[10][0].recomCont = data[10][0].recomCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[4][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                 }
             }
         }
         
         // 將正向文章字串替換成圖片
-        if(data[6] != undefined){
-            if (data[6][0].artiCont.match("\\:imgLocation") != null) {
-                data[6][0].artiCont = data[6][0].artiCont.replace("\\:imgLocation", "<img class='sentimentImg'  src='" + data[6][0].imgName + "'</div>");
-            }
+        for (var i = 0; i < data[6].length; i++) {
+            data[6][i].artiCont = data[6][i].artiCont.replace(/\n/g,'   ').replace(/\r/g,'   ').replace(/<br>/g,'   ').replace(/\\:imgLocation/g, "   "); 
+            data[6][i].artiCont = data[6][i].artiCont.length > 300 ? `${data[6][i].artiCont.substring(0,300)}...` : data[6][i].artiCont
+            console.log(data[6][i].artiCont.length)
         }
 
         // 將負向文章字串替換成圖片
-        if(data[7] != undefined){
-            if (data[7][0].artiCont.match("\\:imgLocation") != null) {
-                data[7][0].artiCont = data[7][0].artiCont.replace("\\:imgLocation", "<img class='sentimentImg'  src='" + data[7][0].imgName + "'</div>");
-            }
+        for (var i = 0; i < data[7].length; i++) {
+            data[7][i].artiCont = data[7][i].artiCont.replace(/\n/g,'   ').replace(/\r/g,'   ').replace(/<br>/g,'   ').replace(/\\:imgLocation/g, "   "); 
+            data[7][i].artiCont = data[7][i].artiCont.length > 300 ? `${data[7][i].artiCont.substring(0,300)}...` : data[7][i].artiCont
+            console.log(data[7][i].artiCont.length)
         }
         
         if (data == null) {
@@ -73,5 +69,6 @@ router.get('/', function (req, res, next) {
         }
     })
 });
+
 
 module.exports = router;

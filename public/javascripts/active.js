@@ -29,6 +29,9 @@ $(document).ready(function () {
         Array.from($('.liContainer').find('li > a')).map((item) => {
             item.innerText = item.innerText.length > 20 ? `${item.innerText.substring(0,20)}...` : item.innerText
         })
+        Array.from($('.positive, .negative')).map((item) => {
+            item.innerText = item.innerText.length > 150 ? `${item.innerText.substring(0,150)}...` : item.innerText
+        })
     }
 
     Array.from($('.fourRecommend')).map((item) => {
