@@ -48,14 +48,14 @@ router.get('/', function (req, res, next) {
         
         // 將正向文章字串替換成圖片
         for (var i = 0; i < data[6].length; i++) {
-            data[6][i].artiCont = data[6][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " "); 
+            data[6][i].artiCont = data[6][i].artiCont.replace(/\n/g,'   ').replace(/\r/g,'   ').replace(/<br>/g,'   ').replace(/\\:imgLocation/g, "   "); 
             data[6][i].artiCont = data[6][i].artiCont.length > 300 ? `${data[6][i].artiCont.substring(0,300)}...` : data[6][i].artiCont
             console.log(data[6][i].artiCont.length)
         }
 
         // 將負向文章字串替換成圖片
         for (var i = 0; i < data[7].length; i++) {
-            data[7][i].artiCont = data[7][i].artiCont.replace(/\n/g,' ').replace(/\r/g,' ').replace(/<br>/g,' ').replace(/\\:imgLocation/g, " "); 
+            data[7][i].artiCont = data[7][i].artiCont.replace(/\n/g,'   ').replace(/\r/g,'   ').replace(/<br>/g,'   ').replace(/\\:imgLocation/g, "   "); 
             data[7][i].artiCont = data[7][i].artiCont.length > 300 ? `${data[7][i].artiCont.substring(0,300)}...` : data[7][i].artiCont
             console.log(data[7][i].artiCont.length)
         }

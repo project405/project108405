@@ -40,7 +40,8 @@
                 <option value="exhibition">展覽類</option>
                 <option value="book">書籍類</option>
             </select>
-            <input type="text" class="titleInput input-with-icon title" name="artiHead" id="artiHead" placeholder="請輸入您的標題">
+            <input type="text" class="titleInput input-with-icon title" name="artiHead" id="artiHead"
+                placeholder="請輸入您的標題">
 
             <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容"></div>
 
@@ -56,7 +57,8 @@
                 <i class="fas fa-images" style="padding-right:5px"></i>加圖片
             </label>
             <!-- </div> -->
-            <button type="submit" class="btn btn-danger col-lg-2 float-right postButton" onclick="submitPost()">提交</button>
+            <button type="submit" class="btn btn-danger col-lg-2 float-right postButton"
+                onclick="submitPost()">提交</button>
 
         </div>
     </div>
@@ -71,16 +73,16 @@
             <span class="sr-only">Loading...</span>
     </div> -->
     <div class='coverContainer'>
-            <div class='loader'>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--text'></div>
-            </div>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
         </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -105,9 +107,21 @@
     <script src="/javascripts/navbar.js"></script>
     <script src="/javascripts/imageCompression.js"></script>
     <script>
+        $('#postInput').click(function () {
+            var el = document.querySelector('#postInput');
+            var range = document.createRange();
+            var sel = window.getSelection();
+            console.log(sel)
+            if (sel.focusNode.previousElementSibling.className == 'upload-img' || sel.focusNode.nextElementSibling.className == 'upload-img') {
+                range.setStart(el.lastChild, 0);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        })
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
-        $('#file-selector').change(function(event) {
+        $('#file-selector').change(function (event) {
             var file = $("#file-selector")[0];  //取得檔案
             //如果有檔案就要加入formData
             if (file.files.length) {
@@ -115,32 +129,32 @@
                     // 解析檔案
                     var item = file.files[img]
                     var reader = new FileReader();
-                    reader.onload = (function(item) {
-                        return async function(event) {
+                    reader.onload = (function (item) {
+                        return async function (event) {
                             var getSize = getOriginalSize(event.target.result)
-                            getSize.then(function(size) {
+                            getSize.then(function (size) {
                                 var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
-                                canvasUrl.then(function(strDataURI) {
+                                canvasUrl.then(function (strDataURI) {
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
                                     $('#postInput').append(img);
+                                    $('#postInput').append('<br /><br /><span id="lastbr"></span>');
+                                    var el = document.querySelector('#postInput');
+                                    var range = document.createRange();
+                                    var sel = window.getSelection();
+                                    range.setStart(el.lastChild, 0);
+                                    range.collapse(true);
+                                    sel.removeAllRanges();
+                                    sel.addRange(range);
                                 }, (e) => {
                                     console.log(e)
-                                    })
                                 })
-                            };
+                            })
+                        };
                     })(file);
                     reader.readAsDataURL(item);
                 })
                 $('#file-selector').val('')
-                // document.onmousemove = function(e) {
-                //     console.log(e)
-                // }
-                $(document).on("focus","#postInput",() => {  
-                    setTimeout(function() {
-                        // $('.br:last-child').focus()
-                    },20) 
-                });
             }
         });
         async function submitPost() {
@@ -163,7 +177,11 @@
             $('.coverContainer').css('display', 'block')
             //img process
             if ($("#postInput").find("img")) {
-                Array.from($("#postInput").find("img")).map(async(img) => {
+                Array.from($("#postInput").find("img")).map(async (img) => {
+                    console.log(img.nextElementSibling.tagName)
+                    if (img.nextElementSibling.tagName == 'BR') {
+                        console.log('i get')
+                    }
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
