@@ -1,7 +1,6 @@
 //----------------------------------------
 // 載入必要的模組
 //----------------------------------------
-
 const bodyParser = require('body-parser');
 var linebot = require('linebot');
 var express = require('express');
@@ -12,7 +11,6 @@ var cors = require('cors')
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors())
-
 const LinePush = require('./utility/LinePush');
 
 //----------------------------------------
