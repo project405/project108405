@@ -324,11 +324,16 @@ async function byClassGetData(index, r){
 
     //取文章
     if( r <= 5 ){
-        await sql('SELECT * '+
-                 ' FROM "articleListDataView" '+
-                 ' WHERE "artiClass" = $1 '+
-                 ' ORDER BY random() '+
-                 ' LIMIT 1', [className])
+        await sql(`SELECT "B".* 
+                    FROM(
+                        SELECT "A".* , "I"."imgName" , ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank"  
+                        FROM "articleListDataView" AS "A" 
+                        INNER JOIN "image" AS "I" 
+                            ON	"I"."artiNum" = "A"."artiNum"
+                        WHERE "artiClass" = $1 AND "I"."artiMessNum" IS NULL ) AS "B"
+                    WHERE "B"."Rank" = 1
+                    ORDER BY random() 
+                    LIMIT 1`, [className])
         .then((data) => {
             if (!data.rows) {
                 result = undefined; 
@@ -340,11 +345,16 @@ async function byClassGetData(index, r){
         });
     }else{ 
         //取推薦
-        await sql('SELECT * '+
-            ' FROM "recommend" '+
-            ' WHERE "recomClass" = $1 '+
-            ' ORDER BY random() '+
-            ' LIMIT 1', [className])
+        await sql(`SELECT "B".* 
+                    FROM(
+                        SELECT "A".* , "I"."imgName" , ROW_NUMBER() OVER(PARTITION BY "A"."recomNum" ORDER BY "I"."imgNum") as "Rank"  
+                        FROM "recommendListDataView" AS "A" 
+                        INNER JOIN "image" AS "I" 
+                                ON	"I"."recomNum" = "A"."recomNum"
+                        WHERE "recomClass" = $1 AND "I"."recomMessNum" IS NULL ) AS "B"
+                    WHERE "B"."Rank" = 1
+                    ORDER BY random() 
+                    LIMIT 1`, [className])
         .then((data) => {
             if (!data.rows) {
                 result = undefined; 

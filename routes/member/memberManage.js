@@ -32,7 +32,16 @@ router.post('/', function (req, res, next) {
     var emailRule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
     var checkMail;
     var originalMail;//目前使用者原本的Mail
-    var memID = req.session.memID;
+    var memID;
+
+    //判斷是使用哪種方式登入
+     if (req.session.memID == undefined && req.session.passport == undefined) {
+        res.render('login');
+    } else if (req.session.memID != undefined && req.session.passport == undefined) {
+        memID = req.session.memID;
+    } else if (req.session.memID == undefined && req.session.passport != undefined) {
+        memID = req.session.passport.user.id;
+    }
 
     var memberData = {
         "memID": memID,
