@@ -32,7 +32,9 @@ router.get('/', function (req, res, next) {
         if (data[10][0].artiNum != undefined) {
             if (data[10][0].artiCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[3].length; j++) {
-                    data[10][0].artiCont = data[10][0].artiCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[3][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    if(data[10][0].artiNum == data[3][j].artiNum){
+                        data[10][0].artiCont = data[10][0].artiCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[3][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    }
                 }
             }
         }
@@ -41,7 +43,9 @@ router.get('/', function (req, res, next) {
         if (data[10][0].recomNum != undefined) {
             if (data[10][0].recomCont.match("\\:imgLocation") != null) {
                 for (var j = 0; j < data[4].length; j++) {
-                    data[10][0].recomCont = data[10][0].recomCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[4][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    if(data[10][0].recomNum == data[4][j].recomNum){
+                        data[10][0].recomCont = data[10][0].recomCont.replace("\\:imgLocation", "<div class='sentimentImg'><img src='" + data[4][j].imgName + "' style='width: 100%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    }
                 }
             }
         }
