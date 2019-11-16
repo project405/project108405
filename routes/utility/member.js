@@ -580,7 +580,8 @@ var myArticle = async function (memID, artiPage) {
                     LIMIT 10
                     OFFSET $2 ) AS "T2"
                     INNER JOIN "member" "M"
-                    ON "M"."memID" = "T2"."memID"`, [memID, (artiPage-1) * 10])
+                        ON "M"."memID" = "T2"."memID"
+                ORDER BY "artiDateTime" DESC`, [memID, (artiPage-1) * 10])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;
@@ -737,7 +738,8 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
                     LIMIT 10
                     OFFSET $3 ) AS "T2"
                     INNER JOIN "member" "M"
-                    ON "M"."memID" = "T2"."memID"`, [artiClass, memID, (artiPage-1) * 10])
+                    ON "M"."memID" = "T2"."memID"
+                ORDER BY "artiDateTime" DESC`, [artiClass, memID, (artiPage-1) * 10])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;

@@ -28,7 +28,8 @@ var getCollRecommend = async function (memID, recompage) {
                     WHERE "T1"."Rank" = '1'
                     ORDER BY "T1"."collDateTime" DESC
                     LIMIT 8
-                    OFFSET $2 ) AS "T2"`, [memID, (recompage-1)*8])
+                    OFFSET $2 ) AS "T2"
+                ORDER BY "collDateTime" DESC`, [memID, (recompage-1)*8])
         .then((data) => {
             if (!data.rows){
                 recommendList = undefined ;
@@ -252,7 +253,8 @@ var getCollArticle = async function (memID, collpage) {
                     LIMIT 10 
                     OFFSET $2 ) AS "T2"
                     INNER JOIN "member" "M"
-                    ON "M"."memID" = "T2"."memID"`,  [memID, (collpage-1)*10 ])
+                    ON "M"."memID" = "T2"."memID"
+                ORDER BY "collDateTime" DESC`,  [memID, (collpage-1)*10 ])
         .then((data) => {
             if(!data.rows){
                 colleArticle = undefined ; 
@@ -341,7 +343,8 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
                     WHERE "T1"."Rank" = '1'
                     ORDER BY "T1"."collDateTime" DESC
                     LIMIT 8
-                    OFFSET $3 ) AS "T2"` , [memID, recomClass, (recompage-1)*8])
+                    OFFSET $3 ) AS "T2"
+                ORDER BY "collDateTime" DESC` , [memID, recomClass, (recompage-1)*8])
         .then((data) => {
             if(!data.rows){
                 recommendList = undefined ; 
@@ -402,8 +405,9 @@ var getCollArtiClassList = async function (memID, artiClass, collpage) {
                     ORDER BY "T1"."collDateTime" DESC
                     LIMIT 10 
                     OFFSET $3 ) AS "T2"
-                    INNER JOIN "member" "M"
-                    ON "M"."memID" = "T2"."memID"` , [memID, artiClass, (collpage-1)* 10])
+                INNER JOIN "member" "M"
+                    ON "M"."memID" = "T2"."memID"
+                ORDER BY "collDateTime" DESC` , [memID, artiClass, (collpage-1)* 10])
         .then((data) => {
             if(!data.rows){
                 articleList = undefined ; 

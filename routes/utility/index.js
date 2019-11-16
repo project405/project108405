@@ -40,7 +40,8 @@ var getIndexData = async function (memID) {
                         ' ON "A"."recomNum" = "I"."recomNum" '+
                     ' WHERE "Rank" = \'1\' AND "I"."recomMessNum" IS NULL '+
                     ' ORDER BY "recomNum" ) AS "B" '+
-             ' WHERE "B"."R" = \'1\' ')
+             ' WHERE "B"."R" = \'1\' '+
+             ' ORDER BY "recomDateTime" DESC')
         .then((data) => {
             
             // 將每周推薦的類別改為中文
@@ -63,7 +64,8 @@ var getIndexData = async function (memID) {
     // -----------  熱門文章 --------------
     await sql('SELECT "articleListDataView".*, "member"."memName" ' + 
               'FROM "articleListDataView" '+
-              'INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"' +
+              'INNER JOIN "member" '+
+                 'ON "member"."memID" = "articleListDataView"."memID"' +
               'ORDER BY "likeCount" DESC , "artiDateTime" DESC LIMIT 3')
         .then((data) => {
             if (!data.rows) {
@@ -88,7 +90,10 @@ var getIndexData = async function (memID) {
         });
 
     //----------- 取得文章照片 ----------- 
-    await sql('SELECT "artiNum" , "imgName" FROM "image" ORDER BY "imgNum" ')
+    await sql(`SELECT "artiNum" , "imgName" 
+               FROM "image" 
+               WHERE "artiMessNum" IS NULL AND "artiNum" IS NOT NULL 
+               ORDER BY "imgNum" `)
         .then((data) => {
             if (!data.rows) {
                 articleImgs = undefined;
@@ -100,7 +105,10 @@ var getIndexData = async function (memID) {
         });
     
     //----------- 取得推薦照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image" ORDER BY "imgNum"')
+    await sql(`SELECT "recomNum" , "imgName" 
+               FROM "image" 
+               WHERE "recomMessNum" IS NULL AND "recomNum" IS NOT NULL 
+               ORDER BY "imgNum"`)
         .then((data) => {
             if (!data.rows) {
                 recommendImgs = undefined;
@@ -155,7 +163,7 @@ var getIndexData = async function (memID) {
     if(positiveArticle.length != 0 ){
         await sql('SELECT "imgName" '+
             ' FROM "image" '+
-            ' WHERE "artiNum" = $1 '+
+            ' WHERE "artiNum" = $1 AND "artiMessNum" IS NULL'+
             ' ORDER BY "imgNum" ',[positiveArticle[0].artiNum])
         .then((data) => {
             if (!data.rows) {
@@ -173,7 +181,7 @@ var getIndexData = async function (memID) {
     if(negativeArticle.length != 0 ){
         await sql('SELECT "imgName" '+
             ' FROM "image" '+
-            ' WHERE "artiNum" = $1 '+
+            ' WHERE "artiNum" = $1 AND "artiMessNum" IS NULL'+
             ' ORDER BY "imgNum"',[negativeArticle[0].artiNum])
         .then((data) => {
             if (!data.rows) {
@@ -368,10 +376,11 @@ var getWebSearch = async function (searchParams, memID) {
                         LEFT JOIN "image" AS "I"
                             ON "A"."artiNum" = "I"."artiNum"
                         WHERE "I"."artiMessNum" IS NULL)  AS "T1"
-                WHERE "T1"."Rank" = '1' AND ("artiHead" LIKE $1 or "artiCont" LIKE $1 or "artiClass" LIKE $1 ) 
-                ORDER BY "artiNum" DESC) AS "T2"
+                    WHERE "T1"."Rank" = '1' AND ("artiHead" LIKE $1 or "artiCont" LIKE $1 or "artiClass" LIKE $1 ) 
+                    ORDER BY "artiNum" DESC) AS "T2"
                 INNER JOIN "member" "M"
-                ON "M"."memID" = "T2"."memID"`,['%' + searchParams + '%'])
+                    ON "M"."memID" = "T2"."memID"
+                ORDER BY "artiDateTime" DESC`,['%' + searchParams + '%'])
         .then((data) => {
             articleList = data.rows;
         }, (error) => {
