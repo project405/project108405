@@ -28,7 +28,7 @@ var getRecommendList = async function (memID, recomPage) {
                     ORDER BY "recomNum" DESC
                     LIMIT 8
                     OFFSET $1 ) AS "T2"
-                ORDER BY "recomDateTime" DESC`, [(recomPage-1) * 8])
+                ORDER BY "recomDateTime" DESC , "recomNum" DESC `, [(recomPage-1) * 8])
         .then((data) => {
             if (data.rows != undefined) {
                 recommendList = data.rows
@@ -350,7 +350,7 @@ var getRecomClassList = async function (recomClass, memID, recomPage) {
                     ORDER BY "recomNum" DESC
                     LIMIT 8
                     OFFSET $2 ) AS "T2"
-                ORDER BY "recomDateTime" DESC`, [recomClass, (recomPage-1)*8])
+                ORDER BY "recomDateTime" DESC , "recomNum" DESC`, [recomClass, (recomPage-1)*8])
         .then((data) => {
           if(!data.rows){
             recommendData = undefined ;

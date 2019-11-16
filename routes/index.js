@@ -51,20 +51,16 @@ router.get('/', function (req, res, next) {
         }
         
         // 將正向文章字串替換成圖片
-        for (var i = 0; i < data[6].length; i++) {
-            if (data[6][i].artiCont.match("\\:imgLocation") != null) {
-                for (var j = 0; j < data[8].length; j++) {
-                    data[6][i].artiCont = data[6][i].artiCont.replace("\\:imgLocation", "<img class='sentimentImg'  src='" + data[8][j].imgName + "'</div>");
-                }
+        if(data[6] != undefined){
+            if (data[6][0].artiCont.match("\\:imgLocation") != null) {
+                data[6][0].artiCont = data[6][0].artiCont.replace("\\:imgLocation", "<img class='sentimentImg'  src='" + data[6][0].imgName + "'</div>");
             }
         }
 
         // 將負向文章字串替換成圖片
-        for (var i = 0; i < data[7].length; i++) {
-            if (data[7][i].artiCont.match("\\:imgLocation") != null) {
-                for (var j = 0; j < data[9].length; j++) {
-                    data[7][i].artiCont = data[7][i].artiCont.replace("\\:imgLocation", "<img class='sentimentImg' src='" + data[9][j].imgName + "'</div>");
-                }
+        if(data[7] != undefined){
+            if (data[7][0].artiCont.match("\\:imgLocation") != null) {
+                data[7][0].artiCont = data[7][0].artiCont.replace("\\:imgLocation", "<img class='sentimentImg'  src='" + data[7][0].imgName + "'</div>");
             }
         }
         
