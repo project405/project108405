@@ -129,7 +129,7 @@ var getIndexData = async function (memID) {
                         WHERE "score2" >= 20
                         ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
                         LIMIT 5) AS "A" 
-                    INNER JOIN "image" AS "I"
+                    LEFT JOIN "image" AS "I"
                         ON "I"."artiNum" = "A"."artiNum"
                     WHERE "artiMessNum" IS NULL ) AS "B"
                 WHERE "B"."Rank" = 1
@@ -155,7 +155,7 @@ var getIndexData = async function (memID) {
                         WHERE "score2" <= -15
                         ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
                         LIMIT 5) AS "A" 
-                    INNER JOIN "image" AS "I"
+                    LEFT JOIN "image" AS "I"
                         ON "I"."artiNum" = "A"."artiNum"
                     WHERE "artiMessNum" IS NULL ) AS "B"
                 WHERE "B"."Rank" = 1
