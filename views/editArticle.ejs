@@ -255,6 +255,7 @@
     <script>
         var tagArray = []
         var classSelected = '<%= items[0][0].artiClass%>'
+        $('#inputState').val(classSelected)
         $('.deleteTag').click(function () {
             $(this).parent('#tag').remove()
         })

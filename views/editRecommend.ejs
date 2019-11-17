@@ -262,8 +262,23 @@
     <script>
         var tagArray = []
         var classSelected = '<%= items[0][0].recomClass%>'
+        switch(classSelected) {
+                case '書籍':
+                    classSelected = 'book'
+                    break;
+                case '電影':
+                    classSelected = 'movie'
+                    break;
+                case '音樂':
+                    classSelected = 'music'
+                    break;
+                case '展覽':
+                    classSelected = 'exhibition'
+                    break;
+            }
+        $('#inputState').val(classSelected)
         $('.deleteTag').click(function () {
-            $(this).parent('#tag').remove()
+        $(this).parent('#tag').remove()
         })
     </script>
 </body>
