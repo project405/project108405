@@ -50,9 +50,8 @@
 
             <!-- 推薦 -->
             <% for(var i = 0 ; i<items[0].length ; i ++) { %>
-                <div class="wrapper col-12  col-lg-4" 
-                    style="background-image: url('<%= items[0][i].imgName%>');"
-                    onclick="location.href='/oneRecommend/<%= items[0][i].recomNum %>'" data-aos="fade-right">
+            <div class="wrapper col-12  col-lg-4" style="background-image: url('<%= items[0][i].imgName%>');"
+                onclick="location.href='/oneRecommend/<%= items[0][i].recomNum %>'" data-aos="fade-right">
 
                 <a class="portfolio-box" href="/oneRecommend/<%= items[0][i].recomNum %>">
                     <div class="portfolio-box-caption">
@@ -81,42 +80,48 @@
                     <h2>情緒專區</h2>
                     <hr class="highlight">
                 </center>
-                <h6>「情緒，其實是一種能量，也是一種指引，<br/>
-                    當它向浪潮一般撲襲而來，你能做的就是任它流淌而過，<br/>
-                    只有感受過，你才得以在人生大海中繼續航行。」 ---- 留佩萱《療癒，從感受情緒開始》<br/>
-                    文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，<br/>
+                <h6>「情緒，其實是一種能量，也是一種指引，<br />
+                    當它向浪潮一般撲襲而來，你能做的就是任它流淌而過，<br />
+                    只有感受過，你才得以在人生大海中繼續航行。」 ---- 留佩萱《療癒，從感受情緒開始》<br />
+                    文藝富心不將情緒區分好壞，我們認為每一種情緒都很重要，<br />
                     我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。</h6>
                 <hr>
             </div>
             <div class="col-sm-6 no-gutters cardStyle">
-              <h5>燦爛、溫暖</h5>
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" style="font-weight:bold;"><%- items[6][0].artiHead %></h5>
-                  <hr>
-                  <p class="card-text positive"><%- items[6][0].artiCont %> </p>
-                  <a href="/article/<%- items[6][0].artiNum %>" class="btn btn-light float-right">進入文章查看更多</a>
+                <h5 style="font-weight: bold;"><i class="fas fa-caret-right"
+                        style="margin:0 0.5em; color: #ffad33; font-size: 28px;"></i>燦爛、溫暖</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight:bold;"><%- items[6][0].artiHead %></h5>
+                        <hr>
+                        <p class="card-text positive"><%- items[6][0].artiCont %> </p>
+                        <a href="/article/<%- items[6][0].artiNum %>" class="btn btn-light float-right">進入文章查看更多</a>
+                    </div>
+                    <% if (items[6][0].imgName) { %>
+                        <div class="wrapperCardbig card-img-bottom"
+                            style="background-image: url('<%= items[6][0].imgName %>')">
+                        </div>
+                    <% } %>
                 </div>
-                <div class="wrapperCardbig card-img-bottom"
-                    style="background-image: url('<%= items[6][0].imgName %>')">
-                </div>
-              </div>
             </div>
             <div class="col-sm-6 no-gutters cardStyle">
-            <h5>惆悵、漣漪</h5>
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title" style="font-weight:bold;"><%- items[7][0].artiHead %></h5>
-                  <hr>
-                  <p class="card-text negative"><%- items[7][0].artiCont %></p>
-                  <a href="/article/<%- items[7][0].artiNum %>" class="btn btn-light float-right">進入文章查看更多</a>
+                <h5 style="font-weight: bold;"><i class="fas fa-caret-right"
+                        style="margin:0 0.5em; color: #1268a2; font-size: 28px;"></i>惆悵、漣漪</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" style="font-weight:bold;"><%- items[7][0].artiHead %></h5>
+                        <hr>
+                        <p class="card-text negative"><%- items[7][0].artiCont %></p>
+                        <a href="/article/<%- items[7][0].artiNum %>" class="btn btn-light float-right">進入文章查看更多</a>
+                    </div>
+                    <% if (items[7][0].imgName) { %>
+                        <div class="wrapperCardbig card-img-bottom"
+                            style="background-image: url('<%= items[7][0].imgName %>'); ">
+                        </div>
+                    <% } %>
                 </div>
-                <div class="wrapperCardbig card-img-bottom"
-                    style="background-image: url('<%= items[7][0].imgName %>'); ">
-                </div>
-              </div>
             </div>
-          </div>
+        </div>
     </div>
     <!-- 熱門文章區塊 -->
 
@@ -142,30 +147,30 @@
                             <p class="poster">
                                 <%= items[1][0].memName %> 於 <%= items[1][0].artiDateTime %>發佈
                             </p>
-                            
+
                             <!-- tag -->
                             <div class="tagDiv">
                                 <% if(items[5] != undefined) { %>
-                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
-                                        <% if(items[5][j].artiNum == items[1][0].artiNum) { %>
-                                            <button type="button" class="btn  tag"><%= items[5][j].tagName %></button>
-                                        <% } %>
-                                    <% } %>
+                                <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                <% if(items[5][j].artiNum == items[1][0].artiNum) { %>
+                                <button type="button" class="btn  tag"><%= items[5][j].tagName %></button>
                                 <% } %>
-                                
+                                <% } %>
+                                <% } %>
+
                             </div>
                         </div>
 
                         <!-- imgs -->
                         <% if(items[3] != undefined ){%>
-                            <% for(var j = 0 ; j < items[3].length ; j++) { %>
-                                <% if (items[1][0].artiNum == items[3][j].artiNum){ %>
-                                    <div class="wrapperCardbig card-img-bottom"
-                                        style="background-image: url( '<%= items[3][j].imgName %>'); ">
-                                    </div>
-                                    <% break ;%>
-                                <% } %>
-                            <% } %>
+                        <% for(var j = 0 ; j < items[3].length ; j++) { %>
+                        <% if (items[1][0].artiNum == items[3][j].artiNum){ %>
+                        <div class="wrapperCardbig card-img-bottom"
+                            style="background-image: url( '<%= items[3][j].imgName %>'); ">
+                        </div>
+                        <% break ;%>
+                        <% } %>
+                        <% } %>
                         <% } %>
                     </div>
                 </div>
@@ -188,25 +193,25 @@
                             <!-- tag -->
                             <div class="tagDiv">
                                 <% if(items[5] != undefined) { %>
-                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
-                                        <% if(items[5][j].artiNum == items[1][1].artiNum) { %>
-                                            <button type="button" class="btn  tag"><%= items[5][j].tagName %></button>
-                                        <% } %>
-                                    <% } %>
+                                <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                <% if(items[5][j].artiNum == items[1][1].artiNum) { %>
+                                <button type="button" class="btn  tag"><%= items[5][j].tagName %></button>
+                                <% } %>
+                                <% } %>
                                 <% } %>
                             </div>
                         </div>
 
                         <!-- imgs -->
                         <% if(items[3] != undefined ){ %>
-                            <% for(var j = 0 ; j < items[3].length ; j++) { %>
-                                <% if (items[1][1].artiNum == items[3][j].artiNum){ %>
-                                    <div class="wrapperCardSmall card-img-bottom"
-                                        style="background-image: url( '<%= items[3][j].imgName %>'); ">
-                                    </div>
-                                    <% break ;%>
-                                <% } %>
-                            <% } %>
+                        <% for(var j = 0 ; j < items[3].length ; j++) { %>
+                        <% if (items[1][1].artiNum == items[3][j].artiNum){ %>
+                        <div class="wrapperCardSmall card-img-bottom"
+                            style="background-image: url( '<%= items[3][j].imgName %>'); ">
+                        </div>
+                        <% break ;%>
+                        <% } %>
+                        <% } %>
                         <% } %>
                     </div>
                     <!-- 精選右邊上面的格子結束 -->
@@ -230,25 +235,25 @@
                             <!-- tag -->
                             <div class="tagDiv">
                                 <% if(items[5] != undefined) { %>
-                                    <% for (var j = 0 ; j < items[5].length ; j++) { %>
-                                        <% if(items[5][j].artiNum == items[1][2].artiNum) { %>
-                                            <button type="button" class="btn  tag"><%= items[5][j].tagName %></button>
-                                        <% } %>
-                                    <% } %>
+                                <% for (var j = 0 ; j < items[5].length ; j++) { %>
+                                <% if(items[5][j].artiNum == items[1][2].artiNum) { %>
+                                <button type="button" class="btn  tag"><%= items[5][j].tagName %></button>
+                                <% } %>
+                                <% } %>
                                 <% } %>
                             </div>
                         </div>
 
-                         <!-- imgs -->
-                         <% if(items[3] != undefined ) { %>
-                            <% for(var j = 0 ; j < items[3].length ; j++) { %>
-                                <% if (items[1][2].artiNum == items[3][j].artiNum){ %>
-                                    <div class="wrapperCardSmall card-img-bottom"
-                                        style="background-image: url( '<%= items[3][j].imgName %>'); ">
-                                    </div>
-                                    <% break %>
-                                <% } %>
-                            <% } %>
+                        <!-- imgs -->
+                        <% if(items[3] != undefined ) { %>
+                        <% for(var j = 0 ; j < items[3].length ; j++) { %>
+                        <% if (items[1][2].artiNum == items[3][j].artiNum){ %>
+                        <div class="wrapperCardSmall card-img-bottom"
+                            style="background-image: url( '<%= items[3][j].imgName %>'); ">
+                        </div>
+                        <% break %>
+                        <% } %>
+                        <% } %>
                         <% } %>
 
                     </div>
@@ -289,8 +294,9 @@
             <h5>常見問題：</h5>
             <p>獎勵機制：在推薦底下的留言，我們會透過點擊次數以及愛心次數來篩選出最佳留言，將會寄送精美小獎品給最佳留言者。</p>
             <p>申報機制：只要對於我們的系統有任何建議，都可以透過申報通知系統管理員，讓文藝富心團隊能夠改進，提供給使用者更好的環境</p>
-            <h5>文藝富心官方Line：<a href="https://line.me/R/ti/p/%40240qtneo"><img src="imgs/icon/lineIcon.png" alt="" style="height: 50px;"></a></h5>
-        
+            <h5>文藝富心官方Line：<a href="https://line.me/R/ti/p/%40240qtneo"><img src="imgs/icon/lineIcon.png" alt=""
+                        style="height: 50px;"></a></h5>
+
         </div>
         <div class="col-lg-2">
         </div>
@@ -301,46 +307,50 @@
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
     </a>
-      
-      <div href="#" class="surpriseSection" style="cursor: pointer;"  data-toggle="modal" data-target="#surpriseSectionContainer">
-          <a class="surpriseHoverText" style="display:none">看看有沒有你喜歡的</a>
-          <img src="imgs/icon/leaf45.png" alt="">
-      </div>
+
+    <div href="#" class="surpriseSection" style="cursor: pointer;" data-toggle="modal"
+        data-target="#surpriseSectionContainer">
+        <a class="surpriseHoverText" style="display:none">看看有沒有你喜歡的</a>
+        <img src="imgs/icon/leaf45.png" alt="">
+    </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="surpriseSectionContainer" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal fade" id="surpriseSectionContainer" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h4 class="modal-title" id="exampleModalScrollableTitle">你可能會想看</h4>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body" style="word-break: break-all;">
-                <div style="text-align: left">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalScrollableTitle">你可能會想看</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-               <div class="memberPrefer">
-                    <!-- 文章 -->
-                    <% if(items[10][0].artiCont != undefined) { %>
+                <div class="modal-body" style="word-break: break-all;">
+                    <div style="text-align: left">
+                    </div>
+                    <div class="memberPrefer">
+                        <!-- 文章 -->
+                        <% if(items[10][0].artiCont != undefined) { %>
                         <h5><%- items[10][0].artiHead %></h5>
                         <hr>
                         <%- items[10][0].artiCont %>
                         <hr>
-                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/article/<%- items[10][0].artiNum %>'">進入文章查看更多</button>
-                    <% } else if(items[10][0].recomCont != undefined) { %>
+                        <button class="btn btn-light float-right" style="margin-right:0.75em"
+                            onclick="location.href='/article/<%- items[10][0].artiNum %>'">進入文章查看更多</button>
+                        <% } else if(items[10][0].recomCont != undefined) { %>
                         <h5><%- items[10][0].recomHead %></h5>
                         <hr>
                         <%- items[10][0].recomCont %>
                         <hr>
-                        <button class="btn btn-light float-right" style="margin-right:0.75em" onclick="location.href='/oneRecommend/<%- items[10][0].recomNum %>'">進入文章查看更多</button>
-                    <% } %>
-                    
-               </div>
+                        <button class="btn btn-light float-right" style="margin-right:0.75em"
+                            onclick="location.href='/oneRecommend/<%- items[10][0].recomNum %>'">進入文章查看更多</button>
+                        <% } %>
+
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div> 
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
