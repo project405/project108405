@@ -28,7 +28,8 @@ var getCollRecommend = async function (memID, recompage) {
                     WHERE "T1"."Rank" = '1'
                     ORDER BY "T1"."collDateTime" DESC
                     LIMIT 8
-                    OFFSET $2 ) AS "T2"`, [memID, (recompage-1)*8])
+                    OFFSET $2 ) AS "T2"
+                ORDER BY "collDateTime" DESC`, [memID, (recompage-1)*8])
         .then((data) => {
             if (!data.rows){
                 recommendList = undefined ;
@@ -51,25 +52,6 @@ var getCollRecommend = async function (memID, recompage) {
             collSum = undefined;
             console.log(error)
         })
-
-    // --------- 取得照片 --------- 
-    // await sql('SELECT "recomNum","imgName" '+
-    //           ' FROM "image" '+
-    //           ' WHERE "recomNum" '+
-    //                 ' IN (SELECT "recomNum" '+
-    //                     ' FROM "memberCollection" '+
-    //                     ' WHERE "memID" = $1 )'+
-    //           ' ORDER BY "imgNum"', [memID])
-    //     .then((data) => {
-    //         if (!data.rows){
-    //             imgs = undefined ;
-    //         }else{
-    //             imgs = data.rows;
-    //         }
-           
-    //     }, (error) => {
-    //         imgs = undefined ;
-    //     });
 
     result[0] = recommendList ; 
     result[1] = [memID] ;
@@ -271,7 +253,8 @@ var getCollArticle = async function (memID, collpage) {
                     LIMIT 10 
                     OFFSET $2 ) AS "T2"
                     INNER JOIN "member" "M"
-                    ON "M"."memID" = "T2"."memID"`,  [memID, (collpage-1)*10 ])
+                    ON "M"."memID" = "T2"."memID"
+                ORDER BY "collDateTime" DESC`,  [memID, (collpage-1)*10 ])
         .then((data) => {
             if(!data.rows){
                 colleArticle = undefined ; 
@@ -326,24 +309,6 @@ var getCollArticle = async function (memID, collpage) {
             isLike = undefined ; 
         });
 
-    // ----------- 取得照片 -----------
-    // await sql('SELECT "artiNum" , "imgName" '+ 
-    //          ' FROM "image" '+
-    //          ' WHERE "artiNum" '+
-    //             ' IN(SELECT "artiNum" '+
-    //                ' FROM "memberCollection" '+
-    //                ' WHERE "memID" = $1)'+
-    //         ' ORDER BY "imgNum"' , [memID])
-    //     .then((data) => {
-    //         if (!data.rows) {
-    //             imgs = undefined ; 
-    //         }else {
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined ; 
-    //     });
-
     result[0] = colleArticle;
     result[1] = tag;
     result[2] = isLike;
@@ -378,7 +343,8 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
                     WHERE "T1"."Rank" = '1'
                     ORDER BY "T1"."collDateTime" DESC
                     LIMIT 8
-                    OFFSET $3 ) AS "T2"` , [memID, recomClass, (recompage-1)*8])
+                    OFFSET $3 ) AS "T2"
+                ORDER BY "collDateTime" DESC` , [memID, recomClass, (recompage-1)*8])
         .then((data) => {
             if(!data.rows){
                 recommendList = undefined ; 
@@ -401,24 +367,6 @@ var getCollRecomClassList = async function (memID, recomClass, recompage) {
         collSum = undefined;
         console.log(error)
     })
-    // --------- 取得照片 --------- 
-    // await sql('SELECT "recomNum" , "imgName" '+
-    //          ' FROM "image"  '+
-    //          ' WHERE "recomNum" '+
-    //             'IN(SELECT "recomNum" '+
-    //                 ' FROM "memberCollection" '+
-    //                 ' WHERE "memID" = $1)'+
-    //         ' ORDER BY "imgNum"', [memID])
-    //     .then((data) => {
-    //         if (!data.rows){
-    //             imgs = undefined ;
-    //         }else{
-    //             imgs = data.rows;
-    //         }
-        
-    //     }, (error) => {
-    //         imgs = undefined ;
-    //     });
 
     result[0] = recommendList ; 
     // result[1] = imgs ;
@@ -457,8 +405,9 @@ var getCollArtiClassList = async function (memID, artiClass, collpage) {
                     ORDER BY "T1"."collDateTime" DESC
                     LIMIT 10 
                     OFFSET $3 ) AS "T2"
-                    INNER JOIN "member" "M"
-                    ON "M"."memID" = "T2"."memID"` , [memID, artiClass, (collpage-1)* 10])
+                INNER JOIN "member" "M"
+                    ON "M"."memID" = "T2"."memID"
+                ORDER BY "collDateTime" DESC` , [memID, artiClass, (collpage-1)* 10])
         .then((data) => {
             if(!data.rows){
                 articleList = undefined ; 
@@ -499,25 +448,6 @@ var getCollArtiClassList = async function (memID, artiClass, collpage) {
         }, (error) => {
             tag = undefined ;
         });
-
-    // --------- 取得照片 --------- 
-    // await sql('SELECT "artiNum" , "imgName" '+
-    //             ' FROM "image"  '+
-    //             ' WHERE "artiNum" '+
-    //                 'IN(SELECT "artiNum" '+
-    //                   ' FROM "memberCollection" '+
-    //                   ' WHERE "memID" = $1)'+
-    //          ' ORDER BY "imgNum" ', [memID])
-    //     .then((data) => {
-    //     if (!data.rows){
-    //         imgs = undefined ;
-    //     }else{
-    //         imgs = data.rows;
-    //     }
-
-    //     }, (error) => {
-    //         imgs = undefined ;
-    //     });
 
     // --------- 判斷是否被使用者按愛心 ---------
     await sql('SELECT "artiNum" '+

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const member = require('../utility/member');
+
 //接收GET請求
 router.get('/:artiPage', function (req, res, next) {
     var artiPage = req.params.artiPage;   //取出參數
@@ -47,6 +48,5 @@ router.get('/:artiPage', function (req, res, next) {
     })
 
 });
-
 
 module.exports = router;

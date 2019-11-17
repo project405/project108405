@@ -27,9 +27,9 @@ var getRecommendList = async function (memID, recomPage) {
                     WHERE "T1"."Rank" = '1'
                     ORDER BY "recomNum" DESC
                     LIMIT 8
-                    OFFSET $1 ) AS "T2"`, [(recomPage-1) * 8])
+                    OFFSET $1 ) AS "T2"
+                ORDER BY "recomDateTime" DESC , "recomNum" DESC `, [(recomPage-1) * 8])
         .then((data) => {
-            console.log(data)
             if (data.rows != undefined) {
                 recommendList = data.rows
             } else {
@@ -58,21 +58,6 @@ var getRecommendList = async function (memID, recomPage) {
         }
     })
 
-    //----------- 取得照片 ----------- 
-    // await sql('SELECT "recomNum" , "imgName" '+
-    //         ' FROM "image" '+
-    //         ' WHERE "recomMessNum" IS NULL '+
-    //         ' ORDER BY "imgNum" ')
-    // .then((data) => {
-    //     if (!data.rows) {
-    //         imgs = undefined;
-    //     } else {
-    //         imgs = data.rows;
-    //     }
-    // }, (error) => {
-    //     console.log(error)
-    //     imgs = undefined;
-    // });
     result[0] = recommendList;
     result[1] = [memID];
     result[2] = checkAuthority;
@@ -351,7 +336,7 @@ var getRecomClassList = async function (recomClass, memID, recomPage) {
     var result = [];
     var recomSum;
 
-    // -----------  取得文章清單 --------------
+    // -----------  取得推薦清單 --------------
     await sql(`SELECT "T2".*
                 FROM(
                     SELECT *
@@ -364,7 +349,8 @@ var getRecomClassList = async function (recomClass, memID, recomPage) {
                     WHERE "T1"."Rank" = '1' AND "recomClass" = $1
                     ORDER BY "recomNum" DESC
                     LIMIT 8
-                    OFFSET $2 ) AS "T2"`, [recomClass, (recomPage-1)*8])
+                    OFFSET $2 ) AS "T2"
+                ORDER BY "recomDateTime" DESC , "recomNum" DESC`, [recomClass, (recomPage-1)*8])
         .then((data) => {
           if(!data.rows){
             recommendData = undefined ;

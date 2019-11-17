@@ -7,8 +7,6 @@ const sql = require('./asyncDB');
 //----- getArticleListPagination() --------
 //=========================================
 var getArticleListPagination = async function (memID, artiListNum) {
-    // const navSegments =  15;
-    // const startPage = Math.floor((artiListNum-1) / navSegments) * navSegments + 1;  //計算導覽列的起始頁數
     var articleList = [];
     var tag ;
     var isCollection  ;
@@ -16,29 +14,30 @@ var getArticleListPagination = async function (memID, artiListNum) {
     var imgs ;
     var result = [];
     var articleSum;
-    var pageImage = [];
     // -----------  取得文章清單 --------------
-    await sql(`SELECT "T2".*, "M"."memName" 
+    await sql(`SELECT "T2".*,
+                      "M"."memName" 
                 FROM(
-                SELECT *
-                FROM( 
-                    SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
-                    FROM "articleListDataView" AS "A"
-                    LEFT JOIN "image" AS "I"
-                        ON "A"."artiNum" = "I"."artiNum"
-                    WHERE "I"."artiMessNum" IS NULL ) AS "T1"
-                WHERE "T1"."Rank" = '1'
-                ORDER BY "artiNum" DESC
-                LIMIT 10 
-                OFFSET $1 ) AS "T2"
-                INNER JOIN "member" "M"
-                ON "M"."memID" = "T2"."memID"`, [(artiListNum-1) * 10])
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "articleListDataView" AS "A"
+                            LEFT JOIN "image" AS "I"
+                                ON "A"."artiNum" = "I"."artiNum"
+                        WHERE "I"."artiMessNum" IS NULL	) AS "T1"
+                    WHERE "T1"."Rank" = '1'
+                    ORDER BY "artiNum" DESC
+                    LIMIT 10 
+                    OFFSET $1 ) AS "T2"
+                        INNER JOIN "member" "M"
+                            ON "M"."memID" = "T2"."memID"
+                ORDER BY "artiDateTime" DESC , "artiNum" DESC`, [(artiListNum-1) * 10])
         .then((data) => {
             articleList = data.rows;
         }, (error) => {
             articleList = undefined;
         });
-    
+
     await sql('SELECT COUNT(*) FROM "articleListDataView"')
     .then((data) => {
         articleSum = data.rows;
@@ -77,27 +76,6 @@ var getArticleListPagination = async function (memID, artiListNum) {
         }, (error) => {
             isCollection = undefined;
         });
-
-    //取得照片
-    // articleList.map((item) => {
-    //     pageImage.push(item.artiNum)
-    // })
-
-    // await sql('SELECT "artiNum" , "imgName" ' +
-    //           ' FROM "image"'+
-    //           ' WHERE "artiNum" = ANY($1::INT[]) AND "artiMessNum" IS NULL'+
-    //           ' ORDER BY "imgNum"', [pageImage])
-    //     .then((data) => {
-    //         if (data.rows == null || data.rows == '') {
-    //             imgs = undefined;
-    //         } else {
-    //             console.log(data)
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined;
-    //         console.log(error)
-    //     });
 
     result[0] = articleList; 
     result[1] = tag;
@@ -166,7 +144,10 @@ var getArticleList = async function (memID) {
         });
 
     //取得照片
-    await sql('SELECT "artiNum" , "imgName" FROM "image" WHERE "artiMessNum" IS NULL ORDER BY "imgNum"')
+    await sql(`SELECT "artiNum" , "imgName" 
+               FROM "image" 
+               WHERE "artiMessNum" IS NULL AND "artiNum" IS NOT NULL 
+               ORDER BY "imgNum"`)
         .then((data) => {
             if (data.rows == null || data.rows == '') {
                 imgs = undefined;
@@ -480,19 +461,20 @@ var getArticleClassList = async function (articleClass, memID, artiListNum) {
     // -----------  取得分類文章 --------------
     await sql(`SELECT "T2".*, "M"."memName" 
                 FROM(
-                SELECT *
-                FROM( 
-                    SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
-                    FROM "articleListDataView" AS "A"
-                    LEFT JOIN "image" AS "I"
-                        ON "A"."artiNum" = "I"."artiNum"
-                    WHERE "I"."artiMessNum" IS NULL ) AS "T1"
-                WHERE "T1"."Rank" = '1' AND "artiClass" = $1
-                ORDER BY "artiNum" DESC
-                LIMIT 10 
-                OFFSET $2 ) AS "T2"
+                    SELECT *
+                    FROM( 
+                        SELECT "A".*,"I"."imgNum", "I"."imgName", ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                        FROM "articleListDataView" AS "A"
+                        LEFT JOIN "image" AS "I"
+                            ON "A"."artiNum" = "I"."artiNum"
+                        WHERE "I"."artiMessNum" IS NULL ) AS "T1"
+                    WHERE "T1"."Rank" = '1' AND "artiClass" = $1
+                    ORDER BY "artiNum" DESC
+                    LIMIT 10 
+                    OFFSET $2 ) AS "T2"
                 INNER JOIN "member" "M"
-                ON "M"."memID" = "T2"."memID"`, [articleClass, (artiListNum-1) * 10])
+                    ON "M"."memID" = "T2"."memID"
+                ORDER BY "artiDateTime" DESC , "artiNum" DESC`, [articleClass, (artiListNum-1) * 10])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;
@@ -552,21 +534,6 @@ var getArticleClassList = async function (articleClass, memID, artiListNum) {
         }, (error) => {
             isLike = undefined;
         });
-
-    // ----------- 取得照片 ----------- 
-    // await sql('SELECT "artiNum" , "imgName" '+
-    // ' FROM "image" '+
-    // ' WHERE "artiMessNum" IS NULL '+
-    // ' ORDER BY "imgNum"')
-    //     .then((data) => {
-    //         if (data.rows == null || data.rows == '') {
-    //             imgs = undefined;
-    //         } else {
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined;
-    //     });
 
     result[0] = articleList ;
     result[1] = tag ; 

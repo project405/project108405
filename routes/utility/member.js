@@ -69,7 +69,7 @@ var articlePost = async function (memID, artiHead, artiCont, artiClass, artiDate
     //新增tag 
     if(tag.length != 0){
         for (var i = 0; i < tag.length; i++) {
-            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i].trim()])
                 .then((data) => {
                     if (!data.rows) {
                         tagNum = undefined;
@@ -206,7 +206,6 @@ var editRecommend = async function (memID, recomHead, recomCont, recomClass, img
     // 刪除舊tag連結
     await sql ('DELETE FROM "tagLinkArticle" WHERE "recomNum" = $1',[recomNum])
     .then((data)=> {
-        console.log(data)
     },(e) => {
         console.error(e)
     }) 
@@ -320,7 +319,6 @@ var deleteArticle = async function (artiNum) {
 //================================
 var deleteRecommend = async function (recomNum) {
     var result = 0;
-    console.log(recomNum)
     await sql ('DELETE FROM "recommend" WHERE "recomNum" = $1',[recomNum])
         .then((data)=> {
             result = 1
@@ -477,7 +475,6 @@ var replyPost = async function (artiNum, memID, replyCont, postDateTime, imgData
 //-------- recommendReplyPost() --
 //================================
 var recommendReplyPost = async function (recomNum, memID, recomMessCont, recomMessDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, score2) {
-    console.log(recomNum, memID, recomMessCont, recomMessDateTime, imgData, analyzeScore, positiveWords, negativeWords, swearWords, score2)
     var recomMessNum;
     var result = 0;
     if (typeof(imgData) == 'string') {
@@ -583,7 +580,8 @@ var myArticle = async function (memID, artiPage) {
                     LIMIT 10
                     OFFSET $2 ) AS "T2"
                     INNER JOIN "member" "M"
-                    ON "M"."memID" = "T2"."memID"`, [memID, (artiPage-1) * 10])
+                        ON "M"."memID" = "T2"."memID"
+                ORDER BY "artiDateTime" DESC`, [memID, (artiPage-1) * 10])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;
@@ -649,24 +647,6 @@ var myArticle = async function (memID, artiPage) {
             isLike = undefined;
         });
 
-    // ----------- 取得照片 -----------
-    // await sql('SELECT "artiNum" , "imgName" ' +
-    //          ' FROM "image" ' +
-    //          ' WHERE "artiNum" ' +
-    //             ' IN(SELECT "artiNum" ' +
-    //                ' FROM "articleListDataView" ' +
-    //                ' WHERE "memID" = $1) '+
-    //          'ORDER BY "imgNum"', [memID])
-    //     .then((data) => {
-    //         if (!data.rows) {
-    //             imgs = undefined;
-    //         } else {
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined;
-    //     });
-
     result[0] = articleList;
     result[1] = tag;
     // result[2] = imgs;
@@ -714,11 +694,27 @@ var getOriginalMail = async function (memID) {
     return result;
 }
 
+//================================
+//--------- getRepeatMail() ------
+//================================
+var getRepeatMail = async function (memID, memMail) {
+    var result;
+
+    // -----------  修改會員資料 --------------
+    await sql('SELECT "memMail" from "member" where "memID" != $1 AND "memMail" = $2', [memID, memMail])
+        .then((data) => {
+            result = data.rows;
+        }, (error) => {
+            result = 0;
+        });
+
+    return result;
+}
+
 //===================================
 //----- getMyArticleClassList() -----
 //===================================
 var getMyArticleClassList = async function (artiClass, memID, artiPage) {
-    console.log(artiClass, memID, artiPage)
     var articleList = [];
     var tag = [];
     var isCollection = [];
@@ -742,7 +738,8 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
                     LIMIT 10
                     OFFSET $3 ) AS "T2"
                     INNER JOIN "member" "M"
-                    ON "M"."memID" = "T2"."memID"`, [artiClass, memID, (artiPage-1) * 10])
+                    ON "M"."memID" = "T2"."memID"
+                ORDER BY "artiDateTime" DESC`, [artiClass, memID, (artiPage-1) * 10])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;
@@ -806,18 +803,6 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
         }, (error) => {
             isLike.push('0');
         });
-
-    // ----------- 取得照片 -----------
-    // await sql('SELECT "artiNum" , "imgName" FROM "image" ORDER BY "imgNum"')
-    //     .then((data) => {
-    //         if (!data.rows) {
-    //             imgs = undefined;
-    //         } else {
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined;
-    //     });
 
     result[0] = articleList;
     result[1] = tag;
@@ -1007,26 +992,25 @@ var getBestReply = async function (month,memID) {
     var result = [];
 
     //先找Like數max值，再撈出所有like數 = max 的所有留言編號 ，再根據所有留言編號找到推薦文章
-    await sql('SELECT * '+
-            ' FROM "recommend" '+
-            ' WHERE "recomNum"'+ 
-            ' IN ( '+
-                ' SELECT "recomNum" '+
-                ' FROM "recommendMessage" '+
-                ' WHERE "recomMessNum" '+
-                ' IN (SELECT "recomMessNum" '+
-                    ' FROM "recommendMessageLike" '+
-                    ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-                    ' GROUP BY "recomMessNum", "memID" '+
-                    ' HAVING COUNT("recomMessNum") '+ 
-                        ' IN( SELECT  COUNT("recomMessNum") '+
-                            ' FROM "recommendMessageLike" '+
-                            ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-                            ' GROUP BY "recomMessNum" ,"memID" '+
-                            ' ORDER BY "count" DESC '+
-                            ' LIMIT 1 ) '+
-                            ' ) '+
-                ')', [month])
+    await sql(`SELECT * 
+                FROM "recommend" 
+                WHERE "recomNum"
+                IN ( SELECT "recomNum" 
+                     FROM "recommendMessage" 
+                     WHERE "recomMessNum" 
+                     IN ( SELECT "recomMessNum"
+                          FROM "recommendMessageLike" 
+                          WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
+                          GROUP BY "recomMessNum"
+                          HAVING COUNT("recomMessNum") 
+                             IN( SELECT  COUNT("recomMessNum") 
+                                 FROM "recommendMessageLike" 
+                                 WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
+                                 GROUP BY "recomMessNum"
+                                 ORDER BY "count" DESC 
+                                 LIMIT 1 ) 
+                        ) 
+                    )`, [month])
         .then((data) => {
             if (!data.rows) {
                 recommendData = undefined;
@@ -1038,17 +1022,22 @@ var getBestReply = async function (month,memID) {
         });
 
     //先找Like數max值，再撈出所有like數 = max 的所有留言編號 跟留言的人
-    await sql('SELECT "recomMessNum", "memID" '+
-            ' FROM "recommendMessageLike" '+
-            ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-            ' GROUP BY "recomMessNum", "memID" '+
-            ' HAVING COUNT("recomMessNum") '+ 
-                ' IN( SELECT  COUNT("recomMessNum") '+
-                    ' FROM "recommendMessageLike" '+
-                    ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-                    ' GROUP BY "recomMessNum"	,"memID" '+
-                    ' ORDER BY "count" DESC '+
-                    ' LIMIT 1 )',[month]) 
+    await sql(`SELECT "A".* , "M"."memID"
+                FROM(
+                    SELECT "recomMessNum"
+                    FROM "recommendMessageLike" 
+                    WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
+                    GROUP BY "recomMessNum"
+                    HAVING COUNT("recomMessNum") 
+                        IN( SELECT  COUNT("recomMessNum") 
+                            FROM "recommendMessageLike" 
+                            WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
+                            GROUP BY "recomMessNum"
+                            ORDER BY "count" DESC 
+                            LIMIT 1 ) 
+                    ) AS "A"
+                INNER JOIN "recommendMessage" AS "M"
+                    ON "A"."recomMessNum" = "M"."recomMessNum"`,[month]) 
             .then((data) => {
                 if (!data.rows) {
                     recomNum = undefined;
@@ -1058,7 +1047,7 @@ var getBestReply = async function (month,memID) {
             }, (error) => {
                 recomNum = null;
             });
-    console.log(recomNum);
+            
     result[0] = recommendData ;
     result[1] = recomNum ; 
 
@@ -1074,5 +1063,5 @@ module.exports = {
     addRecommendMessLike, delRecommendMessLike,
     report, checkAuthority, editArticle, deleteArticle, deleteRecommend, editReply, deleteReply, 
     memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
-    editRecommendReply, editRecommend, getBestReply
+    editRecommendReply, editRecommend, getBestReply, getRepeatMail
 };

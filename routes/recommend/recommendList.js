@@ -30,6 +30,4 @@ router.get('/:recomListNum', function (req, res, next) {
 
 });
 
-
-
 module.exports = router;

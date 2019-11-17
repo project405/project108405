@@ -5,7 +5,7 @@ var router = express.Router();
 
 const collection = require('../utility/collection');
 
-/* GET home page. */
+//接收GET請求
 router.get('/:recomPage', function (req, res, next) {
 	var recomPage = req.params.recomPage;   //取出參數
 	var memID;
