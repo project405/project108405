@@ -33,9 +33,13 @@ $(document).ready(function () {
     $('.surpriseSection').mouseleave(() => {
         $('.surpriseHoverText').css('display', 'none')
     })
+    $('a.list-group-item-action').hover(function(item) {
+        $(`.${item.target.classList[2]}Text`).css('visibility', 'visible').hide().slideDown();
 
-
-
+    })
+    $('a.list-group-item-action').mouseleave(function(item) {
+        $(`.${item.target.classList[2]}Text`).css('visibility', 'hidden')
+    })
 });
 
 

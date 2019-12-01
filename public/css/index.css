@@ -431,19 +431,27 @@ button.goArticle:hover {
     position: fixed;
     margin-top:-20px;
     top: 45%;
-    left: 2%;
+    left: 20px;
 }
 .scrollSpyText {
     position: fixed;
-    margin-top:-20px;
+    margin-top: -20px;
     top: 45%;
-    left: 4%;
-    /* flex-direction: column !important; */
+    left: 40px;
 }
-
+.scrollSpyText p {
+    margin-bottom: -5px !important;
+    font-size: 16px;
+}
+.scrollSpy > a {
+    color: black;
+    height: 20px;
+    width: 20px;
+}
 .scrollSpy > a:before {
     content: '○';
     /* background-color: black; */
+    color: black;
     height: 20px;
     width: 20px;
     /* border-radius: 50%; */
@@ -451,6 +459,7 @@ button.goArticle:hover {
 .scrollSpy > a.s1:hover {
     content: '○';
     /* background-color: black; */
+    color: black;
     height: 20px;
     width: 20px;
     /* border-radius: 50%; */
@@ -466,8 +475,9 @@ button.goArticle:hover {
     border-bottom-left-radius: none !important;
     margin-bottom: -1px !important;
 }
-.active {
+a.active:before {
     content: '●' !important;
+    color: black !important;   
     /* background-color: black; */
     height: 20px !important;
     width: 20px !important;
