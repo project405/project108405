@@ -40,6 +40,13 @@ $(document).ready(function () {
     $('a.list-group-item-action').mouseleave(function(item) {
         $(`.${item.target.classList[2]}Text`).css('visibility', 'hidden')
     })
+
+    $('a').click(function(){
+        $('html, body').animate({
+            scrollTop: $( $(this).attr('href') ).offset().top
+        }, 500);
+        return false;
+    });
 });
 
 

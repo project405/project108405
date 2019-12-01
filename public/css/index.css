@@ -426,17 +426,21 @@ button.goArticle:hover {
     animation: shake 1.5s;
     animation-iteration-count: infinite;
 }
-
+@media (max-width: 991px) {
+    .scrollSpy {
+        display: none;
+    }
+}
 .scrollSpy {
     position: fixed;
     margin-top:-20px;
-    top: 45%;
+    top: 50%;
     left: 20px;
 }
 .scrollSpyText {
     position: fixed;
     margin-top: -20px;
-    top: 45%;
+    top: 50%;
     left: 40px;
 }
 .scrollSpyText p {
