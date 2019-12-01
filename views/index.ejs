@@ -28,11 +28,12 @@
 </head>
 
 <body>
+
     <!-- navbar -->
     <div id="header"></div>
 
     <!-- 封面區塊 -->
-    <div class="banner">
+    <div class="banner" id="banner">
         <a id="goDown"> <i class="fas fa-chevron-circle-down"></i>
         </a>
         <div id="block" class="block"></div>
@@ -73,7 +74,7 @@
             <!-- 推薦結束 -->
         </div>
     </section>
-    <div class="sentimentSection container-fluid d-flex justify-content-center">
+    <div class="sentimentSection container-fluid d-flex justify-content-center" id="sentimentSection">
         <div class="row col-sm-8">
             <div class="sentimentTitle col-lg-12">
                 <center>
@@ -87,7 +88,7 @@
                     我們會對文藝富心所有文本進行情感分析，你可以在這體會到不同的情緒。</h6>
                 <hr>
             </div>
-            <div class="col-sm-6 no-gutters cardStyle">
+            <div class="col-lg-6 no-gutters cardStyle">
                 <h5 style="font-weight: bold;"><i class="fas fa-caret-right"
                         style="margin:0 0.5em; color: #ffad33; font-size: 28px;"></i>燦爛、溫暖</h5>
                 <div class="card">
@@ -98,13 +99,13 @@
                         <a href="/article/<%- items[6][0].artiNum %>" class="btn btn-light float-right">進入文章查看更多</a>
                     </div>
                     <% if (items[6][0].imgName) { %>
-                        <div class="wrapperCardbig card-img-bottom"
-                            style="background-image: url('<%= items[6][0].imgName %>')">
-                        </div>
+                    <div class="wrapperCardbig card-img-bottom"
+                        style="background-image: url('<%= items[6][0].imgName %>')">
+                    </div>
                     <% } %>
                 </div>
             </div>
-            <div class="col-sm-6 no-gutters cardStyle">
+            <div class="col-lg-6 no-gutters cardStyle">
                 <h5 style="font-weight: bold;"><i class="fas fa-caret-right"
                         style="margin:0 0.5em; color: #1268a2; font-size: 28px;"></i>惆悵、漣漪</h5>
                 <div class="card">
@@ -115,9 +116,9 @@
                         <a href="/article/<%- items[7][0].artiNum %>" class="btn btn-light float-right">進入文章查看更多</a>
                     </div>
                     <% if (items[7][0].imgName) { %>
-                        <div class="wrapperCardbig card-img-bottom"
-                            style="background-image: url('<%= items[7][0].imgName %>'); ">
-                        </div>
+                    <div class="wrapperCardbig card-img-bottom"
+                        style="background-image: url('<%= items[7][0].imgName %>'); ">
+                    </div>
                     <% } %>
                 </div>
             </div>
@@ -261,9 +262,6 @@
                 </div>
                 <!-- 精選右邊下面的格子結束 -->
 
-
-
-
             </div>
 
             <div class="col-12 goArticleList">
@@ -273,11 +271,8 @@
 
             </div>
         </div>
-        </div>
     </section>
     <!-- 熱門文章區塊結束 -->
-
-
 
     <div class="container-fluid footer d-flex justify-content-center row">
         <div class="col-lg-2"></div>
@@ -302,8 +297,6 @@
         </div>
 
     </div>
-
-
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
     </a>
@@ -351,6 +344,28 @@
             </div>
         </div>
     </div>
+    <!-- <div id="list-example" class="list-group scrollSpy">
+        <a class="list-group-item list-group-item-action" href="#banner">文藝富心</a>
+        <a class="list-group-item list-group-item-action" href="#portfolio">本週推薦</a>
+        <a class="list-group-item list-group-item-action" href="#sentimentSection">情緒專區</a>
+        <a class="list-group-item list-group-item-action" href="#hotArticle">熱門文章</a>
+        <a class="list-group-item list-group-item-action" href="#hotArticle">熱門文章</a>
+    </div> -->
+    <!-- <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example"> -->
+    <!-- <h4 id="list-item-1">Item 1</h4>
+        <p>...</p>
+        <h4 id="list-item-2">Item 2</h4>
+        <p>...</p>
+        <h4 id="list-item-3">Item 3</h4>
+        <p>...</p> -->
+    <!-- <h4 id="list-item-4">Item 4</h4>
+        <p>Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item
+            1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item
+            1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item
+            1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item
+            1Item 1Item 1Item 1Item 1Item 1Item 1Item 1Item 1</p> -->
+    <!-- </div> -->
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
