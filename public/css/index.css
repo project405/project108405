@@ -430,8 +430,47 @@ button.goArticle:hover {
 .scrollSpy {
     position: fixed;
     margin-top:-20px;
-    top: 50%;
+    top: 45%;
     left: 2%;
+}
+.scrollSpyText {
+    position: fixed;
+    margin-top:-20px;
+    top: 45%;
+    left: 4%;
+    /* flex-direction: column !important; */
+}
+
+.scrollSpy > a:before {
+    content: '○';
+    /* background-color: black; */
+    height: 20px;
+    width: 20px;
+    /* border-radius: 50%; */
+}
+.scrollSpy > a.s1:hover {
+    content: '○';
+    /* background-color: black; */
+    height: 20px;
+    width: 20px;
+    /* border-radius: 50%; */
+}
+.list-group-item {
+    padding: 0 !important;
+    border: none !important;
+    background-color: rgba(255, 255, 255, 0) !important; 
+}
+
+.list-group-item:first-child, .list-group-item:last-child {
+    border-bottom-right-radius: none !important;
+    border-bottom-left-radius: none !important;
+    margin-bottom: -1px !important;
+}
+.active {
+    content: '●' !important;
+    /* background-color: black; */
+    height: 20px !important;
+    width: 20px !important;
 }
 
 

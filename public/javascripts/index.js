@@ -33,6 +33,9 @@ $(document).ready(function () {
     $('.surpriseSection').mouseleave(() => {
         $('.surpriseHoverText').css('display', 'none')
     })
+
+
+
 });
 
 
