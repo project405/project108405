@@ -35,7 +35,7 @@ $(document).ready(function () {
     }
 
     Array.from($('.fourRecommend')).map((item) => {
-        item.innerText = item.innerText.length > 150 ? `${item.innerText.substr(0,150)}...` : item.innerText
+        item.innerText = item.innerText.length > 200 ? `${item.innerText.substr(0,200)}...` : item.innerText
     })
 
     $(".wrapText").each(function () {
