@@ -38,7 +38,7 @@
                             <a class="next"></a>
                             <a class="dateTime">於<%= items[0][0].artiDateTime %>發佈</a>
                         </div>
-                    <% if(items[7][0] == items[0][0].memID) {%>
+                    <% if(items[7][0] == items[0][0].memID || items[10] == 'SYSOP') {%>
                         <div class="dropdown ml-auto" style="margin-bottom: -0.5em">
                                 <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-ellipsis-h"></i>     
@@ -256,7 +256,7 @@
                     </p>
                 </div>
                 <hr>
-                <% if(items[7][0] != items[1][i].memID) {%>
+                <% if(items[7][0] != items[1][i].memID && items[3] != 'SYSOP') {%>
                 <button type="button" class="btn report replyReport" data-toggle="modal" data-target="#artiMessReportPost">檢舉</button>
                  <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
                  <%} else { %>

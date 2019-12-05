@@ -2,7 +2,7 @@
 
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
-
+const member = require('./member');
 //=========================================
 //----- getArticleListPagination() --------
 //=========================================
@@ -181,6 +181,7 @@ var getOneArticle = async function (artiNum, memID) {
     var imgs = [];
     var replyImgs = [];
     var result = [];
+    var checkAuthority;
     var guessArticle = undefined ; //取得猜測使用者可能喜歡的文章
 
     // -----------  取得單一文章 --------------
@@ -386,6 +387,15 @@ var getOneArticle = async function (artiNum, memID) {
             console.error(error)
         });
 
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+        } else {
+            checkAuthority = undefined;
+        }
+    })
+
     result[0] = oneArticle;
     result[1] = oneArtiMessage;
     result[2] = tag;
@@ -396,6 +406,7 @@ var getOneArticle = async function (artiNum, memID) {
     result[7] = [memID];
     result[8] = guessArticle;
     result[9] = replyImgs;
+    result[10] = checkAuthority ; 
 
 
     return result;
@@ -409,6 +420,7 @@ var getOneReply = async function (artiMessNum, memID) {
     var oneReply = []; //存放文章留言內容
     var replyImgs = [];
     var result = [];
+    var checkAuthority ;
 
     //取得單篇留言
     await sql('SELECT * FROM "articleMessage" WHERE "artiMessNum"= $1 ' , [artiMessNum])
@@ -439,9 +451,19 @@ var getOneReply = async function (artiMessNum, memID) {
             console.log(error)
         });
 
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+        } else {
+            checkAuthority = undefined;
+        }
+    })
+
     result[0] = oneReply;
     result[1] = replyImgs;
     result[2] = [memID];
+    result[3] = checkAuthority;
     return result;
 }
 
