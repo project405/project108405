@@ -77,6 +77,7 @@ var recommendListRouter = require('./routes/recommend/recommendList');
 var oneRecommendRouter = require('./routes/recommend/oneRecoomend');
 var recommendPostPageRouter = require('./routes/recommend/recomPostPage');
 var recommendPostRouter = require('./routes/recommend/post');
+var specialColumnPostPageRouter = require('./routes/recommend/recomPostPage');
 var recommendEditRouter = require('./routes/recommend/editRecommend');
 var recommendReplyRouter = require('./routes/recommend/reply');
 var recommendEditReplyRouter = require('./routes/recommend/editRecommendReply');
@@ -223,16 +224,22 @@ app.use('/collection/article/exhibition', colleArtiExhibitionRouter);
 app.use('/recommendList', recommendListRouter);
 app.use('/oneRecommend', oneRecommendRouter);
 app.use('/recommend/post/page', recommendPostPageRouter);
-app.use('/recommend/post',recommendPostRouter);
-app.use('/editRecommend',recommendEditRouter);
-app.use('/recommend/reply',recommendReplyRouter);
-app.use('/editRecommendReply',recommendEditReplyRouter);
+app.use('/recommend/post', recommendPostRouter);
+app.use('/editRecommend', recommendEditRouter);
+app.use('/recommend/reply', recommendReplyRouter);
+app.use('/editRecommendReply', recommendEditReplyRouter);
 // -------------- four Class ----------------
 app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);
 app.use('/recommendList/book', RecomBookRouter);
 app.use('/recommendList/exhibition', RecomExhibitionRouter);
 app.use('/checkStatus', CheckStatus);
+
+// =========================================
+// ---------  specialColumn use ------------
+// =========================================
+app.use('/specialColumn/post/page', specialColumnPostPageRouter);
+
 
 app.use('/search',searchRouter);
 

@@ -102,6 +102,7 @@ $(document).ready(() => {
                                 <a class="dropdown-item" href="#/" onclick="reply()">Line推播</a>\
                                 <a class="dropdown-item" href="/recommend/post/page">新增推薦</a>\
                                 <a class="dropdown-item" href="#/" onclick="bestReply()">選出最佳留言</a>\
+                                <a class="dropdown-item" href="/specialColumn/post/page">新增專欄</a>\
                             </div>\
                         </li>\
                         <li class="nav-item">\
