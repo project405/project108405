@@ -32,27 +32,28 @@
         <h3>新增專欄</h3>
         <hr class="highlight">
     </center>
-    <div class="justify-content-center">
-        <div class="post col-lg-8 content shadow">
-            <input type="text" class="titleInput input-with-icon title" name="artiHead" id="artiHead"
-                placeholder="輸入專欄名稱">
+    <Section id="special">
+        <div class="justify-content-center">
+            <div class="post col-lg-7 content">
+                <input type="text" class="titleInput input-with-icon title" name="artiHead" id="artiHead"
+                    placeholder="輸入專欄名稱">
 
-            <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入專欄內容"></div>
+                <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入專欄內容"></div>
 
-            <!-- <div class="text-right"> -->
-            <label class="btn btn-dark col-lg-2" style="cursor: pointer">
-                <input id="file-selector" name="userImg" type="file" multiple="multiple"
-                    accept=".jpg,.png,.gif,.tif,.bmp" />
-                <i class="fas fa-images" style="padding-right:5px"></i>加圖片
-            </label>
-            <!-- </div> -->
-            <button type="submit" class="btn btn-danger col-lg-2 float-right postButton"
-                onclick="submitPost()">提交</button>
+                <!-- <div class="text-right"> -->
+                <label class="btn btn-dark col-lg-2" style="cursor: pointer">
+                    <input id="file-selector" name="userImg" type="file" multiple="multiple"
+                        accept=".jpg,.png,.gif,.tif,.bmp" />
+                    <i class="fas fa-images" style="padding-right:5px"></i>加圖片
+                </label>
+                <!-- </div> -->
+                <button type="submit" class="btn btn-danger col-lg-2 float-right postButton"
+                    onclick="submitPost()">提交</button>
 
+            </div>
         </div>
-    </div>
 
-
+    </Section>
 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
@@ -96,7 +97,7 @@
     <script src="/javascripts/navbar.js"></script>
     <script src="/javascripts/imageCompression.js"></script>
     <script>
-        $('#postInput').click(function () { 
+        $('#postInput').click(function () {
             var el = document.querySelector('#postInput');
             var range = document.createRange();
             var sel = window.getSelection();
@@ -183,7 +184,7 @@
             }, this);
             formData.append('artiHead', artiHead);
             formData.append('artiCont', artiCont);
-           
+
             await $.ajax({
                 url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                 type: 'POST',

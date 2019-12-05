@@ -15,7 +15,6 @@ var checkAuthority = async function (memID) {
                 result = undefined;
             } else {
                 result = data.rows[0].memAuthority;
-                console.log("result ================>", result)
             }
         }, (error) => {
             result = undefined;

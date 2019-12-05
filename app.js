@@ -77,7 +77,6 @@ var recommendListRouter = require('./routes/recommend/recommendList');
 var oneRecommendRouter = require('./routes/recommend/oneRecoomend');
 var recommendPostPageRouter = require('./routes/recommend/recomPostPage');
 var recommendPostRouter = require('./routes/recommend/post');
-var specialColumnPostPageRouter = require('./routes/recommend/recomPostPage');
 var recommendEditRouter = require('./routes/recommend/editRecommend');
 var recommendReplyRouter = require('./routes/recommend/reply');
 var recommendEditReplyRouter = require('./routes/recommend/editRecommendReply');
@@ -86,6 +85,13 @@ var RecomMovieRouter = require('./routes/recommend/recomMovie');
 var RecomMusicRouter = require('./routes/recommend/recomMusic');
 var RecomBookRouter = require('./routes/recommend/recomBook');
 var RecomExhibitionRouter = require('./routes/recommend/recomExhibition');
+
+//=========================================
+//---------  specialColumn router ---------
+//=========================================
+var specialColumnRouter = require('./routes/specialColumn/specialColumn');
+var specialColumnPostRouter = require('./routes/specialColumn/specialColumnPostPage');
+var specialColumnPostPageRouter = require('./routes/specialColumn/specialColumnPostPage');
 
 var CheckStatus = require('./routes/checkStatus');
 var searchRouter = require('./routes/search');
@@ -238,6 +244,8 @@ app.use('/checkStatus', CheckStatus);
 // =========================================
 // ---------  specialColumn use ------------
 // =========================================
+app.use('/specialColumn', specialColumnRouter);
+app.use('/specialColumn/post', specialColumnPostRouter);
 app.use('/specialColumn/post/page', specialColumnPostPageRouter);
 
 
