@@ -87,6 +87,16 @@ var RecomBookRouter = require('./routes/recommend/recomBook');
 var RecomExhibitionRouter = require('./routes/recommend/recomExhibition');
 
 //=========================================
+//---------  activity router ---------
+//=========================================
+var activityRouter = require('./routes/activity/activity');
+var activityPostRouter = require('./routes/activity/activityPost');
+var activityPostPageRouter = require('./routes/activity/activityPostPage');
+var activityListRouter = require('./routes/activity/activityList');
+
+
+
+//=========================================
 //---------  specialColumn router ---------
 //=========================================
 var specialColumnRouter = require('./routes/specialColumn/specialColumn');
@@ -240,6 +250,15 @@ app.use('/recommendList/music', RecomMusicRouter);
 app.use('/recommendList/book', RecomBookRouter);
 app.use('/recommendList/exhibition', RecomExhibitionRouter);
 app.use('/checkStatus', CheckStatus);
+
+// =========================================
+// ---------  activity use ------------
+// =========================================
+app.use('/activity', activityRouter);
+app.use('/activityList', activityListRouter);
+app.use('/activity/post', activityPostRouter);
+app.use('/activity/post/page', activityPostPageRouter);
+
 
 // =========================================
 // ---------  specialColumn use ------------

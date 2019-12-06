@@ -181,6 +181,74 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
     return result;
 }
 
+
+//================================
+//-------- activityPost() ---------
+//================================
+var activityPost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, score2, deadline) {
+    var artiNum;
+    var tagNum = [];
+    var result = 0;
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
+    //新增文章
+    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime", "analyzeScore", "positiveWords", "negativeWords", "swearWords", "score2", "deadline") ' +
+        ' VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)  returning "article"."artiNum" ;'
+        , [memID, artiHead, artiCont, artiClass, artiDateTime, analyzeScore, positiveWords, negativeWords, swearWords, score2, deadline])
+        .then((data) => {
+            if (!data.rows) {
+                artiNum = undefined;
+            } else {
+                artiNum = data.rows[0].artiNum;
+            }
+        }, (error) => {
+            artiNum = undefined;
+    });
+
+    //新增tag 
+    if(tag.length != 0){
+        for (var i = 0; i < tag.length; i++) {
+            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i].trim()])
+                .then((data) => {
+                    if (!data.rows) {
+                        tagNum = undefined;
+                    } else {
+                        tagNum = data.rows[0].tagNum;
+                    }
+                }, (error) => {
+                    tagNum = undefined;
+                });
+    
+            // --------- 新增tagLink ---------
+            await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
+                .then((data) => {
+                    result = 0;
+                }, (error) => {
+                    result = 1;
+                });
+        }
+    }
+    
+    // --------- 新增img ---------
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
+                .then((data) => {
+                    result = 0;
+                }, (error) => {
+                    result = 1;
+                });
+        }
+    }
+    
+
+    return result;
+}
+
+
 //================================
 //-------- editRecommend()--------
 //================================
@@ -1063,5 +1131,5 @@ module.exports = {
     addRecommendMessLike, delRecommendMessLike,
     report, checkAuthority, editArticle, deleteArticle, deleteRecommend, editReply, deleteReply, 
     memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
-    editRecommendReply, editRecommend, getBestReply, getRepeatMail
+    editRecommendReply, editRecommend, getBestReply, getRepeatMail, activityPost
 };

@@ -60,6 +60,14 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
                             res.send("編輯失敗");
                         }
                     })
+                } else if (req.body.deadline) {
+                    member.activityPost(memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.score2, req.body.deadline).then(data => {
+                        if (data == 0) {
+                            res.send("發佈活動成功");
+                        } else {
+                            res.send("發佈失敗");
+                        }
+                    })
                 } else {
                     member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.score2).then(data => {
                         if (data == 0) {

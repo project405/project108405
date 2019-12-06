@@ -23,7 +23,11 @@ $(document).ready(() => {
                             </div>\
                             <li class="nav-item">\
                             <a class="nav-link" href="/recommendList/1">\
-                                🥳專欄</a>\
+                                專欄</a>\
+                            </li>\
+                            <li class="nav-item">\
+                            <a class="nav-link" href="/activity/post/page">\
+                                緊急活動</a>\
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/recommendList/1">\
@@ -107,7 +111,16 @@ $(document).ready(() => {
                                 <a class="dropdown-item" href="/recommend/post/page">新增推薦</a>\
                                 <a class="dropdown-item" href="#/" onclick="bestReply()">選出最佳留言</a>\
                                 <a class="dropdown-item" href="/specialColumn/post/page">新增專欄</a>\
+                                <a class="dropdown-item" href="/activity/post/page">新增活動</a>\
                             </div>\
+                        </li>\
+                        <li class="nav-item">\
+                        <a class="nav-link" href="/recommendList/1">\
+                            專欄</a>\
+                        </li>\
+                        <li class="nav-item">\
+                        <a class="nav-link" href="/activity/post/page">\
+                            緊急活動</a>\
                         </li>\
                         <li class="nav-item">\
                             <li class="nav-item">\
@@ -231,6 +244,14 @@ $(document).ready(() => {
                             <input type="text" class="navSearch" id="input_search" placeholder="搜尋"/>\
                             <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                         </div>\
+                        <li class="nav-item">\
+                        <a class="nav-link" href="/recommendList/1">\
+                            專欄</a>\
+                        </li>\
+                        <li class="nav-item">\
+                        <a class="nav-link" href="/activity/post/page">\
+                            緊急活動</a>\
+                        </li>\
                         <li class="nav-item">\
                             <a class="nav-link" href="/recommendList/1">\
                             官方推薦</a>\
