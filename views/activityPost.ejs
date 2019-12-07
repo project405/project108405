@@ -1,0 +1,257 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--  js   -->
+    <script src="/javascripts/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+    <link href="/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="/css/post.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
+
+    <title>文藝富心</title>
+</head>
+
+<body>
+    <!-- navbar -->
+    <div id="header"></div>
+
+    <center>
+        <h3>發佈活動</h3>
+        <hr class="highlight">
+    </center>
+    <div class="justify-content-center">
+        <div class="post col-lg-8 content shadow">
+            <select id="inputState" class="form-control" onchange="styleselect()">
+                <option value="movie">電影類</option>
+                <option value="music">音樂類</option>
+                <option value="exhibition">展覽類</option>
+                <option value="book">書籍類</option>
+            </select>
+            <input type="text" class="titleInput input-with-icon title" name="artiHead" id="artiHead"
+                placeholder="請輸入您的標題">
+
+            <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容"></div>
+            <div class="tag content col-lg-12">
+                <input type="text" data-role="tagsinput" id="tagInput" class="form-control" placeholder=" + tag" />
+            </div>
+            <a>截止日：</a><input id="deadline" type="date" placeholder="截止日" style="margin: 1em; border-radius: 4px; border: none;">
+            <br>
+            <!-- <div class="text-right"> -->
+            <label class="btn btn-dark col-lg-2" style="cursor: pointer">
+                <input id="file-selector" name="userImg" type="file" multiple="multiple"
+                    accept=".jpg,.png,.gif,.tif,.bmp" />
+                <i class="fas fa-images" style="padding-right:5px"></i>加圖片
+            </label>
+
+            <!-- </div> -->
+            <button type="submit" class="btn btn-danger col-lg-2 float-right postButton"
+                onclick="submitPost()">提交</button>
+
+        </div>
+    </div>
+
+
+
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
+
+    <!-- <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+    </div> -->
+    <div class='coverContainer'>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="/javascripts/post.js"></script>
+    <script src="/javascripts/tag.js"></script>
+    <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/navbar.js"></script>
+    <script src="/javascripts/imageCompression.js"></script>
+    <script>
+        $('#postInput').click(function () { 
+            var el = document.querySelector('#postInput');
+            var range = document.createRange();
+            var sel = window.getSelection();
+            console.log(sel)
+            if (sel.focusNode.previousElementSibling.className == 'upload-img' || sel.focusNode.nextElementSibling.className == 'upload-img') {
+                range.setStart(el.lastChild, 0);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        })
+        var formData = new FormData(); //用formData來存取要傳送的所有資料
+        // 選取到檔案後開始動作
+        $('#file-selector').change(function (event) {
+            var file = $("#file-selector")[0];  //取得檔案
+            //如果有檔案就要加入formData
+            if (file.files.length) {
+                Object.keys(file.files).map((img, index) => {
+                    // 解析檔案
+                    var item = file.files[img]
+                    var reader = new FileReader();
+                    reader.onload = (function (item) {
+                        return async function (event) {
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function (size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function (strDataURI) {
+                                    var title = escape(file.name);
+                                    var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
+                                    $('#postInput').append(img);
+                                    $('#postInput').append('<span id="lastbr"></span><br /><br />');
+                                    var el = document.querySelector('#postInput');
+                                    var range = document.createRange();
+                                    var sel = window.getSelection();
+                                    range.setStart(el.lastChild, 0);
+                                    range.collapse(true);
+                                    sel.removeAllRanges();
+                                    sel.addRange(range);
+                                }, (e) => {
+                                    console.log(e)
+                                })
+                            })
+                        };
+                    })(file);
+                    reader.readAsDataURL(item);
+                })
+                $('#file-selector').val('')
+            }
+        });
+        async function submitPost() {
+            var templateCont = document.getElementById('postInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+            var templateHead = document.getElementById('artiHead').value.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+            var artiHead = document.getElementById("artiHead").value;
+            var deadline = document.getElementById('deadline').value
+
+            if (templateHead == '') {
+                alert('請輸入標題')
+                return;
+            } else if (templateCont == '') {
+                alert('請輸入內文')
+                return;
+            } else if (templateHead.length > 40) {
+                alert('標題不得超過40字元！')
+                return;
+            }else if (deadline == '') {
+                alert('請輸入截止日')
+                return;
+            }
+            $('.postButton').addClass('disabled')
+            $('.postButton').attr('disabled', true)
+            $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
+            //img process
+            if ($("#postInput").find("img")) {
+                Array.from($("#postInput").find("img")).map(async (img) => {
+                    console.log(img.nextElementSibling.tagName)
+                    if (img.nextElementSibling.tagName == 'BR') {
+                        img.nextElementSibling.remove()
+                    }
+                    formData.append('base64Index', img.getAttribute('src'));
+                    $(img).before("\\:imgLocation")
+                })
+            }
+            var artiCont = [];
+            var artiData = document.querySelectorAll(".postInput"); //只取得文字部分(不含圖片) ;
+            // 取得內容
+            artiData.forEach(function (element) {
+                artiCont.push(element.innerText);
+            }, this);
+            var tagInput = document.querySelectorAll("span.tag"); //取得所有<span class="tag"> 的內容
+            var tag = []; //以陣列形式存放
+            var artiClass = document.getElementById("inputState").value;
+            formData.append('artiHead', artiHead);
+            formData.append('artiCont', artiCont);
+            formData.append('artiClass', artiClass);
+            //取得tag 
+            tagInput.forEach(function (element) {
+                tag.push(element.innerText);
+            }, this);
+            formData.append('tag', tag);
+            formData.append('deadline', deadline);
+
+            await $.ajax({
+                url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
+                type: 'POST',
+                dataType: 'TEXT',
+                data: { 'artiCont': `${artiCont}` },
+                success: function (res) {
+                    var analyzeRes = JSON.parse(res)
+                    formData.append('analyzeScore', analyzeRes.analyze[0]);
+                    formData.append('positiveWords', analyzeRes.analyze[1]);
+                    formData.append('negativeWords', analyzeRes.analyze[2]);
+                    formData.append('swearWords', analyzeRes.analyze[3]);
+                    formData.append('score2', analyzeRes.analyze[4]);
+                    $.ajax({
+                        url: '/article/post',
+                        type: 'POST',
+                        dataType: 'TEXT',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (res) {
+                            if (res == "請進行登入") {
+                                alert(res);
+                                location.replace("/login");
+                            } else {
+                                alert("活動發佈成功");
+                                location.replace("/articleList/1");
+                            }
+                        },
+                        error: function (res) {
+                            console.log(res)
+                        }
+                    });
+                },
+                error: function (res) {
+                    console.error(res)
+                }
+            });
+
+        }
+    </script>
+
+</body>
+
+</html>

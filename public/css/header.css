@@ -169,7 +169,6 @@ div.dropdown-menu {
 .dropdown:hover .dropdown-menu {
     display: block;
     background-color: #2D4F41;
-    padding: 8px;
     border: 2px solid #678878;
 }
 
@@ -181,7 +180,8 @@ div.dropdown-menu {
 
 .dropdown-item:hover {
     background-color: #678878!important;
-    border-radius: 8px;
+    border-radius: 4px;
+    padding: 4px;
 }
 
 
@@ -288,17 +288,17 @@ a.navTitle {
 
 hr.highlight {
     margin: 1em 0 2em 0 !important;
-    width: 20em;
-    background-color: #2D4F41;
+    width: 10em;
+    background-color: rgba(42, 45, 44, 0.482);
     height: 5px;
     border: none;
-    color: #d4d4d4;
-    border-radius: 50%;
+    color: rgb(42, 45, 44);
+    border-radius: 4px;
 }
 
 @media (max-width: 450px) {
     hr.highlight {
-        width: 80%;
+        width: 40%;
     }
     p {
         font-size: 1em !important;

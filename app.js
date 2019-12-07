@@ -86,6 +86,23 @@ var RecomMusicRouter = require('./routes/recommend/recomMusic');
 var RecomBookRouter = require('./routes/recommend/recomBook');
 var RecomExhibitionRouter = require('./routes/recommend/recomExhibition');
 
+//=========================================
+//---------  activity router ---------
+//=========================================
+var activityRouter = require('./routes/activity/activity');
+var activityPostRouter = require('./routes/activity/activityPost');
+var activityPostPageRouter = require('./routes/activity/activityPostPage');
+var activityListRouter = require('./routes/activity/activityList');
+
+
+
+//=========================================
+//---------  specialColumn router ---------
+//=========================================
+var specialColumnRouter = require('./routes/specialColumn/specialColumn');
+var specialColumnPostRouter = require('./routes/specialColumn/specialColumnPostPage');
+var specialColumnPostPageRouter = require('./routes/specialColumn/specialColumnPostPage');
+
 var CheckStatus = require('./routes/checkStatus');
 var searchRouter = require('./routes/search');
 
@@ -223,16 +240,33 @@ app.use('/collection/article/exhibition', colleArtiExhibitionRouter);
 app.use('/recommendList', recommendListRouter);
 app.use('/oneRecommend', oneRecommendRouter);
 app.use('/recommend/post/page', recommendPostPageRouter);
-app.use('/recommend/post',recommendPostRouter);
-app.use('/editRecommend',recommendEditRouter);
-app.use('/recommend/reply',recommendReplyRouter);
-app.use('/editRecommendReply',recommendEditReplyRouter);
+app.use('/recommend/post', recommendPostRouter);
+app.use('/editRecommend', recommendEditRouter);
+app.use('/recommend/reply', recommendReplyRouter);
+app.use('/editRecommendReply', recommendEditReplyRouter);
 // -------------- four Class ----------------
 app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);
 app.use('/recommendList/book', RecomBookRouter);
 app.use('/recommendList/exhibition', RecomExhibitionRouter);
 app.use('/checkStatus', CheckStatus);
+
+// =========================================
+// ---------  activity use ------------
+// =========================================
+app.use('/activity', activityRouter);
+app.use('/activityList', activityListRouter);
+app.use('/activity/post', activityPostRouter);
+app.use('/activity/post/page', activityPostPageRouter);
+
+
+// =========================================
+// ---------  specialColumn use ------------
+// =========================================
+app.use('/specialColumn', specialColumnRouter);
+app.use('/specialColumn/post', specialColumnPostRouter);
+app.use('/specialColumn/post/page', specialColumnPostPageRouter);
+
 
 app.use('/search',searchRouter);
 

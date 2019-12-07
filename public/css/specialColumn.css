@@ -1,0 +1,23 @@
+html,
+body {
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    border: none;
+    /* background: url("../imgs/background/articleBac.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; */
+    padding-top: 3em;
+    height: auto;
+}
+
+@media (max-width: 650px) {
+    html,
+    body {
+        /* background: url("../imgs/background/phone/ParticleBac.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover; */
+    }
+}
+

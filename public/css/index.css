@@ -17,6 +17,14 @@ div.articleContent {
     word-break: break-all !important;
     overflow: hidden !important;
 }
+canvas {
+    position: absolute;
+    opacity: 0.4;
+    height: 100%;
+    width: 100%;
+    top:0;
+    left:0;
+}
 .banner {
     margin-bottom: 4em;
     /* opacity: 0.6; */
@@ -27,7 +35,7 @@ div.articleContent {
     background: url("../imgs/background/banner.png");
     background-position: center center;
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment: fixed;
     background-size: cover;
 }
 
@@ -36,7 +44,7 @@ div.articleContent {
         background: url("../imgs/background/phone/Pbanner.png");
         background-position: center center;
         background-repeat: no-repeat;
-        background-attachment: scroll;
+        background-attachment: fixed;
         background-size: cover;
     }
 }
@@ -66,7 +74,8 @@ div.block {
 /* -------------- */
 
 div.recommend {
-    margin-bottom: 3em;
+    /* margin-bottom: 3em; */
+    position: relative;
 }
 
 div.article {
@@ -417,3 +426,96 @@ button.goArticle:hover {
     animation: shake 1.5s;
     animation-iteration-count: infinite;
 }
+@media (max-width: 991px) {
+    .scrollSpy {
+        display: none;
+    }
+}
+.scrollSpy {
+    position: fixed;
+    margin-top:-20px;
+    top: 50%;
+    left: 20px;
+}
+.scrollSpyText {
+    position: fixed;
+    margin-top: -20px;
+    top: 50%;
+    left: 40px;
+}
+.scrollSpyText p {
+    margin-bottom: -5px !important;
+    font-size: 16px;
+}
+.scrollSpy > a {
+    color: black;
+    height: 20px;
+    width: 20px;
+}
+.scrollSpy > a:before {
+    content: '○';
+    /* background-color: black; */
+    color: black;
+    height: 20px;
+    width: 20px;
+    /* border-radius: 50%; */
+}
+.scrollSpy > a.s1:hover {
+    content: '○';
+    /* background-color: black; */
+    color: black;
+    height: 20px;
+    width: 20px;
+    /* border-radius: 50%; */
+}
+.list-group-item {
+    padding: 0 !important;
+    border: none !important;
+    background-color: rgba(255, 255, 255, 0) !important; 
+}
+
+.list-group-item:first-child, .list-group-item:last-child {
+    border-bottom-right-radius: none !important;
+    border-bottom-left-radius: none !important;
+    margin-bottom: -1px !important;
+}
+a.active:before {
+    content: '●' !important;
+    color: black !important;   
+    /* background-color: black; */
+    height: 20px !important;
+    width: 20px !important;
+}
+
+
+
+.sentimentSection {
+    padding-top: 3em;
+    position: relative;
+}
+
+
+.m1 {
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    left: 20%;
+    right: 20%;
+    background: rgba(45, 79, 65, 0.1);
+  }
+  .m2 {
+    position: absolute;
+    top: 50%;
+    left: 40px;
+    background: rgba(45, 79, 65, 0.1);
+    width: 75px;
+    height: 75px;
+  }
+  .m3 {
+    position: absolute;
+    top: 90%;
+    right: 40px;
+    background: rgba(45, 79, 65, 0.1);
+    width: 100px;
+    height: 100px;
+  }

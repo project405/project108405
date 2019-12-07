@@ -236,3 +236,12 @@ input#tagInput {
     border: #f4f4f4 solid 0.5px;
     border-radius: 8px;
 }
+
+
+/* ========================= */
+/* ==== SpecialColumn */
+/* ========================= */
+
+#special .post {
+    background-color: rgba(238, 238, 238, 0.61);
+}
