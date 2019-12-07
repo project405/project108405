@@ -695,11 +695,76 @@ var getSpecialColumnList = async function (memID) {
     return result;
 }
 
+//=========================================
+//---------  getOneArticle() -------------
+//=========================================
+var getOneSpecialColumn = async function (specColNum, memID) {
+    var oneSpecialColumn = [];  //存放文章內容
+    var result = [];
+    var checkAuthority;
+    var imgs ; 
+
+    // -----------  取得單一文章 --------------
+    await sql(`SELECT "S".*,
+                  "I"."imgName",
+                  ROW_NUMBER() OVER(PARTITION BY "S"."specColNum" ORDER BY "I"."imgNum") as "Rank",
+                  to_char("S"."specColDateTime",'YYYY-MM-DD') AS "specColDate"
+               FROM "specialColumn" AS "S"
+               INNER JOIN "image" AS "I"
+               ON "S"."specColNum" = "I"."specColNum"
+               WHERE "S"."specColNum" = $1
+               ORDER BY "S"."specColDateTime" DESC`, [specColNum])
+        .then((data) => {
+            if (data.rows.length > 0) {
+                oneSpecialColumn = data.rows;
+            } else {
+                oneSpecialColumn = undefined;
+            }
+        }, (error) => {
+            oneSpecialColumn = null;
+        });
+
+    // ----------- 取得照片 -----------
+    await sql(`SELECT "S".*,
+                      "I"."imgName",
+                      ROW_NUMBER() OVER(PARTITION BY "S"."specColNum" ORDER BY "I"."imgNum") as "Rank",
+                      to_char("S"."specColDateTime",'YYYY-MM-DD') AS "specColDate"
+               FROM "specialColumn" AS "S"
+               INNER JOIN "image" AS "I"
+                   ON "S"."specColNum" = "I"."specColNum"
+               WHERE "S"."specColNum" = $1 
+               ORDER BY "S"."specColDateTime" DESC`,[specColNum])
+        .then((data) => {
+            if (!data.rows) {
+                imgs = undefined;
+            } else {
+                imgs = data.rows;
+            }
+        }, (error) => {
+            imgs = undefined;
+        });
+
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+        } else {
+            checkAuthority = undefined;
+        }
+    })
+
+    result[0] = oneSpecialColumn;
+    result[1] = checkAuthority ; 
+    result[2] = imgs;
+    return result;
+}
+
 
 //匯出
 module.exports = {
     getArticleList, getOneArticle,
     getArticleClassList,
     getArtiLikeCount, getRecomLikeCount,
-    getArtiMessLikeCount, getRecomMessLikeCount, getOneReply, getArticleListPagination,getSpecialColumnList
+    getArtiMessLikeCount, getRecomMessLikeCount, getOneReply, getArticleListPagination,
+    getSpecialColumnList, getOneSpecialColumn
 };
