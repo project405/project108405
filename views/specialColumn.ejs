@@ -28,27 +28,18 @@
     <!-- navbar -->
     <div id="header"></div>
     <!-- 封面區塊 -->
-    <div class="banner" style="background-image: url( '/imgs/testImgs/sp.jpg'); ">
+    <div class="banner" style="background-image: url('<%- items[0][0].imgName %>'); ">
 
     </div>
     <div class="container-fluid d-flex justify-content-center">
         <div class="col-lg-8">
             <div class="contain">
                 <center>
-                    <h3 class="title">生活在藝術中的女孩—MAR2INA 夢裡那兔</h3>
-                    <p> 2019-12-12 </p>
+                    <h3 class="title"><%= items[0][0].specColHead %></h3>
+                    <p> <%= items[0][0].specColDate %> </p>
                 </center>
                 <p class="content">
-                    MAR2INA發想源自於德文人名"marina"　
-                    意指為大海的女人，也具有藝術天分、喜愛色彩及細心謹慎的含義在裡頭。
-                    唸的順序是MARINA 2，中文音譯：夢裡那兔
-                    會將2加在名字中間代表著核心，它象徵著自己的幸運數字、生日以及兔的發音。
-                    因為水彩創作上的意外，發展出一套特有的明暗上色技法，紋理會隨著我當下心情、及環境影響而變化。
-
-                    構圖、配色都能了解我的情緒、思想、故事
-                    我喜歡讓每個觀賞者在我的作品前停下腳步
-                    細細品嘗畫面中的每個角落。
-                    <img src="/imgs/testImgs/sp.jpg" alt="">
+                    <%- items[0][0].specColCont %>        
                 </p>
             </div>
         </div>

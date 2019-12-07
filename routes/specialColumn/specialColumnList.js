@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
   	}
 	
 	article.getSpecialColumnList(memID).then(data => {
-		console.log(data);
+		console.log(data[0][0]);
 		if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data.length > 0) {
