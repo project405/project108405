@@ -26,8 +26,8 @@ $(document).ready(() => {
                                 專欄</a>\
                             </li>\
                             <li class="nav-item">\
-                            <a class="nav-link" href="/activity/post/page">\
-                                緊急活動</a>\
+                            <a class="nav-link" href="/activityList">\
+                                限時活動</a>\
                             </li>\
                             <li class="nav-item">\
                                 <a class="nav-link" href="/recommendList/1">\
@@ -119,8 +119,8 @@ $(document).ready(() => {
                             專欄</a>\
                         </li>\
                         <li class="nav-item">\
-                        <a class="nav-link" href="/activity/post/page">\
-                            緊急活動</a>\
+                        <a class="nav-link" href="/activityList">\
+                            限時活動</a>\
                         </li>\
                         <li class="nav-item">\
                             <li class="nav-item">\
@@ -249,8 +249,8 @@ $(document).ready(() => {
                             專欄</a>\
                         </li>\
                         <li class="nav-item">\
-                        <a class="nav-link" href="/activity/post/page">\
-                            緊急活動</a>\
+                        <a class="nav-link" href="activityList">\
+                            限時活動</a>\
                         </li>\
                         <li class="nav-item">\
                             <a class="nav-link" href="/recommendList/1">\
