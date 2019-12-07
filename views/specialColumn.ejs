@@ -28,25 +28,29 @@
     <!-- navbar -->
     <div id="header"></div>
 
-    <!-- 使用者發文 -->
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            123123123
-        </div>       
-    </div>
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="col-lg-8">
+            <div class="contain">
+                <center>
+                    <h3 class="title">生活在藝術中的女孩—MAR2INA 夢裡那兔</h3>
+                    <p> 2019-12-12 </p>
+                </center>
+                <p class="content">
+                    MAR2INA發想源自於德文人名"marina"　
+                    意指為大海的女人，也具有藝術天分、喜愛色彩及細心謹慎的含義在裡頭。
+                    唸的順序是MARINA 2，中文音譯：夢裡那兔
+                    會將2加在名字中間代表著核心，它象徵著自己的幸運數字、生日以及兔的發音。
+                    因為水彩創作上的意外，發展出一套特有的明暗上色技法，紋理會隨著我當下心情、及環境影響而變化。
 
-    <div class='coverContainer'>
-        <div class='loader'>
-            <div class='loader--dot'></div>
-            <div class='loader--dot'></div>
-            <div class='loader--dot'></div>
-            <div class='loader--dot'></div>
-            <div class='loader--dot'></div>
-            <div class='loader--dot'></div>
-            <div class='loader--text'></div>
+                    構圖、配色都能了解我的情緒、思想、故事
+                    我喜歡讓每個觀賞者在我的作品前停下腳步
+                    細細品嘗畫面中的每個角落。
+                    <img src="imgs/background/sp.jpg" alt="">
+                </p>
+            </div>
         </div>
     </div>
-          
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
@@ -87,7 +91,7 @@
         })
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
-        $('#file-selector').change(function(event) {
+        $('#file-selector').change(function (event) {
             let timeStamp = new Date().getTime()
             var file = $("#file-selector")[0];  //取得檔案
             //如果有檔案就要加入formData
@@ -96,12 +100,12 @@
                     // 解析檔案
                     var item = file.files[img]
                     var reader = new FileReader();
-                    reader.onload = (function(item) {
-                        return async function(event) {
+                    reader.onload = (function (item) {
+                        return async function (event) {
                             var getSize = getOriginalSize(event.target.result)
-                            getSize.then(function(size) {
+                            getSize.then(function (size) {
                                 var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
-                                canvasUrl.then(function(strDataURI) {
+                                canvasUrl.then(function (strDataURI) {
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
                                     $('#replyInput').append(img);
@@ -115,9 +119,9 @@
                                     sel.addRange(range);
                                 }, (e) => {
                                     console.log(e)
-                                    })
                                 })
-                            };
+                            })
+                        };
                     })(file);
                     reader.readAsDataURL(item);
                 })
@@ -194,7 +198,7 @@
 
     <!-- 收藏 ajax script  -->
     <script>
-        $('button').click(function() {
+        $('button').click(function () {
             if ($(this).children('.fa-gratipay').length > 0) {
                 $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
                 setTimeout(() => {
@@ -383,17 +387,17 @@
                 $('.spinner-border').css('display', 'block')
                 $('.coverContainer').css('display', 'block')
                 $.ajax({
-                url: '/addLike',
-                type: 'POST',
-                data: { "artiNum": artiNum, "memID": '<%= items[0][0].memID %>', "delArticle": true },
-                success: function (res) {
-                    alert('刪除成功！')
-                    location.replace("/articleList/1");
-                },
-                error: function (res) {
-                    alert('刪除失敗！')
-                }
-            });
+                    url: '/addLike',
+                    type: 'POST',
+                    data: { "artiNum": artiNum, "memID": '<%= items[0][0].memID %>', "delArticle": true },
+                    success: function (res) {
+                        alert('刪除成功！')
+                        location.replace("/articleList/1");
+                    },
+                    error: function (res) {
+                        alert('刪除失敗！')
+                    }
+                });
             }
         }
         // delReply
@@ -402,21 +406,21 @@
                 $('.spinner-border').css('display', 'block')
                 $('.coverContainer').css('display', 'block')
                 $.ajax({
-                url: '/addLike',
-                type: 'POST',
-                data: { "artiMessNum": artiMessNum, "memID": memID, "deleteReply": true },
-                success: function (res) {
-                    alert('刪除成功！')
-                    location.reload();
-                },
-                error: function (res) {
-                    alert('刪除失敗！')
-                }
-            });
+                    url: '/addLike',
+                    type: 'POST',
+                    data: { "artiMessNum": artiMessNum, "memID": memID, "deleteReply": true },
+                    success: function (res) {
+                        alert('刪除成功！')
+                        location.reload();
+                    },
+                    error: function (res) {
+                        alert('刪除失敗！')
+                    }
+                });
+            }
         }
-    }
-        
-</script>
+
+    </script>
 </body>
 
 </html>

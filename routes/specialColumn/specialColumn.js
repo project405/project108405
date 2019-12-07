@@ -4,7 +4,6 @@ const member = require('../utility/member');
 
 //接收GET請求
 router.get('/', function(req, res, next) {
-	console.log("specialColumnPost")
  	var memID;
 	//判斷是使用哪種方式登入
 	if (req.session.memID == undefined && req.session.passport == undefined) {
@@ -17,7 +16,7 @@ router.get('/', function(req, res, next) {
 	
 	member.checkAuthority(memID).then(data => {
 		if (data == 'SYSOP') {
-      		res.render('specialColumnPost');
+      		res.render('specialColumn');
 		} else {
 			res.render("login");
 		}
