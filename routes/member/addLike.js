@@ -17,6 +17,16 @@ router.post('/', function (req, res, next) {
         memID = req.session.passport.user.id;
     }
 
+    if (req.body.deleteSpecialColumn && req.body.member == 'SYSOP') {
+        member.deleteSpecialColumn(req.body.specColNum).then((data) => {
+            if (data == 1) {
+                res.send('刪除成功')
+            } else {
+                res.send('刪除失敗')
+            }
+        })
+        return;
+    }
     if (req.body.deleteRecommendReply) {
         if (memID == req.body.memID) {
             member.deleteRecommendReply(req.body.recomMessNum).then((data) => {

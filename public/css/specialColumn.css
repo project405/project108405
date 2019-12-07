@@ -47,3 +47,21 @@ img {
     margin-bottom: 0.5em;
     font-weight: bolder;
 }
+
+
+.dotMenu {
+    background-color: white !important;
+    text-align: center;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}
+.dotMenu > .dropdown-item:hover {
+    background-color: #b4d7ddb2 !important;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    text-align: center;
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}

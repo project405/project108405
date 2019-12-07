@@ -13,7 +13,6 @@ var upload = multer({
 
 //接收GET請求
 router.post('/', upload.array('userImg', 100), function(req, res, next) {
-	console.log("specialColumnPost111111")
 	var memID = undefined;
 	console.log( req.body.specColHead , req.body.specColCont, req.body.specColNum);
 	var specColHead = req.body.specColHead;
@@ -21,7 +20,7 @@ router.post('/', upload.array('userImg', 100), function(req, res, next) {
 	var specColNum =  req.body.specColNum;
 	var base64Index = req.body.base64Index;
 	var postDateTime = moment(Date().now).format("YYYY-MM-DD HH:mm:ss");
-
+	console.log(req.body.delSpecialColumn)
 	//將所有換行符號替代成<br> 
 	specColCont = specColCont.replace(/\n/g, "<br>");
 	
@@ -46,15 +45,14 @@ router.post('/', upload.array('userImg', 100), function(req, res, next) {
 			} else {
 				if (specColNum) {
 					console.log("QQQ")
-					// member.editArticle(memID, specColHead, specColCont, artiClass, base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.score2).then(data => {
-					// 	if (data == 1) {
-					// 		res.send("編輯成功");
-					// 	} else {
-					// 		res.send("編輯失敗");
-					// 	}
-					// })
-				} 
-				else {
+					member.editSpecialColumn(memID, specColHead, specColCont, postDateTime, base64Index, specColNum).then(data => {
+						if (data == 1) {
+							res.send("編輯成功");
+						} else {
+							res.send("編輯失敗");
+						}
+					})
+				} else {
 					console.log("@@@@@");
 					member.specialColumnPost(memID, specColHead, specColCont, postDateTime, base64Index).then(data => {
 						if (data == 0) {

@@ -32,6 +32,7 @@
 
     </div>
     <div class="container-fluid d-flex justify-content-center">
+
         <div class="col-lg-8">
             <div class="contain">
                 <center>
@@ -39,9 +40,35 @@
                     <p> <%= items[0][0].specColDate %> </p>
                 </center>
                 <p class="content">
-                    <%- items[0][0].specColCont %>        
+                    <%- items[0][0].specColCont %>
                 </p>
             </div>
+        </div>
+        <% if(items[1] && items[1] == 'SYSOP') {%>
+        <div style="position: fixed; right: 1em; bottom:5%;">
+            <div class="dropdown float-right dropup" style="margin-bottom: -0.5em">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-h"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right dotMenu " aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="/specialColumn/edit/page/<%= items[0][0].specColNum %>">編輯</a>
+                    <a class="dropdown-item" onclick="delSpecialColumn('<%= items[0][0].specColNum %>')">刪除</a>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+    <div class='coverContainer'>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
         </div>
     </div>
 
@@ -60,6 +87,56 @@
     <script src="/javascripts/active.js "></script>
     <script src="/javascripts/navbar.js"></script>
     <script src="/javascripts/imageCompression.js"></script>
+    <script>
+        var formData = new FormData();
+        function delSpecialColumn(recomNum) {
+            if (confirm('管理者確定要刪除專欄嗎？')) {
+                $('.coverContainer').css('display', 'block')
+                formData.append('specColNum', recomNum);
+                formData.append('delSpecialColumn', true);
+                $.ajax({
+                    url: '/specialColumn/post',
+                    type: 'POST',
+                    dataType: 'TEXT',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (res) {
+                        if (res == "請進行登入") {
+                            alert(res);
+                            location.replace("/login");
+                        } else {
+                            alert("刪除成功");
+                            location.replace("/specialColumnList");
+                        }
+                    },
+                    error: function (res) {
+                        alert("刪除失敗");
+                    }
+                });
+            }
+        }
+
+        function delSpecialColumn(specColNum) {
+            if (confirm('管理者確定要刪除專欄嗎？')) {
+                $('.coverContainer').css('display', 'block')
+                $.ajax({
+                    url: '/addLike',
+                    type: 'POST',
+                    data: { "specColNum": specColNum, "deleteSpecialColumn": true, "member": "<%= items[1] %>"},
+                    success: function (res) {
+                        alert('刪除成功！')
+                        location.replace("/specialColumnList");
+                    },
+                    error: function (res) {
+                        console.log('刪除失敗');
+                        alert('刪除失敗！')
+                    }
+                });
+            }
+        }
+    </script>
 </body>
 
 </html>

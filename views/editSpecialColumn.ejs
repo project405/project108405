@@ -29,7 +29,7 @@
     <div id="header"></div>
 
     <center>
-        <h3>新增專欄</h3>
+        <h3>編輯專欄</h3>
         <hr class="highlight">
     </center>
     <Section id="special">
@@ -41,12 +41,14 @@
                     <i class="fas fa-images" style="padding-right:5px"></i>Banner
                 </label>
                 <div id="bannerImg" style="width: 100%; margin-bottom: 1em;">
-                    <img style="width: 100%;" src="" alt="">
+                    <img style="width: 100%;" src="<%= items[2][0].imgName %>" alt="">
                 </div>
                 <input type="text" class="titleInput input-with-icon title" name="artiHead" id="artiHead"
-                    placeholder="輸入專欄名稱">
+                    placeholder="輸入專欄名稱" value="<%= items[0][0].specColHead %>">
 
-                <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入專欄內容"></div>
+                <div id="postInput" class="postInput" contenteditable="true" role="textbox">
+                        <%- items[0][0].specColCont %>
+                </div>
 
                 <!-- <div class="text-right"> -->
                 <label class="btn btn-dark col-lg-2" style="cursor: pointer">
@@ -218,6 +220,9 @@
             }
         });
         async function submitPost() {
+            specColNum = '<%= items[0][0].specColNum %>'
+            formData.append('specColNum', specColNum);
+
             var bannerImgBase64 = $('#bannerImg').children('img').attr('src')
             if (bannerImgBase64 == '') {
                 alert('請加入專欄Banner圖片！')
@@ -261,25 +266,37 @@
             formData.append('specColHead', artiHead);
             formData.append('specColCont', artiCont);
 
-            $.ajax({
-                url: '/specialColumn/post',
+            await $.ajax({
+                url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                 type: 'POST',
                 dataType: 'TEXT',
-                data: formData,
-                processData: false,
-                contentType: false,
-                cache: false,
+                data: { 'artiCont': `${artiCont}` },
                 success: function (res) {
-                    if (res == "請進行登入") {
-                        alert(res);
-                        location.replace("/login");
-                    } else {
-                        alert("專欄發佈成功");
-                        location.replace("/specialColumnList");
-                    }
+                    var analyzeRes = JSON.parse(res)
+                    $.ajax({
+                        url: '/specialColumn/post',
+                        type: 'POST',
+                        dataType: 'TEXT',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        success: function (res) {
+                            if (res == "請進行登入") {
+                                alert(res);
+                                location.replace("/login");
+                            } else {
+                                alert("專欄發佈成功");
+                                location.replace("/specialColumnList");
+                            }
+                        },
+                        error: function (res) {
+                            console.log(res)
+                        }
+                    });
                 },
                 error: function (res) {
-                    console.log(res)
+                    console.error(res)
                 }
             });
 

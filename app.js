@@ -103,6 +103,7 @@ var specialColumnRouter = require('./routes/specialColumn/specialColumn');
 var specialColumnListRouter = require('./routes/specialColumn/specialColumnList');
 var specialColumnPostRouter = require('./routes/specialColumn/specialColumnPost');
 var specialColumnPostPageRouter = require('./routes/specialColumn/specialColumnPostPage');
+var specialColumnEditPageRouter = require('./routes/specialColumn/specialColumnEditPage');
 
 var CheckStatus = require('./routes/checkStatus');
 var searchRouter = require('./routes/search');
@@ -268,6 +269,7 @@ app.use('/specialColumn', specialColumnRouter);
 app.use('/specialColumnList', specialColumnListRouter);
 app.use('/specialColumn/post', specialColumnPostRouter);
 app.use('/specialColumn/post/page', specialColumnPostPageRouter);
+app.use('/specialColumn/edit/page', specialColumnEditPageRouter);
 
 
 app.use('/search',searchRouter);

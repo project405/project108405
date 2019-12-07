@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 
 	//判斷是使用哪種方式登入
 	if (req.session.memID == undefined && req.session.passport == undefined) {
-		res.render('login');
+		// res.render('login');
 	} else if (req.session.memID != undefined && req.session.passport == undefined) {
 		memID = req.session.memID;
 	} else if (req.session.memID == undefined && req.session.passport != undefined) {

@@ -254,13 +254,11 @@ var activityPost = async function (memID, artiHead, artiCont, artiClass, artiDat
 var specialColumnPost = async function (memID, specColHead, specColCont, postDateTime, imgData) {
     var specColNum;
     var result = 0;
-    console.log(imgData);
     if (typeof(imgData) == 'string') {
         var temp = imgData
         imgData = []
         imgData.push(temp)
     }
-    console.log(imgData);
     //新增文章
     await sql(`INSERT into "specialColumn" ("specColHead", "specColCont", "specColDateTime")
                 VALUES ($1,$2,$3) 
@@ -271,7 +269,6 @@ var specialColumnPost = async function (memID, specColHead, specColCont, postDat
                 specColNum = undefined;
             } else {
                 specColNum = data.rows[0].specColNum;
-                console.log(specColNum,'QQQ');
             }
         }, (error) => {
             specColNum = undefined;
@@ -295,8 +292,7 @@ var specialColumnPost = async function (memID, specColHead, specColCont, postDat
 //================================
 //----- editSpecialColumn() ------
 //================================
-var editSpecialColumn = async function (memID, artiHead, artiCont, artiClass, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime, score2) {
-    var tagNum = [];
+var editSpecialColumn = async function (memID, specColHead, specColCont, postDateTime, imgData, specColNum) {
     var result = 0;
     if (typeof(imgData) == 'string') {
         var temp = imgData
@@ -304,9 +300,9 @@ var editSpecialColumn = async function (memID, artiHead, artiCont, artiClass, im
         imgData.push(temp)
     }
     //修改文章
-    await sql('UPDATE "article" SET "artiHead" = $1, "artiCont" =$2, "artiClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6, "swearWords"= $7, "score2"= $9' +
-    ' WHERE "artiNum" = $8'
-    , [artiHead, artiCont, artiClass, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, score2])
+    await sql('UPDATE "specialColumn" SET "specColHead" = $1, "specColCont" =$2' +
+    ' WHERE "specColNum" = $3'
+    , [specColHead, specColCont, specColNum])
     .then((data) => {
         result = 1;
     }, (error) => {
@@ -314,40 +310,7 @@ var editSpecialColumn = async function (memID, artiHead, artiCont, artiClass, im
         result = 0;
     });
 
-    // 刪除舊tag連結
-    await sql ('DELETE FROM "tagLinkArticle" WHERE "artiNum" = $1',[artiNum])
-    .then((data)=> {
-    },(e) => {
-        console.error(e)
-    }) 
-
-    //新增tag 
-    if(tag.length != 0){
-        for (var i = 0; i < tag.length; i++) {
-            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
-                .then((data) => {
-                    if (!data.rows) {
-                        tagNum = undefined;
-                    } else {
-                        tagNum = data.rows[0].tagNum;
-                    }
-                }, (error) => {
-                    tagNum = undefined;
-                    console.error(error)
-                });
-
-            // --------- 新增tagLink ---------
-            await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
-                .then((data) => {
-                    result = 1
-                }, (error) => {
-                    console.log(error)
-                    result = 0;
-                });
-        }
-    }
-
-    await sql('DELETE FROM "image" WHERE "artiNum" = $1 and "artiMessNum" IS NULL', [artiNum])
+    await sql('DELETE FROM "image" WHERE "specColNum" = $1', [specColNum])
     .then((data) => {
     }, (error) => {
         console.log(error)
@@ -356,7 +319,7 @@ var editSpecialColumn = async function (memID, artiHead, artiCont, artiClass, im
     // --------- 新增img ---------
     if(imgData != undefined){
         for (var i = 0; i < imgData.length; i++) {
-            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
+            await sql('INSERT into "image" ("memID", "specColNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, specColNum, imgData[i], postDateTime])
                 .then((data) => {
                     result = 1;
                 }, (error) => {
@@ -507,6 +470,24 @@ var deleteArticle = async function (artiNum) {
 var deleteRecommend = async function (recomNum) {
     var result = 0;
     await sql ('DELETE FROM "recommend" WHERE "recomNum" = $1',[recomNum])
+        .then((data)=> {
+            result = 1
+        },(e) => {
+            console.error(e)
+            result = 0
+        }) 
+    return result;
+}
+
+//================================
+//--- deleteSpecialColumn() -----
+//================================
+var deleteSpecialColumn = async function (specColNum) {
+    console.log(specColNum)
+    console.log(typeof(specColNum))
+
+    var result = 0;
+    await sql ('DELETE FROM "specialColumn" WHERE "specColNum" = $1',[specColNum])
         .then((data)=> {
             result = 1
         },(e) => {
@@ -1250,5 +1231,6 @@ module.exports = {
     addRecommendMessLike, delRecommendMessLike,
     report, checkAuthority, editArticle, deleteArticle, deleteRecommend, editReply, deleteReply, 
     memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
-    editRecommendReply, editRecommend, getBestReply, getRepeatMail, activityPost, specialColumnPost
+    editRecommendReply, editRecommend, getBestReply, getRepeatMail, activityPost, specialColumnPost,
+    editSpecialColumn, deleteSpecialColumn
 };
