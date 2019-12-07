@@ -696,7 +696,7 @@ var getSpecialColumnList = async function (memID) {
 }
 
 //=========================================
-//---------  getOneArticle() -------------
+//---------  getOneSpecialColumn() --------
 //=========================================
 var getOneSpecialColumn = async function (specColNum, memID) {
     var oneSpecialColumn = [];  //存放文章內容
@@ -759,6 +759,42 @@ var getOneSpecialColumn = async function (specColNum, memID) {
     return result;
 }
 
+//=========================================
+//------  getActivityList() ----------
+//=========================================
+var getActivityList = async function (memID) {
+    var activityList = [];
+    var result = [];
+
+    // -----------  取得活動清單 --------------
+    await sql(`SELECT "T1".*
+                FROM(
+                    SELECT "adv"."artiNum"
+                            ,"adv"."artiHead"
+                            ,"adv"."artiCont"
+                            ,to_char("adv"."deadline",'YYYY-MM-DD') AS "deadline"
+                            ,"img"."imgName"
+                            ,ROW_NUMBER() OVER(PARTITION BY "adv"."artiNum" ORDER BY "img"."imgNum") as "Rank"
+                            ,CASE WHEN to_char("adv"."deadline",'YYYY-MM-DD') < to_char(NOW(),'YYYY-MM-DD') THEN 'Y' ELSE 'N'
+                             END AS "due"
+                    FROM "articleListDataView" AS "adv" 
+                    INNER JOIN "image" AS "img"
+                        ON "adv"."artiNum" = "img"."artiNum" 
+                    WHERE "deadline" IS NOT NULL
+                    ORDER BY	"img"."imgDateTime") AS "T1"
+                WHERE "T1"."Rank" = '1'`)
+        .then((data) => {
+            activityList = data.rows;
+        }, (error) => {
+            activityList = undefined;
+        });
+
+    result[0] = activityList; 
+    result[1] = [memID];
+
+    return result;
+}
+
 
 //匯出
 module.exports = {
@@ -766,5 +802,6 @@ module.exports = {
     getArticleClassList,
     getArtiLikeCount, getRecomLikeCount,
     getArtiMessLikeCount, getRecomMessLikeCount, getOneReply, getArticleListPagination,
-    getSpecialColumnList, getOneSpecialColumn
+    getSpecialColumnList, getOneSpecialColumn,
+    getActivityList
 };
