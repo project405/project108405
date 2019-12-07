@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
+html, body {
+    height: 100%;
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+    text-align: justify;
+    text-justify: inter-ideograph;
+    background-color: #fafafa;
+    position: relative;
+}
+@media (max-width: 991px) {
+    /* html,
+    body {
+        padding-top: 2em;
+    } */
+}
+.banner {
+    margin-bottom: 4em;
+    /* opacity: 0.6; */
+    width: auto;
+    height: 70% !important;
+    /* padding-top: 40em; */
+    padding-bottom: calc(10em - 72px);
+    background: url("../imgs/background/activity-01.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.contain {
+    background-color: white;
+    border: rgb(230, 230, 230) 1px solid;
+    margin-bottom: 1.5em;
+    padding: 1em 1em 1em 1em;
+    border-radius: 6px;
+}
+
+.activeStatus {
+    padding: 0;
+    margin: 0;
+}
+
+.wrapperCard {
+    width: 100%;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 8px;
+    border: 3px solid #fff;
+    /* text-align: left !important; */
+}
+
+
+.badge {
+    font-size: 1em;
+}
+
+.activeStatus {
+    margin-bottom: 1em;
+}
+
+.active {
+    padding: 1em;
+}
+
+.datetime {
+    color: #6c757d;
+    margin-bottom: 0.5em;
+}
