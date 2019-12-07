@@ -254,13 +254,13 @@ var activityPost = async function (memID, artiHead, artiCont, artiClass, artiDat
 var specialColumnPost = async function (memID, specColHead, specColCont, postDateTime, imgData) {
     var specColNum;
     var result = 0;
-
+    console.log(imgData);
     if (typeof(imgData) == 'string') {
         var temp = imgData
         imgData = []
         imgData.push(temp)
     }
-
+    console.log(imgData);
     //新增文章
     await sql(`INSERT into "specialColumn" ("specColHead", "specColCont", "specColDateTime")
                 VALUES ($1,$2,$3) 
@@ -280,7 +280,7 @@ var specialColumnPost = async function (memID, specColHead, specColCont, postDat
     // --------- 新增img ---------
     if(imgData != undefined){
         for (var i = 0; i < imgData.length; i++) {
-            await sql('INSERT into "image" ("memID", "specColNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, specColNum, imgData, postDateTime])
+            await sql('INSERT into "image" ("memID", "specColNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, specColNum, imgData[i], postDateTime])
                 .then((data) => {
                     result = 0;
                 }, (error) => {
