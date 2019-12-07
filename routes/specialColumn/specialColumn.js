@@ -16,15 +16,13 @@ router.get('/:specColNum', function(req, res, next) {
 	}
 
 	article.getOneSpecialColumn(specColNum, memID).then(data => {
-		console.log(data);
+		// console.log(data[0][0]);
 		// 將字串替換成圖片
-		do{	
-			if (data[0][0].specColCont.match("\\:imgLocation") != null) {
-                for (var j = 1; j < data[2].length; j++) {
-                    data[0][0].specColCont = data[0][0].specColCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='" + data[2][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
-                }
+		if (data[0][0].specColCont.match("\\:imgLocation") != null) {
+			for (var j = 1; j < data[2].length; j++) {
+				data[0][0].specColCont = data[0][0].specColCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='" + data[2][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
 			}
-		}while(data[0][0].specColCont.match("\\:imgLocation") == null)
+		}
 		
         if (data == null) {
             res.render('error');  //導向錯誤頁面
