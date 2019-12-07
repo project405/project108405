@@ -37,22 +37,20 @@
         <h3>創作者專欄</h3>
         <hr class="highlight">
     </center>
-    <div class="container-fluid d-flex justify-content-center">
-        <div class="col-8 row content justify-content-center">
-            <div class="col-lg-6 item" onclick="">
-                <div class="photoContainer">
-                    <img class="photo" src="/imgs/testImgs/frozen2.jpg">
+   
+        <div class="container-fluid d-flex justify-content-center">
+            <div class="col-8 row content justify-content-center">
+                <% for (var i = 0 ; i< items[0].length; i++) { %>
+                <div class="col-lg-6 item" onclick="">
+                    <div class="photoContainer">
+                        <img class="photo" src="<%= items[0][i].imgName %>">
+                    </div>
+                    <h5><%= items[0][i].specColHead %></h5>
                 </div>
-                <h5>《冰雪奇緣2》(Frozen 2) 又再度刮起一陣炫風，艾莎女王以驚人氣勢</h5>
-            </div>
-            <div class="col-lg-6 item" onclick="">
-                <div class="photoContainer">
-                    <img class="photo" src="/imgs/testImgs/lion.jpeg">
-                </div>
-                <h5>繼《與森林共舞》後，導演強法洛與迪士尼合作推出經典《獅子王》擬真動畫電影。</h5>
+                <% } %>
             </div>
         </div>
-    </div>
+ 
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
     </a>

@@ -665,11 +665,41 @@ var getRecomMessLikeCount = async function (recomMessNum) {
     return result;
 }
 
+//=========================================
+//------  getSpecialColumnList() ----------
+//=========================================
+var getSpecialColumnList = async function (memID) {
+    var specialColumnList = [];
+    var result = [];
+
+    // -----------  取得專欄清單 --------------
+    await sql(`SELECT "T1".*
+               FROM(
+                    SELECT "S".*,
+                                "I"."imgName",
+                                ROW_NUMBER() OVER(PARTITION BY "S"."specColNum" ORDER BY "I"."imgNum") as "Rank"
+                    FROM "specialColumn" AS "S"
+                    INNER JOIN "image" AS "I"
+                        ON "S"."specColNum" = "I"."specColNum"
+                    ORDER BY "S"."specColDateTime" DESC) AS "T1"
+                WHERE "T1"."Rank" = '1'`)
+        .then((data) => {
+            specialColumnList = data.rows;
+        }, (error) => {
+            specialColumnList = undefined;
+        });
+
+    result[0] = specialColumnList; 
+    result[1] = [memID];
+
+    return result;
+}
+
 
 //匯出
 module.exports = {
     getArticleList, getOneArticle,
     getArticleClassList,
     getArtiLikeCount, getRecomLikeCount,
-    getArtiMessLikeCount, getRecomMessLikeCount, getOneReply, getArticleListPagination
+    getArtiMessLikeCount, getRecomMessLikeCount, getOneReply, getArticleListPagination,getSpecialColumnList
 };
