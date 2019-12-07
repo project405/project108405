@@ -393,10 +393,10 @@ div.surpriseHeader {
 /* -------------- */
 
 hr.highlight {
-    margin: 1em 0 2em 0 !important;
+    margin: 0.5em 0 2em 0 !important;
     width: 10em;
     background-color: rgba(42, 45, 44, 0.482);
-    height: 5px;
+    height: 3.5px;
     border: none;
     color: rgb(42, 45, 44);
     border-radius: 4px;
