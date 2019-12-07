@@ -71,3 +71,7 @@ html, body {
     color: #6c757d;
     margin-bottom: 0.5em;
 }
+
+.item {
+    cursor: pointer;
+}
