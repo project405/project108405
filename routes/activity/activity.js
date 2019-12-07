@@ -6,7 +6,6 @@ const article = require('../utility/article');
 //接收GET請求
 router.get('/', function (req, res, next) {
     var artiListNum = req.params.artiListNum;   //取出參數
-    var memID;
 
     //判斷是使用哪種方式登入
     if (req.session.memID != undefined && req.session.passport == undefined) {
