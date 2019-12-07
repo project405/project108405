@@ -21,7 +21,7 @@ router.get('/:artiMessNum', async function (req, res, next) {
     }
 
     article.getOneReply(artiMessNum, memID).then(data => {
-        if (data[2][0] != data[0][0].memID) {
+        if (data[2][0] != data[0][0].memID && data[3] != 'SYSOP') {
             res.write('<head><meta charset="utf-8"/></head>');
             res.end('<script> alert("您沒有編輯該留言的權限"); history.back();</script>');
             res.render('notFound');  //導向找不到頁面     
