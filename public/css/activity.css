@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
+html, body {
+    height: 100%;
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    text-align: justify;
+    background-color: #fafafa;
+    position: relative;
+}
+@media (max-width: 991px) {
+    html,
+    body {
+        padding-top: 2em;
+    }
+}
+.container-fluid {
+    padding: 6em 0;
+}
+.content p {
+    font-size: 1.1em;
+}
+
+.response {
+    background-color: white;
+    border-radius: 6px;
+    border: rgb(230, 230, 230) 1px solid;
+    margin-bottom: 1.5em;
+    padding: 1em 1em 1em 1em;
+}
+
+div.tagDiv {
+    padding: 0em;
+    margin: 0em;
+    font-size: 1.1em;
+}
+
+
+div.info {
+    color: #6c757d;
+    margin-bottom: 0.5em;
+}
+
+div.replying {
+    margin-bottom: 50px;
+}
+
+div.replyInput {
+    border: rgb(230, 230, 230) 1px solid;
+    width: 100%;
+    min-height: 150px;
+    height: auto;
+    padding: 1em;
+    overflow: hidden;
+    background-color: white;
+    opacity: 0.89;
+    margin-bottom: 1em;
+    border-radius: 8px;
+    caret-color: #2D4F41;
+    cursor: text;
+    text-align: left !important;
+}
+
+.input:empty::before {
+    color: lightgrey;
+    content: attr(placeholder);
+}
+
+
+/*focus時内容為空*/
+
+[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-text);
+    color: rgb(114, 114, 114);
+}
+
+div.replyInput:focus:before {
+    content: none;
+}
+
+div.replyInput:focus {
+    outline: none;
+    cursor: text;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0.98;
+    transition: 0.3s ease-in-out;
+    cursor: text;
+    display: block;
+}
+
+.float-md-right {
+    float: right;
+}
+
+div[contenteditable=true]>div {
+    padding: 0;
+}
+
+input[type="file"] {
+    position: fixed;
+    right: 100%;
+    bottom: 100%;
+    cursor: pointer;
+}
+
+img.upload-img {
+    max-height: 450px;
+    max-width: 70%;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 0.35em;
+}
+

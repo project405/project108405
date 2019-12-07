@@ -167,7 +167,6 @@ div.dropdown-menu {
 .dropdown:hover .dropdown-menu {
     display: block;
     background-color: #2D4F41;
-    padding: 8px;
     border: 2px solid #678878;
 }
 
@@ -180,8 +179,7 @@ div.dropdown-menu {
 
 .dropdown-item:hover {
     background-color: #678878 !important;
-    border-radius: 8px;
-    transition: 0.3s;
+    border-radius: 4px;
 }
 
 
