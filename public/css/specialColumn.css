@@ -1,23 +1,49 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
 html,
 body {
+    height: 100%;
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    margin: 0 auto;
+    padding: 0;
     border: none;
-    /* background: url("../imgs/background/articleBac.png");
+    /* text-align: justify; */
+    text-justify: inter-ideograph;
+    background-color: #fafafa;
+    position: relative;
+}
+@media (max-width: 991px) {
+
+}
+
+.banner {
+    margin-bottom: 2em;
+    /* opacity: 0.6; */
+    width: auto;
+    height: 80% !important;
+    /* padding-top: 40em; */
+    padding-bottom: calc(10em - 72px);
+    background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover; */
-    padding-top: 3em;
+    background-size: cover;
+}
+
+.container-fluid {
+    padding-bottom: 6em;
+}
+.content {
+    font-size: 1.1em;
+    line-height: 1.8em;
+}
+
+img {
+    max-width: 100% !important;
     height: auto;
+    overflow: hidden;
 }
 
-@media (max-width: 650px) {
-    html,
-    body {
-        /* background: url("../imgs/background/phone/ParticleBac.png");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover; */
-    }
+.title {
+    margin-bottom: 0.5em;
+    font-weight: bolder;
 }
-
