@@ -100,6 +100,7 @@ var activityListRouter = require('./routes/activity/activityList');
 //---------  specialColumn router ---------
 //=========================================
 var specialColumnRouter = require('./routes/specialColumn/specialColumn');
+var specialColumnListRouter = require('./routes/specialColumn/specialColumnList');
 var specialColumnPostRouter = require('./routes/specialColumn/specialColumnPost');
 var specialColumnPostPageRouter = require('./routes/specialColumn/specialColumnPostPage');
 
@@ -264,6 +265,7 @@ app.use('/activity/post/page', activityPostPageRouter);
 // ---------  specialColumn use ------------
 // =========================================
 app.use('/specialColumn', specialColumnRouter);
+app.use('/specialColumnList', specialColumnListRouter);
 app.use('/specialColumn/post', specialColumnPostRouter);
 app.use('/specialColumn/post/page', specialColumnPostPageRouter);
 
