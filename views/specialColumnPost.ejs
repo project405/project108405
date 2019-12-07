@@ -182,8 +182,8 @@
             artiData.forEach(function (element) {
                 artiCont.push(element.innerText);
             }, this);
-            formData.append('artiHead', artiHead);
-            formData.append('artiCont', artiCont);
+            formData.append('specColHead', artiHead);
+            formData.append('specColCont', artiCont);
 
             await $.ajax({
                 url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
@@ -193,7 +193,7 @@
                 success: function (res) {
                     var analyzeRes = JSON.parse(res)
                     $.ajax({
-                        url: '/article/post',
+                        url: '/specialColumn/post',
                         type: 'POST',
                         dataType: 'TEXT',
                         data: formData,

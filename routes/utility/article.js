@@ -3,6 +3,7 @@
 //引用操作資料庫的物件
 const sql = require('./asyncDB');
 const member = require('./member');
+
 //=========================================
 //----- getArticleListPagination() --------
 //=========================================

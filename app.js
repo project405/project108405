@@ -100,7 +100,7 @@ var activityListRouter = require('./routes/activity/activityList');
 //---------  specialColumn router ---------
 //=========================================
 var specialColumnRouter = require('./routes/specialColumn/specialColumn');
-var specialColumnPostRouter = require('./routes/specialColumn/specialColumnPostPage');
+var specialColumnPostRouter = require('./routes/specialColumn/specialColumnPost');
 var specialColumnPostPageRouter = require('./routes/specialColumn/specialColumnPostPage');
 
 var CheckStatus = require('./routes/checkStatus');

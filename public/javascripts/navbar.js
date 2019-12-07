@@ -22,7 +22,7 @@ $(document).ready(() => {
                                 <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
                             <li class="nav-item">\
-                            <a class="nav-link" href="/recommendList/1">\
+                            <a class="nav-link" href="/specialColumn">\
                                 專欄</a>\
                             </li>\
                             <li class="nav-item">\
@@ -115,7 +115,7 @@ $(document).ready(() => {
                             </div>\
                         </li>\
                         <li class="nav-item">\
-                        <a class="nav-link" href="/recommendList/1">\
+                        <a class="nav-link" href="/specialColumn">\
                             專欄</a>\
                         </li>\
                         <li class="nav-item">\
@@ -245,7 +245,7 @@ $(document).ready(() => {
                             <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                         </div>\
                         <li class="nav-item">\
-                        <a class="nav-link" href="/recommendList/1">\
+                        <a class="nav-link" href="/specialColumn">\
                             專欄</a>\
                         </li>\
                         <li class="nav-item">\
