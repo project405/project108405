@@ -39,7 +39,7 @@
                 </div>
                 <% for(var i = 0 ; i < items[0].length ; i++) { %>
                     <% if(items[0][i].due == "N") { %>
-                        <div class="col-lg-12 item" onclick="">
+                        <div class="col-lg-12 item"  onclick=" location.href='/activity/<%= items[0][i].artiNum %>'">
                             <div class="row active d-flex justify-content-center">
                                 <div class="wrapperCard card-img-top col-lg-3"
                                     style="background-image: url('<%= items[0][i].imgName %>'); ">
@@ -62,7 +62,7 @@
                 </div>
                 <% for(var i = 0 ; i<items[0].length ; i++) { %>
                     <% if(items[0][i].due == "Y") { %>
-                        <div class="col-lg-12 item" onclick="">
+                        <div class="col-lg-12 item" onclick=" location.href='/activity/<%= items[0][i].artiNum %>'">
                             <div class="row active d-flex justify-content-center">
                                 <div class="wrapperCard card-img-top col-lg-3"
                                     style="background-image: url('<%= items[0][i].imgName %>'); ">

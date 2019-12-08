@@ -795,6 +795,132 @@ var getActivityList = async function (memID) {
     return result;
 }
 
+//====================================
+//---------  getOneActivity() --------
+//====================================
+var getOneActivity = async function (artiNum, memID) {
+    var oneActivity = [];  //存放文章內容
+    var message = [] ; 
+    var result = [];
+    var checkAuthority;
+    var activeImgs ; 
+    var messImgs;
+    var tag ; 
+
+    // -----------  取得單一文章 --------------
+    await sql(`SELECT "artiNum" ,
+                        "memID",
+                        "artiDateTime",
+                        "artiHead",
+                        "artiCont",
+                        "artiClass",
+                        "likeCount",
+                        "messCount",
+                        "deadline"
+                FROM "articleListDataView" 
+                WHERE "artiNum" = $1`, [artiNum])
+        .then((data) => {
+            if (data.rows.length > 0) {
+                oneActivity = data.rows;
+            } else {
+                oneActivity = undefined;
+            }
+        }, (error) => {
+            oneActivity = undefined;
+        });
+
+    // ----------- 取得文章照片 -----------
+    await sql(`SELECT "imgName"
+               FROM "image"
+               WHERE "artiNum" = $1 AND "artiMessNum" IS NULL
+               ORDER BY "imgDateTime"`,[artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                activeImgs = undefined;
+            } else {
+                activeImgs = data.rows;
+            }
+        }, (error) => {
+            activeImgs = undefined;
+        });
+    
+    // -----------  取得留言 --------------
+    await sql(`SELECT "Mess"."artiMessNum" 
+                        ,"Mess"."memID" 
+                        ,to_char("Mess"."artiMessDateTime",'YYYY-MM-DD') AS "artiMessDateTime" 
+                        ,"Mess"."artiMessCont" 
+                        ,count("MessLike"."artiMessNum") AS "likeCount" 
+                    ,"member"."memName"
+               FROM "articleMessage" AS "Mess" 
+                   LEFT JOIN "articleMessageLike" AS "MessLike" 
+                       ON "Mess"."artiMessNum" = "MessLike"."artiMessNum" 
+                   INNER JOIN "member"
+                  ON "member"."memID" = "Mess"."memID"
+               WHERE "Mess"."artiNum" = $1 
+               GROUP BY "Mess"."artiMessNum" 
+                   ,"Mess"."memID" 
+                   ,"Mess"."artiMessDateTime" 
+                   ,"Mess"."artiMessCont" 
+                   ,"member"."memName" 
+               ORDER BY "artiMessNum" `, [artiNum])
+    .then((data) => {
+        if (data.rows.length > 0) {
+            message = data.rows;
+        } else {
+            message = undefined;
+        }
+    }, (error) => {
+        message = undefined;
+    });
+
+    // ----------- 取得留言照片 -----------
+    await sql(`SELECT "imgName"
+               FROM "image"
+               WHERE "artiMessNum" = $1 
+               ORDER BY "imgDateTime"`,[artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                activeImgs = undefined;
+            } else {
+                activeImgs = data.rows;
+            }
+        }, (error) => {
+            activeImgs = undefined;
+        }); 
+
+    // ----------- 取得tag -----------
+    await sql(`SELECT "tagName"
+                FROM "tag"
+                INNER JOIN "tagLinkArticle" AS "ta"
+                    ON	"tag"."tagNum" = "ta"."tagNum"
+                WHERE "ta"."artiNum" = $1`,[artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                tag = undefined;
+            } else {
+                tag = data.rows;
+            }
+        }, (error) => {
+            tag = undefined;
+        });    
+
+    //取得權限
+    await member.checkAuthority(memID).then(data => {
+        if (data != undefined) {
+            checkAuthority = data;
+        } else {
+            checkAuthority = undefined;
+        }
+    })
+
+    result[0] = oneActivity;
+    result[1] = message ; 
+    result[2] = activeImgs;
+    result[3] = messImgs;
+    result[4] = checkAuthority;
+    result[5] = tag;
+    return result;
+}
 
 //匯出
 module.exports = {
@@ -803,5 +929,5 @@ module.exports = {
     getArtiLikeCount, getRecomLikeCount,
     getArtiMessLikeCount, getRecomMessLikeCount, getOneReply, getArticleListPagination,
     getSpecialColumnList, getOneSpecialColumn,
-    getActivityList
+    getActivityList,getOneActivity
 };
