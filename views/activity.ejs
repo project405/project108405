@@ -29,66 +29,74 @@
 <body>
     <!-- navbar -->
     <div id="header"></div>
-    
+
     <!-- 文章列表區塊 -->
     <div class="container-fluid d-flex justify-content-center">
-            <div class="col-lg-8">
-                <center>
-                    <h3>★限★時★活★動★</h3>
-                    <hr class="highlight">
-                </center>
-                <div class="activity">
-                    <div class="title">
-                        <h4 style="font-weight: bold;"><%= items[0][0].artiHead %></h4>
-                        <hr>
-                    </div>
-                    <div class="content">
-                        <p><%- items[0][0].artiCont %>
-                        </p>
-                    </div>
-                    <div class="tagDiv col-lg-12 ">
-                        <% for(var i = 0 ; i < items[5].length; i++) { %>
-                            <button type="button" class="btn tag"> <%= items[5][i].tagName %></button>
-                        <% } %>
-                    </div>
+        <div class="col-lg-8">
+            <center>
+                <h3>★限★時★活★動★</h3>
+                <hr class="highlight">
+            </center>
+            <div class="activity">
+                <div class="title">
+                    <h4 style="font-weight: bold;"><%= items[0][0].artiHead %></h4>
+                    <hr>
                 </div>
-                <hr>
-                <hr>
-                <h5 style="font-weight: bold;">回應</h5>
-                <% for(var i = 0 ; i<items[1].length ; i++) { %>
-                    <div class="response">
-                        <div class="info">
-                            <div style="white-space:nowrap !important">
-                                <a class="name"><%= items[1][i].memName %></a>
-                                <a class="dateTime"> · <%= items[1][i].artiMessDateTime %></a>
-                            </div>
-                        </div>
-                        <%= items[1][i].artiMessCont %>
-                    </div>
-                <% } %>
-               
-                <div class="replying">
-                    <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="快來參與活動吧！">
-                    </div>
-                    <label class="btn btn-dark col-lg-2" style="cursor: pointer">
-                        <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
-                        <i class="fas fa-images" style="padding-right:5px"></i>加圖片
-                    </label>
-    
-                    <button type="submit" class="btn btn-danger float-right submitReplyButton col-lg-2 shadow-none"
-                        onclick="">提交</button>
+                <div class="content">
+                    <p><%- items[0][0].artiCont %>
+                    </p>
+                </div>
+                <div class="tagDiv col-lg-12 ">
+                    <% for(var i = 0 ; i < items[5].length; i++) { %>
+                    <button type="button" class="btn tag"> <%= items[5][i].tagName %></button>
+                    <% } %>
                 </div>
             </div>
+            <hr>
+            <hr>
+            <h5 style="font-weight: bold;">回應</h5>
+            <% for(var i = 0 ; i<items[1].length ; i++) { %>
+            <div class="response">
+                <div class="info">
+                    <div style="white-space:nowrap !important">
+                        <a class="name"><%= items[1][i].memName %></a>
+                        <a class="dateTime"> · <%= items[1][i].artiMessDateTime %></a>
+                    </div>
+                </div>
+                <%- items[1][i].artiMessCont %>
+            </div>
+            <% } %>
+
+            <div class="replying">
+                <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="快來參與活動吧！">
+                </div>
+                <label class="btn btn-dark col-lg-2" style="cursor: pointer">
+                    <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
+                    <i class="fas fa-images" style="padding-right:5px"></i>加圖片
+                </label>
+
+                <button type="submit" class="btn btn-danger float-right submitReplyButton col-lg-2 shadow-none"
+                    onclick=<%= "submitReply(" + items[0][0].artiNum + ")" %>>提交</button>
+            </div>
         </div>
-    
-    
-        <!-- 文章列表區塊結束 --> 
-        <a href="#" id="gotop">
-            <i class="fa fa-angle-up"></i>
-        </a>
+    </div>
 
 
-
+    <!-- 文章列表區塊結束 -->
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
+    <div class='coverContainer'>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -103,6 +111,135 @@
         crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/imageCompression.js"></script>
+    <script>
+        var member = '<%=items[4]%>'
+        $('.postReport,.replyReport').click(() => {
+            if (!member) {
+                alert('請進行登入再檢舉！')
+                location.replace("/logIn");
+            }
+        })
+        $('#replyInput').click(() => {
+            if (!member) {
+                alert('請進行登入再留言！')
+                location.replace("/logIn");
+            }
+            var el = document.querySelector('#replyInput');
+            var range = document.createRange();
+            var sel = window.getSelection();
+            if (sel.focusNode.previousElementSibling.className == 'upload-img' || sel.focusNode.nextElementSibling.className == 'upload-img') {
+                range.setStart(el.lastChild, 0);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        })
+        var formData = new FormData(); //用formData來存取要傳送的所有資料
+        // 選取到檔案後開始動作
+        $('#file-selector').change(function (event) {
+            let timeStamp = new Date().getTime()
+            var file = $("#file-selector")[0];  //取得檔案
+            //如果有檔案就要加入formData
+            if (file.files.length) {
+                Object.keys(file.files).map((img, index) => {
+                    // 解析檔案
+                    var item = file.files[img]
+                    var reader = new FileReader();
+                    reader.onload = (function (item) {
+                        return async function (event) {
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function (size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function (strDataURI) {
+                                    var title = escape(file.name);
+                                    var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
+                                    $('#replyInput').append(img);
+                                    $('#replyInput').append('<span id="lastbr"></span><br /><br />');
+                                    var el = document.querySelector('#replyInput');
+                                    var range = document.createRange();
+                                    var sel = window.getSelection();
+                                    range.setStart(el.lastChild, 0);
+                                    range.collapse(true);
+                                    sel.removeAllRanges();
+                                    sel.addRange(range);
+                                }, (e) => {
+                                    console.log(e)
+                                })
+                            })
+                        };
+                    })(file);
+                    reader.readAsDataURL(item);
+                })
+                $('#file-selector').val('')
+            }
+        });
+        function submitReply(artiNum) {
+            var templateCont = document.getElementById('replyInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+            if (templateCont == '') {
+                alert('請輸入回覆內容！')
+                return;
+            }
+            $('.submitReplyButton').addClass('disabled')
+            $('.submitReplyButton').attr('disabled', true)
+            $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
+
+            if ($("#replyInput").find("img")) {
+                Array.from($("#replyInput").find("img")).map((img) => {
+                    formData.append('base64Index', img.getAttribute('src'));
+                    $(img).before("\\:imgLocation")
+                })
+            }
+            formData.append('artiNum', artiNum);
+            var replyCont = [];
+            var replyData = document.querySelectorAll("div.replyInput"); //只取得文字部分(不含圖片) ;
+            // 取得內容
+            replyData.forEach(function (element) {
+                replyCont.push(element.innerText);
+            }, this);
+            formData.append('replyCont', replyCont);
+            $.ajax({
+                url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
+                type: 'POST',
+                dataType: 'TEXT',
+                data: { 'artiCont': `${replyCont}` },
+                success: function (res) {
+                    var analyzeRes = JSON.parse(res)
+                    formData.append('analyzeScore', analyzeRes.analyze[0]);
+                    formData.append('positiveWords', analyzeRes.analyze[1]);
+                    formData.append('negativeWords', analyzeRes.analyze[2]);
+                    formData.append('swearWords', analyzeRes.analyze[3]);
+                    formData.append('score2', analyzeRes.analyze[4]);
+                    $.ajax({
+                        url: '/article/reply',
+                        type: 'POST',
+                        dataType: 'TEXT',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            if (res == "請進行登入") {
+                                alert(res);
+                                location.replace("/logIn");
+                            } else if (res == "留言成功") {
+                                alert(res);
+                                location.reload();
+                            } else {
+                                alert('哎呀，出現錯誤')
+                            }
+                        },
+                        error: function (res) {
+                            console.log("哎呀，出現錯誤", res);
+                        }
+                    });
+                },
+                error: function (res) {
+                    console.error(res)
+                }
+            });
+        }
+    </script>
     <!-- 收藏 ajax script -->
 
 </body>

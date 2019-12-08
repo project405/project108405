@@ -876,7 +876,7 @@ var getOneActivity = async function (artiNum, memID) {
     // ----------- 取得留言照片 -----------
     await sql(`SELECT "imgName"
                FROM "image"
-               WHERE "artiMessNum" = $1 
+               WHERE "artiNum" = $1 AND "artiMessNum" IS NOT NULL
                ORDER BY "imgDateTime"`,[artiNum])
         .then((data) => {
             if (!data.rows) {

@@ -22,14 +22,17 @@ router.get('/:artiNum', function (req, res, next) {
             }
         }
 
-        for (var i = 0; i < data[1].length; i++) {
-            if (data[1][i].artiMessCont.match("\\:imgLocation") != null) {
-                for (var j = 0; j < data[3].length; j++) {
-                    data[1][i].artiMessCont = data[1][i].artiMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='" + data[3][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+        //TODO
+        if(data[3] != undefined){
+            for(var i = 0 ; i < data[1].length ; i++){
+                if (data[1][i].artiCont.match("\\:imgLocation") != null) {
+                    for (var j = 0; j < data[3].length; j++) {
+                        data[1][i].artiCont = data[1][i].artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='" + data[3][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                    }
                 }
             }
         }
-
+        
         if (data == null) {
             res.render('error');  //導向錯誤頁面
         } else if (data == -1) {
