@@ -778,7 +778,7 @@ var getActivityList = async function (memID) {
                             ,CASE WHEN to_char("adv"."deadline",'YYYY-MM-DD') < to_char(NOW(),'YYYY-MM-DD') THEN 'Y' ELSE 'N'
                              END AS "due"
                     FROM "articleListDataView" AS "adv" 
-                    INNER JOIN "image" AS "img"
+                    LEFT JOIN "image" AS "img"
                         ON "adv"."artiNum" = "img"."artiNum" 
                     WHERE "deadline" IS NOT NULL
                     ORDER BY	"img"."imgDateTime") AS "T1"
