@@ -314,7 +314,7 @@ var getOneArticle = async function (artiNum, memID) {
                         ' ORDER BY "count" DESC ,"artiNum" DESC '+
                         ' LiMIT 3 '+
                         ' ) AS "A" '+
-                    ') '+
+                    ') AND "article"."deadline" IS NULL '+
             ' ORDER BY "artiNum" DESC', [artiNum])
         .then((data) => {
             if (data.rowCount <= 0) {
@@ -328,7 +328,7 @@ var getOneArticle = async function (artiNum, memID) {
     if(guessArticle == undefined){
         await sql('SELECT * '+
             ' FROM "article" '+
-            ' WHERE "artiNum" != $1 '+
+            ' WHERE "artiNum" != $1  AND "deadline" IS NULL '+
             ' ORDER BY random() '+
             ' LIMIT 3',[artiNum]) 
         .then((data) => {
@@ -343,7 +343,7 @@ var getOneArticle = async function (artiNum, memID) {
         if(guessArticle.length == 1 ){ //如果只有一篇
             await sql('SELECT * '+
                     ' FROM "article" '+
-                    ' WHERE "artiNum" != $1 '+
+                    ' WHERE "artiNum" != $1 AND "deadline" IS NULL '+
                     ' ORDER BY random() '+
                     ' LIMIT 2',[guessArticle[0].artiNum]) 
             .then((data) => {
@@ -358,7 +358,7 @@ var getOneArticle = async function (artiNum, memID) {
         }else if (guessArticle.length == 2 ){  //如果有兩篇
             await sql('SELECT * '+
                      ' FROM "article" '+
-                     ' WHERE "artiNum" != $1 AND "artiNum" != $2 '+
+                     ' WHERE "artiNum" != $1 AND "artiNum" != $2 AND "deadline" IS NULL '+
                      ' ORDER BY random() '+
                      ' LIMIT 1',[guessArticle[0].artiNum ,guessArticle[1].artiNum]) 
             .then((data) => {
