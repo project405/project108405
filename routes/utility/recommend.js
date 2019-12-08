@@ -288,8 +288,6 @@ var getOneRecommend = async function (recomNum, memID) {
         }
     }
     
-
-
     //取得權限
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
