@@ -746,3 +746,7 @@ a.itemClass:after {
     word-break: break-all !important;
     overflow: hidden !important;
 }
+
+.dotMenu:hover {
+    cursor: pointer;
+}

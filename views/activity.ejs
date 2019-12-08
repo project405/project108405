@@ -39,8 +39,23 @@
                     <h4 style="font-weight: bold;"><%= items[0][0].artiHead %></h4>
                     <a class="dateTime" style="color: #6c757d;"> · 截止日 2019-11-15</a>
                     <hr>
+                    <% if(items[4] && items[4] == 'SYSOP') {%>
+                    <div class="dropdown float-right">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right dotMenu " aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/editArticle/<%= items[0][0].artiNum %>">編輯</a>
+                            <a class="dropdown-item" onclick=<%= "delArticle(" + items[0][0].artiNum + ")" %>>刪除</a>
+                        </div>
+                    </div>
+                    <% } %>
+
                 </div>
+
                 <div class="content">
+                    123213211232132112321321123213211232132112321321123213211232132112321321123213211232132112321321
                     <p><%- items[0][0].artiCont %>
                     </p>
                 </div>
@@ -113,6 +128,24 @@
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/imageCompression.js"></script>
     <script>
+        function delArticle(artiNum) {
+            if (confirm('您真的要刪除文章嗎？')) {
+                $('.spinner-border').css('display', 'block')
+                $('.coverContainer').css('display', 'block')
+                $.ajax({
+                    url: '/addLike',
+                    type: 'POST',
+                    data: { "artiNum": artiNum, "memID": '<%= items[0][0].memID %>', "delArticle": true },
+                    success: function (res) {
+                        alert('刪除成功！')
+                        location.replace("/activityList");
+                    },
+                    error: function (res) {
+                        alert('刪除失敗！')
+                    }
+                });
+            }
+        }
         var member = '<%=items[4]%>'
         $('.postReport,.replyReport').click(() => {
             if (!member) {
