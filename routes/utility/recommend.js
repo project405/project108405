@@ -256,7 +256,38 @@ var getOneRecommend = async function (recomNum, memID) {
                     guessRecommend = data.rows;
                 }   
         });
+    }else if(guessRecommend.length < 3 ) { //  如果tag關聯數量小於三篇文章 
+        if(guessRecommend.length == 1 ){ //如果只有一篇
+            await sql('SELECT * '+
+                    ' FROM "recommend" '+
+                    ' WHERE "recomNum" != $1 '+
+                    ' ORDER BY random() '+
+                    ' LIMIT 2',[guessRecommend[0].recomNum]) 
+            .then((data) => {
+                    if (!data.rows) {
+                        guessRecommend = undefined ;
+                    } else {
+                        for(var i = 0 ; i < data.rows.length ; i++){
+                            guessRecommend.push(data.rows[i]);
+                        }
+                    }   
+            });
+        }else if (guessRecommend.length == 2 ){  //如果有兩篇
+            await sql('SELECT * '+
+                     ' FROM "recommend" '+
+                     ' WHERE "recomNum" != $1 AND "recomNum" != $2 '+
+                     ' ORDER BY random() '+
+                     ' LIMIT 1',[guessRecommend[0].recomNum ,guessRecommend[1].recomNum]) 
+            .then((data) => {
+                    if (!data.rows) {
+                        guessRecommend = undefined ;
+                    } else {
+                        guessRecommend.push(data.rows[0]);
+                    }   
+            });
+        }
     }
+    
 
 
     //取得權限
