@@ -781,7 +781,7 @@ var getActivityList = async function (memID) {
                     LEFT JOIN "image" AS "img"
                         ON "adv"."artiNum" = "img"."artiNum" 
                     WHERE "deadline" IS NOT NULL
-                    ORDER BY	"img"."imgDateTime") AS "T1"
+                    ORDER BY "img"."imgDateTime") AS "T1"
                 WHERE "T1"."Rank" = '1'`)
         .then((data) => {
             activityList = data.rows;
@@ -821,7 +821,7 @@ var getOneActivity = async function (artiNum, memID) {
                         CASE WHEN to_char("arti"."deadline",'YYYY-MM-DD') < to_char(NOW(),'YYYY-MM-DD') THEN 'Y' ELSE 'N'
                         END AS "due"
                 FROM "articleListDataView" AS "arti"
-                INNER JOIN "image" AS "img"
+                LEFT JOIN "image" AS "img"
                     ON "arti"."artiNum" = "img"."artiNum"
                 WHERE "arti"."artiNum" = $1
                 ORDER BY "img"."imgDateTime"`, [artiNum])
