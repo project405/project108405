@@ -44,6 +44,7 @@ router.post('/', function (req, res, next) {
             } else {
                 req.session.memID = d.memID;
                 req.session.memPass = d.memPass;
+                req.session.memAuthority = d.memAuthority;
                 res.redirect('/');
             }
         })

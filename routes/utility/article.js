@@ -26,7 +26,7 @@ var getArticleListPagination = async function (memID, artiListNum) {
                             LEFT JOIN "image" AS "I"
                                 ON "A"."artiNum" = "I"."artiNum"
                         WHERE "I"."artiMessNum" IS NULL	) AS "T1"
-                    WHERE "T1"."Rank" = '1'
+                    WHERE "T1"."Rank" = '1' AND "T1"."deadline" IS NULL
                     ORDER BY "artiNum" DESC
                     LIMIT 10 
                     OFFSET $1 ) AS "T2"
@@ -414,9 +414,9 @@ var getOneArticle = async function (artiNum, memID) {
 }
 
 
-//=========================================
+//=======================================
 //---------  getOneReply() -------------
-//=========================================
+//=======================================
 var getOneReply = async function (artiMessNum, memID) {
     var oneReply = []; //存放文章留言內容
     var replyImgs = [];
@@ -491,7 +491,7 @@ var getArticleClassList = async function (articleClass, memID, artiListNum) {
                         LEFT JOIN "image" AS "I"
                             ON "A"."artiNum" = "I"."artiNum"
                         WHERE "I"."artiMessNum" IS NULL ) AS "T1"
-                    WHERE "T1"."Rank" = '1' AND "artiClass" = $1
+                    WHERE "T1"."Rank" = '1' AND "artiClass" = $1 AND "T1"."deadline" IS NULL
                     ORDER BY "artiNum" DESC
                     LIMIT 10 
                     OFFSET $2 ) AS "T2"
