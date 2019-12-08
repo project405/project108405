@@ -38,21 +38,23 @@
                     <a href="#/" class="badge badge-danger">限時活動</a>
                 </div>
                 <% for(var i = 0 ; i < items[0].length ; i++) { %>
-                    <% if(items[0][i].due == "N") { %>
-                        <div class="col-lg-12 item" onclick="">
-                            <div class="row active d-flex justify-content-center">
-                                <div class="wrapperCard card-img-top col-lg-3"
-                                    style="background-image: url('<%= items[0][i].imgName %>'); ">
-                                </div>
-                                <div class="content col-lg-9">
-                                    <h4 style="font-weight:bold;"><%= items[0][i].artiHead %></h4>
-                                    <p class="datetime"> ∙ 活動截止日 <%= items[0][i].deadline %></p>
-                                    <%= items[0][i].artiCont %>
-                                </div>
-                            </div>
-                            <hr>
+                <% if(items[0][i].due == "N") { %>
+                <div class="col-lg-12 item" onclick="">
+                    <div class="row active d-flex justify-content-center">
+                        <div class="wrapperCard card-img-top col-lg-3"
+                            style="background-image: url('<%= items[0][i].imgName %>'); ">
                         </div>
-                    <% } %>
+                        <div class="content col-lg-9">
+                            <h4 style="font-weight:bold;"><%= items[0][i].artiHead %></h4>
+                            <p class="datetime"> ∙ 活動截止日 <%= items[0][i].deadline %></p>
+                            <div class="limitLine">
+                                <%= items[0][i].artiCont %>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <% } %>
                 <% } %>
             </div>
 
@@ -61,21 +63,23 @@
                     <a href="#/" class="badge badge-info">過去活動</a>
                 </div>
                 <% for(var i = 0 ; i<items[0].length ; i++) { %>
-                    <% if(items[0][i].due == "Y") { %>
-                        <div class="col-lg-12 item" onclick="">
-                            <div class="row active d-flex justify-content-center">
-                                <div class="wrapperCard card-img-top col-lg-3"
-                                    style="background-image: url('<%= items[0][i].imgName %>'); ">
-                                </div>
-                                <div class="content col-lg-9">
-                                    <h4 style="font-weight:bold;"><%= items[0][i].artiHead %></h4>
-                                    <p class="datetime"> ∙ 活動截止日 <%= items[0][i].deadline %></p>
-                                    <%= items[0][i].artiCont %>
-                                </div>
-                            </div>
-                            <hr>
+                <% if(items[0][i].due == "Y") { %>
+                <div class="col-lg-12 item" onclick="">
+                    <div class="row active d-flex justify-content-center">
+                        <div class="wrapperCard card-img-top col-lg-3"
+                            style="background-image: url('<%= items[0][i].imgName %>'); ">
                         </div>
-                    <% } %>
+                        <div class="content col-lg-9">
+                            <h4 style="font-weight:bold;"><%= items[0][i].artiHead %></h4>
+                            <p class="datetime"> ∙ 活動截止日 <%= items[0][i].deadline %></p>
+                            <div class="limitLine">
+                                <%= items[0][i].artiCont %>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <% } %>
                 <% } %>
             </div>
         </div>

@@ -40,6 +40,14 @@
                 <option value="exhibition">展覽類</option>
                 <option value="book">書籍類</option>
             </select>
+            <label class="btn btn-secondary col-lg-2" style="cursor: pointer">
+                <input id="bannerInput" style="width: 3em; height: 3em;" type="file"
+                    accept=".jpg,.png,.gif,.tif,.bmp" />
+                <i class="fas fa-images" style="padding-right:5px"></i>Banner
+            </label>
+            <div id="bannerImg" style="width: 100%; margin-bottom: 1em;">
+                <img style="width: 100%;" src="" alt="">
+            </div>
             <input type="text" class="titleInput input-with-icon title" name="artiHead" id="artiHead"
                 placeholder="請輸入您的標題">
 
@@ -47,7 +55,8 @@
             <div class="tag content col-lg-12">
                 <input type="text" data-role="tagsinput" id="tagInput" class="form-control" placeholder=" + tag" />
             </div>
-            <a>截止日：</a><input id="deadline" type="date" placeholder="截止日" style="margin: 1em; border-radius: 4px; border: none;">
+            <a>截止日：</a><input id="deadline" type="date" placeholder="截止日"
+                style="margin: 1em; border-radius: 4px; border: none;">
             <br>
             <!-- <div class="text-right"> -->
             <label class="btn btn-dark col-lg-2" style="cursor: pointer">
@@ -105,9 +114,44 @@
     <script src="/javascripts/tag.js"></script>
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/navbar.js"></script>
-    <script src="/javascripts/imageCompression.js"></script>
     <script>
-        $('#postInput').click(function () { 
+        function getOriginalSize(imgData) {
+            return new Promise(function (resolve, reject) {
+                var template = new Image();
+                template.src = imgData
+                template.onload = function () {
+                    while (this.width >= 750 || this.height >= 600) {
+                        if (this.width >= 750 || this.height >= 600) {
+                            this.width = this.width * 0.85
+                            this.height = this.height * 0.85
+                        }
+                    }
+                    var size = {
+                        originWidth: this.width,
+                        originHeight: this.height
+                    }
+                    resolve(size)
+                }
+            })
+        }
+        function drawToCanvas(imgData, originWidth, originHeight) {
+            return new Promise(function (resolve, reject) {
+                var canvas = document.createElement("canvas");
+                canvas.width = originWidth;
+                canvas.height = originHeight;
+                var ctx = canvas.getContext('2d');
+                var img = new Image;
+                img.src = imgData;
+                img.onload = function () { //必須onload之後再畫
+                    ctx.drawImage(img, 0, 0, originWidth, originHeight);
+                    strDataURI = canvas.toDataURL('image/jpeg', 1);//獲取canvas base64資料
+                    resolve(strDataURI)
+                }
+            })
+        }
+    </script>
+    <script>
+        $('#postInput').click(function () {
             var el = document.querySelector('#postInput');
             var range = document.createRange();
             var sel = window.getSelection();
@@ -120,6 +164,32 @@
             }
         })
         var formData = new FormData(); //用formData來存取要傳送的所有資料
+
+        $('#bannerInput').change(function (event) {
+            var file = $("#bannerInput")[0];  //取得檔案
+            //如果有檔案就要加入formData
+            if (file.files.length) {
+                Object.keys(file.files).map((img, index) => {
+                    // 解析檔案
+                    var item = file.files[img]
+                    var reader = new FileReader();
+                    reader.onload = (function (item) {
+                        return async function (event) {
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function (size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function (strDataURI) {
+                                    $('#bannerImg').children('img').attr('src', strDataURI);
+                                }, (e) => {
+                                    console.log(e)
+                                })
+                            })
+                        };
+                    })(file);
+                    reader.readAsDataURL(item);
+                })
+            }
+        });
         // 選取到檔案後開始動作
         $('#file-selector').change(function (event) {
             var file = $("#file-selector")[0];  //取得檔案
@@ -158,6 +228,12 @@
             }
         });
         async function submitPost() {
+            var bannerImgBase64 = $('#bannerImg').children('img').attr('src')
+            if (bannerImgBase64 == '') {
+                alert('請加入專欄Banner圖片！')
+                return
+            }
+            formData.append('base64Index', bannerImgBase64);
             var templateCont = document.getElementById('postInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
             var templateHead = document.getElementById('artiHead').value.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
             var artiHead = document.getElementById("artiHead").value;
@@ -172,7 +248,7 @@
             } else if (templateHead.length > 40) {
                 alert('標題不得超過40字元！')
                 return;
-            }else if (deadline == '') {
+            } else if (deadline == '') {
                 alert('請輸入截止日')
                 return;
             }
