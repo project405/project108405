@@ -925,6 +925,7 @@ var getOneActivity = async function (artiNum, memID) {
     result[3] = messImgs;
     result[4] = checkAuthority;
     result[5] = tag;
+    result[6] = memID
     return result;
 }
 
