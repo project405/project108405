@@ -1,16 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
 html,
 body {
+    height: 100%;
     max-width: 100%;
     font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    margin: 0 auto;
+    padding: 0;
     border: none;
-    padding-top: 3em;   
+    text-align: justify;
+    text-justify: inter-ideograph;
+    background-color: #fafafa;
+    position: relative;
 }
-@media (max-width: 991px) {
+/* @media (max-width: 991px) {
     html,
     body {
         padding-top: 2em;
     }
+} */
+.banner {
+    margin-bottom: 4em;
+    /* opacity: 0.6; */
+    width: auto;
+    height: 70% !important;
+    /* padding-top: 40em; */
+    padding-bottom: calc(10em - 72px);
+    background: url("../imgs/background/column.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .item {
