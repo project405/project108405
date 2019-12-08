@@ -22,10 +22,7 @@ router.get('/:artiNum', function (req, res, next) {
             }
         }
 
-        //TODO
-        console.log(data[3].length);
         if(data[3].length > 0 ){
-            console.log("fq");
             for(var i = 0 ; i < data[1].length ; i++){
                 if (data[1][i].artiMessCont.match("\\:imgLocation") != null) {
                     for (var j = 0; j < data[3].length; j++) {
