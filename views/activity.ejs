@@ -55,7 +55,6 @@
                 </div>
 
                 <div class="content">
-                    123213211232132112321321123213211232132112321321123213211232132112321321123213211232132112321321
                     <p><%- items[0][0].artiCont %>
                     </p>
                 </div>
@@ -71,11 +70,26 @@
             <% if(items[1] != undefined) { %>
             <% for(var i = 0 ; i<items[1].length ; i++) { %>
             <div class="response">
-                <div class="info">
+                <div class="info d-flex justify-content-between">
                     <div style="white-space:nowrap !important">
                         <a class="name"><%= items[1][i].memName %></a>
                         <a class="dateTime"> · <%= items[1][i].artiMessDateTime %></a>
                     </div>
+                    <% if(items[1][i].memID == items[6]) { %>
+                    <div class="dropdown ml-auto float-right">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <div class="dropdown-menu dotMenu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/editReply/<%= items[1][i].artiMessNum %>"
+                                class="editReply">編輯</a>
+                            <a class="dropdown-item" href="#/"
+                                onclick="deleteReply('<%- items[1][i].artiMessNum %>', '<%- items[1][i].memID %>')">刪除</a>
+                        </div>
+                    </div>
+                    <% } %>
+
                 </div>
                 <%- items[1][i].artiMessCont %>
             </div>
@@ -128,6 +142,7 @@
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/imageCompression.js"></script>
     <script>
+        console.log('<%= items[1].memID %>')
         function delArticle(artiNum) {
             if (confirm('您真的要刪除文章嗎？')) {
                 $('.spinner-border').css('display', 'block')
@@ -146,7 +161,7 @@
                 });
             }
         }
-        var member = '<%=items[4]%>'
+        var member = '<%=items[6]%>'
         $('.postReport,.replyReport').click(() => {
             if (!member) {
                 alert('請進行登入再檢舉！')
