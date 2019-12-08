@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const article = require('../utility/article');
+const moment = require('moment');
 
 //接收GET請求
 router.get('/:artiNum', function (req, res, next) {
@@ -15,6 +16,7 @@ router.get('/:artiNum', function (req, res, next) {
     }
 
     article.getOneActivity(artiNum, memID).then(data => {
+        data[0][0].deadline = moment(data[0][0].deadline).format("YYYY-MM-DD");
         // 將字串替換成圖片
         if (data[0][0].artiCont.match("\\:imgLocation") != null) {
             for (var j = 1; j < data[2].length; j++) {
