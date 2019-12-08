@@ -17,14 +17,14 @@ router.get('/:artiNum', function (req, res, next) {
     article.getOneActivity(artiNum, memID).then(data => {
         // 將字串替換成圖片
         if (data[0][0].artiCont.match("\\:imgLocation") != null) {
-            for (var j = 0; j < data[2].length; j++) {
+            for (var j = 1; j < data[2].length; j++) {
                 data[0][0].artiCont = data[0][0].artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='" + data[2][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
             }
         }
 
         //TODO
-        console.log(data[3]);
-        if(data[3] != undefined){
+        console.log(data[3].length);
+        if(data[3].length > 0 ){
             console.log("fq");
             for(var i = 0 ; i < data[1].length ; i++){
                 if (data[1][i].artiMessCont.match("\\:imgLocation") != null) {

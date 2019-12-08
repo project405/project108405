@@ -17,7 +17,7 @@ router.post('/', function (req, res, next) {
         memID = req.session.passport.user.id;
     }
 
-    if (req.body.deleteSpecialColumn && req.body.member == 'SYSOP') {
+    if (req.body.deleteSpecialColumn &&  req.session.memAuthority == 'SYSOP') {
         member.deleteSpecialColumn(req.body.specColNum).then((data) => {
             if (data == 1) {
                 res.send('刪除成功')
@@ -27,7 +27,7 @@ router.post('/', function (req, res, next) {
         })
         return;
     }
-    if (req.body.deleteRecommendReply) {
+    if (req.body.deleteRecommendReply ) {
         if (memID == req.body.memID) {
             member.deleteRecommendReply(req.body.recomMessNum).then((data) => {
                 if (data == 1) {
@@ -40,7 +40,7 @@ router.post('/', function (req, res, next) {
         return;
     }
     if (req.body.deleteReply) {
-        if (memID == req.body.memID) {
+        if (memID == req.body.memID || req.session.memAuthority == 'SYSOP') {
             member.deleteReply(req.body.artiMessNum).then((data) => {
                 if (data == 1) {
                     res.send('刪除成功')
@@ -52,7 +52,7 @@ router.post('/', function (req, res, next) {
         return;
     }
     if (req.body.delArticle) {
-        if (memID == req.body.memID) {
+        if (memID == req.body.memID || req.session.memAuthority == 'SYSOP') {
             member.deleteArticle(req.body.artiNum).then((data) => {
                 if (data == 1) {
                     res.send('刪除成功')

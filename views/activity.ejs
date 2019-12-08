@@ -29,7 +29,7 @@
 <body>
     <!-- navbar -->
     <div id="header"></div>
-    <div class="banner" style="background-image: url('/imgs/background/activity.png'); ">
+    <div class="banner" style="background-image: url('<%= items[2][0].imgName %>'); ">
     </div>
     <!-- 文章列表區塊 -->
     <div class="container-fluid d-flex justify-content-center">
@@ -53,6 +53,7 @@
             <hr>
             <hr>
             <h5 style="font-weight: bold;">回應</h5>
+            <% if(items[1] != undefined) { %>
             <% for(var i = 0 ; i<items[1].length ; i++) { %>
             <div class="response">
                 <div class="info">
@@ -63,6 +64,7 @@
                 </div>
                 <%- items[1][i].artiMessCont %>
             </div>
+            <% } %>
             <% } %>
 
             <div class="replying">
