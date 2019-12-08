@@ -164,7 +164,15 @@
                     var reader = new FileReader();
                     reader.onload = (function (item) {
                         return async function (event) {
-                            $('#bannerImg').children('img').attr('src', event.target.result);
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function (size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function (strDataURI) {
+                                    $('#bannerImg').children('img').attr('src', strDataURI);
+                                }, (e) => {
+                                    console.log(e)
+                                })
+                            })
                         };
                     })(file);
                     reader.readAsDataURL(item);
@@ -183,17 +191,25 @@
                     var reader = new FileReader();
                     reader.onload = (function (item) {
                         return async function (event) {
-                            var title = escape(file.name);
-                            var img = '<img class="upload-img" src="' + event.target.result + '" title="' + title + '"/> ';
-                            $('#postInput').append(img);
-                            $('#postInput').append('<span id="lastbr"></span><br /><br />');
-                            var el = document.querySelector('#postInput');
-                            var range = document.createRange();
-                            var sel = window.getSelection();
-                            range.setStart(el.lastChild, 0);
-                            range.collapse(true);
-                            sel.removeAllRanges();
-                            sel.addRange(range);
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function (size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function (strDataURI) {
+                                    var title = escape(file.name);
+                                    var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
+                                    $('#replyInput').append(img);
+                                    $('#replyInput').append('<span id="lastbr"></span><br /><br />');
+                                    var el = document.querySelector('#replyInput');
+                                    var range = document.createRange();
+                                    var sel = window.getSelection();
+                                    range.setStart(el.lastChild, 0);
+                                    range.collapse(true);
+                                    sel.removeAllRanges();
+                                    sel.addRange(range);
+                                }, (e) => {
+                                    console.log(e)
+                                })
+                            })
                         };
                     })(file);
                     reader.readAsDataURL(item);
