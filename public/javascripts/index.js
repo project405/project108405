@@ -1,15 +1,5 @@
 // navbar
 $(document).ready(function () {
-    window.onload = function () {
-        document.body.addEventListener('wheel', function (data) {
-            const m1 = document.querySelector('html').scrollTop * 0.3;
-            const m3 = document.querySelector('html').scrollTop * 1.5;
-            const s3 = document.querySelector('html').scrollTop * 0.01;
-            console.log('===> a', document.querySelector('html').scrollTop, m1);
-            document.querySelector('.m1').style.transform = `translateY(${m1}px)`
-            // document.querySelector('.m3').style.transform = `translateY(${-m3}px) scale(${1 - s3})`
-        })
-    };
     $(window).on("scroll", function () {
 
         var wn = $(window).scrollTop();
