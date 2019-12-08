@@ -144,7 +144,7 @@
                 img.src = imgData;
                 img.onload = function () { //必須onload之後再畫
                     ctx.drawImage(img, 0, 0, originWidth, originHeight);
-                    strDataURI = canvas.toDataURL('image/jpeg', 1);//獲取canvas base64資料
+                    strDataURI = canvas.toDataURL('image/png', 1);//獲取canvas base64資料
                     resolve(strDataURI)
                 }
             })
@@ -175,15 +175,7 @@
                     var reader = new FileReader();
                     reader.onload = (function (item) {
                         return async function (event) {
-                            var getSize = getOriginalSize(event.target.result)
-                            getSize.then(function (size) {
-                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
-                                canvasUrl.then(function (strDataURI) {
-                                    $('#bannerImg').children('img').attr('src', strDataURI);
-                                }, (e) => {
-                                    console.log(e)
-                                })
-                            })
+                            $('#bannerImg').children('img').attr('src', event.target.result);
                         };
                     })(file);
                     reader.readAsDataURL(item);
@@ -201,25 +193,17 @@
                     var reader = new FileReader();
                     reader.onload = (function (item) {
                         return async function (event) {
-                            var getSize = getOriginalSize(event.target.result)
-                            getSize.then(function (size) {
-                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
-                                canvasUrl.then(function (strDataURI) {
-                                    var title = escape(file.name);
-                                    var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
-                                    $('#postInput').append(img);
-                                    $('#postInput').append('<span id="lastbr"></span><br /><br />');
-                                    var el = document.querySelector('#postInput');
-                                    var range = document.createRange();
-                                    var sel = window.getSelection();
-                                    range.setStart(el.lastChild, 0);
-                                    range.collapse(true);
-                                    sel.removeAllRanges();
-                                    sel.addRange(range);
-                                }, (e) => {
-                                    console.log(e)
-                                })
-                            })
+                            var title = escape(file.name);
+                            var img = '<img class="upload-img" src="' + event.target.result + '" title="' + title + '"/> ';
+                            $('#postInput').append(img);
+                            $('#postInput').append('<span id="lastbr"></span><br /><br />');
+                            var el = document.querySelector('#postInput');
+                            var range = document.createRange();
+                            var sel = window.getSelection();
+                            range.setStart(el.lastChild, 0);
+                            range.collapse(true);
+                            sel.removeAllRanges();
+                            sel.addRange(range);
                         };
                     })(file);
                     reader.readAsDataURL(item);
