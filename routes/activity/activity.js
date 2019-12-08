@@ -23,11 +23,13 @@ router.get('/:artiNum', function (req, res, next) {
         }
 
         //TODO
+        console.log(data[3]);
         if(data[3] != undefined){
+            console.log("fq");
             for(var i = 0 ; i < data[1].length ; i++){
-                if (data[1][i].artiCont.match("\\:imgLocation") != null) {
+                if (data[1][i].artiMessCont.match("\\:imgLocation") != null) {
                     for (var j = 0; j < data[3].length; j++) {
-                        data[1][i].artiCont = data[1][i].artiCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='" + data[3][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+                        data[1][i].artiMessCont = data[1][i].artiMessCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='" + data[3][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
                     }
                 }
             }

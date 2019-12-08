@@ -20,7 +20,7 @@ router.get('/:specColNum', function(req, res, next) {
 		// 將字串替換成圖片
 		if (data[0][0].specColCont.match("\\:imgLocation") != null) {
 			for (var j = 1; j < data[2].length; j++) {
-				data[0][0].specColCont = data[0][0].specColCont.replace("\\:imgLocation", "<div class='wrapperCard card-img-top'><img src='" + data[2][j].imgName + "' style='max-height: 450px; max-width: 70%; cursor: pointer; border-radius: 12px; padding: 0.1em; ' ></div>");
+				data[0][0].specColCont = data[0][0].specColCont.replace("\\:imgLocation", "<div><img src='" + data[2][j].imgName + "' style='max-height: 450px; max-width: 90%; cursor: pointer; padding: 0.1em; ' ></div>");
 			}
 		}
 		

@@ -808,17 +808,23 @@ var getOneActivity = async function (artiNum, memID) {
     var tag ; 
 
     // -----------  取得單一文章 --------------
-    await sql(`SELECT "artiNum" ,
-                        "memID",
-                        "artiDateTime",
-                        "artiHead",
-                        "artiCont",
-                        "artiClass",
-                        "likeCount",
-                        "messCount",
-                        "deadline"
-                FROM "articleListDataView" 
-                WHERE "artiNum" = $1`, [artiNum])
+    await sql(`SELECT  "arti"."artiNum" ,
+                        "arti"."memID",
+                        "arti"."artiDateTime",
+                        "arti"."artiHead",
+                        "arti"."artiCont",
+                        "arti"."artiClass",
+                        "arti"."likeCount",
+                        "arti"."messCount",
+                        "arti"."deadline",
+                        "img"."imgName",
+                        CASE WHEN to_char("arti"."deadline",'YYYY-MM-DD') < to_char(NOW(),'YYYY-MM-DD') THEN 'Y' ELSE 'N'
+                        END AS "due"
+                FROM "articleListDataView" AS "arti"
+                INNER JOIN "image" AS "img"
+                    ON "arti"."artiNum" = "img"."artiNum"
+                WHERE "arti"."artiNum" = $1
+                ORDER BY "img"."imgDateTime"`, [artiNum])
         .then((data) => {
             if (data.rows.length > 0) {
                 oneActivity = data.rows;
@@ -880,12 +886,12 @@ var getOneActivity = async function (artiNum, memID) {
                ORDER BY "imgDateTime"`,[artiNum])
         .then((data) => {
             if (!data.rows) {
-                activeImgs = undefined;
+                messImgs = undefined;
             } else {
-                activeImgs = data.rows;
+                messImgs = data.rows;
             }
         }, (error) => {
-            activeImgs = undefined;
+            messImgs = undefined;
         }); 
 
     // ----------- 取得tag -----------
