@@ -16,7 +16,11 @@ router.get('/:artiNum', function (req, res, next) {
     }
 
     article.getOneActivity(artiNum, memID).then(data => {
+        if(data[0][0].deadline == null || data[0][0].deadline == undefined ){
+            res.end('notFound');  //導向找不到頁面          
+        }
         data[0][0].deadline = moment(data[0][0].deadline).format("YYYY-MM-DD");
+
         // 將字串替換成圖片
         if (data[0][0].artiCont.match("\\:imgLocation") != null) {
             for (var j = 1; j < data[2].length; j++) {

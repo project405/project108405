@@ -17,6 +17,9 @@ router.get('/:artiNum', async function (req, res, next) {
         this.memID = memID
     }
     article.getOneArticle(artiNum, memID).then(data => {
+        if(data[0][0].deadline != null && data[0][0].deadline != undefined ){
+            res.end('notFound');  //導向找不到頁面          
+        }
         // 將字串替換成圖片
         for (var i = 0; i < data[0].length; i++) {
             if (data[0][i].artiCont.match("\\:imgLocation") != null) {
