@@ -61,6 +61,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
                         }
                     })
                 } else if (req.body.deadline) {
+                    console.log('req.body.base64Index.length', req.body.base64Index)
                     member.activityPost(memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.score2, req.body.deadline).then(data => {
                         if (data == 0) {
                             res.send("發佈活動成功");

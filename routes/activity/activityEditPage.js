@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const article = require('../utility/article');
+const moment = require('moment');
 
 //接收GET請求
 router.get('/:artiNum', function (req, res, next) {
@@ -13,9 +14,15 @@ router.get('/:artiNum', function (req, res, next) {
     } else if (req.session.memID == undefined && req.session.passport != undefined) {
         memID = req.session.passport.user.id;
     }
-
+    
     article.getOneActivity(artiNum, memID).then(data => {
-        console.log(data[0][0])
+        if (!data || data[4] != 'SYSOP') {
+            res.write('<head><meta charset="utf-8"/></head>');
+            res.end('<script> alert("您沒有編輯該活動的權限"); history.back();</script>');
+            return;   
+        }
+        data[0][0].deadline = moment(Date().now).format("YYYY-MM-DD HH:mm:ss");
+        console.log(data[0][0].deadline)
         // 將字串替換成圖片
         if (data[0][0].artiCont.match("\\:imgLocation") != null) {
             for (var j = 1; j < data[2].length; j++) {

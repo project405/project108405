@@ -124,6 +124,7 @@
     <script src="/javascripts/navbar.js"></script>
     <script src="/javascripts/imageCompression.js"></script>
     <script>
+        $('#deadline').val('<%= items[0][0].deadline %>'.split(' ')[0])
         $('#postInput').click(function () {
 
             var el = document.querySelector('#postInput');
@@ -210,8 +211,6 @@
             }
 
             formData.append('base64Index', bannerImgBase64);
-            console.log(bannerImgBase64)
-            return
 
             var templateCont = document.getElementById('postInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
             var templateHead = document.getElementById('artiHead').value.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
@@ -234,6 +233,9 @@
 
             if ($("#postInput").find("img")) {
                 Array.from($("#postInput").find("img")).map((img) => {
+                    if (img.nextElementSibling.tagName == 'BR') {
+                        img.nextElementSibling.remove()
+                    }
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
