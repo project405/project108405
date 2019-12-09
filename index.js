@@ -150,7 +150,8 @@ app.post('/webhook',  function (req, res) {
                 request.post({
                     headers: {
                         'content-type' : 'application/json',
-                        'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
+                        //'Authorization': 'Bearer xQw+g1O20RWNkcAoq8UXnPeucNdgBaXKgSv26TQxIUouB1Ld3Y8KpS6vtjWtEldqWl5jRU1Xdp5m0nUUbaKQ7FE+YNVtTQbdGH3D+12qfXFCgk+uXwbgHSbGdmPThSJFvPMqNctqd5jUePtJLTdBggdB04t89/1O/w1cDnyilFU='
+                        'Authorization': 'Bearer R8lcHnPCuZUl1bN572jcpz1z17xTC0nmXBuGBzDbBpsvPXd8uLhbJxsYw0xKzlqJuEOUmPkMg4R50tsO/HS3xer18+xRNAK27JyiS1Maj+v2MefUSMQpz1hxfyFMBCKdk5bAmsRhBbM3nEVtsJjCxgdB04t89/1O/w1cDnyilFU='
                     },
                     url: 'https://api.line.me/v2/bot/message/push',
                     body: JSON.stringify({
