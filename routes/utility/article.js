@@ -810,22 +810,22 @@ var getOneActivity = async function (artiNum, memID) {
 
     // -----------  取得單一文章 --------------
     await sql(`SELECT  "arti"."artiNum" ,
-                        "arti"."memID",
-                        "arti"."artiDateTime",
-                        "arti"."artiHead",
-                        "arti"."artiCont",
-                        "arti"."artiClass",
-                        "arti"."likeCount",
-                        "arti"."messCount",
-                        "arti"."deadline",
-                        "img"."imgName",
-                        CASE WHEN to_char("arti"."deadline",'YYYY-MM-DD') < to_char(NOW(),'YYYY-MM-DD') THEN 'Y' ELSE 'N'
-                        END AS "due"
+                    "arti"."memID",
+                    "arti"."artiDateTime",
+                    "arti"."artiHead",
+                    "arti"."artiCont",
+                    "arti"."artiClass",
+                    "arti"."likeCount",
+                    "arti"."messCount",
+                    "arti"."deadline",
+                    "img"."imgName",
+                    CASE WHEN to_char("arti"."deadline",'YYYY-MM-DD') < to_char(NOW(),'YYYY-MM-DD') THEN 'Y' ELSE 'N'
+                    END AS "due"
                 FROM "articleListDataView" AS "arti"
                 LEFT JOIN "image" AS "img"
-                    ON "arti"."artiNum" = "img"."artiNum"
+                ON "arti"."artiNum" = "img"."artiNum"
                 WHERE "arti"."artiNum" = $1
-                ORDER BY "img"."imgDateTime"`, [artiNum])
+                ORDER BY "img"."imgDateTime","img"."imgNum"`, [artiNum])
         .then((data) => {
             if (data.rows.length > 0) {
                 oneActivity = data.rows;
