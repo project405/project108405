@@ -52,7 +52,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
             if (artiHead == 'undefined' || artiCont == '') {
                 res.send("標題及內容不可為空，請重新輸入");
             } else {
-                if (artiNum) {
+                if (artiNum && !req.body.deadline) {
                     member.editArticle(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.score2).then(data => {
                         if (data == 1) {
                             res.send("編輯成功");
@@ -61,6 +61,15 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
                         }
                     })
                 } else if (req.body.deadline) {
+                    if (artiNum) {
+                        member.editActivity(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.score2, req.body.deadline).then(data => {
+                            if (data == 0) {
+                                res.send("編輯活動成功");
+                            } else {
+                                res.send("編輯活動失敗");
+                            }
+                        })  
+                    }
                     console.log('req.body.base64Index.length', req.body.base64Index)
                     member.activityPost(memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.score2, req.body.deadline).then(data => {
                         if (data == 0) {

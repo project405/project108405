@@ -31,6 +31,16 @@ html, body {
     background-size: cover;
 }
 
+@media (max-width: 1024px) {
+    .banner {
+        background: url("../imgs/background/phone/activityP_Banner.png");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;
+    }
+}
+
 .contain {
     background-color: white;
     border: rgb(230, 230, 230) 1px solid;
