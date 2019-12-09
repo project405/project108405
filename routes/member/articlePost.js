@@ -43,7 +43,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
     if (req.body.tag != '') {
         tagData = req.body.tag.split(",");
     }
-
+    console.log('req.body.deadline', req.body.deadline)
     //如果沒登入
     if (memID == undefined) {
         res.send("請進行登入");

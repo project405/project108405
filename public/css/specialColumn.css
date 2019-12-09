@@ -30,13 +30,17 @@ body {
 }
 
 @media (max-width: 1024px) {
-    .banner {
-        width: 100%;
-        height: auto !important;
+    .img {
+        width: 150%;
+        height: 40% !important;
         background-position: center center;
         background-repeat: no-repeat;
         background-attachment: scroll;
         background-size: cover;
+    }
+    .banner {
+        overflow: hidden;
+        height: 40% !important;
     }
 }
 
