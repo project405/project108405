@@ -178,9 +178,9 @@
             //img process
             if ($("#postInput").find("img")) {
                 Array.from($("#postInput").find("img")).map(async (img) => {
-                    if (img.nextElementSibling.tagName == 'BR') {
-                        img.nextElementSibling.remove()
-                    }
+                    // if (img.nextElementSibling.tagName == 'BR') {
+                    //     img.nextElementSibling.remove()
+                    // }
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })

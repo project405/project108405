@@ -180,6 +180,80 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
     }
     return result;
 }
+//================================
+//-------- editActivity() ---------
+//================================
+var editActivity = async function (memID, artiHead, artiCont, artiClass, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime, score2, deadline) {
+    var tagNum = [];
+    var result = 0;
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
+    //修改文章
+    await sql('UPDATE "article" SET "artiHead" = $1, "artiCont" =$2, "artiClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6, "swearWords"= $7, "score2"= $9, "deadline"= $10' +
+    ' WHERE "artiNum" = $8'
+    , [artiHead, artiCont, artiClass, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, score2, deadline])
+    .then((data) => {
+        result = 1;
+    }, (error) => {
+        console.error(error)
+        result = 0;
+    });
+
+    // 刪除舊tag連結
+    await sql ('DELETE FROM "tagLinkArticle" WHERE "artiNum" = $1',[artiNum])
+    .then((data)=> {
+    },(e) => {
+        console.error(e)
+    }) 
+
+    //新增tag 
+    if(tag.length != 0){
+        for (var i = 0; i < tag.length; i++) {
+            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+                .then((data) => {
+                    if (!data.rows) {
+                        tagNum = undefined;
+                    } else {
+                        tagNum = data.rows[0].tagNum;
+                    }
+                }, (error) => {
+                    tagNum = undefined;
+                    console.error(error)
+                });
+
+            // --------- 新增tagLink ---------
+            await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
+                .then((data) => {
+                    result = 1
+                }, (error) => {
+                    console.log(error)
+                    result = 0;
+                });
+        }
+    }
+
+    await sql('DELETE FROM "image" WHERE "artiNum" = $1 and "artiMessNum" IS NULL', [artiNum])
+    .then((data) => {
+    }, (error) => {
+        console.log(error)
+    })
+
+    // --------- 新增img ---------
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
+                .then((data) => {
+                    result = 1;
+                }, (error) => {
+                    result = 0;
+                });
+        }
+    }
+    return result;
+}
 
 
 //================================
@@ -1232,5 +1306,5 @@ module.exports = {
     report, checkAuthority, editArticle, deleteArticle, deleteRecommend, editReply, deleteReply, 
     memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
     editRecommendReply, editRecommend, getBestReply, getRepeatMail, activityPost, specialColumnPost,
-    editSpecialColumn, deleteSpecialColumn
+    editSpecialColumn, deleteSpecialColumn, editActivity
 };

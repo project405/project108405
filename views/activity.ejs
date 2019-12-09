@@ -238,9 +238,6 @@
 
             if ($("#replyInput").find("img")) {
                 Array.from($("#replyInput").find("img")).map(async (img) => {
-                    if (img.nextElementSibling.tagName == 'BR') {
-                        img.nextElementSibling.remove()
-                    }
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
