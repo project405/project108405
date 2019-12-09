@@ -776,13 +776,14 @@ var getActivityList = async function (memID) {
                             ,"img"."imgName"
                             ,ROW_NUMBER() OVER(PARTITION BY "adv"."artiNum" ORDER BY "img"."imgNum") as "Rank"
                             ,CASE WHEN to_char("adv"."deadline",'YYYY-MM-DD') < to_char(NOW(),'YYYY-MM-DD') THEN 'Y' ELSE 'N'
-                             END AS "due"
+                            END AS "due"
                     FROM "articleListDataView" AS "adv" 
                     LEFT JOIN "image" AS "img"
-                        ON "adv"."artiNum" = "img"."artiNum" 
+                            ON "adv"."artiNum" = "img"."artiNum" 
                     WHERE "deadline" IS NOT NULL
                     ORDER BY "img"."imgDateTime") AS "T1"
-                WHERE "T1"."Rank" = '1'`)
+                WHERE "T1"."Rank" = '1'
+                ORDER BY "T1"."artiNum" DESC`)
         .then((data) => {
             activityList = data.rows;
         }, (error) => {
