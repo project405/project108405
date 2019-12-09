@@ -32,14 +32,9 @@
 
     </div>
     <div class="container-fluid d-flex justify-content-center">
-
-        <div class="col-lg-8">
-            <div class="contain">
-                <div>
-                    <h3 class="title"><%= items[0][0].specColHead %></h3>
-                    <p> <%= items[0][0].specColDate %> </p>
-                </div>
-                <% if(items[1] && items[1] == 'SYSOP') {%>
+        <div class="row d-flex justify-content-center">
+            <% if(items[1] && items[1] == 'SYSOP') {%>
+            <div class="col-12">
                 <div class="dropdown float-right">
                     <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -50,14 +45,23 @@
                         <a class="dropdown-item" onclick="delSpecialColumn('<%= items[0][0].specColNum %>')">刪除</a>
                     </div>
                 </div>
-                <% } %>
-                <p class="content">
-                    <%- items[0][0].specColCont %>
-                </p>
+            </div>
+            <% } %>
+            <div class="col-lg-8">
+                <div class="contain">
+                    <div>
+                        <h3 class="title"><%= items[0][0].specColHead %></h3>
+                        <p> <%= items[0][0].specColDate %> </p>
+                    </div>
+                    <div class="text">
+                        <p class="content">
+                            <%- items[0][0].specColCont %>
+                        </p>
+                    </div>
+
+                </div>
             </div>
         </div>
-
-
     </div>
 
     <a href="#" id="gotop">

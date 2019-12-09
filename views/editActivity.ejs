@@ -29,7 +29,8 @@
     <div id="header"></div>
 
     <center>
-        <h3>發佈活動</h3>
+        <h3>編輯活動
+        </h3>
         <hr class="highlight">
     </center>
     <div class="justify-content-center">
@@ -46,29 +47,39 @@
                 <i class="fas fa-images" style="padding-right:5px"></i>Banner
             </label>
             <div id="bannerImg" style="width: 100%; margin-bottom: 1em;">
-                <img style="width: 100%;" src="" alt="">
+                <img style="width: 100%;" src="<%= items[2][0].imgName %>" alt="">
             </div>
             <input type="text" class="titleInput input-with-icon title" name="artiHead" id="artiHead"
-                placeholder="請輸入您的標題">
+                placeholder="請輸入您的標題" value="<%= items[0][0].artiHead%>">
 
-            <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容"></div>
+            <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入您的發文內容">
+                <%- items[0][0].artiCont%>
+            </div>
+
             <div class="tag content col-lg-12">
+                <% for (var i = 0 ; i< items[5].length ; i++) { %>
+                <span id="tag" class="tag label label-info"><%= items[5][i].tagName %><span class="deleteTag"
+                        data-role="remove"></span></span>
+                <% } %>
                 <input type="text" data-role="tagsinput" id="tagInput" class="form-control" placeholder=" + tag" />
             </div>
             <a>截止日：</a><input id="deadline" type="date" placeholder="截止日"
                 style="margin: 1em; border-radius: 4px; border: none;">
             <br>
+
             <!-- <div class="text-right"> -->
             <label class="btn btn-dark col-lg-2" style="cursor: pointer">
                 <input id="file-selector" name="userImg" type="file" multiple="multiple"
                     accept=".jpg,.png,.gif,.tif,.bmp" />
                 <i class="fas fa-images" style="padding-right:5px"></i>加圖片
             </label>
-
             <!-- </div> -->
             <button type="submit" class="btn btn-danger col-lg-2 float-right postButton"
-                onclick="submitPost()">提交</button>
+                onclick="submitModifyArticle()">提交</button>
 
+            <!-- <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+            </div> -->
         </div>
     </div>
 
@@ -77,10 +88,6 @@
     <a href="#" id="gotop">
         <i class="fa fa-angle-up"></i>
     </a>
-
-    <!-- <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
-    </div> -->
     <div class='coverContainer'>
         <div class='loader'>
             <div class='loader--dot'></div>
@@ -92,6 +99,8 @@
             <div class='loader--text'></div>
         </div>
     </div>
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -109,53 +118,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
     <script src="/javascripts/post.js"></script>
     <script src="/javascripts/tag.js"></script>
     <script src="/javascripts/active.js"></script>
     <script src="/javascripts/navbar.js"></script>
-    <script>
-        function getOriginalSize(imgData) {
-            return new Promise(function (resolve, reject) {
-                var template = new Image();
-                template.src = imgData
-                template.onload = function () {
-                    while (this.width >= 750 || this.height >= 600) {
-                        if (this.width >= 750 || this.height >= 600) {
-                            this.width = this.width * 0.85
-                            this.height = this.height * 0.85
-                        }
-                    }
-                    var size = {
-                        originWidth: this.width,
-                        originHeight: this.height
-                    }
-                    resolve(size)
-                }
-            })
-        }
-        function drawToCanvas(imgData, originWidth, originHeight) {
-            return new Promise(function (resolve, reject) {
-                var canvas = document.createElement("canvas");
-                canvas.width = originWidth;
-                canvas.height = originHeight;
-                var ctx = canvas.getContext('2d');
-                var img = new Image;
-                img.src = imgData;
-                img.onload = function () { //必須onload之後再畫
-                    ctx.drawImage(img, 0, 0, originWidth, originHeight);
-                    strDataURI = canvas.toDataURL('image/jpeg', 1);//獲取canvas base64資料
-                    resolve(strDataURI)
-                }
-            })
-        }
-    </script>
+    <script src="/javascripts/imageCompression.js"></script>
     <script>
         $('#postInput').click(function () {
+
             var el = document.querySelector('#postInput');
             var range = document.createRange();
             var sel = window.getSelection();
-            console.log(sel)
             if (sel.focusNode.previousElementSibling.className == 'upload-img' || sel.focusNode.nextElementSibling.className == 'upload-img') {
                 range.setStart(el.lastChild, 0);
                 range.collapse(true);
@@ -164,6 +137,7 @@
             }
         })
         var formData = new FormData(); //用formData來存取要傳送的所有資料
+
 
         $('#bannerInput').change(function (event) {
             var file = $("#bannerInput")[0];  //取得檔案
@@ -190,6 +164,7 @@
                 })
             }
         });
+
         // 選取到檔案後開始動作
         $('#file-selector').change(function (event) {
             var file = $("#file-selector")[0];  //取得檔案
@@ -227,19 +202,20 @@
                 $('#file-selector').val('')
             }
         });
-        async function submitPost() {
+        function submitModifyArticle() {
             var bannerImgBase64 = $('#bannerImg').children('img').attr('src')
             if (bannerImgBase64 == '') {
                 alert('請加入專欄Banner圖片！')
                 return
             }
-            console.log('bannerImg', bannerImgBase64)
+
             formData.append('base64Index', bannerImgBase64);
+            console.log(bannerImgBase64)
+            return
+
             var templateCont = document.getElementById('postInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
             var templateHead = document.getElementById('artiHead').value.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
             var artiHead = document.getElementById("artiHead").value;
-            var deadline = document.getElementById('deadline').value
-
             if (templateHead == '') {
                 alert('請輸入標題')
                 return;
@@ -249,28 +225,22 @@
             } else if (templateHead.length > 40) {
                 alert('標題不得超過40字元！')
                 return;
-            } else if (deadline == '') {
-                alert('請輸入截止日')
-                return;
             }
+            artiNum = '<%= items[0][0].artiNum %>'
             $('.postButton').addClass('disabled')
             $('.postButton').attr('disabled', true)
             $('.spinner-border').css('display', 'block')
             $('.coverContainer').css('display', 'block')
-            //img process
+
             if ($("#postInput").find("img")) {
-                Array.from($("#postInput").find("img")).map(async (img) => {
-                    if (img.nextElementSibling.tagName == 'BR') {
-                        console.log('remove')
-                        img.nextElementSibling.remove()
-                    }
-                    console.log(img.getAttribute('src'))
+                Array.from($("#postInput").find("img")).map((img) => {
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
             }
+            artiHead = artiHead.trim()
             var artiCont = [];
-            var artiData = document.querySelectorAll(".postInput"); //只取得文字部分(不含圖片) ;
+            var artiData = document.querySelectorAll("div.postInput"); //只取得文字部分(不含圖片) ;
             // 取得內容
             artiData.forEach(function (element) {
                 artiCont.push(element.innerText);
@@ -278,6 +248,11 @@
             var tagInput = document.querySelectorAll("span.tag"); //取得所有<span class="tag"> 的內容
             var tag = []; //以陣列形式存放
             var artiClass = document.getElementById("inputState").value;
+            if (artiHead.trim() == "") {
+                artiHead = undefined;
+                // artiCont = undefined;
+            }
+            formData.append('artiNum', artiNum);
             formData.append('artiHead', artiHead);
             formData.append('artiCont', artiCont);
             formData.append('artiClass', artiClass);
@@ -286,9 +261,7 @@
                 tag.push(element.innerText);
             }, this);
             formData.append('tag', tag);
-            formData.append('deadline', deadline);
-
-            await $.ajax({
+            $.ajax({
                 url: 'https://analyze405.herokuapp.com/sentimentAnalyze/',
                 type: 'POST',
                 dataType: 'TEXT',
@@ -300,6 +273,7 @@
                     formData.append('negativeWords', analyzeRes.analyze[2]);
                     formData.append('swearWords', analyzeRes.analyze[3]);
                     formData.append('score2', analyzeRes.analyze[4]);
+
                     $.ajax({
                         url: '/article/post',
                         type: 'POST',
@@ -307,18 +281,16 @@
                         data: formData,
                         processData: false,
                         contentType: false,
-                        cache: false,
                         success: function (res) {
                             if (res == "請進行登入") {
                                 alert(res);
                                 location.replace("/login");
                             } else {
-                                alert("活動發佈成功");
-                                location.replace("/activityList");
+                                alert('編輯成功！')
+                                location.replace("/activity/<%= items[0][0].artiNum %>");
                             }
                         },
                         error: function (res) {
-                            console.log(res)
                         }
                     });
                 },
@@ -326,10 +298,16 @@
                     console.error(res)
                 }
             });
-
         }
     </script>
-
+    <script>
+        var tagArray = []
+        var classSelected = '<%= items[0][0].artiClass%>'
+        $('#inputState').val(classSelected)
+        $('.deleteTag').click(function () {
+            $(this).parent('#tag').remove()
+        })
+    </script>
 </body>
 
 </html>
