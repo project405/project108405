@@ -235,7 +235,7 @@ var activityPost = async function (memID, artiHead, artiCont, artiClass, artiDat
     // --------- 新增img ---------
     if(imgData != undefined){
         for (var i = 0; i < imgData.length; i++) {
-            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
+            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,NOW())', [memID, artiNum, imgData[i]])
                 .then((data) => {
                     result = 0;
                 }, (error) => {

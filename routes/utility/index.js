@@ -65,8 +65,9 @@ var getIndexData = async function (memID) {
     await sql('SELECT "articleListDataView".*, "member"."memName" ' + 
               'FROM "articleListDataView" '+
               'INNER JOIN "member" '+
-                 'ON "member"."memID" = "articleListDataView"."memID"' +
-              'ORDER BY "likeCount" DESC , "artiNum" DESC LIMIT 3')
+                 ' ON "member"."memID" = "articleListDataView"."memID"' +
+              ' WHERE "articleListDataView".deadline IS NULL '+
+              ' ORDER BY "likeCount" DESC , "artiNum" DESC LIMIT 3')
         .then((data) => {
             if (!data.rows) {
                 hotArticle = undefined;
@@ -126,7 +127,7 @@ var getIndexData = async function (memID) {
                     FROM( 
                         SELECT * 
                         FROM "article" 
-                        WHERE "score2" >= 20
+                        WHERE "score2" >= 20 AND "deadline" IS NULL
                         ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
                         LIMIT 5) AS "A" 
                     LEFT JOIN "image" AS "I"
@@ -152,7 +153,7 @@ var getIndexData = async function (memID) {
                     FROM( 
                         SELECT * 
                         FROM "article" 
-                        WHERE "score2" <= -15
+                        WHERE "score2" <= -15 AND "deadline" IS NULL
                         ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
                         LIMIT 5) AS "A" 
                     LEFT JOIN "image" AS "I"
@@ -387,7 +388,7 @@ var getWebSearch = async function (searchParams, memID) {
                         FROM "articleListDataView" AS "A"
                         LEFT JOIN "image" AS "I"
                             ON "A"."artiNum" = "I"."artiNum"
-                        WHERE "I"."artiMessNum" IS NULL)  AS "T1"
+                        WHERE "I"."artiMessNum" IS NULL AND "A"."deadline" IS NULL)  AS "T1"
                     WHERE "T1"."Rank" = '1' AND ("artiHead" LIKE $1 or "artiCont" LIKE $1 or "artiClass" LIKE $1 ) 
                     ORDER BY "artiNum" DESC) AS "T2"
                 INNER JOIN "member" "M"

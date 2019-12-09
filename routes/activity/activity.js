@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const article = require('../utility/article');
+const moment = require('moment');
 
 //接收GET請求
 router.get('/:artiNum', function (req, res, next) {
@@ -15,6 +16,11 @@ router.get('/:artiNum', function (req, res, next) {
     }
 
     article.getOneActivity(artiNum, memID).then(data => {
+        if(data[0][0].deadline == null || data[0][0].deadline == undefined ){
+            res.end('notFound');  //導向找不到頁面          
+        }
+        data[0][0].deadline = moment(data[0][0].deadline).format("YYYY-MM-DD");
+
         // 將字串替換成圖片
         if (data[0][0].artiCont.match("\\:imgLocation") != null) {
             for (var j = 1; j < data[2].length; j++) {
@@ -22,10 +28,7 @@ router.get('/:artiNum', function (req, res, next) {
             }
         }
 
-        //TODO
-        console.log(data[3].length);
         if(data[3].length > 0 ){
-            console.log("fq");
             for(var i = 0 ; i < data[1].length ; i++){
                 if (data[1][i].artiMessCont.match("\\:imgLocation") != null) {
                     for (var j = 0; j < data[3].length; j++) {

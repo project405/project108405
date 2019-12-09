@@ -314,7 +314,7 @@ var getOneArticle = async function (artiNum, memID) {
                         ' ORDER BY "count" DESC ,"artiNum" DESC '+
                         ' LiMIT 3 '+
                         ' ) AS "A" '+
-                    ') '+
+                    ') AND "article"."deadline" IS NULL '+
             ' ORDER BY "artiNum" DESC', [artiNum])
         .then((data) => {
             if (data.rowCount <= 0) {
@@ -328,7 +328,7 @@ var getOneArticle = async function (artiNum, memID) {
     if(guessArticle == undefined){
         await sql('SELECT * '+
             ' FROM "article" '+
-            ' WHERE "artiNum" != $1 '+
+            ' WHERE "artiNum" != $1  AND "deadline" IS NULL '+
             ' ORDER BY random() '+
             ' LIMIT 3',[artiNum]) 
         .then((data) => {
@@ -343,7 +343,7 @@ var getOneArticle = async function (artiNum, memID) {
         if(guessArticle.length == 1 ){ //如果只有一篇
             await sql('SELECT * '+
                     ' FROM "article" '+
-                    ' WHERE "artiNum" != $1 '+
+                    ' WHERE "artiNum" != $1 AND "deadline" IS NULL '+
                     ' ORDER BY random() '+
                     ' LIMIT 2',[guessArticle[0].artiNum]) 
             .then((data) => {
@@ -358,7 +358,7 @@ var getOneArticle = async function (artiNum, memID) {
         }else if (guessArticle.length == 2 ){  //如果有兩篇
             await sql('SELECT * '+
                      ' FROM "article" '+
-                     ' WHERE "artiNum" != $1 AND "artiNum" != $2 '+
+                     ' WHERE "artiNum" != $1 AND "artiNum" != $2 AND "deadline" IS NULL '+
                      ' ORDER BY random() '+
                      ' LIMIT 1',[guessArticle[0].artiNum ,guessArticle[1].artiNum]) 
             .then((data) => {
@@ -776,13 +776,14 @@ var getActivityList = async function (memID) {
                             ,"img"."imgName"
                             ,ROW_NUMBER() OVER(PARTITION BY "adv"."artiNum" ORDER BY "img"."imgNum") as "Rank"
                             ,CASE WHEN to_char("adv"."deadline",'YYYY-MM-DD') < to_char(NOW(),'YYYY-MM-DD') THEN 'Y' ELSE 'N'
-                             END AS "due"
+                            END AS "due"
                     FROM "articleListDataView" AS "adv" 
-                    INNER JOIN "image" AS "img"
-                        ON "adv"."artiNum" = "img"."artiNum" 
+                    LEFT JOIN "image" AS "img"
+                            ON "adv"."artiNum" = "img"."artiNum" 
                     WHERE "deadline" IS NOT NULL
-                    ORDER BY	"img"."imgDateTime") AS "T1"
-                WHERE "T1"."Rank" = '1'`)
+                    ORDER BY "img"."imgDateTime") AS "T1"
+                WHERE "T1"."Rank" = '1'
+                ORDER BY "T1"."artiNum" DESC`)
         .then((data) => {
             activityList = data.rows;
         }, (error) => {
@@ -809,22 +810,22 @@ var getOneActivity = async function (artiNum, memID) {
 
     // -----------  取得單一文章 --------------
     await sql(`SELECT  "arti"."artiNum" ,
-                        "arti"."memID",
-                        "arti"."artiDateTime",
-                        "arti"."artiHead",
-                        "arti"."artiCont",
-                        "arti"."artiClass",
-                        "arti"."likeCount",
-                        "arti"."messCount",
-                        "arti"."deadline",
-                        "img"."imgName",
-                        CASE WHEN to_char("arti"."deadline",'YYYY-MM-DD') < to_char(NOW(),'YYYY-MM-DD') THEN 'Y' ELSE 'N'
-                        END AS "due"
+                    "arti"."memID",
+                    "arti"."artiDateTime",
+                    "arti"."artiHead",
+                    "arti"."artiCont",
+                    "arti"."artiClass",
+                    "arti"."likeCount",
+                    "arti"."messCount",
+                    "arti"."deadline",
+                    "img"."imgName",
+                    CASE WHEN to_char("arti"."deadline",'YYYY-MM-DD') < to_char(NOW(),'YYYY-MM-DD') THEN 'Y' ELSE 'N'
+                    END AS "due"
                 FROM "articleListDataView" AS "arti"
-                INNER JOIN "image" AS "img"
-                    ON "arti"."artiNum" = "img"."artiNum"
+                LEFT JOIN "image" AS "img"
+                ON "arti"."artiNum" = "img"."artiNum"
                 WHERE "arti"."artiNum" = $1
-                ORDER BY "img"."imgDateTime"`, [artiNum])
+                ORDER BY "img"."imgDateTime","img"."imgNum"`, [artiNum])
         .then((data) => {
             if (data.rows.length > 0) {
                 oneActivity = data.rows;
