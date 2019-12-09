@@ -682,7 +682,8 @@ var getSpecialColumnList = async function (memID) {
                     INNER JOIN "image" AS "I"
                         ON "S"."specColNum" = "I"."specColNum"
                     ORDER BY "S"."specColDateTime" DESC) AS "T1"
-                WHERE "T1"."Rank" = '1'`)
+                WHERE "T1"."Rank" = '1'
+                ORDER BY "specColDateTime" DESC,"specColNum" DESC`)
         .then((data) => {
             specialColumnList = data.rows;
         }, (error) => {
