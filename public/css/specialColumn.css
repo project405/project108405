@@ -29,6 +29,17 @@ body {
     background-size: cover;
 }
 
+@media (max-width: 1024px) {
+    .banner {
+        width: 100%;
+        height: auto !important;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;
+    }
+}
+
 .container-fluid {
     padding-bottom: 6em;
 }
