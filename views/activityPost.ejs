@@ -155,7 +155,6 @@
             var el = document.querySelector('#postInput');
             var range = document.createRange();
             var sel = window.getSelection();
-            console.log(sel)
             if (sel.focusNode.previousElementSibling.className == 'upload-img' || sel.focusNode.nextElementSibling.className == 'upload-img') {
                 range.setStart(el.lastChild, 0);
                 range.collapse(true);
@@ -233,7 +232,6 @@
                 alert('請加入專欄Banner圖片！')
                 return
             }
-            console.log('bannerImg', bannerImgBase64)
             formData.append('base64Index', bannerImgBase64);
             var templateCont = document.getElementById('postInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
             var templateHead = document.getElementById('artiHead').value.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
@@ -261,10 +259,9 @@
             if ($("#postInput").find("img")) {
                 Array.from($("#postInput").find("img")).map(async (img) => {
                     if (img.nextElementSibling.tagName == 'BR') {
-                        console.log('remove')
+                        console.log(img)
                         img.nextElementSibling.remove()
                     }
-                    console.log(img.getAttribute('src'))
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
