@@ -93,6 +93,7 @@ var activityRouter = require('./routes/activity/activity');
 var activityPostRouter = require('./routes/activity/activityPost');
 var activityPostPageRouter = require('./routes/activity/activityPostPage');
 var activityListRouter = require('./routes/activity/activityList');
+var activityEditPageRouter = require('./routes/activity/activityEditPage');
 
 
 
@@ -260,6 +261,7 @@ app.use('/activity', activityRouter);
 app.use('/activityList', activityListRouter);
 app.use('/activity/post', activityPostRouter);
 app.use('/activity/post/page', activityPostPageRouter);
+app.use('/activity/edit/page', activityEditPageRouter);
 
 
 // =========================================

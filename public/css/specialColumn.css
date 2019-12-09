@@ -33,10 +33,14 @@ body {
     padding-bottom: 6em;
 }
 .content {
-    font-size: 1.1em;
+    font-size: 1.1rem;
     line-height: 1.8em;
 }
 
+.text {
+    font-size: 1.1rem;
+    line-height: 1.8em;
+}
 img {
     max-width: 100% !important;
     height: auto;

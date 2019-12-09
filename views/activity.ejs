@@ -33,79 +33,83 @@
     </div>
     <!-- 文章列表區塊 -->
     <div class="container-fluid d-flex justify-content-center">
-        <div class="col-lg-8">
-            <div class="activity">
-                <div class="title">
-                    <h4 style="font-weight: bold;"><%= items[0][0].artiHead %></h4>
-                    <a class="dateTime" style="color: #6c757d;"> · 截止日 2019-11-15</a>
-                    <hr>
-                    <% if(items[4] && items[4] == 'SYSOP') {%>
-                    <div class="dropdown float-right">
-                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right dotMenu " aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="/editArticle/<%= items[0][0].artiNum %>">編輯</a>
-                            <a class="dropdown-item" onclick=<%= "delArticle(" + items[0][0].artiNum + ")" %>>刪除</a>
-                        </div>
+        <div class="row d-flex justify-content-center col-12">
+            <% if(items[4] && items[4] == 'SYSOP') {%>
+            <div class="col-12">
+                <div class="dropdown float-right">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right dotMenu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/activity/edit/page/<%= items[0][0].artiNum %>">編輯</a>
+                        <a class="dropdown-item" onclick=<%= "delArticle(" + items[0][0].artiNum + ")" %>>刪除</a>
                     </div>
-                    <% } %>
-
-                </div>
-
-                <div class="content">
-                    <p><%- items[0][0].artiCont %>
-                    </p>
-                </div>
-                <div class="tagDiv col-lg-12 ">
-                    <% for(var i = 0 ; i < items[5].length; i++) { %>
-                    <button type="button" class="btn tag"> <%= items[5][i].tagName %></button>
-                    <% } %>
                 </div>
             </div>
-            <hr>
-            <hr>
-            <h5 style="font-weight: bold;">回應</h5>
-            <% if(items[1] != undefined) { %>
-            <% for(var i = 0 ; i<items[1].length ; i++) { %>
-            <div class="response">
-                <div class="info d-flex justify-content-between">
-                    <div style="white-space:nowrap !important">
-                        <a class="name"><%= items[1][i].memName %></a>
-                        <a class="dateTime"> · <%= items[1][i].artiMessDateTime %></a>
+            <% } %>
+            <div class="col-lg-8">
+                <div class="activity">
+                    <div class="title">
+                        <h4 style="font-weight: bold;"><%= items[0][0].artiHead %></h4>
+                        <a class="dateTime" style="color: #6c757d;"> · 截止日 2019-11-15</a>
+                        <hr>
+
                     </div>
-                    <% if(items[1][i].memID == items[6]) { %>
-                    <div class="dropdown ml-auto float-right">
-                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                        <div class="dropdown-menu dotMenu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="/editReply/<%= items[1][i].artiMessNum %>"
-                                class="editReply">編輯</a>
-                            <a class="dropdown-item" href="#/"
-                                onclick="deleteReply('<%- items[1][i].artiMessNum %>', '<%- items[1][i].memID %>')">刪除</a>
+
+                    <div class="content">
+                        <p><%- items[0][0].artiCont %>
+                        </p>
+                    </div>
+                    <div class="tagDiv col-lg-12 ">
+                        <% for(var i = 0 ; i < items[5].length; i++) { %>
+                        <button type="button" class="btn tag"> <%= items[5][i].tagName %></button>
+                        <% } %>
+                    </div>
+                </div>
+                <hr>
+                <hr>
+                <h5 style="font-weight: bold;">回應</h5>
+                <% if(items[1] != undefined) { %>
+                <% for(var i = 0 ; i<items[1].length ; i++) { %>
+                <div class="response">
+                    <div class="info d-flex justify-content-between">
+                        <div style="white-space:nowrap !important">
+                            <a class="name"><%= items[1][i].memName %></a>
+                            <a class="dateTime"> · <%= items[1][i].artiMessDateTime %></a>
                         </div>
+                        <% if(items[1][i].memID == items[6]) { %>
+                        <div class="dropdown ml-auto float-right">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                            <div class="dropdown-menu dotMenu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/editReply/<%= items[1][i].artiMessNum %>"
+                                    class="editReply">編輯</a>
+                                <a class="dropdown-item" href="#/"
+                                    onclick="deleteReply('<%- items[1][i].artiMessNum %>', '<%- items[1][i].memID %>')">刪除</a>
+                            </div>
+                        </div>
+                        <% } %>
+
                     </div>
-                    <% } %>
-
+                    <%- items[1][i].artiMessCont %>
                 </div>
-                <%- items[1][i].artiMessCont %>
-            </div>
-            <% } %>
-            <% } %>
+                <% } %>
+                <% } %>
 
-            <div class="replying">
-                <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="快來參與活動吧！">
+                <div class="replying">
+                    <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="快來參與活動吧！">
+                    </div>
+                    <label class="btn btn-dark col-lg-2" style="cursor: pointer">
+                        <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
+                        <i class="fas fa-images" style="padding-right:5px"></i>加圖片
+                    </label>
+
+                    <button type="submit" class="btn btn-danger float-right submitReplyButton col-lg-2 shadow-none"
+                        onclick=<%= "submitReply(" + items[0][0].artiNum + ")" %>>提交</button>
                 </div>
-                <label class="btn btn-dark col-lg-2" style="cursor: pointer">
-                    <input id="file-selector" type="file" multiple="multiple" accept=".jpg,.png,.gif,.tif,.bmp" />
-                    <i class="fas fa-images" style="padding-right:5px"></i>加圖片
-                </label>
-
-                <button type="submit" class="btn btn-danger float-right submitReplyButton col-lg-2 shadow-none"
-                    onclick=<%= "submitReply(" + items[0][0].artiNum + ")" %>>提交</button>
             </div>
         </div>
     </div>
@@ -233,7 +237,10 @@
             $('.coverContainer').css('display', 'block')
 
             if ($("#replyInput").find("img")) {
-                Array.from($("#replyInput").find("img")).map((img) => {
+                Array.from($("#replyInput").find("img")).map(async (img) => {
+                    if (img.nextElementSibling.tagName == 'BR') {
+                        img.nextElementSibling.remove()
+                    }
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })

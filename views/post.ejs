@@ -178,7 +178,6 @@
             //img process
             if ($("#postInput").find("img")) {
                 Array.from($("#postInput").find("img")).map(async (img) => {
-                    console.log(img.nextElementSibling.tagName)
                     if (img.nextElementSibling.tagName == 'BR') {
                         img.nextElementSibling.remove()
                     }
