@@ -155,7 +155,8 @@ app.post('/webhook',  function (req, res) {
                     },
                     url: 'https://api.line.me/v2/bot/message/push',
                     body: JSON.stringify({
-                        to: user,
+                        // to: user,
+                        to: "U2251202deb66b8a73da26e53c8399a13",
                             messages: [
                                 {
                                     "type": "template",
