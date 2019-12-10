@@ -250,7 +250,7 @@
                 // artiCont = undefined;
             }
             var deadline = document.getElementById('deadline').value
-
+            console.log('artiNum', artiNum)
             formData.append('artiNum', artiNum);
             formData.append('artiHead', artiHead);
             formData.append('artiCont', artiCont);
@@ -286,7 +286,7 @@
                                 alert(res);
                                 location.replace("/login");
                             } else {
-                                alert('編輯成功！')
+                                alert(res)
                                 location.replace("/activity/<%= items[0][0].artiNum %>");
                             }
                         },

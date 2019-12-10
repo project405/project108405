@@ -184,8 +184,11 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
 //-------- editActivity() ---------
 //================================
 var editActivity = async function (memID, artiHead, artiCont, artiClass, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime, score2, deadline) {
+    
+    console.log(memID, artiHead, artiCont, artiClass, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime, score2, deadline)
     var tagNum = [];
     var result = 0;
+    console.log('type of imgData', typeof(imgData))
     if (typeof(imgData) == 'string') {
         var temp = imgData
         imgData = []
