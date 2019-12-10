@@ -13,7 +13,10 @@ body {
     position: relative;
 }
 @media (max-width: 991px) {
-
+    html,
+    body {
+        padding-top: 2em;
+    }
 }
 
 .banner {
