@@ -102,6 +102,7 @@
     <script src="/javascripts/navbar.js"></script>
     <script src="/javascripts/imageCompression.js"></script>
     <script>
+        console.log('<%= items[4]%>')
         $('#replyInput').click(function () {
             var el = document.querySelector('#replyInput');
             var range = document.createRange();
@@ -204,7 +205,12 @@
                                 location.replace("/logIn");
                             } else {
                                 alert('編輯成功');
-                                location.replace(`/article/${artiNum}`);
+                                console.log('<%= items[4]%>')
+                                if ('<%= items[4]%>' == '') {
+                                    location.replace(`/article/${artiNum}`);
+                                } else {
+                                    location.replace(`/activity/${artiNum}`);
+                                }
                             }
                         },
                         error: function (res) {

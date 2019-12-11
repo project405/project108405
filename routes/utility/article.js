@@ -421,6 +421,7 @@ var getOneReply = async function (artiMessNum, memID) {
     var oneReply = []; //存放文章留言內容
     var replyImgs = [];
     var result = [];
+    var arti = []
     var checkAuthority ;
 
     //取得單篇留言
@@ -435,7 +436,22 @@ var getOneReply = async function (artiMessNum, memID) {
         oneReply = undefined;
         console.log(error)
     });
-
+    console.log('oneReply', oneReply)
+    if (oneReply) {
+        await sql('SELECT * FROM "article" WHERE "artiNum"= $1 ' , [oneReply[0].artiNum])
+        .then((data) => {
+            if (!data.rows) {
+                arti = undefined;
+            } else {
+                arti = data.rows;
+            }
+        }, (error) => {
+            arti = undefined;
+            console.log(error)
+        });
+    }
+    console.log(arti)
+    console.log(arti[0].deadline)
     // ----------- 取得照片 -----------
     await sql('SELECT "artiMessNum" , "imgName" '+
              ' FROM "image" '+
@@ -465,6 +481,7 @@ var getOneReply = async function (artiMessNum, memID) {
     result[1] = replyImgs;
     result[2] = [memID];
     result[3] = checkAuthority;
+    result[4] = arti[0].deadline
     return result;
 }
 
