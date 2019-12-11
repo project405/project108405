@@ -62,6 +62,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
                     })
                 } else if (req.body.deadline) {
                     if (artiNum) {
+                        console.log("1234");
                         member.editActivity(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.score2, req.body.deadline).then(data => {
                             if (data == 0) {
                                 res.send("編輯活動成功");
