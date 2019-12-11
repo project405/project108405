@@ -209,7 +209,6 @@
                 alert('請加入專欄Banner圖片！')
                 return
             }
-
             formData.append('base64Index', bannerImgBase64);
             var templateCont = document.getElementById('postInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
             var templateHead = document.getElementById('artiHead').value.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
@@ -250,10 +249,13 @@
                 artiHead = undefined;
                 // artiCont = undefined;
             }
+            var deadline = document.getElementById('deadline').value
+            console.log('artiNum', artiNum)
             formData.append('artiNum', artiNum);
             formData.append('artiHead', artiHead);
             formData.append('artiCont', artiCont);
             formData.append('artiClass', artiClass);
+            formData.append('deadline', deadline);
             //取得tag 
             tagInput.forEach(function (element) {
                 tag.push(element.innerText);
@@ -284,7 +286,7 @@
                                 alert(res);
                                 location.replace("/login");
                             } else {
-                                alert('編輯成功！')
+                                alert(res)
                                 location.replace("/activity/<%= items[0][0].artiNum %>");
                             }
                         },

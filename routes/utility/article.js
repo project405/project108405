@@ -449,7 +449,6 @@ var getOneReply = async function (artiMessNum, memID) {
             }
         }, (error) => {
             replyImgs = undefined;
-            console.log(error)
         });
 
     //取得權限
@@ -505,7 +504,6 @@ var getArticleClassList = async function (articleClass, memID, artiListNum) {
                 articleList = data.rows;
             }
         }, (error) => {
-            console.log(error)
             articleList = null;
         });
 

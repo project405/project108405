@@ -327,7 +327,7 @@ async function byClassGetData(index, r){
     if( r <= 5 ){
         await sql('SELECT * '+
                  ' FROM "articleListDataView" '+
-                 ' WHERE "artiClass" = $1 '+
+                 ' WHERE "artiClass" = $1 AND "deadline" IS NULL '+
                  ' ORDER BY random() '+
                  ' LIMIT 1', [className])
         .then((data) => {

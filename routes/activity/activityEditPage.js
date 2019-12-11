@@ -21,7 +21,7 @@ router.get('/:artiNum', function (req, res, next) {
             res.end('<script> alert("您沒有編輯該活動的權限"); history.back();</script>');
             return;   
         }
-        data[0][0].deadline = moment(Date().now).format("YYYY-MM-DD HH:mm:ss");
+        data[0][0].deadline = moment(data[0][0].deadline).format("YYYY-MM-DD HH:mm:ss");
         console.log(data[0][0].deadline)
         // 將字串替換成圖片
         if (data[0][0].artiCont.match("\\:imgLocation") != null) {
