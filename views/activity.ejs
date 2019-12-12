@@ -33,7 +33,7 @@
     </div>
     <!-- 文章列表區塊 -->
     <div class="container-fluid d-flex justify-content-center">
-        <div class="row d-flex justify-content-center col-12">
+        <div class="row d-flex justify-content-center col-lg-12">
             <% if(items[4] && items[4] == 'SYSOP') {%>
             <div class="col-12">
                 <div class="dropdown float-right">
@@ -98,7 +98,7 @@
                 </div>
                 <% } %>
                 <% } %>
-
+                <% if (items[7]) { %>
                 <div class="replying">
                     <div class="replyInput" id="replyInput" contenteditable="true" role="textbox" data-text="快來參與活動吧！">
                     </div>
@@ -110,6 +110,11 @@
                     <button type="submit" class="btn btn-danger float-right submitReplyButton col-lg-2 shadow-none"
                         onclick=<%= "submitReply(" + items[0][0].artiNum + ")" %>>提交</button>
                 </div>
+                <% } else { %>
+                    <div style="margin-bottom: 5em">
+
+                    </div>
+                <% } %>
             </div>
         </div>
     </div>

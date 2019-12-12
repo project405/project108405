@@ -20,7 +20,12 @@ router.get('/:artiNum', function (req, res, next) {
             res.end('notFound');  //導向找不到頁面          
         }
         data[0][0].deadline = moment(data[0][0].deadline).format("YYYY-MM-DD");
-
+        var isDue = new Date(data[0][0].deadline).getTime() - new Date().getTime()
+        data[7] = isDue > 0 ? true : false  
+        // console.log(isDue)
+        // console.log('deadline', new Date(data[0][0].deadline).getTime())
+        // var today = new Date().getTime()
+        // console.log('today', today)
         // 將字串替換成圖片
         if (data[0][0].artiCont.match("\\:imgLocation") != null) {
             for (var j = 1; j < data[2].length; j++) {
