@@ -27,7 +27,8 @@ var getRecommendList = async function (memID, recomPage) {
                     WHERE "T1"."Rank" = '1'
                     ORDER BY "recomNum" DESC
                     LIMIT 8
-                    OFFSET $1 ) AS "T2"`, [(recomPage-1) * 8])
+                    OFFSET $1 ) AS "T2"
+                ORDER BY "recomDateTime" DESC , "recomNum" DESC `, [(recomPage-1) * 8])
         .then((data) => {
             if (data.rows != undefined) {
                 recommendList = data.rows
@@ -255,9 +256,38 @@ var getOneRecommend = async function (recomNum, memID) {
                     guessRecommend = data.rows;
                 }   
         });
+    }else if(guessRecommend.length < 3 ) { //  如果tag關聯數量小於三篇文章 
+        if(guessRecommend.length == 1 ){ //如果只有一篇
+            await sql('SELECT * '+
+                    ' FROM "recommend" '+
+                    ' WHERE "recomNum" != $1 '+
+                    ' ORDER BY random() '+
+                    ' LIMIT 2',[guessRecommend[0].recomNum]) 
+            .then((data) => {
+                    if (!data.rows) {
+                        guessRecommend = undefined ;
+                    } else {
+                        for(var i = 0 ; i < data.rows.length ; i++){
+                            guessRecommend.push(data.rows[i]);
+                        }
+                    }   
+            });
+        }else if (guessRecommend.length == 2 ){  //如果有兩篇
+            await sql('SELECT * '+
+                     ' FROM "recommend" '+
+                     ' WHERE "recomNum" != $1 AND "recomNum" != $2 '+
+                     ' ORDER BY random() '+
+                     ' LIMIT 1',[guessRecommend[0].recomNum ,guessRecommend[1].recomNum]) 
+            .then((data) => {
+                    if (!data.rows) {
+                        guessRecommend = undefined ;
+                    } else {
+                        guessRecommend.push(data.rows[0]);
+                    }   
+            });
+        }
     }
-
-
+    
     //取得權限
     await member.checkAuthority(memID).then(data => {
         if (data != undefined) {
@@ -335,7 +365,7 @@ var getRecomClassList = async function (recomClass, memID, recomPage) {
     var result = [];
     var recomSum;
 
-    // -----------  取得文章清單 --------------
+    // -----------  取得推薦清單 --------------
     await sql(`SELECT "T2".*
                 FROM(
                     SELECT *
@@ -348,7 +378,8 @@ var getRecomClassList = async function (recomClass, memID, recomPage) {
                     WHERE "T1"."Rank" = '1' AND "recomClass" = $1
                     ORDER BY "recomNum" DESC
                     LIMIT 8
-                    OFFSET $2 ) AS "T2"`, [recomClass, (recomPage-1)*8])
+                    OFFSET $2 ) AS "T2"
+                ORDER BY "recomDateTime" DESC , "recomNum" DESC`, [recomClass, (recomPage-1)*8])
         .then((data) => {
           if(!data.rows){
             recommendData = undefined ;

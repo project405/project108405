@@ -43,7 +43,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
     if (req.body.tag != '') {
         tagData = req.body.tag.split(",");
     }
-
+    console.log('req.body.deadline', req.body.deadline)
     //如果沒登入
     if (memID == undefined) {
         res.send("請進行登入");
@@ -52,7 +52,7 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
             if (artiHead == 'undefined' || artiCont == '') {
                 res.send("標題及內容不可為空，請重新輸入");
             } else {
-                if (artiNum) {
+                if (artiNum && !req.body.deadline) {
                     member.editArticle(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.score2).then(data => {
                         if (data == 1) {
                             res.send("編輯成功");
@@ -60,6 +60,26 @@ router.post('/', upload.array('userImg', 100), function (req, res, next) {
                             res.send("編輯失敗");
                         }
                     })
+                } else if (req.body.deadline) {
+                    if (artiNum) {
+                        console.log('artiNum', artiNum)
+                        console.log(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.score2, req.body.deadline)
+                        member.editActivity(memID, artiHead, artiCont, artiClass, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, postDateTime, req.body.score2, req.body.deadline).then(data => {
+                            if (data == 1) {
+                                res.send("編輯活動成功");
+                            } else {
+                                res.send("編輯活動失敗");
+                            }
+                        })  
+                    } else {
+                        member.activityPost(memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.score2, req.body.deadline).then(data => {
+                            if (data == 0) {
+                                res.send("發佈活動成功");
+                            } else {
+                                res.send("發佈失敗");
+                            }
+                        })
+                    }
                 } else {
                     member.articlePost(memID, artiHead, artiCont, artiClass, postDateTime, req.body.base64Index, tagData, analyzeScore, positiveWords, negativeWords, swearWords, req.body.score2).then(data => {
                         if (data == 0) {

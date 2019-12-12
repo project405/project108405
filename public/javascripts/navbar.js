@@ -22,6 +22,14 @@ $(document).ready(() => {
                                 <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                             </div>\
                             <li class="nav-item">\
+                            <a class="nav-link" href="/specialColumnList">\
+                                專欄</a>\
+                            </li>\
+                            <li class="nav-item">\
+                            <a class="nav-link" href="/activityList">\
+                                限時活動</a>\
+                            </li>\
+                            <li class="nav-item">\
                                 <a class="nav-link" href="/recommendList/1">\
                                 官方推薦</a>\
                             </li>\
@@ -102,7 +110,17 @@ $(document).ready(() => {
                                 <a class="dropdown-item" href="#/" onclick="reply()">Line推播</a>\
                                 <a class="dropdown-item" href="/recommend/post/page">新增推薦</a>\
                                 <a class="dropdown-item" href="#/" onclick="bestReply()">選出最佳留言</a>\
+                                <a class="dropdown-item" href="/specialColumn/post/page">新增專欄</a>\
+                                <a class="dropdown-item" href="/activity/post/page">新增活動</a>\
                             </div>\
+                        </li>\
+                        <li class="nav-item">\
+                        <a class="nav-link" href="/specialColumnList">\
+                            專欄</a>\
+                        </li>\
+                        <li class="nav-item">\
+                        <a class="nav-link" href="/activityList">\
+                            限時活動</a>\
                         </li>\
                         <li class="nav-item">\
                             <li class="nav-item">\
@@ -113,15 +131,12 @@ $(document).ready(() => {
                                 <a class="nav-link" href="/articleList/1">\
                                     討論區</a>\
                             </li>\
-                            <li class="nav-item">\
-                            <a class="nav-link" href="/post">\
-                            <i class="fas fa-pen"></i>&nbsp;發文</a>\
-                            </li>\
                             <li class="nav-item dropdown">\
                                 <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                                     會員\
                                 </a>\
                                 <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
+                                    <a class="dropdown-item" href="/post"><i class="fas fa-pen" style="color:white;"></i>&nbsp;發文</a>\
                                     <a class="dropdown-item" href="/notify"><i class="fas fa-bell" style="color:white;"></i></a>\
                                     <a class="dropdown-item" href="/collection/recommend/1">推薦收藏</a>\
                                     <a class="dropdown-item" href="/collection/article/1">文章收藏</a>\
@@ -227,6 +242,14 @@ $(document).ready(() => {
                             <button class="btn navSearch" onclick="byParamSearch()"><i class="fas fa-search"></i></button>\
                         </div>\
                         <li class="nav-item">\
+                        <a class="nav-link" href="/specialColumnList">\
+                            專欄</a>\
+                        </li>\
+                        <li class="nav-item">\
+                        <a class="nav-link" href="activityList">\
+                            限時活動</a>\
+                        </li>\
+                        <li class="nav-item">\
                             <a class="nav-link" href="/recommendList/1">\
                             官方推薦</a>\
                         </li>\
@@ -234,16 +257,13 @@ $(document).ready(() => {
                             <a class="nav-link" href="/articleList/1">\
                                 討論區</a>\
                         </li>\
-                        <li class="nav-item">\
-                        <a class="nav-link" href="/post">\
-                        <i class="fas fa-pen"></i>&nbsp;發文</a>\
-                        </li>\
                         <li class="nav-item dropdown">\
                             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
                                 會員\
                             </a>\
                             <div class="dropdown-menu member dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" >\
                                 <a class="nav-link" href="/notify"><i class="fas fa-bell" style="color:white;"></i></a>\
+                                <a class="dropdown-item" href="/post"><i class="fas fa-pen"></i>&nbsp;發文</a></a>\
                                 <a class="dropdown-item" href="/collection/recommend/1">推薦收藏</a>\
                                 <a class="dropdown-item" href="/collection/article/1">文章收藏</a>\
                                 <a class="dropdown-item" href="/member/articleManage/1">文章管理</a>\

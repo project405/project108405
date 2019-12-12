@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
+html,
+body {
+    height: 100%;
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+    text-align: justify;
+    text-justify: inter-ideograph;
+    background-color: #fafafa;
+    position: relative;
+}
+/* @media (max-width: 991px) {
+    html,
+    body {
+        padding-top: 2em;
+    }
+} */
+.banner {
+    margin-bottom: 4em;
+    /* opacity: 0.6; */
+    width: auto;
+    height: 80% !important;
+    /* padding-top: 40em; */
+    padding-bottom: calc(10em - 72px);
+    background: url("../imgs/background/column.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+@media (max-width: 1024px) {
+    .banner {
+        background: url("../imgs/background/phone/columnP_Banner.png");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;
+    }
+}
+.item {
+    margin-bottom: 2em;
+    cursor: pointer;
+}
+
+div.content {
+    /* background-color: rgb(236, 54, 41); */
+}
+div.photoContainer {
+    overflow: hidden; 
+    margin-bottom: 0.75em;
+    
+    /* width: 50%; */
+}
+div.photoContainer {
+    height: 20em;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+    /* border: 3px solid #fff; */
+}
+
+img.photo {
+    width: 100%;
+    height: 100%;
+    transition: transform 1.5s, opacity 0.5s;
+    -ms-transition: transform 1.5s, opacity 0.5s;
+    -moz-transition: transform 1.5s, opacity 0.5s;
+    -webkit-transition: transform 1.5s, opacity 0.5s;
+    object-fit: cover;
+    border-radius: 8px;
+    /* transition: all 2s ease-in-out; */
+}
+.photo:hover {
+    transform: scale(1.15,1.15);
+    -webkit-filter:brightness(0.8);
+    border-radius: 8px;
+}
+/* .item{
+    background-color: brown;
+} */

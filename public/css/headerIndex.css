@@ -167,7 +167,6 @@ div.dropdown-menu {
 .dropdown:hover .dropdown-menu {
     display: block;
     background-color: #2D4F41;
-    padding: 8px;
     border: 2px solid #678878;
 }
 
@@ -180,8 +179,7 @@ div.dropdown-menu {
 
 .dropdown-item:hover {
     background-color: #678878 !important;
-    border-radius: 8px;
-    transition: 0.3s;
+    border-radius: 4px;
 }
 
 
@@ -261,7 +259,20 @@ a.navTitle {
     text-align: center;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
-#sentimentSection {
+div.sentimentSection {
+    background-color: rgba(240, 240, 240, 0.877);
+    margin: 3em 0;
+    padding: 2em 0;
+    color: black;
+}
+div.sentimentTitle {
+    text-align: left !important;
+}
+div.cardStyle {
+    padding: 0.25em;
+    color: black;
+}
+/* #sentimentSection {
     padding: 5px;
     position: fixed;
     z-index: 90;
@@ -282,12 +293,12 @@ a.navTitle {
     text-align: center;
     border: dotted 3px  rgb(241, 148, 8);
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);  
-}
+} */
 
 div.surpriseSection {
     position: fixed;
     z-index: 95;
-    bottom: 160px;
+    bottom: 80px;
     right: -45px;
     /* animation: shake 4s;
     animation-iteration-count: infinite; */
@@ -349,24 +360,9 @@ div.surpriseHeader {
         color: #fff;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     }
-    #sentimentSection {
-        position: fixed;
-        bottom: 80px;
-        right: 10px;
-        width: 40px;
-        height: 40px;
-        line-height: 10px;
-        background: rgb(248, 235, 121);
-        text-align: center;
-        color: #fff;
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    }
-    #sentimentSectionHover {
-        display: none;
-    }
     div.surpriseSection {
         z-index: 95;
-        bottom: 120px;
+        bottom: 60px;
         right: -30px;
         /* animation: shake 4s;
         animation-iteration-count: infinite; */
@@ -380,41 +376,6 @@ div.surpriseHeader {
     }
 }
 
-#sentimentSectionHover {
-    position: fixed;
-    z-index: 95;
-    right: 110px;
-    bottom: 90px;
-    /* font-weight: 900; */
-    /* text-shadow: 1px 0.5px 0.5px rgba(214, 158, 148, 0.877); */
-    background-color: rgba(233, 93, 68);
-    font-size: 1em;
-    padding: 0.3em 0.1em;
-    border-radius: 6px; 
-    color: rgba(255, 255, 255, 0.877);
-    writing-mode: vertical-lr;
-}
-img.sentimentImg {
-    width: 100%;
-    border-radius: 8px; 
-    margin: 1em 0;
-    padding: 0;
-    vertical-align: 0 !important;
-}
-div.sentimentContent {
-    margin-top: 1em;
-    text-align: left;
-}
-
-a.chooseSection {
-    color: #212529;
-    padding: 0 1em;
-}
-
-a.chooseSection:hover {
-    color: #ea5645;
-    text-decoration: none;
-}
 
 #positiveButton {
     border-right: 2px solid #2125298a;
@@ -430,12 +391,13 @@ a.chooseSection:hover {
 /* -------------- */
 
 hr.highlight {
-    margin: 1em 0 2em 0 !important;
-    width: 20em;
-    background-color: #2D4F41;
-    height: 5px;
+    margin: 0.5em 0 2em 0 !important;
+    width: 10em;
+    background-color: rgba(42, 45, 44, 0.482);
+    height: 3.5px;
     border: none;
-    border-radius: 50%;
+    color: rgb(42, 45, 44);
+    border-radius: 4px;
 }
 
 hr.leftSeperate {
@@ -448,7 +410,7 @@ hr.leftSeperate {
 
 @media (max-width: 450px) {
     hr.highlight {
-        width: 80%;
+        width: 40%;
     }
     p {
         font-size: 1em !important;

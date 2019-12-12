@@ -35,7 +35,7 @@
                         <a class="next"></a>
                         <a class="dateTime">於<%= items[0][0].recomDateTime %>發佈</a>
                     </div>
-                    <% if(items[7] && items[7] == 'boss') {%>
+                    <% if(items[7] && items[7] == 'SYSOP') {%>
                     <div class="dropdown ml-auto" style="margin-bottom: -0.5em">
                         <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -318,16 +318,16 @@
             <span class="sr-only">Loading...</span>
     </div> -->
     <div class='coverContainer'>
-            <div class='loader'>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--text'></div>
-            </div>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
         </div>
+    </div>
 
 
     <!-- Optional JavaScript -->
@@ -358,13 +358,21 @@
             if (!member) {
                 alert('請進行登入再留言！')
                 location.replace("/logIn");
-
+            }
+            var el = document.querySelector('#replyInput');
+            var range = document.createRange();
+            var sel = window.getSelection();
+            if (sel.focusNode.previousElementSibling.className == 'upload-img' || sel.focusNode.nextElementSibling.className == 'upload-img') {
+                range.setStart(el.lastChild, 0);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
             }
         })
 
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
-        $('#file-selector').change(function(event) {
+        $('#file-selector').change(function (event) {
             var file = $("#file-selector")[0];  //取得檔案
             //如果有檔案就要加入formData
             if (file.files.length) {
@@ -372,20 +380,28 @@
                     // 解析檔案
                     var item = file.files[img]
                     var reader = new FileReader();
-                    reader.onload = (function(item) {
-                        return async function(event) {
+                    reader.onload = (function (item) {
+                        return async function (event) {
                             var getSize = getOriginalSize(event.target.result)
-                            getSize.then(function(size) {
+                            getSize.then(function (size) {
                                 var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
-                                canvasUrl.then(function(strDataURI) {
+                                canvasUrl.then(function (strDataURI) {
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
                                     $('#replyInput').append(img);
+                                    $('#replyInput').append('<span id="lastbr"></span><br /><br />');
+                                    var el = document.querySelector('#replyInput');
+                                    var range = document.createRange();
+                                    var sel = window.getSelection();
+                                    range.setStart(el.lastChild, 0);
+                                    range.collapse(true);
+                                    sel.removeAllRanges();
+                                    sel.addRange(range);
                                 }, (e) => {
                                     console.log(e)
-                                    })
                                 })
-                            };
+                            })
+                        };
                     })(file);
                     reader.readAsDataURL(item);
                 })
@@ -506,7 +522,7 @@
 
     <!-- 推薦文章愛心 ajax script -->
     <script>
-        $('button').click(function() {
+        $('button').click(function () {
             if ($(this).children('.fa-gratipay').length > 0) {
                 $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
                 setTimeout(() => {
@@ -643,24 +659,24 @@
                 }
             });
         }
-            // delRecommend
+        // delRecommend
         function delRecommend(recomNum) {
             if (confirm('管理者確定要刪除推薦嗎？')) {
                 $('.spinner-border').css('display', 'block')
                 $('.coverContainer').css('display', 'block')
 
                 $.ajax({
-                url: '/addLike',
-                type: 'POST',
-                data: { "recomNum": recomNum, "delRecommend": true },
-                success: function (res) {
-                    alert('刪除成功！')
-                    location.replace("/recommendList/1");
-                },
-                error: function (res) {
-                    alert('刪除失敗！')
-                }
-            });
+                    url: '/addLike',
+                    type: 'POST',
+                    data: { "recomNum": recomNum, "delRecommend": true },
+                    success: function (res) {
+                        alert('刪除成功！')
+                        location.replace("/recommendList/1");
+                    },
+                    error: function (res) {
+                        alert('刪除失敗！')
+                    }
+                });
             }
         }
         // delReply
@@ -687,7 +703,7 @@
     <script>
         //推薦留言檢舉ajax
         function ftn_messReport(a) {
-            $('#messReport').attr('disabled',true)
+            $('#messReport').attr('disabled', true)
             $.ajax({
                 url: "/report",
                 type: 'POST',
@@ -695,7 +711,7 @@
                 data: { "recomMessNum": a, "reportReason": $("#messReportReason").val() },
                 success: function (res) {
                     alert('檢舉成功！')
-                    $('#messReport').attr('disabled',false)
+                    $('#messReport').attr('disabled', false)
                     $("#messReportReason").val("");
                     $("#recomMessReportPost").modal('hide')
                 },

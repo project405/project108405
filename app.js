@@ -86,6 +86,26 @@ var RecomMusicRouter = require('./routes/recommend/recomMusic');
 var RecomBookRouter = require('./routes/recommend/recomBook');
 var RecomExhibitionRouter = require('./routes/recommend/recomExhibition');
 
+//=========================================
+//---------  activity router ---------
+//=========================================
+var activityRouter = require('./routes/activity/activity');
+var activityPostRouter = require('./routes/activity/activityPost');
+var activityPostPageRouter = require('./routes/activity/activityPostPage');
+var activityListRouter = require('./routes/activity/activityList');
+var activityEditPageRouter = require('./routes/activity/activityEditPage');
+
+
+
+//=========================================
+//---------  specialColumn router ---------
+//=========================================
+var specialColumnRouter = require('./routes/specialColumn/specialColumn');
+var specialColumnListRouter = require('./routes/specialColumn/specialColumnList');
+var specialColumnPostRouter = require('./routes/specialColumn/specialColumnPost');
+var specialColumnPostPageRouter = require('./routes/specialColumn/specialColumnPostPage');
+var specialColumnEditPageRouter = require('./routes/specialColumn/specialColumnEditPage');
+
 var CheckStatus = require('./routes/checkStatus');
 var searchRouter = require('./routes/search');
 
@@ -121,9 +141,10 @@ passport.use(
     new GoogleStrategy({
         clientID: '535503110825-vsqohis8p2itidvaqii3akbmha3kluie.apps.googleusercontent.com', 
         clientSecret: 'vx7elBl3NGlZcnNPFV3QNH7l',
-        callbackURL: "https://project108405.herokuapp.com/auth/google/callback"
+        callbackURL: "https://project108405.herokuapp.com/auth/google/callback" 
     },
-    // http://localhost:3000/auth/google/callback" 
+    // http://localhost:3000/auth/google/callback
+    // https://project108405.herokuapp.com/auth/google/callback
     function(accessToken, refreshToken, profile, done) {
         if (profile) {
             return done(null, profile);
@@ -222,16 +243,36 @@ app.use('/collection/article/exhibition', colleArtiExhibitionRouter);
 app.use('/recommendList', recommendListRouter);
 app.use('/oneRecommend', oneRecommendRouter);
 app.use('/recommend/post/page', recommendPostPageRouter);
-app.use('/recommend/post',recommendPostRouter);
-app.use('/editRecommend',recommendEditRouter);
-app.use('/recommend/reply',recommendReplyRouter);
-app.use('/editRecommendReply',recommendEditReplyRouter);
+app.use('/recommend/post', recommendPostRouter);
+app.use('/editRecommend', recommendEditRouter);
+app.use('/recommend/reply', recommendReplyRouter);
+app.use('/editRecommendReply', recommendEditReplyRouter);
 // -------------- four Class ----------------
 app.use('/recommendList/movie', RecomMovieRouter);
 app.use('/recommendList/music', RecomMusicRouter);
 app.use('/recommendList/book', RecomBookRouter);
 app.use('/recommendList/exhibition', RecomExhibitionRouter);
 app.use('/checkStatus', CheckStatus);
+
+// =========================================
+// ---------  activity use ------------
+// =========================================
+app.use('/activity', activityRouter);
+app.use('/activityList', activityListRouter);
+app.use('/activity/post', activityPostRouter);
+app.use('/activity/post/page', activityPostPageRouter);
+app.use('/activity/edit/page', activityEditPageRouter);
+
+
+// =========================================
+// ---------  specialColumn use ------------
+// =========================================
+app.use('/specialColumn', specialColumnRouter);
+app.use('/specialColumnList', specialColumnListRouter);
+app.use('/specialColumn/post', specialColumnPostRouter);
+app.use('/specialColumn/post/page', specialColumnPostPageRouter);
+app.use('/specialColumn/edit/page', specialColumnEditPageRouter);
+
 
 app.use('/search',searchRouter);
 

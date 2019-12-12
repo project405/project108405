@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
+html, body {
+    height: 100%;
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    text-align: justify;
+    background-color: #fafafa;
+    position: relative;
+}
+@media (max-width: 991px) {
+    html,
+    body {
+        padding-top: 2em;
+    }
+}
+
+.banner {
+    margin-bottom: 2em;
+    /* opacity: 0.6; */
+    width: 100%;
+    height: 80% !important;
+    /* padding-top: 40em; */
+    padding-bottom: calc(10em - 72px);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
+@media (max-width: 1024px) {
+    .banner {
+        width: 100%;
+        height: 40% !important;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;
+    }
+}
+.container-fluid {
+    padding: 0.5em;
+}
+.content p {
+    font-size: 1.1em;
+}
+
+.response {
+    background-color: white;
+    border-radius: 6px;
+    border: rgb(230, 230, 230) 1px solid;
+    margin-bottom: 1.5em;
+    padding: 1em;
+}
+
+div.tagDiv {
+    padding: 0em;
+    margin: 0em;
+    font-size: 1.1em;
+}
+
+
+div.info {
+    color: #6c757d;
+    margin-bottom: 0.5em;
+}
+
+div.replying {
+    margin-bottom: 50px;
+}
+
+div.replyInput {
+    border: rgb(230, 230, 230) 1px solid;
+    width: 100%;
+    min-height: 150px;
+    height: auto;
+    padding: 1em;
+    overflow: hidden;
+    background-color: white;
+    opacity: 0.89;
+    margin-bottom: 1em;
+    border-radius: 8px;
+    caret-color: #2D4F41;
+    cursor: text;
+    text-align: left !important;
+}
+
+.input:empty::before {
+    color: lightgrey;
+    content: attr(placeholder);
+}
+
+
+/*focus時内容為空*/
+
+[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-text);
+    color: rgb(114, 114, 114);
+}
+
+div.replyInput:focus:before {
+    content: none;
+}
+
+div.replyInput:focus {
+    outline: none;
+    cursor: text;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0.98;
+    transition: 0.3s ease-in-out;
+    cursor: text;
+    display: block;
+}
+
+.float-md-right {
+    float: right;
+}
+
+div[contenteditable=true]>div {
+    padding: 0;
+}
+
+input[type="file"] {
+    position: fixed;
+    right: 100%;
+    bottom: 100%;
+    cursor: pointer;
+}
+
+img.upload-img {
+    max-height: 450px;
+    max-width: 70%;
+    cursor: pointer;
+    border-radius: 12px;
+    padding: 0.35em;
+}
+
+.dotMenu {
+    background-color: white !important;
+    text-align: center;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}
+.dotMenu > .dropdown-item:hover {
+    background-color: #b4d7ddb2 !important;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    text-align: center;
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}

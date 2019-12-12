@@ -8,7 +8,7 @@
 
     <!--  js   -->
     <script src="/javascripts/jquery.min.js"></script>
-    
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -39,18 +39,20 @@
                         <a class="dateTime">於<%= items[0][0].artiDateTime %>發佈</a>
                     </div>
                     <% if(items[7][0] == items[0][0].memID) {%>
-                        <div class="dropdown ml-auto" style="margin-bottom: -0.5em">
-                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-h"></i>     
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="/editArticle/<%= items[0][0].artiNum %>" >編輯</a>
-                                <a class="dropdown-item" href="#/" onclick=<%= "delArticle(" + items[0][0].artiNum + ")" %>>刪除</a>
-                            </div>
+                    <div class="dropdown ml-auto" style="margin-bottom: -0.5em">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right dotMenu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="/editArticle/<%= items[0][0].artiNum %>">編輯</a>
+                            <a class="dropdown-item" href="#/"
+                                onclick=<%= "delArticle(" + items[0][0].artiNum + ")" %>>刪除</a>
                         </div>
+                    </div>
                     <% } %>
                 </div>
-                <hr  style="margin-top: 0.5em"/>
+                <hr style="margin-top: 0.5em" />
 
                 <h5><%= items[0][0].artiHead %></h5>
                 <hr />
@@ -61,97 +63,98 @@
                 <!-- tag -->
                 <div class="tagDiv col-lg-12 ">
                     <% if(items[2] != undefined ) { %>
-                        <% for (var i = 0 ; i< items[2].length ; i++) { %>
-                            <button type="button" class="btn  tag"><%= items[2][i].tagName %></button>
-                        <% } %>
+                    <% for (var i = 0 ; i< items[2].length ; i++) { %>
+                    <button type="button" class="btn  tag"><%= items[2][i].tagName %></button>
+                    <% } %>
                     <% } %>
                 </div>
                 <hr class="info">
                 <!-- info -->
                 <div class="info">
-                    
-                <!-- 愛心按鈕 -->
-                <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/login'"> <i
-                    class="fab fa-gratipay"></i><a><%= items[0][0].likeCount %></a></button>
-                <button type="button" id="addLike" class="btn postInfo"
-                    onclick=<%= "addLike(" + items[0][0].artiNum + ")" %>> <i class="fab fa-gratipay"></i><a
-                        id="addLikeCount"> <%= items[0][0].likeCount %> </a></button>
-                <button type="button" id="delLike" class="btn postInfo" 
-                    onclick=<%= "delLike(" + items[0][0].artiNum + ")" %>><i class="fab fa-gratipay" style="color:#c93737"></i><a
-                        id="delLikeCount"><%= items[0][0].likeCount %> </a></button>
-                <!-- 如果沒登入 -->
-                <% if(items[7][0] == undefined) {%>
-                <script type="text/javascript">
-                    document.getElementById("LikeUnLogIn").style.display = "inline";
-                    document.getElementById("addLike").style.display = "none";
-                    document.getElementById("delLike").style.display = "none";
-                </script>
 
-                <!-- 如果有登入及沒按過愛心 -->
-                <% }else if(items[4][0] == undefined && items[7][0] != undefined ) {%>
-                <script type="text/javascript">
-                    document.getElementById("addLike").style.display = "inline";
-                    document.getElementById("LikeUnLogIn").style.display = "none";
-                    document.getElementById("delLike").style.display = "none";
-                </script>
-                <!-- 如果有登入及按過愛心 -->
-                <% }else if(items[4][0] != undefined && items[7][0] != undefined) {%>
-                <script type="text/javascript">
-                    document.getElementById("delLike").style.display = "inline";
-                    document.getElementById("addLike").style.display = "none";
-                    document.getElementById("LikeUnLogIn").style.display = "none";
-                </script>
-                <!-- 邏輯錯誤 -->
-                <% } else {%>
-                <script type="text/javascript">
-                    document.getElementById("delLike").style.display = "none";
-                    document.getElementById("addLike").style.display = "none";
-                    document.getElementById("LikeUnLogIn").style.display = "none";
-                </script>
-                <% } %>
+                    <!-- 愛心按鈕 -->
+                    <button type="button" id="LikeUnLogIn" class="btn postInfo" onclick="location.href='/login'"> <i
+                            class="fab fa-gratipay"></i><a><%= items[0][0].likeCount %></a></button>
+                    <button type="button" id="addLike" class="btn postInfo"
+                        onclick=<%= "addLike(" + items[0][0].artiNum + ")" %>> <i class="fab fa-gratipay"></i><a
+                            id="addLikeCount"> <%= items[0][0].likeCount %> </a></button>
+                    <button type="button" id="delLike" class="btn postInfo"
+                        onclick=<%= "delLike(" + items[0][0].artiNum + ")" %>><i class="fab fa-gratipay"
+                            style="color:#c93737"></i><a id="delLikeCount"><%= items[0][0].likeCount %> </a></button>
+                    <!-- 如果沒登入 -->
+                    <% if(items[7][0] == undefined) {%>
+                    <script type="text/javascript">
+                        document.getElementById("LikeUnLogIn").style.display = "inline";
+                        document.getElementById("addLike").style.display = "none";
+                        document.getElementById("delLike").style.display = "none";
+                    </script>
 
-                <!-- 留言數量按鈕 -->
-                <button type="button" class="btn postInfo" id="goBottom"><i
-                        class="fas fa-comment-dots"></i><a><%= items[0][0].messCount %></a></button>
+                    <!-- 如果有登入及沒按過愛心 -->
+                    <% }else if(items[4][0] == undefined && items[7][0] != undefined ) {%>
+                    <script type="text/javascript">
+                        document.getElementById("addLike").style.display = "inline";
+                        document.getElementById("LikeUnLogIn").style.display = "none";
+                        document.getElementById("delLike").style.display = "none";
+                    </script>
+                    <!-- 如果有登入及按過愛心 -->
+                    <% }else if(items[4][0] != undefined && items[7][0] != undefined) {%>
+                    <script type="text/javascript">
+                        document.getElementById("delLike").style.display = "inline";
+                        document.getElementById("addLike").style.display = "none";
+                        document.getElementById("LikeUnLogIn").style.display = "none";
+                    </script>
+                    <!-- 邏輯錯誤 -->
+                    <% } else {%>
+                    <script type="text/javascript">
+                        document.getElementById("delLike").style.display = "none";
+                        document.getElementById("addLike").style.display = "none";
+                        document.getElementById("LikeUnLogIn").style.display = "none";
+                    </script>
+                    <% } %>
 
-                <!-- 收藏按鈕 -->
-                <button type="button" id="unLogIn" class="btn postInfo" onclick="location.href='/login'">
-                    <i class="far fa-bookmark"></i></button>
+                    <!-- 留言數量按鈕 -->
+                    <button type="button" class="btn postInfo" id="goBottom"><i
+                            class="fas fa-comment-dots"></i><a><%= items[0][0].messCount %></a></button>
 
-                <button type="button" id="addColle" class="btn postInfo"
-                    onclick=<%= "addColle(" + items[0][0].artiNum + ")" %>>
-                    <i class="far fa-bookmark"></i></button>
+                    <!-- 收藏按鈕 -->
+                    <button type="button" id="unLogIn" class="btn postInfo" onclick="location.href='/login'">
+                        <i class="far fa-bookmark"></i></button>
 
-                <button type="button" id="delColle" class="btn postInfo"
-                    onclick=<%= "delColle(" + items[0][0].artiNum + ")" %>>
-                    <i class="fas fa-bookmark"></i></button>
+                    <button type="button" id="addColle" class="btn postInfo"
+                        onclick=<%= "addColle(" + items[0][0].artiNum + ")" %>>
+                        <i class="far fa-bookmark"></i></button>
 
-                <!-- 如果沒登入 -->
-                <% if(items[7][0] == undefined) {%>
-                <script type="text/javascript">
-                    document.getElementById("unLogIn").style.display = "inline";
-                    document.getElementById("addColle").style.display = "none";
-                    document.getElementById("delColle").style.display = "none";
-                </script>
+                    <button type="button" id="delColle" class="btn postInfo"
+                        onclick=<%= "delColle(" + items[0][0].artiNum + ")" %>>
+                        <i class="fas fa-bookmark"></i></button>
 
-                <!-- 如果有登入及沒按過收藏 -->
-                <% }else if(items[3][0] == undefined && items[7][0] != undefined ) {%>
-                <script type="text/javascript">
-                    document.getElementById("addColle").style.display = "inline";
-                    document.getElementById("unLogIn").style.display = "none";
-                    document.getElementById("delColle").style.display = "none";
-                </script>
-                <!-- 如果有登入及按過收藏 -->
-                <% }else if(items[3][0] != undefined && items[7][0] != undefined ) {%>
-                <script type="text/javascript">
-                    document.getElementById("delColle").style.display = "inline";
-                    document.getElementById("addColle").style.display = "none";
-                    document.getElementById("unLogIn").style.display = "none";
-                </script>
-                <% } %>
-                <% if(items[7][0] != items[0][0].memID) {%>
-                    <button type="button" class="btn report" id="postReport" data-toggle="modal" data-target="#artiReportPost">檢舉</button>
-                <% } %>
+                    <!-- 如果沒登入 -->
+                    <% if(items[7][0] == undefined) {%>
+                    <script type="text/javascript">
+                        document.getElementById("unLogIn").style.display = "inline";
+                        document.getElementById("addColle").style.display = "none";
+                        document.getElementById("delColle").style.display = "none";
+                    </script>
+
+                    <!-- 如果有登入及沒按過收藏 -->
+                    <% }else if(items[3][0] == undefined && items[7][0] != undefined ) {%>
+                    <script type="text/javascript">
+                        document.getElementById("addColle").style.display = "inline";
+                        document.getElementById("unLogIn").style.display = "none";
+                        document.getElementById("delColle").style.display = "none";
+                    </script>
+                    <!-- 如果有登入及按過收藏 -->
+                    <% }else if(items[3][0] != undefined && items[7][0] != undefined ) {%>
+                    <script type="text/javascript">
+                        document.getElementById("delColle").style.display = "inline";
+                        document.getElementById("addColle").style.display = "none";
+                        document.getElementById("unLogIn").style.display = "none";
+                    </script>
+                    <% } %>
+                    <% if(items[7][0] != items[0][0].memID) {%>
+                    <button type="button" class="btn report" id="postReport" data-toggle="modal"
+                        data-target="#artiReportPost">檢舉</button>
+                    <% } %>
                 </div>
                 <!-- 收藏 ajax script  -->
                 <!-- info結束 -->
@@ -164,9 +167,9 @@
             <hr class="separate">
         </center>
 
-       <!-- 文章留言 -->
+        <!-- 文章留言 -->
 
-       <div class="row justify-content-center">
+        <div class="row justify-content-center">
             <% for(var i = 0 ; i < items[1].length ; i ++){ %>
             <div class="col-lg-8 content shadow">
                 <!-- 文章留言 -->
@@ -195,7 +198,7 @@
                         </button>
 
                         <button type="button" id=<%= "MessDelLike" + items[0][0].artiNum + items[1][i].artiMessNum %>
-                            class="btn like" 
+                            class="btn like"
                             onclick=<%= "MessDelLike(" + items[0][0].artiNum + "," + items[1][i].artiMessNum + ")" %>>
                             <i class="fab fa-gratipay" style="color:#c93737"></i>
                             <a id=<%= "MessDelLikeCount" + items[0][0].artiNum + items[1][i].artiMessNum %>>
@@ -242,30 +245,35 @@
                         </script>
                         <% } %>
                     </div>
-                    <hr class="smallMagin">   
+                    <hr class="smallMagin">
                     <!-- info結束 -->
                     <p class="content"> <%- items[1][i].artiMessCont %>
                     </p>
                 </div>
                 <hr>
                 <% if(items[7][0] != items[1][i].memID) {%>
-                    <button type="button" class="btn report" data-toggle="modal" data-target="#artiMessReportPost">檢舉</button>
-                     <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
+                <button type="button" class="btn report" data-toggle="modal"
+                    data-target="#artiMessReportPost">檢舉</button>
+                <!-- 如果留言是他自己的就不顯示檢舉 顯示下面就好 -->
                 <%} else { %>
-                    <div class="dropdown ml-auto float-right dropup">
-                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                        <div class="dropdown-menu dotMenu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="/editReply/<%= items[1][i].artiMessNum %>" class="editReply">編輯</a>
-                            <a class="dropdown-item" href="#/" onclick="deleteReply('<%- items[1][i].artiMessNum %>', '<%- items[1][i].memID %>')">刪除</a>
-                        </div>
+                <div class="dropdown ml-auto float-right dropup">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <div class="dropdown-menu dotMenu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/editReply/<%= items[1][i].artiMessNum %>"
+                            class="editReply">編輯</a>
+                        <a class="dropdown-item" href="#/"
+                            onclick="deleteReply('<%- items[1][i].artiMessNum %>', '<%- items[1][i].memID %>')">刪除</a>
                     </div>
+                </div>
                 <% } %>
             </div>
 
             <!-- 文章留言檢舉區塊 -->
-            <div class="modal fade" id="artiMessReportPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal fade" id="artiMessReportPost" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -276,10 +284,12 @@
                         </div>
                         <form>
                             <div class="modal-body" style="padding:1em;">
-                                <textarea class="report" name="reportReason" id="messReportReason" placeholder="輸入檢舉原因"></textarea>
+                                <textarea class="report" name="reportReason" id="messReportReason"
+                                    placeholder="輸入檢舉原因"></textarea>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" id="messReport"  class="btn btn-danger" onclick=<%= "ftn_messReport(" + items[1][i].artiMessNum + ")" %>>提交</button>
+                                <button type="button" id="messReport" class="btn btn-danger"
+                                    onclick=<%= "ftn_messReport(" + items[1][i].artiMessNum + ")" %>>提交</button>
                             </div>
                         </form>
                     </div>
@@ -308,18 +318,20 @@
         <!-- replying end -->
 
         <!-- 文章檢舉區塊 -->
-        <div class="modal fade" id="artiReportPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="artiReportPost" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalCenterTitle">檢舉</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                            </button>
+                        </button>
                     </div>
                     <form>
                         <div class="modal-body" style="padding:1em;">
-                            <textarea class="report" name="reportReason" id="reportReason" placeholder="輸入檢舉原因"></textarea>
+                            <textarea class="report" name="reportReason" id="reportReason"
+                                placeholder="輸入檢舉原因"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" id="artiReport" class="btn btn-danger">提交</button>
@@ -328,51 +340,51 @@
                 </div>
             </div>
         </div>
-  
+
         <script>
             //文章檢舉ajax
-            $("#artiReport").click(function() {
-                $('#artiReport').attr('disabled',true)
+            $("#artiReport").click(function () {
+                $('#artiReport').attr('disabled', true)
                 $.ajax({
                     url: "/report",
                     type: 'POST',
                     dataType: 'TEXT',
-                    data: { "artiNum" : "<%= items[0][0].artiNum %>" , "reportReason" : $("#reportReason").val()},
+                    data: { "artiNum": "<%= items[0][0].artiNum %>", "reportReason": $("#reportReason").val() },
                     success: function (res) {
                         alert(res);
-                        if(res == "申報成功"){
+                        if (res == "申報成功") {
                             $("#reportReason").val("");
-                            $('#artiReport').attr('disabled',false)
+                            $('#artiReport').attr('disabled', false)
                             $("#artiReportPost").modal('hide')
                         }
                     },
                     error: function (res) {
                         console.log("失敗", res);
                     }
-                }); 
+                });
             })
 
             //文章留言檢舉ajax
-            function ftn_messReport(a){
-                
+            function ftn_messReport(a) {
+
                 $.ajax({
                     url: "/report",
                     type: 'POST',
                     dataType: 'TEXT',
-                    data: { "artiMessNum" : a , "reportReason" : $("#messReportReason").val()},
+                    data: { "artiMessNum": a, "reportReason": $("#messReportReason").val() },
                     success: function (res) {
                         alert(res);
-                        if(res == "申報成功"){
+                        if (res == "申報成功") {
                             $("#messReportReason").val("");
                         }
                     },
                     error: function (res) {
                         console.log("失敗", res);
                     }
-                }); 
+                });
 
             }
-            
+
         </script>
 
         <a href="#" id="gotop">
@@ -384,16 +396,16 @@
             <span class="sr-only">Loading...</span>
     </div> -->
     <div class='coverContainer'>
-            <div class='loader'>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--dot'></div>
-                <div class='loader--text'></div>
-            </div>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
         </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
@@ -412,10 +424,20 @@
     <script src="/javascripts/imageCompression.js"></script>
 
     <script>
-    
+        $('#replyInput').click(function () {
+            var el = document.querySelector('#replyInput');
+            var range = document.createRange();
+            var sel = window.getSelection();
+            if (sel.focusNode.previousElementSibling.className == 'upload-img' || sel.focusNode.nextElementSibling.className == 'upload-img') {
+                range.setStart(el.lastChild, 0);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        })
         var formData = new FormData(); //用formData來存取要傳送的所有資料
         // 選取到檔案後開始動作
-        $('#file-selector').change(function(event) {
+        $('#file-selector').change(function (event) {
             var file = $("#file-selector")[0];  //取得檔案
             //如果有檔案就要加入formData
             if (file.files.length) {
@@ -423,20 +445,28 @@
                     // 解析檔案
                     var item = file.files[img]
                     var reader = new FileReader();
-                    reader.onload = (function(item) {
-                        return async function(event) {
+                    reader.onload = (function (item) {
+                        return async function (event) {
                             var getSize = getOriginalSize(event.target.result)
-                            getSize.then(function(size) {
+                            getSize.then(function (size) {
                                 var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
-                                canvasUrl.then(function(strDataURI) {
+                                canvasUrl.then(function (strDataURI) {
                                     var title = escape(file.name);
                                     var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
                                     $('#replyInput').append(img);
+                                    $('#replyInput').append('<span id="lastbr"></span><br /><br />');
+                                    var el = document.querySelector('#replyInput');
+                                    var range = document.createRange();
+                                    var sel = window.getSelection();
+                                    range.setStart(el.lastChild, 0);
+                                    range.collapse(true);
+                                    sel.removeAllRanges();
+                                    sel.addRange(range);
                                 }, (e) => {
                                     console.log(e)
-                                    })
                                 })
-                            };
+                            })
+                        };
                     })(file);
                     reader.readAsDataURL(item);
                 })
@@ -455,7 +485,7 @@
             $('.coverContainer').css('display', 'block')
 
             if ($("#replyInput").find("img")) {
-                Array.from($("#replyInput").find("img")).map((img) => { 
+                Array.from($("#replyInput").find("img")).map((img) => {
                     formData.append('base64Index', img.getAttribute('src'));
                     $(img).before("\\:imgLocation")
                 })
@@ -556,7 +586,7 @@
 
     <!-- 愛心 ajax script -->
     <script>
-        $('button').click(function() {
+        $('button').click(function () {
             if ($(this).children('.fa-gratipay').length > 0) {
                 $(this).parent('div').find('.fa-gratipay').parent('button').attr('disabled', true)
                 setTimeout(() => {
@@ -694,13 +724,13 @@
             });
         }
 
-         // delArticle
-         function delArticle(artiNum) {
+        // delArticle
+        function delArticle(artiNum) {
             if (confirm('您真的要刪除文章嗎？')) {
-                    $('.spinner-border').css('display', 'block')
-                    $('.coverContainer').css('display', 'block')
+                $('.spinner-border').css('display', 'block')
+                $('.coverContainer').css('display', 'block')
 
-                    $.ajax({
+                $.ajax({
                     url: '/addLike',
                     type: 'POST',
                     data: { "artiNum": artiNum, "memID": '<%= items[0][0].memID %>', "delArticle": true },
@@ -714,12 +744,12 @@
                 });
             }
         }
-                        // delReply
-            function deleteReply(artiMessNum, memID) {
-                if (confirm('您真的要刪除留言嗎？')) {
-                    $('.spinner-border').css('display', 'block')
-                    $('.coverContainer').css('display', 'block')
-                    $.ajax({
+        // delReply
+        function deleteReply(artiMessNum, memID) {
+            if (confirm('您真的要刪除留言嗎？')) {
+                $('.spinner-border').css('display', 'block')
+                $('.coverContainer').css('display', 'block')
+                $.ajax({
                     url: '/addLike',
                     type: 'POST',
                     data: { "artiMessNum": artiMessNum, "memID": memID, "deleteReply": true },

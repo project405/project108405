@@ -27,10 +27,10 @@ body {
     }
 }
 
-div.member {
+/* div.member {
     margin: 0em;
     padding-bottom: 3em;
-}
+} */
 
 input:focus {
     outline: none;

@@ -1,12 +1,6 @@
 // navbar
-$(document).ready(function() {
-
-    $(window).on("scroll", function() {
-        if ($(this).scrollTop() > 150) {
-            $('#sentimentSection').fadeIn();
-        } else {
-            $('#sentimentSection').fadeOut();
-        };
+$(document).ready(function () {
+    $(window).on("scroll", function () {
 
         var wn = $(window).scrollTop();
         if (wn > 120) {
@@ -23,61 +17,26 @@ $(document).ready(function() {
         }
     });
 
-    $('#positiveButton').click(() => {
-        if ($('#negativeSection').has('display')) {
-            $('#negativeSection').css('display', 'none')
-            $('#positiveButton').css('color','#ea5645')
-            $('#negativeButton').css('color','#212529')
-            $('#positiveButton').css('font-weight','bold')
-            $('#negativeButton').css('font-weight','normal')
-
-        }
-         $('#positiveSection').css('display', 'block')
-         $('.defaultAlarm').css('display', 'none')
-       }
-    )
-    $('#negativeButton').click(() => {
-        if ($('#positiveSection').has('display')) {
-            $('#positiveSection').css('display', 'none')
-            $('#negativeButton').css('color','#ea5645')
-            $('#positiveButton').css('color','#212529')
-            $('#negativeButton').css('font-weight','bold')
-            $('#positiveButton').css('font-weight','normal')
-
-        }
-         $('#negativeSection').css('display', 'block')
-         $('.defaultAlarm').css('display', 'none')
-       }
-    )
-    $('#sentimentSection').hover(() => {
-        $('#sentimentSection').css('width','75px')
-        $('#sentimentSection').css('height','75px')
-        // $('#sentimentSection > img').css('transform','rotate(180deg)')
-        // $('#sentimentSection > img').css('-ms-transform','rotate(180deg)')
-        // $('#sentimentSection > img').css('-moz-transform','rotate(180deg)')
-        // $('#sentimentSection > img').css('-webkit-transform','rotate(180deg)')
-        // $('#sentimentSection > img').css('-o-transform','rotate(180deg)')
-        $('#sentimentSectionHover').css('visibility','visible')
-        $('#sentimentSectionHover').css('transition','visibility 0.8s, opacity 0.5s linear')
-    })
-    $('#sentimentSection').mouseleave(() => {
-        $('#sentimentSection').css('width','50px')
-        $('#sentimentSection').css('height','50px')
-        // $('#sentimentSection > img').css('transform','rotate(360deg)')
-        // $('#sentimentSection > img').css('-ms-transform','rotate(360deg)')
-        // $('#sentimentSection > img').css('-moz-transform','rotate(360deg)')
-        // $('#sentimentSection > img').css('-webkit-transform','rotate(360deg)')
-        // $('#sentimentSection > img').css('-o-transform','rotate(360deg)')
-        $('#sentimentSectionHover').css('visibility','hidden')
-        $('#sentimentSectionHover').css('transition','visibility 0.2s, opacity 0.5s linear')
-    })
-
     $('.surpriseSection').hover(() => {
-        $('.surpriseHoverText').css('display','block')
+        $('.surpriseHoverText').css('display', 'block')
     })
     $('.surpriseSection').mouseleave(() => {
-        $('.surpriseHoverText').css('display','none')
+        $('.surpriseHoverText').css('display', 'none')
     })
+    $('a.list-group-item-action').hover(function(item) {
+        $(`.${item.target.classList[2]}Text`).css('visibility', 'visible').hide().slideDown();
+
+    })
+    $('a.list-group-item-action').mouseleave(function(item) {
+        $(`.${item.target.classList[2]}Text`).css('visibility', 'hidden')
+    })
+
+    $('a').click(function(){
+        $('html, body').animate({
+            scrollTop: $( $(this).attr('href') ).offset().top
+        }, 500);
+        return false;
+    });
 });
 
 

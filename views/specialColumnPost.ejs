@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--  js   -->
+    <script src="/javascripts/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+    <link href="/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="/css/post.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
+
+    <title>文藝富心</title>
+</head>
+
+<body>
+    <!-- navbar -->
+    <div id="header"></div>
+
+    <center>
+        <h3>新增專欄</h3>
+        <hr class="highlight">
+    </center>
+    <Section id="special">
+        <div class="justify-content-center">
+            <div class="post col-lg-7 content">
+                <label class="btn btn-secondary col-lg-2" style="cursor: pointer">
+                    <input id="bannerInput" style="width: 3em; height: 3em;" type="file"
+                        accept=".jpg,.png,.gif,.tif,.bmp" />
+                    <i class="fas fa-images" style="padding-right:5px"></i>Banner
+                </label>
+                <div id="bannerImg" style="width: 100%; margin-bottom: 1em;">
+                    <img style="width: 100%;" src="" alt="">
+                </div>
+                <input type="text" class="titleInput input-with-icon title" name="artiHead" id="artiHead"
+                    placeholder="輸入專欄名稱">
+
+                <div id="postInput" class="postInput" contenteditable="true" role="textbox" data-text="請輸入專欄內容"></div>
+
+                <!-- <div class="text-right"> -->
+                <label class="btn btn-dark col-lg-2" style="cursor: pointer">
+                    <input id="file-selector" name="userImg" type="file" multiple="multiple"
+                        accept=".jpg,.png,.gif,.tif,.bmp" />
+                    <i class="fas fa-images" style="padding-right:5px"></i>加圖片
+                </label>
+                <!-- </div> -->
+                <button type="submit" class="btn btn-danger col-lg-2 float-right postButton"
+                    onclick="submitPost()">提交</button>
+
+            </div>
+        </div>
+
+    </Section>
+
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
+
+    <!-- <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+    </div> -->
+    <div class='coverContainer'>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="/javascripts/post.js"></script>
+    <script src="/javascripts/tag.js"></script>
+    <script src="/javascripts/active.js"></script>
+    <script src="/javascripts/navbar.js"></script>
+    <script>
+        function getOriginalSize(imgData) {
+            return new Promise(function (resolve, reject) {
+                var template = new Image();
+                template.src = imgData
+                template.onload = function () {
+                    while (this.width >= 750 || this.height >= 600) {
+                        if (this.width >= 750 || this.height >= 600) {
+                            this.width = this.width * 0.85
+                            this.height = this.height * 0.85
+                        }
+                    }
+                    var size = {
+                        originWidth: this.width,
+                        originHeight: this.height
+                    }
+                    resolve(size)
+                }
+            })
+        }
+        function drawToCanvas(imgData, originWidth, originHeight) {
+            return new Promise(function (resolve, reject) {
+                var canvas = document.createElement("canvas");
+                canvas.width = originWidth;
+                canvas.height = originHeight;
+                var ctx = canvas.getContext('2d');
+                var img = new Image;
+                img.src = imgData;
+                img.onload = function () { //必須onload之後再畫
+                    ctx.drawImage(img, 0, 0, originWidth, originHeight);
+                    strDataURI = canvas.toDataURL('image/jpeg', 1);//獲取canvas base64資料
+                    resolve(strDataURI)
+                }
+            })
+        }
+    </script>
+    <script>
+        $('#postInput').click(function () {
+            var el = document.querySelector('#postInput');
+            var range = document.createRange();
+            var sel = window.getSelection();
+            console.log(sel)
+            if (sel.focusNode.previousElementSibling.className == 'upload-img' || sel.focusNode.nextElementSibling.className == 'upload-img') {
+                range.setStart(el.lastChild, 0);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        })
+        var formData = new FormData(); //用formData來存取要傳送的所有資料
+
+        $('#bannerInput').change(function (event) {
+            var file = $("#bannerInput")[0];  //取得檔案
+            //如果有檔案就要加入formData
+            if (file.files.length) {
+                Object.keys(file.files).map((img, index) => {
+                    // 解析檔案
+                    var item = file.files[img]
+                    var reader = new FileReader();
+                    reader.onload = (function (item) {
+                        return async function (event) {
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function (size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function (strDataURI) {
+                                    $('#bannerImg').children('img').attr('src', strDataURI);
+                                }, (e) => {
+                                    console.log(e)
+                                })
+                            })
+                        };
+                    })(file);
+                    reader.readAsDataURL(item);
+                })
+            }
+        });
+
+        // 選取到檔案後開始動作
+        $('#file-selector').change(function (event) {
+            var file = $("#file-selector")[0];  //取得檔案
+            //如果有檔案就要加入formData
+            if (file.files.length) {
+                Object.keys(file.files).map((img, index) => {
+                    // 解析檔案
+                    var item = file.files[img]
+                    var reader = new FileReader();
+                    reader.onload = (function (item) {
+                        return async function (event) {
+                            var getSize = getOriginalSize(event.target.result)
+                            getSize.then(function (size) {
+                                var canvasUrl = drawToCanvas(event.target.result, size.originWidth, size.originHeight)
+                                canvasUrl.then(function (strDataURI) {
+                                    var title = escape(file.name);
+                                    var img = '<img class="upload-img" src="' + strDataURI + '" title="' + title + '"/> ';
+                                    $('#postInput').append(img);
+                                    $('#postInput').append('<span id="lastbr"></span><br /><br />');
+                                    var el = document.querySelector('#postInput');
+                                    var range = document.createRange();
+                                    var sel = window.getSelection();
+                                    range.setStart(el.lastChild, 0);
+                                    range.collapse(true);
+                                    sel.removeAllRanges();
+                                    sel.addRange(range);
+                                }, (e) => {
+                                    console.log(e)
+                                })
+                            })
+                        };
+                    })(file);
+                    reader.readAsDataURL(item);
+                })
+                $('#file-selector').val('')
+            }
+        });
+        async function submitPost() {
+            var bannerImgBase64 = $('#bannerImg').children('img').attr('src')
+            if (bannerImgBase64 == '') {
+                alert('請加入專欄Banner圖片！')
+                return
+            }
+            formData.append('base64Index', bannerImgBase64);
+            var templateCont = document.getElementById('postInput').innerHTML.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+            var templateHead = document.getElementById('artiHead').value.replace(/&nbsp;/g, '').replace(/&ensp;/g, '').replace(/&emsp;/g, '').replace(/<br>/g, '').trim()
+            var artiHead = document.getElementById("artiHead").value;
+            if (templateHead == '') {
+                alert('請輸入標題')
+                return;
+            } else if (templateCont == '') {
+                alert('請輸入內文')
+                return;
+            } else if (templateHead.length > 40) {
+                alert('標題不得超過40字元！')
+                return;
+            }
+            $('.postButton').addClass('disabled')
+            $('.postButton').attr('disabled', true)
+            $('.spinner-border').css('display', 'block')
+            $('.coverContainer').css('display', 'block')
+            //img process
+            if ($("#postInput").find("img")) {
+                Array.from($("#postInput").find("img")).map(async (img) => {
+                    formData.append('base64Index', img.getAttribute('src'));
+                    $(img).before("\\:imgLocation")
+                })
+            }
+            var artiCont = [];
+            var artiData = document.querySelectorAll(".postInput"); //只取得文字部分(不含圖片) ;
+            // 取得內容
+            artiData.forEach(function (element) {
+                artiCont.push(element.innerText);
+            }, this);
+            formData.append('specColHead', artiHead);
+            formData.append('specColCont', artiCont);
+
+            $.ajax({
+                url: '/specialColumn/post',
+                type: 'POST',
+                dataType: 'TEXT',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (res) {
+                    if (res == "請進行登入") {
+                        alert(res);
+                        location.replace("/login");
+                    } else {
+                        alert("專欄發佈成功");
+                        location.replace("/specialColumnList");
+                    }
+                },
+                error: function (res) {
+                    console.log(res)
+                }
+            });
+
+        }
+    </script>
+
+</body>
+
+</html>

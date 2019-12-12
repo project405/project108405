@@ -20,7 +20,7 @@ router.get('/:artiNum', async function (req, res, next) {
     }
 
     article.getOneArticle(artiNum, memID).then(data => {
-        if (data[0][0].memID != memID) {
+        if (data[0][0].memID != memID && data[10] != 'SYSOP') {
             res.write('<head><meta charset="utf-8"/></head>');
             res.end('<script> alert("您沒有編輯該文章的權限"); history.back();</script>');
             return;           

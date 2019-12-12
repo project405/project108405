@@ -113,10 +113,10 @@
                             <% } else if(items[5][0] != undefined ) { %>
                                 <!-- 判斷是否有按過愛心 -->
                                 <% var isLike = false %>
-                                <% if(items[2] != undefined ) { %>
-                                    <%  for (var j = 0; j < items[2].length ; j++) { %>
+                                <% if(items[3] != undefined ) { %>
+                                    <%  for (var j = 0; j < items[3].length ; j++) { %>
                                         <!-- 如果有按過愛心 -->
-                                        <% if(items[0][i].artiNum == items[2][j].artiNum ) { %>
+                                        <% if(items[0][i].artiNum == items[3][j].artiNum ) { %>
                                             <script type="text/javascript">                                  
                                                 document.getElementById("delLike" + "<%= items[0][i].artiNum %>").style.display = "inline";
                                                 document.getElementById("addLike" + "<%= items[0][i].artiNum %>").style.display = "none";

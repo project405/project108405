@@ -40,7 +40,8 @@ var getIndexData = async function (memID) {
                         ' ON "A"."recomNum" = "I"."recomNum" '+
                     ' WHERE "Rank" = \'1\' AND "I"."recomMessNum" IS NULL '+
                     ' ORDER BY "recomNum" ) AS "B" '+
-             ' WHERE "B"."R" = \'1\' ')
+             ' WHERE "B"."R" = \'1\' '+
+             ' ORDER BY "recomDateTime" DESC')
         .then((data) => {
             
             // 將每周推薦的類別改為中文
@@ -63,8 +64,10 @@ var getIndexData = async function (memID) {
     // -----------  熱門文章 --------------
     await sql('SELECT "articleListDataView".*, "member"."memName" ' + 
               'FROM "articleListDataView" '+
-              'INNER JOIN "member" ON "member"."memID" = "articleListDataView"."memID"' +
-              'ORDER BY "likeCount" DESC , "artiDateTime" DESC LIMIT 3')
+              'INNER JOIN "member" '+
+                 ' ON "member"."memID" = "articleListDataView"."memID"' +
+              ' WHERE "articleListDataView".deadline IS NULL '+
+              ' ORDER BY "likeCount" DESC , "artiNum" DESC LIMIT 3')
         .then((data) => {
             if (!data.rows) {
                 hotArticle = undefined;
@@ -88,7 +91,10 @@ var getIndexData = async function (memID) {
         });
 
     //----------- 取得文章照片 ----------- 
-    await sql('SELECT "artiNum" , "imgName" FROM "image" ORDER BY "imgNum" ')
+    await sql(`SELECT "artiNum" , "imgName" 
+               FROM "image" 
+               WHERE "artiMessNum" IS NULL AND "artiNum" IS NOT NULL 
+               ORDER BY "imgNum" `)
         .then((data) => {
             if (!data.rows) {
                 articleImgs = undefined;
@@ -100,7 +106,10 @@ var getIndexData = async function (memID) {
         });
     
     //----------- 取得推薦照片 ----------- 
-    await sql('SELECT "recomNum" , "imgName" FROM "image" ORDER BY "imgNum"')
+    await sql(`SELECT "recomNum" , "imgName" 
+               FROM "image" 
+               WHERE "recomMessNum" IS NULL AND "recomNum" IS NOT NULL 
+               ORDER BY "imgNum"`)
         .then((data) => {
             if (!data.rows) {
                 recommendImgs = undefined;
@@ -112,15 +121,21 @@ var getIndexData = async function (memID) {
         });
 
     //----------- 正向文章 ----------- 
-    await sql('SELECT * '+ 
-            ' FROM( '+
-                ' SELECT * '+
-                ' FROM "article" '+
-                ' WHERE "score2" >= 20 '+
-                ' ORDER BY "positiveWords" DESC, "analyzeScore" DESC '+
-                ' LIMIT 5) AS "A" '+
-            ' ORDER BY random() '+
-            ' LIMIT 1 ')
+    await sql(`SELECT *
+                FROM(
+                    SELECT "A".*,"I"."imgName" , ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                    FROM( 
+                        SELECT * 
+                        FROM "article" 
+                        WHERE "score2" >= 20 AND "deadline" IS NULL
+                        ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
+                        LIMIT 5) AS "A" 
+                    LEFT JOIN "image" AS "I"
+                        ON "I"."artiNum" = "A"."artiNum"
+                    WHERE "artiMessNum" IS NULL ) AS "B"
+                WHERE "B"."Rank" = 1
+                ORDER BY random() 
+                LIMIT 1`)
     .then((data) => {
         if (!data.rows) {
             positiveArticle = undefined;
@@ -132,15 +147,21 @@ var getIndexData = async function (memID) {
     });
 
     //----------- 負向文章 ----------- 
-    await sql('SELECT * '+
-            ' FROM( '+
-                ' SELECT * '+
-                ' FROM "article" '+
-                ' WHERE "score2" <= -15 '+
-                ' ORDER BY "negativeWords" DESC, "analyzeScore" DESC '+
-                ' LIMIT 5) AS "A" '+
-            ' ORDER BY random() '+
-            ' LIMIT 1 ')
+    await sql(`SELECT *
+                FROM(
+                    SELECT "A".*,"I"."imgName" , ROW_NUMBER() OVER(PARTITION BY "A"."artiNum" ORDER BY "I"."imgNum") as "Rank" 
+                    FROM( 
+                        SELECT * 
+                        FROM "article" 
+                        WHERE "score2" <= -15 AND "deadline" IS NULL
+                        ORDER BY "positiveWords" DESC, "analyzeScore" DESC 
+                        LIMIT 5) AS "A" 
+                    LEFT JOIN "image" AS "I"
+                        ON "I"."artiNum" = "A"."artiNum"
+                    WHERE "artiMessNum" IS NULL ) AS "B"
+                WHERE "B"."Rank" = 1
+                ORDER BY random() 
+                LIMIT 1`)
     .then((data) => {
         if (!data.rows) {
             negativeArticle = undefined;
@@ -152,39 +173,39 @@ var getIndexData = async function (memID) {
     });
 
     //----------- 正向照片 ----------- 
-    if(positiveArticle.length != 0 ){
-        await sql('SELECT "imgName" '+
-            ' FROM "image" '+
-            ' WHERE "artiNum" = $1 '+
-            ' ORDER BY "imgNum" ',[positiveArticle[0].artiNum])
-        .then((data) => {
-            if (!data.rows) {
-                positiveImg = undefined;
-            } else {
-                positiveImg = data.rows;
-            }
-        }, (error) => {
-            positiveImg = undefined;
-        });
-    }
+    // if(positiveArticle.length != 0 ){
+    //     await sql('SELECT "imgName" '+
+    //         ' FROM "image" '+
+    //         ' WHERE "artiNum" = $1 AND "artiMessNum" IS NULL'+
+    //         ' ORDER BY "imgNum" ',[positiveArticle[0].artiNum])
+    //     .then((data) => {
+    //         if (!data.rows) {
+    //             positiveImg = undefined;
+    //         } else {
+    //             positiveImg = data.rows;
+    //         }
+    //     }, (error) => {
+    //         positiveImg = undefined;
+    //     });
+    // }
     
 
     //----------- 負向照片 ----------- 
-    if(negativeArticle.length != 0 ){
-        await sql('SELECT "imgName" '+
-            ' FROM "image" '+
-            ' WHERE "artiNum" = $1 '+
-            ' ORDER BY "imgNum"',[negativeArticle[0].artiNum])
-        .then((data) => {
-            if (!data.rows) {
-                negativeImg = undefined;
-            } else {
-                negativeImg = data.rows;
-            }
-        }, (error) => {
-            negativeImg = undefined;
-        });
-    }
+    // if(negativeArticle.length != 0 ){
+    //     await sql('SELECT "imgName" '+
+    //         ' FROM "image" '+
+    //         ' WHERE "artiNum" = $1 AND "artiMessNum" IS NULL'+
+    //         ' ORDER BY "imgNum"',[negativeArticle[0].artiNum])
+    //     .then((data) => {
+    //         if (!data.rows) {
+    //             negativeImg = undefined;
+    //         } else {
+    //             negativeImg = data.rows;
+    //         }
+    //     }, (error) => {
+    //         negativeImg = undefined;
+    //     });
+    // }
     
 
     // ----------- 計算文章class的數量-----------
@@ -250,8 +271,8 @@ var getIndexData = async function (memID) {
     result[5] = tag ; 
     result[6] = positiveArticle ; 
     result[7] = negativeArticle ; 
-    result[8] = positiveImg ;
-    result[9] = negativeImg ;
+    // result[8] = positiveImg ;
+    // result[9] = negativeImg ;
     result[10] = byClassData; 
 
     return result;
@@ -306,7 +327,7 @@ async function byClassGetData(index, r){
     if( r <= 5 ){
         await sql('SELECT * '+
                  ' FROM "articleListDataView" '+
-                 ' WHERE "artiClass" = $1 '+
+                 ' WHERE "artiClass" = $1 AND "deadline" IS NULL '+
                  ' ORDER BY random() '+
                  ' LIMIT 1', [className])
         .then((data) => {
@@ -367,11 +388,12 @@ var getWebSearch = async function (searchParams, memID) {
                         FROM "articleListDataView" AS "A"
                         LEFT JOIN "image" AS "I"
                             ON "A"."artiNum" = "I"."artiNum"
-                        WHERE "I"."artiMessNum" IS NULL)  AS "T1"
-                WHERE "T1"."Rank" = '1' AND ("artiHead" LIKE $1 or "artiCont" LIKE $1 or "artiClass" LIKE $1 ) 
-                ORDER BY "artiNum" DESC) AS "T2"
+                        WHERE "I"."artiMessNum" IS NULL AND "A"."deadline" IS NULL)  AS "T1"
+                    WHERE "T1"."Rank" = '1' AND ("artiHead" LIKE $1 or "artiCont" LIKE $1 or "artiClass" LIKE $1 ) 
+                    ORDER BY "artiNum" DESC) AS "T2"
                 INNER JOIN "member" "M"
-                ON "M"."memID" = "T2"."memID"`,['%' + searchParams + '%'])
+                    ON "M"."memID" = "T2"."memID"
+                ORDER BY "artiDateTime" DESC, "artiNum" DESC`,['%' + searchParams + '%'])
         .then((data) => {
             articleList = data.rows;
         }, (error) => {
@@ -416,18 +438,6 @@ var getWebSearch = async function (searchParams, memID) {
             isCollection = undefined ; 
         });
 
-    //取得第一張照片
-    // await sql('SELECT "artiNum" , "imgName" FROM "image"  WHERE "artiMessNum" IS NULL')
-    //     .then((data) => {
-    //         if (data.rows == null || data.rows == '') {
-    //             artiImgs = undefined;
-    //         } else {
-    //             artiImgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         artiImgs = undefined;
-    //     });
-
     //======================================
     //------------- 搜尋推薦 ---------------
     //======================================
@@ -454,18 +464,6 @@ var getWebSearch = async function (searchParams, memID) {
         }, (error) => {
             recommendList = undefined;
         });
-
-    //----------- 取得照片 ----------- 
-    // await sql('SELECT "recomNum" , "imgName" FROM "image" ')
-    // .then((data) => {
-    //     if (!data.rows) {
-    //         recomImgs = undefined;
-    //     } else {
-    //         recomImgs = data.rows;
-    //     }
-    // }, (error) => {
-    //     recomImgs = undefined;
-    // });
 
     //文章
     result[0] = articleList;

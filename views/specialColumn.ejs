@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--  js   -->
+    <script src="/javascripts/jquery.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+
+    <link href="/css/header.css" rel="stylesheet" type="text/css" />
+    <link href="/css/specialColumn.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/imgs/logo.ico" type="image/x-icon" />
+
+    <title>文藝富心</title>
+</head>
+
+<body>
+    <!-- navbar -->
+    <div id="header"></div>
+    <!-- 封面區塊 -->
+    <div class="banner" style="background-image: url('<%- items[0][0].imgName %>'); ">
+        <!-- <img src="<%- items[0][0].imgName %>" alt=""> -->
+    </div>
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="row d-flex justify-content-center col-lg-12">
+            <% if(items[1] && items[1] == 'SYSOP') {%>
+            <div class="col-12">
+                <div class="dropdown float-right">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right dotMenu " aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/specialColumn/edit/page/<%= items[0][0].specColNum %>">編輯</a>
+                        <a class="dropdown-item" onclick="delSpecialColumn('<%= items[0][0].specColNum %>')">刪除</a>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+            <div class="col-lg-8">
+                <div class="contain">
+                    <div>
+                        <h3 class="title"><%= items[0][0].specColHead %></h3>
+                        <p> <%= items[0][0].specColDate %> </p>
+                    </div>
+                    <div class="text">
+                        <p class="content">
+                            <%- items[0][0].specColCont %>
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" id="gotop">
+        <i class="fa fa-angle-up"></i>
+    </a>
+
+    <div class='coverContainer'>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js "
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo "
+        crossorigin="anonymous "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js "
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 "
+        crossorigin="anonymous "></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js "
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM "
+        crossorigin="anonymous "></script>
+    <script src="/javascripts/active.js "></script>
+    <script src="/javascripts/navbar.js"></script>
+    <script src="/javascripts/imageCompression.js"></script>
+    <script>
+        var formData = new FormData();
+        function delSpecialColumn(recomNum) {
+            if (confirm('管理者確定要刪除專欄嗎？')) {
+                $('.coverContainer').css('display', 'block')
+                formData.append('specColNum', recomNum);
+                formData.append('delSpecialColumn', true);
+                $.ajax({
+                    url: '/specialColumn/post',
+                    type: 'POST',
+                    dataType: 'TEXT',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (res) {
+                        if (res == "請進行登入") {
+                            alert(res);
+                            location.replace("/login");
+                        } else {
+                            alert("刪除成功");
+                            location.replace("/specialColumnList");
+                        }
+                    },
+                    error: function (res) {
+                        alert("刪除失敗");
+                    }
+                });
+            }
+        }
+
+        function delSpecialColumn(specColNum) {
+            if (confirm('管理者確定要刪除專欄嗎？')) {
+                $('.coverContainer').css('display', 'block')
+                $.ajax({
+                    url: '/addLike',
+                    type: 'POST',
+                    data: { "specColNum": specColNum, "deleteSpecialColumn": true, "member": "<%= items[1] %>" },
+                    success: function (res) {
+                        alert('刪除成功！')
+                        location.replace("/specialColumnList");
+                    },
+                    error: function (res) {
+                        console.log('刪除失敗');
+                        alert('刪除失敗！')
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

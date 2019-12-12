@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC');
+html,
+body {
+    height: 100%;
+    max-width: 100%;
+    font-family: 'Noto Serif TC', 'Times New Roman', 'Microsoft JhengHei';
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+    /* text-align: justify; */
+    text-justify: inter-ideograph;
+    background-color: #fafafa;
+    position: relative;
+}
+@media (max-width: 991px) {
+    html,
+    body {
+        padding-top: 2em;
+    }
+}
+
+.banner {
+    margin-bottom: 1.5em;
+    /* opacity: 0.6; */
+    width: 100%;
+    height: 80% !important;
+    /* padding-top: 40em; */
+    padding-bottom: calc(10em - 72px);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
+@media (max-width: 1024px) {
+    .banner {
+        width: 100%;
+        height: 40% !important;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: cover;
+    }
+}
+
+.container-fluid {
+    padding-bottom: 6em;
+}
+.content {
+    font-size: 1.1rem;
+    line-height: 1.8em;
+}
+
+.text {
+    font-size: 1.1rem;
+    line-height: 1.8em;
+}
+img {
+    max-width: 100% !important;
+    height: auto;
+    overflow: hidden;
+}
+
+.title {
+    margin-bottom: 0.5em;
+    font-weight: bolder;
+}
+
+
+.dotMenu {
+    background-color: white !important;
+    text-align: center;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}
+.dotMenu > .dropdown-item:hover {
+    background-color: #b4d7ddb2 !important;
+    color: rgb(83, 83, 83) !important;
+    font-size:1em !important; 
+    text-align: center;
+    padding: 0.25 !important;
+    margin: 0.25 !important;
+}

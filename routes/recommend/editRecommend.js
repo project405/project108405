@@ -20,7 +20,7 @@ router.get('/:recomNum', async function (req, res, next) {
     }
 
     recommend.getOneRecommend(recomNum, memID).then(data => {
-        if (!data || data[7] != 'boss') {
+        if (!data || data[7] != 'SYSOP') {
             res.write('<head><meta charset="utf-8"/></head>');
             res.end('<script> alert("您沒有編輯該推薦的權限"); history.back();</script>');
             return;           

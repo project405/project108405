@@ -180,6 +180,233 @@ var editArticle = async function (memID, artiHead, artiCont, artiClass, imgData,
     }
     return result;
 }
+//================================
+//-------- editActivity() ---------
+//================================
+var editActivity = async function (memID, artiHead, artiCont, artiClass, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime, score2, deadline) {
+    
+    console.log(memID, artiHead, artiCont, artiClass, tag, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, artiDateTime, score2, deadline)
+    var tagNum = [];
+    var result = 0;
+    console.log('type of imgData', typeof(imgData))
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
+    //修改文章
+    await sql('UPDATE "article" SET "artiHead" = $1, "artiCont" =$2, "artiClass"= $3, "analyzeScore"= $4, "positiveWords"= $5, "negativeWords"= $6, "swearWords"= $7, "score2"= $9, "deadline"= $10' +
+    ' WHERE "artiNum" = $8'
+    , [artiHead, artiCont, artiClass, analyzeScore, positiveWords, negativeWords, swearWords, artiNum, score2, deadline])
+    .then((data) => {
+        result = 1;
+    }, (error) => {
+        console.error(error)
+        result = 0;
+    });
+
+    // 刪除舊tag連結
+    await sql ('DELETE FROM "tagLinkArticle" WHERE "artiNum" = $1',[artiNum])
+    .then((data)=> {
+    },(e) => {
+        console.error(e)
+    }) 
+
+    //新增tag 
+    if(tag.length != 0){
+        for (var i = 0; i < tag.length; i++) {
+            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i]])
+                .then((data) => {
+                    if (!data.rows) {
+                        tagNum = undefined;
+                    } else {
+                        tagNum = data.rows[0].tagNum;
+                    }
+                }, (error) => {
+                    tagNum = undefined;
+                    console.error(error)
+                });
+
+            // --------- 新增tagLink ---------
+            await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
+                .then((data) => {
+                    result = 1
+                }, (error) => {
+                    console.log(error)
+                    result = 0;
+                });
+        }
+    }
+
+    await sql('DELETE FROM "image" WHERE "artiNum" = $1 and "artiMessNum" IS NULL', [artiNum])
+    .then((data) => {
+    }, (error) => {
+        console.log(error)
+    })
+
+    // --------- 新增img ---------
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, artiNum, imgData[i], artiDateTime])
+                .then((data) => {
+                    result = 1;
+                }, (error) => {
+                    result = 0;
+                });
+        }
+    }
+    return result;
+}
+
+
+//================================
+//-------- activityPost() ---------
+//================================
+var activityPost = async function (memID, artiHead, artiCont, artiClass, artiDateTime, imgData, tag, analyzeScore, positiveWords, negativeWords, swearWords, score2, deadline) {
+    var artiNum;
+    var tagNum = [];
+    var result = 0;
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
+    //新增文章
+    await sql('INSERT into "article" ("memID","artiHead","artiCont","artiClass","artiDateTime", "analyzeScore", "positiveWords", "negativeWords", "swearWords", "score2", "deadline") ' +
+        ' VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)  returning "article"."artiNum" ;'
+        , [memID, artiHead, artiCont, artiClass, artiDateTime, analyzeScore, positiveWords, negativeWords, swearWords, score2, deadline])
+        .then((data) => {
+            if (!data.rows) {
+                artiNum = undefined;
+            } else {
+                artiNum = data.rows[0].artiNum;
+            }
+        }, (error) => {
+            artiNum = undefined;
+    });
+
+    //新增tag 
+    if(tag.length != 0){
+        for (var i = 0; i < tag.length; i++) {
+            await sql('INSERT into "tag" ("tagName") VALUES ($1) returning "tag"."tagNum" ', [tag[i].trim()])
+                .then((data) => {
+                    if (!data.rows) {
+                        tagNum = undefined;
+                    } else {
+                        tagNum = data.rows[0].tagNum;
+                    }
+                }, (error) => {
+                    tagNum = undefined;
+                });
+    
+            // --------- 新增tagLink ---------
+            await sql('INSERT into "tagLinkArticle" ("artiNum","tagNum") VALUES ($1,$2)', [artiNum, tagNum])
+                .then((data) => {
+                    result = 0;
+                }, (error) => {
+                    result = 1;
+                });
+        }
+    }
+    
+    // --------- 新增img ---------
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("memID", "artiNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,NOW())', [memID, artiNum, imgData[i]])
+                .then((data) => {
+                    result = 0;
+                }, (error) => {
+                    result = 1;
+                });
+        }
+    }
+    
+
+    return result;
+}
+
+//================================
+//----- specialColumnPost() ------
+//================================
+var specialColumnPost = async function (memID, specColHead, specColCont, postDateTime, imgData) {
+    var specColNum;
+    var result = 0;
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
+    //新增文章
+    await sql(`INSERT into "specialColumn" ("specColHead", "specColCont", "specColDateTime")
+                VALUES ($1,$2,$3) 
+                returning "specialColumn"."specColNum"`
+        , [specColHead, specColCont, postDateTime])
+        .then((data) => {
+            if (!data.rows) {
+                specColNum = undefined;
+            } else {
+                specColNum = data.rows[0].specColNum;
+            }
+        }, (error) => {
+            specColNum = undefined;
+    });
+
+    // --------- 新增img ---------
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("memID", "specColNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, specColNum, imgData[i], postDateTime])
+                .then((data) => {
+                    result = 0;
+                }, (error) => {
+                    result = 1;
+                });
+        }
+    }
+    
+    return result;
+}
+
+//================================
+//----- editSpecialColumn() ------
+//================================
+var editSpecialColumn = async function (memID, specColHead, specColCont, postDateTime, imgData, specColNum) {
+    var result = 0;
+    if (typeof(imgData) == 'string') {
+        var temp = imgData
+        imgData = []
+        imgData.push(temp)
+    }
+    //修改文章
+    await sql('UPDATE "specialColumn" SET "specColHead" = $1, "specColCont" =$2' +
+    ' WHERE "specColNum" = $3'
+    , [specColHead, specColCont, specColNum])
+    .then((data) => {
+        result = 1;
+    }, (error) => {
+        console.error(error)
+        result = 0;
+    });
+
+    await sql('DELETE FROM "image" WHERE "specColNum" = $1', [specColNum])
+    .then((data) => {
+    }, (error) => {
+        console.log(error)
+    })
+
+    // --------- 新增img ---------
+    if(imgData != undefined){
+        for (var i = 0; i < imgData.length; i++) {
+            await sql('INSERT into "image" ("memID", "specColNum", "imgName", "imgDateTime") VALUES ($1,$2,$3,$4)', [memID, specColNum, imgData[i], postDateTime])
+                .then((data) => {
+                    result = 1;
+                }, (error) => {
+                    result = 0;
+                });
+        }
+    }
+    return result;
+}
+
 
 //================================
 //-------- editRecommend()--------
@@ -320,6 +547,24 @@ var deleteArticle = async function (artiNum) {
 var deleteRecommend = async function (recomNum) {
     var result = 0;
     await sql ('DELETE FROM "recommend" WHERE "recomNum" = $1',[recomNum])
+        .then((data)=> {
+            result = 1
+        },(e) => {
+            console.error(e)
+            result = 0
+        }) 
+    return result;
+}
+
+//================================
+//--- deleteSpecialColumn() -----
+//================================
+var deleteSpecialColumn = async function (specColNum) {
+    console.log(specColNum)
+    console.log(typeof(specColNum))
+
+    var result = 0;
+    await sql ('DELETE FROM "specialColumn" WHERE "specColNum" = $1',[specColNum])
         .then((data)=> {
             result = 1
         },(e) => {
@@ -580,7 +825,8 @@ var myArticle = async function (memID, artiPage) {
                     LIMIT 10
                     OFFSET $2 ) AS "T2"
                     INNER JOIN "member" "M"
-                    ON "M"."memID" = "T2"."memID"`, [memID, (artiPage-1) * 10])
+                        ON "M"."memID" = "T2"."memID"
+                ORDER BY "artiDateTime" DESC`, [memID, (artiPage-1) * 10])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;
@@ -646,24 +892,6 @@ var myArticle = async function (memID, artiPage) {
             isLike = undefined;
         });
 
-    // ----------- 取得照片 -----------
-    // await sql('SELECT "artiNum" , "imgName" ' +
-    //          ' FROM "image" ' +
-    //          ' WHERE "artiNum" ' +
-    //             ' IN(SELECT "artiNum" ' +
-    //                ' FROM "articleListDataView" ' +
-    //                ' WHERE "memID" = $1) '+
-    //          'ORDER BY "imgNum"', [memID])
-    //     .then((data) => {
-    //         if (!data.rows) {
-    //             imgs = undefined;
-    //         } else {
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined;
-    //     });
-
     result[0] = articleList;
     result[1] = tag;
     // result[2] = imgs;
@@ -711,6 +939,23 @@ var getOriginalMail = async function (memID) {
     return result;
 }
 
+//================================
+//--------- getRepeatMail() ------
+//================================
+var getRepeatMail = async function (memID, memMail) {
+    var result;
+
+    // -----------  修改會員資料 --------------
+    await sql('SELECT "memMail" from "member" where "memID" != $1 AND "memMail" = $2', [memID, memMail])
+        .then((data) => {
+            result = data.rows;
+        }, (error) => {
+            result = 0;
+        });
+
+    return result;
+}
+
 //===================================
 //----- getMyArticleClassList() -----
 //===================================
@@ -738,7 +983,8 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
                     LIMIT 10
                     OFFSET $3 ) AS "T2"
                     INNER JOIN "member" "M"
-                    ON "M"."memID" = "T2"."memID"`, [artiClass, memID, (artiPage-1) * 10])
+                    ON "M"."memID" = "T2"."memID"
+                ORDER BY "artiDateTime" DESC`, [artiClass, memID, (artiPage-1) * 10])
         .then((data) => {
             if (!data.rows) {
                 articleList = undefined;
@@ -802,18 +1048,6 @@ var getMyArticleClassList = async function (artiClass, memID, artiPage) {
         }, (error) => {
             isLike.push('0');
         });
-
-    // ----------- 取得照片 -----------
-    // await sql('SELECT "artiNum" , "imgName" FROM "image" ORDER BY "imgNum"')
-    //     .then((data) => {
-    //         if (!data.rows) {
-    //             imgs = undefined;
-    //         } else {
-    //             imgs = data.rows;
-    //         }
-    //     }, (error) => {
-    //         imgs = undefined;
-    //     });
 
     result[0] = articleList;
     result[1] = tag;
@@ -1003,26 +1237,25 @@ var getBestReply = async function (month,memID) {
     var result = [];
 
     //先找Like數max值，再撈出所有like數 = max 的所有留言編號 ，再根據所有留言編號找到推薦文章
-    await sql('SELECT * '+
-            ' FROM "recommend" '+
-            ' WHERE "recomNum"'+ 
-            ' IN ( '+
-                ' SELECT "recomNum" '+
-                ' FROM "recommendMessage" '+
-                ' WHERE "recomMessNum" '+
-                ' IN (SELECT "recomMessNum" '+
-                    ' FROM "recommendMessageLike" '+
-                    ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-                    ' GROUP BY "recomMessNum", "memID" '+
-                    ' HAVING COUNT("recomMessNum") '+ 
-                        ' IN( SELECT  COUNT("recomMessNum") '+
-                            ' FROM "recommendMessageLike" '+
-                            ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-                            ' GROUP BY "recomMessNum" ,"memID" '+
-                            ' ORDER BY "count" DESC '+
-                            ' LIMIT 1 ) '+
-                            ' ) '+
-                ')', [month])
+    await sql(`SELECT * 
+                FROM "recommend" 
+                WHERE "recomNum"
+                IN ( SELECT "recomNum" 
+                     FROM "recommendMessage" 
+                     WHERE "recomMessNum" 
+                     IN ( SELECT "recomMessNum"
+                          FROM "recommendMessageLike" 
+                          WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
+                          GROUP BY "recomMessNum"
+                          HAVING COUNT("recomMessNum") 
+                             IN( SELECT  COUNT("recomMessNum") 
+                                 FROM "recommendMessageLike" 
+                                 WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
+                                 GROUP BY "recomMessNum"
+                                 ORDER BY "count" DESC 
+                                 LIMIT 1 ) 
+                        ) 
+                    )`, [month])
         .then((data) => {
             if (!data.rows) {
                 recommendData = undefined;
@@ -1034,17 +1267,22 @@ var getBestReply = async function (month,memID) {
         });
 
     //先找Like數max值，再撈出所有like數 = max 的所有留言編號 跟留言的人
-    await sql('SELECT "recomMessNum", "memID" '+
-            ' FROM "recommendMessageLike" '+
-            ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-            ' GROUP BY "recomMessNum", "memID" '+
-            ' HAVING COUNT("recomMessNum") '+ 
-                ' IN( SELECT  COUNT("recomMessNum") '+
-                    ' FROM "recommendMessageLike" '+
-                    ' WHERE date_part(\'MONTH\',"recomMessLikeDateTime") = $1 '+ 
-                    ' GROUP BY "recomMessNum"	,"memID" '+
-                    ' ORDER BY "count" DESC '+
-                    ' LIMIT 1 )',[month]) 
+    await sql(`SELECT "A".* , "M"."memID"
+                FROM(
+                    SELECT "recomMessNum"
+                    FROM "recommendMessageLike" 
+                    WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
+                    GROUP BY "recomMessNum"
+                    HAVING COUNT("recomMessNum") 
+                        IN( SELECT  COUNT("recomMessNum") 
+                            FROM "recommendMessageLike" 
+                            WHERE date_part('MONTH',"recomMessLikeDateTime") = $1
+                            GROUP BY "recomMessNum"
+                            ORDER BY "count" DESC 
+                            LIMIT 1 ) 
+                    ) AS "A"
+                INNER JOIN "recommendMessage" AS "M"
+                    ON "A"."recomMessNum" = "M"."recomMessNum"`,[month]) 
             .then((data) => {
                 if (!data.rows) {
                     recomNum = undefined;
@@ -1070,5 +1308,6 @@ module.exports = {
     addRecommendMessLike, delRecommendMessLike,
     report, checkAuthority, editArticle, deleteArticle, deleteRecommend, editReply, deleteReply, 
     memberInformation, getMemberInfor, recommendReplyPost, deleteRecommendReply,
-    editRecommendReply, editRecommend, getBestReply
+    editRecommendReply, editRecommend, getBestReply, getRepeatMail, activityPost, specialColumnPost,
+    editSpecialColumn, deleteSpecialColumn, editActivity
 };
