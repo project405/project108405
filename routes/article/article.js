@@ -17,6 +17,7 @@ router.get('/:artiNum', async function (req, res, next) {
         this.memID = memID
     }
     article.getOneArticle(artiNum, memID).then(data => {
+        console.log("dta",data[10]);
         if(data[0][0].deadline != null && data[0][0].deadline != undefined ){
             res.end('notFound');  //導向找不到頁面          
         }
